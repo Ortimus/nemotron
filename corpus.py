@@ -17,9 +17,7 @@ Usage:
 from __future__ import annotations
 
 import csv
-import hashlib
 import json
-import random
 import re
 import shutil
 from dataclasses import dataclass
@@ -35,7 +33,6 @@ REASONING_DIR = Path(__file__).parent / "reasoning"
 CORPUS_DIR = Path(__file__).parent / "corpus"
 CORPUS_INDEX = Path(__file__).parent / "corpus.jsonl"
 TOKENIZER_PATH = Path(__file__).parent / "tokenizer.json"
-PRIORITY_IDS_PATH = Path(__file__).parent / "investigators" / "priority_problem_ids.txt"
 
 # Must match metric_reference.py / query.py
 PROMPT_SUFFIX = (
@@ -44,31 +41,6 @@ PROMPT_SUFFIX = (
 )
 
 TOKEN_LIMIT = 8192
-
-# Downsample rate per category (fraction to KEEP). Categories not listed are kept at 100%.
-DOWNSAMPLE_RATES: dict[str, float] = {
-    "numeral": 0.4,
-    "gravity": 0.6,
-    "unit_conversion": 0.6,
-}
-
-# Truncate completion tokens to a random range (min, max) for specified categories.
-# Instead of dropping entries, we keep them all but shorten the completion.
-TRUNCATE_COMPLETION: dict[str, tuple[int, int]] = {}
-
-# Duplicate rate per category (number of COPIES to add). Categories not listed get 0 extra copies.
-DUPLICATE_COUNTS: dict[str, int] = {
-    "cryptarithm_deduce": 1,
-}
-
-
-def _keep_by_hash(problem_id: str, rate: float) -> bool:
-    """Deterministic downsample: keep entry if hash falls within rate."""
-    # rate is considered to introduce some shuffle as we downsample differently
-    h = int(hashlib.sha256((problem_id + str(rate)).encode()).hexdigest(), 16) + int(
-        10000 * rate
-    )
-    return (h % 10000) < int(rate * 10000)
 
 
 def load_jsonl(path: Path) -> list[dict]:
@@ -123,13 +95,6 @@ class CorpusEntry:
             "answer": self.answer,
             "included": self.included,
         }
-
-
-def choose_entry_to_include(problem_status: str, category: str) -> bool:
-    """Include if the problem's rule was found, or if category is a _guess type."""
-    if category.endswith("_guess"):
-        return True
-    return problem_status == "rule_found"
 
 
 def build_segments(
@@ -189,21 +154,10 @@ def main() -> None:
             prompts[pid] = row["prompt"]
             answers[pid] = row["answer"]
 
-    # Load problem categories and statuses
+    # Load problem categories
     problem_cats: dict[str, str] = {}
-    problem_statuses: dict[str, str] = {}
     for prob_raw in load_jsonl(PROBLEMS_INDEX):
         problem_cats[prob_raw["id"]] = prob_raw["category"]
-        problem_statuses[prob_raw["id"]] = prob_raw["status"]
-
-    # Load priority IDs (never downsampled)
-    priority_ids: set[str] = set()
-    if PRIORITY_IDS_PATH.exists():
-        priority_ids = {
-            line.strip()
-            for line in PRIORITY_IDS_PATH.read_text().splitlines()
-            if line.strip()
-        }
 
     # Clean and recreate corpus directory
     if CORPUS_DIR.exists():
@@ -255,32 +209,8 @@ def main() -> None:
             masked_token_count=masked_count,
             unmasked_token_count=unmasked_count,
             answer=answer,
+            included=True,
         )
-        entry.included = choose_entry_to_include(problem_statuses[problem_id], category)
-
-        if not entry.included:
-            continue
-
-        # Deterministic downsampling by category (skip for priority IDs)
-        rate = DOWNSAMPLE_RATES.get(category, 1.0)
-        if (
-            rate < 1.0
-            and problem_id not in priority_ids
-            and not _keep_by_hash(problem_id, rate)
-        ):
-            # Truncate completion instead of dropping entirely
-            if category in TRUNCATE_COMPLETION:
-                lo, hi = TRUNCATE_COMPLETION[category]
-                rng = random.Random(problem_id)
-                max_completion = rng.randint(lo, hi)
-                prompt_len = len(prompt_ids)
-                keep_len = min(prompt_len + max_completion, len(all_tokens))
-                entry.tokens = all_tokens[:keep_len]
-                entry.mask = mask[:keep_len]
-                entry.unmasked_token_count = sum(entry.mask)
-                entry.masked_token_count = len(entry.mask) - entry.unmasked_token_count
-            else:
-                continue
 
         # Build interleaved segments and write segment file
         segments = build_segments(all_tokens, mask)
@@ -345,46 +275,6 @@ def main() -> None:
                     sf.write("\n")
 
             entries.append(entry)
-
-    # Collect all duplicates: priority copies + category copies
-    def _duplicate_entry(e: CorpusEntry, suffix: str) -> CorpusEntry:
-        dup = CorpusEntry(
-            problem_id=f"{e.problem_id}{suffix}",
-            category=e.category,
-            tokens=e.tokens,
-            mask=e.mask,
-            masked_token_count=e.masked_token_count,
-            unmasked_token_count=e.unmasked_token_count,
-            answer=e.answer,
-            included=e.included,
-        )
-        dup_dir = CORPUS_DIR / dup.problem_id
-        dup_dir.mkdir(parents=True, exist_ok=True)
-        segments = build_segments(dup.tokens, dup.mask)
-        with open(dup_dir / "synthetic.jsonl", "w") as f:
-            for seg in segments:
-                json.dump(seg, f)
-                f.write("\n")
-        return dup
-
-    # Priority problems get one extra copy
-    priority_dups = [
-        _duplicate_entry(e, "-p0") for e in entries if e.problem_id in priority_ids
-    ]
-    if priority_dups:
-        print(f"Priority duplicated: {len(priority_dups)} extra entries added")
-        entries.extend(priority_dups)
-
-    # Category duplicates (skip priority copies to avoid compounding)
-    cat_dups = [
-        _duplicate_entry(e, f"-d{i}")
-        for e in entries
-        if "-p0" not in e.problem_id
-        for i in range(DUPLICATE_COUNTS.get(e.category, 0))
-    ]
-    if cat_dups:
-        print(f"Duplicated: {len(cat_dups)} extra entries added")
-        entries.extend(cat_dups)
 
     entries.sort(key=lambda e: e.problem_id)
 

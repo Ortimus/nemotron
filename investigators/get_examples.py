@@ -3,68 +3,19 @@
 Usage:
     uv run investigators/get_examples.py sort --min
     uv run investigators/get_examples.py sort --last
-    uv run investigators/get_examples.py sort --last --save
     uv run investigators/get_examples.py sort --min --logpath 04-08-02-34
-
-Sequence:
-rm investigators/priority_problem_ids.txt
-uv run investigators/get_examples.py sort --last --save --logpath 04-07-23-15
-uv run investigators/get_examples.py sort --last --save --logpath 04-08-02-34
-uv run investigators/get_examples.py sort --last --save --logpath 04-08-11-49
-uv run investigators/get_examples.py sort --last --save --logpath 04-08-16-14
-uv run investigators/get_examples.py sort --last --save --logpath 04-09-03-00
-uv run investigators/get_examples.py sort --last --save --logpath 04-09-12-26
-uv run investigators/get_examples.py sort --last --save
-# uv run corpus.py
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import re
 from pathlib import Path
 
-REASONING_DIR = Path(__file__).parent.parent / "reasoning"
 TRAINING_DIR = Path(__file__).parent.parent / "training" / "sft"
 DEFAULT_COUNT = 10
 RELAXED_CATS = {"cryptarithm_guess", "equation_numeric_guess"}
 INCLUSION_THRESHOLD = -0.69
-REMOVAL_THRESHOLD = -0.35
-
-
-PROBLEMS_PATH = Path(__file__).parent.parent / "problems.jsonl"
-_DIGIT_DIGIT_Y = re.compile(r"\d\dy")
-
-
-def text_prioritized_ids() -> set[str]:
-    """Scan reasoning files for text patterns that indicate priority problems."""
-    categories: dict[str, str] = {}
-    with open(PROBLEMS_PATH) as f:
-        for line in f:
-            obj = json.loads(line)
-            categories[obj["id"]] = obj["category"]
-
-    prioritized: set[str] = set()
-    for path in REASONING_DIR.glob("*.txt"):
-        pid = path.stem
-        if "-" in pid:
-            continue
-        cat = categories.get(pid, "")
-        text = path.read_text()
-        if cat == "bit_manipulation":
-            if _DIGIT_DIGIT_Y.search(text):
-                prioritized.add(pid)
-            if "truncated" in text:
-                # "truncated" is lowercase to match -truncated
-                prioritized.add(pid)
-        elif cat == "cipher":
-            if "New mappings: 【" in text:
-                prioritized.add(pid)
-        elif cat.startswith("equation_numeric"):
-            if "】\n  Result:" in text:
-                prioritized.add(pid)
-    return prioritized
 
 
 def latest_logpath() -> str:
@@ -167,11 +118,6 @@ def main() -> None:
         action="store_true",
         help="Sort by latest step, filtered for logprob < INCLUSION_THRESHOLD",
     )
-    sort_parser.add_argument(
-        "--save",
-        action="store_true",
-        help="Save problem IDs to investigators/priority_problem_ids.txt",
-    )
     args = parser.parse_args()
 
     if args.command != "sort":
@@ -191,36 +137,9 @@ def main() -> None:
     print(f"# logpath: {logpath}")
 
     if getattr(args, "min"):
-        ids = sort_min(problems, counts, default_count)
+        sort_min(problems, counts, default_count)
     elif args.last:
-        ids = sort_last(problems, counts, default_count)
-
-    if args.save:
-        save_path = Path(__file__).parent / "priority_problem_ids.txt"
-        text_prio = text_prioritized_ids()
-        new_ids = set(ids) | text_prio
-        if text_prio:
-            print(f"\nText-prioritized: {len(text_prio)} IDs")
-        # Preserve existing IDs unless they have min_logprob >= REMOVAL_THRESHOLD in latest run
-        if save_path.exists():
-            old_ids = {
-                line.strip()
-                for line in save_path.read_text().splitlines()
-                if line.strip()
-            }
-            removed = []
-            for pid in old_ids - new_ids:
-                info = problems.get(pid)
-                if info is not None and info["min_logprob"] >= REMOVAL_THRESHOLD:
-                    removed.append(pid)
-                else:
-                    new_ids.add(pid)
-            if removed:
-                print(
-                    f"\nRemoved {len(removed)} IDs with min_logprob >= {REMOVAL_THRESHOLD}"
-                )
-        save_path.write_text("\n".join(sorted(new_ids)) + "\n")
-        print(f"\nSaved {len(new_ids)} problem IDs to {save_path}")
+        sort_last(problems, counts, default_count)
 
 
 if __name__ == "__main__":
