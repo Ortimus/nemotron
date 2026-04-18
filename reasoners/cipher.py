@@ -364,7 +364,7 @@ def reasoning_cipher(problem: Problem) -> str | None:
                 plain_to_cipher[pc] = cc
             if new_mappings:
                 nl_new = "\n".join(new_mappings)
-                lines.append(f"New mappings\n{nl_new}")
+                lines.append(f"Added mappings\n{nl_new}")
 
     if any(w == "" for w in decoded_words):
         return None
