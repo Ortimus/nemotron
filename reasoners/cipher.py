@@ -247,6 +247,7 @@ def reasoning_cipher(problem: Problem) -> str | None:
 
     if unknown_words:
         wonderland_set = set(wonderland_words)
+        initial_c2p = dict(cipher_to_plain)
 
         for idx, cw, _partial_orig, display_partial, orig_dashed in unknown_words:
             # Recompute partial with current mappings (may have new letters from previous words)
@@ -264,21 +265,15 @@ def reasoning_cipher(problem: Problem) -> str | None:
                 f"({cc})" if cc not in cipher_to_plain else cipher_to_plain[cc]
                 for cc in cw
             )
-            # Show what changed between original and current partial decryption
-            new_from_prev: list[str] = []
-            seen_chars: set[str] = set()
-            for cc in cw:
-                if (
-                    cc not in seen_chars
-                    and f"({cc})" in orig_dashed
-                    and cc in cipher_to_plain
-                ):
-                    new_from_prev.append(f"【({cc})】->【{cipher_to_plain[cc]}】")
-                    seen_chars.add(cc)
+            accumulated_new = [
+                f"【({cc})】->【{cipher_to_plain[cc]}】"
+                for cc in sorted(cipher_to_plain)
+                if cc not in initial_c2p
+            ]
             lines.append("")
             lines.append(f"【{orig_dashed}】")
-            if new_from_prev:
-                lines.append(f"New mappings: {', '.join(new_from_prev)}")
+            if accumulated_new:
+                lines.append(f"New mappings: {', '.join(accumulated_new)}")
             else:
                 lines.append("New mappings: none")
             lines.append(f"【{display_dashed}】")
