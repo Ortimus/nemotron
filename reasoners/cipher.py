@@ -290,6 +290,7 @@ def reasoning_cipher(problem: Problem) -> str | None:
                 word_dashed = dash.join(word)
                 comparisons: list[str] = []
                 mismatch_found = False
+                tentative: dict[str, str] = {}
                 for pos, (wi_char, cc) in enumerate(zip(word, cw)):
                     if cc in cipher_to_plain:
                         pc = cipher_to_plain[cc]
@@ -300,7 +301,16 @@ def reasoning_cipher(problem: Problem) -> str | None:
                             mismatch_found = True
                             break
                     else:
-                        comparisons.append(f"{pos}【{wi_char}】【({cc})】matchable")
+                        if cc in tentative:
+                            if tentative[cc] == wi_char:
+                                comparisons.append(f"{pos}【{wi_char}】【({cc})】consistent")
+                            else:
+                                comparisons.append(f"{pos}【{wi_char}】【({cc})】contradiction")
+                                mismatch_found = True
+                                break
+                        else:
+                            tentative[cc] = wi_char
+                            comparisons.append(f"{pos}【{wi_char}】【({cc})】matchable")
                 comp_str = ", ".join(comparisons)
                 if not mismatch_found:
                     comp_str += f", {len(cw)} all match"
