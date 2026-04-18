@@ -3,7 +3,7 @@
 Input:  【]】【}】【@】【]】
 Output: 【]}@]】
 
-Uses symbols from cryptarithm problems. Length 1-10.
+Uses symbols from cryptarithm problems. Length 2-8.
 Generates 300 problems, each with 100 rows.
 """
 
@@ -30,17 +30,7 @@ def _box_merged(chars: list[str]) -> str:
 
 
 def _random_symbols(rng: random.Random) -> list[str]:
-    r = rng.random()
-    if r < 0.4:
-        # 40%: exactly 4 characters
-        length = 4
-    elif r < 0.8:
-        # 40%: 6 characters, first is { and last is }
-        middle = [rng.choice(SYMBOLS) for _ in range(4)]
-        return ["{"] + middle + ["}"]
-    else:
-        # 20%: random 1-10
-        length = rng.randint(1, 10)
+    length = rng.randint(2, 8)
     return [rng.choice(SYMBOLS) for _ in range(length)]
 
 

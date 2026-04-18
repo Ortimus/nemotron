@@ -301,12 +301,12 @@ def reasoning_cipher(problem: Problem) -> str | None:
                         if wi_char == pc:
                             comparisons.append(f"{pos}【{wi_char}】【{pc}】match")
                         else:
-                            comparisons.append(f"{pos}【{pc}】【{wi_char}】mismatch")
+                            comparisons.append(f"{pos}【{pc}】【{wi_char}】unmatchable")
                             mismatch_found = True
                             break
                     else:
-                        comparisons.append(f"{pos}【{wi_char}】【({cc})】match")
-                comp_str = " , ".join(comparisons)
+                        comparisons.append(f"{pos}【{wi_char}】【({cc})】matchable")
+                comp_str = ", ".join(comparisons)
                 if not mismatch_found:
                     comp_str += f", {len(cw)} all match"
                 lines.append(f"{word} {wlen} 【{word_dashed}】, {comp_str}")

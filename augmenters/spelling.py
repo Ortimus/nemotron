@@ -78,8 +78,8 @@ def generate() -> list[dict[str, str]]:
             s1, s2 = rng.choice(spaced_tokens), rng.choice(spaced_tokens)
             demo_inputs.append(f"{b} {s1} {s2}")
 
-        sample_input_lines = [f"{j:02d} {inp}" for j, inp in enumerate(demo_inputs)]
-        sample_output_lines = [f"{j:02d} {inp} -> {spell_out(inp)}" for j, inp in enumerate(demo_inputs)]
+        sample_input_lines = [f"{j:02d}\n{inp}" for j, inp in enumerate(demo_inputs)]
+        sample_output_lines = [f"{j:02d}\n{inp} -> {spell_out(inp)}" for j, inp in enumerate(demo_inputs)]
 
         test_inputs = []
         test_answers = []
@@ -92,8 +92,8 @@ def generate() -> list[dict[str, str]]:
             spaced_idx += 1
 
             inp = f"{b} {s1} {s2}"
-            test_inputs.append(f"{row_num:02d} {inp}")
-            test_answers.append(f"{row_num:02d} {inp} -> {spell_out(inp)}")
+            test_inputs.append(f"{row_num:02d}\n{inp}")
+            test_answers.append(f"{row_num:02d}\n{inp} -> {spell_out(inp)}")
 
         prompt = (
             "In Alice's Wonderland, secret processing rules are used on text.\n\n"
