@@ -291,6 +291,7 @@ def reasoning_cipher(problem: Problem) -> str | None:
                 comparisons: list[str] = []
                 mismatch_found = False
                 tentative: dict[str, str] = {}
+                mapped_plain = set(cipher_to_plain.values())
                 for pos, (wi_char, cc) in enumerate(zip(word, cw)):
                     if cc in cipher_to_plain:
                         pc = cipher_to_plain[cc]
@@ -309,6 +310,10 @@ def reasoning_cipher(problem: Problem) -> str | None:
                                 mismatch_found = True
                                 break
                         else:
+                            if wi_char in mapped_plain:
+                                comparisons.append(f"{pos}【{wi_char}】【({cc})】untargeted")
+                                mismatch_found = True
+                                break
                             tentative[cc] = wi_char
                             comparisons.append(f"{pos}【{wi_char}】【({cc})】matchable")
                 comp_str = ", ".join(comparisons)
