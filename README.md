@@ -4,7 +4,7 @@ This is the Github repository to the Progress Prize winning submission for NVIDI
 
 Resources on Kaggle
 
-- [Writeup](https://www.kaggle.com/competitions/nvidia-nemotron-model-reasoning-challenge/discussion/689915).
+- [Writeup](https://www.kaggle.com/competitions/nvidia-nemotron-model-reasoning-challenge/discussion/689915)
 - [Notebook](https://www.kaggle.com/code/huikang/end-to-end-finetuning-for-lb-0-85)
 
 
