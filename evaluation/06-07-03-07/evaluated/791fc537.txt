@@ -1,0 +1,182 @@
+01`26 = 2601
+76-39 = -62
+85/52 = 38
+53`71 = 7153
+61/44 = 06
+
+The inputs are 01, 26, 76, 39, 85, 52, 53, 71, 61, 44
+
+The outputs are 2601, -62, 38, 7153, 06
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 2601, -62, 38, 7153, 06
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+01`26 -> `
+76-39 -> -
+85/52 -> /
+53`71 -> `
+61/44 -> /
+
+The operators
+`
+-
+/
+
+Looking at the question
+42`53 -> `
+The question operator is found in the examples.
+
+Looking at operator ` [01`26 = 2601, 53`71 = 7153]:
+
+Trying common operations reversed operands [01->10 26->62, 53->35 71->17] and reversed result [expected (10,62)->2601, (35,17)->7153]:
+ addition
+ (10,62)->2601: 10 + 62 = 72 rev-> 27 mismatch
+ multiplication
+ (35,17)->7153: (30 + 5) * 17 = 30 * 17 + 5 * 17 = 510 + 85 = 595 rev-> 595 mismatch
+ concatenation
+ (10,62)->2601: 10 || 62 = 1062 rev-> 2601 match
+ (35,17)->7153: 35 || 17 = 3517 rev-> 7153 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (35,17)->7153: 17 || 35 = 1735 rev-> 5371 mismatch
+
+Trying common operations on identity [01 26, 53 71] [expected (01,26)->2601, (53,71)->7153]:
+ addition
+ (01,26)->2601: 01 + 26 = 27 mismatch
+ multiplication
+ (53,71)->7153: (50 + 3) * 71 = 50 * 71 + 3 * 71 = 3550 + 213 = 3763 mismatch
+ concatenation
+ (01,26)->2601: 01 || 26 = 0126 mismatch
+ reverse concatenation
+ (53,71)->7153: 71 || 53 = 7153 match
+ (01,26)->2601: 26 || 01 = 2601 match
+ correct, but skipping
+
+Trying difference operations reversed operands [01->10 26->62, 53->35 71->17] and reversed result [expected (10,62)->2601, (35,17)->7153]:
+ subtraction (a-b)
+ (10,62)->2601: 10 - 62 = -52 rev-> -25 mismatch
+ absolute difference
+ (35,17)->7153: |35 - 17| = 18 rev-> 81 mismatch
+ max mod min
+ (10,62)->2601: max(10,62) mod min(10,62) = 62 mod 10 = 2 rev-> 2 mismatch
+ negated absolute difference
+ (35,17)->7153: -|35 - 17| = -18 rev-> -81 mismatch
+ reverse subtraction (b-a)
+ (10,62)->2601: 62 - 10 = 52 rev-> 25 mismatch
+ modulo (a mod b)
+ (35,17)->7153: 35 mod 17 = 1 rev-> 1 mismatch
+
+Trying difference operations on identity [01 26, 53 71] [expected (01,26)->2601, (53,71)->7153]:
+ subtraction (a-b)
+ (01,26)->2601: 01 - 26 = -25 mismatch
+ absolute difference
+ (53,71)->7153: |53 - 71| = 18 mismatch
+ max mod min
+ (01,26)->2601: max(01,26) mod min(01,26) = 26 mod 01 = 0 mismatch
+ negated absolute difference
+ (53,71)->7153: -|53 - 71| = -18 mismatch
+ reverse subtraction (b-a)
+ (01,26)->2601: 26 - 01 = 25 mismatch
+ modulo (a mod b)
+ (53,71)->7153: 53 mod 71 = 53 mismatch
+
+Trying rare operations reversed operands [01->10 26->62, 53->35 71->17] and reversed result [expected (10,62)->2601, (35,17)->7153]:
+ multiply+1
+ (10,62)->2601: (10 + 0) * 62 + 1 = 10 * 62 + 0 * 62 + 1 = 620 + 0 + 1 = 620 + 1 = 621 rev-> 126 mismatch
+ multiply-1
+ (35,17)->7153: (30 + 5) * 17 - 1 = 30 * 17 + 5 * 17 - 1 = 510 + 85 - 1 = 595 - 1 = 594 rev-> 495 mismatch
+ add+1
+ (10,62)->2601: 10 + 62 + 1 = 73 rev-> 37 mismatch
+ add-1
+ (35,17)->7153: 35 + 17 - 1 = 51 rev-> 15 mismatch
+ sub+1
+ (10,62)->2601: 10 - 62 + 1 = -51 rev-> -15 mismatch
+ sub-1
+ (35,17)->7153: 35 - 17 - 1 = 17 rev-> 71 mismatch
+ integer division (a/b)
+ (10,62)->2601: 10 / 62 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (35,17)->7153: 17 / 35 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (10,62)->2601: 62 mod 10 = 2 rev-> 2 mismatch
+ digit absolute diff
+ (35,17)->7153: |3-1| || |5-7| = 22 rev-> 22 mismatch
+ digit add mod10
+ (10,62)->2601: (1+6)%10 || (0+2)%10 = 72 rev-> 27 mismatch
+ digit sub mod10
+ (35,17)->7153: (3-1)%10 || (5-7)%10 = 28 rev-> 82 mismatch
+ cross multiply
+ (10,62)->2601: 1*6 + 0*2 = 6 + 0 = 6 rev-> 6 mismatch
+ cross multiply rev
+ (35,17)->7153: 3*7 + 5*1 = 21 + 5 = 26 rev-> 62 mismatch
+ digit multiply
+ (10,62)->2601: 1*6 || 0*2 = 6 || 0 = 60 rev-> 06 mismatch
+ digit multiply rev
+ (35,17)->7153: 3*7 || 5*1 = 21 || 5 = 215 rev-> 512 mismatch
+ digit sum diff
+ (10,62)->2601: (1+0) - (6+2) = -7 rev-> -7 mismatch
+ digit sum sum
+ (35,17)->7153: (3+5) + (1+7) = 16 rev-> 61 mismatch
+ digit product diff
+ (10,62)->2601: 1*0 - 6*2 = 0 - 12 = -12 rev-> -21 mismatch
+ digit product sum
+ (35,17)->7153: 3*5 + 1*7 = 15 + 7 = 22 rev-> 22 mismatch
+ determinant
+ (10,62)->2601: 1*2 - 0*6 = 2 - 0 = 2 rev-> 2 mismatch
+ abs determinant
+ (35,17)->7153: |3*7 - 5*1| = |21 - 5| = 16 rev-> 61 mismatch
+
+Trying rare operations on identity [01 26, 53 71] [expected (01,26)->2601, (53,71)->7153]:
+ multiply+1
+ (01,26)->2601: (0 + 1) * 26 + 1 = 0 * 26 + 1 * 26 + 1 = 0 + 26 + 1 = 26 + 1 = 27 mismatch
+ multiply-1
+ (53,71)->7153: (50 + 3) * 71 - 1 = 50 * 71 + 3 * 71 - 1 = 3550 + 213 - 1 = 3763 - 1 = 3762 mismatch
+ add+1
+ (01,26)->2601: 01 + 26 + 1 = 28 mismatch
+ add-1
+ (53,71)->7153: 53 + 71 - 1 = 123 mismatch
+ sub+1
+ (01,26)->2601: 01 - 26 + 1 = -24 mismatch
+ sub-1
+ (53,71)->7153: 53 - 71 - 1 = -19 mismatch
+ integer division (a/b)
+ (01,26)->2601: 01 / 26 = 0 mismatch
+ reverse division (b/a)
+ (53,71)->7153: 71 / 53 = 1 mismatch
+ reverse modulo (b mod a)
+ (01,26)->2601: 26 mod 01 = 0 mismatch
+ digit absolute diff
+ (53,71)->7153: |5-7| || |3-1| = 22 mismatch
+ digit add mod10
+ (01,26)->2601: (0+2)%10 || (1+6)%10 = 27 mismatch
+ digit sub mod10
+ (53,71)->7153: (5-7)%10 || (3-1)%10 = 82 mismatch
+ cross multiply
+ (01,26)->2601: 0*2 + 1*6 = 0 + 6 = 6 mismatch
+ cross multiply rev
+ (53,71)->7153: 5*1 + 3*7 = 5 + 21 = 26 mismatch
+ digit multiply
+ (01,26)->2601: 0*2 || 1*6 = 0 || 6 = 06 mismatch
+ digit multiply rev
+ (53,71)->7153: 5*1 || 3*7 = 5 || 21 = 521 mismatch
+ digit sum diff
+ (01,26)->2601: (0+1) - (2+6) = -7 mismatch
+ digit sum sum
+ (53,71)->7153: (5+3) + (7+1) = 16 mismatch
+ digit product diff
+ (01,26)->2601: 0*1 - 2*6 = 0 - 12 = -12 mismatch
+ digit product sum
+ (53,71)->7153: 5*3 + 7*1 = 15 + 7 = 22 mismatch
+ determinant
+ (01,26)->2601: 0*6 - 1*2 = 0 - 2 = -2 mismatch
+ abs determinant
+ (53,71)->7153: |5*1 - 3*7| = |5 - 21| = 16 mismatch
+
+Applying to 42`53:
+ We recall that the question operator is found in the examples.
+ reversed operands [42->24, 53->35] and reversed result
+ concatenation (24,35): 24 || 35 = 2435 rev-> 5342
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{5342}

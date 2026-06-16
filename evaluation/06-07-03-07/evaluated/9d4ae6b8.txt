@@ -1,0 +1,174 @@
+18)69 = 1869
+96|81 = 177
+80-13 = 67
+
+The inputs are 18, 69, 96, 81, 80, 13
+
+The outputs are 1869, 177, 67
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+18)69 -> )
+96|81 -> |
+80-13 -> -
+
+The operators
+)
+|
+-
+
+Looking at the question
+51-35 -> -
+The question operator is found in the examples.
+
+Looking at operator - [80-13 = 67]:
+
+Trying common operations reversed operands [80->08 13->31] and reversed result [expected (08,31)->67]:
+ addition
+ (08,31)->67: 08 + 31 = 39 rev-> 93 mismatch
+ multiplication
+ (08,31)->67: (0 + 8) * 31 = 0 * 31 + 8 * 31 = 0 + 248 = 248 rev-> 842 mismatch
+ concatenation
+ (08,31)->67: 08 || 31 = 0831 rev-> 1380 mismatch
+ reverse concatenation
+ (08,31)->67: 31 || 08 = 3108 rev-> 8013 mismatch
+
+Trying common operations on identity [80 13] [expected (80,13)->67]:
+ addition
+ (80,13)->67: 80 + 13 = 93 mismatch
+ multiplication
+ (80,13)->67: (80 + 0) * 13 = 80 * 13 + 0 * 13 = 1040 + 0 = 1040 mismatch
+ concatenation
+ (80,13)->67: 80 || 13 = 8013 mismatch
+ reverse concatenation
+ (80,13)->67: 13 || 80 = 1380 mismatch
+
+Trying difference operations reversed operands [80->08 13->31] and reversed result [expected (08,31)->67]:
+ subtraction (a-b)
+ (08,31)->67: 08 - 31 = -23 rev-> -32 mismatch
+ absolute difference
+ (08,31)->67: |08 - 31| = 23 rev-> 32 mismatch
+ max mod min
+ (08,31)->67: max(08,31) mod min(08,31) = 31 mod 08 = 7 rev-> 7 mismatch
+ negated absolute difference
+ (08,31)->67: -|08 - 31| = -23 rev-> -32 mismatch
+ reverse subtraction (b-a)
+ (08,31)->67: 31 - 08 = 23 rev-> 32 mismatch
+ modulo (a mod b)
+ (08,31)->67: 08 mod 31 = 8 rev-> 8 mismatch
+
+Trying difference operations on identity [80 13] [expected (80,13)->67]:
+ subtraction (a-b)
+ (80,13)->67: 80 - 13 = 67 match
+ correct, actions: subtraction (a-b)
+ absolute difference
+ (80,13)->67: |80 - 13| = 67 match
+ correct, but skipping
+ max mod min
+ (80,13)->67: max(80,13) mod min(80,13) = 80 mod 13 = 2 mismatch
+ negated absolute difference
+ (80,13)->67: -|80 - 13| = -67 mismatch
+ reverse subtraction (b-a)
+ (80,13)->67: 13 - 80 = -67 mismatch
+ modulo (a mod b)
+ (80,13)->67: 80 mod 13 = 2 mismatch
+
+Trying rare operations reversed operands [80->08 13->31] and reversed result [expected (08,31)->67]:
+ multiply+1
+ (08,31)->67: (0 + 8) * 31 + 1 = 0 * 31 + 8 * 31 + 1 = 0 + 248 + 1 = 248 + 1 = 249 rev-> 942 mismatch
+ multiply-1
+ (08,31)->67: (0 + 8) * 31 - 1 = 0 * 31 + 8 * 31 - 1 = 0 + 248 - 1 = 248 - 1 = 247 rev-> 742 mismatch
+ add+1
+ (08,31)->67: 08 + 31 + 1 = 40 rev-> 04 mismatch
+ add-1
+ (08,31)->67: 08 + 31 - 1 = 38 rev-> 83 mismatch
+ sub+1
+ (08,31)->67: 08 - 31 + 1 = -22 rev-> -22 mismatch
+ sub-1
+ (08,31)->67: 08 - 31 - 1 = -24 rev-> -42 mismatch
+ integer division (a/b)
+ (08,31)->67: 08 / 31 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (08,31)->67: 31 / 08 = 3 rev-> 3 mismatch
+ reverse modulo (b mod a)
+ (08,31)->67: 31 mod 08 = 7 rev-> 7 mismatch
+ digit absolute diff
+ (08,31)->67: |0-3| || |8-1| = 37 rev-> 73 mismatch
+ digit add mod10
+ (08,31)->67: (0+3)%10 || (8+1)%10 = 39 rev-> 93 mismatch
+ digit sub mod10
+ (08,31)->67: (0-3)%10 || (8-1)%10 = 77 rev-> 77 mismatch
+ cross multiply
+ (08,31)->67: 0*3 + 8*1 = 0 + 8 = 8 rev-> 8 mismatch
+ cross multiply rev
+ (08,31)->67: 0*1 + 8*3 = 0 + 24 = 24 rev-> 42 mismatch
+ digit multiply
+ (08,31)->67: 0*3 || 8*1 = 0 || 8 = 08 rev-> 80 mismatch
+ digit multiply rev
+ (08,31)->67: 0*1 || 8*3 = 0 || 24 = 024 rev-> 420 mismatch
+ digit sum diff
+ (08,31)->67: (0+8) - (3+1) = 4 rev-> 4 mismatch
+ digit sum sum
+ (08,31)->67: (0+8) + (3+1) = 12 rev-> 21 mismatch
+ digit product diff
+ (08,31)->67: 0*8 - 3*1 = 0 - 3 = -3 rev-> -3 mismatch
+ digit product sum
+ (08,31)->67: 0*8 + 3*1 = 0 + 3 = 3 rev-> 3 mismatch
+ determinant
+ (08,31)->67: 0*1 - 8*3 = 0 - 24 = -24 rev-> -42 mismatch
+ abs determinant
+ (08,31)->67: |0*1 - 8*3| = |0 - 24| = 24 rev-> 42 mismatch
+
+Trying rare operations on identity [80 13] [expected (80,13)->67]:
+ multiply+1
+ (80,13)->67: (80 + 0) * 13 + 1 = 80 * 13 + 0 * 13 + 1 = 1040 + 0 + 1 = 1040 + 1 = 1041 mismatch
+ multiply-1
+ (80,13)->67: (80 + 0) * 13 - 1 = 80 * 13 + 0 * 13 - 1 = 1040 + 0 - 1 = 1040 - 1 = 1039 mismatch
+ add+1
+ (80,13)->67: 80 + 13 + 1 = 94 mismatch
+ add-1
+ (80,13)->67: 80 + 13 - 1 = 92 mismatch
+ sub+1
+ (80,13)->67: 80 - 13 + 1 = 68 mismatch
+ sub-1
+ (80,13)->67: 80 - 13 - 1 = 66 mismatch
+ integer division (a/b)
+ (80,13)->67: 80 / 13 = 6 mismatch
+ reverse division (b/a)
+ (80,13)->67: 13 / 80 = 0 mismatch
+ reverse modulo (b mod a)
+ (80,13)->67: 13 mod 80 = 13 mismatch
+ digit absolute diff
+ (80,13)->67: |8-1| || |0-3| = 73 mismatch
+ digit add mod10
+ (80,13)->67: (8+1)%10 || (0+3)%10 = 93 mismatch
+ digit sub mod10
+ (80,13)->67: (8-1)%10 || (0-3)%10 = 77 mismatch
+ cross multiply
+ (80,13)->67: 8*1 + 0*3 = 8 + 0 = 8 mismatch
+ cross multiply rev
+ (80,13)->67: 8*3 + 0*1 = 24 + 0 = 24 mismatch
+ digit multiply
+ (80,13)->67: 8*1 || 0*3 = 8 || 0 = 80 mismatch
+ digit multiply rev
+ (80,13)->67: 8*3 || 0*1 = 24 || 0 = 240 mismatch
+ digit sum diff
+ (80,13)->67: (8+0) - (1+3) = 4 mismatch
+ digit sum sum
+ (80,13)->67: (8+0) + (1+3) = 12 mismatch
+ digit product diff
+ (80,13)->67: 8*0 - 1*3 = 0 - 3 = -3 mismatch
+ digit product sum
+ (80,13)->67: 8*0 + 1*3 = 0 + 3 = 3 mismatch
+ determinant
+ (80,13)->67: 8*3 - 0*1 = 24 - 0 = 24 mismatch
+ abs determinant
+ (80,13)->67: |8*3 - 0*1| = |24 - 0| = 24 mismatch
+
+Applying to 51-35:
+ We recall that the question operator is found in the examples.
+ identity
+ subtraction (a-b) (51,35): 51 - 35 = 16
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{16}

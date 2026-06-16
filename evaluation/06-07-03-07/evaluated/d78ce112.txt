@@ -1,0 +1,175 @@
+27+69 = +42
+56\86 = 0244
+33\34 = 9141
+
+The inputs are 27, 69, 56, 86, 33, 34
+
+The outputs are +42, 0244, 9141
+Some example outputs have the operator symbol as prefix +.
+We now consider the outputs to be -42, 0244, 9141
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+27+69 -> +
+56\86 -> \
+33\34 -> \
+
+The operators
++
+\
+
+Looking at the question
+38\92 -> \
+The question operator is found in the examples.
+
+Looking at operator \ [56\86 = 0244, 33\34 = 9141]:
+
+Trying common operations reversed operands [56->65 86->68, 33->33 34->43] and reversed result [expected (65,68)->0244, (33,43)->9141]:
+ addition
+ (65,68)->0244: 65 + 68 = 133 rev-> 331 mismatch
+ multiplication
+ (33,43)->9141: (30 + 3) * 43 = 30 * 43 + 3 * 43 = 1290 + 129 = 1419 rev-> 9141 match
+ (65,68)->0244: (60 + 5) * 68 = 60 * 68 + 5 * 68 = 4080 + 340 = 4420 rev-> 0244 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (65,68)->0244: 65 || 68 = 6568 rev-> 8656 mismatch
+ reverse concatenation
+ (33,43)->9141: 43 || 33 = 4333 rev-> 3334 mismatch
+
+Trying common operations on identity [56 86, 33 34] [expected (56,86)->0244, (33,34)->9141]:
+ addition
+ (56,86)->0244: 56 + 86 = 142 mismatch
+ multiplication
+ (33,34)->9141: (30 + 3) * 34 = 30 * 34 + 3 * 34 = 1020 + 102 = 1122 mismatch
+ concatenation
+ (56,86)->0244: 56 || 86 = 5686 mismatch
+ reverse concatenation
+ (33,34)->9141: 34 || 33 = 3433 mismatch
+
+Trying difference operations reversed operands [56->65 86->68, 33->33 34->43] and reversed result [expected (65,68)->0244, (33,43)->9141]:
+ subtraction (a-b)
+ (65,68)->0244: 65 - 68 = -3 rev-> -3 mismatch
+ absolute difference
+ (33,43)->9141: |33 - 43| = 10 rev-> 01 mismatch
+ max mod min
+ (65,68)->0244: max(65,68) mod min(65,68) = 68 mod 65 = 3 rev-> 3 mismatch
+ negated absolute difference
+ (33,43)->9141: -|33 - 43| = -10 rev-> -01 mismatch
+ reverse subtraction (b-a)
+ (65,68)->0244: 68 - 65 = 3 rev-> 3 mismatch
+ modulo (a mod b)
+ (33,43)->9141: 33 mod 43 = 33 rev-> 33 mismatch
+
+Trying difference operations on identity [56 86, 33 34] [expected (56,86)->0244, (33,34)->9141]:
+ subtraction (a-b)
+ (56,86)->0244: 56 - 86 = -30 mismatch
+ absolute difference
+ (33,34)->9141: |33 - 34| = 1 mismatch
+ max mod min
+ (56,86)->0244: max(56,86) mod min(56,86) = 86 mod 56 = 30 mismatch
+ negated absolute difference
+ (33,34)->9141: -|33 - 34| = -1 mismatch
+ reverse subtraction (b-a)
+ (56,86)->0244: 86 - 56 = 30 mismatch
+ modulo (a mod b)
+ (33,34)->9141: 33 mod 34 = 33 mismatch
+
+Trying rare operations reversed operands [56->65 86->68, 33->33 34->43] and reversed result [expected (65,68)->0244, (33,43)->9141]:
+ multiply+1
+ (65,68)->0244: (60 + 5) * 68 + 1 = 60 * 68 + 5 * 68 + 1 = 4080 + 340 + 1 = 4420 + 1 = 4421 rev-> 1244 mismatch
+ multiply-1
+ (33,43)->9141: (30 + 3) * 43 - 1 = 30 * 43 + 3 * 43 - 1 = 1290 + 129 - 1 = 1419 - 1 = 1418 rev-> 8141 mismatch
+ add+1
+ (65,68)->0244: 65 + 68 + 1 = 134 rev-> 431 mismatch
+ add-1
+ (33,43)->9141: 33 + 43 - 1 = 75 rev-> 57 mismatch
+ sub+1
+ (65,68)->0244: 65 - 68 + 1 = -2 rev-> -2 mismatch
+ sub-1
+ (33,43)->9141: 33 - 43 - 1 = -11 rev-> -11 mismatch
+ integer division (a/b)
+ (65,68)->0244: 65 / 68 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (33,43)->9141: 43 / 33 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (65,68)->0244: 68 mod 65 = 3 rev-> 3 mismatch
+ digit absolute diff
+ (33,43)->9141: |3-4| || |3-3| = 10 rev-> 01 mismatch
+ digit add mod10
+ (65,68)->0244: (6+6)%10 || (5+8)%10 = 23 rev-> 32 mismatch
+ digit sub mod10
+ (33,43)->9141: (3-4)%10 || (3-3)%10 = 90 rev-> 09 mismatch
+ cross multiply
+ (65,68)->0244: 6*6 + 5*8 = 36 + 40 = 76 rev-> 67 mismatch
+ cross multiply rev
+ (33,43)->9141: 3*3 + 3*4 = 9 + 12 = 21 rev-> 12 mismatch
+ digit multiply
+ (65,68)->0244: 6*6 || 5*8 = 36 || 40 = 3640 rev-> 0463 mismatch
+ digit multiply rev
+ (33,43)->9141: 3*3 || 3*4 = 9 || 12 = 912 rev-> 219 mismatch
+ digit sum diff
+ (65,68)->0244: (6+5) - (6+8) = -3 rev-> -3 mismatch
+ digit sum sum
+ (33,43)->9141: (3+3) + (4+3) = 13 rev-> 31 mismatch
+ digit product diff
+ (65,68)->0244: 6*5 - 6*8 = 30 - 48 = -18 rev-> -81 mismatch
+ digit product sum
+ (33,43)->9141: 3*3 + 4*3 = 9 + 12 = 21 rev-> 12 mismatch
+ determinant
+ (65,68)->0244: 6*8 - 5*6 = 48 - 30 = 18 rev-> 81 mismatch
+ abs determinant
+ (33,43)->9141: |3*3 - 3*4| = |9 - 12| = 3 rev-> 3 mismatch
+
+Trying rare operations on identity [56 86, 33 34] [expected (56,86)->0244, (33,34)->9141]:
+ multiply+1
+ (56,86)->0244: (50 + 6) * 86 + 1 = 50 * 86 + 6 * 86 + 1 = 4300 + 516 + 1 = 4816 + 1 = 4817 mismatch
+ multiply-1
+ (33,34)->9141: (30 + 3) * 34 - 1 = 30 * 34 + 3 * 34 - 1 = 1020 + 102 - 1 = 1122 - 1 = 1121 mismatch
+ add+1
+ (56,86)->0244: 56 + 86 + 1 = 143 mismatch
+ add-1
+ (33,34)->9141: 33 + 34 - 1 = 66 mismatch
+ sub+1
+ (56,86)->0244: 56 - 86 + 1 = -29 mismatch
+ sub-1
+ (33,34)->9141: 33 - 34 - 1 = -2 mismatch
+ integer division (a/b)
+ (56,86)->0244: 56 / 86 = 0 mismatch
+ reverse division (b/a)
+ (33,34)->9141: 34 / 33 = 1 mismatch
+ reverse modulo (b mod a)
+ (56,86)->0244: 86 mod 56 = 30 mismatch
+ digit absolute diff
+ (33,34)->9141: |3-3| || |3-4| = 01 mismatch
+ digit add mod10
+ (56,86)->0244: (5+8)%10 || (6+6)%10 = 32 mismatch
+ digit sub mod10
+ (33,34)->9141: (3-3)%10 || (3-4)%10 = 09 mismatch
+ cross multiply
+ (56,86)->0244: 5*8 + 6*6 = 40 + 36 = 76 mismatch
+ cross multiply rev
+ (33,34)->9141: 3*4 + 3*3 = 12 + 9 = 21 mismatch
+ digit multiply
+ (56,86)->0244: 5*8 || 6*6 = 40 || 36 = 4036 mismatch
+ digit multiply rev
+ (33,34)->9141: 3*4 || 3*3 = 12 || 9 = 129 mismatch
+ digit sum diff
+ (56,86)->0244: (5+6) - (8+6) = -3 mismatch
+ digit sum sum
+ (33,34)->9141: (3+3) + (3+4) = 13 mismatch
+ digit product diff
+ (56,86)->0244: 5*6 - 8*6 = 30 - 48 = -18 mismatch
+ digit product sum
+ (33,34)->9141: 3*3 + 3*4 = 9 + 12 = 21 mismatch
+ determinant
+ (56,86)->0244: 5*6 - 6*8 = 30 - 48 = -18 mismatch
+ abs determinant
+ (33,34)->9141: |3*4 - 3*3| = |12 - 9| = 3 mismatch
+
+Applying to 38\92:
+ We recall that the question operator is found in the examples.
+ reversed operands [38->83, 92->29] and reversed result
+ multiplication (83,29): (80 + 3) * 29 = 80 * 29 + 3 * 29 = 2320 + 87 = 2407 rev-> 7042
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{7042}

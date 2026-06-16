@@ -1,0 +1,175 @@
+15-79 = 95
+94"45 = 4230
+73"66 = 4818
+50-90 = 141
+
+The inputs are 15, 79, 94, 45, 73, 66, 50, 90
+
+The outputs are 95, 4230, 4818, 141
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+15-79 -> -
+94"45 -> "
+73"66 -> "
+50-90 -> -
+
+The operators
+-
+"
+
+Looking at the question
+90"65 -> "
+The question operator is found in the examples.
+
+Looking at operator " [94"45 = 4230, 73"66 = 4818]:
+
+Trying common operations reversed operands [94->49 45->54, 73->37 66->66] and reversed result [expected (49,54)->4230, (37,66)->4818]:
+ addition
+ (49,54)->4230: 49 + 54 = 103 rev-> 301 mismatch
+ multiplication
+ (37,66)->4818: (30 + 7) * 66 = 30 * 66 + 7 * 66 = 1980 + 462 = 2442 rev-> 2442 mismatch
+ concatenation
+ (49,54)->4230: 49 || 54 = 4954 rev-> 4594 mismatch
+ reverse concatenation
+ (37,66)->4818: 66 || 37 = 6637 rev-> 7366 mismatch
+
+Trying common operations on identity [94 45, 73 66] [expected (94,45)->4230, (73,66)->4818]:
+ addition
+ (94,45)->4230: 94 + 45 = 139 mismatch
+ multiplication
+ (73,66)->4818: (70 + 3) * 66 = 70 * 66 + 3 * 66 = 4620 + 198 = 4818 match
+ (94,45)->4230: (90 + 4) * 45 = 90 * 45 + 4 * 45 = 4050 + 180 = 4230 match
+ correct, actions: multiplication
+ concatenation
+ (94,45)->4230: 94 || 45 = 9445 mismatch
+ reverse concatenation
+ (73,66)->4818: 66 || 73 = 6673 mismatch
+
+Trying difference operations reversed operands [94->49 45->54, 73->37 66->66] and reversed result [expected (49,54)->4230, (37,66)->4818]:
+ subtraction (a-b)
+ (49,54)->4230: 49 - 54 = -5 rev-> -5 mismatch
+ absolute difference
+ (37,66)->4818: |37 - 66| = 29 rev-> 92 mismatch
+ max mod min
+ (49,54)->4230: max(49,54) mod min(49,54) = 54 mod 49 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (37,66)->4818: -|37 - 66| = -29 rev-> -92 mismatch
+ reverse subtraction (b-a)
+ (49,54)->4230: 54 - 49 = 5 rev-> 5 mismatch
+ modulo (a mod b)
+ (37,66)->4818: 37 mod 66 = 37 rev-> 73 mismatch
+
+Trying difference operations on identity [94 45, 73 66] [expected (94,45)->4230, (73,66)->4818]:
+ subtraction (a-b)
+ (94,45)->4230: 94 - 45 = 49 mismatch
+ absolute difference
+ (73,66)->4818: |73 - 66| = 7 mismatch
+ max mod min
+ (94,45)->4230: max(94,45) mod min(94,45) = 94 mod 45 = 4 mismatch
+ negated absolute difference
+ (73,66)->4818: -|73 - 66| = -7 mismatch
+ reverse subtraction (b-a)
+ (94,45)->4230: 45 - 94 = -49 mismatch
+ modulo (a mod b)
+ (73,66)->4818: 73 mod 66 = 7 mismatch
+
+Trying rare operations reversed operands [94->49 45->54, 73->37 66->66] and reversed result [expected (49,54)->4230, (37,66)->4818]:
+ multiply+1
+ (49,54)->4230: (40 + 9) * 54 + 1 = 40 * 54 + 9 * 54 + 1 = 2160 + 486 + 1 = 2646 + 1 = 2647 rev-> 7462 mismatch
+ multiply-1
+ (37,66)->4818: (30 + 7) * 66 - 1 = 30 * 66 + 7 * 66 - 1 = 1980 + 462 - 1 = 2442 - 1 = 2441 rev-> 1442 mismatch
+ add+1
+ (49,54)->4230: 49 + 54 + 1 = 104 rev-> 401 mismatch
+ add-1
+ (37,66)->4818: 37 + 66 - 1 = 102 rev-> 201 mismatch
+ sub+1
+ (49,54)->4230: 49 - 54 + 1 = -4 rev-> -4 mismatch
+ sub-1
+ (37,66)->4818: 37 - 66 - 1 = -30 rev-> -03 mismatch
+ integer division (a/b)
+ (49,54)->4230: 49 / 54 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (37,66)->4818: 66 / 37 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (49,54)->4230: 54 mod 49 = 5 rev-> 5 mismatch
+ digit absolute diff
+ (37,66)->4818: |3-6| || |7-6| = 31 rev-> 13 mismatch
+ digit add mod10
+ (49,54)->4230: (4+5)%10 || (9+4)%10 = 93 rev-> 39 mismatch
+ digit sub mod10
+ (37,66)->4818: (3-6)%10 || (7-6)%10 = 71 rev-> 17 mismatch
+ cross multiply
+ (49,54)->4230: 4*5 + 9*4 = 20 + 36 = 56 rev-> 65 mismatch
+ cross multiply rev
+ (37,66)->4818: 3*6 + 7*6 = 18 + 42 = 60 rev-> 06 mismatch
+ digit multiply
+ (49,54)->4230: 4*5 || 9*4 = 20 || 36 = 2036 rev-> 6302 mismatch
+ digit multiply rev
+ (37,66)->4818: 3*6 || 7*6 = 18 || 42 = 1842 rev-> 2481 mismatch
+ digit sum diff
+ (49,54)->4230: (4+9) - (5+4) = 4 rev-> 4 mismatch
+ digit sum sum
+ (37,66)->4818: (3+7) + (6+6) = 22 rev-> 22 mismatch
+ digit product diff
+ (49,54)->4230: 4*9 - 5*4 = 36 - 20 = 16 rev-> 61 mismatch
+ digit product sum
+ (37,66)->4818: 3*7 + 6*6 = 21 + 36 = 57 rev-> 75 mismatch
+ determinant
+ (49,54)->4230: 4*4 - 9*5 = 16 - 45 = -29 rev-> -92 mismatch
+ abs determinant
+ (37,66)->4818: |3*6 - 7*6| = |18 - 42| = 24 rev-> 42 mismatch
+
+Trying rare operations on identity [94 45, 73 66] [expected (94,45)->4230, (73,66)->4818]:
+ multiply+1
+ (94,45)->4230: (90 + 4) * 45 + 1 = 90 * 45 + 4 * 45 + 1 = 4050 + 180 + 1 = 4230 + 1 = 4231 mismatch
+ multiply-1
+ (73,66)->4818: (70 + 3) * 66 - 1 = 70 * 66 + 3 * 66 - 1 = 4620 + 198 - 1 = 4818 - 1 = 4817 mismatch
+ add+1
+ (94,45)->4230: 94 + 45 + 1 = 140 mismatch
+ add-1
+ (73,66)->4818: 73 + 66 - 1 = 138 mismatch
+ sub+1
+ (94,45)->4230: 94 - 45 + 1 = 50 mismatch
+ sub-1
+ (73,66)->4818: 73 - 66 - 1 = 6 mismatch
+ integer division (a/b)
+ (94,45)->4230: 94 / 45 = 2 mismatch
+ reverse division (b/a)
+ (73,66)->4818: 66 / 73 = 0 mismatch
+ reverse modulo (b mod a)
+ (94,45)->4230: 45 mod 94 = 45 mismatch
+ digit absolute diff
+ (73,66)->4818: |7-6| || |3-6| = 13 mismatch
+ digit add mod10
+ (94,45)->4230: (9+4)%10 || (4+5)%10 = 39 mismatch
+ digit sub mod10
+ (73,66)->4818: (7-6)%10 || (3-6)%10 = 17 mismatch
+ cross multiply
+ (94,45)->4230: 9*4 + 4*5 = 36 + 20 = 56 mismatch
+ cross multiply rev
+ (73,66)->4818: 7*6 + 3*6 = 42 + 18 = 60 mismatch
+ digit multiply
+ (94,45)->4230: 9*4 || 4*5 = 36 || 20 = 3620 mismatch
+ digit multiply rev
+ (73,66)->4818: 7*6 || 3*6 = 42 || 18 = 4218 mismatch
+ digit sum diff
+ (94,45)->4230: (9+4) - (4+5) = 4 mismatch
+ digit sum sum
+ (73,66)->4818: (7+3) + (6+6) = 22 mismatch
+ digit product diff
+ (94,45)->4230: 9*4 - 4*5 = 36 - 20 = 16 mismatch
+ digit product sum
+ (73,66)->4818: 7*3 + 6*6 = 21 + 36 = 57 mismatch
+ determinant
+ (94,45)->4230: 9*5 - 4*4 = 45 - 16 = 29 mismatch
+ abs determinant
+ (73,66)->4818: |7*6 - 3*6| = |42 - 18| = 24 mismatch
+
+Applying to 90"65:
+ We recall that the question operator is found in the examples.
+ identity
+ multiplication (90,65): (90 + 0) * 65 = 90 * 65 + 0 * 65 = 5850 + 0 = 5850
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{5850}

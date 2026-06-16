@@ -1,0 +1,178 @@
+49?74 = 74?
+41!17 = 58
+76!87 = 541
+97}56 = 9756
+
+The inputs are 49, 74, 41, 17, 76, 87, 97, 56
+
+The outputs are 74?, 58, 541, 9756
+Some example outputs have the operator symbol as suffix ?.
+We now consider the outputs to be -74, 58, 541, 9756
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+49?74 -> ?
+41!17 -> !
+76!87 -> !
+97}56 -> }
+
+The operators
+?
+!
+}
+
+Looking at the question
+31}82 -> }
+The question operator is found in the examples.
+
+Looking at operator } [97}56 = 9756]:
+
+Trying common operations reversed operands [97->79 56->65] and reversed result [expected (79,65)->9756]:
+ addition
+ (79,65)->9756: 79 + 65 = 144 rev-> 441 mismatch
+ multiplication
+ (79,65)->9756: (70 + 9) * 65 = 70 * 65 + 9 * 65 = 4550 + 585 = 5135 rev-> 5315 mismatch
+ concatenation
+ (79,65)->9756: 79 || 65 = 7965 rev-> 5697 mismatch
+ reverse concatenation
+ (79,65)->9756: 65 || 79 = 6579 rev-> 9756 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+Trying common operations on identity [97 56] [expected (97,56)->9756]:
+ addition
+ (97,56)->9756: 97 + 56 = 153 mismatch
+ multiplication
+ (97,56)->9756: (90 + 7) * 56 = 90 * 56 + 7 * 56 = 5040 + 392 = 5432 mismatch
+ concatenation
+ (97,56)->9756: 97 || 56 = 9756 match
+ correct, but skipping
+ reverse concatenation
+ (97,56)->9756: 56 || 97 = 5697 mismatch
+
+Trying difference operations reversed operands [97->79 56->65] and reversed result [expected (79,65)->9756]:
+ subtraction (a-b)
+ (79,65)->9756: 79 - 65 = 14 rev-> 41 mismatch
+ absolute difference
+ (79,65)->9756: |79 - 65| = 14 rev-> 41 mismatch
+ max mod min
+ (79,65)->9756: max(79,65) mod min(79,65) = 79 mod 65 = 14 rev-> 41 mismatch
+ negated absolute difference
+ (79,65)->9756: -|79 - 65| = -14 rev-> -41 mismatch
+ reverse subtraction (b-a)
+ (79,65)->9756: 65 - 79 = -14 rev-> -41 mismatch
+ modulo (a mod b)
+ (79,65)->9756: 79 mod 65 = 14 rev-> 41 mismatch
+
+Trying difference operations on identity [97 56] [expected (97,56)->9756]:
+ subtraction (a-b)
+ (97,56)->9756: 97 - 56 = 41 mismatch
+ absolute difference
+ (97,56)->9756: |97 - 56| = 41 mismatch
+ max mod min
+ (97,56)->9756: max(97,56) mod min(97,56) = 97 mod 56 = 41 mismatch
+ negated absolute difference
+ (97,56)->9756: -|97 - 56| = -41 mismatch
+ reverse subtraction (b-a)
+ (97,56)->9756: 56 - 97 = -41 mismatch
+ modulo (a mod b)
+ (97,56)->9756: 97 mod 56 = 41 mismatch
+
+Trying rare operations reversed operands [97->79 56->65] and reversed result [expected (79,65)->9756]:
+ multiply+1
+ (79,65)->9756: (70 + 9) * 65 + 1 = 70 * 65 + 9 * 65 + 1 = 4550 + 585 + 1 = 5135 + 1 = 5136 rev-> 6315 mismatch
+ multiply-1
+ (79,65)->9756: (70 + 9) * 65 - 1 = 70 * 65 + 9 * 65 - 1 = 4550 + 585 - 1 = 5135 - 1 = 5134 rev-> 4315 mismatch
+ add+1
+ (79,65)->9756: 79 + 65 + 1 = 145 rev-> 541 mismatch
+ add-1
+ (79,65)->9756: 79 + 65 - 1 = 143 rev-> 341 mismatch
+ sub+1
+ (79,65)->9756: 79 - 65 + 1 = 15 rev-> 51 mismatch
+ sub-1
+ (79,65)->9756: 79 - 65 - 1 = 13 rev-> 31 mismatch
+ integer division (a/b)
+ (79,65)->9756: 79 / 65 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (79,65)->9756: 65 / 79 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (79,65)->9756: 65 mod 79 = 65 rev-> 56 mismatch
+ digit absolute diff
+ (79,65)->9756: |7-6| || |9-5| = 14 rev-> 41 mismatch
+ digit add mod10
+ (79,65)->9756: (7+6)%10 || (9+5)%10 = 34 rev-> 43 mismatch
+ digit sub mod10
+ (79,65)->9756: (7-6)%10 || (9-5)%10 = 14 rev-> 41 mismatch
+ cross multiply
+ (79,65)->9756: 7*6 + 9*5 = 42 + 45 = 87 rev-> 78 mismatch
+ cross multiply rev
+ (79,65)->9756: 7*5 + 9*6 = 35 + 54 = 89 rev-> 98 mismatch
+ digit multiply
+ (79,65)->9756: 7*6 || 9*5 = 42 || 45 = 4245 rev-> 5424 mismatch
+ digit multiply rev
+ (79,65)->9756: 7*5 || 9*6 = 35 || 54 = 3554 rev-> 4553 mismatch
+ digit sum diff
+ (79,65)->9756: (7+9) - (6+5) = 5 rev-> 5 mismatch
+ digit sum sum
+ (79,65)->9756: (7+9) + (6+5) = 27 rev-> 72 mismatch
+ digit product diff
+ (79,65)->9756: 7*9 - 6*5 = 63 - 30 = 33 rev-> 33 mismatch
+ digit product sum
+ (79,65)->9756: 7*9 + 6*5 = 63 + 30 = 93 rev-> 39 mismatch
+ determinant
+ (79,65)->9756: 7*5 - 9*6 = 35 - 54 = -19 rev-> -91 mismatch
+ abs determinant
+ (79,65)->9756: |7*5 - 9*6| = |35 - 54| = 19 rev-> 91 mismatch
+
+Trying rare operations on identity [97 56] [expected (97,56)->9756]:
+ multiply+1
+ (97,56)->9756: (90 + 7) * 56 + 1 = 90 * 56 + 7 * 56 + 1 = 5040 + 392 + 1 = 5432 + 1 = 5433 mismatch
+ multiply-1
+ (97,56)->9756: (90 + 7) * 56 - 1 = 90 * 56 + 7 * 56 - 1 = 5040 + 392 - 1 = 5432 - 1 = 5431 mismatch
+ add+1
+ (97,56)->9756: 97 + 56 + 1 = 154 mismatch
+ add-1
+ (97,56)->9756: 97 + 56 - 1 = 152 mismatch
+ sub+1
+ (97,56)->9756: 97 - 56 + 1 = 42 mismatch
+ sub-1
+ (97,56)->9756: 97 - 56 - 1 = 40 mismatch
+ integer division (a/b)
+ (97,56)->9756: 97 / 56 = 1 mismatch
+ reverse division (b/a)
+ (97,56)->9756: 56 / 97 = 0 mismatch
+ reverse modulo (b mod a)
+ (97,56)->9756: 56 mod 97 = 56 mismatch
+ digit absolute diff
+ (97,56)->9756: |9-5| || |7-6| = 41 mismatch
+ digit add mod10
+ (97,56)->9756: (9+5)%10 || (7+6)%10 = 43 mismatch
+ digit sub mod10
+ (97,56)->9756: (9-5)%10 || (7-6)%10 = 41 mismatch
+ cross multiply
+ (97,56)->9756: 9*5 + 7*6 = 45 + 42 = 87 mismatch
+ cross multiply rev
+ (97,56)->9756: 9*6 + 7*5 = 54 + 35 = 89 mismatch
+ digit multiply
+ (97,56)->9756: 9*5 || 7*6 = 45 || 42 = 4542 mismatch
+ digit multiply rev
+ (97,56)->9756: 9*6 || 7*5 = 54 || 35 = 5435 mismatch
+ digit sum diff
+ (97,56)->9756: (9+7) - (5+6) = 5 mismatch
+ digit sum sum
+ (97,56)->9756: (9+7) + (5+6) = 27 mismatch
+ digit product diff
+ (97,56)->9756: 9*7 - 5*6 = 63 - 30 = 33 mismatch
+ digit product sum
+ (97,56)->9756: 9*7 + 5*6 = 63 + 30 = 93 mismatch
+ determinant
+ (97,56)->9756: 9*6 - 7*5 = 54 - 35 = 19 mismatch
+ abs determinant
+ (97,56)->9756: |9*6 - 7*5| = |54 - 35| = 19 mismatch
+
+Applying to 31}82:
+ We recall that the question operator is found in the examples.
+ reversed operands [31->13, 82->28] and reversed result
+ reverse concatenation (13,28): 28 || 13 = 2813 rev-> 3182
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{3182}

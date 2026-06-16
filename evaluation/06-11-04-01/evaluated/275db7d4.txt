@@ -1,0 +1,185 @@
+35"65 = 100
+68"97 = 165
+19@78 = @59
+88@42 = @46
+72"58 = 130
+
+The inputs are 35, 65, 68, 97, 19, 78, 88, 42, 72, 58
+
+The outputs are 100, 165, @59, @46, 130
+Some example outputs have the operator symbol as prefix @.
+We now consider the outputs to be 100, 165, -59, -46, 130
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+35"65 -> "
+68"97 -> "
+19@78 -> @
+88@42 -> @
+72"58 -> "
+
+The operators
+"
+@
+
+Looking at the question
+62:21 -> :
+The question operator is not found in the examples. Investigating the most common example operator " instead. We will use addition for the question operator.
+
+Looking at operator " [35"65 = 100, 68"97 = 165, 72"58 = 130]:
+
+Trying common operations
+ reversed operands [35->53 65->56, 68->86 97->79, 72->27 58->85] and reversed result [expected (53,56)->100, (86,79)->165, (27,85)->130]
+ addition
+ (53,56)->100: 53 + 56 = 109 rev-> 901 mismatch
+ multiplication
+ (86,79)->165: (80 + 6) * 79 = 80 * 79 + 6 * 79 = 6320 + 474 = 6794 rev-> 4976 mismatch
+ concatenation
+ (27,85)->130: 27 || 85 = 2785 rev-> 5872 mismatch
+ reverse concatenation
+ (53,56)->100: 56 || 53 = 5653 rev-> 3565 mismatch
+
+ identity [35 65, 68 97, 72 58] [expected (35,65)->100, (68,97)->165, (72,58)->130]
+ addition
+ (35,65)->100: 35 + 65 = 100 match
+ (68,97)->165: 68 + 97 = 165 match
+ (72,58)->130: 72 + 58 = 130 match
+ correct, actions: addition
+ multiplication
+ (68,97)->165: (60 + 8) * 97 = 60 * 97 + 8 * 97 = 5820 + 776 = 6596 mismatch
+ concatenation
+ (72,58)->130: 72 || 58 = 7258 mismatch
+ reverse concatenation
+ (35,65)->100: 65 || 35 = 6535 mismatch
+
+Trying difference operations
+ reversed operands [35->53 65->56, 68->86 97->79, 72->27 58->85] and reversed result [expected (53,56)->100, (86,79)->165, (27,85)->130]
+ subtraction (a-b)
+ (53,56)->100: 53 - 56 = -3 rev-> -3 mismatch
+ absolute difference
+ (86,79)->165: |86 - 79| = 7 rev-> 7 mismatch
+ max mod min
+ (27,85)->130: max(27,85) mod min(27,85) = 85 mod 27 = 4 rev-> 4 mismatch
+ negated absolute difference
+ (53,56)->100: -|53 - 56| = -3 rev-> -3 mismatch
+ reverse subtraction (b-a)
+ (86,79)->165: 79 - 86 = -7 rev-> -7 mismatch
+ modulo (a mod b)
+ (27,85)->130: 27 mod 85 = 27 rev-> 72 mismatch
+
+ identity [35 65, 68 97, 72 58] [expected (35,65)->100, (68,97)->165, (72,58)->130]
+ subtraction (a-b)
+ (35,65)->100: 35 - 65 = -30 mismatch
+ absolute difference
+ (68,97)->165: |68 - 97| = 29 mismatch
+ max mod min
+ (72,58)->130: max(72,58) mod min(72,58) = 72 mod 58 = 14 mismatch
+ negated absolute difference
+ (35,65)->100: -|35 - 65| = -30 mismatch
+ reverse subtraction (b-a)
+ (68,97)->165: 97 - 68 = 29 mismatch
+ modulo (a mod b)
+ (72,58)->130: 72 mod 58 = 14 mismatch
+
+Trying rare operations
+ reversed operands [35->53 65->56, 68->86 97->79, 72->27 58->85] and reversed result [expected (53,56)->100, (86,79)->165, (27,85)->130]
+ multiply+1
+ (53,56)->100: (50 + 3) * 56 + 1 = 50 * 56 + 3 * 56 + 1 = 2800 + 168 + 1 = 2968 + 1 = 2969 rev-> 9692 mismatch
+ multiply-1
+ (86,79)->165: (80 + 6) * 79 - 1 = 80 * 79 + 6 * 79 - 1 = 6320 + 474 - 1 = 6794 - 1 = 6793 rev-> 3976 mismatch
+ add+1
+ (27,85)->130: 27 + 85 + 1 = 113 rev-> 311 mismatch
+ add-1
+ (53,56)->100: 53 + 56 - 1 = 108 rev-> 801 mismatch
+ sub+1
+ (86,79)->165: 86 - 79 + 1 = 8 rev-> 8 mismatch
+ sub-1
+ (27,85)->130: 27 - 85 - 1 = -59 rev-> -95 mismatch
+ integer division (a/b)
+ (53,56)->100: 53 / 56 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (86,79)->165: 79 / 86 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (27,85)->130: 85 mod 27 = 4 rev-> 4 mismatch
+ digit absolute diff
+ (53,56)->100: |5-5| || |3-6| = 03 rev-> 30 mismatch
+ digit add mod10
+ (86,79)->165: (8+7)%10 || (6+9)%10 = 55 rev-> 55 mismatch
+ digit sub mod10
+ (27,85)->130: (2-8)%10 || (7-5)%10 = 42 rev-> 24 mismatch
+ cross multiply
+ (53,56)->100: 5*5 + 3*6 = 25 + 18 = 43 rev-> 34 mismatch
+ cross multiply rev
+ (86,79)->165: 8*9 + 6*7 = 72 + 42 = 114 rev-> 411 mismatch
+ digit multiply
+ (27,85)->130: 2*8 || 7*5 = 16 || 35 = 1635 rev-> 5361 mismatch
+ digit multiply rev
+ (53,56)->100: 5*6 || 3*5 = 30 || 15 = 3015 rev-> 5103 mismatch
+ digit sum diff
+ (86,79)->165: (8+6) - (7+9) = -2 rev-> -2 mismatch
+ digit sum sum
+ (27,85)->130: (2+7) + (8+5) = 22 rev-> 22 mismatch
+ digit product diff
+ (53,56)->100: 5*3 - 5*6 = 15 - 30 = -15 rev-> -51 mismatch
+ digit product sum
+ (86,79)->165: 8*6 + 7*9 = 48 + 63 = 111 rev-> 111 mismatch
+ determinant
+ (27,85)->130: 2*5 - 7*8 = 10 - 56 = -46 rev-> -64 mismatch
+ abs determinant
+ (53,56)->100: |5*6 - 3*5| = |30 - 15| = 15 rev-> 51 mismatch
+
+ identity [35 65, 68 97, 72 58] [expected (35,65)->100, (68,97)->165, (72,58)->130]
+ multiply+1
+ (35,65)->100: (30 + 5) * 65 + 1 = 30 * 65 + 5 * 65 + 1 = 1950 + 325 + 1 = 2275 + 1 = 2276 mismatch
+ multiply-1
+ (68,97)->165: (60 + 8) * 97 - 1 = 60 * 97 + 8 * 97 - 1 = 5820 + 776 - 1 = 6596 - 1 = 6595 mismatch
+ add+1
+ (72,58)->130: 72 + 58 + 1 = 131 mismatch
+ add-1
+ (35,65)->100: 35 + 65 - 1 = 99 mismatch
+ sub+1
+ (68,97)->165: 68 - 97 + 1 = -28 mismatch
+ sub-1
+ (72,58)->130: 72 - 58 - 1 = 13 mismatch
+ integer division (a/b)
+ (35,65)->100: 35 / 65 = 0 mismatch
+ reverse division (b/a)
+ (68,97)->165: 97 / 68 = 1 mismatch
+ reverse modulo (b mod a)
+ (72,58)->130: 58 mod 72 = 58 mismatch
+ digit absolute diff
+ (35,65)->100: |3-6| || |5-5| = 30 mismatch
+ digit add mod10
+ (68,97)->165: (6+9)%10 || (8+7)%10 = 55 mismatch
+ digit sub mod10
+ (72,58)->130: (7-5)%10 || (2-8)%10 = 24 mismatch
+ cross multiply
+ (35,65)->100: 3*6 + 5*5 = 18 + 25 = 43 mismatch
+ cross multiply rev
+ (68,97)->165: 6*7 + 8*9 = 42 + 72 = 114 mismatch
+ digit multiply
+ (72,58)->130: 7*5 || 2*8 = 35 || 16 = 3516 mismatch
+ digit multiply rev
+ (35,65)->100: 3*5 || 5*6 = 15 || 30 = 1530 mismatch
+ digit sum diff
+ (68,97)->165: (6+8) - (9+7) = -2 mismatch
+ digit sum sum
+ (72,58)->130: (7+2) + (5+8) = 22 mismatch
+ digit product diff
+ (35,65)->100: 3*5 - 6*5 = 15 - 30 = -15 mismatch
+ digit product sum
+ (68,97)->165: 6*8 + 9*7 = 48 + 63 = 111 mismatch
+ determinant
+ (72,58)->130: 7*8 - 2*5 = 56 - 10 = 46 mismatch
+ abs determinant
+ (35,65)->100: |3*5 - 5*6| = |15 - 30| = 15 mismatch
+
+correct, actions: addition
+
+Applying to 62:21:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ identity [62 21]
+ addition
+ (62,21): 62 + 21 = 83
+ Result is non-negative
+ \boxed{83}

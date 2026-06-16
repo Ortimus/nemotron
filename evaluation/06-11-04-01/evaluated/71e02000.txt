@@ -1,0 +1,180 @@
+56-66 = -10
+25$31 = 2531
+47-19 = -28
+
+The inputs are 56, 66, 25, 31, 47, 19
+
+The outputs are -10, 2531, -28
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -10, 2531, -28
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+56-66 -> -
+25$31 -> $
+47-19 -> -
+
+The operators
+-
+$
+
+Looking at the question
+37$67 -> $
+The question operator is found in the examples.
+
+Looking at operator $ [25$31 = 2531]:
+
+Trying common operations
+ reversed operands [25->52 31->13] and reversed result [expected (52,13)->2531]
+ addition
+ (52,13)->2531: 52 + 13 = 65 rev-> 56 mismatch
+ multiplication
+ (52,13)->2531: (50 + 2) * 13 = 50 * 13 + 2 * 13 = 650 + 26 = 676 rev-> 676 mismatch
+ concatenation
+ (52,13)->2531: 52 || 13 = 5213 rev-> 3125 mismatch
+ reverse concatenation
+ (52,13)->2531: 13 || 52 = 1352 rev-> 2531 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+ identity [25 31] [expected (25,31)->2531]
+ addition
+ (25,31)->2531: 25 + 31 = 56 mismatch
+ multiplication
+ (25,31)->2531: (20 + 5) * 31 = 20 * 31 + 5 * 31 = 620 + 155 = 775 mismatch
+ concatenation
+ (25,31)->2531: 25 || 31 = 2531 match
+ correct, but skipping
+ reverse concatenation
+ (25,31)->2531: 31 || 25 = 3125 mismatch
+
+Trying difference operations
+ reversed operands [25->52 31->13] and reversed result [expected (52,13)->2531]
+ subtraction (a-b)
+ (52,13)->2531: 52 - 13 = 39 rev-> 93 mismatch
+ absolute difference
+ (52,13)->2531: |52 - 13| = 39 rev-> 93 mismatch
+ max mod min
+ (52,13)->2531: max(52,13) mod min(52,13) = 52 mod 13 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (52,13)->2531: -|52 - 13| = -39 rev-> -93 mismatch
+ reverse subtraction (b-a)
+ (52,13)->2531: 13 - 52 = -39 rev-> -93 mismatch
+ modulo (a mod b)
+ (52,13)->2531: 52 mod 13 = 0 rev-> 0 mismatch
+
+ identity [25 31] [expected (25,31)->2531]
+ subtraction (a-b)
+ (25,31)->2531: 25 - 31 = -6 mismatch
+ absolute difference
+ (25,31)->2531: |25 - 31| = 6 mismatch
+ max mod min
+ (25,31)->2531: max(25,31) mod min(25,31) = 31 mod 25 = 6 mismatch
+ negated absolute difference
+ (25,31)->2531: -|25 - 31| = -6 mismatch
+ reverse subtraction (b-a)
+ (25,31)->2531: 31 - 25 = 6 mismatch
+ modulo (a mod b)
+ (25,31)->2531: 25 mod 31 = 25 mismatch
+
+Trying rare operations
+ reversed operands [25->52 31->13] and reversed result [expected (52,13)->2531]
+ multiply+1
+ (52,13)->2531: (50 + 2) * 13 + 1 = 50 * 13 + 2 * 13 + 1 = 650 + 26 + 1 = 676 + 1 = 677 rev-> 776 mismatch
+ multiply-1
+ (52,13)->2531: (50 + 2) * 13 - 1 = 50 * 13 + 2 * 13 - 1 = 650 + 26 - 1 = 676 - 1 = 675 rev-> 576 mismatch
+ add+1
+ (52,13)->2531: 52 + 13 + 1 = 66 rev-> 66 mismatch
+ add-1
+ (52,13)->2531: 52 + 13 - 1 = 64 rev-> 46 mismatch
+ sub+1
+ (52,13)->2531: 52 - 13 + 1 = 40 rev-> 04 mismatch
+ sub-1
+ (52,13)->2531: 52 - 13 - 1 = 38 rev-> 83 mismatch
+ integer division (a/b)
+ (52,13)->2531: 52 / 13 = 4 rev-> 4 mismatch
+ reverse division (b/a)
+ (52,13)->2531: 13 / 52 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (52,13)->2531: 13 mod 52 = 13 rev-> 31 mismatch
+ digit absolute diff
+ (52,13)->2531: |5-1| || |2-3| = 41 rev-> 14 mismatch
+ digit add mod10
+ (52,13)->2531: (5+1)%10 || (2+3)%10 = 65 rev-> 56 mismatch
+ digit sub mod10
+ (52,13)->2531: (5-1)%10 || (2-3)%10 = 49 rev-> 94 mismatch
+ cross multiply
+ (52,13)->2531: 5*1 + 2*3 = 5 + 6 = 11 rev-> 11 mismatch
+ cross multiply rev
+ (52,13)->2531: 5*3 + 2*1 = 15 + 2 = 17 rev-> 71 mismatch
+ digit multiply
+ (52,13)->2531: 5*1 || 2*3 = 5 || 6 = 56 rev-> 65 mismatch
+ digit multiply rev
+ (52,13)->2531: 5*3 || 2*1 = 15 || 2 = 152 rev-> 251 mismatch
+ digit sum diff
+ (52,13)->2531: (5+2) - (1+3) = 3 rev-> 3 mismatch
+ digit sum sum
+ (52,13)->2531: (5+2) + (1+3) = 11 rev-> 11 mismatch
+ digit product diff
+ (52,13)->2531: 5*2 - 1*3 = 10 - 3 = 7 rev-> 7 mismatch
+ digit product sum
+ (52,13)->2531: 5*2 + 1*3 = 10 + 3 = 13 rev-> 31 mismatch
+ determinant
+ (52,13)->2531: 5*3 - 2*1 = 15 - 2 = 13 rev-> 31 mismatch
+ abs determinant
+ (52,13)->2531: |5*3 - 2*1| = |15 - 2| = 13 rev-> 31 mismatch
+
+ identity [25 31] [expected (25,31)->2531]
+ multiply+1
+ (25,31)->2531: (20 + 5) * 31 + 1 = 20 * 31 + 5 * 31 + 1 = 620 + 155 + 1 = 775 + 1 = 776 mismatch
+ multiply-1
+ (25,31)->2531: (20 + 5) * 31 - 1 = 20 * 31 + 5 * 31 - 1 = 620 + 155 - 1 = 775 - 1 = 774 mismatch
+ add+1
+ (25,31)->2531: 25 + 31 + 1 = 57 mismatch
+ add-1
+ (25,31)->2531: 25 + 31 - 1 = 55 mismatch
+ sub+1
+ (25,31)->2531: 25 - 31 + 1 = -5 mismatch
+ sub-1
+ (25,31)->2531: 25 - 31 - 1 = -7 mismatch
+ integer division (a/b)
+ (25,31)->2531: 25 / 31 = 0 mismatch
+ reverse division (b/a)
+ (25,31)->2531: 31 / 25 = 1 mismatch
+ reverse modulo (b mod a)
+ (25,31)->2531: 31 mod 25 = 6 mismatch
+ digit absolute diff
+ (25,31)->2531: |2-3| || |5-1| = 14 mismatch
+ digit add mod10
+ (25,31)->2531: (2+3)%10 || (5+1)%10 = 56 mismatch
+ digit sub mod10
+ (25,31)->2531: (2-3)%10 || (5-1)%10 = 94 mismatch
+ cross multiply
+ (25,31)->2531: 2*3 + 5*1 = 6 + 5 = 11 mismatch
+ cross multiply rev
+ (25,31)->2531: 2*1 + 5*3 = 2 + 15 = 17 mismatch
+ digit multiply
+ (25,31)->2531: 2*3 || 5*1 = 6 || 5 = 65 mismatch
+ digit multiply rev
+ (25,31)->2531: 2*1 || 5*3 = 2 || 15 = 215 mismatch
+ digit sum diff
+ (25,31)->2531: (2+5) - (3+1) = 3 mismatch
+ digit sum sum
+ (25,31)->2531: (2+5) + (3+1) = 11 mismatch
+ digit product diff
+ (25,31)->2531: 2*5 - 3*1 = 10 - 3 = 7 mismatch
+ digit product sum
+ (25,31)->2531: 2*5 + 3*1 = 10 + 3 = 13 mismatch
+ determinant
+ (25,31)->2531: 2*1 - 5*3 = 2 - 15 = -13 mismatch
+ abs determinant
+ (25,31)->2531: |2*1 - 5*3| = |2 - 15| = 13 mismatch
+
+correct, actions: reversed operands, reversed result, reverse concatenation
+
+Applying to 37$67:
+ We recall that the question operator is found in the examples.
+ reversed operands [37->73, 67->76] and reversed result
+ reverse concatenation
+ (73,76): 76 || 73 = 7673 rev-> 3767
+ Result is non-negative
+ \boxed{3767}

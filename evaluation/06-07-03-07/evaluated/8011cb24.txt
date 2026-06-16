@@ -1,0 +1,177 @@
+79-69 = 7969
+95:22 = :73
+19-49 = 1949
+
+The inputs are 79, 69, 95, 22, 19, 49
+
+The outputs are 7969, :73, 1949
+Some example outputs have the operator symbol as prefix :.
+We now consider the outputs to be 7969, -73, 1949
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+79-69 -> -
+95:22 -> :
+19-49 -> -
+
+The operators
+-
+:
+
+Looking at the question
+74:10 -> :
+The question operator is found in the examples.
+
+Looking at operator : [95:22 = -73]:
+
+Trying common operations reversed operands [95->59 22->22] and reversed result [expected (59,22)->-73]:
+ addition
+ (59,22)->-73: 59 + 22 = 81 rev-> 18 mismatch
+ multiplication
+ (59,22)->-73: (50 + 9) * 22 = 50 * 22 + 9 * 22 = 1100 + 198 = 1298 rev-> 8921 mismatch
+ concatenation
+ (59,22)->-73: 59 || 22 = 5922 rev-> 2295 mismatch
+ reverse concatenation
+ (59,22)->-73: 22 || 59 = 2259 rev-> 9522 mismatch
+
+Trying common operations on identity [95 22] [expected (95,22)->-73]:
+ addition
+ (95,22)->-73: 95 + 22 = 117 mismatch
+ multiplication
+ (95,22)->-73: (90 + 5) * 22 = 90 * 22 + 5 * 22 = 1980 + 110 = 2090 mismatch
+ concatenation
+ (95,22)->-73: 95 || 22 = 9522 mismatch
+ reverse concatenation
+ (95,22)->-73: 22 || 95 = 2295 mismatch
+
+Trying difference operations reversed operands [95->59 22->22] and reversed result [expected (59,22)->-73]:
+ subtraction (a-b)
+ (59,22)->-73: 59 - 22 = 37 rev-> 73 mismatch
+ absolute difference
+ (59,22)->-73: |59 - 22| = 37 rev-> 73 mismatch
+ max mod min
+ (59,22)->-73: max(59,22) mod min(59,22) = 59 mod 22 = 15 rev-> 51 mismatch
+ negated absolute difference
+ (59,22)->-73: -|59 - 22| = -37 rev-> -73 match
+ correct, actions: reversed operands, reversed result, negated absolute difference
+ reverse subtraction (b-a)
+ (59,22)->-73: 22 - 59 = -37 rev-> -73 match
+ correct, but skipping
+ modulo (a mod b)
+ (59,22)->-73: 59 mod 22 = 15 rev-> 51 mismatch
+
+Trying difference operations on identity [95 22] [expected (95,22)->-73]:
+ subtraction (a-b)
+ (95,22)->-73: 95 - 22 = 73 mismatch
+ absolute difference
+ (95,22)->-73: |95 - 22| = 73 mismatch
+ max mod min
+ (95,22)->-73: max(95,22) mod min(95,22) = 95 mod 22 = 7 mismatch
+ negated absolute difference
+ (95,22)->-73: -|95 - 22| = -73 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (95,22)->-73: 22 - 95 = -73 match
+ correct, but skipping
+ modulo (a mod b)
+ (95,22)->-73: 95 mod 22 = 7 mismatch
+
+Trying rare operations reversed operands [95->59 22->22] and reversed result [expected (59,22)->-73]:
+ multiply+1
+ (59,22)->-73: (50 + 9) * 22 + 1 = 50 * 22 + 9 * 22 + 1 = 1100 + 198 + 1 = 1298 + 1 = 1299 rev-> 9921 mismatch
+ multiply-1
+ (59,22)->-73: (50 + 9) * 22 - 1 = 50 * 22 + 9 * 22 - 1 = 1100 + 198 - 1 = 1298 - 1 = 1297 rev-> 7921 mismatch
+ add+1
+ (59,22)->-73: 59 + 22 + 1 = 82 rev-> 28 mismatch
+ add-1
+ (59,22)->-73: 59 + 22 - 1 = 80 rev-> 08 mismatch
+ sub+1
+ (59,22)->-73: 59 - 22 + 1 = 38 rev-> 83 mismatch
+ sub-1
+ (59,22)->-73: 59 - 22 - 1 = 36 rev-> 63 mismatch
+ integer division (a/b)
+ (59,22)->-73: 59 / 22 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (59,22)->-73: 22 / 59 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (59,22)->-73: 22 mod 59 = 22 rev-> 22 mismatch
+ digit absolute diff
+ (59,22)->-73: |5-2| || |9-2| = 37 rev-> 73 mismatch
+ digit add mod10
+ (59,22)->-73: (5+2)%10 || (9+2)%10 = 71 rev-> 17 mismatch
+ digit sub mod10
+ (59,22)->-73: (5-2)%10 || (9-2)%10 = 37 rev-> 73 mismatch
+ cross multiply
+ (59,22)->-73: 5*2 + 9*2 = 10 + 18 = 28 rev-> 82 mismatch
+ cross multiply rev
+ (59,22)->-73: 5*2 + 9*2 = 10 + 18 = 28 rev-> 82 mismatch
+ digit multiply
+ (59,22)->-73: 5*2 || 9*2 = 10 || 18 = 1018 rev-> 8101 mismatch
+ digit multiply rev
+ (59,22)->-73: 5*2 || 9*2 = 10 || 18 = 1018 rev-> 8101 mismatch
+ digit sum diff
+ (59,22)->-73: (5+9) - (2+2) = 10 rev-> 01 mismatch
+ digit sum sum
+ (59,22)->-73: (5+9) + (2+2) = 18 rev-> 81 mismatch
+ digit product diff
+ (59,22)->-73: 5*9 - 2*2 = 45 - 4 = 41 rev-> 14 mismatch
+ digit product sum
+ (59,22)->-73: 5*9 + 2*2 = 45 + 4 = 49 rev-> 94 mismatch
+ determinant
+ (59,22)->-73: 5*2 - 9*2 = 10 - 18 = -8 rev-> -8 mismatch
+ abs determinant
+ (59,22)->-73: |5*2 - 9*2| = |10 - 18| = 8 rev-> 8 mismatch
+
+Trying rare operations on identity [95 22] [expected (95,22)->-73]:
+ multiply+1
+ (95,22)->-73: (90 + 5) * 22 + 1 = 90 * 22 + 5 * 22 + 1 = 1980 + 110 + 1 = 2090 + 1 = 2091 mismatch
+ multiply-1
+ (95,22)->-73: (90 + 5) * 22 - 1 = 90 * 22 + 5 * 22 - 1 = 1980 + 110 - 1 = 2090 - 1 = 2089 mismatch
+ add+1
+ (95,22)->-73: 95 + 22 + 1 = 118 mismatch
+ add-1
+ (95,22)->-73: 95 + 22 - 1 = 116 mismatch
+ sub+1
+ (95,22)->-73: 95 - 22 + 1 = 74 mismatch
+ sub-1
+ (95,22)->-73: 95 - 22 - 1 = 72 mismatch
+ integer division (a/b)
+ (95,22)->-73: 95 / 22 = 4 mismatch
+ reverse division (b/a)
+ (95,22)->-73: 22 / 95 = 0 mismatch
+ reverse modulo (b mod a)
+ (95,22)->-73: 22 mod 95 = 22 mismatch
+ digit absolute diff
+ (95,22)->-73: |9-2| || |5-2| = 73 mismatch
+ digit add mod10
+ (95,22)->-73: (9+2)%10 || (5+2)%10 = 17 mismatch
+ digit sub mod10
+ (95,22)->-73: (9-2)%10 || (5-2)%10 = 73 mismatch
+ cross multiply
+ (95,22)->-73: 9*2 + 5*2 = 18 + 10 = 28 mismatch
+ cross multiply rev
+ (95,22)->-73: 9*2 + 5*2 = 18 + 10 = 28 mismatch
+ digit multiply
+ (95,22)->-73: 9*2 || 5*2 = 18 || 10 = 1810 mismatch
+ digit multiply rev
+ (95,22)->-73: 9*2 || 5*2 = 18 || 10 = 1810 mismatch
+ digit sum diff
+ (95,22)->-73: (9+5) - (2+2) = 10 mismatch
+ digit sum sum
+ (95,22)->-73: (9+5) + (2+2) = 18 mismatch
+ digit product diff
+ (95,22)->-73: 9*5 - 2*2 = 45 - 4 = 41 mismatch
+ digit product sum
+ (95,22)->-73: 9*5 + 2*2 = 45 + 4 = 49 mismatch
+ determinant
+ (95,22)->-73: 9*2 - 5*2 = 18 - 10 = 8 mismatch
+ abs determinant
+ (95,22)->-73: |9*2 - 5*2| = |18 - 10| = 8 mismatch
+
+Applying to 74:10:
+ We recall that the question operator is found in the examples.
+ reversed operands [74->47, 10->01] and reversed result
+ negated absolute difference (47,01): -|47 - 01| = -46 rev-> -64
+ Result is negative - we add back the operator prefix :: -64 -> :64
+
+\boxed{:64}

@@ -1,0 +1,182 @@
+41"98 = "57
+47]64 = 3009
+58-87 = 144
+91-84 = 174
+16-30 = 45
+
+The inputs are 41, 98, 47, 64, 58, 87, 91, 84, 16, 30
+
+The outputs are "57, 3009, 144, 174, 45
+Some example outputs have the operator symbol as prefix ".
+We now consider the outputs to be -57, 3009, 144, 174, 45
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+41"98 -> "
+47]64 -> ]
+58-87 -> -
+91-84 -> -
+16-30 -> -
+
+The operators
+"
+]
+-
+
+Looking at the question
+74"17 -> "
+The question operator is found in the examples.
+
+Looking at operator " [41"98 = -57]:
+
+Trying common operations reversed operands [41->14 98->89] and reversed result [expected (14,89)->-57]:
+ addition
+ (14,89)->-57: 14 + 89 = 103 rev-> 301 mismatch
+ multiplication
+ (14,89)->-57: (10 + 4) * 89 = 10 * 89 + 4 * 89 = 890 + 356 = 1246 rev-> 6421 mismatch
+ concatenation
+ (14,89)->-57: 14 || 89 = 1489 rev-> 9841 mismatch
+ reverse concatenation
+ (14,89)->-57: 89 || 14 = 8914 rev-> 4198 mismatch
+
+Trying common operations on identity [41 98] [expected (41,98)->-57]:
+ addition
+ (41,98)->-57: 41 + 98 = 139 mismatch
+ multiplication
+ (41,98)->-57: (40 + 1) * 98 = 40 * 98 + 1 * 98 = 3920 + 98 = 4018 mismatch
+ concatenation
+ (41,98)->-57: 41 || 98 = 4198 mismatch
+ reverse concatenation
+ (41,98)->-57: 98 || 41 = 9841 mismatch
+
+Trying difference operations reversed operands [41->14 98->89] and reversed result [expected (14,89)->-57]:
+ subtraction (a-b)
+ (14,89)->-57: 14 - 89 = -75 rev-> -57 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (14,89)->-57: |14 - 89| = 75 rev-> 57 mismatch
+ max mod min
+ (14,89)->-57: max(14,89) mod min(14,89) = 89 mod 14 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (14,89)->-57: -|14 - 89| = -75 rev-> -57 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (14,89)->-57: 89 - 14 = 75 rev-> 57 mismatch
+ modulo (a mod b)
+ (14,89)->-57: 14 mod 89 = 14 rev-> 41 mismatch
+
+Trying difference operations on identity [41 98] [expected (41,98)->-57]:
+ subtraction (a-b)
+ (41,98)->-57: 41 - 98 = -57 match
+ correct, but skipping
+ absolute difference
+ (41,98)->-57: |41 - 98| = 57 mismatch
+ max mod min
+ (41,98)->-57: max(41,98) mod min(41,98) = 98 mod 41 = 16 mismatch
+ negated absolute difference
+ (41,98)->-57: -|41 - 98| = -57 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (41,98)->-57: 98 - 41 = 57 mismatch
+ modulo (a mod b)
+ (41,98)->-57: 41 mod 98 = 41 mismatch
+
+Trying rare operations reversed operands [41->14 98->89] and reversed result [expected (14,89)->-57]:
+ multiply+1
+ (14,89)->-57: (10 + 4) * 89 + 1 = 10 * 89 + 4 * 89 + 1 = 890 + 356 + 1 = 1246 + 1 = 1247 rev-> 7421 mismatch
+ multiply-1
+ (14,89)->-57: (10 + 4) * 89 - 1 = 10 * 89 + 4 * 89 - 1 = 890 + 356 - 1 = 1246 - 1 = 1245 rev-> 5421 mismatch
+ add+1
+ (14,89)->-57: 14 + 89 + 1 = 104 rev-> 401 mismatch
+ add-1
+ (14,89)->-57: 14 + 89 - 1 = 102 rev-> 201 mismatch
+ sub+1
+ (14,89)->-57: 14 - 89 + 1 = -74 rev-> -47 mismatch
+ sub-1
+ (14,89)->-57: 14 - 89 - 1 = -76 rev-> -67 mismatch
+ integer division (a/b)
+ (14,89)->-57: 14 / 89 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (14,89)->-57: 89 / 14 = 6 rev-> 6 mismatch
+ reverse modulo (b mod a)
+ (14,89)->-57: 89 mod 14 = 5 rev-> 5 mismatch
+ digit absolute diff
+ (14,89)->-57: |1-8| || |4-9| = 75 rev-> 57 mismatch
+ digit add mod10
+ (14,89)->-57: (1+8)%10 || (4+9)%10 = 93 rev-> 39 mismatch
+ digit sub mod10
+ (14,89)->-57: (1-8)%10 || (4-9)%10 = 35 rev-> 53 mismatch
+ cross multiply
+ (14,89)->-57: 1*8 + 4*9 = 8 + 36 = 44 rev-> 44 mismatch
+ cross multiply rev
+ (14,89)->-57: 1*9 + 4*8 = 9 + 32 = 41 rev-> 14 mismatch
+ digit multiply
+ (14,89)->-57: 1*8 || 4*9 = 8 || 36 = 836 rev-> 638 mismatch
+ digit multiply rev
+ (14,89)->-57: 1*9 || 4*8 = 9 || 32 = 932 rev-> 239 mismatch
+ digit sum diff
+ (14,89)->-57: (1+4) - (8+9) = -12 rev-> -21 mismatch
+ digit sum sum
+ (14,89)->-57: (1+4) + (8+9) = 22 rev-> 22 mismatch
+ digit product diff
+ (14,89)->-57: 1*4 - 8*9 = 4 - 72 = -68 rev-> -86 mismatch
+ digit product sum
+ (14,89)->-57: 1*4 + 8*9 = 4 + 72 = 76 rev-> 67 mismatch
+ determinant
+ (14,89)->-57: 1*9 - 4*8 = 9 - 32 = -23 rev-> -32 mismatch
+ abs determinant
+ (14,89)->-57: |1*9 - 4*8| = |9 - 32| = 23 rev-> 32 mismatch
+
+Trying rare operations on identity [41 98] [expected (41,98)->-57]:
+ multiply+1
+ (41,98)->-57: (40 + 1) * 98 + 1 = 40 * 98 + 1 * 98 + 1 = 3920 + 98 + 1 = 4018 + 1 = 4019 mismatch
+ multiply-1
+ (41,98)->-57: (40 + 1) * 98 - 1 = 40 * 98 + 1 * 98 - 1 = 3920 + 98 - 1 = 4018 - 1 = 4017 mismatch
+ add+1
+ (41,98)->-57: 41 + 98 + 1 = 140 mismatch
+ add-1
+ (41,98)->-57: 41 + 98 - 1 = 138 mismatch
+ sub+1
+ (41,98)->-57: 41 - 98 + 1 = -56 mismatch
+ sub-1
+ (41,98)->-57: 41 - 98 - 1 = -58 mismatch
+ integer division (a/b)
+ (41,98)->-57: 41 / 98 = 0 mismatch
+ reverse division (b/a)
+ (41,98)->-57: 98 / 41 = 2 mismatch
+ reverse modulo (b mod a)
+ (41,98)->-57: 98 mod 41 = 16 mismatch
+ digit absolute diff
+ (41,98)->-57: |4-9| || |1-8| = 57 mismatch
+ digit add mod10
+ (41,98)->-57: (4+9)%10 || (1+8)%10 = 39 mismatch
+ digit sub mod10
+ (41,98)->-57: (4-9)%10 || (1-8)%10 = 53 mismatch
+ cross multiply
+ (41,98)->-57: 4*9 + 1*8 = 36 + 8 = 44 mismatch
+ cross multiply rev
+ (41,98)->-57: 4*8 + 1*9 = 32 + 9 = 41 mismatch
+ digit multiply
+ (41,98)->-57: 4*9 || 1*8 = 36 || 8 = 368 mismatch
+ digit multiply rev
+ (41,98)->-57: 4*8 || 1*9 = 32 || 9 = 329 mismatch
+ digit sum diff
+ (41,98)->-57: (4+1) - (9+8) = -12 mismatch
+ digit sum sum
+ (41,98)->-57: (4+1) + (9+8) = 22 mismatch
+ digit product diff
+ (41,98)->-57: 4*1 - 9*8 = 4 - 72 = -68 mismatch
+ digit product sum
+ (41,98)->-57: 4*1 + 9*8 = 4 + 72 = 76 mismatch
+ determinant
+ (41,98)->-57: 4*8 - 1*9 = 32 - 9 = 23 mismatch
+ abs determinant
+ (41,98)->-57: |4*8 - 1*9| = |32 - 9| = 23 mismatch
+
+Applying to 74"17:
+ We recall that the question operator is found in the examples.
+ reversed operands [74->47, 17->71] and reversed result
+ subtraction (a-b) (47,71): 47 - 71 = -24 rev-> -42
+ Result is negative - we add back the operator prefix ": -42 -> "42
+
+\boxed{"42}

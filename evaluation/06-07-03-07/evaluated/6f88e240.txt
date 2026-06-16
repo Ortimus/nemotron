@@ -1,0 +1,194 @@
+06-41 = 47
+45)45 = 0
+41)12 = 7
+
+The inputs are 06, 41, 45, 45, 41, 12
+
+The outputs are 47, 0, 7
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+06-41 -> -
+45)45 -> )
+41)12 -> )
+
+The operators
+-
+)
+
+Looking at the question
+43<61 -> <
+The question operator is not found in the examples. Investigating the most common example operator ) instead. We will use addition for the question operator.
+
+Looking at operator ) [45)45 = 0, 41)12 = 7]:
+
+Trying common operations reversed operands [45->54 45->54, 41->14 12->21] and reversed result [expected (54,54)->0, (14,21)->7]:
+ addition
+ (54,54)->0: 54 + 54 = 108 rev-> 801 mismatch
+ multiplication
+ (14,21)->7: (10 + 4) * 21 = 10 * 21 + 4 * 21 = 210 + 84 = 294 rev-> 492 mismatch
+ concatenation
+ (54,54)->0: 54 || 54 = 5454 rev-> 4545 mismatch
+ reverse concatenation
+ (14,21)->7: 21 || 14 = 2114 rev-> 4112 mismatch
+
+Trying common operations on identity [45 45, 41 12] [expected (45,45)->0, (41,12)->7]:
+ addition
+ (45,45)->0: 45 + 45 = 90 mismatch
+ multiplication
+ (41,12)->7: (40 + 1) * 12 = 40 * 12 + 1 * 12 = 480 + 12 = 492 mismatch
+ concatenation
+ (45,45)->0: 45 || 45 = 4545 mismatch
+ reverse concatenation
+ (41,12)->7: 12 || 41 = 1241 mismatch
+
+Trying difference operations reversed operands [45->54 45->54, 41->14 12->21] and reversed result [expected (54,54)->0, (14,21)->7]:
+ subtraction (a-b)
+ (54,54)->0: 54 - 54 = 0 rev-> 0 match
+ (14,21)->7: 14 - 21 = -7 rev-> -7 mismatch
+ absolute difference
+ (14,21)->7: |14 - 21| = 7 rev-> 7 match
+ (54,54)->0: |54 - 54| = 0 rev-> 0 match
+ correct, actions: reversed operands, reversed result, absolute difference
+ max mod min
+ (54,54)->0: max(54,54) mod min(54,54) = 54 mod 54 = 0 rev-> 0 match
+ (14,21)->7: max(14,21) mod min(14,21) = 21 mod 14 = 7 rev-> 7 match
+ correct, but skipping
+ negated absolute difference
+ (14,21)->7: -|14 - 21| = -7 rev-> -7 mismatch
+ reverse subtraction (b-a)
+ (54,54)->0: 54 - 54 = 0 rev-> 0 match
+ (14,21)->7: 21 - 14 = 7 rev-> 7 match
+ correct, but skipping
+ modulo (a mod b)
+ (14,21)->7: 14 mod 21 = 14 rev-> 41 mismatch
+
+Trying difference operations on identity [45 45, 41 12] [expected (45,45)->0, (41,12)->7]:
+ subtraction (a-b)
+ (45,45)->0: 45 - 45 = 0 match
+ (41,12)->7: 41 - 12 = 29 mismatch
+ absolute difference
+ (41,12)->7: |41 - 12| = 29 mismatch
+ max mod min
+ (45,45)->0: max(45,45) mod min(45,45) = 45 mod 45 = 0 match
+ (41,12)->7: max(41,12) mod min(41,12) = 41 mod 12 = 5 mismatch
+ negated absolute difference
+ (41,12)->7: -|41 - 12| = -29 mismatch
+ reverse subtraction (b-a)
+ (45,45)->0: 45 - 45 = 0 match
+ (41,12)->7: 12 - 41 = -29 mismatch
+ modulo (a mod b)
+ (41,12)->7: 41 mod 12 = 5 mismatch
+
+Trying rare operations reversed operands [45->54 45->54, 41->14 12->21] and reversed result [expected (54,54)->0, (14,21)->7]:
+ multiply+1
+ (54,54)->0: (50 + 4) * 54 + 1 = 50 * 54 + 4 * 54 + 1 = 2700 + 216 + 1 = 2916 + 1 = 2917 rev-> 7192 mismatch
+ multiply-1
+ (14,21)->7: (10 + 4) * 21 - 1 = 10 * 21 + 4 * 21 - 1 = 210 + 84 - 1 = 294 - 1 = 293 rev-> 392 mismatch
+ add+1
+ (54,54)->0: 54 + 54 + 1 = 109 rev-> 901 mismatch
+ add-1
+ (14,21)->7: 14 + 21 - 1 = 34 rev-> 43 mismatch
+ sub+1
+ (54,54)->0: 54 - 54 + 1 = 1 rev-> 1 mismatch
+ sub-1
+ (14,21)->7: 14 - 21 - 1 = -8 rev-> -8 mismatch
+ integer division (a/b)
+ (54,54)->0: 54 / 54 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (14,21)->7: 21 / 14 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (54,54)->0: 54 mod 54 = 0 rev-> 0 match
+ (14,21)->7: 14 mod 21 = 14 rev-> 41 mismatch
+ digit absolute diff
+ (14,21)->7: |1-2| || |4-1| = 13 rev-> 31 mismatch
+ digit add mod10
+ (54,54)->0: (5+5)%10 || (4+4)%10 = 08 rev-> 80 mismatch
+ digit sub mod10
+ (14,21)->7: (1-2)%10 || (4-1)%10 = 93 rev-> 39 mismatch
+ cross multiply
+ (54,54)->0: 5*5 + 4*4 = 25 + 16 = 41 rev-> 14 mismatch
+ cross multiply rev
+ (14,21)->7: 1*1 + 4*2 = 1 + 8 = 9 rev-> 9 mismatch
+ digit multiply
+ (54,54)->0: 5*5 || 4*4 = 25 || 16 = 2516 rev-> 6152 mismatch
+ digit multiply rev
+ (14,21)->7: 1*1 || 4*2 = 1 || 8 = 18 rev-> 81 mismatch
+ digit sum diff
+ (54,54)->0: (5+4) - (5+4) = 0 rev-> 0 match
+ (14,21)->7: (1+4) - (2+1) = 2 rev-> 2 mismatch
+ digit sum sum
+ (14,21)->7: (1+4) + (2+1) = 8 rev-> 8 mismatch
+ digit product diff
+ (54,54)->0: 5*4 - 5*4 = 20 - 20 = 0 rev-> 0 match
+ (14,21)->7: 1*4 - 2*1 = 4 - 2 = 2 rev-> 2 mismatch
+ digit product sum
+ (14,21)->7: 1*4 + 2*1 = 4 + 2 = 6 rev-> 6 mismatch
+ determinant
+ (54,54)->0: 5*4 - 4*5 = 20 - 20 = 0 rev-> 0 match
+ (14,21)->7: 1*1 - 4*2 = 1 - 8 = -7 rev-> -7 mismatch
+ abs determinant
+ (14,21)->7: |1*1 - 4*2| = |1 - 8| = 7 rev-> 7 match
+ (54,54)->0: |5*4 - 4*5| = |20 - 20| = 0 rev-> 0 match
+ correct, but skipping
+
+Trying rare operations on identity [45 45, 41 12] [expected (45,45)->0, (41,12)->7]:
+ multiply+1
+ (45,45)->0: (40 + 5) * 45 + 1 = 40 * 45 + 5 * 45 + 1 = 1800 + 225 + 1 = 2025 + 1 = 2026 mismatch
+ multiply-1
+ (41,12)->7: (40 + 1) * 12 - 1 = 40 * 12 + 1 * 12 - 1 = 480 + 12 - 1 = 492 - 1 = 491 mismatch
+ add+1
+ (45,45)->0: 45 + 45 + 1 = 91 mismatch
+ add-1
+ (41,12)->7: 41 + 12 - 1 = 52 mismatch
+ sub+1
+ (45,45)->0: 45 - 45 + 1 = 1 mismatch
+ sub-1
+ (41,12)->7: 41 - 12 - 1 = 28 mismatch
+ integer division (a/b)
+ (45,45)->0: 45 / 45 = 1 mismatch
+ reverse division (b/a)
+ (41,12)->7: 12 / 41 = 0 mismatch
+ reverse modulo (b mod a)
+ (45,45)->0: 45 mod 45 = 0 match
+ (41,12)->7: 12 mod 41 = 12 mismatch
+ digit absolute diff
+ (41,12)->7: |4-1| || |1-2| = 31 mismatch
+ digit add mod10
+ (45,45)->0: (4+4)%10 || (5+5)%10 = 80 mismatch
+ digit sub mod10
+ (41,12)->7: (4-1)%10 || (1-2)%10 = 39 mismatch
+ cross multiply
+ (45,45)->0: 4*4 + 5*5 = 16 + 25 = 41 mismatch
+ cross multiply rev
+ (41,12)->7: 4*2 + 1*1 = 8 + 1 = 9 mismatch
+ digit multiply
+ (45,45)->0: 4*4 || 5*5 = 16 || 25 = 1625 mismatch
+ digit multiply rev
+ (41,12)->7: 4*2 || 1*1 = 8 || 1 = 81 mismatch
+ digit sum diff
+ (45,45)->0: (4+5) - (4+5) = 0 match
+ (41,12)->7: (4+1) - (1+2) = 2 mismatch
+ digit sum sum
+ (41,12)->7: (4+1) + (1+2) = 8 mismatch
+ digit product diff
+ (45,45)->0: 4*5 - 4*5 = 20 - 20 = 0 match
+ (41,12)->7: 4*1 - 1*2 = 4 - 2 = 2 mismatch
+ digit product sum
+ (41,12)->7: 4*1 + 1*2 = 4 + 2 = 6 mismatch
+ determinant
+ (45,45)->0: 4*5 - 5*4 = 20 - 20 = 0 match
+ (41,12)->7: 4*2 - 1*1 = 8 - 1 = 7 match
+ correct, but skipping
+ abs determinant
+ (41,12)->7: |4*2 - 1*1| = |8 - 1| = 7 match
+ (45,45)->0: |4*5 - 5*4| = |20 - 20| = 0 match
+ correct, but skipping
+
+Applying to 43<61:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [43->34, 61->16] and reversed result
+ addition (34,16): 34 + 16 = 50 rev-> 05
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{05}

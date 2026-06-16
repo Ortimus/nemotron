@@ -1,0 +1,182 @@
+20'20 = 0
+57'12 = 45
+49^50 = 99
+37)48 = 3748
+86'51 = 35
+
+The inputs are 20, 20, 57, 12, 49, 50, 37, 48, 86, 51
+
+The outputs are 0, 45, 99, 3748, 35
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+20'20 -> '
+57'12 -> '
+49^50 -> ^
+37)48 -> )
+86'51 -> '
+
+The operators
+'
+^
+)
+
+Looking at the question
+48^79 -> ^
+The question operator is found in the examples.
+
+Looking at operator ^ [49^50 = 99]:
+
+Trying common operations reversed operands [49->94 50->05] and reversed result [expected (94,05)->99]:
+ addition
+ (94,05)->99: 94 + 05 = 99 rev-> 99 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (94,05)->99: (90 + 4) * 05 = 90 * 05 + 4 * 05 = 450 + 20 = 470 rev-> 074 mismatch
+ concatenation
+ (94,05)->99: 94 || 05 = 9405 rev-> 5049 mismatch
+ reverse concatenation
+ (94,05)->99: 05 || 94 = 0594 rev-> 4950 mismatch
+
+Trying common operations on identity [49 50] [expected (49,50)->99]:
+ addition
+ (49,50)->99: 49 + 50 = 99 match
+ correct, but skipping
+ multiplication
+ (49,50)->99: (40 + 9) * 50 = 40 * 50 + 9 * 50 = 2000 + 450 = 2450 mismatch
+ concatenation
+ (49,50)->99: 49 || 50 = 4950 mismatch
+ reverse concatenation
+ (49,50)->99: 50 || 49 = 5049 mismatch
+
+Trying difference operations reversed operands [49->94 50->05] and reversed result [expected (94,05)->99]:
+ subtraction (a-b)
+ (94,05)->99: 94 - 05 = 89 rev-> 98 mismatch
+ absolute difference
+ (94,05)->99: |94 - 05| = 89 rev-> 98 mismatch
+ max mod min
+ (94,05)->99: max(94,05) mod min(94,05) = 94 mod 05 = 4 rev-> 4 mismatch
+ negated absolute difference
+ (94,05)->99: -|94 - 05| = -89 rev-> -98 mismatch
+ reverse subtraction (b-a)
+ (94,05)->99: 05 - 94 = -89 rev-> -98 mismatch
+ modulo (a mod b)
+ (94,05)->99: 94 mod 05 = 4 rev-> 4 mismatch
+
+Trying difference operations on identity [49 50] [expected (49,50)->99]:
+ subtraction (a-b)
+ (49,50)->99: 49 - 50 = -1 mismatch
+ absolute difference
+ (49,50)->99: |49 - 50| = 1 mismatch
+ max mod min
+ (49,50)->99: max(49,50) mod min(49,50) = 50 mod 49 = 1 mismatch
+ negated absolute difference
+ (49,50)->99: -|49 - 50| = -1 mismatch
+ reverse subtraction (b-a)
+ (49,50)->99: 50 - 49 = 1 mismatch
+ modulo (a mod b)
+ (49,50)->99: 49 mod 50 = 49 mismatch
+
+Trying rare operations reversed operands [49->94 50->05] and reversed result [expected (94,05)->99]:
+ multiply+1
+ (94,05)->99: (90 + 4) * 05 + 1 = 90 * 05 + 4 * 05 + 1 = 450 + 20 + 1 = 470 + 1 = 471 rev-> 174 mismatch
+ multiply-1
+ (94,05)->99: (90 + 4) * 05 - 1 = 90 * 05 + 4 * 05 - 1 = 450 + 20 - 1 = 470 - 1 = 469 rev-> 964 mismatch
+ add+1
+ (94,05)->99: 94 + 05 + 1 = 100 rev-> 001 mismatch
+ add-1
+ (94,05)->99: 94 + 05 - 1 = 98 rev-> 89 mismatch
+ sub+1
+ (94,05)->99: 94 - 05 + 1 = 90 rev-> 09 mismatch
+ sub-1
+ (94,05)->99: 94 - 05 - 1 = 88 rev-> 88 mismatch
+ integer division (a/b)
+ (94,05)->99: 94 / 05 = 18 rev-> 81 mismatch
+ reverse division (b/a)
+ (94,05)->99: 05 / 94 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (94,05)->99: 05 mod 94 = 5 rev-> 5 mismatch
+ digit absolute diff
+ (94,05)->99: |9-0| || |4-5| = 91 rev-> 19 mismatch
+ digit add mod10
+ (94,05)->99: (9+0)%10 || (4+5)%10 = 99 rev-> 99 match
+ correct, but skipping
+ digit sub mod10
+ (94,05)->99: (9-0)%10 || (4-5)%10 = 99 rev-> 99 match
+ correct, but skipping
+ cross multiply
+ (94,05)->99: 9*0 + 4*5 = 0 + 20 = 20 rev-> 02 mismatch
+ cross multiply rev
+ (94,05)->99: 9*5 + 4*0 = 45 + 0 = 45 rev-> 54 mismatch
+ digit multiply
+ (94,05)->99: 9*0 || 4*5 = 0 || 20 = 020 rev-> 020 mismatch
+ digit multiply rev
+ (94,05)->99: 9*5 || 4*0 = 45 || 0 = 450 rev-> 054 mismatch
+ digit sum diff
+ (94,05)->99: (9+4) - (0+5) = 8 rev-> 8 mismatch
+ digit sum sum
+ (94,05)->99: (9+4) + (0+5) = 18 rev-> 81 mismatch
+ digit product diff
+ (94,05)->99: 9*4 - 0*5 = 36 - 0 = 36 rev-> 63 mismatch
+ digit product sum
+ (94,05)->99: 9*4 + 0*5 = 36 + 0 = 36 rev-> 63 mismatch
+ determinant
+ (94,05)->99: 9*5 - 4*0 = 45 - 0 = 45 rev-> 54 mismatch
+ abs determinant
+ (94,05)->99: |9*5 - 4*0| = |45 - 0| = 45 rev-> 54 mismatch
+
+Trying rare operations on identity [49 50] [expected (49,50)->99]:
+ multiply+1
+ (49,50)->99: (40 + 9) * 50 + 1 = 40 * 50 + 9 * 50 + 1 = 2000 + 450 + 1 = 2450 + 1 = 2451 mismatch
+ multiply-1
+ (49,50)->99: (40 + 9) * 50 - 1 = 40 * 50 + 9 * 50 - 1 = 2000 + 450 - 1 = 2450 - 1 = 2449 mismatch
+ add+1
+ (49,50)->99: 49 + 50 + 1 = 100 mismatch
+ add-1
+ (49,50)->99: 49 + 50 - 1 = 98 mismatch
+ sub+1
+ (49,50)->99: 49 - 50 + 1 = 0 mismatch
+ sub-1
+ (49,50)->99: 49 - 50 - 1 = -2 mismatch
+ integer division (a/b)
+ (49,50)->99: 49 / 50 = 0 mismatch
+ reverse division (b/a)
+ (49,50)->99: 50 / 49 = 1 mismatch
+ reverse modulo (b mod a)
+ (49,50)->99: 50 mod 49 = 1 mismatch
+ digit absolute diff
+ (49,50)->99: |4-5| || |9-0| = 19 mismatch
+ digit add mod10
+ (49,50)->99: (4+5)%10 || (9+0)%10 = 99 match
+ correct, but skipping
+ digit sub mod10
+ (49,50)->99: (4-5)%10 || (9-0)%10 = 99 match
+ correct, but skipping
+ cross multiply
+ (49,50)->99: 4*5 + 9*0 = 20 + 0 = 20 mismatch
+ cross multiply rev
+ (49,50)->99: 4*0 + 9*5 = 0 + 45 = 45 mismatch
+ digit multiply
+ (49,50)->99: 4*5 || 9*0 = 20 || 0 = 200 mismatch
+ digit multiply rev
+ (49,50)->99: 4*0 || 9*5 = 0 || 45 = 045 mismatch
+ digit sum diff
+ (49,50)->99: (4+9) - (5+0) = 8 mismatch
+ digit sum sum
+ (49,50)->99: (4+9) + (5+0) = 18 mismatch
+ digit product diff
+ (49,50)->99: 4*9 - 5*0 = 36 - 0 = 36 mismatch
+ digit product sum
+ (49,50)->99: 4*9 + 5*0 = 36 + 0 = 36 mismatch
+ determinant
+ (49,50)->99: 4*0 - 9*5 = 0 - 45 = -45 mismatch
+ abs determinant
+ (49,50)->99: |4*0 - 9*5| = |0 - 45| = 45 mismatch
+
+Applying to 48^79:
+ We recall that the question operator is found in the examples.
+ reversed operands [48->84, 79->97] and reversed result
+ addition (84,97): 84 + 97 = 181 rev-> 181
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{181}

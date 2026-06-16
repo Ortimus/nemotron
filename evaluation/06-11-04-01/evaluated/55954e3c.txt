@@ -1,0 +1,182 @@
+02-87 = -85
+73+51 = 25
+53*69 = 1633
+57+97 = 451
+
+The inputs are 02, 87, 73, 51, 53, 69, 57, 97
+
+The outputs are -85, 25, 1633, 451
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -85, 25, 1633, 451
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+02-87 -> -
+73+51 -> +
+53*69 -> *
+57+97 -> +
+
+The operators
+-
++
+*
+
+Looking at the question
+39*36 -> *
+The question operator is found in the examples.
+
+Looking at operator * [53*69 = 1633]:
+
+Trying common operations
+ reversed operands [53->35 69->96] and reversed result [expected (35,96)->1633]
+ addition
+ (35,96)->1633: 35 + 96 = 131 rev-> 131 mismatch
+ multiplication
+ (35,96)->1633: (30 + 5) * 96 = 30 * 96 + 5 * 96 = 2880 + 480 = 3360 rev-> 0633 mismatch
+ concatenation
+ (35,96)->1633: 35 || 96 = 3596 rev-> 6953 mismatch
+ reverse concatenation
+ (35,96)->1633: 96 || 35 = 9635 rev-> 5369 mismatch
+
+ identity [53 69] [expected (53,69)->1633]
+ addition
+ (53,69)->1633: 53 + 69 = 122 mismatch
+ multiplication
+ (53,69)->1633: (50 + 3) * 69 = 50 * 69 + 3 * 69 = 3450 + 207 = 3657 mismatch
+ concatenation
+ (53,69)->1633: 53 || 69 = 5369 mismatch
+ reverse concatenation
+ (53,69)->1633: 69 || 53 = 6953 mismatch
+
+Trying difference operations
+ reversed operands [53->35 69->96] and reversed result [expected (35,96)->1633]
+ subtraction (a-b)
+ (35,96)->1633: 35 - 96 = -61 rev-> -16 mismatch
+ absolute difference
+ (35,96)->1633: |35 - 96| = 61 rev-> 16 mismatch
+ max mod min
+ (35,96)->1633: max(35,96) mod min(35,96) = 96 mod 35 = 26 rev-> 62 mismatch
+ negated absolute difference
+ (35,96)->1633: -|35 - 96| = -61 rev-> -16 mismatch
+ reverse subtraction (b-a)
+ (35,96)->1633: 96 - 35 = 61 rev-> 16 mismatch
+ modulo (a mod b)
+ (35,96)->1633: 35 mod 96 = 35 rev-> 53 mismatch
+
+ identity [53 69] [expected (53,69)->1633]
+ subtraction (a-b)
+ (53,69)->1633: 53 - 69 = -16 mismatch
+ absolute difference
+ (53,69)->1633: |53 - 69| = 16 mismatch
+ max mod min
+ (53,69)->1633: max(53,69) mod min(53,69) = 69 mod 53 = 16 mismatch
+ negated absolute difference
+ (53,69)->1633: -|53 - 69| = -16 mismatch
+ reverse subtraction (b-a)
+ (53,69)->1633: 69 - 53 = 16 mismatch
+ modulo (a mod b)
+ (53,69)->1633: 53 mod 69 = 53 mismatch
+
+Trying rare operations
+ reversed operands [53->35 69->96] and reversed result [expected (35,96)->1633]
+ multiply+1
+ (35,96)->1633: (30 + 5) * 96 + 1 = 30 * 96 + 5 * 96 + 1 = 2880 + 480 + 1 = 3360 + 1 = 3361 rev-> 1633 match
+ correct, actions: reversed operands, reversed result, multiply+1
+ multiply-1
+ (35,96)->1633: (30 + 5) * 96 - 1 = 30 * 96 + 5 * 96 - 1 = 2880 + 480 - 1 = 3360 - 1 = 3359 rev-> 9533 mismatch
+ add+1
+ (35,96)->1633: 35 + 96 + 1 = 132 rev-> 231 mismatch
+ add-1
+ (35,96)->1633: 35 + 96 - 1 = 130 rev-> 031 mismatch
+ sub+1
+ (35,96)->1633: 35 - 96 + 1 = -60 rev-> -06 mismatch
+ sub-1
+ (35,96)->1633: 35 - 96 - 1 = -62 rev-> -26 mismatch
+ integer division (a/b)
+ (35,96)->1633: 35 / 96 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (35,96)->1633: 96 / 35 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (35,96)->1633: 96 mod 35 = 26 rev-> 62 mismatch
+ digit absolute diff
+ (35,96)->1633: |3-9| || |5-6| = 61 rev-> 16 mismatch
+ digit add mod10
+ (35,96)->1633: (3+9)%10 || (5+6)%10 = 21 rev-> 12 mismatch
+ digit sub mod10
+ (35,96)->1633: (3-9)%10 || (5-6)%10 = 49 rev-> 94 mismatch
+ cross multiply
+ (35,96)->1633: 3*9 + 5*6 = 27 + 30 = 57 rev-> 75 mismatch
+ cross multiply rev
+ (35,96)->1633: 3*6 + 5*9 = 18 + 45 = 63 rev-> 36 mismatch
+ digit multiply
+ (35,96)->1633: 3*9 || 5*6 = 27 || 30 = 2730 rev-> 0372 mismatch
+ digit multiply rev
+ (35,96)->1633: 3*6 || 5*9 = 18 || 45 = 1845 rev-> 5481 mismatch
+ digit sum diff
+ (35,96)->1633: (3+5) - (9+6) = -7 rev-> -7 mismatch
+ digit sum sum
+ (35,96)->1633: (3+5) + (9+6) = 23 rev-> 32 mismatch
+ digit product diff
+ (35,96)->1633: 3*5 - 9*6 = 15 - 54 = -39 rev-> -93 mismatch
+ digit product sum
+ (35,96)->1633: 3*5 + 9*6 = 15 + 54 = 69 rev-> 96 mismatch
+ determinant
+ (35,96)->1633: 3*6 - 5*9 = 18 - 45 = -27 rev-> -72 mismatch
+ abs determinant
+ (35,96)->1633: |3*6 - 5*9| = |18 - 45| = 27 rev-> 72 mismatch
+
+ identity [53 69] [expected (53,69)->1633]
+ multiply+1
+ (53,69)->1633: (50 + 3) * 69 + 1 = 50 * 69 + 3 * 69 + 1 = 3450 + 207 + 1 = 3657 + 1 = 3658 mismatch
+ multiply-1
+ (53,69)->1633: (50 + 3) * 69 - 1 = 50 * 69 + 3 * 69 - 1 = 3450 + 207 - 1 = 3657 - 1 = 3656 mismatch
+ add+1
+ (53,69)->1633: 53 + 69 + 1 = 123 mismatch
+ add-1
+ (53,69)->1633: 53 + 69 - 1 = 121 mismatch
+ sub+1
+ (53,69)->1633: 53 - 69 + 1 = -15 mismatch
+ sub-1
+ (53,69)->1633: 53 - 69 - 1 = -17 mismatch
+ integer division (a/b)
+ (53,69)->1633: 53 / 69 = 0 mismatch
+ reverse division (b/a)
+ (53,69)->1633: 69 / 53 = 1 mismatch
+ reverse modulo (b mod a)
+ (53,69)->1633: 69 mod 53 = 16 mismatch
+ digit absolute diff
+ (53,69)->1633: |5-6| || |3-9| = 16 mismatch
+ digit add mod10
+ (53,69)->1633: (5+6)%10 || (3+9)%10 = 12 mismatch
+ digit sub mod10
+ (53,69)->1633: (5-6)%10 || (3-9)%10 = 94 mismatch
+ cross multiply
+ (53,69)->1633: 5*6 + 3*9 = 30 + 27 = 57 mismatch
+ cross multiply rev
+ (53,69)->1633: 5*9 + 3*6 = 45 + 18 = 63 mismatch
+ digit multiply
+ (53,69)->1633: 5*6 || 3*9 = 30 || 27 = 3027 mismatch
+ digit multiply rev
+ (53,69)->1633: 5*9 || 3*6 = 45 || 18 = 4518 mismatch
+ digit sum diff
+ (53,69)->1633: (5+3) - (6+9) = -7 mismatch
+ digit sum sum
+ (53,69)->1633: (5+3) + (6+9) = 23 mismatch
+ digit product diff
+ (53,69)->1633: 5*3 - 6*9 = 15 - 54 = -39 mismatch
+ digit product sum
+ (53,69)->1633: 5*3 + 6*9 = 15 + 54 = 69 mismatch
+ determinant
+ (53,69)->1633: 5*9 - 3*6 = 45 - 18 = 27 mismatch
+ abs determinant
+ (53,69)->1633: |5*9 - 3*6| = |45 - 18| = 27 mismatch
+
+correct, actions: reversed operands, reversed result, multiply+1
+
+Applying to 39*36:
+ We recall that the question operator is found in the examples.
+ reversed operands [39->93, 36->63] and reversed result
+ multiply+1
+ (93,63): (90 + 3) * 63 + 1 = 90 * 63 + 3 * 63 + 1 = 5670 + 189 + 1 = 5859 + 1 = 5860 rev-> 0685
+ Result is non-negative
+ \boxed{0685}

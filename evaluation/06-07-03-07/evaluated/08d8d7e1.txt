@@ -1,0 +1,175 @@
+41+98 = 301
+94+07 = 911
+06*49 = 4906
+95*27 = 2795
+
+The inputs are 41, 98, 94, 07, 06, 49, 95, 27
+
+The outputs are 301, 911, 4906, 2795
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+41+98 -> +
+94+07 -> +
+06*49 -> *
+95*27 -> *
+
+The operators
++
+*
+
+Looking at the question
+65+23 -> +
+The question operator is found in the examples.
+
+Looking at operator + [41+98 = 301, 94+07 = 911]:
+
+Trying common operations reversed operands [41->14 98->89, 94->49 07->70] and reversed result [expected (14,89)->301, (49,70)->911]:
+ addition
+ (14,89)->301: 14 + 89 = 103 rev-> 301 match
+ (49,70)->911: 49 + 70 = 119 rev-> 911 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (49,70)->911: (40 + 9) * 70 = 40 * 70 + 9 * 70 = 2800 + 630 = 3430 rev-> 0343 mismatch
+ concatenation
+ (14,89)->301: 14 || 89 = 1489 rev-> 9841 mismatch
+ reverse concatenation
+ (49,70)->911: 70 || 49 = 7049 rev-> 9407 mismatch
+
+Trying common operations on identity [41 98, 94 07] [expected (41,98)->301, (94,07)->911]:
+ addition
+ (41,98)->301: 41 + 98 = 139 mismatch
+ multiplication
+ (94,07)->911: (90 + 4) * 07 = 90 * 07 + 4 * 07 = 630 + 28 = 658 mismatch
+ concatenation
+ (41,98)->301: 41 || 98 = 4198 mismatch
+ reverse concatenation
+ (94,07)->911: 07 || 94 = 0794 mismatch
+
+Trying difference operations reversed operands [41->14 98->89, 94->49 07->70] and reversed result [expected (14,89)->301, (49,70)->911]:
+ subtraction (a-b)
+ (14,89)->301: 14 - 89 = -75 rev-> -57 mismatch
+ absolute difference
+ (49,70)->911: |49 - 70| = 21 rev-> 12 mismatch
+ max mod min
+ (14,89)->301: max(14,89) mod min(14,89) = 89 mod 14 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (49,70)->911: -|49 - 70| = -21 rev-> -12 mismatch
+ reverse subtraction (b-a)
+ (14,89)->301: 89 - 14 = 75 rev-> 57 mismatch
+ modulo (a mod b)
+ (49,70)->911: 49 mod 70 = 49 rev-> 94 mismatch
+
+Trying difference operations on identity [41 98, 94 07] [expected (41,98)->301, (94,07)->911]:
+ subtraction (a-b)
+ (41,98)->301: 41 - 98 = -57 mismatch
+ absolute difference
+ (94,07)->911: |94 - 07| = 87 mismatch
+ max mod min
+ (41,98)->301: max(41,98) mod min(41,98) = 98 mod 41 = 16 mismatch
+ negated absolute difference
+ (94,07)->911: -|94 - 07| = -87 mismatch
+ reverse subtraction (b-a)
+ (41,98)->301: 98 - 41 = 57 mismatch
+ modulo (a mod b)
+ (94,07)->911: 94 mod 07 = 3 mismatch
+
+Trying rare operations reversed operands [41->14 98->89, 94->49 07->70] and reversed result [expected (14,89)->301, (49,70)->911]:
+ multiply+1
+ (14,89)->301: (10 + 4) * 89 + 1 = 10 * 89 + 4 * 89 + 1 = 890 + 356 + 1 = 1246 + 1 = 1247 rev-> 7421 mismatch
+ multiply-1
+ (49,70)->911: (40 + 9) * 70 - 1 = 40 * 70 + 9 * 70 - 1 = 2800 + 630 - 1 = 3430 - 1 = 3429 rev-> 9243 mismatch
+ add+1
+ (14,89)->301: 14 + 89 + 1 = 104 rev-> 401 mismatch
+ add-1
+ (49,70)->911: 49 + 70 - 1 = 118 rev-> 811 mismatch
+ sub+1
+ (14,89)->301: 14 - 89 + 1 = -74 rev-> -47 mismatch
+ sub-1
+ (49,70)->911: 49 - 70 - 1 = -22 rev-> -22 mismatch
+ integer division (a/b)
+ (14,89)->301: 14 / 89 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (49,70)->911: 70 / 49 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (14,89)->301: 89 mod 14 = 5 rev-> 5 mismatch
+ digit absolute diff
+ (49,70)->911: |4-7| || |9-0| = 39 rev-> 93 mismatch
+ digit add mod10
+ (14,89)->301: (1+8)%10 || (4+9)%10 = 93 rev-> 39 mismatch
+ digit sub mod10
+ (49,70)->911: (4-7)%10 || (9-0)%10 = 79 rev-> 97 mismatch
+ cross multiply
+ (14,89)->301: 1*8 + 4*9 = 8 + 36 = 44 rev-> 44 mismatch
+ cross multiply rev
+ (49,70)->911: 4*0 + 9*7 = 0 + 63 = 63 rev-> 36 mismatch
+ digit multiply
+ (14,89)->301: 1*8 || 4*9 = 8 || 36 = 836 rev-> 638 mismatch
+ digit multiply rev
+ (49,70)->911: 4*0 || 9*7 = 0 || 63 = 063 rev-> 360 mismatch
+ digit sum diff
+ (14,89)->301: (1+4) - (8+9) = -12 rev-> -21 mismatch
+ digit sum sum
+ (49,70)->911: (4+9) + (7+0) = 20 rev-> 02 mismatch
+ digit product diff
+ (14,89)->301: 1*4 - 8*9 = 4 - 72 = -68 rev-> -86 mismatch
+ digit product sum
+ (49,70)->911: 4*9 + 7*0 = 36 + 0 = 36 rev-> 63 mismatch
+ determinant
+ (14,89)->301: 1*9 - 4*8 = 9 - 32 = -23 rev-> -32 mismatch
+ abs determinant
+ (49,70)->911: |4*0 - 9*7| = |0 - 63| = 63 rev-> 36 mismatch
+
+Trying rare operations on identity [41 98, 94 07] [expected (41,98)->301, (94,07)->911]:
+ multiply+1
+ (41,98)->301: (40 + 1) * 98 + 1 = 40 * 98 + 1 * 98 + 1 = 3920 + 98 + 1 = 4018 + 1 = 4019 mismatch
+ multiply-1
+ (94,07)->911: (90 + 4) * 07 - 1 = 90 * 07 + 4 * 07 - 1 = 630 + 28 - 1 = 658 - 1 = 657 mismatch
+ add+1
+ (41,98)->301: 41 + 98 + 1 = 140 mismatch
+ add-1
+ (94,07)->911: 94 + 07 - 1 = 100 mismatch
+ sub+1
+ (41,98)->301: 41 - 98 + 1 = -56 mismatch
+ sub-1
+ (94,07)->911: 94 - 07 - 1 = 86 mismatch
+ integer division (a/b)
+ (41,98)->301: 41 / 98 = 0 mismatch
+ reverse division (b/a)
+ (94,07)->911: 07 / 94 = 0 mismatch
+ reverse modulo (b mod a)
+ (41,98)->301: 98 mod 41 = 16 mismatch
+ digit absolute diff
+ (94,07)->911: |9-0| || |4-7| = 93 mismatch
+ digit add mod10
+ (41,98)->301: (4+9)%10 || (1+8)%10 = 39 mismatch
+ digit sub mod10
+ (94,07)->911: (9-0)%10 || (4-7)%10 = 97 mismatch
+ cross multiply
+ (41,98)->301: 4*9 + 1*8 = 36 + 8 = 44 mismatch
+ cross multiply rev
+ (94,07)->911: 9*7 + 4*0 = 63 + 0 = 63 mismatch
+ digit multiply
+ (41,98)->301: 4*9 || 1*8 = 36 || 8 = 368 mismatch
+ digit multiply rev
+ (94,07)->911: 9*7 || 4*0 = 63 || 0 = 630 mismatch
+ digit sum diff
+ (41,98)->301: (4+1) - (9+8) = -12 mismatch
+ digit sum sum
+ (94,07)->911: (9+4) + (0+7) = 20 mismatch
+ digit product diff
+ (41,98)->301: 4*1 - 9*8 = 4 - 72 = -68 mismatch
+ digit product sum
+ (94,07)->911: 9*4 + 0*7 = 36 + 0 = 36 mismatch
+ determinant
+ (41,98)->301: 4*8 - 1*9 = 32 - 9 = 23 mismatch
+ abs determinant
+ (94,07)->911: |9*7 - 4*0| = |63 - 0| = 63 mismatch
+
+Applying to 65+23:
+ We recall that the question operator is found in the examples.
+ reversed operands [65->56, 23->32] and reversed result
+ addition (56,32): 56 + 32 = 88 rev-> 88
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{88}

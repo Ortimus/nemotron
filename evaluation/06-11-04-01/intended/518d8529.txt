@@ -1,0 +1,181 @@
+64@61 = 03
+85^75 = 7585
+21@05 = @83
+
+The inputs are 64, 61, 85, 75, 21, 05
+
+The outputs are 03, 7585, @83
+Some example outputs have the operator symbol as prefix @.
+We now consider the outputs to be 03, 7585, -83
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+64@61 -> @
+85^75 -> ^
+21@05 -> @
+
+The operators
+@
+^
+
+Looking at the question
+91@67 -> @
+The question operator is found in the examples.
+
+Looking at operator @ [64@61 = 03, 21@05 = -83]:
+
+Trying common operations
+ reversed operands [64->46 61->16, 21->12 05->50] and reversed result [expected (46,16)->03, (12,50)->-83]
+ addition
+ (46,16)->03: 46 + 16 = 62 rev-> 26 mismatch
+ multiplication
+ (12,50)->-83: (10 + 2) * 50 = 10 * 50 + 2 * 50 = 500 + 100 = 600 rev-> 006 mismatch
+ concatenation
+ (46,16)->03: 46 || 16 = 4616 rev-> 6164 mismatch
+ reverse concatenation
+ (12,50)->-83: 50 || 12 = 5012 rev-> 2105 mismatch
+
+ identity [64 61, 21 05] [expected (64,61)->03, (21,05)->-83]
+ addition
+ (64,61)->03: 64 + 61 = 125 mismatch
+ multiplication
+ (21,05)->-83: (20 + 1) * 05 = 20 * 05 + 1 * 05 = 100 + 5 = 105 mismatch
+ concatenation
+ (64,61)->03: 64 || 61 = 6461 mismatch
+ reverse concatenation
+ (21,05)->-83: 05 || 21 = 0521 mismatch
+
+Trying difference operations
+ reversed operands [64->46 61->16, 21->12 05->50] and reversed result [expected (46,16)->03, (12,50)->-83]
+ subtraction (a-b)
+ (46,16)->03: 46 - 16 = 30 rev-> 03 match
+ (12,50)->-83: 12 - 50 = -38 rev-> -83 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (12,50)->-83: |12 - 50| = 38 rev-> 83 mismatch
+ max mod min
+ (46,16)->03: max(46,16) mod min(46,16) = 46 mod 16 = 14 rev-> 41 mismatch
+ negated absolute difference
+ (12,50)->-83: -|12 - 50| = -38 rev-> -83 match
+ (46,16)->03: -|46 - 16| = -30 rev-> -03 mismatch
+ reverse subtraction (b-a)
+ (46,16)->03: 16 - 46 = -30 rev-> -03 mismatch
+ modulo (a mod b)
+ (12,50)->-83: 12 mod 50 = 12 rev-> 21 mismatch
+
+ identity [64 61, 21 05] [expected (64,61)->03, (21,05)->-83]
+ subtraction (a-b)
+ (64,61)->03: 64 - 61 = 3 mismatch
+ absolute difference
+ (21,05)->-83: |21 - 05| = 16 mismatch
+ max mod min
+ (64,61)->03: max(64,61) mod min(64,61) = 64 mod 61 = 3 mismatch
+ negated absolute difference
+ (21,05)->-83: -|21 - 05| = -16 mismatch
+ reverse subtraction (b-a)
+ (64,61)->03: 61 - 64 = -3 mismatch
+ modulo (a mod b)
+ (21,05)->-83: 21 mod 05 = 1 mismatch
+
+Trying rare operations
+ reversed operands [64->46 61->16, 21->12 05->50] and reversed result [expected (46,16)->03, (12,50)->-83]
+ multiply+1
+ (46,16)->03: (40 + 6) * 16 + 1 = 40 * 16 + 6 * 16 + 1 = 640 + 96 + 1 = 736 + 1 = 737 rev-> 737 mismatch
+ multiply-1
+ (12,50)->-83: (10 + 2) * 50 - 1 = 10 * 50 + 2 * 50 - 1 = 500 + 100 - 1 = 600 - 1 = 599 rev-> 995 mismatch
+ add+1
+ (46,16)->03: 46 + 16 + 1 = 63 rev-> 36 mismatch
+ add-1
+ (12,50)->-83: 12 + 50 - 1 = 61 rev-> 16 mismatch
+ sub+1
+ (46,16)->03: 46 - 16 + 1 = 31 rev-> 13 mismatch
+ sub-1
+ (12,50)->-83: 12 - 50 - 1 = -39 rev-> -93 mismatch
+ integer division (a/b)
+ (46,16)->03: 46 / 16 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (12,50)->-83: 50 / 12 = 4 rev-> 4 mismatch
+ reverse modulo (b mod a)
+ (46,16)->03: 16 mod 46 = 16 rev-> 61 mismatch
+ digit absolute diff
+ (12,50)->-83: |1-5| || |2-0| = 42 rev-> 24 mismatch
+ digit add mod10
+ (46,16)->03: (4+1)%10 || (6+6)%10 = 52 rev-> 25 mismatch
+ digit sub mod10
+ (12,50)->-83: (1-5)%10 || (2-0)%10 = 62 rev-> 26 mismatch
+ cross multiply
+ (46,16)->03: 4*1 + 6*6 = 4 + 36 = 40 rev-> 04 mismatch
+ cross multiply rev
+ (12,50)->-83: 1*0 + 2*5 = 0 + 10 = 10 rev-> 01 mismatch
+ digit multiply
+ (46,16)->03: 4*1 || 6*6 = 4 || 36 = 436 rev-> 634 mismatch
+ digit multiply rev
+ (12,50)->-83: 1*0 || 2*5 = 0 || 10 = 010 rev-> 010 mismatch
+ digit sum diff
+ (46,16)->03: (4+6) - (1+6) = 3 rev-> 3 mismatch
+ digit sum sum
+ (12,50)->-83: (1+2) + (5+0) = 8 rev-> 8 mismatch
+ digit product diff
+ (46,16)->03: 4*6 - 1*6 = 24 - 6 = 18 rev-> 81 mismatch
+ digit product sum
+ (12,50)->-83: 1*2 + 5*0 = 2 + 0 = 2 rev-> 2 mismatch
+ determinant
+ (46,16)->03: 4*6 - 6*1 = 24 - 6 = 18 rev-> 81 mismatch
+ abs determinant
+ (12,50)->-83: |1*0 - 2*5| = |0 - 10| = 10 rev-> 01 mismatch
+
+ identity [64 61, 21 05] [expected (64,61)->03, (21,05)->-83]
+ multiply+1
+ (64,61)->03: (60 + 4) * 61 + 1 = 60 * 61 + 4 * 61 + 1 = 3660 + 244 + 1 = 3904 + 1 = 3905 mismatch
+ multiply-1
+ (21,05)->-83: (20 + 1) * 05 - 1 = 20 * 05 + 1 * 05 - 1 = 100 + 5 - 1 = 105 - 1 = 104 mismatch
+ add+1
+ (64,61)->03: 64 + 61 + 1 = 126 mismatch
+ add-1
+ (21,05)->-83: 21 + 05 - 1 = 25 mismatch
+ sub+1
+ (64,61)->03: 64 - 61 + 1 = 4 mismatch
+ sub-1
+ (21,05)->-83: 21 - 05 - 1 = 15 mismatch
+ integer division (a/b)
+ (64,61)->03: 64 / 61 = 1 mismatch
+ reverse division (b/a)
+ (21,05)->-83: 05 / 21 = 0 mismatch
+ reverse modulo (b mod a)
+ (64,61)->03: 61 mod 64 = 61 mismatch
+ digit absolute diff
+ (21,05)->-83: |2-0| || |1-5| = 24 mismatch
+ digit add mod10
+ (64,61)->03: (6+6)%10 || (4+1)%10 = 25 mismatch
+ digit sub mod10
+ (21,05)->-83: (2-0)%10 || (1-5)%10 = 26 mismatch
+ cross multiply
+ (64,61)->03: 6*6 + 4*1 = 36 + 4 = 40 mismatch
+ cross multiply rev
+ (21,05)->-83: 2*5 + 1*0 = 10 + 0 = 10 mismatch
+ digit multiply
+ (64,61)->03: 6*6 || 4*1 = 36 || 4 = 364 mismatch
+ digit multiply rev
+ (21,05)->-83: 2*5 || 1*0 = 10 || 0 = 100 mismatch
+ digit sum diff
+ (64,61)->03: (6+4) - (6+1) = 3 mismatch
+ digit sum sum
+ (21,05)->-83: (2+1) + (0+5) = 8 mismatch
+ digit product diff
+ (64,61)->03: 6*4 - 6*1 = 24 - 6 = 18 mismatch
+ digit product sum
+ (21,05)->-83: 2*1 + 0*5 = 2 + 0 = 2 mismatch
+ determinant
+ (64,61)->03: 6*1 - 4*6 = 6 - 24 = -18 mismatch
+ abs determinant
+ (21,05)->-83: |2*5 - 1*0| = |10 - 0| = 10 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 91@67:
+ We recall that the question operator is found in the examples.
+ reversed operands [91->19, 67->76] and reversed result
+ subtraction (a-b)
+ (19,76): 19 - 76 = -57 rev-> -75
+ Result is negative - we add back the operator prefix @
+ -75 -> \boxed{@75}

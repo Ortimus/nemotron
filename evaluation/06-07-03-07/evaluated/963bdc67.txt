@@ -1,0 +1,174 @@
+52*81 = 7
+49-83 = 2753
+96\83 = 9683
+
+The inputs are 52, 81, 49, 83, 96, 83
+
+The outputs are 7, 2753, 9683
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+52*81 -> *
+49-83 -> -
+96\83 -> \
+
+The operators
+*
+-
+\
+
+Looking at the question
+99\73 -> \
+The question operator is found in the examples.
+
+Looking at operator \ [96\83 = 9683]:
+
+Trying common operations reversed operands [96->69 83->38] and reversed result [expected (69,38)->9683]:
+ addition
+ (69,38)->9683: 69 + 38 = 107 rev-> 701 mismatch
+ multiplication
+ (69,38)->9683: (60 + 9) * 38 = 60 * 38 + 9 * 38 = 2280 + 342 = 2622 rev-> 2262 mismatch
+ concatenation
+ (69,38)->9683: 69 || 38 = 6938 rev-> 8396 mismatch
+ reverse concatenation
+ (69,38)->9683: 38 || 69 = 3869 rev-> 9683 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+Trying common operations on identity [96 83] [expected (96,83)->9683]:
+ addition
+ (96,83)->9683: 96 + 83 = 179 mismatch
+ multiplication
+ (96,83)->9683: (90 + 6) * 83 = 90 * 83 + 6 * 83 = 7470 + 498 = 7968 mismatch
+ concatenation
+ (96,83)->9683: 96 || 83 = 9683 match
+ correct, but skipping
+ reverse concatenation
+ (96,83)->9683: 83 || 96 = 8396 mismatch
+
+Trying difference operations reversed operands [96->69 83->38] and reversed result [expected (69,38)->9683]:
+ subtraction (a-b)
+ (69,38)->9683: 69 - 38 = 31 rev-> 13 mismatch
+ absolute difference
+ (69,38)->9683: |69 - 38| = 31 rev-> 13 mismatch
+ max mod min
+ (69,38)->9683: max(69,38) mod min(69,38) = 69 mod 38 = 31 rev-> 13 mismatch
+ negated absolute difference
+ (69,38)->9683: -|69 - 38| = -31 rev-> -13 mismatch
+ reverse subtraction (b-a)
+ (69,38)->9683: 38 - 69 = -31 rev-> -13 mismatch
+ modulo (a mod b)
+ (69,38)->9683: 69 mod 38 = 31 rev-> 13 mismatch
+
+Trying difference operations on identity [96 83] [expected (96,83)->9683]:
+ subtraction (a-b)
+ (96,83)->9683: 96 - 83 = 13 mismatch
+ absolute difference
+ (96,83)->9683: |96 - 83| = 13 mismatch
+ max mod min
+ (96,83)->9683: max(96,83) mod min(96,83) = 96 mod 83 = 13 mismatch
+ negated absolute difference
+ (96,83)->9683: -|96 - 83| = -13 mismatch
+ reverse subtraction (b-a)
+ (96,83)->9683: 83 - 96 = -13 mismatch
+ modulo (a mod b)
+ (96,83)->9683: 96 mod 83 = 13 mismatch
+
+Trying rare operations reversed operands [96->69 83->38] and reversed result [expected (69,38)->9683]:
+ multiply+1
+ (69,38)->9683: (60 + 9) * 38 + 1 = 60 * 38 + 9 * 38 + 1 = 2280 + 342 + 1 = 2622 + 1 = 2623 rev-> 3262 mismatch
+ multiply-1
+ (69,38)->9683: (60 + 9) * 38 - 1 = 60 * 38 + 9 * 38 - 1 = 2280 + 342 - 1 = 2622 - 1 = 2621 rev-> 1262 mismatch
+ add+1
+ (69,38)->9683: 69 + 38 + 1 = 108 rev-> 801 mismatch
+ add-1
+ (69,38)->9683: 69 + 38 - 1 = 106 rev-> 601 mismatch
+ sub+1
+ (69,38)->9683: 69 - 38 + 1 = 32 rev-> 23 mismatch
+ sub-1
+ (69,38)->9683: 69 - 38 - 1 = 30 rev-> 03 mismatch
+ integer division (a/b)
+ (69,38)->9683: 69 / 38 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (69,38)->9683: 38 / 69 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (69,38)->9683: 38 mod 69 = 38 rev-> 83 mismatch
+ digit absolute diff
+ (69,38)->9683: |6-3| || |9-8| = 31 rev-> 13 mismatch
+ digit add mod10
+ (69,38)->9683: (6+3)%10 || (9+8)%10 = 97 rev-> 79 mismatch
+ digit sub mod10
+ (69,38)->9683: (6-3)%10 || (9-8)%10 = 31 rev-> 13 mismatch
+ cross multiply
+ (69,38)->9683: 6*3 + 9*8 = 18 + 72 = 90 rev-> 09 mismatch
+ cross multiply rev
+ (69,38)->9683: 6*8 + 9*3 = 48 + 27 = 75 rev-> 57 mismatch
+ digit multiply
+ (69,38)->9683: 6*3 || 9*8 = 18 || 72 = 1872 rev-> 2781 mismatch
+ digit multiply rev
+ (69,38)->9683: 6*8 || 9*3 = 48 || 27 = 4827 rev-> 7284 mismatch
+ digit sum diff
+ (69,38)->9683: (6+9) - (3+8) = 4 rev-> 4 mismatch
+ digit sum sum
+ (69,38)->9683: (6+9) + (3+8) = 26 rev-> 62 mismatch
+ digit product diff
+ (69,38)->9683: 6*9 - 3*8 = 54 - 24 = 30 rev-> 03 mismatch
+ digit product sum
+ (69,38)->9683: 6*9 + 3*8 = 54 + 24 = 78 rev-> 87 mismatch
+ determinant
+ (69,38)->9683: 6*8 - 9*3 = 48 - 27 = 21 rev-> 12 mismatch
+ abs determinant
+ (69,38)->9683: |6*8 - 9*3| = |48 - 27| = 21 rev-> 12 mismatch
+
+Trying rare operations on identity [96 83] [expected (96,83)->9683]:
+ multiply+1
+ (96,83)->9683: (90 + 6) * 83 + 1 = 90 * 83 + 6 * 83 + 1 = 7470 + 498 + 1 = 7968 + 1 = 7969 mismatch
+ multiply-1
+ (96,83)->9683: (90 + 6) * 83 - 1 = 90 * 83 + 6 * 83 - 1 = 7470 + 498 - 1 = 7968 - 1 = 7967 mismatch
+ add+1
+ (96,83)->9683: 96 + 83 + 1 = 180 mismatch
+ add-1
+ (96,83)->9683: 96 + 83 - 1 = 178 mismatch
+ sub+1
+ (96,83)->9683: 96 - 83 + 1 = 14 mismatch
+ sub-1
+ (96,83)->9683: 96 - 83 - 1 = 12 mismatch
+ integer division (a/b)
+ (96,83)->9683: 96 / 83 = 1 mismatch
+ reverse division (b/a)
+ (96,83)->9683: 83 / 96 = 0 mismatch
+ reverse modulo (b mod a)
+ (96,83)->9683: 83 mod 96 = 83 mismatch
+ digit absolute diff
+ (96,83)->9683: |9-8| || |6-3| = 13 mismatch
+ digit add mod10
+ (96,83)->9683: (9+8)%10 || (6+3)%10 = 79 mismatch
+ digit sub mod10
+ (96,83)->9683: (9-8)%10 || (6-3)%10 = 13 mismatch
+ cross multiply
+ (96,83)->9683: 9*8 + 6*3 = 72 + 18 = 90 mismatch
+ cross multiply rev
+ (96,83)->9683: 9*3 + 6*8 = 27 + 48 = 75 mismatch
+ digit multiply
+ (96,83)->9683: 9*8 || 6*3 = 72 || 18 = 7218 mismatch
+ digit multiply rev
+ (96,83)->9683: 9*3 || 6*8 = 27 || 48 = 2748 mismatch
+ digit sum diff
+ (96,83)->9683: (9+6) - (8+3) = 4 mismatch
+ digit sum sum
+ (96,83)->9683: (9+6) + (8+3) = 26 mismatch
+ digit product diff
+ (96,83)->9683: 9*6 - 8*3 = 54 - 24 = 30 mismatch
+ digit product sum
+ (96,83)->9683: 9*6 + 8*3 = 54 + 24 = 78 mismatch
+ determinant
+ (96,83)->9683: 9*3 - 6*8 = 27 - 48 = -21 mismatch
+ abs determinant
+ (96,83)->9683: |9*3 - 6*8| = |27 - 48| = 21 mismatch
+
+Applying to 99\73:
+ We recall that the question operator is found in the examples.
+ reversed operands [99->99, 73->37] and reversed result
+ reverse concatenation (99,37): 37 || 99 = 3799 rev-> 9973
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{9973}

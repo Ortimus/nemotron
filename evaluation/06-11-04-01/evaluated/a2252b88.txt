@@ -1,0 +1,181 @@
+13)49 = 36
+89^55 = 0935
+52)52 = 0
+98)78 = 2)
+
+The inputs are 13, 49, 89, 55, 52, 52, 98, 78
+
+The outputs are 36, 0935, 0, 2)
+Some example outputs have the operator symbol as suffix ).
+We now consider the outputs to be 36, 0935, 0, 2)
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+13)49 -> )
+89^55 -> ^
+52)52 -> )
+98)78 -> )
+
+The operators
+)
+^
+
+Looking at the question
+66^73 -> ^
+The question operator is found in the examples.
+
+Looking at operator ^ [89^55 = 0935]:
+
+Trying common operations
+ reversed operands [89->98 55->55] and reversed result [expected (98,55)->0935]
+ addition
+ (98,55)->0935: 98 + 55 = 153 rev-> 351 mismatch
+ multiplication
+ (98,55)->0935: (90 + 8) * 55 = 90 * 55 + 8 * 55 = 4950 + 440 = 5390 rev-> 0935 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (98,55)->0935: 98 || 55 = 9855 rev-> 5589 mismatch
+ reverse concatenation
+ (98,55)->0935: 55 || 98 = 5598 rev-> 8955 mismatch
+
+ identity [89 55] [expected (89,55)->0935]
+ addition
+ (89,55)->0935: 89 + 55 = 144 mismatch
+ multiplication
+ (89,55)->0935: (80 + 9) * 55 = 80 * 55 + 9 * 55 = 4400 + 495 = 4895 mismatch
+ concatenation
+ (89,55)->0935: 89 || 55 = 8955 mismatch
+ reverse concatenation
+ (89,55)->0935: 55 || 89 = 5589 mismatch
+
+Trying difference operations
+ reversed operands [89->98 55->55] and reversed result [expected (98,55)->0935]
+ subtraction (a-b)
+ (98,55)->0935: 98 - 55 = 43 rev-> 34 mismatch
+ absolute difference
+ (98,55)->0935: |98 - 55| = 43 rev-> 34 mismatch
+ max mod min
+ (98,55)->0935: max(98,55) mod min(98,55) = 98 mod 55 = 43 rev-> 34 mismatch
+ negated absolute difference
+ (98,55)->0935: -|98 - 55| = -43 rev-> -34 mismatch
+ reverse subtraction (b-a)
+ (98,55)->0935: 55 - 98 = -43 rev-> -34 mismatch
+ modulo (a mod b)
+ (98,55)->0935: 98 mod 55 = 43 rev-> 34 mismatch
+
+ identity [89 55] [expected (89,55)->0935]
+ subtraction (a-b)
+ (89,55)->0935: 89 - 55 = 34 mismatch
+ absolute difference
+ (89,55)->0935: |89 - 55| = 34 mismatch
+ max mod min
+ (89,55)->0935: max(89,55) mod min(89,55) = 89 mod 55 = 34 mismatch
+ negated absolute difference
+ (89,55)->0935: -|89 - 55| = -34 mismatch
+ reverse subtraction (b-a)
+ (89,55)->0935: 55 - 89 = -34 mismatch
+ modulo (a mod b)
+ (89,55)->0935: 89 mod 55 = 34 mismatch
+
+Trying rare operations
+ reversed operands [89->98 55->55] and reversed result [expected (98,55)->0935]
+ multiply+1
+ (98,55)->0935: (90 + 8) * 55 + 1 = 90 * 55 + 8 * 55 + 1 = 4950 + 440 + 1 = 5390 + 1 = 5391 rev-> 1935 mismatch
+ multiply-1
+ (98,55)->0935: (90 + 8) * 55 - 1 = 90 * 55 + 8 * 55 - 1 = 4950 + 440 - 1 = 5390 - 1 = 5389 rev-> 9835 mismatch
+ add+1
+ (98,55)->0935: 98 + 55 + 1 = 154 rev-> 451 mismatch
+ add-1
+ (98,55)->0935: 98 + 55 - 1 = 152 rev-> 251 mismatch
+ sub+1
+ (98,55)->0935: 98 - 55 + 1 = 44 rev-> 44 mismatch
+ sub-1
+ (98,55)->0935: 98 - 55 - 1 = 42 rev-> 24 mismatch
+ integer division (a/b)
+ (98,55)->0935: 98 / 55 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (98,55)->0935: 55 / 98 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (98,55)->0935: 55 mod 98 = 55 rev-> 55 mismatch
+ digit absolute diff
+ (98,55)->0935: |9-5| || |8-5| = 43 rev-> 34 mismatch
+ digit add mod10
+ (98,55)->0935: (9+5)%10 || (8+5)%10 = 43 rev-> 34 mismatch
+ digit sub mod10
+ (98,55)->0935: (9-5)%10 || (8-5)%10 = 43 rev-> 34 mismatch
+ cross multiply
+ (98,55)->0935: 9*5 + 8*5 = 45 + 40 = 85 rev-> 58 mismatch
+ cross multiply rev
+ (98,55)->0935: 9*5 + 8*5 = 45 + 40 = 85 rev-> 58 mismatch
+ digit multiply
+ (98,55)->0935: 9*5 || 8*5 = 45 || 40 = 4540 rev-> 0454 mismatch
+ digit multiply rev
+ (98,55)->0935: 9*5 || 8*5 = 45 || 40 = 4540 rev-> 0454 mismatch
+ digit sum diff
+ (98,55)->0935: (9+8) - (5+5) = 7 rev-> 7 mismatch
+ digit sum sum
+ (98,55)->0935: (9+8) + (5+5) = 27 rev-> 72 mismatch
+ digit product diff
+ (98,55)->0935: 9*8 - 5*5 = 72 - 25 = 47 rev-> 74 mismatch
+ digit product sum
+ (98,55)->0935: 9*8 + 5*5 = 72 + 25 = 97 rev-> 79 mismatch
+ determinant
+ (98,55)->0935: 9*5 - 8*5 = 45 - 40 = 5 rev-> 5 mismatch
+ abs determinant
+ (98,55)->0935: |9*5 - 8*5| = |45 - 40| = 5 rev-> 5 mismatch
+
+ identity [89 55] [expected (89,55)->0935]
+ multiply+1
+ (89,55)->0935: (80 + 9) * 55 + 1 = 80 * 55 + 9 * 55 + 1 = 4400 + 495 + 1 = 4895 + 1 = 4896 mismatch
+ multiply-1
+ (89,55)->0935: (80 + 9) * 55 - 1 = 80 * 55 + 9 * 55 - 1 = 4400 + 495 - 1 = 4895 - 1 = 4894 mismatch
+ add+1
+ (89,55)->0935: 89 + 55 + 1 = 145 mismatch
+ add-1
+ (89,55)->0935: 89 + 55 - 1 = 143 mismatch
+ sub+1
+ (89,55)->0935: 89 - 55 + 1 = 35 mismatch
+ sub-1
+ (89,55)->0935: 89 - 55 - 1 = 33 mismatch
+ integer division (a/b)
+ (89,55)->0935: 89 / 55 = 1 mismatch
+ reverse division (b/a)
+ (89,55)->0935: 55 / 89 = 0 mismatch
+ reverse modulo (b mod a)
+ (89,55)->0935: 55 mod 89 = 55 mismatch
+ digit absolute diff
+ (89,55)->0935: |8-5| || |9-5| = 34 mismatch
+ digit add mod10
+ (89,55)->0935: (8+5)%10 || (9+5)%10 = 34 mismatch
+ digit sub mod10
+ (89,55)->0935: (8-5)%10 || (9-5)%10 = 34 mismatch
+ cross multiply
+ (89,55)->0935: 8*5 + 9*5 = 40 + 45 = 85 mismatch
+ cross multiply rev
+ (89,55)->0935: 8*5 + 9*5 = 40 + 45 = 85 mismatch
+ digit multiply
+ (89,55)->0935: 8*5 || 9*5 = 40 || 45 = 4045 mismatch
+ digit multiply rev
+ (89,55)->0935: 8*5 || 9*5 = 40 || 45 = 4045 mismatch
+ digit sum diff
+ (89,55)->0935: (8+9) - (5+5) = 7 mismatch
+ digit sum sum
+ (89,55)->0935: (8+9) + (5+5) = 27 mismatch
+ digit product diff
+ (89,55)->0935: 8*9 - 5*5 = 72 - 25 = 47 mismatch
+ digit product sum
+ (89,55)->0935: 8*9 + 5*5 = 72 + 25 = 97 mismatch
+ determinant
+ (89,55)->0935: 8*5 - 9*5 = 40 - 45 = -5 mismatch
+ abs determinant
+ (89,55)->0935: |8*5 - 9*5| = |40 - 45| = 5 mismatch
+
+correct, actions: reversed operands, reversed result, multiplication
+
+Applying to 66^73:
+ We recall that the question operator is found in the examples.
+ reversed operands [66->66, 73->37] and reversed result
+ multiplication
+ (66,37): (60 + 6) * 37 = 60 * 37 + 6 * 37 = 2220 + 222 = 2442 rev-> 2442
+ Result is non-negative
+ \boxed{2442}

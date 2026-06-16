@@ -1,0 +1,186 @@
+55"38 = "17
+78^42 = 120
+51^87 = 138
+24^73 = 97
+11$15 = 164
+
+The inputs are 55, 38, 78, 42, 51, 87, 24, 73, 11, 15
+
+The outputs are "17, 120, 138, 97, 164
+Some example outputs have the operator symbol as prefix ".
+We now consider the outputs to be -17, 120, 138, 97, 164
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+55"38 -> "
+78^42 -> ^
+51^87 -> ^
+24^73 -> ^
+11$15 -> $
+
+The operators
+"
+^
+$
+
+Looking at the question
+13^18 -> ^
+The question operator is found in the examples.
+
+Looking at operator ^ [78^42 = 120, 51^87 = 138, 24^73 = 97]:
+
+Trying common operations
+ reversed operands [78->87 42->24, 51->15 87->78, 24->42 73->37] and reversed result [expected (87,24)->120, (15,78)->138, (42,37)->97]
+ addition
+ (87,24)->120: 87 + 24 = 111 rev-> 111 mismatch
+ multiplication
+ (15,78)->138: (10 + 5) * 78 = 10 * 78 + 5 * 78 = 780 + 390 = 1170 rev-> 0711 mismatch
+ concatenation
+ (42,37)->97: 42 || 37 = 4237 rev-> 7324 mismatch
+ reverse concatenation
+ (87,24)->120: 24 || 87 = 2487 rev-> 7842 mismatch
+
+ identity [78 42, 51 87, 24 73] [expected (78,42)->120, (51,87)->138, (24,73)->97]
+ addition
+ (78,42)->120: 78 + 42 = 120 match
+ (51,87)->138: 51 + 87 = 138 match
+ (24,73)->97: 24 + 73 = 97 match
+ correct, actions: addition
+ multiplication
+ (51,87)->138: (50 + 1) * 87 = 50 * 87 + 1 * 87 = 4350 + 87 = 4437 mismatch
+ concatenation
+ (24,73)->97: 24 || 73 = 2473 mismatch
+ reverse concatenation
+ (78,42)->120: 42 || 78 = 4278 mismatch
+
+Trying difference operations
+ reversed operands [78->87 42->24, 51->15 87->78, 24->42 73->37] and reversed result [expected (87,24)->120, (15,78)->138, (42,37)->97]
+ subtraction (a-b)
+ (87,24)->120: 87 - 24 = 63 rev-> 36 mismatch
+ absolute difference
+ (15,78)->138: |15 - 78| = 63 rev-> 36 mismatch
+ max mod min
+ (42,37)->97: max(42,37) mod min(42,37) = 42 mod 37 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (87,24)->120: -|87 - 24| = -63 rev-> -36 mismatch
+ reverse subtraction (b-a)
+ (15,78)->138: 78 - 15 = 63 rev-> 36 mismatch
+ modulo (a mod b)
+ (42,37)->97: 42 mod 37 = 5 rev-> 5 mismatch
+
+ identity [78 42, 51 87, 24 73] [expected (78,42)->120, (51,87)->138, (24,73)->97]
+ subtraction (a-b)
+ (78,42)->120: 78 - 42 = 36 mismatch
+ absolute difference
+ (51,87)->138: |51 - 87| = 36 mismatch
+ max mod min
+ (24,73)->97: max(24,73) mod min(24,73) = 73 mod 24 = 1 mismatch
+ negated absolute difference
+ (78,42)->120: -|78 - 42| = -36 mismatch
+ reverse subtraction (b-a)
+ (51,87)->138: 87 - 51 = 36 mismatch
+ modulo (a mod b)
+ (24,73)->97: 24 mod 73 = 24 mismatch
+
+Trying rare operations
+ reversed operands [78->87 42->24, 51->15 87->78, 24->42 73->37] and reversed result [expected (87,24)->120, (15,78)->138, (42,37)->97]
+ multiply+1
+ (87,24)->120: (80 + 7) * 24 + 1 = 80 * 24 + 7 * 24 + 1 = 1920 + 168 + 1 = 2088 + 1 = 2089 rev-> 9802 mismatch
+ multiply-1
+ (15,78)->138: (10 + 5) * 78 - 1 = 10 * 78 + 5 * 78 - 1 = 780 + 390 - 1 = 1170 - 1 = 1169 rev-> 9611 mismatch
+ add+1
+ (42,37)->97: 42 + 37 + 1 = 80 rev-> 08 mismatch
+ add-1
+ (87,24)->120: 87 + 24 - 1 = 110 rev-> 011 mismatch
+ sub+1
+ (15,78)->138: 15 - 78 + 1 = -62 rev-> -26 mismatch
+ sub-1
+ (42,37)->97: 42 - 37 - 1 = 4 rev-> 4 mismatch
+ integer division (a/b)
+ (87,24)->120: 87 / 24 = 3 rev-> 3 mismatch
+ reverse division (b/a)
+ (15,78)->138: 78 / 15 = 5 rev-> 5 mismatch
+ reverse modulo (b mod a)
+ (42,37)->97: 37 mod 42 = 37 rev-> 73 mismatch
+ digit absolute diff
+ (87,24)->120: |8-2| || |7-4| = 63 rev-> 36 mismatch
+ digit add mod10
+ (15,78)->138: (1+7)%10 || (5+8)%10 = 83 rev-> 38 mismatch
+ digit sub mod10
+ (42,37)->97: (4-3)%10 || (2-7)%10 = 15 rev-> 51 mismatch
+ cross multiply
+ (87,24)->120: 8*2 + 7*4 = 16 + 28 = 44 rev-> 44 mismatch
+ cross multiply rev
+ (15,78)->138: 1*8 + 5*7 = 8 + 35 = 43 rev-> 34 mismatch
+ digit multiply
+ (42,37)->97: 4*3 || 2*7 = 12 || 14 = 1214 rev-> 4121 mismatch
+ digit multiply rev
+ (87,24)->120: 8*4 || 7*2 = 32 || 14 = 3214 rev-> 4123 mismatch
+ digit sum diff
+ (15,78)->138: (1+5) - (7+8) = -9 rev-> -9 mismatch
+ digit sum sum
+ (42,37)->97: (4+2) + (3+7) = 16 rev-> 61 mismatch
+ digit product diff
+ (87,24)->120: 8*7 - 2*4 = 56 - 8 = 48 rev-> 84 mismatch
+ digit product sum
+ (15,78)->138: 1*5 + 7*8 = 5 + 56 = 61 rev-> 16 mismatch
+ determinant
+ (42,37)->97: 4*7 - 2*3 = 28 - 6 = 22 rev-> 22 mismatch
+ abs determinant
+ (87,24)->120: |8*4 - 7*2| = |32 - 14| = 18 rev-> 81 mismatch
+
+ identity [78 42, 51 87, 24 73] [expected (78,42)->120, (51,87)->138, (24,73)->97]
+ multiply+1
+ (78,42)->120: (70 + 8) * 42 + 1 = 70 * 42 + 8 * 42 + 1 = 2940 + 336 + 1 = 3276 + 1 = 3277 mismatch
+ multiply-1
+ (51,87)->138: (50 + 1) * 87 - 1 = 50 * 87 + 1 * 87 - 1 = 4350 + 87 - 1 = 4437 - 1 = 4436 mismatch
+ add+1
+ (24,73)->97: 24 + 73 + 1 = 98 mismatch
+ add-1
+ (78,42)->120: 78 + 42 - 1 = 119 mismatch
+ sub+1
+ (51,87)->138: 51 - 87 + 1 = -35 mismatch
+ sub-1
+ (24,73)->97: 24 - 73 - 1 = -50 mismatch
+ integer division (a/b)
+ (78,42)->120: 78 / 42 = 1 mismatch
+ reverse division (b/a)
+ (51,87)->138: 87 / 51 = 1 mismatch
+ reverse modulo (b mod a)
+ (24,73)->97: 73 mod 24 = 1 mismatch
+ digit absolute diff
+ (78,42)->120: |7-4| || |8-2| = 36 mismatch
+ digit add mod10
+ (51,87)->138: (5+8)%10 || (1+7)%10 = 38 mismatch
+ digit sub mod10
+ (24,73)->97: (2-7)%10 || (4-3)%10 = 51 mismatch
+ cross multiply
+ (78,42)->120: 7*4 + 8*2 = 28 + 16 = 44 mismatch
+ cross multiply rev
+ (51,87)->138: 5*7 + 1*8 = 35 + 8 = 43 mismatch
+ digit multiply
+ (24,73)->97: 2*7 || 4*3 = 14 || 12 = 1412 mismatch
+ digit multiply rev
+ (78,42)->120: 7*2 || 8*4 = 14 || 32 = 1432 mismatch
+ digit sum diff
+ (51,87)->138: (5+1) - (8+7) = -9 mismatch
+ digit sum sum
+ (24,73)->97: (2+4) + (7+3) = 16 mismatch
+ digit product diff
+ (78,42)->120: 7*8 - 4*2 = 56 - 8 = 48 mismatch
+ digit product sum
+ (51,87)->138: 5*1 + 8*7 = 5 + 56 = 61 mismatch
+ determinant
+ (24,73)->97: 2*3 - 4*7 = 6 - 28 = -22 mismatch
+ abs determinant
+ (78,42)->120: |7*2 - 8*4| = |14 - 32| = 18 mismatch
+
+correct, actions: addition
+
+Applying to 13^18:
+ We recall that the question operator is found in the examples.
+ identity [13 18]
+ addition
+ (13,18): 13 + 18 = 31
+ Result is non-negative
+ \boxed{31}

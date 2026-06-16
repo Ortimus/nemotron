@@ -1,0 +1,177 @@
+32[35 = 0221
+64}04 = 6}
+23}18 = 94
+94/21 = 16
+
+The inputs are 32, 35, 64, 04, 23, 18, 94, 21
+
+The outputs are 0221, 6}, 94, 16
+Some example outputs have the operator symbol as suffix }.
+We now consider the outputs to be 0221, -6, 94, 16
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+32[35 -> [
+64}04 -> }
+23}18 -> }
+94/21 -> /
+
+The operators
+[
+}
+/
+
+Looking at the question
+85[56 -> [
+The question operator is found in the examples.
+
+Looking at operator [ [32[35 = 0221]:
+
+Trying common operations reversed operands [32->23 35->53] and reversed result [expected (23,53)->0221]:
+ addition
+ (23,53)->0221: 23 + 53 = 76 rev-> 67 mismatch
+ multiplication
+ (23,53)->0221: (20 + 3) * 53 = 20 * 53 + 3 * 53 = 1060 + 159 = 1219 rev-> 9121 mismatch
+ concatenation
+ (23,53)->0221: 23 || 53 = 2353 rev-> 3532 mismatch
+ reverse concatenation
+ (23,53)->0221: 53 || 23 = 5323 rev-> 3235 mismatch
+
+Trying common operations on identity [32 35] [expected (32,35)->0221]:
+ addition
+ (32,35)->0221: 32 + 35 = 67 mismatch
+ multiplication
+ (32,35)->0221: (30 + 2) * 35 = 30 * 35 + 2 * 35 = 1050 + 70 = 1120 mismatch
+ concatenation
+ (32,35)->0221: 32 || 35 = 3235 mismatch
+ reverse concatenation
+ (32,35)->0221: 35 || 32 = 3532 mismatch
+
+Trying difference operations reversed operands [32->23 35->53] and reversed result [expected (23,53)->0221]:
+ subtraction (a-b)
+ (23,53)->0221: 23 - 53 = -30 rev-> -03 mismatch
+ absolute difference
+ (23,53)->0221: |23 - 53| = 30 rev-> 03 mismatch
+ max mod min
+ (23,53)->0221: max(23,53) mod min(23,53) = 53 mod 23 = 7 rev-> 7 mismatch
+ negated absolute difference
+ (23,53)->0221: -|23 - 53| = -30 rev-> -03 mismatch
+ reverse subtraction (b-a)
+ (23,53)->0221: 53 - 23 = 30 rev-> 03 mismatch
+ modulo (a mod b)
+ (23,53)->0221: 23 mod 53 = 23 rev-> 32 mismatch
+
+Trying difference operations on identity [32 35] [expected (32,35)->0221]:
+ subtraction (a-b)
+ (32,35)->0221: 32 - 35 = -3 mismatch
+ absolute difference
+ (32,35)->0221: |32 - 35| = 3 mismatch
+ max mod min
+ (32,35)->0221: max(32,35) mod min(32,35) = 35 mod 32 = 3 mismatch
+ negated absolute difference
+ (32,35)->0221: -|32 - 35| = -3 mismatch
+ reverse subtraction (b-a)
+ (32,35)->0221: 35 - 32 = 3 mismatch
+ modulo (a mod b)
+ (32,35)->0221: 32 mod 35 = 32 mismatch
+
+Trying rare operations reversed operands [32->23 35->53] and reversed result [expected (23,53)->0221]:
+ multiply+1
+ (23,53)->0221: (20 + 3) * 53 + 1 = 20 * 53 + 3 * 53 + 1 = 1060 + 159 + 1 = 1219 + 1 = 1220 rev-> 0221 match
+ correct, actions: reversed operands, reversed result, multiply+1
+ multiply-1
+ (23,53)->0221: (20 + 3) * 53 - 1 = 20 * 53 + 3 * 53 - 1 = 1060 + 159 - 1 = 1219 - 1 = 1218 rev-> 8121 mismatch
+ add+1
+ (23,53)->0221: 23 + 53 + 1 = 77 rev-> 77 mismatch
+ add-1
+ (23,53)->0221: 23 + 53 - 1 = 75 rev-> 57 mismatch
+ sub+1
+ (23,53)->0221: 23 - 53 + 1 = -29 rev-> -92 mismatch
+ sub-1
+ (23,53)->0221: 23 - 53 - 1 = -31 rev-> -13 mismatch
+ integer division (a/b)
+ (23,53)->0221: 23 / 53 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (23,53)->0221: 53 / 23 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (23,53)->0221: 53 mod 23 = 7 rev-> 7 mismatch
+ digit absolute diff
+ (23,53)->0221: |2-5| || |3-3| = 30 rev-> 03 mismatch
+ digit add mod10
+ (23,53)->0221: (2+5)%10 || (3+3)%10 = 76 rev-> 67 mismatch
+ digit sub mod10
+ (23,53)->0221: (2-5)%10 || (3-3)%10 = 70 rev-> 07 mismatch
+ cross multiply
+ (23,53)->0221: 2*5 + 3*3 = 10 + 9 = 19 rev-> 91 mismatch
+ cross multiply rev
+ (23,53)->0221: 2*3 + 3*5 = 6 + 15 = 21 rev-> 12 mismatch
+ digit multiply
+ (23,53)->0221: 2*5 || 3*3 = 10 || 9 = 109 rev-> 901 mismatch
+ digit multiply rev
+ (23,53)->0221: 2*3 || 3*5 = 6 || 15 = 615 rev-> 516 mismatch
+ digit sum diff
+ (23,53)->0221: (2+3) - (5+3) = -3 rev-> -3 mismatch
+ digit sum sum
+ (23,53)->0221: (2+3) + (5+3) = 13 rev-> 31 mismatch
+ digit product diff
+ (23,53)->0221: 2*3 - 5*3 = 6 - 15 = -9 rev-> -9 mismatch
+ digit product sum
+ (23,53)->0221: 2*3 + 5*3 = 6 + 15 = 21 rev-> 12 mismatch
+ determinant
+ (23,53)->0221: 2*3 - 3*5 = 6 - 15 = -9 rev-> -9 mismatch
+ abs determinant
+ (23,53)->0221: |2*3 - 3*5| = |6 - 15| = 9 rev-> 9 mismatch
+
+Trying rare operations on identity [32 35] [expected (32,35)->0221]:
+ multiply+1
+ (32,35)->0221: (30 + 2) * 35 + 1 = 30 * 35 + 2 * 35 + 1 = 1050 + 70 + 1 = 1120 + 1 = 1121 mismatch
+ multiply-1
+ (32,35)->0221: (30 + 2) * 35 - 1 = 30 * 35 + 2 * 35 - 1 = 1050 + 70 - 1 = 1120 - 1 = 1119 mismatch
+ add+1
+ (32,35)->0221: 32 + 35 + 1 = 68 mismatch
+ add-1
+ (32,35)->0221: 32 + 35 - 1 = 66 mismatch
+ sub+1
+ (32,35)->0221: 32 - 35 + 1 = -2 mismatch
+ sub-1
+ (32,35)->0221: 32 - 35 - 1 = -4 mismatch
+ integer division (a/b)
+ (32,35)->0221: 32 / 35 = 0 mismatch
+ reverse division (b/a)
+ (32,35)->0221: 35 / 32 = 1 mismatch
+ reverse modulo (b mod a)
+ (32,35)->0221: 35 mod 32 = 3 mismatch
+ digit absolute diff
+ (32,35)->0221: |3-3| || |2-5| = 03 mismatch
+ digit add mod10
+ (32,35)->0221: (3+3)%10 || (2+5)%10 = 67 mismatch
+ digit sub mod10
+ (32,35)->0221: (3-3)%10 || (2-5)%10 = 07 mismatch
+ cross multiply
+ (32,35)->0221: 3*3 + 2*5 = 9 + 10 = 19 mismatch
+ cross multiply rev
+ (32,35)->0221: 3*5 + 2*3 = 15 + 6 = 21 mismatch
+ digit multiply
+ (32,35)->0221: 3*3 || 2*5 = 9 || 10 = 910 mismatch
+ digit multiply rev
+ (32,35)->0221: 3*5 || 2*3 = 15 || 6 = 156 mismatch
+ digit sum diff
+ (32,35)->0221: (3+2) - (3+5) = -3 mismatch
+ digit sum sum
+ (32,35)->0221: (3+2) + (3+5) = 13 mismatch
+ digit product diff
+ (32,35)->0221: 3*2 - 3*5 = 6 - 15 = -9 mismatch
+ digit product sum
+ (32,35)->0221: 3*2 + 3*5 = 6 + 15 = 21 mismatch
+ determinant
+ (32,35)->0221: 3*5 - 2*3 = 15 - 6 = 9 mismatch
+ abs determinant
+ (32,35)->0221: |3*5 - 2*3| = |15 - 6| = 9 mismatch
+
+Applying to 85[56:
+ We recall that the question operator is found in the examples.
+ reversed operands [85->58, 56->65] and reversed result
+ multiply+1 (58,65): (50 + 8) * 65 + 1 = 50 * 65 + 8 * 65 + 1 = 3250 + 520 + 1 = 3770 + 1 = 3771 rev-> 1773
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{1773}

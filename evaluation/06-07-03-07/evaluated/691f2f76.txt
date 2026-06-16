@@ -1,0 +1,180 @@
+65+55 = 111
+15+04 = 19
+03+34 = 37
+13+44 = 57
+
+The inputs are 65, 55, 15, 04, 03, 34, 13, 44
+
+The outputs are 111, 19, 37, 57
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+65+55 -> +
+15+04 -> +
+03+34 -> +
+13+44 -> +
+
+The operators
++
+
+Looking at the question
+57+85 -> +
+The question operator is found in the examples.
+
+Looking at operator + [65+55 = 111, 15+04 = 19, 03+34 = 37, 13+44 = 57]:
+
+Trying common operations reversed operands [65->56 55->55, 15->51 04->40, 03->30 34->43, 13->31 44->44] and reversed result [expected (56,55)->111, (51,40)->19, (30,43)->37, (31,44)->57]:
+ addition
+ (56,55)->111: 56 + 55 = 111 rev-> 111 match
+ (51,40)->19: 51 + 40 = 91 rev-> 19 match
+ (30,43)->37: 30 + 43 = 73 rev-> 37 match
+ (31,44)->57: 31 + 44 = 75 rev-> 57 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (51,40)->19: (50 + 1) * 40 = 50 * 40 + 1 * 40 = 2000 + 40 = 2040 rev-> 0402 mismatch
+ concatenation
+ (30,43)->37: 30 || 43 = 3043 rev-> 3403 mismatch
+ reverse concatenation
+ (31,44)->57: 44 || 31 = 4431 rev-> 1344 mismatch
+
+Trying common operations on identity [65 55, 15 04, 03 34, 13 44] [expected (65,55)->111, (15,04)->19, (03,34)->37, (13,44)->57]:
+ addition
+ (65,55)->111: 65 + 55 = 120 mismatch
+ multiplication
+ (15,04)->19: (10 + 5) * 04 = 10 * 04 + 5 * 04 = 40 + 20 = 60 mismatch
+ concatenation
+ (03,34)->37: 03 || 34 = 0334 mismatch
+ reverse concatenation
+ (13,44)->57: 44 || 13 = 4413 mismatch
+
+Trying difference operations reversed operands [65->56 55->55, 15->51 04->40, 03->30 34->43, 13->31 44->44] and reversed result [expected (56,55)->111, (51,40)->19, (30,43)->37, (31,44)->57]:
+ subtraction (a-b)
+ (56,55)->111: 56 - 55 = 1 rev-> 1 mismatch
+ absolute difference
+ (51,40)->19: |51 - 40| = 11 rev-> 11 mismatch
+ max mod min
+ (30,43)->37: max(30,43) mod min(30,43) = 43 mod 30 = 13 rev-> 31 mismatch
+ negated absolute difference
+ (31,44)->57: -|31 - 44| = -13 rev-> -31 mismatch
+ reverse subtraction (b-a)
+ (56,55)->111: 55 - 56 = -1 rev-> -1 mismatch
+ modulo (a mod b)
+ (51,40)->19: 51 mod 40 = 11 rev-> 11 mismatch
+
+Trying difference operations on identity [65 55, 15 04, 03 34, 13 44] [expected (65,55)->111, (15,04)->19, (03,34)->37, (13,44)->57]:
+ subtraction (a-b)
+ (65,55)->111: 65 - 55 = 10 mismatch
+ absolute difference
+ (15,04)->19: |15 - 04| = 11 mismatch
+ max mod min
+ (03,34)->37: max(03,34) mod min(03,34) = 34 mod 03 = 1 mismatch
+ negated absolute difference
+ (13,44)->57: -|13 - 44| = -31 mismatch
+ reverse subtraction (b-a)
+ (65,55)->111: 55 - 65 = -10 mismatch
+ modulo (a mod b)
+ (15,04)->19: 15 mod 04 = 3 mismatch
+
+Trying rare operations reversed operands [65->56 55->55, 15->51 04->40, 03->30 34->43, 13->31 44->44] and reversed result [expected (56,55)->111, (51,40)->19, (30,43)->37, (31,44)->57]:
+ multiply+1
+ (56,55)->111: (50 + 6) * 55 + 1 = 50 * 55 + 6 * 55 + 1 = 2750 + 330 + 1 = 3080 + 1 = 3081 rev-> 1803 mismatch
+ multiply-1
+ (51,40)->19: (50 + 1) * 40 - 1 = 50 * 40 + 1 * 40 - 1 = 2000 + 40 - 1 = 2040 - 1 = 2039 rev-> 9302 mismatch
+ add+1
+ (30,43)->37: 30 + 43 + 1 = 74 rev-> 47 mismatch
+ add-1
+ (31,44)->57: 31 + 44 - 1 = 74 rev-> 47 mismatch
+ sub+1
+ (56,55)->111: 56 - 55 + 1 = 2 rev-> 2 mismatch
+ sub-1
+ (51,40)->19: 51 - 40 - 1 = 10 rev-> 01 mismatch
+ integer division (a/b)
+ (30,43)->37: 30 / 43 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (31,44)->57: 44 / 31 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (56,55)->111: 55 mod 56 = 55 rev-> 55 mismatch
+ digit absolute diff
+ (51,40)->19: |5-4| || |1-0| = 11 rev-> 11 mismatch
+ digit add mod10
+ (30,43)->37: (3+4)%10 || (0+3)%10 = 73 rev-> 37 match
+ (31,44)->57: (3+4)%10 || (1+4)%10 = 75 rev-> 57 match
+ (56,55)->111: (5+5)%10 || (6+5)%10 = 01 rev-> 10 mismatch
+ digit sub mod10
+ (31,44)->57: (3-4)%10 || (1-4)%10 = 97 rev-> 79 mismatch
+ cross multiply
+ (56,55)->111: 5*5 + 6*5 = 25 + 30 = 55 rev-> 55 mismatch
+ cross multiply rev
+ (51,40)->19: 5*0 + 1*4 = 0 + 4 = 4 rev-> 4 mismatch
+ digit multiply
+ (30,43)->37: 3*4 || 0*3 = 12 || 0 = 120 rev-> 021 mismatch
+ digit multiply rev
+ (31,44)->57: 3*4 || 1*4 = 12 || 4 = 124 rev-> 421 mismatch
+ digit sum diff
+ (56,55)->111: (5+6) - (5+5) = 1 rev-> 1 mismatch
+ digit sum sum
+ (51,40)->19: (5+1) + (4+0) = 10 rev-> 01 mismatch
+ digit product diff
+ (30,43)->37: 3*0 - 4*3 = 0 - 12 = -12 rev-> -21 mismatch
+ digit product sum
+ (31,44)->57: 3*1 + 4*4 = 3 + 16 = 19 rev-> 91 mismatch
+ determinant
+ (56,55)->111: 5*5 - 6*5 = 25 - 30 = -5 rev-> -5 mismatch
+ abs determinant
+ (51,40)->19: |5*0 - 1*4| = |0 - 4| = 4 rev-> 4 mismatch
+
+Trying rare operations on identity [65 55, 15 04, 03 34, 13 44] [expected (65,55)->111, (15,04)->19, (03,34)->37, (13,44)->57]:
+ multiply+1
+ (65,55)->111: (60 + 5) * 55 + 1 = 60 * 55 + 5 * 55 + 1 = 3300 + 275 + 1 = 3575 + 1 = 3576 mismatch
+ multiply-1
+ (15,04)->19: (10 + 5) * 04 - 1 = 10 * 04 + 5 * 04 - 1 = 40 + 20 - 1 = 60 - 1 = 59 mismatch
+ add+1
+ (03,34)->37: 03 + 34 + 1 = 38 mismatch
+ add-1
+ (13,44)->57: 13 + 44 - 1 = 56 mismatch
+ sub+1
+ (65,55)->111: 65 - 55 + 1 = 11 mismatch
+ sub-1
+ (15,04)->19: 15 - 04 - 1 = 10 mismatch
+ integer division (a/b)
+ (03,34)->37: 03 / 34 = 0 mismatch
+ reverse division (b/a)
+ (13,44)->57: 44 / 13 = 3 mismatch
+ reverse modulo (b mod a)
+ (65,55)->111: 55 mod 65 = 55 mismatch
+ digit absolute diff
+ (15,04)->19: |1-0| || |5-4| = 11 mismatch
+ digit add mod10
+ (03,34)->37: (0+3)%10 || (3+4)%10 = 37 match
+ (13,44)->57: (1+4)%10 || (3+4)%10 = 57 match
+ (65,55)->111: (6+5)%10 || (5+5)%10 = 10 mismatch
+ digit sub mod10
+ (13,44)->57: (1-4)%10 || (3-4)%10 = 79 mismatch
+ cross multiply
+ (65,55)->111: 6*5 + 5*5 = 30 + 25 = 55 mismatch
+ cross multiply rev
+ (15,04)->19: 1*4 + 5*0 = 4 + 0 = 4 mismatch
+ digit multiply
+ (03,34)->37: 0*3 || 3*4 = 0 || 12 = 012 mismatch
+ digit multiply rev
+ (13,44)->57: 1*4 || 3*4 = 4 || 12 = 412 mismatch
+ digit sum diff
+ (65,55)->111: (6+5) - (5+5) = 1 mismatch
+ digit sum sum
+ (15,04)->19: (1+5) + (0+4) = 10 mismatch
+ digit product diff
+ (03,34)->37: 0*3 - 3*4 = 0 - 12 = -12 mismatch
+ digit product sum
+ (13,44)->57: 1*3 + 4*4 = 3 + 16 = 19 mismatch
+ determinant
+ (65,55)->111: 6*5 - 5*5 = 30 - 25 = 5 mismatch
+ abs determinant
+ (15,04)->19: |1*4 - 5*0| = |4 - 0| = 4 mismatch
+
+Applying to 57+85:
+ We recall that the question operator is found in the examples.
+ reversed operands [57->75, 85->58] and reversed result
+ addition (75,58): 75 + 58 = 133 rev-> 331
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{331}

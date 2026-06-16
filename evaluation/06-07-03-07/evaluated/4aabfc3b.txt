@@ -1,0 +1,179 @@
+03*61 = 64
+05*84 = 89
+27"97 = 8865
+
+The inputs are 03, 61, 05, 84, 27, 97
+
+The outputs are 64, 89, 8865
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+03*61 -> *
+05*84 -> *
+27"97 -> "
+
+The operators
+*
+"
+
+Looking at the question
+31*85 -> *
+The question operator is found in the examples.
+
+Looking at operator * [03*61 = 64, 05*84 = 89]:
+
+Trying common operations reversed operands [03->30 61->16, 05->50 84->48] and reversed result [expected (30,16)->64, (50,48)->89]:
+ addition
+ (30,16)->64: 30 + 16 = 46 rev-> 64 match
+ (50,48)->89: 50 + 48 = 98 rev-> 89 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (50,48)->89: (50 + 0) * 48 = 50 * 48 + 0 * 48 = 2400 + 0 = 2400 rev-> 0042 mismatch
+ concatenation
+ (30,16)->64: 30 || 16 = 3016 rev-> 6103 mismatch
+ reverse concatenation
+ (50,48)->89: 48 || 50 = 4850 rev-> 0584 mismatch
+
+Trying common operations on identity [03 61, 05 84] [expected (03,61)->64, (05,84)->89]:
+ addition
+ (03,61)->64: 03 + 61 = 64 match
+ (05,84)->89: 05 + 84 = 89 match
+ correct, but skipping
+ multiplication
+ (05,84)->89: (0 + 5) * 84 = 0 * 84 + 5 * 84 = 0 + 420 = 420 mismatch
+ concatenation
+ (03,61)->64: 03 || 61 = 0361 mismatch
+ reverse concatenation
+ (05,84)->89: 84 || 05 = 8405 mismatch
+
+Trying difference operations reversed operands [03->30 61->16, 05->50 84->48] and reversed result [expected (30,16)->64, (50,48)->89]:
+ subtraction (a-b)
+ (30,16)->64: 30 - 16 = 14 rev-> 41 mismatch
+ absolute difference
+ (50,48)->89: |50 - 48| = 2 rev-> 2 mismatch
+ max mod min
+ (30,16)->64: max(30,16) mod min(30,16) = 30 mod 16 = 14 rev-> 41 mismatch
+ negated absolute difference
+ (50,48)->89: -|50 - 48| = -2 rev-> -2 mismatch
+ reverse subtraction (b-a)
+ (30,16)->64: 16 - 30 = -14 rev-> -41 mismatch
+ modulo (a mod b)
+ (50,48)->89: 50 mod 48 = 2 rev-> 2 mismatch
+
+Trying difference operations on identity [03 61, 05 84] [expected (03,61)->64, (05,84)->89]:
+ subtraction (a-b)
+ (03,61)->64: 03 - 61 = -58 mismatch
+ absolute difference
+ (05,84)->89: |05 - 84| = 79 mismatch
+ max mod min
+ (03,61)->64: max(03,61) mod min(03,61) = 61 mod 03 = 1 mismatch
+ negated absolute difference
+ (05,84)->89: -|05 - 84| = -79 mismatch
+ reverse subtraction (b-a)
+ (03,61)->64: 61 - 03 = 58 mismatch
+ modulo (a mod b)
+ (05,84)->89: 05 mod 84 = 5 mismatch
+
+Trying rare operations reversed operands [03->30 61->16, 05->50 84->48] and reversed result [expected (30,16)->64, (50,48)->89]:
+ multiply+1
+ (30,16)->64: (30 + 0) * 16 + 1 = 30 * 16 + 0 * 16 + 1 = 480 + 0 + 1 = 480 + 1 = 481 rev-> 184 mismatch
+ multiply-1
+ (50,48)->89: (50 + 0) * 48 - 1 = 50 * 48 + 0 * 48 - 1 = 2400 + 0 - 1 = 2400 - 1 = 2399 rev-> 9932 mismatch
+ add+1
+ (30,16)->64: 30 + 16 + 1 = 47 rev-> 74 mismatch
+ add-1
+ (50,48)->89: 50 + 48 - 1 = 97 rev-> 79 mismatch
+ sub+1
+ (30,16)->64: 30 - 16 + 1 = 15 rev-> 51 mismatch
+ sub-1
+ (50,48)->89: 50 - 48 - 1 = 1 rev-> 1 mismatch
+ integer division (a/b)
+ (30,16)->64: 30 / 16 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (50,48)->89: 48 / 50 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (30,16)->64: 16 mod 30 = 16 rev-> 61 mismatch
+ digit absolute diff
+ (50,48)->89: |5-4| || |0-8| = 18 rev-> 81 mismatch
+ digit add mod10
+ (30,16)->64: (3+1)%10 || (0+6)%10 = 46 rev-> 64 match
+ (50,48)->89: (5+4)%10 || (0+8)%10 = 98 rev-> 89 match
+ correct, but skipping
+ digit sub mod10
+ (50,48)->89: (5-4)%10 || (0-8)%10 = 12 rev-> 21 mismatch
+ cross multiply
+ (30,16)->64: 3*1 + 0*6 = 3 + 0 = 3 rev-> 3 mismatch
+ cross multiply rev
+ (50,48)->89: 5*8 + 0*4 = 40 + 0 = 40 rev-> 04 mismatch
+ digit multiply
+ (30,16)->64: 3*1 || 0*6 = 3 || 0 = 30 rev-> 03 mismatch
+ digit multiply rev
+ (50,48)->89: 5*8 || 0*4 = 40 || 0 = 400 rev-> 004 mismatch
+ digit sum diff
+ (30,16)->64: (3+0) - (1+6) = -4 rev-> -4 mismatch
+ digit sum sum
+ (50,48)->89: (5+0) + (4+8) = 17 rev-> 71 mismatch
+ digit product diff
+ (30,16)->64: 3*0 - 1*6 = 0 - 6 = -6 rev-> -6 mismatch
+ digit product sum
+ (50,48)->89: 5*0 + 4*8 = 0 + 32 = 32 rev-> 23 mismatch
+ determinant
+ (30,16)->64: 3*6 - 0*1 = 18 - 0 = 18 rev-> 81 mismatch
+ abs determinant
+ (50,48)->89: |5*8 - 0*4| = |40 - 0| = 40 rev-> 04 mismatch
+
+Trying rare operations on identity [03 61, 05 84] [expected (03,61)->64, (05,84)->89]:
+ multiply+1
+ (03,61)->64: (0 + 3) * 61 + 1 = 0 * 61 + 3 * 61 + 1 = 0 + 183 + 1 = 183 + 1 = 184 mismatch
+ multiply-1
+ (05,84)->89: (0 + 5) * 84 - 1 = 0 * 84 + 5 * 84 - 1 = 0 + 420 - 1 = 420 - 1 = 419 mismatch
+ add+1
+ (03,61)->64: 03 + 61 + 1 = 65 mismatch
+ add-1
+ (05,84)->89: 05 + 84 - 1 = 88 mismatch
+ sub+1
+ (03,61)->64: 03 - 61 + 1 = -57 mismatch
+ sub-1
+ (05,84)->89: 05 - 84 - 1 = -80 mismatch
+ integer division (a/b)
+ (03,61)->64: 03 / 61 = 0 mismatch
+ reverse division (b/a)
+ (05,84)->89: 84 / 05 = 16 mismatch
+ reverse modulo (b mod a)
+ (03,61)->64: 61 mod 03 = 1 mismatch
+ digit absolute diff
+ (05,84)->89: |0-8| || |5-4| = 81 mismatch
+ digit add mod10
+ (03,61)->64: (0+6)%10 || (3+1)%10 = 64 match
+ (05,84)->89: (0+8)%10 || (5+4)%10 = 89 match
+ correct, but skipping
+ digit sub mod10
+ (05,84)->89: (0-8)%10 || (5-4)%10 = 21 mismatch
+ cross multiply
+ (03,61)->64: 0*6 + 3*1 = 0 + 3 = 3 mismatch
+ cross multiply rev
+ (05,84)->89: 0*4 + 5*8 = 0 + 40 = 40 mismatch
+ digit multiply
+ (03,61)->64: 0*6 || 3*1 = 0 || 3 = 03 mismatch
+ digit multiply rev
+ (05,84)->89: 0*4 || 5*8 = 0 || 40 = 040 mismatch
+ digit sum diff
+ (03,61)->64: (0+3) - (6+1) = -4 mismatch
+ digit sum sum
+ (05,84)->89: (0+5) + (8+4) = 17 mismatch
+ digit product diff
+ (03,61)->64: 0*3 - 6*1 = 0 - 6 = -6 mismatch
+ digit product sum
+ (05,84)->89: 0*5 + 8*4 = 0 + 32 = 32 mismatch
+ determinant
+ (03,61)->64: 0*1 - 3*6 = 0 - 18 = -18 mismatch
+ abs determinant
+ (05,84)->89: |0*4 - 5*8| = |0 - 40| = 40 mismatch
+
+Applying to 31*85:
+ We recall that the question operator is found in the examples.
+ reversed operands [31->13, 85->58] and reversed result
+ addition (13,58): 13 + 58 = 71 rev-> 17
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{17}

@@ -1,0 +1,182 @@
+82+74 = 7482
+68+89 = 8968
+05-58 = -53
+02*61 = 913
+41+77 = 7741
+
+The inputs are 82, 74, 68, 89, 05, 58, 02, 61, 41, 77
+
+The outputs are 7482, 8968, -53, 913, 7741
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 7482, 8968, -53, 913, 7741
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+82+74 -> +
+68+89 -> +
+05-58 -> -
+02*61 -> *
+41+77 -> +
+
+The operators
++
+-
+*
+
+Looking at the question
+08-23 -> -
+The question operator is found in the examples.
+
+Looking at operator - [05-58 = -53]:
+
+Trying common operations reversed operands [05->50 58->85] and reversed result [expected (50,85)->-53]:
+ addition
+ (50,85)->-53: 50 + 85 = 135 rev-> 531 mismatch
+ multiplication
+ (50,85)->-53: (50 + 0) * 85 = 50 * 85 + 0 * 85 = 4250 + 0 = 4250 rev-> 0524 mismatch
+ concatenation
+ (50,85)->-53: 50 || 85 = 5085 rev-> 5805 mismatch
+ reverse concatenation
+ (50,85)->-53: 85 || 50 = 8550 rev-> 0558 mismatch
+
+Trying common operations on identity [05 58] [expected (05,58)->-53]:
+ addition
+ (05,58)->-53: 05 + 58 = 63 mismatch
+ multiplication
+ (05,58)->-53: (0 + 5) * 58 = 0 * 58 + 5 * 58 = 0 + 290 = 290 mismatch
+ concatenation
+ (05,58)->-53: 05 || 58 = 0558 mismatch
+ reverse concatenation
+ (05,58)->-53: 58 || 05 = 5805 mismatch
+
+Trying difference operations reversed operands [05->50 58->85] and reversed result [expected (50,85)->-53]:
+ subtraction (a-b)
+ (50,85)->-53: 50 - 85 = -35 rev-> -53 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (50,85)->-53: |50 - 85| = 35 rev-> 53 mismatch
+ max mod min
+ (50,85)->-53: max(50,85) mod min(50,85) = 85 mod 50 = 35 rev-> 53 mismatch
+ negated absolute difference
+ (50,85)->-53: -|50 - 85| = -35 rev-> -53 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (50,85)->-53: 85 - 50 = 35 rev-> 53 mismatch
+ modulo (a mod b)
+ (50,85)->-53: 50 mod 85 = 50 rev-> 05 mismatch
+
+Trying difference operations on identity [05 58] [expected (05,58)->-53]:
+ subtraction (a-b)
+ (05,58)->-53: 05 - 58 = -53 match
+ correct, but skipping
+ absolute difference
+ (05,58)->-53: |05 - 58| = 53 mismatch
+ max mod min
+ (05,58)->-53: max(05,58) mod min(05,58) = 58 mod 05 = 3 mismatch
+ negated absolute difference
+ (05,58)->-53: -|05 - 58| = -53 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (05,58)->-53: 58 - 05 = 53 mismatch
+ modulo (a mod b)
+ (05,58)->-53: 05 mod 58 = 5 mismatch
+
+Trying rare operations reversed operands [05->50 58->85] and reversed result [expected (50,85)->-53]:
+ multiply+1
+ (50,85)->-53: (50 + 0) * 85 + 1 = 50 * 85 + 0 * 85 + 1 = 4250 + 0 + 1 = 4250 + 1 = 4251 rev-> 1524 mismatch
+ multiply-1
+ (50,85)->-53: (50 + 0) * 85 - 1 = 50 * 85 + 0 * 85 - 1 = 4250 + 0 - 1 = 4250 - 1 = 4249 rev-> 9424 mismatch
+ add+1
+ (50,85)->-53: 50 + 85 + 1 = 136 rev-> 631 mismatch
+ add-1
+ (50,85)->-53: 50 + 85 - 1 = 134 rev-> 431 mismatch
+ sub+1
+ (50,85)->-53: 50 - 85 + 1 = -34 rev-> -43 mismatch
+ sub-1
+ (50,85)->-53: 50 - 85 - 1 = -36 rev-> -63 mismatch
+ integer division (a/b)
+ (50,85)->-53: 50 / 85 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (50,85)->-53: 85 / 50 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (50,85)->-53: 85 mod 50 = 35 rev-> 53 mismatch
+ digit absolute diff
+ (50,85)->-53: |5-8| || |0-5| = 35 rev-> 53 mismatch
+ digit add mod10
+ (50,85)->-53: (5+8)%10 || (0+5)%10 = 35 rev-> 53 mismatch
+ digit sub mod10
+ (50,85)->-53: (5-8)%10 || (0-5)%10 = 75 rev-> 57 mismatch
+ cross multiply
+ (50,85)->-53: 5*8 + 0*5 = 40 + 0 = 40 rev-> 04 mismatch
+ cross multiply rev
+ (50,85)->-53: 5*5 + 0*8 = 25 + 0 = 25 rev-> 52 mismatch
+ digit multiply
+ (50,85)->-53: 5*8 || 0*5 = 40 || 0 = 400 rev-> 004 mismatch
+ digit multiply rev
+ (50,85)->-53: 5*5 || 0*8 = 25 || 0 = 250 rev-> 052 mismatch
+ digit sum diff
+ (50,85)->-53: (5+0) - (8+5) = -8 rev-> -8 mismatch
+ digit sum sum
+ (50,85)->-53: (5+0) + (8+5) = 18 rev-> 81 mismatch
+ digit product diff
+ (50,85)->-53: 5*0 - 8*5 = 0 - 40 = -40 rev-> -04 mismatch
+ digit product sum
+ (50,85)->-53: 5*0 + 8*5 = 0 + 40 = 40 rev-> 04 mismatch
+ determinant
+ (50,85)->-53: 5*5 - 0*8 = 25 - 0 = 25 rev-> 52 mismatch
+ abs determinant
+ (50,85)->-53: |5*5 - 0*8| = |25 - 0| = 25 rev-> 52 mismatch
+
+Trying rare operations on identity [05 58] [expected (05,58)->-53]:
+ multiply+1
+ (05,58)->-53: (0 + 5) * 58 + 1 = 0 * 58 + 5 * 58 + 1 = 0 + 290 + 1 = 290 + 1 = 291 mismatch
+ multiply-1
+ (05,58)->-53: (0 + 5) * 58 - 1 = 0 * 58 + 5 * 58 - 1 = 0 + 290 - 1 = 290 - 1 = 289 mismatch
+ add+1
+ (05,58)->-53: 05 + 58 + 1 = 64 mismatch
+ add-1
+ (05,58)->-53: 05 + 58 - 1 = 62 mismatch
+ sub+1
+ (05,58)->-53: 05 - 58 + 1 = -52 mismatch
+ sub-1
+ (05,58)->-53: 05 - 58 - 1 = -54 mismatch
+ integer division (a/b)
+ (05,58)->-53: 05 / 58 = 0 mismatch
+ reverse division (b/a)
+ (05,58)->-53: 58 / 05 = 11 mismatch
+ reverse modulo (b mod a)
+ (05,58)->-53: 58 mod 05 = 3 mismatch
+ digit absolute diff
+ (05,58)->-53: |0-5| || |5-8| = 53 mismatch
+ digit add mod10
+ (05,58)->-53: (0+5)%10 || (5+8)%10 = 53 mismatch
+ digit sub mod10
+ (05,58)->-53: (0-5)%10 || (5-8)%10 = 57 mismatch
+ cross multiply
+ (05,58)->-53: 0*5 + 5*8 = 0 + 40 = 40 mismatch
+ cross multiply rev
+ (05,58)->-53: 0*8 + 5*5 = 0 + 25 = 25 mismatch
+ digit multiply
+ (05,58)->-53: 0*5 || 5*8 = 0 || 40 = 040 mismatch
+ digit multiply rev
+ (05,58)->-53: 0*8 || 5*5 = 0 || 25 = 025 mismatch
+ digit sum diff
+ (05,58)->-53: (0+5) - (5+8) = -8 mismatch
+ digit sum sum
+ (05,58)->-53: (0+5) + (5+8) = 18 mismatch
+ digit product diff
+ (05,58)->-53: 0*5 - 5*8 = 0 - 40 = -40 mismatch
+ digit product sum
+ (05,58)->-53: 0*5 + 5*8 = 0 + 40 = 40 mismatch
+ determinant
+ (05,58)->-53: 0*8 - 5*5 = 0 - 25 = -25 mismatch
+ abs determinant
+ (05,58)->-53: |0*8 - 5*5| = |0 - 25| = 25 mismatch
+
+Applying to 08-23:
+ We recall that the question operator is found in the examples.
+ reversed operands [08->80, 23->32] and reversed result
+ subtraction (a-b) (80,32): 80 - 32 = 48 rev-> 84
+ Result is non-negative, no prefix needed: 84
+
+\boxed{84}

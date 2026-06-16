@@ -1,0 +1,178 @@
+09+17 = 161
+11+44 = 55
+43*07 = 0743
+
+The inputs are 09, 17, 11, 44, 43, 07
+
+The outputs are 161, 55, 0743
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+09+17 -> +
+11+44 -> +
+43*07 -> *
+
+The operators
++
+*
+
+Looking at the question
+18-32 -> -
+The question operator is not found in the examples. Investigating the most common example operator + instead. We will use addition for the question operator.
+
+Looking at operator + [09+17 = 161, 11+44 = 55]:
+
+Trying common operations
+ reversed operands [09->90 17->71, 11->11 44->44] and reversed result [expected (90,71)->161, (11,44)->55]
+ addition
+ (90,71)->161: 90 + 71 = 161 rev-> 161 match
+ (11,44)->55: 11 + 44 = 55 rev-> 55 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (11,44)->55: (10 + 1) * 44 = 10 * 44 + 1 * 44 = 440 + 44 = 484 rev-> 484 mismatch
+ concatenation
+ (90,71)->161: 90 || 71 = 9071 rev-> 1709 mismatch
+ reverse concatenation
+ (11,44)->55: 44 || 11 = 4411 rev-> 1144 mismatch
+
+ identity [09 17, 11 44] [expected (09,17)->161, (11,44)->55]
+ addition
+ (09,17)->161: 09 + 17 = 26 mismatch
+ multiplication
+ (11,44)->55: (10 + 1) * 44 = 10 * 44 + 1 * 44 = 440 + 44 = 484 mismatch
+ concatenation
+ (09,17)->161: 09 || 17 = 0917 mismatch
+ reverse concatenation
+ (11,44)->55: 44 || 11 = 4411 mismatch
+
+Trying difference operations
+ reversed operands [09->90 17->71, 11->11 44->44] and reversed result [expected (90,71)->161, (11,44)->55]
+ subtraction (a-b)
+ (90,71)->161: 90 - 71 = 19 rev-> 91 mismatch
+ absolute difference
+ (11,44)->55: |11 - 44| = 33 rev-> 33 mismatch
+ max mod min
+ (90,71)->161: max(90,71) mod min(90,71) = 90 mod 71 = 19 rev-> 91 mismatch
+ negated absolute difference
+ (11,44)->55: -|11 - 44| = -33 rev-> -33 mismatch
+ reverse subtraction (b-a)
+ (90,71)->161: 71 - 90 = -19 rev-> -91 mismatch
+ modulo (a mod b)
+ (11,44)->55: 11 mod 44 = 11 rev-> 11 mismatch
+
+ identity [09 17, 11 44] [expected (09,17)->161, (11,44)->55]
+ subtraction (a-b)
+ (09,17)->161: 09 - 17 = -8 mismatch
+ absolute difference
+ (11,44)->55: |11 - 44| = 33 mismatch
+ max mod min
+ (09,17)->161: max(09,17) mod min(09,17) = 17 mod 09 = 8 mismatch
+ negated absolute difference
+ (11,44)->55: -|11 - 44| = -33 mismatch
+ reverse subtraction (b-a)
+ (09,17)->161: 17 - 09 = 8 mismatch
+ modulo (a mod b)
+ (11,44)->55: 11 mod 44 = 11 mismatch
+
+Trying rare operations
+ reversed operands [09->90 17->71, 11->11 44->44] and reversed result [expected (90,71)->161, (11,44)->55]
+ multiply+1
+ (90,71)->161: (90 + 0) * 71 + 1 = 90 * 71 + 0 * 71 + 1 = 6390 + 0 + 1 = 6390 + 1 = 6391 rev-> 1936 mismatch
+ multiply-1
+ (11,44)->55: (10 + 1) * 44 - 1 = 10 * 44 + 1 * 44 - 1 = 440 + 44 - 1 = 484 - 1 = 483 rev-> 384 mismatch
+ add+1
+ (90,71)->161: 90 + 71 + 1 = 162 rev-> 261 mismatch
+ add-1
+ (11,44)->55: 11 + 44 - 1 = 54 rev-> 45 mismatch
+ sub+1
+ (90,71)->161: 90 - 71 + 1 = 20 rev-> 02 mismatch
+ sub-1
+ (11,44)->55: 11 - 44 - 1 = -34 rev-> -43 mismatch
+ integer division (a/b)
+ (90,71)->161: 90 / 71 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (11,44)->55: 44 / 11 = 4 rev-> 4 mismatch
+ reverse modulo (b mod a)
+ (90,71)->161: 71 mod 90 = 71 rev-> 17 mismatch
+ digit absolute diff
+ (11,44)->55: |1-4| || |1-4| = 33 rev-> 33 mismatch
+ digit add mod10
+ (90,71)->161: (9+7)%10 || (0+1)%10 = 61 rev-> 16 mismatch
+ digit sub mod10
+ (11,44)->55: (1-4)%10 || (1-4)%10 = 77 rev-> 77 mismatch
+ cross multiply
+ (90,71)->161: 9*7 + 0*1 = 63 + 0 = 63 rev-> 36 mismatch
+ cross multiply rev
+ (11,44)->55: 1*4 + 1*4 = 4 + 4 = 8 rev-> 8 mismatch
+ digit multiply
+ (90,71)->161: 9*7 || 0*1 = 63 || 0 = 630 rev-> 036 mismatch
+ digit multiply rev
+ (11,44)->55: 1*4 || 1*4 = 4 || 4 = 44 rev-> 44 mismatch
+ digit sum diff
+ (90,71)->161: (9+0) - (7+1) = 1 rev-> 1 mismatch
+ digit sum sum
+ (11,44)->55: (1+1) + (4+4) = 10 rev-> 01 mismatch
+ digit product diff
+ (90,71)->161: 9*0 - 7*1 = 0 - 7 = -7 rev-> -7 mismatch
+ digit product sum
+ (11,44)->55: 1*1 + 4*4 = 1 + 16 = 17 rev-> 71 mismatch
+ determinant
+ (90,71)->161: 9*1 - 0*7 = 9 - 0 = 9 rev-> 9 mismatch
+ abs determinant
+ (11,44)->55: |1*4 - 1*4| = |4 - 4| = 0 rev-> 0 mismatch
+
+ identity [09 17, 11 44] [expected (09,17)->161, (11,44)->55]
+ multiply+1
+ (09,17)->161: (0 + 9) * 17 + 1 = 0 * 17 + 9 * 17 + 1 = 0 + 153 + 1 = 153 + 1 = 154 mismatch
+ multiply-1
+ (11,44)->55: (10 + 1) * 44 - 1 = 10 * 44 + 1 * 44 - 1 = 440 + 44 - 1 = 484 - 1 = 483 mismatch
+ add+1
+ (09,17)->161: 09 + 17 + 1 = 27 mismatch
+ add-1
+ (11,44)->55: 11 + 44 - 1 = 54 mismatch
+ sub+1
+ (09,17)->161: 09 - 17 + 1 = -7 mismatch
+ sub-1
+ (11,44)->55: 11 - 44 - 1 = -34 mismatch
+ integer division (a/b)
+ (09,17)->161: 09 / 17 = 0 mismatch
+ reverse division (b/a)
+ (11,44)->55: 44 / 11 = 4 mismatch
+ reverse modulo (b mod a)
+ (09,17)->161: 17 mod 09 = 8 mismatch
+ digit absolute diff
+ (11,44)->55: |1-4| || |1-4| = 33 mismatch
+ digit add mod10
+ (09,17)->161: (0+1)%10 || (9+7)%10 = 16 mismatch
+ digit sub mod10
+ (11,44)->55: (1-4)%10 || (1-4)%10 = 77 mismatch
+ cross multiply
+ (09,17)->161: 0*1 + 9*7 = 0 + 63 = 63 mismatch
+ cross multiply rev
+ (11,44)->55: 1*4 + 1*4 = 4 + 4 = 8 mismatch
+ digit multiply
+ (09,17)->161: 0*1 || 9*7 = 0 || 63 = 063 mismatch
+ digit multiply rev
+ (11,44)->55: 1*4 || 1*4 = 4 || 4 = 44 mismatch
+ digit sum diff
+ (09,17)->161: (0+9) - (1+7) = 1 mismatch
+ digit sum sum
+ (11,44)->55: (1+1) + (4+4) = 10 mismatch
+ digit product diff
+ (09,17)->161: 0*9 - 1*7 = 0 - 7 = -7 mismatch
+ digit product sum
+ (11,44)->55: 1*1 + 4*4 = 1 + 16 = 17 mismatch
+ determinant
+ (09,17)->161: 0*7 - 9*1 = 0 - 9 = -9 mismatch
+ abs determinant
+ (11,44)->55: |1*4 - 1*4| = |4 - 4| = 0 mismatch
+
+correct, actions: reversed operands, reversed result, addition
+
+Applying to 18-32:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [18->81, 32->23] and reversed result
+ addition
+ (81,23): 81 + 23 = 104 rev-> 401
+ Result is non-negative
+ \boxed{401}

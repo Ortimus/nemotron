@@ -1,0 +1,182 @@
+65(87 = (22
+71(58 = (13
+51`93 = 144
+
+The inputs are 65, 87, 71, 58, 51, 93
+
+The outputs are (22, (13, 144
+Some example outputs have the operator symbol as prefix (.
+We now consider the outputs to be -22, -13, 144
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+65(87 -> (
+71(58 -> (
+51`93 -> `
+
+The operators
+(
+`
+
+Looking at the question
+44:82 -> :
+The question operator is not found in the examples. Investigating the most common example operator ( instead. We will use addition for the question operator.
+
+Looking at operator ( [65(87 = -22, 71(58 = -13]:
+
+Trying common operations
+ reversed operands [65->56 87->78, 71->17 58->85] and reversed result [expected (56,78)->-22, (17,85)->-13]
+ addition
+ (56,78)->-22: 56 + 78 = 134 rev-> 431 mismatch
+ multiplication
+ (17,85)->-13: (10 + 7) * 85 = 10 * 85 + 7 * 85 = 850 + 595 = 1445 rev-> 5441 mismatch
+ concatenation
+ (56,78)->-22: 56 || 78 = 5678 rev-> 8765 mismatch
+ reverse concatenation
+ (17,85)->-13: 85 || 17 = 8517 rev-> 7158 mismatch
+
+ identity [65 87, 71 58] [expected (65,87)->-22, (71,58)->-13]
+ addition
+ (65,87)->-22: 65 + 87 = 152 mismatch
+ multiplication
+ (71,58)->-13: (70 + 1) * 58 = 70 * 58 + 1 * 58 = 4060 + 58 = 4118 mismatch
+ concatenation
+ (65,87)->-22: 65 || 87 = 6587 mismatch
+ reverse concatenation
+ (71,58)->-13: 58 || 71 = 5871 mismatch
+
+Trying difference operations
+ reversed operands [65->56 87->78, 71->17 58->85] and reversed result [expected (56,78)->-22, (17,85)->-13]
+ subtraction (a-b)
+ (56,78)->-22: 56 - 78 = -22 rev-> -22 match
+ (17,85)->-13: 17 - 85 = -68 rev-> -86 mismatch
+ absolute difference
+ (17,85)->-13: |17 - 85| = 68 rev-> 86 mismatch
+ max mod min
+ (56,78)->-22: max(56,78) mod min(56,78) = 78 mod 56 = 22 rev-> 22 mismatch
+ negated absolute difference
+ (17,85)->-13: -|17 - 85| = -68 rev-> -86 mismatch
+ reverse subtraction (b-a)
+ (56,78)->-22: 78 - 56 = 22 rev-> 22 mismatch
+ modulo (a mod b)
+ (17,85)->-13: 17 mod 85 = 17 rev-> 71 mismatch
+
+ identity [65 87, 71 58] [expected (65,87)->-22, (71,58)->-13]
+ subtraction (a-b)
+ (65,87)->-22: 65 - 87 = -22 match
+ (71,58)->-13: 71 - 58 = 13 mismatch
+ absolute difference
+ (71,58)->-13: |71 - 58| = 13 mismatch
+ max mod min
+ (65,87)->-22: max(65,87) mod min(65,87) = 87 mod 65 = 22 mismatch
+ negated absolute difference
+ (71,58)->-13: -|71 - 58| = -13 match
+ (65,87)->-22: -|65 - 87| = -22 match
+ correct, actions: negated absolute difference
+ reverse subtraction (b-a)
+ (65,87)->-22: 87 - 65 = 22 mismatch
+ modulo (a mod b)
+ (71,58)->-13: 71 mod 58 = 13 mismatch
+
+Trying rare operations
+ reversed operands [65->56 87->78, 71->17 58->85] and reversed result [expected (56,78)->-22, (17,85)->-13]
+ multiply+1
+ (56,78)->-22: (50 + 6) * 78 + 1 = 50 * 78 + 6 * 78 + 1 = 3900 + 468 + 1 = 4368 + 1 = 4369 rev-> 9634 mismatch
+ multiply-1
+ (17,85)->-13: (10 + 7) * 85 - 1 = 10 * 85 + 7 * 85 - 1 = 850 + 595 - 1 = 1445 - 1 = 1444 rev-> 4441 mismatch
+ add+1
+ (56,78)->-22: 56 + 78 + 1 = 135 rev-> 531 mismatch
+ add-1
+ (17,85)->-13: 17 + 85 - 1 = 101 rev-> 101 mismatch
+ sub+1
+ (56,78)->-22: 56 - 78 + 1 = -21 rev-> -12 mismatch
+ sub-1
+ (17,85)->-13: 17 - 85 - 1 = -69 rev-> -96 mismatch
+ integer division (a/b)
+ (56,78)->-22: 56 / 78 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (17,85)->-13: 85 / 17 = 5 rev-> 5 mismatch
+ reverse modulo (b mod a)
+ (56,78)->-22: 78 mod 56 = 22 rev-> 22 mismatch
+ digit absolute diff
+ (17,85)->-13: |1-8| || |7-5| = 72 rev-> 27 mismatch
+ digit add mod10
+ (56,78)->-22: (5+7)%10 || (6+8)%10 = 24 rev-> 42 mismatch
+ digit sub mod10
+ (17,85)->-13: (1-8)%10 || (7-5)%10 = 32 rev-> 23 mismatch
+ cross multiply
+ (56,78)->-22: 5*7 + 6*8 = 35 + 48 = 83 rev-> 38 mismatch
+ cross multiply rev
+ (17,85)->-13: 1*5 + 7*8 = 5 + 56 = 61 rev-> 16 mismatch
+ digit multiply
+ (56,78)->-22: 5*7 || 6*8 = 35 || 48 = 3548 rev-> 8453 mismatch
+ digit multiply rev
+ (17,85)->-13: 1*5 || 7*8 = 5 || 56 = 556 rev-> 655 mismatch
+ digit sum diff
+ (56,78)->-22: (5+6) - (7+8) = -4 rev-> -4 mismatch
+ digit sum sum
+ (17,85)->-13: (1+7) + (8+5) = 21 rev-> 12 mismatch
+ digit product diff
+ (56,78)->-22: 5*6 - 7*8 = 30 - 56 = -26 rev-> -62 mismatch
+ digit product sum
+ (17,85)->-13: 1*7 + 8*5 = 7 + 40 = 47 rev-> 74 mismatch
+ determinant
+ (56,78)->-22: 5*8 - 6*7 = 40 - 42 = -2 rev-> -2 mismatch
+ abs determinant
+ (17,85)->-13: |1*5 - 7*8| = |5 - 56| = 51 rev-> 15 mismatch
+
+ identity [65 87, 71 58] [expected (65,87)->-22, (71,58)->-13]
+ multiply+1
+ (65,87)->-22: (60 + 5) * 87 + 1 = 60 * 87 + 5 * 87 + 1 = 5220 + 435 + 1 = 5655 + 1 = 5656 mismatch
+ multiply-1
+ (71,58)->-13: (70 + 1) * 58 - 1 = 70 * 58 + 1 * 58 - 1 = 4060 + 58 - 1 = 4118 - 1 = 4117 mismatch
+ add+1
+ (65,87)->-22: 65 + 87 + 1 = 153 mismatch
+ add-1
+ (71,58)->-13: 71 + 58 - 1 = 128 mismatch
+ sub+1
+ (65,87)->-22: 65 - 87 + 1 = -21 mismatch
+ sub-1
+ (71,58)->-13: 71 - 58 - 1 = 12 mismatch
+ integer division (a/b)
+ (65,87)->-22: 65 / 87 = 0 mismatch
+ reverse division (b/a)
+ (71,58)->-13: 58 / 71 = 0 mismatch
+ reverse modulo (b mod a)
+ (65,87)->-22: 87 mod 65 = 22 mismatch
+ digit absolute diff
+ (71,58)->-13: |7-5| || |1-8| = 27 mismatch
+ digit add mod10
+ (65,87)->-22: (6+8)%10 || (5+7)%10 = 42 mismatch
+ digit sub mod10
+ (71,58)->-13: (7-5)%10 || (1-8)%10 = 23 mismatch
+ cross multiply
+ (65,87)->-22: 6*8 + 5*7 = 48 + 35 = 83 mismatch
+ cross multiply rev
+ (71,58)->-13: 7*8 + 1*5 = 56 + 5 = 61 mismatch
+ digit multiply
+ (65,87)->-22: 6*8 || 5*7 = 48 || 35 = 4835 mismatch
+ digit multiply rev
+ (71,58)->-13: 7*8 || 1*5 = 56 || 5 = 565 mismatch
+ digit sum diff
+ (65,87)->-22: (6+5) - (8+7) = -4 mismatch
+ digit sum sum
+ (71,58)->-13: (7+1) + (5+8) = 21 mismatch
+ digit product diff
+ (65,87)->-22: 6*5 - 8*7 = 30 - 56 = -26 mismatch
+ digit product sum
+ (71,58)->-13: 7*1 + 5*8 = 7 + 40 = 47 mismatch
+ determinant
+ (65,87)->-22: 6*7 - 5*8 = 42 - 40 = 2 mismatch
+ abs determinant
+ (71,58)->-13: |7*8 - 1*5| = |56 - 5| = 51 mismatch
+
+correct, actions: negated absolute difference
+
+Applying to 44:82:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ identity [44 82]
+ addition
+ (44,82): 44 + 82 = 126
+ Result is non-negative
+ \boxed{126}

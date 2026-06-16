@@ -1,0 +1,183 @@
+33-12 = -21
+37+87 = 151
+32-34 = -02
+
+The inputs are 33, 12, 37, 87, 32, 34
+
+The outputs are -21, 151, -02
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -21, 151, -02
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+33-12 -> -
+37+87 -> +
+32-34 -> -
+
+The operators
+-
++
+
+Looking at the question
+97*93 -> *
+The question operator is not found in the examples. Investigating the most common example operator - instead. We will use addition for the question operator.
+
+Looking at operator - [33-12 = -21, 32-34 = -02]:
+
+Trying common operations
+ reversed operands [33->33 12->21, 32->23 34->43] and reversed result [expected (33,21)->-21, (23,43)->-02]
+ addition
+ (33,21)->-21: 33 + 21 = 54 rev-> 45 mismatch
+ multiplication
+ (23,43)->-02: (20 + 3) * 43 = 20 * 43 + 3 * 43 = 860 + 129 = 989 rev-> 989 mismatch
+ concatenation
+ (33,21)->-21: 33 || 21 = 3321 rev-> 1233 mismatch
+ reverse concatenation
+ (23,43)->-02: 43 || 23 = 4323 rev-> 3234 mismatch
+
+ identity [33 12, 32 34] [expected (33,12)->-21, (32,34)->-02]
+ addition
+ (33,12)->-21: 33 + 12 = 45 mismatch
+ multiplication
+ (32,34)->-02: (30 + 2) * 34 = 30 * 34 + 2 * 34 = 1020 + 68 = 1088 mismatch
+ concatenation
+ (33,12)->-21: 33 || 12 = 3312 mismatch
+ reverse concatenation
+ (32,34)->-02: 34 || 32 = 3432 mismatch
+
+Trying difference operations
+ reversed operands [33->33 12->21, 32->23 34->43] and reversed result [expected (33,21)->-21, (23,43)->-02]
+ subtraction (a-b)
+ (33,21)->-21: 33 - 21 = 12 rev-> 21 mismatch
+ absolute difference
+ (23,43)->-02: |23 - 43| = 20 rev-> 02 mismatch
+ max mod min
+ (33,21)->-21: max(33,21) mod min(33,21) = 33 mod 21 = 12 rev-> 21 mismatch
+ negated absolute difference
+ (23,43)->-02: -|23 - 43| = -20 rev-> -02 match
+ (33,21)->-21: -|33 - 21| = -12 rev-> -21 match
+ correct, actions: reversed operands, reversed result, negated absolute difference
+ reverse subtraction (b-a)
+ (33,21)->-21: 21 - 33 = -12 rev-> -21 match
+ (23,43)->-02: 43 - 23 = 20 rev-> 02 mismatch
+ modulo (a mod b)
+ (23,43)->-02: 23 mod 43 = 23 rev-> 32 mismatch
+
+ identity [33 12, 32 34] [expected (33,12)->-21, (32,34)->-02]
+ subtraction (a-b)
+ (33,12)->-21: 33 - 12 = 21 mismatch
+ absolute difference
+ (32,34)->-02: |32 - 34| = 2 mismatch
+ max mod min
+ (33,12)->-21: max(33,12) mod min(33,12) = 33 mod 12 = 9 mismatch
+ negated absolute difference
+ (32,34)->-02: -|32 - 34| = -2 mismatch
+ reverse subtraction (b-a)
+ (33,12)->-21: 12 - 33 = -21 match
+ (32,34)->-02: 34 - 32 = 2 mismatch
+ modulo (a mod b)
+ (32,34)->-02: 32 mod 34 = 32 mismatch
+
+Trying rare operations
+ reversed operands [33->33 12->21, 32->23 34->43] and reversed result [expected (33,21)->-21, (23,43)->-02]
+ multiply+1
+ (33,21)->-21: (30 + 3) * 21 + 1 = 30 * 21 + 3 * 21 + 1 = 630 + 63 + 1 = 693 + 1 = 694 rev-> 496 mismatch
+ multiply-1
+ (23,43)->-02: (20 + 3) * 43 - 1 = 20 * 43 + 3 * 43 - 1 = 860 + 129 - 1 = 989 - 1 = 988 rev-> 889 mismatch
+ add+1
+ (33,21)->-21: 33 + 21 + 1 = 55 rev-> 55 mismatch
+ add-1
+ (23,43)->-02: 23 + 43 - 1 = 65 rev-> 56 mismatch
+ sub+1
+ (33,21)->-21: 33 - 21 + 1 = 13 rev-> 31 mismatch
+ sub-1
+ (23,43)->-02: 23 - 43 - 1 = -21 rev-> -12 mismatch
+ integer division (a/b)
+ (33,21)->-21: 33 / 21 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (23,43)->-02: 43 / 23 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (33,21)->-21: 21 mod 33 = 21 rev-> 12 mismatch
+ digit absolute diff
+ (23,43)->-02: |2-4| || |3-3| = 20 rev-> 02 mismatch
+ digit add mod10
+ (33,21)->-21: (3+2)%10 || (3+1)%10 = 54 rev-> 45 mismatch
+ digit sub mod10
+ (23,43)->-02: (2-4)%10 || (3-3)%10 = 80 rev-> 08 mismatch
+ cross multiply
+ (33,21)->-21: 3*2 + 3*1 = 6 + 3 = 9 rev-> 9 mismatch
+ cross multiply rev
+ (23,43)->-02: 2*3 + 3*4 = 6 + 12 = 18 rev-> 81 mismatch
+ digit multiply
+ (33,21)->-21: 3*2 || 3*1 = 6 || 3 = 63 rev-> 36 mismatch
+ digit multiply rev
+ (23,43)->-02: 2*3 || 3*4 = 6 || 12 = 612 rev-> 216 mismatch
+ digit sum diff
+ (33,21)->-21: (3+3) - (2+1) = 3 rev-> 3 mismatch
+ digit sum sum
+ (23,43)->-02: (2+3) + (4+3) = 12 rev-> 21 mismatch
+ digit product diff
+ (33,21)->-21: 3*3 - 2*1 = 9 - 2 = 7 rev-> 7 mismatch
+ digit product sum
+ (23,43)->-02: 2*3 + 4*3 = 6 + 12 = 18 rev-> 81 mismatch
+ determinant
+ (33,21)->-21: 3*1 - 3*2 = 3 - 6 = -3 rev-> -3 mismatch
+ abs determinant
+ (23,43)->-02: |2*3 - 3*4| = |6 - 12| = 6 rev-> 6 mismatch
+
+ identity [33 12, 32 34] [expected (33,12)->-21, (32,34)->-02]
+ multiply+1
+ (33,12)->-21: (30 + 3) * 12 + 1 = 30 * 12 + 3 * 12 + 1 = 360 + 36 + 1 = 396 + 1 = 397 mismatch
+ multiply-1
+ (32,34)->-02: (30 + 2) * 34 - 1 = 30 * 34 + 2 * 34 - 1 = 1020 + 68 - 1 = 1088 - 1 = 1087 mismatch
+ add+1
+ (33,12)->-21: 33 + 12 + 1 = 46 mismatch
+ add-1
+ (32,34)->-02: 32 + 34 - 1 = 65 mismatch
+ sub+1
+ (33,12)->-21: 33 - 12 + 1 = 22 mismatch
+ sub-1
+ (32,34)->-02: 32 - 34 - 1 = -3 mismatch
+ integer division (a/b)
+ (33,12)->-21: 33 / 12 = 2 mismatch
+ reverse division (b/a)
+ (32,34)->-02: 34 / 32 = 1 mismatch
+ reverse modulo (b mod a)
+ (33,12)->-21: 12 mod 33 = 12 mismatch
+ digit absolute diff
+ (32,34)->-02: |3-3| || |2-4| = 02 match
+ (33,12)->-21: |3-1| || |3-2| = 21 mismatch
+ digit add mod10
+ (33,12)->-21: (3+1)%10 || (3+2)%10 = 45 mismatch
+ digit sub mod10
+ (32,34)->-02: (3-3)%10 || (2-4)%10 = 08 mismatch
+ cross multiply
+ (33,12)->-21: 3*1 + 3*2 = 3 + 6 = 9 mismatch
+ cross multiply rev
+ (32,34)->-02: 3*4 + 2*3 = 12 + 6 = 18 mismatch
+ digit multiply
+ (33,12)->-21: 3*1 || 3*2 = 3 || 6 = 36 mismatch
+ digit multiply rev
+ (32,34)->-02: 3*4 || 2*3 = 12 || 6 = 126 mismatch
+ digit sum diff
+ (33,12)->-21: (3+3) - (1+2) = 3 mismatch
+ digit sum sum
+ (32,34)->-02: (3+2) + (3+4) = 12 mismatch
+ digit product diff
+ (33,12)->-21: 3*3 - 1*2 = 9 - 2 = 7 mismatch
+ digit product sum
+ (32,34)->-02: 3*2 + 3*4 = 6 + 12 = 18 mismatch
+ determinant
+ (33,12)->-21: 3*2 - 3*1 = 6 - 3 = 3 mismatch
+ abs determinant
+ (32,34)->-02: |3*4 - 2*3| = |12 - 6| = 6 mismatch
+
+correct, actions: reversed operands, reversed result, negated absolute difference
+
+Applying to 97*93:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [97->79, 93->39] and reversed result
+ addition
+ (79,39): 79 + 39 = 118 rev-> 811
+ Result is non-negative
+ \boxed{811}

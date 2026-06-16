@@ -1,0 +1,182 @@
+15@99 = 9405
+78|61 = 401
+64|17 = 811
+16\35 = 8\
+
+The inputs are 15, 99, 78, 61, 64, 17, 16, 35
+
+The outputs are 9405, 401, 811, 8\
+Some example outputs have the operator symbol as suffix \.
+We now consider the outputs to be 9405, 401, 811, -8
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+15@99 -> @
+78|61 -> |
+64|17 -> |
+16\35 -> \
+
+The operators
+@
+|
+\
+
+Looking at the question
+57@55 -> @
+The question operator is found in the examples.
+
+Looking at operator @ [15@99 = 9405]:
+
+Trying common operations
+ reversed operands [15->51 99->99] and reversed result [expected (51,99)->9405]
+ addition
+ (51,99)->9405: 51 + 99 = 150 rev-> 051 mismatch
+ multiplication
+ (51,99)->9405: (50 + 1) * 99 = 50 * 99 + 1 * 99 = 4950 + 99 = 5049 rev-> 9405 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (51,99)->9405: 51 || 99 = 5199 rev-> 9915 mismatch
+ reverse concatenation
+ (51,99)->9405: 99 || 51 = 9951 rev-> 1599 mismatch
+
+ identity [15 99] [expected (15,99)->9405]
+ addition
+ (15,99)->9405: 15 + 99 = 114 mismatch
+ multiplication
+ (15,99)->9405: (10 + 5) * 99 = 10 * 99 + 5 * 99 = 990 + 495 = 1485 mismatch
+ concatenation
+ (15,99)->9405: 15 || 99 = 1599 mismatch
+ reverse concatenation
+ (15,99)->9405: 99 || 15 = 9915 mismatch
+
+Trying difference operations
+ reversed operands [15->51 99->99] and reversed result [expected (51,99)->9405]
+ subtraction (a-b)
+ (51,99)->9405: 51 - 99 = -48 rev-> -84 mismatch
+ absolute difference
+ (51,99)->9405: |51 - 99| = 48 rev-> 84 mismatch
+ max mod min
+ (51,99)->9405: max(51,99) mod min(51,99) = 99 mod 51 = 48 rev-> 84 mismatch
+ negated absolute difference
+ (51,99)->9405: -|51 - 99| = -48 rev-> -84 mismatch
+ reverse subtraction (b-a)
+ (51,99)->9405: 99 - 51 = 48 rev-> 84 mismatch
+ modulo (a mod b)
+ (51,99)->9405: 51 mod 99 = 51 rev-> 15 mismatch
+
+ identity [15 99] [expected (15,99)->9405]
+ subtraction (a-b)
+ (15,99)->9405: 15 - 99 = -84 mismatch
+ absolute difference
+ (15,99)->9405: |15 - 99| = 84 mismatch
+ max mod min
+ (15,99)->9405: max(15,99) mod min(15,99) = 99 mod 15 = 9 mismatch
+ negated absolute difference
+ (15,99)->9405: -|15 - 99| = -84 mismatch
+ reverse subtraction (b-a)
+ (15,99)->9405: 99 - 15 = 84 mismatch
+ modulo (a mod b)
+ (15,99)->9405: 15 mod 99 = 15 mismatch
+
+Trying rare operations
+ reversed operands [15->51 99->99] and reversed result [expected (51,99)->9405]
+ multiply+1
+ (51,99)->9405: (50 + 1) * 99 + 1 = 50 * 99 + 1 * 99 + 1 = 4950 + 99 + 1 = 5049 + 1 = 5050 rev-> 0505 mismatch
+ multiply-1
+ (51,99)->9405: (50 + 1) * 99 - 1 = 50 * 99 + 1 * 99 - 1 = 4950 + 99 - 1 = 5049 - 1 = 5048 rev-> 8405 mismatch
+ add+1
+ (51,99)->9405: 51 + 99 + 1 = 151 rev-> 151 mismatch
+ add-1
+ (51,99)->9405: 51 + 99 - 1 = 149 rev-> 941 mismatch
+ sub+1
+ (51,99)->9405: 51 - 99 + 1 = -47 rev-> -74 mismatch
+ sub-1
+ (51,99)->9405: 51 - 99 - 1 = -49 rev-> -94 mismatch
+ integer division (a/b)
+ (51,99)->9405: 51 / 99 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (51,99)->9405: 99 / 51 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (51,99)->9405: 99 mod 51 = 48 rev-> 84 mismatch
+ digit absolute diff
+ (51,99)->9405: |5-9| || |1-9| = 48 rev-> 84 mismatch
+ digit add mod10
+ (51,99)->9405: (5+9)%10 || (1+9)%10 = 40 rev-> 04 mismatch
+ digit sub mod10
+ (51,99)->9405: (5-9)%10 || (1-9)%10 = 62 rev-> 26 mismatch
+ cross multiply
+ (51,99)->9405: 5*9 + 1*9 = 45 + 9 = 54 rev-> 45 mismatch
+ cross multiply rev
+ (51,99)->9405: 5*9 + 1*9 = 45 + 9 = 54 rev-> 45 mismatch
+ digit multiply
+ (51,99)->9405: 5*9 || 1*9 = 45 || 9 = 459 rev-> 954 mismatch
+ digit multiply rev
+ (51,99)->9405: 5*9 || 1*9 = 45 || 9 = 459 rev-> 954 mismatch
+ digit sum diff
+ (51,99)->9405: (5+1) - (9+9) = -12 rev-> -21 mismatch
+ digit sum sum
+ (51,99)->9405: (5+1) + (9+9) = 24 rev-> 42 mismatch
+ digit product diff
+ (51,99)->9405: 5*1 - 9*9 = 5 - 81 = -76 rev-> -67 mismatch
+ digit product sum
+ (51,99)->9405: 5*1 + 9*9 = 5 + 81 = 86 rev-> 68 mismatch
+ determinant
+ (51,99)->9405: 5*9 - 1*9 = 45 - 9 = 36 rev-> 63 mismatch
+ abs determinant
+ (51,99)->9405: |5*9 - 1*9| = |45 - 9| = 36 rev-> 63 mismatch
+
+ identity [15 99] [expected (15,99)->9405]
+ multiply+1
+ (15,99)->9405: (10 + 5) * 99 + 1 = 10 * 99 + 5 * 99 + 1 = 990 + 495 + 1 = 1485 + 1 = 1486 mismatch
+ multiply-1
+ (15,99)->9405: (10 + 5) * 99 - 1 = 10 * 99 + 5 * 99 - 1 = 990 + 495 - 1 = 1485 - 1 = 1484 mismatch
+ add+1
+ (15,99)->9405: 15 + 99 + 1 = 115 mismatch
+ add-1
+ (15,99)->9405: 15 + 99 - 1 = 113 mismatch
+ sub+1
+ (15,99)->9405: 15 - 99 + 1 = -83 mismatch
+ sub-1
+ (15,99)->9405: 15 - 99 - 1 = -85 mismatch
+ integer division (a/b)
+ (15,99)->9405: 15 / 99 = 0 mismatch
+ reverse division (b/a)
+ (15,99)->9405: 99 / 15 = 6 mismatch
+ reverse modulo (b mod a)
+ (15,99)->9405: 99 mod 15 = 9 mismatch
+ digit absolute diff
+ (15,99)->9405: |1-9| || |5-9| = 84 mismatch
+ digit add mod10
+ (15,99)->9405: (1+9)%10 || (5+9)%10 = 04 mismatch
+ digit sub mod10
+ (15,99)->9405: (1-9)%10 || (5-9)%10 = 26 mismatch
+ cross multiply
+ (15,99)->9405: 1*9 + 5*9 = 9 + 45 = 54 mismatch
+ cross multiply rev
+ (15,99)->9405: 1*9 + 5*9 = 9 + 45 = 54 mismatch
+ digit multiply
+ (15,99)->9405: 1*9 || 5*9 = 9 || 45 = 945 mismatch
+ digit multiply rev
+ (15,99)->9405: 1*9 || 5*9 = 9 || 45 = 945 mismatch
+ digit sum diff
+ (15,99)->9405: (1+5) - (9+9) = -12 mismatch
+ digit sum sum
+ (15,99)->9405: (1+5) + (9+9) = 24 mismatch
+ digit product diff
+ (15,99)->9405: 1*5 - 9*9 = 5 - 81 = -76 mismatch
+ digit product sum
+ (15,99)->9405: 1*5 + 9*9 = 5 + 81 = 86 mismatch
+ determinant
+ (15,99)->9405: 1*9 - 5*9 = 9 - 45 = -36 mismatch
+ abs determinant
+ (15,99)->9405: |1*9 - 5*9| = |9 - 45| = 36 mismatch
+
+correct, actions: reversed operands, reversed result, multiplication
+
+Applying to 57@55:
+ We recall that the question operator is found in the examples.
+ reversed operands [57->75, 55->55] and reversed result
+ multiplication
+ (75,55): (70 + 5) * 55 = 70 * 55 + 5 * 55 = 3850 + 275 = 4125 rev-> 5214
+ Result is non-negative
+ \boxed{5214}

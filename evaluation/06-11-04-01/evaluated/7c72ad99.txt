@@ -1,0 +1,181 @@
+69*91 = 9169
+33*27 = 2733
+19*34 = 3419
+
+The inputs are 69, 91, 33, 27, 19, 34
+
+The outputs are 9169, 2733, 3419
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+69*91 -> *
+33*27 -> *
+19*34 -> *
+
+The operators
+*
+
+Looking at the question
+33*27 -> *
+The question operator is found in the examples.
+
+Looking at operator * [69*91 = 9169, 33*27 = 2733, 19*34 = 3419]:
+
+Trying common operations
+ reversed operands [69->96 91->19, 33->33 27->72, 19->91 34->43] and reversed result [expected (96,19)->9169, (33,72)->2733, (91,43)->3419]
+ addition
+ (96,19)->9169: 96 + 19 = 115 rev-> 511 mismatch
+ multiplication
+ (33,72)->2733: (30 + 3) * 72 = 30 * 72 + 3 * 72 = 2160 + 216 = 2376 rev-> 6732 mismatch
+ concatenation
+ (91,43)->3419: 91 || 43 = 9143 rev-> 3419 match
+ (96,19)->9169: 96 || 19 = 9619 rev-> 9169 match
+ (33,72)->2733: 33 || 72 = 3372 rev-> 2733 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (96,19)->9169: 19 || 96 = 1996 rev-> 6991 mismatch
+
+ identity [69 91, 33 27, 19 34] [expected (69,91)->9169, (33,27)->2733, (19,34)->3419]
+ addition
+ (69,91)->9169: 69 + 91 = 160 mismatch
+ multiplication
+ (33,27)->2733: (30 + 3) * 27 = 30 * 27 + 3 * 27 = 810 + 81 = 891 mismatch
+ concatenation
+ (19,34)->3419: 19 || 34 = 1934 mismatch
+ reverse concatenation
+ (69,91)->9169: 91 || 69 = 9169 match
+ (33,27)->2733: 27 || 33 = 2733 match
+ (19,34)->3419: 34 || 19 = 3419 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [69->96 91->19, 33->33 27->72, 19->91 34->43] and reversed result [expected (96,19)->9169, (33,72)->2733, (91,43)->3419]
+ subtraction (a-b)
+ (96,19)->9169: 96 - 19 = 77 rev-> 77 mismatch
+ absolute difference
+ (33,72)->2733: |33 - 72| = 39 rev-> 93 mismatch
+ max mod min
+ (91,43)->3419: max(91,43) mod min(91,43) = 91 mod 43 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (96,19)->9169: -|96 - 19| = -77 rev-> -77 mismatch
+ reverse subtraction (b-a)
+ (33,72)->2733: 72 - 33 = 39 rev-> 93 mismatch
+ modulo (a mod b)
+ (91,43)->3419: 91 mod 43 = 5 rev-> 5 mismatch
+
+ identity [69 91, 33 27, 19 34] [expected (69,91)->9169, (33,27)->2733, (19,34)->3419]
+ subtraction (a-b)
+ (69,91)->9169: 69 - 91 = -22 mismatch
+ absolute difference
+ (33,27)->2733: |33 - 27| = 6 mismatch
+ max mod min
+ (19,34)->3419: max(19,34) mod min(19,34) = 34 mod 19 = 15 mismatch
+ negated absolute difference
+ (69,91)->9169: -|69 - 91| = -22 mismatch
+ reverse subtraction (b-a)
+ (33,27)->2733: 27 - 33 = -6 mismatch
+ modulo (a mod b)
+ (19,34)->3419: 19 mod 34 = 19 mismatch
+
+Trying rare operations
+ reversed operands [69->96 91->19, 33->33 27->72, 19->91 34->43] and reversed result [expected (96,19)->9169, (33,72)->2733, (91,43)->3419]
+ multiply+1
+ (96,19)->9169: (90 + 6) * 19 + 1 = 90 * 19 + 6 * 19 + 1 = 1710 + 114 + 1 = 1824 + 1 = 1825 rev-> 5281 mismatch
+ multiply-1
+ (33,72)->2733: (30 + 3) * 72 - 1 = 30 * 72 + 3 * 72 - 1 = 2160 + 216 - 1 = 2376 - 1 = 2375 rev-> 5732 mismatch
+ add+1
+ (91,43)->3419: 91 + 43 + 1 = 135 rev-> 531 mismatch
+ add-1
+ (96,19)->9169: 96 + 19 - 1 = 114 rev-> 411 mismatch
+ sub+1
+ (33,72)->2733: 33 - 72 + 1 = -38 rev-> -83 mismatch
+ sub-1
+ (91,43)->3419: 91 - 43 - 1 = 47 rev-> 74 mismatch
+ integer division (a/b)
+ (96,19)->9169: 96 / 19 = 5 rev-> 5 mismatch
+ reverse division (b/a)
+ (33,72)->2733: 72 / 33 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (91,43)->3419: 43 mod 91 = 43 rev-> 34 mismatch
+ digit absolute diff
+ (96,19)->9169: |9-1| || |6-9| = 83 rev-> 38 mismatch
+ digit add mod10
+ (33,72)->2733: (3+7)%10 || (3+2)%10 = 05 rev-> 50 mismatch
+ digit sub mod10
+ (91,43)->3419: (9-4)%10 || (1-3)%10 = 58 rev-> 85 mismatch
+ cross multiply
+ (96,19)->9169: 9*1 + 6*9 = 9 + 54 = 63 rev-> 36 mismatch
+ cross multiply rev
+ (33,72)->2733: 3*2 + 3*7 = 6 + 21 = 27 rev-> 72 mismatch
+ digit multiply
+ (91,43)->3419: 9*4 || 1*3 = 36 || 3 = 363 rev-> 363 mismatch
+ digit multiply rev
+ (96,19)->9169: 9*9 || 6*1 = 81 || 6 = 816 rev-> 618 mismatch
+ digit sum diff
+ (33,72)->2733: (3+3) - (7+2) = -3 rev-> -3 mismatch
+ digit sum sum
+ (91,43)->3419: (9+1) + (4+3) = 17 rev-> 71 mismatch
+ digit product
+ (96,19)->9169: 9*6 || 1*9 = 54 || 9 = 549 rev-> 945 mismatch
+ digit product rev
+ (33,72)->2733: 3*3 || 3*2 = 9 || 6 = 96 rev-> 69 mismatch
+ determinant
+ (91,43)->3419: 9*3 - 1*4 = 27 - 4 = 23 rev-> 32 mismatch
+ abs determinant
+ (96,19)->9169: |9*9 - 6*1| = |81 - 6| = 75 rev-> 57 mismatch
+
+ identity [69 91, 33 27, 19 34] [expected (69,91)->9169, (33,27)->2733, (19,34)->3419]
+ multiply+1
+ (69,91)->9169: (60 + 9) * 91 + 1 = 60 * 91 + 9 * 91 + 1 = 5460 + 819 + 1 = 6279 + 1 = 6280 mismatch
+ multiply-1
+ (33,27)->2733: (30 + 3) * 27 - 1 = 30 * 27 + 3 * 27 - 1 = 810 + 81 - 1 = 891 - 1 = 890 mismatch
+ add+1
+ (19,34)->3419: 19 + 34 + 1 = 54 mismatch
+ add-1
+ (69,91)->9169: 69 + 91 - 1 = 159 mismatch
+ sub+1
+ (33,27)->2733: 33 - 27 + 1 = 7 mismatch
+ sub-1
+ (19,34)->3419: 19 - 34 - 1 = -16 mismatch
+ integer division (a/b)
+ (69,91)->9169: 69 / 91 = 0 mismatch
+ reverse division (b/a)
+ (33,27)->2733: 27 / 33 = 0 mismatch
+ reverse modulo (b mod a)
+ (19,34)->3419: 34 mod 19 = 15 mismatch
+ digit absolute diff
+ (69,91)->9169: |6-9| || |9-1| = 38 mismatch
+ digit add mod10
+ (33,27)->2733: (3+2)%10 || (3+7)%10 = 50 mismatch
+ digit sub mod10
+ (19,34)->3419: (1-3)%10 || (9-4)%10 = 85 mismatch
+ cross multiply
+ (69,91)->9169: 6*9 + 9*1 = 54 + 9 = 63 mismatch
+ cross multiply rev
+ (33,27)->2733: 3*7 + 3*2 = 21 + 6 = 27 mismatch
+ digit multiply
+ (19,34)->3419: 1*3 || 9*4 = 3 || 36 = 336 mismatch
+ digit multiply rev
+ (69,91)->9169: 6*1 || 9*9 = 6 || 81 = 681 mismatch
+ digit sum diff
+ (33,27)->2733: (3+3) - (2+7) = -3 mismatch
+ digit sum sum
+ (19,34)->3419: (1+9) + (3+4) = 17 mismatch
+ digit product
+ (69,91)->9169: 6*9 || 9*1 = 54 || 9 = 549 mismatch
+ digit product rev
+ (33,27)->2733: 3*7 || 3*2 = 21 || 6 = 216 mismatch
+ determinant
+ (19,34)->3419: 1*4 - 9*3 = 4 - 27 = -23 mismatch
+ abs determinant
+ (69,91)->9169: |6*1 - 9*9| = |6 - 81| = 75 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 33*27:
+ We recall that the question operator is found in the examples.
+ reversed operands [33->33, 27->72] and reversed result
+ concatenation
+ (33,72): 33 || 72 = 3372 rev-> 2733
+ Result is non-negative
+ \boxed{2733}

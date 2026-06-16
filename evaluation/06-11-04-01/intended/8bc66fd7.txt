@@ -1,0 +1,180 @@
+28-27 = 01
+19*98 = 0018
+33+82 = 26
+45+02 = 57
+
+The inputs are 28, 27, 19, 98, 33, 82, 45, 02
+
+The outputs are 01, 0018, 26, 57
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+28-27 -> -
+19*98 -> *
+33+82 -> +
+45+02 -> +
+
+The operators
+-
+*
++
+
+Looking at the question
+64*15 -> *
+The question operator is found in the examples.
+
+Looking at operator * [19*98 = 0018]:
+
+Trying common operations
+ reversed operands [19->91 98->89] and reversed result [expected (91,89)->0018]
+ addition
+ (91,89)->0018: 91 + 89 = 180 rev-> 081 mismatch
+ multiplication
+ (91,89)->0018: (90 + 1) * 89 = 90 * 89 + 1 * 89 = 8010 + 89 = 8099 rev-> 9908 mismatch
+ concatenation
+ (91,89)->0018: 91 || 89 = 9189 rev-> 9819 mismatch
+ reverse concatenation
+ (91,89)->0018: 89 || 91 = 8991 rev-> 1998 mismatch
+
+ identity [19 98] [expected (19,98)->0018]
+ addition
+ (19,98)->0018: 19 + 98 = 117 mismatch
+ multiplication
+ (19,98)->0018: (10 + 9) * 98 = 10 * 98 + 9 * 98 = 980 + 882 = 1862 mismatch
+ concatenation
+ (19,98)->0018: 19 || 98 = 1998 mismatch
+ reverse concatenation
+ (19,98)->0018: 98 || 19 = 9819 mismatch
+
+Trying difference operations
+ reversed operands [19->91 98->89] and reversed result [expected (91,89)->0018]
+ subtraction (a-b)
+ (91,89)->0018: 91 - 89 = 2 rev-> 2 mismatch
+ absolute difference
+ (91,89)->0018: |91 - 89| = 2 rev-> 2 mismatch
+ max mod min
+ (91,89)->0018: max(91,89) mod min(91,89) = 91 mod 89 = 2 rev-> 2 mismatch
+ negated absolute difference
+ (91,89)->0018: -|91 - 89| = -2 rev-> -2 mismatch
+ reverse subtraction (b-a)
+ (91,89)->0018: 89 - 91 = -2 rev-> -2 mismatch
+ modulo (a mod b)
+ (91,89)->0018: 91 mod 89 = 2 rev-> 2 mismatch
+
+ identity [19 98] [expected (19,98)->0018]
+ subtraction (a-b)
+ (19,98)->0018: 19 - 98 = -79 mismatch
+ absolute difference
+ (19,98)->0018: |19 - 98| = 79 mismatch
+ max mod min
+ (19,98)->0018: max(19,98) mod min(19,98) = 98 mod 19 = 3 mismatch
+ negated absolute difference
+ (19,98)->0018: -|19 - 98| = -79 mismatch
+ reverse subtraction (b-a)
+ (19,98)->0018: 98 - 19 = 79 mismatch
+ modulo (a mod b)
+ (19,98)->0018: 19 mod 98 = 19 mismatch
+
+Trying rare operations
+ reversed operands [19->91 98->89] and reversed result [expected (91,89)->0018]
+ multiply+1
+ (91,89)->0018: (90 + 1) * 89 + 1 = 90 * 89 + 1 * 89 + 1 = 8010 + 89 + 1 = 8099 + 1 = 8100 rev-> 0018 match
+ correct, actions: reversed operands, reversed result, multiply+1
+ multiply-1
+ (91,89)->0018: (90 + 1) * 89 - 1 = 90 * 89 + 1 * 89 - 1 = 8010 + 89 - 1 = 8099 - 1 = 8098 rev-> 8908 mismatch
+ add+1
+ (91,89)->0018: 91 + 89 + 1 = 181 rev-> 181 mismatch
+ add-1
+ (91,89)->0018: 91 + 89 - 1 = 179 rev-> 971 mismatch
+ sub+1
+ (91,89)->0018: 91 - 89 + 1 = 3 rev-> 3 mismatch
+ sub-1
+ (91,89)->0018: 91 - 89 - 1 = 1 rev-> 1 mismatch
+ integer division (a/b)
+ (91,89)->0018: 91 / 89 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (91,89)->0018: 89 / 91 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (91,89)->0018: 89 mod 91 = 89 rev-> 98 mismatch
+ digit absolute diff
+ (91,89)->0018: |9-8| || |1-9| = 18 rev-> 81 mismatch
+ digit add mod10
+ (91,89)->0018: (9+8)%10 || (1+9)%10 = 70 rev-> 07 mismatch
+ digit sub mod10
+ (91,89)->0018: (9-8)%10 || (1-9)%10 = 12 rev-> 21 mismatch
+ cross multiply
+ (91,89)->0018: 9*8 + 1*9 = 72 + 9 = 81 rev-> 18 mismatch
+ cross multiply rev
+ (91,89)->0018: 9*9 + 1*8 = 81 + 8 = 89 rev-> 98 mismatch
+ digit multiply
+ (91,89)->0018: 9*8 || 1*9 = 72 || 9 = 729 rev-> 927 mismatch
+ digit multiply rev
+ (91,89)->0018: 9*9 || 1*8 = 81 || 8 = 818 rev-> 818 mismatch
+ digit sum diff
+ (91,89)->0018: (9+1) - (8+9) = -7 rev-> -7 mismatch
+ digit sum sum
+ (91,89)->0018: (9+1) + (8+9) = 27 rev-> 72 mismatch
+ digit product diff
+ (91,89)->0018: 9*1 - 8*9 = 9 - 72 = -63 rev-> -36 mismatch
+ digit product sum
+ (91,89)->0018: 9*1 + 8*9 = 9 + 72 = 81 rev-> 18 mismatch
+ determinant
+ (91,89)->0018: 9*9 - 1*8 = 81 - 8 = 73 rev-> 37 mismatch
+ abs determinant
+ (91,89)->0018: |9*9 - 1*8| = |81 - 8| = 73 rev-> 37 mismatch
+
+ identity [19 98] [expected (19,98)->0018]
+ multiply+1
+ (19,98)->0018: (10 + 9) * 98 + 1 = 10 * 98 + 9 * 98 + 1 = 980 + 882 + 1 = 1862 + 1 = 1863 mismatch
+ multiply-1
+ (19,98)->0018: (10 + 9) * 98 - 1 = 10 * 98 + 9 * 98 - 1 = 980 + 882 - 1 = 1862 - 1 = 1861 mismatch
+ add+1
+ (19,98)->0018: 19 + 98 + 1 = 118 mismatch
+ add-1
+ (19,98)->0018: 19 + 98 - 1 = 116 mismatch
+ sub+1
+ (19,98)->0018: 19 - 98 + 1 = -78 mismatch
+ sub-1
+ (19,98)->0018: 19 - 98 - 1 = -80 mismatch
+ integer division (a/b)
+ (19,98)->0018: 19 / 98 = 0 mismatch
+ reverse division (b/a)
+ (19,98)->0018: 98 / 19 = 5 mismatch
+ reverse modulo (b mod a)
+ (19,98)->0018: 98 mod 19 = 3 mismatch
+ digit absolute diff
+ (19,98)->0018: |1-9| || |9-8| = 81 mismatch
+ digit add mod10
+ (19,98)->0018: (1+9)%10 || (9+8)%10 = 07 mismatch
+ digit sub mod10
+ (19,98)->0018: (1-9)%10 || (9-8)%10 = 21 mismatch
+ cross multiply
+ (19,98)->0018: 1*9 + 9*8 = 9 + 72 = 81 mismatch
+ cross multiply rev
+ (19,98)->0018: 1*8 + 9*9 = 8 + 81 = 89 mismatch
+ digit multiply
+ (19,98)->0018: 1*9 || 9*8 = 9 || 72 = 972 mismatch
+ digit multiply rev
+ (19,98)->0018: 1*8 || 9*9 = 8 || 81 = 881 mismatch
+ digit sum diff
+ (19,98)->0018: (1+9) - (9+8) = -7 mismatch
+ digit sum sum
+ (19,98)->0018: (1+9) + (9+8) = 27 mismatch
+ digit product diff
+ (19,98)->0018: 1*9 - 9*8 = 9 - 72 = -63 mismatch
+ digit product sum
+ (19,98)->0018: 1*9 + 9*8 = 9 + 72 = 81 mismatch
+ determinant
+ (19,98)->0018: 1*8 - 9*9 = 8 - 81 = -73 mismatch
+ abs determinant
+ (19,98)->0018: |1*8 - 9*9| = |8 - 81| = 73 mismatch
+
+correct, actions: reversed operands, reversed result, multiply+1
+
+Applying to 64*15:
+ We recall that the question operator is found in the examples.
+ reversed operands [64->46, 15->51] and reversed result
+ multiply+1
+ (46,51): (40 + 6) * 51 + 1 = 40 * 51 + 6 * 51 + 1 = 2040 + 306 + 1 = 2346 + 1 = 2347 rev-> 7432
+ Result is non-negative
+ \boxed{7432}

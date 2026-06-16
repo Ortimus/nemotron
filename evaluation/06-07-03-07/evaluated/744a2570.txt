@@ -1,0 +1,180 @@
+91"19 = 51
+66"02 = 6
+51^95 = 47
+36\45 = 2043
+53\02 = 007
+
+The inputs are 91, 19, 66, 02, 51, 95, 36, 45, 53, 02
+
+The outputs are 51, 6, 47, 2043, 007
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+91"19 -> "
+66"02 -> "
+51^95 -> ^
+36\45 -> \
+53\02 -> \
+
+The operators
+"
+^
+\
+
+Looking at the question
+87"38 -> "
+The question operator is found in the examples.
+
+Looking at operator " [91"19 = 51, 66"02 = 6]:
+
+Trying common operations reversed operands [91->19 19->91, 66->66 02->20] and reversed result [expected (19,91)->51, (66,20)->6]:
+ addition
+ (19,91)->51: 19 + 91 = 110 rev-> 011 mismatch
+ multiplication
+ (66,20)->6: (60 + 6) * 20 = 60 * 20 + 6 * 20 = 1200 + 120 = 1320 rev-> 0231 mismatch
+ concatenation
+ (19,91)->51: 19 || 91 = 1991 rev-> 1991 mismatch
+ reverse concatenation
+ (66,20)->6: 20 || 66 = 2066 rev-> 6602 mismatch
+
+Trying common operations on identity [91 19, 66 02] [expected (91,19)->51, (66,02)->6]:
+ addition
+ (91,19)->51: 91 + 19 = 110 mismatch
+ multiplication
+ (66,02)->6: (60 + 6) * 02 = 60 * 02 + 6 * 02 = 120 + 12 = 132 mismatch
+ concatenation
+ (91,19)->51: 91 || 19 = 9119 mismatch
+ reverse concatenation
+ (66,02)->6: 02 || 66 = 0266 mismatch
+
+Trying difference operations reversed operands [91->19 19->91, 66->66 02->20] and reversed result [expected (19,91)->51, (66,20)->6]:
+ subtraction (a-b)
+ (19,91)->51: 19 - 91 = -72 rev-> -27 mismatch
+ absolute difference
+ (66,20)->6: |66 - 20| = 46 rev-> 64 mismatch
+ max mod min
+ (19,91)->51: max(19,91) mod min(19,91) = 91 mod 19 = 15 rev-> 51 match
+ (66,20)->6: max(66,20) mod min(66,20) = 66 mod 20 = 6 rev-> 6 match
+ correct, actions: reversed operands, reversed result, max mod min
+ negated absolute difference
+ (66,20)->6: -|66 - 20| = -46 rev-> -64 mismatch
+ reverse subtraction (b-a)
+ (19,91)->51: 91 - 19 = 72 rev-> 27 mismatch
+ modulo (a mod b)
+ (66,20)->6: 66 mod 20 = 6 rev-> 6 match
+ (19,91)->51: 19 mod 91 = 19 rev-> 91 mismatch
+
+Trying difference operations on identity [91 19, 66 02] [expected (91,19)->51, (66,02)->6]:
+ subtraction (a-b)
+ (91,19)->51: 91 - 19 = 72 mismatch
+ absolute difference
+ (66,02)->6: |66 - 02| = 64 mismatch
+ max mod min
+ (91,19)->51: max(91,19) mod min(91,19) = 91 mod 19 = 15 mismatch
+ negated absolute difference
+ (66,02)->6: -|66 - 02| = -64 mismatch
+ reverse subtraction (b-a)
+ (91,19)->51: 19 - 91 = -72 mismatch
+ modulo (a mod b)
+ (66,02)->6: 66 mod 02 = 0 mismatch
+
+Trying rare operations reversed operands [91->19 19->91, 66->66 02->20] and reversed result [expected (19,91)->51, (66,20)->6]:
+ multiply+1
+ (19,91)->51: (10 + 9) * 91 + 1 = 10 * 91 + 9 * 91 + 1 = 910 + 819 + 1 = 1729 + 1 = 1730 rev-> 0371 mismatch
+ multiply-1
+ (66,20)->6: (60 + 6) * 20 - 1 = 60 * 20 + 6 * 20 - 1 = 1200 + 120 - 1 = 1320 - 1 = 1319 rev-> 9131 mismatch
+ add+1
+ (19,91)->51: 19 + 91 + 1 = 111 rev-> 111 mismatch
+ add-1
+ (66,20)->6: 66 + 20 - 1 = 85 rev-> 58 mismatch
+ sub+1
+ (19,91)->51: 19 - 91 + 1 = -71 rev-> -17 mismatch
+ sub-1
+ (66,20)->6: 66 - 20 - 1 = 45 rev-> 54 mismatch
+ integer division (a/b)
+ (19,91)->51: 19 / 91 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (66,20)->6: 20 / 66 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (19,91)->51: 91 mod 19 = 15 rev-> 51 match
+ (66,20)->6: 20 mod 66 = 20 rev-> 02 mismatch
+ digit absolute diff
+ (66,20)->6: |6-2| || |6-0| = 46 rev-> 64 mismatch
+ digit add mod10
+ (19,91)->51: (1+9)%10 || (9+1)%10 = 00 rev-> 00 mismatch
+ digit sub mod10
+ (66,20)->6: (6-2)%10 || (6-0)%10 = 46 rev-> 64 mismatch
+ cross multiply
+ (19,91)->51: 1*9 + 9*1 = 9 + 9 = 18 rev-> 81 mismatch
+ cross multiply rev
+ (66,20)->6: 6*0 + 6*2 = 0 + 12 = 12 rev-> 21 mismatch
+ digit multiply
+ (19,91)->51: 1*9 || 9*1 = 9 || 9 = 99 rev-> 99 mismatch
+ digit multiply rev
+ (66,20)->6: 6*0 || 6*2 = 0 || 12 = 012 rev-> 210 mismatch
+ digit sum diff
+ (19,91)->51: (1+9) - (9+1) = 0 rev-> 0 mismatch
+ digit sum sum
+ (66,20)->6: (6+6) + (2+0) = 14 rev-> 41 mismatch
+ digit product diff
+ (19,91)->51: 1*9 - 9*1 = 9 - 9 = 0 rev-> 0 mismatch
+ digit product sum
+ (66,20)->6: 6*6 + 2*0 = 36 + 0 = 36 rev-> 63 mismatch
+ determinant
+ (19,91)->51: 1*1 - 9*9 = 1 - 81 = -80 rev-> -08 mismatch
+ abs determinant
+ (66,20)->6: |6*0 - 6*2| = |0 - 12| = 12 rev-> 21 mismatch
+
+Trying rare operations on identity [91 19, 66 02] [expected (91,19)->51, (66,02)->6]:
+ multiply+1
+ (91,19)->51: (90 + 1) * 19 + 1 = 90 * 19 + 1 * 19 + 1 = 1710 + 19 + 1 = 1729 + 1 = 1730 mismatch
+ multiply-1
+ (66,02)->6: (60 + 6) * 02 - 1 = 60 * 02 + 6 * 02 - 1 = 120 + 12 - 1 = 132 - 1 = 131 mismatch
+ add+1
+ (91,19)->51: 91 + 19 + 1 = 111 mismatch
+ add-1
+ (66,02)->6: 66 + 02 - 1 = 67 mismatch
+ sub+1
+ (91,19)->51: 91 - 19 + 1 = 73 mismatch
+ sub-1
+ (66,02)->6: 66 - 02 - 1 = 63 mismatch
+ integer division (a/b)
+ (91,19)->51: 91 / 19 = 4 mismatch
+ reverse division (b/a)
+ (66,02)->6: 02 / 66 = 0 mismatch
+ reverse modulo (b mod a)
+ (91,19)->51: 19 mod 91 = 19 mismatch
+ digit absolute diff
+ (66,02)->6: |6-0| || |6-2| = 64 mismatch
+ digit add mod10
+ (91,19)->51: (9+1)%10 || (1+9)%10 = 00 mismatch
+ digit sub mod10
+ (66,02)->6: (6-0)%10 || (6-2)%10 = 64 mismatch
+ cross multiply
+ (91,19)->51: 9*1 + 1*9 = 9 + 9 = 18 mismatch
+ cross multiply rev
+ (66,02)->6: 6*0 + 6*2 = 0 + 12 = 12 mismatch
+ digit multiply
+ (91,19)->51: 9*1 || 1*9 = 9 || 9 = 99 mismatch
+ digit multiply rev
+ (66,02)->6: 6*0 || 6*2 = 0 || 12 = 012 mismatch
+ digit sum diff
+ (91,19)->51: (9+1) - (1+9) = 0 mismatch
+ digit sum sum
+ (66,02)->6: (6+6) + (0+2) = 14 mismatch
+ digit product diff
+ (91,19)->51: 9*1 - 1*9 = 9 - 9 = 0 mismatch
+ digit product sum
+ (66,02)->6: 6*6 + 0*2 = 36 + 0 = 36 mismatch
+ determinant
+ (91,19)->51: 9*9 - 1*1 = 81 - 1 = 80 mismatch
+ abs determinant
+ (66,02)->6: |6*2 - 6*0| = |12 - 0| = 12 mismatch
+
+Applying to 87"38:
+ We recall that the question operator is found in the examples.
+ reversed operands [87->78, 38->83] and reversed result
+ max mod min (78,83): max(78,83) mod min(78,83) = 83 mod 78 = 5 rev-> 5
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{5}

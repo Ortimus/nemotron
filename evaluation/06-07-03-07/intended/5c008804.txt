@@ -1,0 +1,183 @@
+98'21 = 101
+07)76 = 0964
+91'15 = 07
+19@84 = 34
+
+The inputs are 98, 21, 07, 76, 91, 15, 19, 84
+
+The outputs are 101, 0964, 07, 34
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+98'21 -> '
+07)76 -> )
+91'15 -> '
+19@84 -> @
+
+The operators
+'
+)
+@
+
+Looking at the question
+83@36 -> @
+The question operator is found in the examples.
+
+Looking at operator @ [19@84 = 34]:
+
+Trying common operations
+ reversed operands [19->91 84->48] and reversed result [expected (91,48)->34]
+ addition
+ (91,48)->34: 91 + 48 = 139 rev-> 931 mismatch
+ multiplication
+ (91,48)->34: (90 + 1) * 48 = 90 * 48 + 1 * 48 = 4320 + 48 = 4368 rev-> 8634 mismatch
+ concatenation
+ (91,48)->34: 91 || 48 = 9148 rev-> 8419 mismatch
+ reverse concatenation
+ (91,48)->34: 48 || 91 = 4891 rev-> 1984 mismatch
+
+ identity [19 84] [expected (19,84)->34]
+ addition
+ (19,84)->34: 19 + 84 = 103 mismatch
+ multiplication
+ (19,84)->34: (10 + 9) * 84 = 10 * 84 + 9 * 84 = 840 + 756 = 1596 mismatch
+ concatenation
+ (19,84)->34: 19 || 84 = 1984 mismatch
+ reverse concatenation
+ (19,84)->34: 84 || 19 = 8419 mismatch
+
+Trying difference operations
+ reversed operands [19->91 84->48] and reversed result [expected (91,48)->34]
+ subtraction (a-b)
+ (91,48)->34: 91 - 48 = 43 rev-> 34 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (91,48)->34: |91 - 48| = 43 rev-> 34 match
+ correct, but skipping
+ max mod min
+ (91,48)->34: max(91,48) mod min(91,48) = 91 mod 48 = 43 rev-> 34 match
+ correct, but skipping
+ negated absolute difference
+ (91,48)->34: -|91 - 48| = -43 rev-> -34 mismatch
+ reverse subtraction (b-a)
+ (91,48)->34: 48 - 91 = -43 rev-> -34 mismatch
+ modulo (a mod b)
+ (91,48)->34: 91 mod 48 = 43 rev-> 34 match
+ correct, but skipping
+
+ identity [19 84] [expected (19,84)->34]
+ subtraction (a-b)
+ (19,84)->34: 19 - 84 = -65 mismatch
+ absolute difference
+ (19,84)->34: |19 - 84| = 65 mismatch
+ max mod min
+ (19,84)->34: max(19,84) mod min(19,84) = 84 mod 19 = 8 mismatch
+ negated absolute difference
+ (19,84)->34: -|19 - 84| = -65 mismatch
+ reverse subtraction (b-a)
+ (19,84)->34: 84 - 19 = 65 mismatch
+ modulo (a mod b)
+ (19,84)->34: 19 mod 84 = 19 mismatch
+
+Trying rare operations
+ reversed operands [19->91 84->48] and reversed result [expected (91,48)->34]
+ multiply+1
+ (91,48)->34: (90 + 1) * 48 + 1 = 90 * 48 + 1 * 48 + 1 = 4320 + 48 + 1 = 4368 + 1 = 4369 rev-> 9634 mismatch
+ multiply-1
+ (91,48)->34: (90 + 1) * 48 - 1 = 90 * 48 + 1 * 48 - 1 = 4320 + 48 - 1 = 4368 - 1 = 4367 rev-> 7634 mismatch
+ add+1
+ (91,48)->34: 91 + 48 + 1 = 140 rev-> 041 mismatch
+ add-1
+ (91,48)->34: 91 + 48 - 1 = 138 rev-> 831 mismatch
+ sub+1
+ (91,48)->34: 91 - 48 + 1 = 44 rev-> 44 mismatch
+ sub-1
+ (91,48)->34: 91 - 48 - 1 = 42 rev-> 24 mismatch
+ integer division (a/b)
+ (91,48)->34: 91 / 48 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (91,48)->34: 48 / 91 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (91,48)->34: 48 mod 91 = 48 rev-> 84 mismatch
+ digit absolute diff
+ (91,48)->34: |9-4| || |1-8| = 57 rev-> 75 mismatch
+ digit add mod10
+ (91,48)->34: (9+4)%10 || (1+8)%10 = 39 rev-> 93 mismatch
+ digit sub mod10
+ (91,48)->34: (9-4)%10 || (1-8)%10 = 53 rev-> 35 mismatch
+ cross multiply
+ (91,48)->34: 9*4 + 1*8 = 36 + 8 = 44 rev-> 44 mismatch
+ cross multiply rev
+ (91,48)->34: 9*8 + 1*4 = 72 + 4 = 76 rev-> 67 mismatch
+ digit multiply
+ (91,48)->34: 9*4 || 1*8 = 36 || 8 = 368 rev-> 863 mismatch
+ digit multiply rev
+ (91,48)->34: 9*8 || 1*4 = 72 || 4 = 724 rev-> 427 mismatch
+ digit sum diff
+ (91,48)->34: (9+1) - (4+8) = -2 rev-> -2 mismatch
+ digit sum sum
+ (91,48)->34: (9+1) + (4+8) = 22 rev-> 22 mismatch
+ digit product diff
+ (91,48)->34: 9*1 - 4*8 = 9 - 32 = -23 rev-> -32 mismatch
+ digit product sum
+ (91,48)->34: 9*1 + 4*8 = 9 + 32 = 41 rev-> 14 mismatch
+ determinant
+ (91,48)->34: 9*8 - 1*4 = 72 - 4 = 68 rev-> 86 mismatch
+ abs determinant
+ (91,48)->34: |9*8 - 1*4| = |72 - 4| = 68 rev-> 86 mismatch
+
+ identity [19 84] [expected (19,84)->34]
+ multiply+1
+ (19,84)->34: (10 + 9) * 84 + 1 = 10 * 84 + 9 * 84 + 1 = 840 + 756 + 1 = 1596 + 1 = 1597 mismatch
+ multiply-1
+ (19,84)->34: (10 + 9) * 84 - 1 = 10 * 84 + 9 * 84 - 1 = 840 + 756 - 1 = 1596 - 1 = 1595 mismatch
+ add+1
+ (19,84)->34: 19 + 84 + 1 = 104 mismatch
+ add-1
+ (19,84)->34: 19 + 84 - 1 = 102 mismatch
+ sub+1
+ (19,84)->34: 19 - 84 + 1 = -64 mismatch
+ sub-1
+ (19,84)->34: 19 - 84 - 1 = -66 mismatch
+ integer division (a/b)
+ (19,84)->34: 19 / 84 = 0 mismatch
+ reverse division (b/a)
+ (19,84)->34: 84 / 19 = 4 mismatch
+ reverse modulo (b mod a)
+ (19,84)->34: 84 mod 19 = 8 mismatch
+ digit absolute diff
+ (19,84)->34: |1-8| || |9-4| = 75 mismatch
+ digit add mod10
+ (19,84)->34: (1+8)%10 || (9+4)%10 = 93 mismatch
+ digit sub mod10
+ (19,84)->34: (1-8)%10 || (9-4)%10 = 35 mismatch
+ cross multiply
+ (19,84)->34: 1*8 + 9*4 = 8 + 36 = 44 mismatch
+ cross multiply rev
+ (19,84)->34: 1*4 + 9*8 = 4 + 72 = 76 mismatch
+ digit multiply
+ (19,84)->34: 1*8 || 9*4 = 8 || 36 = 836 mismatch
+ digit multiply rev
+ (19,84)->34: 1*4 || 9*8 = 4 || 72 = 472 mismatch
+ digit sum diff
+ (19,84)->34: (1+9) - (8+4) = -2 mismatch
+ digit sum sum
+ (19,84)->34: (1+9) + (8+4) = 22 mismatch
+ digit product diff
+ (19,84)->34: 1*9 - 8*4 = 9 - 32 = -23 mismatch
+ digit product sum
+ (19,84)->34: 1*9 + 8*4 = 9 + 32 = 41 mismatch
+ determinant
+ (19,84)->34: 1*4 - 9*8 = 4 - 72 = -68 mismatch
+ abs determinant
+ (19,84)->34: |1*4 - 9*8| = |4 - 72| = 68 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 83@36:
+ We recall that the question operator is found in the examples.
+ reversed operands [83->38, 36->63] and reversed result
+ subtraction (a-b)
+ (38,63): 38 - 63 = -25 rev-> -52
+ Result is negative - but none of the example outputs have a symbol prefix or suffix
+ \boxed{-52}

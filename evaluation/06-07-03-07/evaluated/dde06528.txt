@@ -1,0 +1,177 @@
+54`14 = 755
+54%61 = %7
+61%37 = 24
+93`99 = 9206
+
+The inputs are 54, 14, 54, 61, 61, 37, 93, 99
+
+The outputs are 755, %7, 24, 9206
+Some example outputs have the operator symbol as prefix %.
+We now consider the outputs to be 755, -7, 24, 9206
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+54`14 -> `
+54%61 -> %
+61%37 -> %
+93`99 -> `
+
+The operators
+`
+%
+
+Looking at the question
+84?52 -> ?
+The question operator is not found in the examples. Investigating the most common example operator ` instead. We will use addition for the question operator.
+
+Looking at operator ` [54`14 = 755, 93`99 = 9206]:
+
+Trying common operations reversed operands [54->45 14->41, 93->39 99->99] and reversed result [expected (45,41)->755, (39,99)->9206]:
+ addition
+ (45,41)->755: 45 + 41 = 86 rev-> 68 mismatch
+ multiplication
+ (39,99)->9206: (30 + 9) * 99 = 30 * 99 + 9 * 99 = 2970 + 891 = 3861 rev-> 1683 mismatch
+ concatenation
+ (45,41)->755: 45 || 41 = 4541 rev-> 1454 mismatch
+ reverse concatenation
+ (39,99)->9206: 99 || 39 = 9939 rev-> 9399 mismatch
+
+Trying common operations on identity [54 14, 93 99] [expected (54,14)->755, (93,99)->9206]:
+ addition
+ (54,14)->755: 54 + 14 = 68 mismatch
+ multiplication
+ (93,99)->9206: (90 + 3) * 99 = 90 * 99 + 3 * 99 = 8910 + 297 = 9207 mismatch
+ concatenation
+ (54,14)->755: 54 || 14 = 5414 mismatch
+ reverse concatenation
+ (93,99)->9206: 99 || 93 = 9993 mismatch
+
+Trying difference operations reversed operands [54->45 14->41, 93->39 99->99] and reversed result [expected (45,41)->755, (39,99)->9206]:
+ subtraction (a-b)
+ (45,41)->755: 45 - 41 = 4 rev-> 4 mismatch
+ absolute difference
+ (39,99)->9206: |39 - 99| = 60 rev-> 06 mismatch
+ max mod min
+ (45,41)->755: max(45,41) mod min(45,41) = 45 mod 41 = 4 rev-> 4 mismatch
+ negated absolute difference
+ (39,99)->9206: -|39 - 99| = -60 rev-> -06 mismatch
+ reverse subtraction (b-a)
+ (45,41)->755: 41 - 45 = -4 rev-> -4 mismatch
+ modulo (a mod b)
+ (39,99)->9206: 39 mod 99 = 39 rev-> 93 mismatch
+
+Trying difference operations on identity [54 14, 93 99] [expected (54,14)->755, (93,99)->9206]:
+ subtraction (a-b)
+ (54,14)->755: 54 - 14 = 40 mismatch
+ absolute difference
+ (93,99)->9206: |93 - 99| = 6 mismatch
+ max mod min
+ (54,14)->755: max(54,14) mod min(54,14) = 54 mod 14 = 12 mismatch
+ negated absolute difference
+ (93,99)->9206: -|93 - 99| = -6 mismatch
+ reverse subtraction (b-a)
+ (54,14)->755: 14 - 54 = -40 mismatch
+ modulo (a mod b)
+ (93,99)->9206: 93 mod 99 = 93 mismatch
+
+Trying rare operations reversed operands [54->45 14->41, 93->39 99->99] and reversed result [expected (45,41)->755, (39,99)->9206]:
+ multiply+1
+ (45,41)->755: (40 + 5) * 41 + 1 = 40 * 41 + 5 * 41 + 1 = 1640 + 205 + 1 = 1845 + 1 = 1846 rev-> 6481 mismatch
+ multiply-1
+ (39,99)->9206: (30 + 9) * 99 - 1 = 30 * 99 + 9 * 99 - 1 = 2970 + 891 - 1 = 3861 - 1 = 3860 rev-> 0683 mismatch
+ add+1
+ (45,41)->755: 45 + 41 + 1 = 87 rev-> 78 mismatch
+ add-1
+ (39,99)->9206: 39 + 99 - 1 = 137 rev-> 731 mismatch
+ sub+1
+ (45,41)->755: 45 - 41 + 1 = 5 rev-> 5 mismatch
+ sub-1
+ (39,99)->9206: 39 - 99 - 1 = -61 rev-> -16 mismatch
+ integer division (a/b)
+ (45,41)->755: 45 / 41 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (39,99)->9206: 99 / 39 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (45,41)->755: 41 mod 45 = 41 rev-> 14 mismatch
+ digit absolute diff
+ (39,99)->9206: |3-9| || |9-9| = 60 rev-> 06 mismatch
+ digit add mod10
+ (45,41)->755: (4+4)%10 || (5+1)%10 = 86 rev-> 68 mismatch
+ digit sub mod10
+ (39,99)->9206: (3-9)%10 || (9-9)%10 = 40 rev-> 04 mismatch
+ cross multiply
+ (45,41)->755: 4*4 + 5*1 = 16 + 5 = 21 rev-> 12 mismatch
+ cross multiply rev
+ (39,99)->9206: 3*9 + 9*9 = 27 + 81 = 108 rev-> 801 mismatch
+ digit multiply
+ (45,41)->755: 4*4 || 5*1 = 16 || 5 = 165 rev-> 561 mismatch
+ digit multiply rev
+ (39,99)->9206: 3*9 || 9*9 = 27 || 81 = 2781 rev-> 1872 mismatch
+ digit sum diff
+ (45,41)->755: (4+5) - (4+1) = 4 rev-> 4 mismatch
+ digit sum sum
+ (39,99)->9206: (3+9) + (9+9) = 30 rev-> 03 mismatch
+ digit product diff
+ (45,41)->755: 4*5 - 4*1 = 20 - 4 = 16 rev-> 61 mismatch
+ digit product sum
+ (39,99)->9206: 3*9 + 9*9 = 27 + 81 = 108 rev-> 801 mismatch
+ determinant
+ (45,41)->755: 4*1 - 5*4 = 4 - 20 = -16 rev-> -61 mismatch
+ abs determinant
+ (39,99)->9206: |3*9 - 9*9| = |27 - 81| = 54 rev-> 45 mismatch
+
+Trying rare operations on identity [54 14, 93 99] [expected (54,14)->755, (93,99)->9206]:
+ multiply+1
+ (54,14)->755: (50 + 4) * 14 + 1 = 50 * 14 + 4 * 14 + 1 = 700 + 56 + 1 = 756 + 1 = 757 mismatch
+ multiply-1
+ (93,99)->9206: (90 + 3) * 99 - 1 = 90 * 99 + 3 * 99 - 1 = 8910 + 297 - 1 = 9207 - 1 = 9206 match
+ (54,14)->755: (50 + 4) * 14 - 1 = 50 * 14 + 4 * 14 - 1 = 700 + 56 - 1 = 756 - 1 = 755 match
+ correct, actions: multiply-1
+ add+1
+ (54,14)->755: 54 + 14 + 1 = 69 mismatch
+ add-1
+ (93,99)->9206: 93 + 99 - 1 = 191 mismatch
+ sub+1
+ (54,14)->755: 54 - 14 + 1 = 41 mismatch
+ sub-1
+ (93,99)->9206: 93 - 99 - 1 = -7 mismatch
+ integer division (a/b)
+ (54,14)->755: 54 / 14 = 3 mismatch
+ reverse division (b/a)
+ (93,99)->9206: 99 / 93 = 1 mismatch
+ reverse modulo (b mod a)
+ (54,14)->755: 14 mod 54 = 14 mismatch
+ digit absolute diff
+ (93,99)->9206: |9-9| || |3-9| = 06 mismatch
+ digit add mod10
+ (54,14)->755: (5+1)%10 || (4+4)%10 = 68 mismatch
+ digit sub mod10
+ (93,99)->9206: (9-9)%10 || (3-9)%10 = 04 mismatch
+ cross multiply
+ (54,14)->755: 5*1 + 4*4 = 5 + 16 = 21 mismatch
+ cross multiply rev
+ (93,99)->9206: 9*9 + 3*9 = 81 + 27 = 108 mismatch
+ digit multiply
+ (54,14)->755: 5*1 || 4*4 = 5 || 16 = 516 mismatch
+ digit multiply rev
+ (93,99)->9206: 9*9 || 3*9 = 81 || 27 = 8127 mismatch
+ digit sum diff
+ (54,14)->755: (5+4) - (1+4) = 4 mismatch
+ digit sum sum
+ (93,99)->9206: (9+3) + (9+9) = 30 mismatch
+ digit product diff
+ (54,14)->755: 5*4 - 1*4 = 20 - 4 = 16 mismatch
+ digit product sum
+ (93,99)->9206: 9*3 + 9*9 = 27 + 81 = 108 mismatch
+ determinant
+ (54,14)->755: 5*4 - 4*1 = 20 - 4 = 16 mismatch
+ abs determinant
+ (93,99)->9206: |9*9 - 3*9| = |81 - 27| = 54 mismatch
+
+Applying to 84?52:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ identity
+ addition (84,52): 84 + 52 = 136
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{136}

@@ -1,0 +1,554 @@
+Output bit columns with bitsum
+0 1010000000 2
+1 1100000001 3
+2 0001010000 2
+3 1011001010 5
+4 0000000000 a
+5 0000000000 a
+6 0000000000 a
+7 0000000000 a
+
+Inverted
+0 0101111111 8
+1 0011111110 7
+2 1110101111 8
+3 0100110101 5
+4 1111111111 a
+5 1111111111 a
+6 1111111111 a
+7 1111111111 a
+
+Matching
+0 1010000000 2 match 0
+1 1100000001 3 match 1
+2 0001010000 2 match 2
+3 1011001010 5 match 3
+4 0000000000 a match 4 5 6 7
+5 0000000000 a match 4 5 6 7
+6 0000000000 a match 4 5 6 7
+7 0000000000 a match 4 5 6 7
+
+Inverted matching
+0 0101111111 8 match 0n
+1 0011111110 7 match 1n
+2 1110101111 8 match 2n
+3 0100110101 5 match 3n
+4 1111111111 a match 4n 5n 6n 7n
+5 1111111111 a match 4n 5n 6n 7n
+6 1111111111 a match 4n 5n 6n 7n
+7 1111111111 a match 4n 5n 6n 7n
+
+I
+0 0100010001 3
+1 1110010000 4
+2 1100110111 7
+3 1001010010 4
+4 1011101010 6
+5 1110000001 4
+6 0001011000 3
+7 1011011010 6
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+Best Left: none
+Best Right: none
+
+---
+
+C
+C 1111111111 a match 4n 5n 6n 7n R1
+
+Left
+L1-absence loss
+
+Right
+R1 C-7n C-6n C-5n C-4n C-absence win
+R2-absence loss
+
+Best Left: none
+Best Right: C C-7n C-6n C-5n C-4n
+
+---
+
+AND
+01 0100010000 2
+12 1100010000 3
+23 1000010010 3
+34 1001000010 3
+45 1010000000 2 match 0 L1
+56 0000000000 a match 4 5 6 7 R1
+67 0001011000 3
+70 0000010000 1
+
+Left
+L1 45-0 56-absence win
+L2-absence loss
+
+Right
+R1 56-7 45-absence win
+R2-absence loss
+
+-
+
+02 0100010001 3
+13 1000010000 2
+24 1000100010 3
+35 1000000000 1
+46 0001001000 2
+57 1010000000 2 match 0 L1
+60 0000010000 1
+71 1010010000 3
+
+Left
+L1 57-0 60-absence late
+L2-absence loss
+
+Right
+R1-absence loss
+
+-
+
+03 0000010000 1
+14 1010000000 2 match 0 L1
+25 1100000001 3 match 1
+36 0001010000 2 match 2
+47 1011001010 5 match 3
+50 0100000001 2
+61 0000010000 1
+72 1000010010 3
+
+Left
+L1 14-0 25-1 36-2 47-3 50-absence win
+L2-absence loss
+
+Right
+R1-absence loss
+
+-
+
+04 0000000000 a match 4 5 6 7 R1
+15 1110000000 3
+26 0000010000 1
+37 1001010010 4
+40 0000000000 a match 4 5 6 7 R2
+51 1110000000 3
+62 0000010000 1
+73 1001010010 4
+
+Left
+L1-absence loss
+
+Right
+R1 04-7 73-absence late
+R2 40-7 37-absence late
+R3-absence loss
+
+Best Left: AND 14-0 25-1 36-2 47-3
+Best Right: AND 56-7
+
+---
+
+OR
+01 1110010001 5
+12 1110110111 8
+23 1101110111 8
+34 1011111010 7
+45 1111101011 8
+56 1111011001 7
+67 1011011010 6
+70 1111011011 8
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+-
+
+02 1100110111 7
+13 1111010010 6
+24 1111111111 a match 4n 5n 6n 7n R1
+35 1111010011 7
+46 1011111010 7
+57 1111011011 8
+60 0101011001 5
+71 1111011010 7
+
+Left
+L1-absence loss
+
+Right
+R1 24-7n 13-absence win
+R2-absence loss
+
+-
+
+03 1101010011 6
+14 1111111010 8
+25 1110110111 8
+36 1001011010 5
+47 1011111010 7
+50 1110010001 5
+61 1111011000 6
+72 1111111111 a match 4n 5n 6n 7n R1
+
+Left
+L1-absence loss
+
+Right
+R1 72-7n 61-absence late
+R2-absence loss
+
+-
+
+04 1111111011 9
+15 1110010001 5
+26 1101111111 9
+37 1011011010 6
+40 1111111011 9
+51 1110010001 5
+62 1101111111 9
+73 1011011010 6
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+Best Left: none
+Best Right: OR 24-7n
+
+---
+
+XOR
+01 1010000001 3
+12 0010100111 5
+23 0101100101 5
+34 0010111000 4
+45 0101101011 6
+56 1111011001 7
+67 1010000010 3
+70 1111001011 7
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+-
+
+02 1000100110 4
+13 0111000010 4
+24 0111011101 7
+35 0111010011 6
+46 1010110010 5
+57 0101011011 6
+60 0101001001 4
+71 0101001010 4
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+-
+
+03 1101000011 5
+14 0101111010 6
+25 0010110110 5
+36 1000001010 3
+47 0000110000 2
+50 1010010000 3
+61 1111001000 5
+72 0111101101 7
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+-
+
+04 1111111011 9
+15 0000010001 2
+26 1101101111 8
+37 0010001000 2
+40 1111111011 9
+51 0000010001 2
+62 1101101111 8
+73 0010001000 2
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+Best Left: none
+Best Right: none
+
+---
+
+AND-NOT
+01 0000000001 1
+12 0010000000 1
+23 0100100101 4
+34 0000010000 1
+45 0001101010 4
+56 1110000001 4
+67 0000000000 a match 4 5 6 7 R1
+70 1011001010 5 match 3
+
+Left
+L1-absence loss
+
+Right
+R1 67-7 56-absence win
+R2-absence loss
+
+-
+
+02 0000000000 a match 4 5 6 7 R1
+13 0110000000 2
+24 0100010101 4
+35 0001010010 3
+46 1010100010 4
+57 0100000001 2
+60 0001001000 2
+71 0001001010 3
+
+Left
+L1-absence loss
+
+Right
+R1 02-7 71-absence late
+R2-absence loss
+
+-
+
+03 0100000001 2
+14 0100010000 2
+25 0000110110 4
+36 1000000010 2
+47 0000100000 1
+50 1010000000 2 match 0 L1
+61 0001001000 2
+72 0011001000 3
+
+Left
+L1 50-0 61-absence win
+L2-absence loss
+
+Right
+R1-absence loss
+
+-
+
+04 0100010001 3
+15 0000010000 1
+26 1100100111 6
+37 0000000000 a match 4 5 6 7 R1
+40 1011101010 6
+51 0000000001 1
+62 0001001000 2
+73 0010001000 2
+
+Left
+L1-absence loss
+
+Right
+R1 37-7 26-absence late
+R2-absence loss
+
+Best Left: AND-NOT 50-0
+Best Right: AND-NOT 67-7
+
+---
+
+OR-NOT
+01 0101111111 8 match 0n L1
+12 1111011000 6
+23 1110111111 9
+34 1101010111 7
+45 1011111110 8
+56 1110100111 7
+67 0101111101 7
+70 1011111110 8
+
+Left
+L1 01-0n 12-absence win
+L2-absence loss
+
+Right
+R1-absence loss
+
+-
+
+02 0111011001 6
+13 1110111101 8
+24 1100110111 7
+35 1001111110 7
+46 1111101111 9
+57 1110100101 6
+60 1011111110 8
+71 1011111111 9
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+-
+
+03 0110111101 7
+14 1110010101 6
+25 1101111111 9
+36 1111110111 9
+47 1111101111 9
+50 1111101111 9
+61 0001111111 7
+72 1011011010 6
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+-
+
+04 0100010101 4
+15 1111111110 9
+26 1110110111 8
+37 1101110111 8
+40 1011101110 7
+51 1111101111 9
+62 0011011000 4
+73 1111111111 a match 4n 5n 6n 7n R1
+
+Left
+L1-absence loss
+
+Right
+R1 73-7n 62-absence win
+R2-absence loss
+
+Best Left: OR-NOT 01-0n
+Best Right: OR-NOT 73-7n
+
+Selecting
+
+Lefts
+I none
+C none
+AND 14-0 25-1 36-2 47-3 length 4
+OR none
+XOR none
+AND-NOT 50-0 length 1
+OR-NOT 01-0n length 1
+
+Rights
+I none
+C C-7n C-6n C-5n C-4n length 4
+AND 56-7 length 1
+OR 24-7n length 1
+XOR none
+AND-NOT 67-7 length 1
+OR-NOT 73-7n length 1
+
+Left longest: 4
+Right longest: 4
+
+Left winner: I none, C none, AND win, OR none, XOR none, AND-NOT lost, OR-NOT lost
+Right winner: I none, C win, AND lost, OR lost, XOR none, AND-NOT lost, OR-NOT lost
+
+Longest Left: AND 14-0 25-1 36-2 47-3
+Longest Right: C C-7n C-6n C-5n C-4n
+
+4 + 4 = 8 = 8
+Not truncating
+
+Truncated left: AND 14-0 25-1 36-2 47-3
+Truncated right: C C-7n C-6n C-5n C-4n
+
+Tentative from right
+7 C 7n
+6 C 6n
+5 C 5n
+4 C 4n
+3 ?
+2 ?
+1 ?
+0 ?
+
+Tentative
+0 AND 14
+1 AND 25
+2 AND 36
+3 AND 47
+4 C 4n
+5 C 5n
+6 C 6n
+7 C 7n
+
+Preferred from left
+0 AND 14
+1 AND 25
+2 AND 36
+3 AND 47
+4 C 4n
+5 C 5n
+6 C 6n
+7 C 7n
+
+Preferred from right
+7 C 7n
+6 C 6n
+5 C 5n
+4 C 4n
+3 AND 47
+2 AND 36
+1 AND 25
+0 AND 14
+
+Matched
+0 AND 14
+1 AND 25
+2 AND 36
+3 AND 47
+4 C 4n
+5 C 5n
+6 C 6n
+7 C 7n
+
+Applying to 10101001
+Input
+I 0 = 1
+I 1 = 0
+I 2 = 1
+I 3 = 0
+I 4 = 1
+I 5 = 0
+I 6 = 0
+I 7 = 1
+Output
+0 AND 14 = AND(I 1,I 4) = AND(0,1) = 0
+1 AND 25 = AND(I 2,I 5) = AND(1,0) = 0
+2 AND 36 = AND(I 3,I 6) = AND(0,0) = 0
+3 AND 47 = AND(I 4,I 7) = AND(1,1) = 1
+4 C 4n = NOT(1) = 0
+5 C 5n = NOT(1) = 0
+6 C 6n = NOT(1) = 0
+7 C 7n = NOT(1) = 0
+
+\boxed{00010000}

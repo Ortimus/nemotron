@@ -1,0 +1,185 @@
+88*39 = 8839
+64<16 = 80
+26#12 = #14
+21*72 = 2172
+
+The inputs are 88, 39, 64, 16, 26, 12, 21, 72
+
+The outputs are 8839, 80, #14, 2172
+Some example outputs have the operator symbol as prefix #.
+We now consider the outputs to be 8839, 80, -14, 2172
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+88*39 -> *
+64<16 -> <
+26#12 -> #
+21*72 -> *
+
+The operators
+*
+<
+#
+
+Looking at the question
+77#25 -> #
+The question operator is found in the examples.
+
+Looking at operator # [26#12 = -14]:
+
+Trying common operations
+ reversed operands [26->62 12->21] and reversed result [expected (62,21)->-14]
+ addition
+ (62,21)->-14: 62 + 21 = 83 rev-> 38 mismatch
+ multiplication
+ (62,21)->-14: (60 + 2) * 21 = 60 * 21 + 2 * 21 = 1260 + 42 = 1302 rev-> 2031 mismatch
+ concatenation
+ (62,21)->-14: 62 || 21 = 6221 rev-> 1226 mismatch
+ reverse concatenation
+ (62,21)->-14: 21 || 62 = 2162 rev-> 2612 mismatch
+
+ identity [26 12] [expected (26,12)->-14]
+ addition
+ (26,12)->-14: 26 + 12 = 38 mismatch
+ multiplication
+ (26,12)->-14: (20 + 6) * 12 = 20 * 12 + 6 * 12 = 240 + 72 = 312 mismatch
+ concatenation
+ (26,12)->-14: 26 || 12 = 2612 mismatch
+ reverse concatenation
+ (26,12)->-14: 12 || 26 = 1226 mismatch
+
+Trying difference operations
+ reversed operands [26->62 12->21] and reversed result [expected (62,21)->-14]
+ subtraction (a-b)
+ (62,21)->-14: 62 - 21 = 41 rev-> 14 mismatch
+ absolute difference
+ (62,21)->-14: |62 - 21| = 41 rev-> 14 mismatch
+ max mod min
+ (62,21)->-14: max(62,21) mod min(62,21) = 62 mod 21 = 20 rev-> 02 mismatch
+ negated absolute difference
+ (62,21)->-14: -|62 - 21| = -41 rev-> -14 match
+ correct, actions: reversed operands, reversed result, negated absolute difference
+ reverse subtraction (b-a)
+ (62,21)->-14: 21 - 62 = -41 rev-> -14 match
+ correct, but skipping
+ modulo (a mod b)
+ (62,21)->-14: 62 mod 21 = 20 rev-> 02 mismatch
+
+ identity [26 12] [expected (26,12)->-14]
+ subtraction (a-b)
+ (26,12)->-14: 26 - 12 = 14 mismatch
+ absolute difference
+ (26,12)->-14: |26 - 12| = 14 mismatch
+ max mod min
+ (26,12)->-14: max(26,12) mod min(26,12) = 26 mod 12 = 2 mismatch
+ negated absolute difference
+ (26,12)->-14: -|26 - 12| = -14 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (26,12)->-14: 12 - 26 = -14 match
+ correct, but skipping
+ modulo (a mod b)
+ (26,12)->-14: 26 mod 12 = 2 mismatch
+
+Trying rare operations
+ reversed operands [26->62 12->21] and reversed result [expected (62,21)->-14]
+ multiply+1
+ (62,21)->-14: (60 + 2) * 21 + 1 = 60 * 21 + 2 * 21 + 1 = 1260 + 42 + 1 = 1302 + 1 = 1303 rev-> 3031 mismatch
+ multiply-1
+ (62,21)->-14: (60 + 2) * 21 - 1 = 60 * 21 + 2 * 21 - 1 = 1260 + 42 - 1 = 1302 - 1 = 1301 rev-> 1031 mismatch
+ add+1
+ (62,21)->-14: 62 + 21 + 1 = 84 rev-> 48 mismatch
+ add-1
+ (62,21)->-14: 62 + 21 - 1 = 82 rev-> 28 mismatch
+ sub+1
+ (62,21)->-14: 62 - 21 + 1 = 42 rev-> 24 mismatch
+ sub-1
+ (62,21)->-14: 62 - 21 - 1 = 40 rev-> 04 mismatch
+ integer division (a/b)
+ (62,21)->-14: 62 / 21 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (62,21)->-14: 21 / 62 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (62,21)->-14: 21 mod 62 = 21 rev-> 12 mismatch
+ digit absolute diff
+ (62,21)->-14: |6-2| || |2-1| = 41 rev-> 14 mismatch
+ digit add mod10
+ (62,21)->-14: (6+2)%10 || (2+1)%10 = 83 rev-> 38 mismatch
+ digit sub mod10
+ (62,21)->-14: (6-2)%10 || (2-1)%10 = 41 rev-> 14 mismatch
+ cross multiply
+ (62,21)->-14: 6*2 + 2*1 = 12 + 2 = 14 rev-> 41 mismatch
+ cross multiply rev
+ (62,21)->-14: 6*1 + 2*2 = 6 + 4 = 10 rev-> 01 mismatch
+ digit multiply
+ (62,21)->-14: 6*2 || 2*1 = 12 || 2 = 122 rev-> 221 mismatch
+ digit multiply rev
+ (62,21)->-14: 6*1 || 2*2 = 6 || 4 = 64 rev-> 46 mismatch
+ digit sum diff
+ (62,21)->-14: (6+2) - (2+1) = 5 rev-> 5 mismatch
+ digit sum sum
+ (62,21)->-14: (6+2) + (2+1) = 11 rev-> 11 mismatch
+ digit product diff
+ (62,21)->-14: 6*2 - 2*1 = 12 - 2 = 10 rev-> 01 mismatch
+ digit product sum
+ (62,21)->-14: 6*2 + 2*1 = 12 + 2 = 14 rev-> 41 mismatch
+ determinant
+ (62,21)->-14: 6*1 - 2*2 = 6 - 4 = 2 rev-> 2 mismatch
+ abs determinant
+ (62,21)->-14: |6*1 - 2*2| = |6 - 4| = 2 rev-> 2 mismatch
+
+ identity [26 12] [expected (26,12)->-14]
+ multiply+1
+ (26,12)->-14: (20 + 6) * 12 + 1 = 20 * 12 + 6 * 12 + 1 = 240 + 72 + 1 = 312 + 1 = 313 mismatch
+ multiply-1
+ (26,12)->-14: (20 + 6) * 12 - 1 = 20 * 12 + 6 * 12 - 1 = 240 + 72 - 1 = 312 - 1 = 311 mismatch
+ add+1
+ (26,12)->-14: 26 + 12 + 1 = 39 mismatch
+ add-1
+ (26,12)->-14: 26 + 12 - 1 = 37 mismatch
+ sub+1
+ (26,12)->-14: 26 - 12 + 1 = 15 mismatch
+ sub-1
+ (26,12)->-14: 26 - 12 - 1 = 13 mismatch
+ integer division (a/b)
+ (26,12)->-14: 26 / 12 = 2 mismatch
+ reverse division (b/a)
+ (26,12)->-14: 12 / 26 = 0 mismatch
+ reverse modulo (b mod a)
+ (26,12)->-14: 12 mod 26 = 12 mismatch
+ digit absolute diff
+ (26,12)->-14: |2-1| || |6-2| = 14 mismatch
+ digit add mod10
+ (26,12)->-14: (2+1)%10 || (6+2)%10 = 38 mismatch
+ digit sub mod10
+ (26,12)->-14: (2-1)%10 || (6-2)%10 = 14 mismatch
+ cross multiply
+ (26,12)->-14: 2*1 + 6*2 = 2 + 12 = 14 mismatch
+ cross multiply rev
+ (26,12)->-14: 2*2 + 6*1 = 4 + 6 = 10 mismatch
+ digit multiply
+ (26,12)->-14: 2*1 || 6*2 = 2 || 12 = 212 mismatch
+ digit multiply rev
+ (26,12)->-14: 2*2 || 6*1 = 4 || 6 = 46 mismatch
+ digit sum diff
+ (26,12)->-14: (2+6) - (1+2) = 5 mismatch
+ digit sum sum
+ (26,12)->-14: (2+6) + (1+2) = 11 mismatch
+ digit product diff
+ (26,12)->-14: 2*6 - 1*2 = 12 - 2 = 10 mismatch
+ digit product sum
+ (26,12)->-14: 2*6 + 1*2 = 12 + 2 = 14 mismatch
+ determinant
+ (26,12)->-14: 2*2 - 6*1 = 4 - 6 = -2 mismatch
+ abs determinant
+ (26,12)->-14: |2*2 - 6*1| = |4 - 6| = 2 mismatch
+
+correct, actions: reversed operands, reversed result, negated absolute difference
+
+Applying to 77#25:
+ We recall that the question operator is found in the examples.
+ reversed operands [77->77, 25->52] and reversed result
+ negated absolute difference
+ (77,52): -|77 - 52| = -25 rev-> -52
+ Result is negative - we add back the operator prefix #
+ -52 -> \boxed{#52}

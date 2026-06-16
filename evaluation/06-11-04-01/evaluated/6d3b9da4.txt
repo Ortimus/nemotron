@@ -1,0 +1,184 @@
+58[99 = 4148
+26'22 = 04'
+74<53 = 28
+02'83 = 81
+93'61 = 32'
+
+The inputs are 58, 99, 26, 22, 74, 53, 02, 83, 93, 61
+
+The outputs are 4148, 04', 28, 81, 32'
+Some example outputs have the operator symbol as suffix '.
+We now consider the outputs to be 4148, -04, 28, 81, 32
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+58[99 -> [
+26'22 -> '
+74<53 -> <
+02'83 -> '
+93'61 -> '
+
+The operators
+[
+'
+<
+
+Looking at the question
+67<32 -> <
+The question operator is found in the examples.
+
+Looking at operator < [74<53 = 28]:
+
+Trying common operations
+ reversed operands [74->47 53->35] and reversed result [expected (47,35)->28]
+ addition
+ (47,35)->28: 47 + 35 = 82 rev-> 28 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (47,35)->28: (40 + 7) * 35 = 40 * 35 + 7 * 35 = 1400 + 245 = 1645 rev-> 5461 mismatch
+ concatenation
+ (47,35)->28: 47 || 35 = 4735 rev-> 5374 mismatch
+ reverse concatenation
+ (47,35)->28: 35 || 47 = 3547 rev-> 7453 mismatch
+
+ identity [74 53] [expected (74,53)->28]
+ addition
+ (74,53)->28: 74 + 53 = 127 mismatch
+ multiplication
+ (74,53)->28: (70 + 4) * 53 = 70 * 53 + 4 * 53 = 3710 + 212 = 3922 mismatch
+ concatenation
+ (74,53)->28: 74 || 53 = 7453 mismatch
+ reverse concatenation
+ (74,53)->28: 53 || 74 = 5374 mismatch
+
+Trying difference operations
+ reversed operands [74->47 53->35] and reversed result [expected (47,35)->28]
+ subtraction (a-b)
+ (47,35)->28: 47 - 35 = 12 rev-> 21 mismatch
+ absolute difference
+ (47,35)->28: |47 - 35| = 12 rev-> 21 mismatch
+ max mod min
+ (47,35)->28: max(47,35) mod min(47,35) = 47 mod 35 = 12 rev-> 21 mismatch
+ negated absolute difference
+ (47,35)->28: -|47 - 35| = -12 rev-> -21 mismatch
+ reverse subtraction (b-a)
+ (47,35)->28: 35 - 47 = -12 rev-> -21 mismatch
+ modulo (a mod b)
+ (47,35)->28: 47 mod 35 = 12 rev-> 21 mismatch
+
+ identity [74 53] [expected (74,53)->28]
+ subtraction (a-b)
+ (74,53)->28: 74 - 53 = 21 mismatch
+ absolute difference
+ (74,53)->28: |74 - 53| = 21 mismatch
+ max mod min
+ (74,53)->28: max(74,53) mod min(74,53) = 74 mod 53 = 21 mismatch
+ negated absolute difference
+ (74,53)->28: -|74 - 53| = -21 mismatch
+ reverse subtraction (b-a)
+ (74,53)->28: 53 - 74 = -21 mismatch
+ modulo (a mod b)
+ (74,53)->28: 74 mod 53 = 21 mismatch
+
+Trying rare operations
+ reversed operands [74->47 53->35] and reversed result [expected (47,35)->28]
+ multiply+1
+ (47,35)->28: (40 + 7) * 35 + 1 = 40 * 35 + 7 * 35 + 1 = 1400 + 245 + 1 = 1645 + 1 = 1646 rev-> 6461 mismatch
+ multiply-1
+ (47,35)->28: (40 + 7) * 35 - 1 = 40 * 35 + 7 * 35 - 1 = 1400 + 245 - 1 = 1645 - 1 = 1644 rev-> 4461 mismatch
+ add+1
+ (47,35)->28: 47 + 35 + 1 = 83 rev-> 38 mismatch
+ add-1
+ (47,35)->28: 47 + 35 - 1 = 81 rev-> 18 mismatch
+ sub+1
+ (47,35)->28: 47 - 35 + 1 = 13 rev-> 31 mismatch
+ sub-1
+ (47,35)->28: 47 - 35 - 1 = 11 rev-> 11 mismatch
+ integer division (a/b)
+ (47,35)->28: 47 / 35 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (47,35)->28: 35 / 47 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (47,35)->28: 35 mod 47 = 35 rev-> 53 mismatch
+ digit absolute diff
+ (47,35)->28: |4-3| || |7-5| = 12 rev-> 21 mismatch
+ digit add mod10
+ (47,35)->28: (4+3)%10 || (7+5)%10 = 72 rev-> 27 mismatch
+ digit sub mod10
+ (47,35)->28: (4-3)%10 || (7-5)%10 = 12 rev-> 21 mismatch
+ cross multiply
+ (47,35)->28: 4*3 + 7*5 = 12 + 35 = 47 rev-> 74 mismatch
+ cross multiply rev
+ (47,35)->28: 4*5 + 7*3 = 20 + 21 = 41 rev-> 14 mismatch
+ digit multiply
+ (47,35)->28: 4*3 || 7*5 = 12 || 35 = 1235 rev-> 5321 mismatch
+ digit multiply rev
+ (47,35)->28: 4*5 || 7*3 = 20 || 21 = 2021 rev-> 1202 mismatch
+ digit sum diff
+ (47,35)->28: (4+7) - (3+5) = 3 rev-> 3 mismatch
+ digit sum sum
+ (47,35)->28: (4+7) + (3+5) = 19 rev-> 91 mismatch
+ digit product diff
+ (47,35)->28: 4*7 - 3*5 = 28 - 15 = 13 rev-> 31 mismatch
+ digit product sum
+ (47,35)->28: 4*7 + 3*5 = 28 + 15 = 43 rev-> 34 mismatch
+ determinant
+ (47,35)->28: 4*5 - 7*3 = 20 - 21 = -1 rev-> -1 mismatch
+ abs determinant
+ (47,35)->28: |4*5 - 7*3| = |20 - 21| = 1 rev-> 1 mismatch
+
+ identity [74 53] [expected (74,53)->28]
+ multiply+1
+ (74,53)->28: (70 + 4) * 53 + 1 = 70 * 53 + 4 * 53 + 1 = 3710 + 212 + 1 = 3922 + 1 = 3923 mismatch
+ multiply-1
+ (74,53)->28: (70 + 4) * 53 - 1 = 70 * 53 + 4 * 53 - 1 = 3710 + 212 - 1 = 3922 - 1 = 3921 mismatch
+ add+1
+ (74,53)->28: 74 + 53 + 1 = 128 mismatch
+ add-1
+ (74,53)->28: 74 + 53 - 1 = 126 mismatch
+ sub+1
+ (74,53)->28: 74 - 53 + 1 = 22 mismatch
+ sub-1
+ (74,53)->28: 74 - 53 - 1 = 20 mismatch
+ integer division (a/b)
+ (74,53)->28: 74 / 53 = 1 mismatch
+ reverse division (b/a)
+ (74,53)->28: 53 / 74 = 0 mismatch
+ reverse modulo (b mod a)
+ (74,53)->28: 53 mod 74 = 53 mismatch
+ digit absolute diff
+ (74,53)->28: |7-5| || |4-3| = 21 mismatch
+ digit add mod10
+ (74,53)->28: (7+5)%10 || (4+3)%10 = 27 mismatch
+ digit sub mod10
+ (74,53)->28: (7-5)%10 || (4-3)%10 = 21 mismatch
+ cross multiply
+ (74,53)->28: 7*5 + 4*3 = 35 + 12 = 47 mismatch
+ cross multiply rev
+ (74,53)->28: 7*3 + 4*5 = 21 + 20 = 41 mismatch
+ digit multiply
+ (74,53)->28: 7*5 || 4*3 = 35 || 12 = 3512 mismatch
+ digit multiply rev
+ (74,53)->28: 7*3 || 4*5 = 21 || 20 = 2120 mismatch
+ digit sum diff
+ (74,53)->28: (7+4) - (5+3) = 3 mismatch
+ digit sum sum
+ (74,53)->28: (7+4) + (5+3) = 19 mismatch
+ digit product diff
+ (74,53)->28: 7*4 - 5*3 = 28 - 15 = 13 mismatch
+ digit product sum
+ (74,53)->28: 7*4 + 5*3 = 28 + 15 = 43 mismatch
+ determinant
+ (74,53)->28: 7*3 - 4*5 = 21 - 20 = 1 mismatch
+ abs determinant
+ (74,53)->28: |7*3 - 4*5| = |21 - 20| = 1 mismatch
+
+correct, actions: reversed operands, reversed result, addition
+
+Applying to 67<32:
+ We recall that the question operator is found in the examples.
+ reversed operands [67->76, 32->23] and reversed result
+ addition
+ (76,23): 76 + 23 = 99 rev-> 99
+ Result is non-negative
+ \boxed{99}

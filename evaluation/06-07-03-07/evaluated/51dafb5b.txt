@@ -1,0 +1,177 @@
+67*68 = 5356
+03-99 = 96
+11-81 = 7
+02*14 = 918
+14-35 = 21
+
+The inputs are 67, 68, 03, 99, 11, 81, 02, 14, 14, 35
+
+The outputs are 5356, 96, 7, 918, 21
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+67*68 -> *
+03-99 -> -
+11-81 -> -
+02*14 -> *
+14-35 -> -
+
+The operators
+*
+-
+
+Looking at the question
+86*53 -> *
+The question operator is found in the examples.
+
+Looking at operator * [67*68 = 5356, 02*14 = 918]:
+
+Trying common operations reversed operands [67->76 68->86, 02->20 14->41] and reversed result [expected (76,86)->5356, (20,41)->918]:
+ addition
+ (76,86)->5356: 76 + 86 = 162 rev-> 261 mismatch
+ multiplication
+ (20,41)->918: (20 + 0) * 41 = 20 * 41 + 0 * 41 = 820 + 0 = 820 rev-> 028 mismatch
+ concatenation
+ (76,86)->5356: 76 || 86 = 7686 rev-> 6867 mismatch
+ reverse concatenation
+ (20,41)->918: 41 || 20 = 4120 rev-> 0214 mismatch
+
+Trying common operations on identity [67 68, 02 14] [expected (67,68)->5356, (02,14)->918]:
+ addition
+ (67,68)->5356: 67 + 68 = 135 mismatch
+ multiplication
+ (02,14)->918: (0 + 2) * 14 = 0 * 14 + 2 * 14 = 0 + 28 = 28 mismatch
+ concatenation
+ (67,68)->5356: 67 || 68 = 6768 mismatch
+ reverse concatenation
+ (02,14)->918: 14 || 02 = 1402 mismatch
+
+Trying difference operations reversed operands [67->76 68->86, 02->20 14->41] and reversed result [expected (76,86)->5356, (20,41)->918]:
+ subtraction (a-b)
+ (76,86)->5356: 76 - 86 = -10 rev-> -01 mismatch
+ absolute difference
+ (20,41)->918: |20 - 41| = 21 rev-> 12 mismatch
+ max mod min
+ (76,86)->5356: max(76,86) mod min(76,86) = 86 mod 76 = 10 rev-> 01 mismatch
+ negated absolute difference
+ (20,41)->918: -|20 - 41| = -21 rev-> -12 mismatch
+ reverse subtraction (b-a)
+ (76,86)->5356: 86 - 76 = 10 rev-> 01 mismatch
+ modulo (a mod b)
+ (20,41)->918: 20 mod 41 = 20 rev-> 02 mismatch
+
+Trying difference operations on identity [67 68, 02 14] [expected (67,68)->5356, (02,14)->918]:
+ subtraction (a-b)
+ (67,68)->5356: 67 - 68 = -1 mismatch
+ absolute difference
+ (02,14)->918: |02 - 14| = 12 mismatch
+ max mod min
+ (67,68)->5356: max(67,68) mod min(67,68) = 68 mod 67 = 1 mismatch
+ negated absolute difference
+ (02,14)->918: -|02 - 14| = -12 mismatch
+ reverse subtraction (b-a)
+ (67,68)->5356: 68 - 67 = 1 mismatch
+ modulo (a mod b)
+ (02,14)->918: 02 mod 14 = 2 mismatch
+
+Trying rare operations reversed operands [67->76 68->86, 02->20 14->41] and reversed result [expected (76,86)->5356, (20,41)->918]:
+ multiply+1
+ (76,86)->5356: (70 + 6) * 86 + 1 = 70 * 86 + 6 * 86 + 1 = 6020 + 516 + 1 = 6536 + 1 = 6537 rev-> 7356 mismatch
+ multiply-1
+ (20,41)->918: (20 + 0) * 41 - 1 = 20 * 41 + 0 * 41 - 1 = 820 + 0 - 1 = 820 - 1 = 819 rev-> 918 match
+ (76,86)->5356: (70 + 6) * 86 - 1 = 70 * 86 + 6 * 86 - 1 = 6020 + 516 - 1 = 6536 - 1 = 6535 rev-> 5356 match
+ correct, actions: reversed operands, reversed result, multiply-1
+ add+1
+ (76,86)->5356: 76 + 86 + 1 = 163 rev-> 361 mismatch
+ add-1
+ (20,41)->918: 20 + 41 - 1 = 60 rev-> 06 mismatch
+ sub+1
+ (76,86)->5356: 76 - 86 + 1 = -9 rev-> -9 mismatch
+ sub-1
+ (20,41)->918: 20 - 41 - 1 = -22 rev-> -22 mismatch
+ integer division (a/b)
+ (76,86)->5356: 76 / 86 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (20,41)->918: 41 / 20 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (76,86)->5356: 86 mod 76 = 10 rev-> 01 mismatch
+ digit absolute diff
+ (20,41)->918: |2-4| || |0-1| = 21 rev-> 12 mismatch
+ digit add mod10
+ (76,86)->5356: (7+8)%10 || (6+6)%10 = 52 rev-> 25 mismatch
+ digit sub mod10
+ (20,41)->918: (2-4)%10 || (0-1)%10 = 89 rev-> 98 mismatch
+ cross multiply
+ (76,86)->5356: 7*8 + 6*6 = 56 + 36 = 92 rev-> 29 mismatch
+ cross multiply rev
+ (20,41)->918: 2*1 + 0*4 = 2 + 0 = 2 rev-> 2 mismatch
+ digit multiply
+ (76,86)->5356: 7*8 || 6*6 = 56 || 36 = 5636 rev-> 6365 mismatch
+ digit multiply rev
+ (20,41)->918: 2*1 || 0*4 = 2 || 0 = 20 rev-> 02 mismatch
+ digit sum diff
+ (76,86)->5356: (7+6) - (8+6) = -1 rev-> -1 mismatch
+ digit sum sum
+ (20,41)->918: (2+0) + (4+1) = 7 rev-> 7 mismatch
+ digit product diff
+ (76,86)->5356: 7*6 - 8*6 = 42 - 48 = -6 rev-> -6 mismatch
+ digit product sum
+ (20,41)->918: 2*0 + 4*1 = 0 + 4 = 4 rev-> 4 mismatch
+ determinant
+ (76,86)->5356: 7*6 - 6*8 = 42 - 48 = -6 rev-> -6 mismatch
+ abs determinant
+ (20,41)->918: |2*1 - 0*4| = |2 - 0| = 2 rev-> 2 mismatch
+
+Trying rare operations on identity [67 68, 02 14] [expected (67,68)->5356, (02,14)->918]:
+ multiply+1
+ (67,68)->5356: (60 + 7) * 68 + 1 = 60 * 68 + 7 * 68 + 1 = 4080 + 476 + 1 = 4556 + 1 = 4557 mismatch
+ multiply-1
+ (02,14)->918: (0 + 2) * 14 - 1 = 0 * 14 + 2 * 14 - 1 = 0 + 28 - 1 = 28 - 1 = 27 mismatch
+ add+1
+ (67,68)->5356: 67 + 68 + 1 = 136 mismatch
+ add-1
+ (02,14)->918: 02 + 14 - 1 = 15 mismatch
+ sub+1
+ (67,68)->5356: 67 - 68 + 1 = 0 mismatch
+ sub-1
+ (02,14)->918: 02 - 14 - 1 = -13 mismatch
+ integer division (a/b)
+ (67,68)->5356: 67 / 68 = 0 mismatch
+ reverse division (b/a)
+ (02,14)->918: 14 / 02 = 7 mismatch
+ reverse modulo (b mod a)
+ (67,68)->5356: 68 mod 67 = 1 mismatch
+ digit absolute diff
+ (02,14)->918: |0-1| || |2-4| = 12 mismatch
+ digit add mod10
+ (67,68)->5356: (6+6)%10 || (7+8)%10 = 25 mismatch
+ digit sub mod10
+ (02,14)->918: (0-1)%10 || (2-4)%10 = 98 mismatch
+ cross multiply
+ (67,68)->5356: 6*6 + 7*8 = 36 + 56 = 92 mismatch
+ cross multiply rev
+ (02,14)->918: 0*4 + 2*1 = 0 + 2 = 2 mismatch
+ digit multiply
+ (67,68)->5356: 6*6 || 7*8 = 36 || 56 = 3656 mismatch
+ digit multiply rev
+ (02,14)->918: 0*4 || 2*1 = 0 || 2 = 02 mismatch
+ digit sum diff
+ (67,68)->5356: (6+7) - (6+8) = -1 mismatch
+ digit sum sum
+ (02,14)->918: (0+2) + (1+4) = 7 mismatch
+ digit product diff
+ (67,68)->5356: 6*7 - 6*8 = 42 - 48 = -6 mismatch
+ digit product sum
+ (02,14)->918: 0*2 + 1*4 = 0 + 4 = 4 mismatch
+ determinant
+ (67,68)->5356: 6*8 - 7*6 = 48 - 42 = 6 mismatch
+ abs determinant
+ (02,14)->918: |0*4 - 2*1| = |0 - 2| = 2 mismatch
+
+Applying to 86*53:
+ We recall that the question operator is found in the examples.
+ reversed operands [86->68, 53->35] and reversed result
+ multiply-1 (68,35): (60 + 8) * 35 - 1 = 60 * 35 + 8 * 35 - 1 = 2100 + 280 - 1 = 2380 - 1 = 2379 rev-> 9732
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{9732}

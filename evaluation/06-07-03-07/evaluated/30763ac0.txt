@@ -1,0 +1,175 @@
+67-47 = 2
+89+97 = 671
+14-72 = 41
+18+79 = 771
+
+The inputs are 67, 47, 89, 97, 14, 72, 18, 79
+
+The outputs are 2, 671, 41, 771
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+67-47 -> -
+89+97 -> +
+14-72 -> -
+18+79 -> +
+
+The operators
+-
++
+
+Looking at the question
+79+44 -> +
+The question operator is found in the examples.
+
+Looking at operator + [89+97 = 671, 18+79 = 771]:
+
+Trying common operations reversed operands [89->98 97->79, 18->81 79->97] and reversed result [expected (98,79)->671, (81,97)->771]:
+ addition
+ (98,79)->671: 98 + 79 = 177 rev-> 771 mismatch
+ multiplication
+ (81,97)->771: (80 + 1) * 97 = 80 * 97 + 1 * 97 = 7760 + 97 = 7857 rev-> 7587 mismatch
+ concatenation
+ (98,79)->671: 98 || 79 = 9879 rev-> 9789 mismatch
+ reverse concatenation
+ (81,97)->771: 97 || 81 = 9781 rev-> 1879 mismatch
+
+Trying common operations on identity [89 97, 18 79] [expected (89,97)->671, (18,79)->771]:
+ addition
+ (89,97)->671: 89 + 97 = 186 mismatch
+ multiplication
+ (18,79)->771: (10 + 8) * 79 = 10 * 79 + 8 * 79 = 790 + 632 = 1422 mismatch
+ concatenation
+ (89,97)->671: 89 || 97 = 8997 mismatch
+ reverse concatenation
+ (18,79)->771: 79 || 18 = 7918 mismatch
+
+Trying difference operations reversed operands [89->98 97->79, 18->81 79->97] and reversed result [expected (98,79)->671, (81,97)->771]:
+ subtraction (a-b)
+ (98,79)->671: 98 - 79 = 19 rev-> 91 mismatch
+ absolute difference
+ (81,97)->771: |81 - 97| = 16 rev-> 61 mismatch
+ max mod min
+ (98,79)->671: max(98,79) mod min(98,79) = 98 mod 79 = 19 rev-> 91 mismatch
+ negated absolute difference
+ (81,97)->771: -|81 - 97| = -16 rev-> -61 mismatch
+ reverse subtraction (b-a)
+ (98,79)->671: 79 - 98 = -19 rev-> -91 mismatch
+ modulo (a mod b)
+ (81,97)->771: 81 mod 97 = 81 rev-> 18 mismatch
+
+Trying difference operations on identity [89 97, 18 79] [expected (89,97)->671, (18,79)->771]:
+ subtraction (a-b)
+ (89,97)->671: 89 - 97 = -8 mismatch
+ absolute difference
+ (18,79)->771: |18 - 79| = 61 mismatch
+ max mod min
+ (89,97)->671: max(89,97) mod min(89,97) = 97 mod 89 = 8 mismatch
+ negated absolute difference
+ (18,79)->771: -|18 - 79| = -61 mismatch
+ reverse subtraction (b-a)
+ (89,97)->671: 97 - 89 = 8 mismatch
+ modulo (a mod b)
+ (18,79)->771: 18 mod 79 = 18 mismatch
+
+Trying rare operations reversed operands [89->98 97->79, 18->81 79->97] and reversed result [expected (98,79)->671, (81,97)->771]:
+ multiply+1
+ (98,79)->671: (90 + 8) * 79 + 1 = 90 * 79 + 8 * 79 + 1 = 7110 + 632 + 1 = 7742 + 1 = 7743 rev-> 3477 mismatch
+ multiply-1
+ (81,97)->771: (80 + 1) * 97 - 1 = 80 * 97 + 1 * 97 - 1 = 7760 + 97 - 1 = 7857 - 1 = 7856 rev-> 6587 mismatch
+ add+1
+ (98,79)->671: 98 + 79 + 1 = 178 rev-> 871 mismatch
+ add-1
+ (81,97)->771: 81 + 97 - 1 = 177 rev-> 771 match
+ (98,79)->671: 98 + 79 - 1 = 176 rev-> 671 match
+ correct, actions: reversed operands, reversed result, add-1
+ sub+1
+ (98,79)->671: 98 - 79 + 1 = 20 rev-> 02 mismatch
+ sub-1
+ (81,97)->771: 81 - 97 - 1 = -17 rev-> -71 mismatch
+ integer division (a/b)
+ (98,79)->671: 98 / 79 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (81,97)->771: 97 / 81 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (98,79)->671: 79 mod 98 = 79 rev-> 97 mismatch
+ digit absolute diff
+ (81,97)->771: |8-9| || |1-7| = 16 rev-> 61 mismatch
+ digit add mod10
+ (98,79)->671: (9+7)%10 || (8+9)%10 = 67 rev-> 76 mismatch
+ digit sub mod10
+ (81,97)->771: (8-9)%10 || (1-7)%10 = 94 rev-> 49 mismatch
+ cross multiply
+ (98,79)->671: 9*7 + 8*9 = 63 + 72 = 135 rev-> 531 mismatch
+ cross multiply rev
+ (81,97)->771: 8*7 + 1*9 = 56 + 9 = 65 rev-> 56 mismatch
+ digit multiply
+ (98,79)->671: 9*7 || 8*9 = 63 || 72 = 6372 rev-> 2736 mismatch
+ digit multiply rev
+ (81,97)->771: 8*7 || 1*9 = 56 || 9 = 569 rev-> 965 mismatch
+ digit sum diff
+ (98,79)->671: (9+8) - (7+9) = 1 rev-> 1 mismatch
+ digit sum sum
+ (81,97)->771: (8+1) + (9+7) = 25 rev-> 52 mismatch
+ digit product diff
+ (98,79)->671: 9*8 - 7*9 = 72 - 63 = 9 rev-> 9 mismatch
+ digit product sum
+ (81,97)->771: 8*1 + 9*7 = 8 + 63 = 71 rev-> 17 mismatch
+ determinant
+ (98,79)->671: 9*9 - 8*7 = 81 - 56 = 25 rev-> 52 mismatch
+ abs determinant
+ (81,97)->771: |8*7 - 1*9| = |56 - 9| = 47 rev-> 74 mismatch
+
+Trying rare operations on identity [89 97, 18 79] [expected (89,97)->671, (18,79)->771]:
+ multiply+1
+ (89,97)->671: (80 + 9) * 97 + 1 = 80 * 97 + 9 * 97 + 1 = 7760 + 873 + 1 = 8633 + 1 = 8634 mismatch
+ multiply-1
+ (18,79)->771: (10 + 8) * 79 - 1 = 10 * 79 + 8 * 79 - 1 = 790 + 632 - 1 = 1422 - 1 = 1421 mismatch
+ add+1
+ (89,97)->671: 89 + 97 + 1 = 187 mismatch
+ add-1
+ (18,79)->771: 18 + 79 - 1 = 96 mismatch
+ sub+1
+ (89,97)->671: 89 - 97 + 1 = -7 mismatch
+ sub-1
+ (18,79)->771: 18 - 79 - 1 = -62 mismatch
+ integer division (a/b)
+ (89,97)->671: 89 / 97 = 0 mismatch
+ reverse division (b/a)
+ (18,79)->771: 79 / 18 = 4 mismatch
+ reverse modulo (b mod a)
+ (89,97)->671: 97 mod 89 = 8 mismatch
+ digit absolute diff
+ (18,79)->771: |1-7| || |8-9| = 61 mismatch
+ digit add mod10
+ (89,97)->671: (8+9)%10 || (9+7)%10 = 76 mismatch
+ digit sub mod10
+ (18,79)->771: (1-7)%10 || (8-9)%10 = 49 mismatch
+ cross multiply
+ (89,97)->671: 8*9 + 9*7 = 72 + 63 = 135 mismatch
+ cross multiply rev
+ (18,79)->771: 1*9 + 8*7 = 9 + 56 = 65 mismatch
+ digit multiply
+ (89,97)->671: 8*9 || 9*7 = 72 || 63 = 7263 mismatch
+ digit multiply rev
+ (18,79)->771: 1*9 || 8*7 = 9 || 56 = 956 mismatch
+ digit sum diff
+ (89,97)->671: (8+9) - (9+7) = 1 mismatch
+ digit sum sum
+ (18,79)->771: (1+8) + (7+9) = 25 mismatch
+ digit product diff
+ (89,97)->671: 8*9 - 9*7 = 72 - 63 = 9 mismatch
+ digit product sum
+ (18,79)->771: 1*8 + 7*9 = 8 + 63 = 71 mismatch
+ determinant
+ (89,97)->671: 8*7 - 9*9 = 56 - 81 = -25 mismatch
+ abs determinant
+ (18,79)->771: |1*9 - 8*7| = |9 - 56| = 47 mismatch
+
+Applying to 79+44:
+ We recall that the question operator is found in the examples.
+ reversed operands [79->97, 44->44] and reversed result
+ add-1 (97,44): 97 + 44 - 1 = 140 rev-> 041
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{041}

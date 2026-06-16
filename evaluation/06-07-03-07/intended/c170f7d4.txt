@@ -1,0 +1,190 @@
+82-22 = 6
+02-66 = -64
+26+67 = 6726
+83*15 = 1583
+33*06 = 0633
+
+The inputs are 82, 22, 02, 66, 26, 67, 83, 15, 33, 06
+
+The outputs are 6, -64, 6726, 1583, 0633
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 6, -64, 6726, 1583, 0633
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+82-22 -> -
+02-66 -> -
+26+67 -> +
+83*15 -> *
+33*06 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+01-16 -> -
+The question operator is found in the examples.
+
+Looking at operator - [82-22 = 6, 02-66 = -64]:
+
+Trying common operations
+ reversed operands [82->28 22->22, 02->20 66->66] and reversed result [expected (28,22)->6, (20,66)->-64]
+ addition
+ (28,22)->6: 28 + 22 = 50 rev-> 05 mismatch
+ multiplication
+ (20,66)->-64: (20 + 0) * 66 = 20 * 66 + 0 * 66 = 1320 + 0 = 1320 rev-> 0231 mismatch
+ concatenation
+ (28,22)->6: 28 || 22 = 2822 rev-> 2282 mismatch
+ reverse concatenation
+ (20,66)->-64: 66 || 20 = 6620 rev-> 0266 mismatch
+
+ identity [82 22, 02 66] [expected (82,22)->6, (02,66)->-64]
+ addition
+ (82,22)->6: 82 + 22 = 104 mismatch
+ multiplication
+ (02,66)->-64: (0 + 2) * 66 = 0 * 66 + 2 * 66 = 0 + 132 = 132 mismatch
+ concatenation
+ (82,22)->6: 82 || 22 = 8222 mismatch
+ reverse concatenation
+ (02,66)->-64: 66 || 02 = 6602 mismatch
+
+Trying difference operations
+ reversed operands [82->28 22->22, 02->20 66->66] and reversed result [expected (28,22)->6, (20,66)->-64]
+ subtraction (a-b)
+ (28,22)->6: 28 - 22 = 6 rev-> 6 match
+ (20,66)->-64: 20 - 66 = -46 rev-> -64 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (20,66)->-64: |20 - 66| = 46 rev-> 64 mismatch
+ max mod min
+ (28,22)->6: max(28,22) mod min(28,22) = 28 mod 22 = 6 rev-> 6 match
+ (20,66)->-64: max(20,66) mod min(20,66) = 66 mod 20 = 6 rev-> 6 mismatch
+ negated absolute difference
+ (20,66)->-64: -|20 - 66| = -46 rev-> -64 match
+ (28,22)->6: -|28 - 22| = -6 rev-> -6 mismatch
+ reverse subtraction (b-a)
+ (28,22)->6: 22 - 28 = -6 rev-> -6 mismatch
+ modulo (a mod b)
+ (20,66)->-64: 20 mod 66 = 20 rev-> 02 mismatch
+
+ identity [82 22, 02 66] [expected (82,22)->6, (02,66)->-64]
+ subtraction (a-b)
+ (82,22)->6: 82 - 22 = 60 mismatch
+ absolute difference
+ (02,66)->-64: |02 - 66| = 64 mismatch
+ max mod min
+ (82,22)->6: max(82,22) mod min(82,22) = 82 mod 22 = 16 mismatch
+ negated absolute difference
+ (02,66)->-64: -|02 - 66| = -64 match
+ (82,22)->6: -|82 - 22| = -60 mismatch
+ reverse subtraction (b-a)
+ (82,22)->6: 22 - 82 = -60 mismatch
+ modulo (a mod b)
+ (02,66)->-64: 02 mod 66 = 2 mismatch
+
+Trying rare operations
+ reversed operands [82->28 22->22, 02->20 66->66] and reversed result [expected (28,22)->6, (20,66)->-64]
+ multiply+1
+ (28,22)->6: (20 + 8) * 22 + 1 = 20 * 22 + 8 * 22 + 1 = 440 + 176 + 1 = 616 + 1 = 617 rev-> 716 mismatch
+ multiply-1
+ (20,66)->-64: (20 + 0) * 66 - 1 = 20 * 66 + 0 * 66 - 1 = 1320 + 0 - 1 = 1320 - 1 = 1319 rev-> 9131 mismatch
+ add+1
+ (28,22)->6: 28 + 22 + 1 = 51 rev-> 15 mismatch
+ add-1
+ (20,66)->-64: 20 + 66 - 1 = 85 rev-> 58 mismatch
+ sub+1
+ (28,22)->6: 28 - 22 + 1 = 7 rev-> 7 mismatch
+ sub-1
+ (20,66)->-64: 20 - 66 - 1 = -47 rev-> -74 mismatch
+ integer division (a/b)
+ (28,22)->6: 28 / 22 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (20,66)->-64: 66 / 20 = 3 rev-> 3 mismatch
+ reverse modulo (b mod a)
+ (28,22)->6: 22 mod 28 = 22 rev-> 22 mismatch
+ digit absolute diff
+ (20,66)->-64: |2-6| || |0-6| = 46 rev-> 64 mismatch
+ digit add mod10
+ (28,22)->6: (2+2)%10 || (8+2)%10 = 40 rev-> 04 mismatch
+ digit sub mod10
+ (20,66)->-64: (2-6)%10 || (0-6)%10 = 64 rev-> 46 mismatch
+ cross multiply
+ (28,22)->6: 2*2 + 8*2 = 4 + 16 = 20 rev-> 02 mismatch
+ cross multiply rev
+ (20,66)->-64: 2*6 + 0*6 = 12 + 0 = 12 rev-> 21 mismatch
+ digit multiply
+ (28,22)->6: 2*2 || 8*2 = 4 || 16 = 416 rev-> 614 mismatch
+ digit multiply rev
+ (20,66)->-64: 2*6 || 0*6 = 12 || 0 = 120 rev-> 021 mismatch
+ digit sum diff
+ (28,22)->6: (2+8) - (2+2) = 6 rev-> 6 match
+ (20,66)->-64: (2+0) - (6+6) = -10 rev-> -01 mismatch
+ digit sum sum
+ (20,66)->-64: (2+0) + (6+6) = 14 rev-> 41 mismatch
+ digit product diff
+ (28,22)->6: 2*8 - 2*2 = 16 - 4 = 12 rev-> 21 mismatch
+ digit product sum
+ (20,66)->-64: 2*0 + 6*6 = 0 + 36 = 36 rev-> 63 mismatch
+ determinant
+ (28,22)->6: 2*2 - 8*2 = 4 - 16 = -12 rev-> -21 mismatch
+ abs determinant
+ (20,66)->-64: |2*6 - 0*6| = |12 - 0| = 12 rev-> 21 mismatch
+
+ identity [82 22, 02 66] [expected (82,22)->6, (02,66)->-64]
+ multiply+1
+ (82,22)->6: (80 + 2) * 22 + 1 = 80 * 22 + 2 * 22 + 1 = 1760 + 44 + 1 = 1804 + 1 = 1805 mismatch
+ multiply-1
+ (02,66)->-64: (0 + 2) * 66 - 1 = 0 * 66 + 2 * 66 - 1 = 0 + 132 - 1 = 132 - 1 = 131 mismatch
+ add+1
+ (82,22)->6: 82 + 22 + 1 = 105 mismatch
+ add-1
+ (02,66)->-64: 02 + 66 - 1 = 67 mismatch
+ sub+1
+ (82,22)->6: 82 - 22 + 1 = 61 mismatch
+ sub-1
+ (02,66)->-64: 02 - 66 - 1 = -65 mismatch
+ integer division (a/b)
+ (82,22)->6: 82 / 22 = 3 mismatch
+ reverse division (b/a)
+ (02,66)->-64: 66 / 02 = 33 mismatch
+ reverse modulo (b mod a)
+ (82,22)->6: 22 mod 82 = 22 mismatch
+ digit absolute diff
+ (02,66)->-64: |0-6| || |2-6| = 64 mismatch
+ digit add mod10
+ (82,22)->6: (8+2)%10 || (2+2)%10 = 04 mismatch
+ digit sub mod10
+ (02,66)->-64: (0-6)%10 || (2-6)%10 = 46 mismatch
+ cross multiply
+ (82,22)->6: 8*2 + 2*2 = 16 + 4 = 20 mismatch
+ cross multiply rev
+ (02,66)->-64: 0*6 + 2*6 = 0 + 12 = 12 mismatch
+ digit multiply
+ (82,22)->6: 8*2 || 2*2 = 16 || 4 = 164 mismatch
+ digit multiply rev
+ (02,66)->-64: 0*6 || 2*6 = 0 || 12 = 012 mismatch
+ digit sum diff
+ (82,22)->6: (8+2) - (2+2) = 6 match
+ (02,66)->-64: (0+2) - (6+6) = -10 mismatch
+ digit sum sum
+ (02,66)->-64: (0+2) + (6+6) = 14 mismatch
+ digit product diff
+ (82,22)->6: 8*2 - 2*2 = 16 - 4 = 12 mismatch
+ digit product sum
+ (02,66)->-64: 0*2 + 6*6 = 0 + 36 = 36 mismatch
+ determinant
+ (82,22)->6: 8*2 - 2*2 = 16 - 4 = 12 mismatch
+ abs determinant
+ (02,66)->-64: |0*6 - 2*6| = |0 - 12| = 12 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 01-16:
+ We recall that the question operator is found in the examples.
+ reversed operands [01->10, 16->61] and reversed result
+ subtraction (a-b)
+ (10,61): 10 - 61 = -51 rev-> -15
+ Result is negative - we add back the operator prefix -
+ -15 -> \boxed{-15}

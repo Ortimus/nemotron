@@ -1,0 +1,186 @@
+89$90 = 8010
+88:77 = 11
+10|87 = 98
+41|87 = 129
+
+The inputs are 89, 90, 88, 77, 10, 87, 41, 87
+
+The outputs are 8010, 11, 98, 129
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+89$90 -> $
+88:77 -> :
+10|87 -> |
+41|87 -> |
+
+The operators
+$
+:
+|
+
+Looking at the question
+37:67 -> :
+The question operator is found in the examples.
+
+Looking at operator : [88:77 = 11]:
+
+Trying common operations reversed operands [88->88 77->77] and reversed result [expected (88,77)->11]:
+ addition
+ (88,77)->11: 88 + 77 = 165 rev-> 561 mismatch
+ multiplication
+ (88,77)->11: (80 + 8) * 77 = 80 * 77 + 8 * 77 = 6160 + 616 = 6776 rev-> 6776 mismatch
+ concatenation
+ (88,77)->11: 88 || 77 = 8877 rev-> 7788 mismatch
+ reverse concatenation
+ (88,77)->11: 77 || 88 = 7788 rev-> 8877 mismatch
+
+Trying common operations on identity [88 77] [expected (88,77)->11]:
+ addition
+ (88,77)->11: 88 + 77 = 165 mismatch
+ multiplication
+ (88,77)->11: (80 + 8) * 77 = 80 * 77 + 8 * 77 = 6160 + 616 = 6776 mismatch
+ concatenation
+ (88,77)->11: 88 || 77 = 8877 mismatch
+ reverse concatenation
+ (88,77)->11: 77 || 88 = 7788 mismatch
+
+Trying difference operations reversed operands [88->88 77->77] and reversed result [expected (88,77)->11]:
+ subtraction (a-b)
+ (88,77)->11: 88 - 77 = 11 rev-> 11 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (88,77)->11: |88 - 77| = 11 rev-> 11 match
+ correct, but skipping
+ max mod min
+ (88,77)->11: max(88,77) mod min(88,77) = 88 mod 77 = 11 rev-> 11 match
+ correct, but skipping
+ negated absolute difference
+ (88,77)->11: -|88 - 77| = -11 rev-> -11 mismatch
+ reverse subtraction (b-a)
+ (88,77)->11: 77 - 88 = -11 rev-> -11 mismatch
+ modulo (a mod b)
+ (88,77)->11: 88 mod 77 = 11 rev-> 11 match
+ correct, but skipping
+
+Trying difference operations on identity [88 77] [expected (88,77)->11]:
+ subtraction (a-b)
+ (88,77)->11: 88 - 77 = 11 match
+ correct, but skipping
+ absolute difference
+ (88,77)->11: |88 - 77| = 11 match
+ correct, but skipping
+ max mod min
+ (88,77)->11: max(88,77) mod min(88,77) = 88 mod 77 = 11 match
+ correct, but skipping
+ negated absolute difference
+ (88,77)->11: -|88 - 77| = -11 mismatch
+ reverse subtraction (b-a)
+ (88,77)->11: 77 - 88 = -11 mismatch
+ modulo (a mod b)
+ (88,77)->11: 88 mod 77 = 11 match
+ correct, but skipping
+
+Trying rare operations reversed operands [88->88 77->77] and reversed result [expected (88,77)->11]:
+ multiply+1
+ (88,77)->11: (80 + 8) * 77 + 1 = 80 * 77 + 8 * 77 + 1 = 6160 + 616 + 1 = 6776 + 1 = 6777 rev-> 7776 mismatch
+ multiply-1
+ (88,77)->11: (80 + 8) * 77 - 1 = 80 * 77 + 8 * 77 - 1 = 6160 + 616 - 1 = 6776 - 1 = 6775 rev-> 5776 mismatch
+ add+1
+ (88,77)->11: 88 + 77 + 1 = 166 rev-> 661 mismatch
+ add-1
+ (88,77)->11: 88 + 77 - 1 = 164 rev-> 461 mismatch
+ sub+1
+ (88,77)->11: 88 - 77 + 1 = 12 rev-> 21 mismatch
+ sub-1
+ (88,77)->11: 88 - 77 - 1 = 10 rev-> 01 mismatch
+ integer division (a/b)
+ (88,77)->11: 88 / 77 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (88,77)->11: 77 / 88 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (88,77)->11: 77 mod 88 = 77 rev-> 77 mismatch
+ digit absolute diff
+ (88,77)->11: |8-7| || |8-7| = 11 rev-> 11 match
+ correct, but skipping
+ digit add mod10
+ (88,77)->11: (8+7)%10 || (8+7)%10 = 55 rev-> 55 mismatch
+ digit sub mod10
+ (88,77)->11: (8-7)%10 || (8-7)%10 = 11 rev-> 11 match
+ correct, but skipping
+ cross multiply
+ (88,77)->11: 8*7 + 8*7 = 56 + 56 = 112 rev-> 211 mismatch
+ cross multiply rev
+ (88,77)->11: 8*7 + 8*7 = 56 + 56 = 112 rev-> 211 mismatch
+ digit multiply
+ (88,77)->11: 8*7 || 8*7 = 56 || 56 = 5656 rev-> 6565 mismatch
+ digit multiply rev
+ (88,77)->11: 8*7 || 8*7 = 56 || 56 = 5656 rev-> 6565 mismatch
+ digit sum diff
+ (88,77)->11: (8+8) - (7+7) = 2 rev-> 2 mismatch
+ digit sum sum
+ (88,77)->11: (8+8) + (7+7) = 30 rev-> 03 mismatch
+ digit product diff
+ (88,77)->11: 8*8 - 7*7 = 64 - 49 = 15 rev-> 51 mismatch
+ digit product sum
+ (88,77)->11: 8*8 + 7*7 = 64 + 49 = 113 rev-> 311 mismatch
+ determinant
+ (88,77)->11: 8*7 - 8*7 = 56 - 56 = 0 rev-> 0 mismatch
+ abs determinant
+ (88,77)->11: |8*7 - 8*7| = |56 - 56| = 0 rev-> 0 mismatch
+
+Trying rare operations on identity [88 77] [expected (88,77)->11]:
+ multiply+1
+ (88,77)->11: (80 + 8) * 77 + 1 = 80 * 77 + 8 * 77 + 1 = 6160 + 616 + 1 = 6776 + 1 = 6777 mismatch
+ multiply-1
+ (88,77)->11: (80 + 8) * 77 - 1 = 80 * 77 + 8 * 77 - 1 = 6160 + 616 - 1 = 6776 - 1 = 6775 mismatch
+ add+1
+ (88,77)->11: 88 + 77 + 1 = 166 mismatch
+ add-1
+ (88,77)->11: 88 + 77 - 1 = 164 mismatch
+ sub+1
+ (88,77)->11: 88 - 77 + 1 = 12 mismatch
+ sub-1
+ (88,77)->11: 88 - 77 - 1 = 10 mismatch
+ integer division (a/b)
+ (88,77)->11: 88 / 77 = 1 mismatch
+ reverse division (b/a)
+ (88,77)->11: 77 / 88 = 0 mismatch
+ reverse modulo (b mod a)
+ (88,77)->11: 77 mod 88 = 77 mismatch
+ digit absolute diff
+ (88,77)->11: |8-7| || |8-7| = 11 match
+ correct, but skipping
+ digit add mod10
+ (88,77)->11: (8+7)%10 || (8+7)%10 = 55 mismatch
+ digit sub mod10
+ (88,77)->11: (8-7)%10 || (8-7)%10 = 11 match
+ correct, but skipping
+ cross multiply
+ (88,77)->11: 8*7 + 8*7 = 56 + 56 = 112 mismatch
+ cross multiply rev
+ (88,77)->11: 8*7 + 8*7 = 56 + 56 = 112 mismatch
+ digit multiply
+ (88,77)->11: 8*7 || 8*7 = 56 || 56 = 5656 mismatch
+ digit multiply rev
+ (88,77)->11: 8*7 || 8*7 = 56 || 56 = 5656 mismatch
+ digit sum diff
+ (88,77)->11: (8+8) - (7+7) = 2 mismatch
+ digit sum sum
+ (88,77)->11: (8+8) + (7+7) = 30 mismatch
+ digit product diff
+ (88,77)->11: 8*8 - 7*7 = 64 - 49 = 15 mismatch
+ digit product sum
+ (88,77)->11: 8*8 + 7*7 = 64 + 49 = 113 mismatch
+ determinant
+ (88,77)->11: 8*7 - 8*7 = 56 - 56 = 0 mismatch
+ abs determinant
+ (88,77)->11: |8*7 - 8*7| = |56 - 56| = 0 mismatch
+
+Applying to 37:67:
+ We recall that the question operator is found in the examples.
+ reversed operands [37->73, 67->76] and reversed result
+ subtraction (a-b) (73,76): 73 - 76 = -3 rev-> -3
+ Result is negative - but none of the example outputs have a symbol prefix or suffix.
+
+\boxed{-3}

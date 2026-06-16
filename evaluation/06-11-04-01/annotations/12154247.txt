@@ -1,0 +1,2 @@
+FAULT: COLUMN_COMPUTE
+At L610 the evaluated trace computes "5 OR 7" as 1111101110 (count 8) vs the intended 1111111110 (count 9), losing the XOR 7 match chain and propagating wrong partials that flip the totals (left 31/right 28 -> left 24/right 40); load-bearing — it chooses right so bits 1-5 take AND-NOT 60n..24n = 11111, and evaluated boxes 11111101 vs intended 10111101.

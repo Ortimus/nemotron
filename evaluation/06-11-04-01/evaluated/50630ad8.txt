@@ -1,0 +1,187 @@
+49`94 = 9449
+67`98 = 9867
+03$01 = 02
+37+35 = 621
+59`76 = 7659
+
+The inputs are 49, 94, 67, 98, 03, 01, 37, 35, 59, 76
+
+The outputs are 9449, 9867, 02, 621, 7659
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+49`94 -> `
+67`98 -> `
+03$01 -> $
+37+35 -> +
+59`76 -> `
+
+The operators
+`
+$
++
+
+Looking at the question
+51$37 -> $
+The question operator is found in the examples.
+
+Looking at operator $ [03$01 = 02]:
+
+Trying common operations
+ reversed operands [03->30 01->10] and reversed result [expected (30,10)->02]
+ addition
+ (30,10)->02: 30 + 10 = 40 rev-> 04 mismatch
+ multiplication
+ (30,10)->02: (30 + 0) * 10 = 30 * 10 + 0 * 10 = 300 + 0 = 300 rev-> 003 mismatch
+ concatenation
+ (30,10)->02: 30 || 10 = 3010 rev-> 0103 mismatch
+ reverse concatenation
+ (30,10)->02: 10 || 30 = 1030 rev-> 0301 mismatch
+
+ identity [03 01] [expected (03,01)->02]
+ addition
+ (03,01)->02: 03 + 01 = 4 mismatch
+ multiplication
+ (03,01)->02: (0 + 3) * 01 = 0 * 01 + 3 * 01 = 0 + 3 = 3 mismatch
+ concatenation
+ (03,01)->02: 03 || 01 = 0301 mismatch
+ reverse concatenation
+ (03,01)->02: 01 || 03 = 0103 mismatch
+
+Trying difference operations
+ reversed operands [03->30 01->10] and reversed result [expected (30,10)->02]
+ subtraction (a-b)
+ (30,10)->02: 30 - 10 = 20 rev-> 02 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (30,10)->02: |30 - 10| = 20 rev-> 02 match
+ correct, but skipping
+ max mod min
+ (30,10)->02: max(30,10) mod min(30,10) = 30 mod 10 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (30,10)->02: -|30 - 10| = -20 rev-> -02 mismatch
+ reverse subtraction (b-a)
+ (30,10)->02: 10 - 30 = -20 rev-> -02 mismatch
+ modulo (a mod b)
+ (30,10)->02: 30 mod 10 = 0 rev-> 0 mismatch
+
+ identity [03 01] [expected (03,01)->02]
+ subtraction (a-b)
+ (03,01)->02: 03 - 01 = 2 mismatch
+ absolute difference
+ (03,01)->02: |03 - 01| = 2 mismatch
+ max mod min
+ (03,01)->02: max(03,01) mod min(03,01) = 03 mod 01 = 0 mismatch
+ negated absolute difference
+ (03,01)->02: -|03 - 01| = -2 mismatch
+ reverse subtraction (b-a)
+ (03,01)->02: 01 - 03 = -2 mismatch
+ modulo (a mod b)
+ (03,01)->02: 03 mod 01 = 0 mismatch
+
+Trying rare operations
+ reversed operands [03->30 01->10] and reversed result [expected (30,10)->02]
+ multiply+1
+ (30,10)->02: (30 + 0) * 10 + 1 = 30 * 10 + 0 * 10 + 1 = 300 + 0 + 1 = 300 + 1 = 301 rev-> 103 mismatch
+ multiply-1
+ (30,10)->02: (30 + 0) * 10 - 1 = 30 * 10 + 0 * 10 - 1 = 300 + 0 - 1 = 300 - 1 = 299 rev-> 992 mismatch
+ add+1
+ (30,10)->02: 30 + 10 + 1 = 41 rev-> 14 mismatch
+ add-1
+ (30,10)->02: 30 + 10 - 1 = 39 rev-> 93 mismatch
+ sub+1
+ (30,10)->02: 30 - 10 + 1 = 21 rev-> 12 mismatch
+ sub-1
+ (30,10)->02: 30 - 10 - 1 = 19 rev-> 91 mismatch
+ integer division (a/b)
+ (30,10)->02: 30 / 10 = 3 rev-> 3 mismatch
+ reverse division (b/a)
+ (30,10)->02: 10 / 30 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (30,10)->02: 10 mod 30 = 10 rev-> 01 mismatch
+ digit absolute diff
+ (30,10)->02: |3-1| || |0-0| = 20 rev-> 02 match
+ correct, but skipping
+ digit add mod10
+ (30,10)->02: (3+1)%10 || (0+0)%10 = 40 rev-> 04 mismatch
+ digit sub mod10
+ (30,10)->02: (3-1)%10 || (0-0)%10 = 20 rev-> 02 match
+ correct, but skipping
+ cross multiply
+ (30,10)->02: 3*1 + 0*0 = 3 + 0 = 3 rev-> 3 mismatch
+ cross multiply rev
+ (30,10)->02: 3*0 + 0*1 = 0 + 0 = 0 rev-> 0 mismatch
+ digit multiply
+ (30,10)->02: 3*1 || 0*0 = 3 || 0 = 30 rev-> 03 mismatch
+ digit multiply rev
+ (30,10)->02: 3*0 || 0*1 = 0 || 0 = 00 rev-> 00 mismatch
+ digit sum diff
+ (30,10)->02: (3+0) - (1+0) = 2 rev-> 2 mismatch
+ digit sum sum
+ (30,10)->02: (3+0) + (1+0) = 4 rev-> 4 mismatch
+ digit product diff
+ (30,10)->02: 3*0 - 1*0 = 0 - 0 = 0 rev-> 0 mismatch
+ digit product sum
+ (30,10)->02: 3*0 + 1*0 = 0 + 0 = 0 rev-> 0 mismatch
+ determinant
+ (30,10)->02: 3*0 - 0*1 = 0 - 0 = 0 rev-> 0 mismatch
+ abs determinant
+ (30,10)->02: |3*0 - 0*1| = |0 - 0| = 0 rev-> 0 mismatch
+
+ identity [03 01] [expected (03,01)->02]
+ multiply+1
+ (03,01)->02: (0 + 3) * 01 + 1 = 0 * 01 + 3 * 01 + 1 = 0 + 3 + 1 = 3 + 1 = 4 mismatch
+ multiply-1
+ (03,01)->02: (0 + 3) * 01 - 1 = 0 * 01 + 3 * 01 - 1 = 0 + 3 - 1 = 3 - 1 = 2 mismatch
+ add+1
+ (03,01)->02: 03 + 01 + 1 = 5 mismatch
+ add-1
+ (03,01)->02: 03 + 01 - 1 = 3 mismatch
+ sub+1
+ (03,01)->02: 03 - 01 + 1 = 3 mismatch
+ sub-1
+ (03,01)->02: 03 - 01 - 1 = 1 mismatch
+ integer division (a/b)
+ (03,01)->02: 03 / 01 = 3 mismatch
+ reverse division (b/a)
+ (03,01)->02: 01 / 03 = 0 mismatch
+ reverse modulo (b mod a)
+ (03,01)->02: 01 mod 03 = 1 mismatch
+ digit absolute diff
+ (03,01)->02: |0-0| || |3-1| = 02 match
+ correct, but skipping
+ digit add mod10
+ (03,01)->02: (0+0)%10 || (3+1)%10 = 04 mismatch
+ digit sub mod10
+ (03,01)->02: (0-0)%10 || (3-1)%10 = 02 match
+ correct, but skipping
+ cross multiply
+ (03,01)->02: 0*0 + 3*1 = 0 + 3 = 3 mismatch
+ cross multiply rev
+ (03,01)->02: 0*1 + 3*0 = 0 + 0 = 0 mismatch
+ digit multiply
+ (03,01)->02: 0*0 || 3*1 = 0 || 3 = 03 mismatch
+ digit multiply rev
+ (03,01)->02: 0*1 || 3*0 = 0 || 0 = 00 mismatch
+ digit sum diff
+ (03,01)->02: (0+3) - (0+1) = 2 mismatch
+ digit sum sum
+ (03,01)->02: (0+3) + (0+1) = 4 mismatch
+ digit product diff
+ (03,01)->02: 0*3 - 0*1 = 0 - 0 = 0 mismatch
+ digit product sum
+ (03,01)->02: 0*3 + 0*1 = 0 + 0 = 0 mismatch
+ determinant
+ (03,01)->02: 0*1 - 3*0 = 0 - 0 = 0 mismatch
+ abs determinant
+ (03,01)->02: |0*1 - 3*0| = |0 - 0| = 0 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 51$37:
+ We recall that the question operator is found in the examples.
+ reversed operands [51->15, 37->73] and reversed result
+ subtraction (a-b)
+ (15,73): 15 - 73 = -58 rev-> -85
+ Result is negative - but none of the example outputs have a symbol prefix or suffix
+ \boxed{-85}

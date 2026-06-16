@@ -1,0 +1,189 @@
+89-80 = 9
+84(16 = 101
+95(69 = 165
+15-40 = -25
+80?13 = 1039
+
+The inputs are 89, 80, 84, 16, 95, 69, 15, 40, 80, 13
+
+The outputs are 9, 101, 165, -25, 1039
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 9, 101, 165, -25, 1039
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+89-80 -> -
+84(16 -> (
+95(69 -> (
+15-40 -> -
+80?13 -> ?
+
+The operators
+-
+(
+?
+
+Looking at the question
+62-86 -> -
+The question operator is found in the examples.
+
+Looking at operator - [89-80 = 9, 15-40 = -25]:
+
+Trying common operations
+ reversed operands [89->98 80->08, 15->51 40->04] and reversed result [expected (98,08)->9, (51,04)->-25]
+ addition
+ (98,08)->9: 98 + 08 = 106 rev-> 601 mismatch
+ multiplication
+ (51,04)->-25: (50 + 1) * 04 = 50 * 04 + 1 * 04 = 200 + 4 = 204 rev-> 402 mismatch
+ concatenation
+ (98,08)->9: 98 || 08 = 9808 rev-> 8089 mismatch
+ reverse concatenation
+ (51,04)->-25: 04 || 51 = 0451 rev-> 1540 mismatch
+
+ identity [89 80, 15 40] [expected (89,80)->9, (15,40)->-25]
+ addition
+ (89,80)->9: 89 + 80 = 169 mismatch
+ multiplication
+ (15,40)->-25: (10 + 5) * 40 = 10 * 40 + 5 * 40 = 400 + 200 = 600 mismatch
+ concatenation
+ (89,80)->9: 89 || 80 = 8980 mismatch
+ reverse concatenation
+ (15,40)->-25: 40 || 15 = 4015 mismatch
+
+Trying difference operations
+ reversed operands [89->98 80->08, 15->51 40->04] and reversed result [expected (98,08)->9, (51,04)->-25]
+ subtraction (a-b)
+ (98,08)->9: 98 - 08 = 90 rev-> 09 mismatch
+ absolute difference
+ (51,04)->-25: |51 - 04| = 47 rev-> 74 mismatch
+ max mod min
+ (98,08)->9: max(98,08) mod min(98,08) = 98 mod 08 = 2 rev-> 2 mismatch
+ negated absolute difference
+ (51,04)->-25: -|51 - 04| = -47 rev-> -74 mismatch
+ reverse subtraction (b-a)
+ (98,08)->9: 08 - 98 = -90 rev-> -09 mismatch
+ modulo (a mod b)
+ (51,04)->-25: 51 mod 04 = 3 rev-> 3 mismatch
+
+ identity [89 80, 15 40] [expected (89,80)->9, (15,40)->-25]
+ subtraction (a-b)
+ (89,80)->9: 89 - 80 = 9 match
+ (15,40)->-25: 15 - 40 = -25 match
+ correct, actions: subtraction (a-b)
+ absolute difference
+ (15,40)->-25: |15 - 40| = 25 mismatch
+ max mod min
+ (89,80)->9: max(89,80) mod min(89,80) = 89 mod 80 = 9 match
+ (15,40)->-25: max(15,40) mod min(15,40) = 40 mod 15 = 10 mismatch
+ negated absolute difference
+ (15,40)->-25: -|15 - 40| = -25 match
+ (89,80)->9: -|89 - 80| = -9 mismatch
+ reverse subtraction (b-a)
+ (89,80)->9: 80 - 89 = -9 mismatch
+ modulo (a mod b)
+ (15,40)->-25: 15 mod 40 = 15 mismatch
+
+Trying rare operations
+ reversed operands [89->98 80->08, 15->51 40->04] and reversed result [expected (98,08)->9, (51,04)->-25]
+ multiply+1
+ (98,08)->9: (90 + 8) * 08 + 1 = 90 * 08 + 8 * 08 + 1 = 720 + 64 + 1 = 784 + 1 = 785 rev-> 587 mismatch
+ multiply-1
+ (51,04)->-25: (50 + 1) * 04 - 1 = 50 * 04 + 1 * 04 - 1 = 200 + 4 - 1 = 204 - 1 = 203 rev-> 302 mismatch
+ add+1
+ (98,08)->9: 98 + 08 + 1 = 107 rev-> 701 mismatch
+ add-1
+ (51,04)->-25: 51 + 04 - 1 = 54 rev-> 45 mismatch
+ sub+1
+ (98,08)->9: 98 - 08 + 1 = 91 rev-> 19 mismatch
+ sub-1
+ (51,04)->-25: 51 - 04 - 1 = 46 rev-> 64 mismatch
+ integer division (a/b)
+ (98,08)->9: 98 / 08 = 12 rev-> 21 mismatch
+ reverse division (b/a)
+ (51,04)->-25: 04 / 51 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (98,08)->9: 08 mod 98 = 8 rev-> 8 mismatch
+ digit absolute diff
+ (51,04)->-25: |5-0| || |1-4| = 53 rev-> 35 mismatch
+ digit add mod10
+ (98,08)->9: (9+0)%10 || (8+8)%10 = 96 rev-> 69 mismatch
+ digit sub mod10
+ (51,04)->-25: (5-0)%10 || (1-4)%10 = 57 rev-> 75 mismatch
+ cross multiply
+ (98,08)->9: 9*0 + 8*8 = 0 + 64 = 64 rev-> 46 mismatch
+ cross multiply rev
+ (51,04)->-25: 5*4 + 1*0 = 20 + 0 = 20 rev-> 02 mismatch
+ digit multiply
+ (98,08)->9: 9*0 || 8*8 = 0 || 64 = 064 rev-> 460 mismatch
+ digit multiply rev
+ (51,04)->-25: 5*4 || 1*0 = 20 || 0 = 200 rev-> 002 mismatch
+ digit sum diff
+ (98,08)->9: (9+8) - (0+8) = 9 rev-> 9 match
+ (51,04)->-25: (5+1) - (0+4) = 2 rev-> 2 mismatch
+ digit sum sum
+ (51,04)->-25: (5+1) + (0+4) = 10 rev-> 01 mismatch
+ digit product diff
+ (98,08)->9: 9*8 - 0*8 = 72 - 0 = 72 rev-> 27 mismatch
+ digit product sum
+ (51,04)->-25: 5*1 + 0*4 = 5 + 0 = 5 rev-> 5 mismatch
+ determinant
+ (98,08)->9: 9*8 - 8*0 = 72 - 0 = 72 rev-> 27 mismatch
+ abs determinant
+ (51,04)->-25: |5*4 - 1*0| = |20 - 0| = 20 rev-> 02 mismatch
+
+ identity [89 80, 15 40] [expected (89,80)->9, (15,40)->-25]
+ multiply+1
+ (89,80)->9: (80 + 9) * 80 + 1 = 80 * 80 + 9 * 80 + 1 = 6400 + 720 + 1 = 7120 + 1 = 7121 mismatch
+ multiply-1
+ (15,40)->-25: (10 + 5) * 40 - 1 = 10 * 40 + 5 * 40 - 1 = 400 + 200 - 1 = 600 - 1 = 599 mismatch
+ add+1
+ (89,80)->9: 89 + 80 + 1 = 170 mismatch
+ add-1
+ (15,40)->-25: 15 + 40 - 1 = 54 mismatch
+ sub+1
+ (89,80)->9: 89 - 80 + 1 = 10 mismatch
+ sub-1
+ (15,40)->-25: 15 - 40 - 1 = -26 mismatch
+ integer division (a/b)
+ (89,80)->9: 89 / 80 = 1 mismatch
+ reverse division (b/a)
+ (15,40)->-25: 40 / 15 = 2 mismatch
+ reverse modulo (b mod a)
+ (89,80)->9: 80 mod 89 = 80 mismatch
+ digit absolute diff
+ (15,40)->-25: |1-4| || |5-0| = 35 mismatch
+ digit add mod10
+ (89,80)->9: (8+8)%10 || (9+0)%10 = 69 mismatch
+ digit sub mod10
+ (15,40)->-25: (1-4)%10 || (5-0)%10 = 75 mismatch
+ cross multiply
+ (89,80)->9: 8*8 + 9*0 = 64 + 0 = 64 mismatch
+ cross multiply rev
+ (15,40)->-25: 1*0 + 5*4 = 0 + 20 = 20 mismatch
+ digit multiply
+ (89,80)->9: 8*8 || 9*0 = 64 || 0 = 640 mismatch
+ digit multiply rev
+ (15,40)->-25: 1*0 || 5*4 = 0 || 20 = 020 mismatch
+ digit sum diff
+ (89,80)->9: (8+9) - (8+0) = 9 match
+ (15,40)->-25: (1+5) - (4+0) = 2 mismatch
+ digit sum sum
+ (15,40)->-25: (1+5) + (4+0) = 10 mismatch
+ digit product diff
+ (89,80)->9: 8*9 - 8*0 = 72 - 0 = 72 mismatch
+ digit product sum
+ (15,40)->-25: 1*5 + 4*0 = 5 + 0 = 5 mismatch
+ determinant
+ (89,80)->9: 8*0 - 9*8 = 0 - 72 = -72 mismatch
+ abs determinant
+ (15,40)->-25: |1*0 - 5*4| = |0 - 20| = 20 mismatch
+
+correct, actions: subtraction (a-b)
+
+Applying to 62-86:
+ We recall that the question operator is found in the examples.
+ identity [62 86]
+ subtraction (a-b)
+ (62,86): 62 - 86 = -24
+ Result is negative - we add back the operator prefix -
+ -24 -> \boxed{-24}

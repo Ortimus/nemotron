@@ -1,0 +1,181 @@
+85#34 = 8534
+20/37 = 17
+57#26 = 5726
+67#85 = 6785
+
+The inputs are 85, 34, 20, 37, 57, 26, 67, 85
+
+The outputs are 8534, 17, 5726, 6785
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+85#34 -> #
+20/37 -> /
+57#26 -> #
+67#85 -> #
+
+The operators
+#
+/
+
+Looking at the question
+18/52 -> /
+The question operator is found in the examples.
+
+Looking at operator / [20/37 = 17]:
+
+Trying common operations reversed operands [20->02 37->73] and reversed result [expected (02,73)->17]:
+ addition
+ (02,73)->17: 02 + 73 = 75 rev-> 57 mismatch
+ multiplication
+ (02,73)->17: (0 + 2) * 73 = 0 * 73 + 2 * 73 = 0 + 146 = 146 rev-> 641 mismatch
+ concatenation
+ (02,73)->17: 02 || 73 = 0273 rev-> 3720 mismatch
+ reverse concatenation
+ (02,73)->17: 73 || 02 = 7302 rev-> 2037 mismatch
+
+Trying common operations on identity [20 37] [expected (20,37)->17]:
+ addition
+ (20,37)->17: 20 + 37 = 57 mismatch
+ multiplication
+ (20,37)->17: (20 + 0) * 37 = 20 * 37 + 0 * 37 = 740 + 0 = 740 mismatch
+ concatenation
+ (20,37)->17: 20 || 37 = 2037 mismatch
+ reverse concatenation
+ (20,37)->17: 37 || 20 = 3720 mismatch
+
+Trying difference operations reversed operands [20->02 37->73] and reversed result [expected (02,73)->17]:
+ subtraction (a-b)
+ (02,73)->17: 02 - 73 = -71 rev-> -17 mismatch
+ absolute difference
+ (02,73)->17: |02 - 73| = 71 rev-> 17 match
+ correct, actions: reversed operands, reversed result, absolute difference
+ max mod min
+ (02,73)->17: max(02,73) mod min(02,73) = 73 mod 02 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (02,73)->17: -|02 - 73| = -71 rev-> -17 mismatch
+ reverse subtraction (b-a)
+ (02,73)->17: 73 - 02 = 71 rev-> 17 match
+ correct, but skipping
+ modulo (a mod b)
+ (02,73)->17: 02 mod 73 = 2 rev-> 2 mismatch
+
+Trying difference operations on identity [20 37] [expected (20,37)->17]:
+ subtraction (a-b)
+ (20,37)->17: 20 - 37 = -17 mismatch
+ absolute difference
+ (20,37)->17: |20 - 37| = 17 match
+ correct, but skipping
+ max mod min
+ (20,37)->17: max(20,37) mod min(20,37) = 37 mod 20 = 17 match
+ correct, but skipping
+ negated absolute difference
+ (20,37)->17: -|20 - 37| = -17 mismatch
+ reverse subtraction (b-a)
+ (20,37)->17: 37 - 20 = 17 match
+ correct, but skipping
+ modulo (a mod b)
+ (20,37)->17: 20 mod 37 = 20 mismatch
+
+Trying rare operations reversed operands [20->02 37->73] and reversed result [expected (02,73)->17]:
+ multiply+1
+ (02,73)->17: (0 + 2) * 73 + 1 = 0 * 73 + 2 * 73 + 1 = 0 + 146 + 1 = 146 + 1 = 147 rev-> 741 mismatch
+ multiply-1
+ (02,73)->17: (0 + 2) * 73 - 1 = 0 * 73 + 2 * 73 - 1 = 0 + 146 - 1 = 146 - 1 = 145 rev-> 541 mismatch
+ add+1
+ (02,73)->17: 02 + 73 + 1 = 76 rev-> 67 mismatch
+ add-1
+ (02,73)->17: 02 + 73 - 1 = 74 rev-> 47 mismatch
+ sub+1
+ (02,73)->17: 02 - 73 + 1 = -70 rev-> -07 mismatch
+ sub-1
+ (02,73)->17: 02 - 73 - 1 = -72 rev-> -27 mismatch
+ integer division (a/b)
+ (02,73)->17: 02 / 73 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (02,73)->17: 73 / 02 = 36 rev-> 63 mismatch
+ reverse modulo (b mod a)
+ (02,73)->17: 73 mod 02 = 1 rev-> 1 mismatch
+ digit absolute diff
+ (02,73)->17: |0-7| || |2-3| = 71 rev-> 17 match
+ correct, but skipping
+ digit add mod10
+ (02,73)->17: (0+7)%10 || (2+3)%10 = 75 rev-> 57 mismatch
+ digit sub mod10
+ (02,73)->17: (0-7)%10 || (2-3)%10 = 39 rev-> 93 mismatch
+ cross multiply
+ (02,73)->17: 0*7 + 2*3 = 0 + 6 = 6 rev-> 6 mismatch
+ cross multiply rev
+ (02,73)->17: 0*3 + 2*7 = 0 + 14 = 14 rev-> 41 mismatch
+ digit multiply
+ (02,73)->17: 0*7 || 2*3 = 0 || 6 = 06 rev-> 60 mismatch
+ digit multiply rev
+ (02,73)->17: 0*3 || 2*7 = 0 || 14 = 014 rev-> 410 mismatch
+ digit sum diff
+ (02,73)->17: (0+2) - (7+3) = -8 rev-> -8 mismatch
+ digit sum sum
+ (02,73)->17: (0+2) + (7+3) = 12 rev-> 21 mismatch
+ digit product diff
+ (02,73)->17: 0*2 - 7*3 = 0 - 21 = -21 rev-> -12 mismatch
+ digit product sum
+ (02,73)->17: 0*2 + 7*3 = 0 + 21 = 21 rev-> 12 mismatch
+ determinant
+ (02,73)->17: 0*3 - 2*7 = 0 - 14 = -14 rev-> -41 mismatch
+ abs determinant
+ (02,73)->17: |0*3 - 2*7| = |0 - 14| = 14 rev-> 41 mismatch
+
+Trying rare operations on identity [20 37] [expected (20,37)->17]:
+ multiply+1
+ (20,37)->17: (20 + 0) * 37 + 1 = 20 * 37 + 0 * 37 + 1 = 740 + 0 + 1 = 740 + 1 = 741 mismatch
+ multiply-1
+ (20,37)->17: (20 + 0) * 37 - 1 = 20 * 37 + 0 * 37 - 1 = 740 + 0 - 1 = 740 - 1 = 739 mismatch
+ add+1
+ (20,37)->17: 20 + 37 + 1 = 58 mismatch
+ add-1
+ (20,37)->17: 20 + 37 - 1 = 56 mismatch
+ sub+1
+ (20,37)->17: 20 - 37 + 1 = -16 mismatch
+ sub-1
+ (20,37)->17: 20 - 37 - 1 = -18 mismatch
+ integer division (a/b)
+ (20,37)->17: 20 / 37 = 0 mismatch
+ reverse division (b/a)
+ (20,37)->17: 37 / 20 = 1 mismatch
+ reverse modulo (b mod a)
+ (20,37)->17: 37 mod 20 = 17 match
+ correct, but skipping
+ digit absolute diff
+ (20,37)->17: |2-3| || |0-7| = 17 match
+ correct, but skipping
+ digit add mod10
+ (20,37)->17: (2+3)%10 || (0+7)%10 = 57 mismatch
+ digit sub mod10
+ (20,37)->17: (2-3)%10 || (0-7)%10 = 93 mismatch
+ cross multiply
+ (20,37)->17: 2*3 + 0*7 = 6 + 0 = 6 mismatch
+ cross multiply rev
+ (20,37)->17: 2*7 + 0*3 = 14 + 0 = 14 mismatch
+ digit multiply
+ (20,37)->17: 2*3 || 0*7 = 6 || 0 = 60 mismatch
+ digit multiply rev
+ (20,37)->17: 2*7 || 0*3 = 14 || 0 = 140 mismatch
+ digit sum diff
+ (20,37)->17: (2+0) - (3+7) = -8 mismatch
+ digit sum sum
+ (20,37)->17: (2+0) + (3+7) = 12 mismatch
+ digit product diff
+ (20,37)->17: 2*0 - 3*7 = 0 - 21 = -21 mismatch
+ digit product sum
+ (20,37)->17: 2*0 + 3*7 = 0 + 21 = 21 mismatch
+ determinant
+ (20,37)->17: 2*7 - 0*3 = 14 - 0 = 14 mismatch
+ abs determinant
+ (20,37)->17: |2*7 - 0*3| = |14 - 0| = 14 mismatch
+
+Applying to 18/52:
+ We recall that the question operator is found in the examples.
+ reversed operands [18->81, 52->25] and reversed result
+ absolute difference (81,25): |81 - 25| = 56 rev-> 65
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{65}

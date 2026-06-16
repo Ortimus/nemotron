@@ -1,0 +1,173 @@
+42+63 = 16
+52*79 = 4242
+86-26 = 6
+
+The inputs are 42, 63, 52, 79, 86, 26
+
+The outputs are 16, 4242, 6
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+42+63 -> +
+52*79 -> *
+86-26 -> -
+
+The operators
++
+*
+-
+
+Looking at the question
+19*92 -> *
+The question operator is found in the examples.
+
+Looking at operator * [52*79 = 4242]:
+
+Trying common operations reversed operands [52->25 79->97] and reversed result [expected (25,97)->4242]:
+ addition
+ (25,97)->4242: 25 + 97 = 122 rev-> 221 mismatch
+ multiplication
+ (25,97)->4242: (20 + 5) * 97 = 20 * 97 + 5 * 97 = 1940 + 485 = 2425 rev-> 5242 mismatch
+ concatenation
+ (25,97)->4242: 25 || 97 = 2597 rev-> 7952 mismatch
+ reverse concatenation
+ (25,97)->4242: 97 || 25 = 9725 rev-> 5279 mismatch
+
+Trying common operations on identity [52 79] [expected (52,79)->4242]:
+ addition
+ (52,79)->4242: 52 + 79 = 131 mismatch
+ multiplication
+ (52,79)->4242: (50 + 2) * 79 = 50 * 79 + 2 * 79 = 3950 + 158 = 4108 mismatch
+ concatenation
+ (52,79)->4242: 52 || 79 = 5279 mismatch
+ reverse concatenation
+ (52,79)->4242: 79 || 52 = 7952 mismatch
+
+Trying difference operations reversed operands [52->25 79->97] and reversed result [expected (25,97)->4242]:
+ subtraction (a-b)
+ (25,97)->4242: 25 - 97 = -72 rev-> -27 mismatch
+ absolute difference
+ (25,97)->4242: |25 - 97| = 72 rev-> 27 mismatch
+ max mod min
+ (25,97)->4242: max(25,97) mod min(25,97) = 97 mod 25 = 22 rev-> 22 mismatch
+ negated absolute difference
+ (25,97)->4242: -|25 - 97| = -72 rev-> -27 mismatch
+ reverse subtraction (b-a)
+ (25,97)->4242: 97 - 25 = 72 rev-> 27 mismatch
+ modulo (a mod b)
+ (25,97)->4242: 25 mod 97 = 25 rev-> 52 mismatch
+
+Trying difference operations on identity [52 79] [expected (52,79)->4242]:
+ subtraction (a-b)
+ (52,79)->4242: 52 - 79 = -27 mismatch
+ absolute difference
+ (52,79)->4242: |52 - 79| = 27 mismatch
+ max mod min
+ (52,79)->4242: max(52,79) mod min(52,79) = 79 mod 52 = 27 mismatch
+ negated absolute difference
+ (52,79)->4242: -|52 - 79| = -27 mismatch
+ reverse subtraction (b-a)
+ (52,79)->4242: 79 - 52 = 27 mismatch
+ modulo (a mod b)
+ (52,79)->4242: 52 mod 79 = 52 mismatch
+
+Trying rare operations reversed operands [52->25 79->97] and reversed result [expected (25,97)->4242]:
+ multiply+1
+ (25,97)->4242: (20 + 5) * 97 + 1 = 20 * 97 + 5 * 97 + 1 = 1940 + 485 + 1 = 2425 + 1 = 2426 rev-> 6242 mismatch
+ multiply-1
+ (25,97)->4242: (20 + 5) * 97 - 1 = 20 * 97 + 5 * 97 - 1 = 1940 + 485 - 1 = 2425 - 1 = 2424 rev-> 4242 match
+ correct, actions: reversed operands, reversed result, multiply-1
+ add+1
+ (25,97)->4242: 25 + 97 + 1 = 123 rev-> 321 mismatch
+ add-1
+ (25,97)->4242: 25 + 97 - 1 = 121 rev-> 121 mismatch
+ sub+1
+ (25,97)->4242: 25 - 97 + 1 = -71 rev-> -17 mismatch
+ sub-1
+ (25,97)->4242: 25 - 97 - 1 = -73 rev-> -37 mismatch
+ integer division (a/b)
+ (25,97)->4242: 25 / 97 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (25,97)->4242: 97 / 25 = 3 rev-> 3 mismatch
+ reverse modulo (b mod a)
+ (25,97)->4242: 97 mod 25 = 22 rev-> 22 mismatch
+ digit absolute diff
+ (25,97)->4242: |2-9| || |5-7| = 72 rev-> 27 mismatch
+ digit add mod10
+ (25,97)->4242: (2+9)%10 || (5+7)%10 = 12 rev-> 21 mismatch
+ digit sub mod10
+ (25,97)->4242: (2-9)%10 || (5-7)%10 = 38 rev-> 83 mismatch
+ cross multiply
+ (25,97)->4242: 2*9 + 5*7 = 18 + 35 = 53 rev-> 35 mismatch
+ cross multiply rev
+ (25,97)->4242: 2*7 + 5*9 = 14 + 45 = 59 rev-> 95 mismatch
+ digit multiply
+ (25,97)->4242: 2*9 || 5*7 = 18 || 35 = 1835 rev-> 5381 mismatch
+ digit multiply rev
+ (25,97)->4242: 2*7 || 5*9 = 14 || 45 = 1445 rev-> 5441 mismatch
+ digit sum diff
+ (25,97)->4242: (2+5) - (9+7) = -9 rev-> -9 mismatch
+ digit sum sum
+ (25,97)->4242: (2+5) + (9+7) = 23 rev-> 32 mismatch
+ digit product diff
+ (25,97)->4242: 2*5 - 9*7 = 10 - 63 = -53 rev-> -35 mismatch
+ digit product sum
+ (25,97)->4242: 2*5 + 9*7 = 10 + 63 = 73 rev-> 37 mismatch
+ determinant
+ (25,97)->4242: 2*7 - 5*9 = 14 - 45 = -31 rev-> -13 mismatch
+ abs determinant
+ (25,97)->4242: |2*7 - 5*9| = |14 - 45| = 31 rev-> 13 mismatch
+
+Trying rare operations on identity [52 79] [expected (52,79)->4242]:
+ multiply+1
+ (52,79)->4242: (50 + 2) * 79 + 1 = 50 * 79 + 2 * 79 + 1 = 3950 + 158 + 1 = 4108 + 1 = 4109 mismatch
+ multiply-1
+ (52,79)->4242: (50 + 2) * 79 - 1 = 50 * 79 + 2 * 79 - 1 = 3950 + 158 - 1 = 4108 - 1 = 4107 mismatch
+ add+1
+ (52,79)->4242: 52 + 79 + 1 = 132 mismatch
+ add-1
+ (52,79)->4242: 52 + 79 - 1 = 130 mismatch
+ sub+1
+ (52,79)->4242: 52 - 79 + 1 = -26 mismatch
+ sub-1
+ (52,79)->4242: 52 - 79 - 1 = -28 mismatch
+ integer division (a/b)
+ (52,79)->4242: 52 / 79 = 0 mismatch
+ reverse division (b/a)
+ (52,79)->4242: 79 / 52 = 1 mismatch
+ reverse modulo (b mod a)
+ (52,79)->4242: 79 mod 52 = 27 mismatch
+ digit absolute diff
+ (52,79)->4242: |5-7| || |2-9| = 27 mismatch
+ digit add mod10
+ (52,79)->4242: (5+7)%10 || (2+9)%10 = 21 mismatch
+ digit sub mod10
+ (52,79)->4242: (5-7)%10 || (2-9)%10 = 83 mismatch
+ cross multiply
+ (52,79)->4242: 5*7 + 2*9 = 35 + 18 = 53 mismatch
+ cross multiply rev
+ (52,79)->4242: 5*9 + 2*7 = 45 + 14 = 59 mismatch
+ digit multiply
+ (52,79)->4242: 5*7 || 2*9 = 35 || 18 = 3518 mismatch
+ digit multiply rev
+ (52,79)->4242: 5*9 || 2*7 = 45 || 14 = 4514 mismatch
+ digit sum diff
+ (52,79)->4242: (5+2) - (7+9) = -9 mismatch
+ digit sum sum
+ (52,79)->4242: (5+2) + (7+9) = 23 mismatch
+ digit product diff
+ (52,79)->4242: 5*2 - 7*9 = 10 - 63 = -53 mismatch
+ digit product sum
+ (52,79)->4242: 5*2 + 7*9 = 10 + 63 = 73 mismatch
+ determinant
+ (52,79)->4242: 5*9 - 2*7 = 45 - 14 = 31 mismatch
+ abs determinant
+ (52,79)->4242: |5*9 - 2*7| = |45 - 14| = 31 mismatch
+
+Applying to 19*92:
+ We recall that the question operator is found in the examples.
+ reversed operands [19->91, 92->29] and reversed result
+ multiply-1 (91,29): (90 + 1) * 29 - 1 = 90 * 29 + 1 * 29 - 1 = 2610 + 29 - 1 = 2639 - 1 = 2638 rev-> 8362
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{8362}

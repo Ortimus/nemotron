@@ -1,0 +1,175 @@
+56*48 = 2688
+81/77 = /4
+16&69 = 84
+
+The inputs are 56, 48, 81, 77, 16, 69
+
+The outputs are 2688, /4, 84
+Some example outputs have the operator symbol as prefix /.
+We now consider the outputs to be 2688, -4, 84
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+56*48 -> *
+81/77 -> /
+16&69 -> &
+
+The operators
+*
+/
+&
+
+Looking at the question
+99&82 -> &
+The question operator is found in the examples.
+
+Looking at operator & [16&69 = 84]:
+
+Trying common operations reversed operands [16->61 69->96] and reversed result [expected (61,96)->84]:
+ addition
+ (61,96)->84: 61 + 96 = 157 rev-> 751 mismatch
+ multiplication
+ (61,96)->84: (60 + 1) * 96 = 60 * 96 + 1 * 96 = 5760 + 96 = 5856 rev-> 6585 mismatch
+ concatenation
+ (61,96)->84: 61 || 96 = 6196 rev-> 6916 mismatch
+ reverse concatenation
+ (61,96)->84: 96 || 61 = 9661 rev-> 1669 mismatch
+
+Trying common operations on identity [16 69] [expected (16,69)->84]:
+ addition
+ (16,69)->84: 16 + 69 = 85 mismatch
+ multiplication
+ (16,69)->84: (10 + 6) * 69 = 10 * 69 + 6 * 69 = 690 + 414 = 1104 mismatch
+ concatenation
+ (16,69)->84: 16 || 69 = 1669 mismatch
+ reverse concatenation
+ (16,69)->84: 69 || 16 = 6916 mismatch
+
+Trying difference operations reversed operands [16->61 69->96] and reversed result [expected (61,96)->84]:
+ subtraction (a-b)
+ (61,96)->84: 61 - 96 = -35 rev-> -53 mismatch
+ absolute difference
+ (61,96)->84: |61 - 96| = 35 rev-> 53 mismatch
+ max mod min
+ (61,96)->84: max(61,96) mod min(61,96) = 96 mod 61 = 35 rev-> 53 mismatch
+ negated absolute difference
+ (61,96)->84: -|61 - 96| = -35 rev-> -53 mismatch
+ reverse subtraction (b-a)
+ (61,96)->84: 96 - 61 = 35 rev-> 53 mismatch
+ modulo (a mod b)
+ (61,96)->84: 61 mod 96 = 61 rev-> 16 mismatch
+
+Trying difference operations on identity [16 69] [expected (16,69)->84]:
+ subtraction (a-b)
+ (16,69)->84: 16 - 69 = -53 mismatch
+ absolute difference
+ (16,69)->84: |16 - 69| = 53 mismatch
+ max mod min
+ (16,69)->84: max(16,69) mod min(16,69) = 69 mod 16 = 5 mismatch
+ negated absolute difference
+ (16,69)->84: -|16 - 69| = -53 mismatch
+ reverse subtraction (b-a)
+ (16,69)->84: 69 - 16 = 53 mismatch
+ modulo (a mod b)
+ (16,69)->84: 16 mod 69 = 16 mismatch
+
+Trying rare operations reversed operands [16->61 69->96] and reversed result [expected (61,96)->84]:
+ multiply+1
+ (61,96)->84: (60 + 1) * 96 + 1 = 60 * 96 + 1 * 96 + 1 = 5760 + 96 + 1 = 5856 + 1 = 5857 rev-> 7585 mismatch
+ multiply-1
+ (61,96)->84: (60 + 1) * 96 - 1 = 60 * 96 + 1 * 96 - 1 = 5760 + 96 - 1 = 5856 - 1 = 5855 rev-> 5585 mismatch
+ add+1
+ (61,96)->84: 61 + 96 + 1 = 158 rev-> 851 mismatch
+ add-1
+ (61,96)->84: 61 + 96 - 1 = 156 rev-> 651 mismatch
+ sub+1
+ (61,96)->84: 61 - 96 + 1 = -34 rev-> -43 mismatch
+ sub-1
+ (61,96)->84: 61 - 96 - 1 = -36 rev-> -63 mismatch
+ integer division (a/b)
+ (61,96)->84: 61 / 96 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (61,96)->84: 96 / 61 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (61,96)->84: 96 mod 61 = 35 rev-> 53 mismatch
+ digit absolute diff
+ (61,96)->84: |6-9| || |1-6| = 35 rev-> 53 mismatch
+ digit add mod10
+ (61,96)->84: (6+9)%10 || (1+6)%10 = 57 rev-> 75 mismatch
+ digit sub mod10
+ (61,96)->84: (6-9)%10 || (1-6)%10 = 75 rev-> 57 mismatch
+ cross multiply
+ (61,96)->84: 6*9 + 1*6 = 54 + 6 = 60 rev-> 06 mismatch
+ cross multiply rev
+ (61,96)->84: 6*6 + 1*9 = 36 + 9 = 45 rev-> 54 mismatch
+ digit multiply
+ (61,96)->84: 6*9 || 1*6 = 54 || 6 = 546 rev-> 645 mismatch
+ digit multiply rev
+ (61,96)->84: 6*6 || 1*9 = 36 || 9 = 369 rev-> 963 mismatch
+ digit sum diff
+ (61,96)->84: (6+1) - (9+6) = -8 rev-> -8 mismatch
+ digit sum sum
+ (61,96)->84: (6+1) + (9+6) = 22 rev-> 22 mismatch
+ digit product diff
+ (61,96)->84: 6*1 - 9*6 = 6 - 54 = -48 rev-> -84 mismatch
+ digit product sum
+ (61,96)->84: 6*1 + 9*6 = 6 + 54 = 60 rev-> 06 mismatch
+ determinant
+ (61,96)->84: 6*6 - 1*9 = 36 - 9 = 27 rev-> 72 mismatch
+ abs determinant
+ (61,96)->84: |6*6 - 1*9| = |36 - 9| = 27 rev-> 72 mismatch
+
+Trying rare operations on identity [16 69] [expected (16,69)->84]:
+ multiply+1
+ (16,69)->84: (10 + 6) * 69 + 1 = 10 * 69 + 6 * 69 + 1 = 690 + 414 + 1 = 1104 + 1 = 1105 mismatch
+ multiply-1
+ (16,69)->84: (10 + 6) * 69 - 1 = 10 * 69 + 6 * 69 - 1 = 690 + 414 - 1 = 1104 - 1 = 1103 mismatch
+ add+1
+ (16,69)->84: 16 + 69 + 1 = 86 mismatch
+ add-1
+ (16,69)->84: 16 + 69 - 1 = 84 match
+ correct, actions: add-1
+ sub+1
+ (16,69)->84: 16 - 69 + 1 = -52 mismatch
+ sub-1
+ (16,69)->84: 16 - 69 - 1 = -54 mismatch
+ integer division (a/b)
+ (16,69)->84: 16 / 69 = 0 mismatch
+ reverse division (b/a)
+ (16,69)->84: 69 / 16 = 4 mismatch
+ reverse modulo (b mod a)
+ (16,69)->84: 69 mod 16 = 5 mismatch
+ digit absolute diff
+ (16,69)->84: |1-6| || |6-9| = 53 mismatch
+ digit add mod10
+ (16,69)->84: (1+6)%10 || (6+9)%10 = 75 mismatch
+ digit sub mod10
+ (16,69)->84: (1-6)%10 || (6-9)%10 = 57 mismatch
+ cross multiply
+ (16,69)->84: 1*6 + 6*9 = 6 + 54 = 60 mismatch
+ cross multiply rev
+ (16,69)->84: 1*9 + 6*6 = 9 + 36 = 45 mismatch
+ digit multiply
+ (16,69)->84: 1*6 || 6*9 = 6 || 54 = 654 mismatch
+ digit multiply rev
+ (16,69)->84: 1*9 || 6*6 = 9 || 36 = 936 mismatch
+ digit sum diff
+ (16,69)->84: (1+6) - (6+9) = -8 mismatch
+ digit sum sum
+ (16,69)->84: (1+6) + (6+9) = 22 mismatch
+ digit product diff
+ (16,69)->84: 1*6 - 6*9 = 6 - 54 = -48 mismatch
+ digit product sum
+ (16,69)->84: 1*6 + 6*9 = 6 + 54 = 60 mismatch
+ determinant
+ (16,69)->84: 1*9 - 6*6 = 9 - 36 = -27 mismatch
+ abs determinant
+ (16,69)->84: |1*9 - 6*6| = |9 - 36| = 27 mismatch
+
+Applying to 99&82:
+ We recall that the question operator is found in the examples.
+ identity
+ add-1 (99,82): 99 + 82 - 1 = 180
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{180}

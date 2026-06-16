@@ -1,0 +1,186 @@
+10$38 = 8
+46@33 = 1518
+95[44 = 138
+37@53 = 1961
+
+The inputs are 10, 38, 46, 33, 95, 44, 37, 53
+
+The outputs are 8, 1518, 138, 1961
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+10$38 -> $
+46@33 -> @
+95[44 -> [
+37@53 -> @
+
+The operators
+$
+@
+[
+
+Looking at the question
+80$13 -> $
+The question operator is found in the examples.
+
+Looking at operator $ [10$38 = 8]:
+
+Trying common operations
+ reversed operands [10->01 38->83] and reversed result [expected (01,83)->8]
+ addition
+ (01,83)->8: 01 + 83 = 84 rev-> 48 mismatch
+ multiplication
+ (01,83)->8: (0 + 1) * 83 = 0 * 83 + 1 * 83 = 0 + 83 = 83 rev-> 38 mismatch
+ concatenation
+ (01,83)->8: 01 || 83 = 0183 rev-> 3810 mismatch
+ reverse concatenation
+ (01,83)->8: 83 || 01 = 8301 rev-> 1038 mismatch
+
+ identity [10 38] [expected (10,38)->8]
+ addition
+ (10,38)->8: 10 + 38 = 48 mismatch
+ multiplication
+ (10,38)->8: (10 + 0) * 38 = 10 * 38 + 0 * 38 = 380 + 0 = 380 mismatch
+ concatenation
+ (10,38)->8: 10 || 38 = 1038 mismatch
+ reverse concatenation
+ (10,38)->8: 38 || 10 = 3810 mismatch
+
+Trying difference operations
+ reversed operands [10->01 38->83] and reversed result [expected (01,83)->8]
+ subtraction (a-b)
+ (01,83)->8: 01 - 83 = -82 rev-> -28 mismatch
+ absolute difference
+ (01,83)->8: |01 - 83| = 82 rev-> 28 mismatch
+ max mod min
+ (01,83)->8: max(01,83) mod min(01,83) = 83 mod 01 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (01,83)->8: -|01 - 83| = -82 rev-> -28 mismatch
+ reverse subtraction (b-a)
+ (01,83)->8: 83 - 01 = 82 rev-> 28 mismatch
+ modulo (a mod b)
+ (01,83)->8: 01 mod 83 = 1 rev-> 1 mismatch
+
+ identity [10 38] [expected (10,38)->8]
+ subtraction (a-b)
+ (10,38)->8: 10 - 38 = -28 mismatch
+ absolute difference
+ (10,38)->8: |10 - 38| = 28 mismatch
+ max mod min
+ (10,38)->8: max(10,38) mod min(10,38) = 38 mod 10 = 8 match
+ correct, actions: max mod min
+ negated absolute difference
+ (10,38)->8: -|10 - 38| = -28 mismatch
+ reverse subtraction (b-a)
+ (10,38)->8: 38 - 10 = 28 mismatch
+ modulo (a mod b)
+ (10,38)->8: 10 mod 38 = 10 mismatch
+
+Trying rare operations
+ reversed operands [10->01 38->83] and reversed result [expected (01,83)->8]
+ multiply+1
+ (01,83)->8: (0 + 1) * 83 + 1 = 0 * 83 + 1 * 83 + 1 = 0 + 83 + 1 = 83 + 1 = 84 rev-> 48 mismatch
+ multiply-1
+ (01,83)->8: (0 + 1) * 83 - 1 = 0 * 83 + 1 * 83 - 1 = 0 + 83 - 1 = 83 - 1 = 82 rev-> 28 mismatch
+ add+1
+ (01,83)->8: 01 + 83 + 1 = 85 rev-> 58 mismatch
+ add-1
+ (01,83)->8: 01 + 83 - 1 = 83 rev-> 38 mismatch
+ sub+1
+ (01,83)->8: 01 - 83 + 1 = -81 rev-> -18 mismatch
+ sub-1
+ (01,83)->8: 01 - 83 - 1 = -83 rev-> -38 mismatch
+ integer division (a/b)
+ (01,83)->8: 01 / 83 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (01,83)->8: 83 / 01 = 83 rev-> 38 mismatch
+ reverse modulo (b mod a)
+ (01,83)->8: 83 mod 01 = 0 rev-> 0 mismatch
+ digit absolute diff
+ (01,83)->8: |0-8| || |1-3| = 82 rev-> 28 mismatch
+ digit add mod10
+ (01,83)->8: (0+8)%10 || (1+3)%10 = 84 rev-> 48 mismatch
+ digit sub mod10
+ (01,83)->8: (0-8)%10 || (1-3)%10 = 28 rev-> 82 mismatch
+ cross multiply
+ (01,83)->8: 0*8 + 1*3 = 0 + 3 = 3 rev-> 3 mismatch
+ cross multiply rev
+ (01,83)->8: 0*3 + 1*8 = 0 + 8 = 8 rev-> 8 match
+ correct, but skipping
+ digit multiply
+ (01,83)->8: 0*8 || 1*3 = 0 || 3 = 03 rev-> 30 mismatch
+ digit multiply rev
+ (01,83)->8: 0*3 || 1*8 = 0 || 8 = 08 rev-> 80 mismatch
+ digit sum diff
+ (01,83)->8: (0+1) - (8+3) = -10 rev-> -01 mismatch
+ digit sum sum
+ (01,83)->8: (0+1) + (8+3) = 12 rev-> 21 mismatch
+ digit product diff
+ (01,83)->8: 0*1 - 8*3 = 0 - 24 = -24 rev-> -42 mismatch
+ digit product sum
+ (01,83)->8: 0*1 + 8*3 = 0 + 24 = 24 rev-> 42 mismatch
+ determinant
+ (01,83)->8: 0*3 - 1*8 = 0 - 8 = -8 rev-> -8 mismatch
+ abs determinant
+ (01,83)->8: |0*3 - 1*8| = |0 - 8| = 8 rev-> 8 match
+ correct, but skipping
+
+ identity [10 38] [expected (10,38)->8]
+ multiply+1
+ (10,38)->8: (10 + 0) * 38 + 1 = 10 * 38 + 0 * 38 + 1 = 380 + 0 + 1 = 380 + 1 = 381 mismatch
+ multiply-1
+ (10,38)->8: (10 + 0) * 38 - 1 = 10 * 38 + 0 * 38 - 1 = 380 + 0 - 1 = 380 - 1 = 379 mismatch
+ add+1
+ (10,38)->8: 10 + 38 + 1 = 49 mismatch
+ add-1
+ (10,38)->8: 10 + 38 - 1 = 47 mismatch
+ sub+1
+ (10,38)->8: 10 - 38 + 1 = -27 mismatch
+ sub-1
+ (10,38)->8: 10 - 38 - 1 = -29 mismatch
+ integer division (a/b)
+ (10,38)->8: 10 / 38 = 0 mismatch
+ reverse division (b/a)
+ (10,38)->8: 38 / 10 = 3 mismatch
+ reverse modulo (b mod a)
+ (10,38)->8: 38 mod 10 = 8 match
+ correct, but skipping
+ digit absolute diff
+ (10,38)->8: |1-3| || |0-8| = 28 mismatch
+ digit add mod10
+ (10,38)->8: (1+3)%10 || (0+8)%10 = 48 mismatch
+ digit sub mod10
+ (10,38)->8: (1-3)%10 || (0-8)%10 = 82 mismatch
+ cross multiply
+ (10,38)->8: 1*3 + 0*8 = 3 + 0 = 3 mismatch
+ cross multiply rev
+ (10,38)->8: 1*8 + 0*3 = 8 + 0 = 8 match
+ correct, but skipping
+ digit multiply
+ (10,38)->8: 1*3 || 0*8 = 3 || 0 = 30 mismatch
+ digit multiply rev
+ (10,38)->8: 1*8 || 0*3 = 8 || 0 = 80 mismatch
+ digit sum diff
+ (10,38)->8: (1+0) - (3+8) = -10 mismatch
+ digit sum sum
+ (10,38)->8: (1+0) + (3+8) = 12 mismatch
+ digit product diff
+ (10,38)->8: 1*0 - 3*8 = 0 - 24 = -24 mismatch
+ digit product sum
+ (10,38)->8: 1*0 + 3*8 = 0 + 24 = 24 mismatch
+ determinant
+ (10,38)->8: 1*8 - 0*3 = 8 - 0 = 8 match
+ correct, but skipping
+ abs determinant
+ (10,38)->8: |1*8 - 0*3| = |8 - 0| = 8 match
+ correct, but skipping
+
+correct, actions: max mod min
+
+Applying to 80$13:
+ We recall that the question operator is found in the examples.
+ identity [80 13]
+ max mod min
+ (80,13): max(80,13) mod min(80,13) = 80 mod 13 = 2
+ Result is non-negative
+ \boxed{2}

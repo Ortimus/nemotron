@@ -1,0 +1,173 @@
+66+13 = 69
+11*29 = 2101
+41*41 = 691
+
+The inputs are 66, 13, 11, 29, 41, 41
+
+The outputs are 69, 2101, 691
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+66+13 -> +
+11*29 -> *
+41*41 -> *
+
+The operators
++
+*
+
+Looking at the question
+52*67 -> *
+The question operator is found in the examples.
+
+Looking at operator * [11*29 = 2101, 41*41 = 691]:
+
+Trying common operations reversed operands [11->11 29->92, 41->14 41->14] and reversed result [expected (11,92)->2101, (14,14)->691]:
+ addition
+ (11,92)->2101: 11 + 92 = 103 rev-> 301 mismatch
+ multiplication
+ (14,14)->691: (10 + 4) * 14 = 10 * 14 + 4 * 14 = 140 + 56 = 196 rev-> 691 match
+ (11,92)->2101: (10 + 1) * 92 = 10 * 92 + 1 * 92 = 920 + 92 = 1012 rev-> 2101 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (11,92)->2101: 11 || 92 = 1192 rev-> 2911 mismatch
+ reverse concatenation
+ (14,14)->691: 14 || 14 = 1414 rev-> 4141 mismatch
+
+Trying common operations on identity [11 29, 41 41] [expected (11,29)->2101, (41,41)->691]:
+ addition
+ (11,29)->2101: 11 + 29 = 40 mismatch
+ multiplication
+ (41,41)->691: (40 + 1) * 41 = 40 * 41 + 1 * 41 = 1640 + 41 = 1681 mismatch
+ concatenation
+ (11,29)->2101: 11 || 29 = 1129 mismatch
+ reverse concatenation
+ (41,41)->691: 41 || 41 = 4141 mismatch
+
+Trying difference operations reversed operands [11->11 29->92, 41->14 41->14] and reversed result [expected (11,92)->2101, (14,14)->691]:
+ subtraction (a-b)
+ (11,92)->2101: 11 - 92 = -81 rev-> -18 mismatch
+ absolute difference
+ (14,14)->691: |14 - 14| = 0 rev-> 0 mismatch
+ max mod min
+ (11,92)->2101: max(11,92) mod min(11,92) = 92 mod 11 = 4 rev-> 4 mismatch
+ negated absolute difference
+ (14,14)->691: -|14 - 14| = 0 rev-> 0 mismatch
+ reverse subtraction (b-a)
+ (11,92)->2101: 92 - 11 = 81 rev-> 18 mismatch
+ modulo (a mod b)
+ (14,14)->691: 14 mod 14 = 0 rev-> 0 mismatch
+
+Trying difference operations on identity [11 29, 41 41] [expected (11,29)->2101, (41,41)->691]:
+ subtraction (a-b)
+ (11,29)->2101: 11 - 29 = -18 mismatch
+ absolute difference
+ (41,41)->691: |41 - 41| = 0 mismatch
+ max mod min
+ (11,29)->2101: max(11,29) mod min(11,29) = 29 mod 11 = 7 mismatch
+ negated absolute difference
+ (41,41)->691: -|41 - 41| = 0 mismatch
+ reverse subtraction (b-a)
+ (11,29)->2101: 29 - 11 = 18 mismatch
+ modulo (a mod b)
+ (41,41)->691: 41 mod 41 = 0 mismatch
+
+Trying rare operations reversed operands [11->11 29->92, 41->14 41->14] and reversed result [expected (11,92)->2101, (14,14)->691]:
+ multiply+1
+ (11,92)->2101: (10 + 1) * 92 + 1 = 10 * 92 + 1 * 92 + 1 = 920 + 92 + 1 = 1012 + 1 = 1013 rev-> 3101 mismatch
+ multiply-1
+ (14,14)->691: (10 + 4) * 14 - 1 = 10 * 14 + 4 * 14 - 1 = 140 + 56 - 1 = 196 - 1 = 195 rev-> 591 mismatch
+ add+1
+ (11,92)->2101: 11 + 92 + 1 = 104 rev-> 401 mismatch
+ add-1
+ (14,14)->691: 14 + 14 - 1 = 27 rev-> 72 mismatch
+ sub+1
+ (11,92)->2101: 11 - 92 + 1 = -80 rev-> -08 mismatch
+ sub-1
+ (14,14)->691: 14 - 14 - 1 = -1 rev-> -1 mismatch
+ integer division (a/b)
+ (11,92)->2101: 11 / 92 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (14,14)->691: 14 / 14 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (11,92)->2101: 92 mod 11 = 4 rev-> 4 mismatch
+ digit absolute diff
+ (14,14)->691: |1-1| || |4-4| = 00 rev-> 00 mismatch
+ digit add mod10
+ (11,92)->2101: (1+9)%10 || (1+2)%10 = 03 rev-> 30 mismatch
+ digit sub mod10
+ (14,14)->691: (1-1)%10 || (4-4)%10 = 00 rev-> 00 mismatch
+ cross multiply
+ (11,92)->2101: 1*9 + 1*2 = 9 + 2 = 11 rev-> 11 mismatch
+ cross multiply rev
+ (14,14)->691: 1*4 + 4*1 = 4 + 4 = 8 rev-> 8 mismatch
+ digit multiply
+ (11,92)->2101: 1*9 || 1*2 = 9 || 2 = 92 rev-> 29 mismatch
+ digit multiply rev
+ (14,14)->691: 1*4 || 4*1 = 4 || 4 = 44 rev-> 44 mismatch
+ digit sum diff
+ (11,92)->2101: (1+1) - (9+2) = -9 rev-> -9 mismatch
+ digit sum sum
+ (14,14)->691: (1+4) + (1+4) = 10 rev-> 01 mismatch
+ digit product diff
+ (11,92)->2101: 1*1 - 9*2 = 1 - 18 = -17 rev-> -71 mismatch
+ digit product sum
+ (14,14)->691: 1*4 + 1*4 = 4 + 4 = 8 rev-> 8 mismatch
+ determinant
+ (11,92)->2101: 1*2 - 1*9 = 2 - 9 = -7 rev-> -7 mismatch
+ abs determinant
+ (14,14)->691: |1*4 - 4*1| = |4 - 4| = 0 rev-> 0 mismatch
+
+Trying rare operations on identity [11 29, 41 41] [expected (11,29)->2101, (41,41)->691]:
+ multiply+1
+ (11,29)->2101: (10 + 1) * 29 + 1 = 10 * 29 + 1 * 29 + 1 = 290 + 29 + 1 = 319 + 1 = 320 mismatch
+ multiply-1
+ (41,41)->691: (40 + 1) * 41 - 1 = 40 * 41 + 1 * 41 - 1 = 1640 + 41 - 1 = 1681 - 1 = 1680 mismatch
+ add+1
+ (11,29)->2101: 11 + 29 + 1 = 41 mismatch
+ add-1
+ (41,41)->691: 41 + 41 - 1 = 81 mismatch
+ sub+1
+ (11,29)->2101: 11 - 29 + 1 = -17 mismatch
+ sub-1
+ (41,41)->691: 41 - 41 - 1 = -1 mismatch
+ integer division (a/b)
+ (11,29)->2101: 11 / 29 = 0 mismatch
+ reverse division (b/a)
+ (41,41)->691: 41 / 41 = 1 mismatch
+ reverse modulo (b mod a)
+ (11,29)->2101: 29 mod 11 = 7 mismatch
+ digit absolute diff
+ (41,41)->691: |4-4| || |1-1| = 00 mismatch
+ digit add mod10
+ (11,29)->2101: (1+2)%10 || (1+9)%10 = 30 mismatch
+ digit sub mod10
+ (41,41)->691: (4-4)%10 || (1-1)%10 = 00 mismatch
+ cross multiply
+ (11,29)->2101: 1*2 + 1*9 = 2 + 9 = 11 mismatch
+ cross multiply rev
+ (41,41)->691: 4*1 + 1*4 = 4 + 4 = 8 mismatch
+ digit multiply
+ (11,29)->2101: 1*2 || 1*9 = 2 || 9 = 29 mismatch
+ digit multiply rev
+ (41,41)->691: 4*1 || 1*4 = 4 || 4 = 44 mismatch
+ digit sum diff
+ (11,29)->2101: (1+1) - (2+9) = -9 mismatch
+ digit sum sum
+ (41,41)->691: (4+1) + (4+1) = 10 mismatch
+ digit product diff
+ (11,29)->2101: 1*1 - 2*9 = 1 - 18 = -17 mismatch
+ digit product sum
+ (41,41)->691: 4*1 + 4*1 = 4 + 4 = 8 mismatch
+ determinant
+ (11,29)->2101: 1*9 - 1*2 = 9 - 2 = 7 mismatch
+ abs determinant
+ (41,41)->691: |4*1 - 1*4| = |4 - 4| = 0 mismatch
+
+Applying to 52*67:
+ We recall that the question operator is found in the examples.
+ reversed operands [52->25, 67->76] and reversed result
+ multiplication (25,76): (20 + 5) * 76 = 20 * 76 + 5 * 76 = 1520 + 380 = 1900 rev-> 0091
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{0091}

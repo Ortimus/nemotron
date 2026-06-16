@@ -1,0 +1,178 @@
+77"48 = 124
+59[35 = 24
+26[84 = 58
+29"60 = 88
+48"62 = 109
+
+The inputs are 77, 48, 59, 35, 26, 84, 29, 60, 48, 62
+
+The outputs are 124, 24, 58, 88, 109
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+77"48 -> "
+59[35 -> [
+26[84 -> [
+29"60 -> "
+48"62 -> "
+
+The operators
+"
+[
+
+Looking at the question
+11"86 -> "
+The question operator is found in the examples.
+
+Looking at operator " [77"48 = 124, 29"60 = 88, 48"62 = 109]:
+
+Trying common operations reversed operands [77->77 48->84, 29->92 60->06, 48->84 62->26] and reversed result [expected (77,84)->124, (92,06)->88, (84,26)->109]:
+ addition
+ (77,84)->124: 77 + 84 = 161 rev-> 161 mismatch
+ multiplication
+ (92,06)->88: (90 + 2) * 06 = 90 * 06 + 2 * 06 = 540 + 12 = 552 rev-> 255 mismatch
+ concatenation
+ (84,26)->109: 84 || 26 = 8426 rev-> 6248 mismatch
+ reverse concatenation
+ (77,84)->124: 84 || 77 = 8477 rev-> 7748 mismatch
+
+Trying common operations on identity [77 48, 29 60, 48 62] [expected (77,48)->124, (29,60)->88, (48,62)->109]:
+ addition
+ (77,48)->124: 77 + 48 = 125 mismatch
+ multiplication
+ (29,60)->88: (20 + 9) * 60 = 20 * 60 + 9 * 60 = 1200 + 540 = 1740 mismatch
+ concatenation
+ (48,62)->109: 48 || 62 = 4862 mismatch
+ reverse concatenation
+ (77,48)->124: 48 || 77 = 4877 mismatch
+
+Trying difference operations reversed operands [77->77 48->84, 29->92 60->06, 48->84 62->26] and reversed result [expected (77,84)->124, (92,06)->88, (84,26)->109]:
+ subtraction (a-b)
+ (77,84)->124: 77 - 84 = -7 rev-> -7 mismatch
+ absolute difference
+ (92,06)->88: |92 - 06| = 86 rev-> 68 mismatch
+ max mod min
+ (84,26)->109: max(84,26) mod min(84,26) = 84 mod 26 = 6 rev-> 6 mismatch
+ negated absolute difference
+ (77,84)->124: -|77 - 84| = -7 rev-> -7 mismatch
+ reverse subtraction (b-a)
+ (92,06)->88: 06 - 92 = -86 rev-> -68 mismatch
+ modulo (a mod b)
+ (84,26)->109: 84 mod 26 = 6 rev-> 6 mismatch
+
+Trying difference operations on identity [77 48, 29 60, 48 62] [expected (77,48)->124, (29,60)->88, (48,62)->109]:
+ subtraction (a-b)
+ (77,48)->124: 77 - 48 = 29 mismatch
+ absolute difference
+ (29,60)->88: |29 - 60| = 31 mismatch
+ max mod min
+ (48,62)->109: max(48,62) mod min(48,62) = 62 mod 48 = 14 mismatch
+ negated absolute difference
+ (77,48)->124: -|77 - 48| = -29 mismatch
+ reverse subtraction (b-a)
+ (29,60)->88: 60 - 29 = 31 mismatch
+ modulo (a mod b)
+ (48,62)->109: 48 mod 62 = 48 mismatch
+
+Trying rare operations reversed operands [77->77 48->84, 29->92 60->06, 48->84 62->26] and reversed result [expected (77,84)->124, (92,06)->88, (84,26)->109]:
+ multiply+1
+ (77,84)->124: (70 + 7) * 84 + 1 = 70 * 84 + 7 * 84 + 1 = 5880 + 588 + 1 = 6468 + 1 = 6469 rev-> 9646 mismatch
+ multiply-1
+ (92,06)->88: (90 + 2) * 06 - 1 = 90 * 06 + 2 * 06 - 1 = 540 + 12 - 1 = 552 - 1 = 551 rev-> 155 mismatch
+ add+1
+ (84,26)->109: 84 + 26 + 1 = 111 rev-> 111 mismatch
+ add-1
+ (77,84)->124: 77 + 84 - 1 = 160 rev-> 061 mismatch
+ sub+1
+ (92,06)->88: 92 - 06 + 1 = 87 rev-> 78 mismatch
+ sub-1
+ (84,26)->109: 84 - 26 - 1 = 57 rev-> 75 mismatch
+ integer division (a/b)
+ (77,84)->124: 77 / 84 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (92,06)->88: 06 / 92 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (84,26)->109: 26 mod 84 = 26 rev-> 62 mismatch
+ digit absolute diff
+ (77,84)->124: |7-8| || |7-4| = 13 rev-> 31 mismatch
+ digit add mod10
+ (92,06)->88: (9+0)%10 || (2+6)%10 = 98 rev-> 89 mismatch
+ digit sub mod10
+ (84,26)->109: (8-2)%10 || (4-6)%10 = 68 rev-> 86 mismatch
+ cross multiply
+ (77,84)->124: 7*8 + 7*4 = 56 + 28 = 84 rev-> 48 mismatch
+ cross multiply rev
+ (92,06)->88: 9*6 + 2*0 = 54 + 0 = 54 rev-> 45 mismatch
+ digit multiply
+ (84,26)->109: 8*2 || 4*6 = 16 || 24 = 1624 rev-> 4261 mismatch
+ digit multiply rev
+ (77,84)->124: 7*4 || 7*8 = 28 || 56 = 2856 rev-> 6582 mismatch
+ digit sum diff
+ (92,06)->88: (9+2) - (0+6) = 5 rev-> 5 mismatch
+ digit sum sum
+ (84,26)->109: (8+4) + (2+6) = 20 rev-> 02 mismatch
+ digit product diff
+ (77,84)->124: 7*7 - 8*4 = 49 - 32 = 17 rev-> 71 mismatch
+ digit product sum
+ (92,06)->88: 9*2 + 0*6 = 18 + 0 = 18 rev-> 81 mismatch
+ determinant
+ (84,26)->109: 8*6 - 4*2 = 48 - 8 = 40 rev-> 04 mismatch
+ abs determinant
+ (77,84)->124: |7*4 - 7*8| = |28 - 56| = 28 rev-> 82 mismatch
+
+Trying rare operations on identity [77 48, 29 60, 48 62] [expected (77,48)->124, (29,60)->88, (48,62)->109]:
+ multiply+1
+ (77,48)->124: (70 + 7) * 48 + 1 = 70 * 48 + 7 * 48 + 1 = 3360 + 336 + 1 = 3696 + 1 = 3697 mismatch
+ multiply-1
+ (29,60)->88: (20 + 9) * 60 - 1 = 20 * 60 + 9 * 60 - 1 = 1200 + 540 - 1 = 1740 - 1 = 1739 mismatch
+ add+1
+ (48,62)->109: 48 + 62 + 1 = 111 mismatch
+ add-1
+ (77,48)->124: 77 + 48 - 1 = 124 match
+ (29,60)->88: 29 + 60 - 1 = 88 match
+ (48,62)->109: 48 + 62 - 1 = 109 match
+ correct, actions: add-1
+ sub+1
+ (29,60)->88: 29 - 60 + 1 = -30 mismatch
+ sub-1
+ (48,62)->109: 48 - 62 - 1 = -15 mismatch
+ integer division (a/b)
+ (77,48)->124: 77 / 48 = 1 mismatch
+ reverse division (b/a)
+ (29,60)->88: 60 / 29 = 2 mismatch
+ reverse modulo (b mod a)
+ (48,62)->109: 62 mod 48 = 14 mismatch
+ digit absolute diff
+ (77,48)->124: |7-4| || |7-8| = 31 mismatch
+ digit add mod10
+ (29,60)->88: (2+6)%10 || (9+0)%10 = 89 mismatch
+ digit sub mod10
+ (48,62)->109: (4-6)%10 || (8-2)%10 = 86 mismatch
+ cross multiply
+ (77,48)->124: 7*4 + 7*8 = 28 + 56 = 84 mismatch
+ cross multiply rev
+ (29,60)->88: 2*0 + 9*6 = 0 + 54 = 54 mismatch
+ digit multiply
+ (48,62)->109: 4*6 || 8*2 = 24 || 16 = 2416 mismatch
+ digit multiply rev
+ (77,48)->124: 7*8 || 7*4 = 56 || 28 = 5628 mismatch
+ digit sum diff
+ (29,60)->88: (2+9) - (6+0) = 5 mismatch
+ digit sum sum
+ (48,62)->109: (4+8) + (6+2) = 20 mismatch
+ digit product diff
+ (77,48)->124: 7*7 - 4*8 = 49 - 32 = 17 mismatch
+ digit product sum
+ (29,60)->88: 2*9 + 6*0 = 18 + 0 = 18 mismatch
+ determinant
+ (48,62)->109: 4*2 - 8*6 = 8 - 48 = -40 mismatch
+ abs determinant
+ (77,48)->124: |7*8 - 7*4| = |56 - 28| = 28 mismatch
+
+Applying to 11"86:
+ We recall that the question operator is found in the examples.
+ identity
+ add-1 (11,86): 11 + 86 - 1 = 96
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{96}

@@ -1,0 +1,178 @@
+56-18 = 73
+49{82 = 4019
+26}35 = }9
+
+The inputs are 56, 18, 49, 82, 26, 35
+
+The outputs are 73, 4019, }9
+Some example outputs have the operator symbol as prefix }.
+We now consider the outputs to be 73, 4019, -9
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+56-18 -> -
+49{82 -> {
+26}35 -> }
+
+The operators
+-
+{
+}
+
+Looking at the question
+13}64 -> }
+The question operator is found in the examples.
+
+Looking at operator } [26}35 = -9]:
+
+Trying common operations reversed operands [26->62 35->53] and reversed result [expected (62,53)->-9]:
+ addition
+ (62,53)->-9: 62 + 53 = 115 rev-> 511 mismatch
+ multiplication
+ (62,53)->-9: (60 + 2) * 53 = 60 * 53 + 2 * 53 = 3180 + 106 = 3286 rev-> 6823 mismatch
+ concatenation
+ (62,53)->-9: 62 || 53 = 6253 rev-> 3526 mismatch
+ reverse concatenation
+ (62,53)->-9: 53 || 62 = 5362 rev-> 2635 mismatch
+
+Trying common operations on identity [26 35] [expected (26,35)->-9]:
+ addition
+ (26,35)->-9: 26 + 35 = 61 mismatch
+ multiplication
+ (26,35)->-9: (20 + 6) * 35 = 20 * 35 + 6 * 35 = 700 + 210 = 910 mismatch
+ concatenation
+ (26,35)->-9: 26 || 35 = 2635 mismatch
+ reverse concatenation
+ (26,35)->-9: 35 || 26 = 3526 mismatch
+
+Trying difference operations reversed operands [26->62 35->53] and reversed result [expected (62,53)->-9]:
+ subtraction (a-b)
+ (62,53)->-9: 62 - 53 = 9 rev-> 9 mismatch
+ absolute difference
+ (62,53)->-9: |62 - 53| = 9 rev-> 9 mismatch
+ max mod min
+ (62,53)->-9: max(62,53) mod min(62,53) = 62 mod 53 = 9 rev-> 9 mismatch
+ negated absolute difference
+ (62,53)->-9: -|62 - 53| = -9 rev-> -9 match
+ correct, actions: reversed operands, reversed result, negated absolute difference
+ reverse subtraction (b-a)
+ (62,53)->-9: 53 - 62 = -9 rev-> -9 match
+ correct, but skipping
+ modulo (a mod b)
+ (62,53)->-9: 62 mod 53 = 9 rev-> 9 mismatch
+
+Trying difference operations on identity [26 35] [expected (26,35)->-9]:
+ subtraction (a-b)
+ (26,35)->-9: 26 - 35 = -9 match
+ correct, but skipping
+ absolute difference
+ (26,35)->-9: |26 - 35| = 9 mismatch
+ max mod min
+ (26,35)->-9: max(26,35) mod min(26,35) = 35 mod 26 = 9 mismatch
+ negated absolute difference
+ (26,35)->-9: -|26 - 35| = -9 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (26,35)->-9: 35 - 26 = 9 mismatch
+ modulo (a mod b)
+ (26,35)->-9: 26 mod 35 = 26 mismatch
+
+Trying rare operations reversed operands [26->62 35->53] and reversed result [expected (62,53)->-9]:
+ multiply+1
+ (62,53)->-9: (60 + 2) * 53 + 1 = 60 * 53 + 2 * 53 + 1 = 3180 + 106 + 1 = 3286 + 1 = 3287 rev-> 7823 mismatch
+ multiply-1
+ (62,53)->-9: (60 + 2) * 53 - 1 = 60 * 53 + 2 * 53 - 1 = 3180 + 106 - 1 = 3286 - 1 = 3285 rev-> 5823 mismatch
+ add+1
+ (62,53)->-9: 62 + 53 + 1 = 116 rev-> 611 mismatch
+ add-1
+ (62,53)->-9: 62 + 53 - 1 = 114 rev-> 411 mismatch
+ sub+1
+ (62,53)->-9: 62 - 53 + 1 = 10 rev-> 01 mismatch
+ sub-1
+ (62,53)->-9: 62 - 53 - 1 = 8 rev-> 8 mismatch
+ integer division (a/b)
+ (62,53)->-9: 62 / 53 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (62,53)->-9: 53 / 62 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (62,53)->-9: 53 mod 62 = 53 rev-> 35 mismatch
+ digit absolute diff
+ (62,53)->-9: |6-5| || |2-3| = 11 rev-> 11 mismatch
+ digit add mod10
+ (62,53)->-9: (6+5)%10 || (2+3)%10 = 15 rev-> 51 mismatch
+ digit sub mod10
+ (62,53)->-9: (6-5)%10 || (2-3)%10 = 19 rev-> 91 mismatch
+ cross multiply
+ (62,53)->-9: 6*5 + 2*3 = 30 + 6 = 36 rev-> 63 mismatch
+ cross multiply rev
+ (62,53)->-9: 6*3 + 2*5 = 18 + 10 = 28 rev-> 82 mismatch
+ digit multiply
+ (62,53)->-9: 6*5 || 2*3 = 30 || 6 = 306 rev-> 603 mismatch
+ digit multiply rev
+ (62,53)->-9: 6*3 || 2*5 = 18 || 10 = 1810 rev-> 0181 mismatch
+ digit sum diff
+ (62,53)->-9: (6+2) - (5+3) = 0 rev-> 0 mismatch
+ digit sum sum
+ (62,53)->-9: (6+2) + (5+3) = 16 rev-> 61 mismatch
+ digit product diff
+ (62,53)->-9: 6*2 - 5*3 = 12 - 15 = -3 rev-> -3 mismatch
+ digit product sum
+ (62,53)->-9: 6*2 + 5*3 = 12 + 15 = 27 rev-> 72 mismatch
+ determinant
+ (62,53)->-9: 6*3 - 2*5 = 18 - 10 = 8 rev-> 8 mismatch
+ abs determinant
+ (62,53)->-9: |6*3 - 2*5| = |18 - 10| = 8 rev-> 8 mismatch
+
+Trying rare operations on identity [26 35] [expected (26,35)->-9]:
+ multiply+1
+ (26,35)->-9: (20 + 6) * 35 + 1 = 20 * 35 + 6 * 35 + 1 = 700 + 210 + 1 = 910 + 1 = 911 mismatch
+ multiply-1
+ (26,35)->-9: (20 + 6) * 35 - 1 = 20 * 35 + 6 * 35 - 1 = 700 + 210 - 1 = 910 - 1 = 909 mismatch
+ add+1
+ (26,35)->-9: 26 + 35 + 1 = 62 mismatch
+ add-1
+ (26,35)->-9: 26 + 35 - 1 = 60 mismatch
+ sub+1
+ (26,35)->-9: 26 - 35 + 1 = -8 mismatch
+ sub-1
+ (26,35)->-9: 26 - 35 - 1 = -10 mismatch
+ integer division (a/b)
+ (26,35)->-9: 26 / 35 = 0 mismatch
+ reverse division (b/a)
+ (26,35)->-9: 35 / 26 = 1 mismatch
+ reverse modulo (b mod a)
+ (26,35)->-9: 35 mod 26 = 9 mismatch
+ digit absolute diff
+ (26,35)->-9: |2-3| || |6-5| = 11 mismatch
+ digit add mod10
+ (26,35)->-9: (2+3)%10 || (6+5)%10 = 51 mismatch
+ digit sub mod10
+ (26,35)->-9: (2-3)%10 || (6-5)%10 = 91 mismatch
+ cross multiply
+ (26,35)->-9: 2*3 + 6*5 = 6 + 30 = 36 mismatch
+ cross multiply rev
+ (26,35)->-9: 2*5 + 6*3 = 10 + 18 = 28 mismatch
+ digit multiply
+ (26,35)->-9: 2*3 || 6*5 = 6 || 30 = 630 mismatch
+ digit multiply rev
+ (26,35)->-9: 2*5 || 6*3 = 10 || 18 = 1018 mismatch
+ digit sum diff
+ (26,35)->-9: (2+6) - (3+5) = 0 mismatch
+ digit sum sum
+ (26,35)->-9: (2+6) + (3+5) = 16 mismatch
+ digit product diff
+ (26,35)->-9: 2*6 - 3*5 = 12 - 15 = -3 mismatch
+ digit product sum
+ (26,35)->-9: 2*6 + 3*5 = 12 + 15 = 27 mismatch
+ determinant
+ (26,35)->-9: 2*5 - 6*3 = 10 - 18 = -8 mismatch
+ abs determinant
+ (26,35)->-9: |2*5 - 6*3| = |10 - 18| = 8 mismatch
+
+Applying to 13}64:
+ We recall that the question operator is found in the examples.
+ reversed operands [13->31, 64->46] and reversed result
+ negated absolute difference (31,46): -|31 - 46| = -15 rev-> -51
+ Result is negative - we add back the operator prefix }: -51 -> }51
+
+\boxed{}51}

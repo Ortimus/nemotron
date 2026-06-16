@@ -1,0 +1,182 @@
+03-91 = 11
+24-36 = 12
+29+76 = 951
+88-14 = 74
+49*92 = 9249
+
+The inputs are 03, 91, 24, 36, 29, 76, 88, 14, 49, 92
+
+The outputs are 11, 12, 951, 74, 9249
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+03-91 -> -
+24-36 -> -
+29+76 -> +
+88-14 -> -
+49*92 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+74+19 -> +
+The question operator is found in the examples.
+
+Looking at operator + [29+76 = 951]:
+
+Trying common operations
+ reversed operands [29->92 76->67] and reversed result [expected (92,67)->951]
+ addition
+ (92,67)->951: 92 + 67 = 159 rev-> 951 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (92,67)->951: (90 + 2) * 67 = 90 * 67 + 2 * 67 = 6030 + 134 = 6164 rev-> 4616 mismatch
+ concatenation
+ (92,67)->951: 92 || 67 = 9267 rev-> 7629 mismatch
+ reverse concatenation
+ (92,67)->951: 67 || 92 = 6792 rev-> 2976 mismatch
+
+ identity [29 76] [expected (29,76)->951]
+ addition
+ (29,76)->951: 29 + 76 = 105 mismatch
+ multiplication
+ (29,76)->951: (20 + 9) * 76 = 20 * 76 + 9 * 76 = 1520 + 684 = 2204 mismatch
+ concatenation
+ (29,76)->951: 29 || 76 = 2976 mismatch
+ reverse concatenation
+ (29,76)->951: 76 || 29 = 7629 mismatch
+
+Trying difference operations
+ reversed operands [29->92 76->67] and reversed result [expected (92,67)->951]
+ subtraction (a-b)
+ (92,67)->951: 92 - 67 = 25 rev-> 52 mismatch
+ absolute difference
+ (92,67)->951: |92 - 67| = 25 rev-> 52 mismatch
+ max mod min
+ (92,67)->951: max(92,67) mod min(92,67) = 92 mod 67 = 25 rev-> 52 mismatch
+ negated absolute difference
+ (92,67)->951: -|92 - 67| = -25 rev-> -52 mismatch
+ reverse subtraction (b-a)
+ (92,67)->951: 67 - 92 = -25 rev-> -52 mismatch
+ modulo (a mod b)
+ (92,67)->951: 92 mod 67 = 25 rev-> 52 mismatch
+
+ identity [29 76] [expected (29,76)->951]
+ subtraction (a-b)
+ (29,76)->951: 29 - 76 = -47 mismatch
+ absolute difference
+ (29,76)->951: |29 - 76| = 47 mismatch
+ max mod min
+ (29,76)->951: max(29,76) mod min(29,76) = 76 mod 29 = 18 mismatch
+ negated absolute difference
+ (29,76)->951: -|29 - 76| = -47 mismatch
+ reverse subtraction (b-a)
+ (29,76)->951: 76 - 29 = 47 mismatch
+ modulo (a mod b)
+ (29,76)->951: 29 mod 76 = 29 mismatch
+
+Trying rare operations
+ reversed operands [29->92 76->67] and reversed result [expected (92,67)->951]
+ multiply+1
+ (92,67)->951: (90 + 2) * 67 + 1 = 90 * 67 + 2 * 67 + 1 = 6030 + 134 + 1 = 6164 + 1 = 6165 rev-> 5616 mismatch
+ multiply-1
+ (92,67)->951: (90 + 2) * 67 - 1 = 90 * 67 + 2 * 67 - 1 = 6030 + 134 - 1 = 6164 - 1 = 6163 rev-> 3616 mismatch
+ add+1
+ (92,67)->951: 92 + 67 + 1 = 160 rev-> 061 mismatch
+ add-1
+ (92,67)->951: 92 + 67 - 1 = 158 rev-> 851 mismatch
+ sub+1
+ (92,67)->951: 92 - 67 + 1 = 26 rev-> 62 mismatch
+ sub-1
+ (92,67)->951: 92 - 67 - 1 = 24 rev-> 42 mismatch
+ integer division (a/b)
+ (92,67)->951: 92 / 67 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (92,67)->951: 67 / 92 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (92,67)->951: 67 mod 92 = 67 rev-> 76 mismatch
+ digit absolute diff
+ (92,67)->951: |9-6| || |2-7| = 35 rev-> 53 mismatch
+ digit add mod10
+ (92,67)->951: (9+6)%10 || (2+7)%10 = 59 rev-> 95 mismatch
+ digit sub mod10
+ (92,67)->951: (9-6)%10 || (2-7)%10 = 35 rev-> 53 mismatch
+ cross multiply
+ (92,67)->951: 9*6 + 2*7 = 54 + 14 = 68 rev-> 86 mismatch
+ cross multiply rev
+ (92,67)->951: 9*7 + 2*6 = 63 + 12 = 75 rev-> 57 mismatch
+ digit multiply
+ (92,67)->951: 9*6 || 2*7 = 54 || 14 = 5414 rev-> 4145 mismatch
+ digit multiply rev
+ (92,67)->951: 9*7 || 2*6 = 63 || 12 = 6312 rev-> 2136 mismatch
+ digit sum diff
+ (92,67)->951: (9+2) - (6+7) = -2 rev-> -2 mismatch
+ digit sum sum
+ (92,67)->951: (9+2) + (6+7) = 24 rev-> 42 mismatch
+ digit product diff
+ (92,67)->951: 9*2 - 6*7 = 18 - 42 = -24 rev-> -42 mismatch
+ digit product sum
+ (92,67)->951: 9*2 + 6*7 = 18 + 42 = 60 rev-> 06 mismatch
+ determinant
+ (92,67)->951: 9*7 - 2*6 = 63 - 12 = 51 rev-> 15 mismatch
+ abs determinant
+ (92,67)->951: |9*7 - 2*6| = |63 - 12| = 51 rev-> 15 mismatch
+
+ identity [29 76] [expected (29,76)->951]
+ multiply+1
+ (29,76)->951: (20 + 9) * 76 + 1 = 20 * 76 + 9 * 76 + 1 = 1520 + 684 + 1 = 2204 + 1 = 2205 mismatch
+ multiply-1
+ (29,76)->951: (20 + 9) * 76 - 1 = 20 * 76 + 9 * 76 - 1 = 1520 + 684 - 1 = 2204 - 1 = 2203 mismatch
+ add+1
+ (29,76)->951: 29 + 76 + 1 = 106 mismatch
+ add-1
+ (29,76)->951: 29 + 76 - 1 = 104 mismatch
+ sub+1
+ (29,76)->951: 29 - 76 + 1 = -46 mismatch
+ sub-1
+ (29,76)->951: 29 - 76 - 1 = -48 mismatch
+ integer division (a/b)
+ (29,76)->951: 29 / 76 = 0 mismatch
+ reverse division (b/a)
+ (29,76)->951: 76 / 29 = 2 mismatch
+ reverse modulo (b mod a)
+ (29,76)->951: 76 mod 29 = 18 mismatch
+ digit absolute diff
+ (29,76)->951: |2-7| || |9-6| = 53 mismatch
+ digit add mod10
+ (29,76)->951: (2+7)%10 || (9+6)%10 = 95 mismatch
+ digit sub mod10
+ (29,76)->951: (2-7)%10 || (9-6)%10 = 53 mismatch
+ cross multiply
+ (29,76)->951: 2*7 + 9*6 = 14 + 54 = 68 mismatch
+ cross multiply rev
+ (29,76)->951: 2*6 + 9*7 = 12 + 63 = 75 mismatch
+ digit multiply
+ (29,76)->951: 2*7 || 9*6 = 14 || 54 = 1454 mismatch
+ digit multiply rev
+ (29,76)->951: 2*6 || 9*7 = 12 || 63 = 1263 mismatch
+ digit sum diff
+ (29,76)->951: (2+9) - (7+6) = -2 mismatch
+ digit sum sum
+ (29,76)->951: (2+9) + (7+6) = 24 mismatch
+ digit product diff
+ (29,76)->951: 2*9 - 7*6 = 18 - 42 = -24 mismatch
+ digit product sum
+ (29,76)->951: 2*9 + 7*6 = 18 + 42 = 60 mismatch
+ determinant
+ (29,76)->951: 2*6 - 9*7 = 12 - 63 = -51 mismatch
+ abs determinant
+ (29,76)->951: |2*6 - 9*7| = |12 - 63| = 51 mismatch
+
+correct, actions: reversed operands, reversed result, addition
+
+Applying to 74+19:
+ We recall that the question operator is found in the examples.
+ reversed operands [74->47, 19->91] and reversed result
+ addition
+ (47,91): 47 + 91 = 138 rev-> 831
+ Result is non-negative
+ \boxed{831}

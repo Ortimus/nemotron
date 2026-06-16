@@ -1,0 +1,181 @@
+69-63 = 06
+06*17 = 1706
+37+29 = 461
+79*88 = 8879
+47-09 = -61
+
+The inputs are 69, 63, 06, 17, 37, 29, 79, 88, 47, 09
+
+The outputs are 06, 1706, 461, 8879, -61
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 06, 1706, 461, 8879, -61
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+69-63 -> -
+06*17 -> *
+37+29 -> +
+79*88 -> *
+47-09 -> -
+
+The operators
+-
+*
++
+
+Looking at the question
+71-45 -> -
+The question operator is found in the examples.
+
+Looking at operator - [69-63 = 06, 47-09 = -61]:
+
+Trying common operations reversed operands [69->96 63->36, 47->74 09->90] and reversed result [expected (96,36)->06, (74,90)->-61]:
+ addition
+ (96,36)->06: 96 + 36 = 132 rev-> 231 mismatch
+ multiplication
+ (74,90)->-61: (70 + 4) * 90 = 70 * 90 + 4 * 90 = 6300 + 360 = 6660 rev-> 0666 mismatch
+ concatenation
+ (96,36)->06: 96 || 36 = 9636 rev-> 6369 mismatch
+ reverse concatenation
+ (74,90)->-61: 90 || 74 = 9074 rev-> 4709 mismatch
+
+Trying common operations on identity [69 63, 47 09] [expected (69,63)->06, (47,09)->-61]:
+ addition
+ (69,63)->06: 69 + 63 = 132 mismatch
+ multiplication
+ (47,09)->-61: (40 + 7) * 09 = 40 * 09 + 7 * 09 = 360 + 63 = 423 mismatch
+ concatenation
+ (69,63)->06: 69 || 63 = 6963 mismatch
+ reverse concatenation
+ (47,09)->-61: 09 || 47 = 0947 mismatch
+
+Trying difference operations reversed operands [69->96 63->36, 47->74 09->90] and reversed result [expected (96,36)->06, (74,90)->-61]:
+ subtraction (a-b)
+ (96,36)->06: 96 - 36 = 60 rev-> 06 match
+ (74,90)->-61: 74 - 90 = -16 rev-> -61 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (74,90)->-61: |74 - 90| = 16 rev-> 61 mismatch
+ max mod min
+ (96,36)->06: max(96,36) mod min(96,36) = 96 mod 36 = 24 rev-> 42 mismatch
+ negated absolute difference
+ (74,90)->-61: -|74 - 90| = -16 rev-> -61 match
+ (96,36)->06: -|96 - 36| = -60 rev-> -06 mismatch
+ reverse subtraction (b-a)
+ (96,36)->06: 36 - 96 = -60 rev-> -06 mismatch
+ modulo (a mod b)
+ (74,90)->-61: 74 mod 90 = 74 rev-> 47 mismatch
+
+Trying difference operations on identity [69 63, 47 09] [expected (69,63)->06, (47,09)->-61]:
+ subtraction (a-b)
+ (69,63)->06: 69 - 63 = 6 mismatch
+ absolute difference
+ (47,09)->-61: |47 - 09| = 38 mismatch
+ max mod min
+ (69,63)->06: max(69,63) mod min(69,63) = 69 mod 63 = 6 mismatch
+ negated absolute difference
+ (47,09)->-61: -|47 - 09| = -38 mismatch
+ reverse subtraction (b-a)
+ (69,63)->06: 63 - 69 = -6 mismatch
+ modulo (a mod b)
+ (47,09)->-61: 47 mod 09 = 2 mismatch
+
+Trying rare operations reversed operands [69->96 63->36, 47->74 09->90] and reversed result [expected (96,36)->06, (74,90)->-61]:
+ multiply+1
+ (96,36)->06: (90 + 6) * 36 + 1 = 90 * 36 + 6 * 36 + 1 = 3240 + 216 + 1 = 3456 + 1 = 3457 rev-> 7543 mismatch
+ multiply-1
+ (74,90)->-61: (70 + 4) * 90 - 1 = 70 * 90 + 4 * 90 - 1 = 6300 + 360 - 1 = 6660 - 1 = 6659 rev-> 9566 mismatch
+ add+1
+ (96,36)->06: 96 + 36 + 1 = 133 rev-> 331 mismatch
+ add-1
+ (74,90)->-61: 74 + 90 - 1 = 163 rev-> 361 mismatch
+ sub+1
+ (96,36)->06: 96 - 36 + 1 = 61 rev-> 16 mismatch
+ sub-1
+ (74,90)->-61: 74 - 90 - 1 = -17 rev-> -71 mismatch
+ integer division (a/b)
+ (96,36)->06: 96 / 36 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (74,90)->-61: 90 / 74 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (96,36)->06: 36 mod 96 = 36 rev-> 63 mismatch
+ digit absolute diff
+ (74,90)->-61: |7-9| || |4-0| = 24 rev-> 42 mismatch
+ digit add mod10
+ (96,36)->06: (9+3)%10 || (6+6)%10 = 22 rev-> 22 mismatch
+ digit sub mod10
+ (74,90)->-61: (7-9)%10 || (4-0)%10 = 84 rev-> 48 mismatch
+ cross multiply
+ (96,36)->06: 9*3 + 6*6 = 27 + 36 = 63 rev-> 36 mismatch
+ cross multiply rev
+ (74,90)->-61: 7*0 + 4*9 = 0 + 36 = 36 rev-> 63 mismatch
+ digit multiply
+ (96,36)->06: 9*3 || 6*6 = 27 || 36 = 2736 rev-> 6372 mismatch
+ digit multiply rev
+ (74,90)->-61: 7*0 || 4*9 = 0 || 36 = 036 rev-> 630 mismatch
+ digit sum diff
+ (96,36)->06: (9+6) - (3+6) = 6 rev-> 6 mismatch
+ digit sum sum
+ (74,90)->-61: (7+4) + (9+0) = 20 rev-> 02 mismatch
+ digit product diff
+ (96,36)->06: 9*6 - 3*6 = 54 - 18 = 36 rev-> 63 mismatch
+ digit product sum
+ (74,90)->-61: 7*4 + 9*0 = 28 + 0 = 28 rev-> 82 mismatch
+ determinant
+ (96,36)->06: 9*6 - 6*3 = 54 - 18 = 36 rev-> 63 mismatch
+ abs determinant
+ (74,90)->-61: |7*0 - 4*9| = |0 - 36| = 36 rev-> 63 mismatch
+
+Trying rare operations on identity [69 63, 47 09] [expected (69,63)->06, (47,09)->-61]:
+ multiply+1
+ (69,63)->06: (60 + 9) * 63 + 1 = 60 * 63 + 9 * 63 + 1 = 3780 + 567 + 1 = 4347 + 1 = 4348 mismatch
+ multiply-1
+ (47,09)->-61: (40 + 7) * 09 - 1 = 40 * 09 + 7 * 09 - 1 = 360 + 63 - 1 = 423 - 1 = 422 mismatch
+ add+1
+ (69,63)->06: 69 + 63 + 1 = 133 mismatch
+ add-1
+ (47,09)->-61: 47 + 09 - 1 = 55 mismatch
+ sub+1
+ (69,63)->06: 69 - 63 + 1 = 7 mismatch
+ sub-1
+ (47,09)->-61: 47 - 09 - 1 = 37 mismatch
+ integer division (a/b)
+ (69,63)->06: 69 / 63 = 1 mismatch
+ reverse division (b/a)
+ (47,09)->-61: 09 / 47 = 0 mismatch
+ reverse modulo (b mod a)
+ (69,63)->06: 63 mod 69 = 63 mismatch
+ digit absolute diff
+ (47,09)->-61: |4-0| || |7-9| = 42 mismatch
+ digit add mod10
+ (69,63)->06: (6+6)%10 || (9+3)%10 = 22 mismatch
+ digit sub mod10
+ (47,09)->-61: (4-0)%10 || (7-9)%10 = 48 mismatch
+ cross multiply
+ (69,63)->06: 6*6 + 9*3 = 36 + 27 = 63 mismatch
+ cross multiply rev
+ (47,09)->-61: 4*9 + 7*0 = 36 + 0 = 36 mismatch
+ digit multiply
+ (69,63)->06: 6*6 || 9*3 = 36 || 27 = 3627 mismatch
+ digit multiply rev
+ (47,09)->-61: 4*9 || 7*0 = 36 || 0 = 360 mismatch
+ digit sum diff
+ (69,63)->06: (6+9) - (6+3) = 6 mismatch
+ digit sum sum
+ (47,09)->-61: (4+7) + (0+9) = 20 mismatch
+ digit product diff
+ (69,63)->06: 6*9 - 6*3 = 54 - 18 = 36 mismatch
+ digit product sum
+ (47,09)->-61: 4*7 + 0*9 = 28 + 0 = 28 mismatch
+ determinant
+ (69,63)->06: 6*3 - 9*6 = 18 - 54 = -36 mismatch
+ abs determinant
+ (47,09)->-61: |4*9 - 7*0| = |36 - 0| = 36 mismatch
+
+Applying to 71-45:
+ We recall that the question operator is found in the examples.
+ reversed operands [71->17, 45->54] and reversed result
+ subtraction (a-b) (17,54): 17 - 54 = -37 rev-> -73
+ Result is negative - we add back the operator prefix -: -73 -> -73
+
+\boxed{-73}

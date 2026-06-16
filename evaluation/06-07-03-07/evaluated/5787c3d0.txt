@@ -1,0 +1,176 @@
+22@80 = 1759
+15`29 = 44
+51^49 = ^2
+
+The inputs are 22, 80, 15, 29, 51, 49
+
+The outputs are 1759, 44, ^2
+Some example outputs have the operator symbol as prefix ^.
+We now consider the outputs to be 1759, 44, -2
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+22@80 -> @
+15`29 -> `
+51^49 -> ^
+
+The operators
+@
+`
+^
+
+Looking at the question
+85^86 -> ^
+The question operator is found in the examples.
+
+Looking at operator ^ [51^49 = -2]:
+
+Trying common operations reversed operands [51->15 49->94] and reversed result [expected (15,94)->-2]:
+ addition
+ (15,94)->-2: 15 + 94 = 109 rev-> 901 mismatch
+ multiplication
+ (15,94)->-2: (10 + 5) * 94 = 10 * 94 + 5 * 94 = 940 + 470 = 1410 rev-> 0141 mismatch
+ concatenation
+ (15,94)->-2: 15 || 94 = 1594 rev-> 4951 mismatch
+ reverse concatenation
+ (15,94)->-2: 94 || 15 = 9415 rev-> 5149 mismatch
+
+Trying common operations on identity [51 49] [expected (51,49)->-2]:
+ addition
+ (51,49)->-2: 51 + 49 = 100 mismatch
+ multiplication
+ (51,49)->-2: (50 + 1) * 49 = 50 * 49 + 1 * 49 = 2450 + 49 = 2499 mismatch
+ concatenation
+ (51,49)->-2: 51 || 49 = 5149 mismatch
+ reverse concatenation
+ (51,49)->-2: 49 || 51 = 4951 mismatch
+
+Trying difference operations reversed operands [51->15 49->94] and reversed result [expected (15,94)->-2]:
+ subtraction (a-b)
+ (15,94)->-2: 15 - 94 = -79 rev-> -97 mismatch
+ absolute difference
+ (15,94)->-2: |15 - 94| = 79 rev-> 97 mismatch
+ max mod min
+ (15,94)->-2: max(15,94) mod min(15,94) = 94 mod 15 = 4 rev-> 4 mismatch
+ negated absolute difference
+ (15,94)->-2: -|15 - 94| = -79 rev-> -97 mismatch
+ reverse subtraction (b-a)
+ (15,94)->-2: 94 - 15 = 79 rev-> 97 mismatch
+ modulo (a mod b)
+ (15,94)->-2: 15 mod 94 = 15 rev-> 51 mismatch
+
+Trying difference operations on identity [51 49] [expected (51,49)->-2]:
+ subtraction (a-b)
+ (51,49)->-2: 51 - 49 = 2 mismatch
+ absolute difference
+ (51,49)->-2: |51 - 49| = 2 mismatch
+ max mod min
+ (51,49)->-2: max(51,49) mod min(51,49) = 51 mod 49 = 2 mismatch
+ negated absolute difference
+ (51,49)->-2: -|51 - 49| = -2 match
+ correct, actions: negated absolute difference
+ reverse subtraction (b-a)
+ (51,49)->-2: 49 - 51 = -2 match
+ correct, but skipping
+ modulo (a mod b)
+ (51,49)->-2: 51 mod 49 = 2 mismatch
+
+Trying rare operations reversed operands [51->15 49->94] and reversed result [expected (15,94)->-2]:
+ multiply+1
+ (15,94)->-2: (10 + 5) * 94 + 1 = 10 * 94 + 5 * 94 + 1 = 940 + 470 + 1 = 1410 + 1 = 1411 rev-> 1141 mismatch
+ multiply-1
+ (15,94)->-2: (10 + 5) * 94 - 1 = 10 * 94 + 5 * 94 - 1 = 940 + 470 - 1 = 1410 - 1 = 1409 rev-> 9041 mismatch
+ add+1
+ (15,94)->-2: 15 + 94 + 1 = 110 rev-> 011 mismatch
+ add-1
+ (15,94)->-2: 15 + 94 - 1 = 108 rev-> 801 mismatch
+ sub+1
+ (15,94)->-2: 15 - 94 + 1 = -78 rev-> -87 mismatch
+ sub-1
+ (15,94)->-2: 15 - 94 - 1 = -80 rev-> -08 mismatch
+ integer division (a/b)
+ (15,94)->-2: 15 / 94 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (15,94)->-2: 94 / 15 = 6 rev-> 6 mismatch
+ reverse modulo (b mod a)
+ (15,94)->-2: 94 mod 15 = 4 rev-> 4 mismatch
+ digit absolute diff
+ (15,94)->-2: |1-9| || |5-4| = 81 rev-> 18 mismatch
+ digit add mod10
+ (15,94)->-2: (1+9)%10 || (5+4)%10 = 09 rev-> 90 mismatch
+ digit sub mod10
+ (15,94)->-2: (1-9)%10 || (5-4)%10 = 21 rev-> 12 mismatch
+ cross multiply
+ (15,94)->-2: 1*9 + 5*4 = 9 + 20 = 29 rev-> 92 mismatch
+ cross multiply rev
+ (15,94)->-2: 1*4 + 5*9 = 4 + 45 = 49 rev-> 94 mismatch
+ digit multiply
+ (15,94)->-2: 1*9 || 5*4 = 9 || 20 = 920 rev-> 029 mismatch
+ digit multiply rev
+ (15,94)->-2: 1*4 || 5*9 = 4 || 45 = 445 rev-> 544 mismatch
+ digit sum diff
+ (15,94)->-2: (1+5) - (9+4) = -7 rev-> -7 mismatch
+ digit sum sum
+ (15,94)->-2: (1+5) + (9+4) = 19 rev-> 91 mismatch
+ digit product diff
+ (15,94)->-2: 1*5 - 9*4 = 5 - 36 = -31 rev-> -13 mismatch
+ digit product sum
+ (15,94)->-2: 1*5 + 9*4 = 5 + 36 = 41 rev-> 14 mismatch
+ determinant
+ (15,94)->-2: 1*4 - 5*9 = 4 - 45 = -41 rev-> -14 mismatch
+ abs determinant
+ (15,94)->-2: |1*4 - 5*9| = |4 - 45| = 41 rev-> 14 mismatch
+
+Trying rare operations on identity [51 49] [expected (51,49)->-2]:
+ multiply+1
+ (51,49)->-2: (50 + 1) * 49 + 1 = 50 * 49 + 1 * 49 + 1 = 2450 + 49 + 1 = 2499 + 1 = 2500 mismatch
+ multiply-1
+ (51,49)->-2: (50 + 1) * 49 - 1 = 50 * 49 + 1 * 49 - 1 = 2450 + 49 - 1 = 2499 - 1 = 2498 mismatch
+ add+1
+ (51,49)->-2: 51 + 49 + 1 = 101 mismatch
+ add-1
+ (51,49)->-2: 51 + 49 - 1 = 99 mismatch
+ sub+1
+ (51,49)->-2: 51 - 49 + 1 = 3 mismatch
+ sub-1
+ (51,49)->-2: 51 - 49 - 1 = 1 mismatch
+ integer division (a/b)
+ (51,49)->-2: 51 / 49 = 1 mismatch
+ reverse division (b/a)
+ (51,49)->-2: 49 / 51 = 0 mismatch
+ reverse modulo (b mod a)
+ (51,49)->-2: 49 mod 51 = 49 mismatch
+ digit absolute diff
+ (51,49)->-2: |5-4| || |1-9| = 18 mismatch
+ digit add mod10
+ (51,49)->-2: (5+4)%10 || (1+9)%10 = 90 mismatch
+ digit sub mod10
+ (51,49)->-2: (5-4)%10 || (1-9)%10 = 12 mismatch
+ cross multiply
+ (51,49)->-2: 5*4 + 1*9 = 20 + 9 = 29 mismatch
+ cross multiply rev
+ (51,49)->-2: 5*9 + 1*4 = 45 + 4 = 49 mismatch
+ digit multiply
+ (51,49)->-2: 5*4 || 1*9 = 20 || 9 = 209 mismatch
+ digit multiply rev
+ (51,49)->-2: 5*9 || 1*4 = 45 || 4 = 454 mismatch
+ digit sum diff
+ (51,49)->-2: (5+1) - (4+9) = -7 mismatch
+ digit sum sum
+ (51,49)->-2: (5+1) + (4+9) = 19 mismatch
+ digit product diff
+ (51,49)->-2: 5*1 - 4*9 = 5 - 36 = -31 mismatch
+ digit product sum
+ (51,49)->-2: 5*1 + 4*9 = 5 + 36 = 41 mismatch
+ determinant
+ (51,49)->-2: 5*9 - 1*4 = 45 - 4 = 41 mismatch
+ abs determinant
+ (51,49)->-2: |5*9 - 1*4| = |45 - 4| = 41 mismatch
+
+Applying to 85^86:
+ We recall that the question operator is found in the examples.
+ identity
+ negated absolute difference (85,86): -|85 - 86| = -1
+ Result is negative - we add back the operator prefix ^: -1 -> ^1
+
+\boxed{^1}

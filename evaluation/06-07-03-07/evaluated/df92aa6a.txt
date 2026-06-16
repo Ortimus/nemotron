@@ -1,0 +1,177 @@
+02+12 = 24
+23-25 = -02
+82+17 = 001
+94-63 = 31
+
+The inputs are 02, 12, 23, 25, 82, 17, 94, 63
+
+The outputs are 24, -02, 001, 31
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 24, -02, 001, 31
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+02+12 -> +
+23-25 -> -
+82+17 -> +
+94-63 -> -
+
+The operators
++
+-
+
+Looking at the question
+82*76 -> *
+The question operator is not found in the examples. Investigating the most common example operator + instead. We will use addition for the question operator.
+
+Looking at operator + [02+12 = 24, 82+17 = 001]:
+
+Trying common operations reversed operands [02->20 12->21, 82->28 17->71] and reversed result [expected (20,21)->24, (28,71)->001]:
+ addition
+ (20,21)->24: 20 + 21 = 41 rev-> 14 mismatch
+ multiplication
+ (28,71)->001: (20 + 8) * 71 = 20 * 71 + 8 * 71 = 1420 + 568 = 1988 rev-> 8891 mismatch
+ concatenation
+ (20,21)->24: 20 || 21 = 2021 rev-> 1202 mismatch
+ reverse concatenation
+ (28,71)->001: 71 || 28 = 7128 rev-> 8217 mismatch
+
+Trying common operations on identity [02 12, 82 17] [expected (02,12)->24, (82,17)->001]:
+ addition
+ (02,12)->24: 02 + 12 = 14 mismatch
+ multiplication
+ (82,17)->001: (80 + 2) * 17 = 80 * 17 + 2 * 17 = 1360 + 34 = 1394 mismatch
+ concatenation
+ (02,12)->24: 02 || 12 = 0212 mismatch
+ reverse concatenation
+ (82,17)->001: 17 || 82 = 1782 mismatch
+
+Trying difference operations reversed operands [02->20 12->21, 82->28 17->71] and reversed result [expected (20,21)->24, (28,71)->001]:
+ subtraction (a-b)
+ (20,21)->24: 20 - 21 = -1 rev-> -1 mismatch
+ absolute difference
+ (28,71)->001: |28 - 71| = 43 rev-> 34 mismatch
+ max mod min
+ (20,21)->24: max(20,21) mod min(20,21) = 21 mod 20 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (28,71)->001: -|28 - 71| = -43 rev-> -34 mismatch
+ reverse subtraction (b-a)
+ (20,21)->24: 21 - 20 = 1 rev-> 1 mismatch
+ modulo (a mod b)
+ (28,71)->001: 28 mod 71 = 28 rev-> 82 mismatch
+
+Trying difference operations on identity [02 12, 82 17] [expected (02,12)->24, (82,17)->001]:
+ subtraction (a-b)
+ (02,12)->24: 02 - 12 = -10 mismatch
+ absolute difference
+ (82,17)->001: |82 - 17| = 65 mismatch
+ max mod min
+ (02,12)->24: max(02,12) mod min(02,12) = 12 mod 02 = 0 mismatch
+ negated absolute difference
+ (82,17)->001: -|82 - 17| = -65 mismatch
+ reverse subtraction (b-a)
+ (02,12)->24: 12 - 02 = 10 mismatch
+ modulo (a mod b)
+ (82,17)->001: 82 mod 17 = 14 mismatch
+
+Trying rare operations reversed operands [02->20 12->21, 82->28 17->71] and reversed result [expected (20,21)->24, (28,71)->001]:
+ multiply+1
+ (20,21)->24: (20 + 0) * 21 + 1 = 20 * 21 + 0 * 21 + 1 = 420 + 0 + 1 = 420 + 1 = 421 rev-> 124 mismatch
+ multiply-1
+ (28,71)->001: (20 + 8) * 71 - 1 = 20 * 71 + 8 * 71 - 1 = 1420 + 568 - 1 = 1988 - 1 = 1987 rev-> 7891 mismatch
+ add+1
+ (20,21)->24: 20 + 21 + 1 = 42 rev-> 24 match
+ (28,71)->001: 28 + 71 + 1 = 100 rev-> 001 match
+ correct, actions: reversed operands, reversed result, add+1
+ add-1
+ (28,71)->001: 28 + 71 - 1 = 98 rev-> 89 mismatch
+ sub+1
+ (20,21)->24: 20 - 21 + 1 = 0 rev-> 0 mismatch
+ sub-1
+ (28,71)->001: 28 - 71 - 1 = -44 rev-> -44 mismatch
+ integer division (a/b)
+ (20,21)->24: 20 / 21 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (28,71)->001: 71 / 28 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (20,21)->24: 21 mod 20 = 1 rev-> 1 mismatch
+ digit absolute diff
+ (28,71)->001: |2-7| || |8-1| = 57 rev-> 75 mismatch
+ digit add mod10
+ (20,21)->24: (2+2)%10 || (0+1)%10 = 41 rev-> 14 mismatch
+ digit sub mod10
+ (28,71)->001: (2-7)%10 || (8-1)%10 = 57 rev-> 75 mismatch
+ cross multiply
+ (20,21)->24: 2*2 + 0*1 = 4 + 0 = 4 rev-> 4 mismatch
+ cross multiply rev
+ (28,71)->001: 2*1 + 8*7 = 2 + 56 = 58 rev-> 85 mismatch
+ digit multiply
+ (20,21)->24: 2*2 || 0*1 = 4 || 0 = 40 rev-> 04 mismatch
+ digit multiply rev
+ (28,71)->001: 2*1 || 8*7 = 2 || 56 = 256 rev-> 652 mismatch
+ digit sum diff
+ (20,21)->24: (2+0) - (2+1) = -1 rev-> -1 mismatch
+ digit sum sum
+ (28,71)->001: (2+8) + (7+1) = 18 rev-> 81 mismatch
+ digit product diff
+ (20,21)->24: 2*0 - 2*1 = 0 - 2 = -2 rev-> -2 mismatch
+ digit product sum
+ (28,71)->001: 2*8 + 7*1 = 16 + 7 = 23 rev-> 32 mismatch
+ determinant
+ (20,21)->24: 2*1 - 0*2 = 2 - 0 = 2 rev-> 2 mismatch
+ abs determinant
+ (28,71)->001: |2*1 - 8*7| = |2 - 56| = 54 rev-> 45 mismatch
+
+Trying rare operations on identity [02 12, 82 17] [expected (02,12)->24, (82,17)->001]:
+ multiply+1
+ (02,12)->24: (0 + 2) * 12 + 1 = 0 * 12 + 2 * 12 + 1 = 0 + 24 + 1 = 24 + 1 = 25 mismatch
+ multiply-1
+ (82,17)->001: (80 + 2) * 17 - 1 = 80 * 17 + 2 * 17 - 1 = 1360 + 34 - 1 = 1394 - 1 = 1393 mismatch
+ add+1
+ (02,12)->24: 02 + 12 + 1 = 15 mismatch
+ add-1
+ (82,17)->001: 82 + 17 - 1 = 98 mismatch
+ sub+1
+ (02,12)->24: 02 - 12 + 1 = -9 mismatch
+ sub-1
+ (82,17)->001: 82 - 17 - 1 = 64 mismatch
+ integer division (a/b)
+ (02,12)->24: 02 / 12 = 0 mismatch
+ reverse division (b/a)
+ (82,17)->001: 17 / 82 = 0 mismatch
+ reverse modulo (b mod a)
+ (02,12)->24: 12 mod 02 = 0 mismatch
+ digit absolute diff
+ (82,17)->001: |8-1| || |2-7| = 75 mismatch
+ digit add mod10
+ (02,12)->24: (0+1)%10 || (2+2)%10 = 14 mismatch
+ digit sub mod10
+ (82,17)->001: (8-1)%10 || (2-7)%10 = 75 mismatch
+ cross multiply
+ (02,12)->24: 0*1 + 2*2 = 0 + 4 = 4 mismatch
+ cross multiply rev
+ (82,17)->001: 8*7 + 2*1 = 56 + 2 = 58 mismatch
+ digit multiply
+ (02,12)->24: 0*1 || 2*2 = 0 || 4 = 04 mismatch
+ digit multiply rev
+ (82,17)->001: 8*7 || 2*1 = 56 || 2 = 562 mismatch
+ digit sum diff
+ (02,12)->24: (0+2) - (1+2) = -1 mismatch
+ digit sum sum
+ (82,17)->001: (8+2) + (1+7) = 18 mismatch
+ digit product diff
+ (02,12)->24: 0*2 - 1*2 = 0 - 2 = -2 mismatch
+ digit product sum
+ (82,17)->001: 8*2 + 1*7 = 16 + 7 = 23 mismatch
+ determinant
+ (02,12)->24: 0*2 - 2*1 = 0 - 2 = -2 mismatch
+ abs determinant
+ (82,17)->001: |8*7 - 2*1| = |56 - 2| = 54 mismatch
+
+Applying to 82*76:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [82->28, 76->67] and reversed result
+ addition (28,67): 28 + 67 = 95 rev-> 59
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{59}

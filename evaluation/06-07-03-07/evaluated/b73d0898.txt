@@ -1,0 +1,177 @@
+16*42 = 3641
+36-71 = 21
+56-62 = 31
+64*73 = 1071
+
+The inputs are 16, 42, 36, 71, 56, 62, 64, 73
+
+The outputs are 3641, 21, 31, 1071
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+16*42 -> *
+36-71 -> -
+56-62 -> -
+64*73 -> *
+
+The operators
+*
+-
+
+Looking at the question
+41-15 -> -
+The question operator is found in the examples.
+
+Looking at operator - [36-71 = 21, 56-62 = 31]:
+
+Trying common operations reversed operands [36->63 71->17, 56->65 62->26] and reversed result [expected (63,17)->21, (65,26)->31]:
+ addition
+ (63,17)->21: 63 + 17 = 80 rev-> 08 mismatch
+ multiplication
+ (65,26)->31: (60 + 5) * 26 = 60 * 26 + 5 * 26 = 1560 + 130 = 1690 rev-> 0961 mismatch
+ concatenation
+ (63,17)->21: 63 || 17 = 6317 rev-> 7136 mismatch
+ reverse concatenation
+ (65,26)->31: 26 || 65 = 2665 rev-> 5662 mismatch
+
+Trying common operations on identity [36 71, 56 62] [expected (36,71)->21, (56,62)->31]:
+ addition
+ (36,71)->21: 36 + 71 = 107 mismatch
+ multiplication
+ (56,62)->31: (50 + 6) * 62 = 50 * 62 + 6 * 62 = 3100 + 372 = 3472 mismatch
+ concatenation
+ (36,71)->21: 36 || 71 = 3671 mismatch
+ reverse concatenation
+ (56,62)->31: 62 || 56 = 6256 mismatch
+
+Trying difference operations reversed operands [36->63 71->17, 56->65 62->26] and reversed result [expected (63,17)->21, (65,26)->31]:
+ subtraction (a-b)
+ (63,17)->21: 63 - 17 = 46 rev-> 64 mismatch
+ absolute difference
+ (65,26)->31: |65 - 26| = 39 rev-> 93 mismatch
+ max mod min
+ (63,17)->21: max(63,17) mod min(63,17) = 63 mod 17 = 12 rev-> 21 match
+ (65,26)->31: max(65,26) mod min(65,26) = 65 mod 26 = 13 rev-> 31 match
+ correct, actions: reversed operands, reversed result, max mod min
+ negated absolute difference
+ (65,26)->31: -|65 - 26| = -39 rev-> -93 mismatch
+ reverse subtraction (b-a)
+ (63,17)->21: 17 - 63 = -46 rev-> -64 mismatch
+ modulo (a mod b)
+ (65,26)->31: 65 mod 26 = 13 rev-> 31 match
+ (63,17)->21: 63 mod 17 = 12 rev-> 21 match
+ correct, but skipping
+
+Trying difference operations on identity [36 71, 56 62] [expected (36,71)->21, (56,62)->31]:
+ subtraction (a-b)
+ (36,71)->21: 36 - 71 = -35 mismatch
+ absolute difference
+ (56,62)->31: |56 - 62| = 6 mismatch
+ max mod min
+ (36,71)->21: max(36,71) mod min(36,71) = 71 mod 36 = 35 mismatch
+ negated absolute difference
+ (56,62)->31: -|56 - 62| = -6 mismatch
+ reverse subtraction (b-a)
+ (36,71)->21: 71 - 36 = 35 mismatch
+ modulo (a mod b)
+ (56,62)->31: 56 mod 62 = 56 mismatch
+
+Trying rare operations reversed operands [36->63 71->17, 56->65 62->26] and reversed result [expected (63,17)->21, (65,26)->31]:
+ multiply+1
+ (63,17)->21: (60 + 3) * 17 + 1 = 60 * 17 + 3 * 17 + 1 = 1020 + 51 + 1 = 1071 + 1 = 1072 rev-> 2701 mismatch
+ multiply-1
+ (65,26)->31: (60 + 5) * 26 - 1 = 60 * 26 + 5 * 26 - 1 = 1560 + 130 - 1 = 1690 - 1 = 1689 rev-> 9861 mismatch
+ add+1
+ (63,17)->21: 63 + 17 + 1 = 81 rev-> 18 mismatch
+ add-1
+ (65,26)->31: 65 + 26 - 1 = 90 rev-> 09 mismatch
+ sub+1
+ (63,17)->21: 63 - 17 + 1 = 47 rev-> 74 mismatch
+ sub-1
+ (65,26)->31: 65 - 26 - 1 = 38 rev-> 83 mismatch
+ integer division (a/b)
+ (63,17)->21: 63 / 17 = 3 rev-> 3 mismatch
+ reverse division (b/a)
+ (65,26)->31: 26 / 65 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (63,17)->21: 17 mod 63 = 17 rev-> 71 mismatch
+ digit absolute diff
+ (65,26)->31: |6-2| || |5-6| = 41 rev-> 14 mismatch
+ digit add mod10
+ (63,17)->21: (6+1)%10 || (3+7)%10 = 70 rev-> 07 mismatch
+ digit sub mod10
+ (65,26)->31: (6-2)%10 || (5-6)%10 = 49 rev-> 94 mismatch
+ cross multiply
+ (63,17)->21: 6*1 + 3*7 = 6 + 21 = 27 rev-> 72 mismatch
+ cross multiply rev
+ (65,26)->31: 6*6 + 5*2 = 36 + 10 = 46 rev-> 64 mismatch
+ digit multiply
+ (63,17)->21: 6*1 || 3*7 = 6 || 21 = 621 rev-> 126 mismatch
+ digit multiply rev
+ (65,26)->31: 6*6 || 5*2 = 36 || 10 = 3610 rev-> 0163 mismatch
+ digit sum diff
+ (63,17)->21: (6+3) - (1+7) = 1 rev-> 1 mismatch
+ digit sum sum
+ (65,26)->31: (6+5) + (2+6) = 19 rev-> 91 mismatch
+ digit product diff
+ (63,17)->21: 6*3 - 1*7 = 18 - 7 = 11 rev-> 11 mismatch
+ digit product sum
+ (65,26)->31: 6*5 + 2*6 = 30 + 12 = 42 rev-> 24 mismatch
+ determinant
+ (63,17)->21: 6*7 - 3*1 = 42 - 3 = 39 rev-> 93 mismatch
+ abs determinant
+ (65,26)->31: |6*6 - 5*2| = |36 - 10| = 26 rev-> 62 mismatch
+
+Trying rare operations on identity [36 71, 56 62] [expected (36,71)->21, (56,62)->31]:
+ multiply+1
+ (36,71)->21: (30 + 6) * 71 + 1 = 30 * 71 + 6 * 71 + 1 = 2130 + 426 + 1 = 2556 + 1 = 2557 mismatch
+ multiply-1
+ (56,62)->31: (50 + 6) * 62 - 1 = 50 * 62 + 6 * 62 - 1 = 3100 + 372 - 1 = 3472 - 1 = 3471 mismatch
+ add+1
+ (36,71)->21: 36 + 71 + 1 = 108 mismatch
+ add-1
+ (56,62)->31: 56 + 62 - 1 = 117 mismatch
+ sub+1
+ (36,71)->21: 36 - 71 + 1 = -34 mismatch
+ sub-1
+ (56,62)->31: 56 - 62 - 1 = -7 mismatch
+ integer division (a/b)
+ (36,71)->21: 36 / 71 = 0 mismatch
+ reverse division (b/a)
+ (56,62)->31: 62 / 56 = 1 mismatch
+ reverse modulo (b mod a)
+ (36,71)->21: 71 mod 36 = 35 mismatch
+ digit absolute diff
+ (56,62)->31: |5-6| || |6-2| = 14 mismatch
+ digit add mod10
+ (36,71)->21: (3+7)%10 || (6+1)%10 = 07 mismatch
+ digit sub mod10
+ (56,62)->31: (5-6)%10 || (6-2)%10 = 94 mismatch
+ cross multiply
+ (36,71)->21: 3*7 + 6*1 = 21 + 6 = 27 mismatch
+ cross multiply rev
+ (56,62)->31: 5*2 + 6*6 = 10 + 36 = 46 mismatch
+ digit multiply
+ (36,71)->21: 3*7 || 6*1 = 21 || 6 = 216 mismatch
+ digit multiply rev
+ (56,62)->31: 5*2 || 6*6 = 10 || 36 = 1036 mismatch
+ digit sum diff
+ (36,71)->21: (3+6) - (7+1) = 1 mismatch
+ digit sum sum
+ (56,62)->31: (5+6) + (6+2) = 19 mismatch
+ digit product diff
+ (36,71)->21: 3*6 - 7*1 = 18 - 7 = 11 mismatch
+ digit product sum
+ (56,62)->31: 5*6 + 6*2 = 30 + 12 = 42 mismatch
+ determinant
+ (36,71)->21: 3*1 - 6*7 = 3 - 42 = -39 mismatch
+ abs determinant
+ (56,62)->31: |5*2 - 6*6| = |10 - 36| = 26 mismatch
+
+Applying to 41-15:
+ We recall that the question operator is found in the examples.
+ reversed operands [41->14, 15->51] and reversed result
+ max mod min (14,51): max(14,51) mod min(14,51) = 51 mod 14 = 9 rev-> 9
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{9}

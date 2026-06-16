@@ -1,0 +1,179 @@
+10&65 = 650
+98{96 = 2
+54&31 = 1674
+
+The inputs are 10, 65, 98, 96, 54, 31
+
+The outputs are 650, 2, 1674
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+10&65 -> &
+98{96 -> {
+54&31 -> &
+
+The operators
+&
+{
+
+Looking at the question
+97{23 -> {
+The question operator is found in the examples.
+
+Looking at operator { [98{96 = 2]:
+
+Trying common operations reversed operands [98->89 96->69] and reversed result [expected (89,69)->2]:
+ addition
+ (89,69)->2: 89 + 69 = 158 rev-> 851 mismatch
+ multiplication
+ (89,69)->2: (80 + 9) * 69 = 80 * 69 + 9 * 69 = 5520 + 621 = 6141 rev-> 1416 mismatch
+ concatenation
+ (89,69)->2: 89 || 69 = 8969 rev-> 9698 mismatch
+ reverse concatenation
+ (89,69)->2: 69 || 89 = 6989 rev-> 9896 mismatch
+
+Trying common operations on identity [98 96] [expected (98,96)->2]:
+ addition
+ (98,96)->2: 98 + 96 = 194 mismatch
+ multiplication
+ (98,96)->2: (90 + 8) * 96 = 90 * 96 + 8 * 96 = 8640 + 768 = 9408 mismatch
+ concatenation
+ (98,96)->2: 98 || 96 = 9896 mismatch
+ reverse concatenation
+ (98,96)->2: 96 || 98 = 9698 mismatch
+
+Trying difference operations reversed operands [98->89 96->69] and reversed result [expected (89,69)->2]:
+ subtraction (a-b)
+ (89,69)->2: 89 - 69 = 20 rev-> 02 mismatch
+ absolute difference
+ (89,69)->2: |89 - 69| = 20 rev-> 02 mismatch
+ max mod min
+ (89,69)->2: max(89,69) mod min(89,69) = 89 mod 69 = 20 rev-> 02 mismatch
+ negated absolute difference
+ (89,69)->2: -|89 - 69| = -20 rev-> -02 mismatch
+ reverse subtraction (b-a)
+ (89,69)->2: 69 - 89 = -20 rev-> -02 mismatch
+ modulo (a mod b)
+ (89,69)->2: 89 mod 69 = 20 rev-> 02 mismatch
+
+Trying difference operations on identity [98 96] [expected (98,96)->2]:
+ subtraction (a-b)
+ (98,96)->2: 98 - 96 = 2 match
+ correct, actions: subtraction (a-b)
+ absolute difference
+ (98,96)->2: |98 - 96| = 2 match
+ correct, but skipping
+ max mod min
+ (98,96)->2: max(98,96) mod min(98,96) = 98 mod 96 = 2 match
+ correct, but skipping
+ negated absolute difference
+ (98,96)->2: -|98 - 96| = -2 mismatch
+ reverse subtraction (b-a)
+ (98,96)->2: 96 - 98 = -2 mismatch
+ modulo (a mod b)
+ (98,96)->2: 98 mod 96 = 2 match
+ correct, but skipping
+
+Trying rare operations reversed operands [98->89 96->69] and reversed result [expected (89,69)->2]:
+ multiply+1
+ (89,69)->2: (80 + 9) * 69 + 1 = 80 * 69 + 9 * 69 + 1 = 5520 + 621 + 1 = 6141 + 1 = 6142 rev-> 2416 mismatch
+ multiply-1
+ (89,69)->2: (80 + 9) * 69 - 1 = 80 * 69 + 9 * 69 - 1 = 5520 + 621 - 1 = 6141 - 1 = 6140 rev-> 0416 mismatch
+ add+1
+ (89,69)->2: 89 + 69 + 1 = 159 rev-> 951 mismatch
+ add-1
+ (89,69)->2: 89 + 69 - 1 = 157 rev-> 751 mismatch
+ sub+1
+ (89,69)->2: 89 - 69 + 1 = 21 rev-> 12 mismatch
+ sub-1
+ (89,69)->2: 89 - 69 - 1 = 19 rev-> 91 mismatch
+ integer division (a/b)
+ (89,69)->2: 89 / 69 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (89,69)->2: 69 / 89 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (89,69)->2: 69 mod 89 = 69 rev-> 96 mismatch
+ digit absolute diff
+ (89,69)->2: |8-6| || |9-9| = 20 rev-> 02 mismatch
+ digit add mod10
+ (89,69)->2: (8+6)%10 || (9+9)%10 = 48 rev-> 84 mismatch
+ digit sub mod10
+ (89,69)->2: (8-6)%10 || (9-9)%10 = 20 rev-> 02 mismatch
+ cross multiply
+ (89,69)->2: 8*6 + 9*9 = 48 + 81 = 129 rev-> 921 mismatch
+ cross multiply rev
+ (89,69)->2: 8*9 + 9*6 = 72 + 54 = 126 rev-> 621 mismatch
+ digit multiply
+ (89,69)->2: 8*6 || 9*9 = 48 || 81 = 4881 rev-> 1884 mismatch
+ digit multiply rev
+ (89,69)->2: 8*9 || 9*6 = 72 || 54 = 7254 rev-> 4527 mismatch
+ digit sum diff
+ (89,69)->2: (8+9) - (6+9) = 2 rev-> 2 match
+ correct, but skipping
+ digit sum sum
+ (89,69)->2: (8+9) + (6+9) = 32 rev-> 23 mismatch
+ digit product diff
+ (89,69)->2: 8*9 - 6*9 = 72 - 54 = 18 rev-> 81 mismatch
+ digit product sum
+ (89,69)->2: 8*9 + 6*9 = 72 + 54 = 126 rev-> 621 mismatch
+ determinant
+ (89,69)->2: 8*9 - 9*6 = 72 - 54 = 18 rev-> 81 mismatch
+ abs determinant
+ (89,69)->2: |8*9 - 9*6| = |72 - 54| = 18 rev-> 81 mismatch
+
+Trying rare operations on identity [98 96] [expected (98,96)->2]:
+ multiply+1
+ (98,96)->2: (90 + 8) * 96 + 1 = 90 * 96 + 8 * 96 + 1 = 8640 + 768 + 1 = 9408 + 1 = 9409 mismatch
+ multiply-1
+ (98,96)->2: (90 + 8) * 96 - 1 = 90 * 96 + 8 * 96 - 1 = 8640 + 768 - 1 = 9408 - 1 = 9407 mismatch
+ add+1
+ (98,96)->2: 98 + 96 + 1 = 195 mismatch
+ add-1
+ (98,96)->2: 98 + 96 - 1 = 193 mismatch
+ sub+1
+ (98,96)->2: 98 - 96 + 1 = 3 mismatch
+ sub-1
+ (98,96)->2: 98 - 96 - 1 = 1 mismatch
+ integer division (a/b)
+ (98,96)->2: 98 / 96 = 1 mismatch
+ reverse division (b/a)
+ (98,96)->2: 96 / 98 = 0 mismatch
+ reverse modulo (b mod a)
+ (98,96)->2: 96 mod 98 = 96 mismatch
+ digit absolute diff
+ (98,96)->2: |9-9| || |8-6| = 02 match
+ correct, but skipping
+ digit add mod10
+ (98,96)->2: (9+9)%10 || (8+6)%10 = 84 mismatch
+ digit sub mod10
+ (98,96)->2: (9-9)%10 || (8-6)%10 = 02 match
+ correct, but skipping
+ cross multiply
+ (98,96)->2: 9*9 + 8*6 = 81 + 48 = 129 mismatch
+ cross multiply rev
+ (98,96)->2: 9*6 + 8*9 = 54 + 72 = 126 mismatch
+ digit multiply
+ (98,96)->2: 9*9 || 8*6 = 81 || 48 = 8148 mismatch
+ digit multiply rev
+ (98,96)->2: 9*6 || 8*9 = 54 || 72 = 5472 mismatch
+ digit sum diff
+ (98,96)->2: (9+8) - (9+6) = 2 match
+ correct, but skipping
+ digit sum sum
+ (98,96)->2: (9+8) + (9+6) = 32 mismatch
+ digit product diff
+ (98,96)->2: 9*8 - 9*6 = 72 - 54 = 18 mismatch
+ digit product sum
+ (98,96)->2: 9*8 + 9*6 = 72 + 54 = 126 mismatch
+ determinant
+ (98,96)->2: 9*6 - 8*9 = 54 - 72 = -18 mismatch
+ abs determinant
+ (98,96)->2: |9*6 - 8*9| = |54 - 72| = 18 mismatch
+
+Applying to 97{23:
+ We recall that the question operator is found in the examples.
+ identity
+ subtraction (a-b) (97,23): 97 - 23 = 74
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{74}

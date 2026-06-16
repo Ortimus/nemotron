@@ -1,0 +1,177 @@
+83-86 = 03
+72*86 = 7381
+42+25 = 67
+83+05 = 88
+71+73 = 45
+
+The inputs are 83, 86, 72, 86, 42, 25, 83, 05, 71, 73
+
+The outputs are 03, 7381, 67, 88, 45
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+83-86 -> -
+72*86 -> *
+42+25 -> +
+83+05 -> +
+71+73 -> +
+
+The operators
+-
+*
++
+
+Looking at the question
+99*07 -> *
+The question operator is found in the examples.
+
+Looking at operator * [72*86 = 7381]:
+
+Trying common operations reversed operands [72->27 86->68] and reversed result [expected (27,68)->7381]:
+ addition
+ (27,68)->7381: 27 + 68 = 95 rev-> 59 mismatch
+ multiplication
+ (27,68)->7381: (20 + 7) * 68 = 20 * 68 + 7 * 68 = 1360 + 476 = 1836 rev-> 6381 mismatch
+ concatenation
+ (27,68)->7381: 27 || 68 = 2768 rev-> 8672 mismatch
+ reverse concatenation
+ (27,68)->7381: 68 || 27 = 6827 rev-> 7286 mismatch
+
+Trying common operations on identity [72 86] [expected (72,86)->7381]:
+ addition
+ (72,86)->7381: 72 + 86 = 158 mismatch
+ multiplication
+ (72,86)->7381: (70 + 2) * 86 = 70 * 86 + 2 * 86 = 6020 + 172 = 6192 mismatch
+ concatenation
+ (72,86)->7381: 72 || 86 = 7286 mismatch
+ reverse concatenation
+ (72,86)->7381: 86 || 72 = 8672 mismatch
+
+Trying difference operations reversed operands [72->27 86->68] and reversed result [expected (27,68)->7381]:
+ subtraction (a-b)
+ (27,68)->7381: 27 - 68 = -41 rev-> -14 mismatch
+ absolute difference
+ (27,68)->7381: |27 - 68| = 41 rev-> 14 mismatch
+ max mod min
+ (27,68)->7381: max(27,68) mod min(27,68) = 68 mod 27 = 14 rev-> 41 mismatch
+ negated absolute difference
+ (27,68)->7381: -|27 - 68| = -41 rev-> -14 mismatch
+ reverse subtraction (b-a)
+ (27,68)->7381: 68 - 27 = 41 rev-> 14 mismatch
+ modulo (a mod b)
+ (27,68)->7381: 27 mod 68 = 27 rev-> 72 mismatch
+
+Trying difference operations on identity [72 86] [expected (72,86)->7381]:
+ subtraction (a-b)
+ (72,86)->7381: 72 - 86 = -14 mismatch
+ absolute difference
+ (72,86)->7381: |72 - 86| = 14 mismatch
+ max mod min
+ (72,86)->7381: max(72,86) mod min(72,86) = 86 mod 72 = 14 mismatch
+ negated absolute difference
+ (72,86)->7381: -|72 - 86| = -14 mismatch
+ reverse subtraction (b-a)
+ (72,86)->7381: 86 - 72 = 14 mismatch
+ modulo (a mod b)
+ (72,86)->7381: 72 mod 86 = 72 mismatch
+
+Trying rare operations reversed operands [72->27 86->68] and reversed result [expected (27,68)->7381]:
+ multiply+1
+ (27,68)->7381: (20 + 7) * 68 + 1 = 20 * 68 + 7 * 68 + 1 = 1360 + 476 + 1 = 1836 + 1 = 1837 rev-> 7381 match
+ correct, actions: reversed operands, reversed result, multiply+1
+ multiply-1
+ (27,68)->7381: (20 + 7) * 68 - 1 = 20 * 68 + 7 * 68 - 1 = 1360 + 476 - 1 = 1836 - 1 = 1835 rev-> 5381 mismatch
+ add+1
+ (27,68)->7381: 27 + 68 + 1 = 96 rev-> 69 mismatch
+ add-1
+ (27,68)->7381: 27 + 68 - 1 = 94 rev-> 49 mismatch
+ sub+1
+ (27,68)->7381: 27 - 68 + 1 = -40 rev-> -04 mismatch
+ sub-1
+ (27,68)->7381: 27 - 68 - 1 = -42 rev-> -24 mismatch
+ integer division (a/b)
+ (27,68)->7381: 27 / 68 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (27,68)->7381: 68 / 27 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (27,68)->7381: 68 mod 27 = 14 rev-> 41 mismatch
+ digit absolute diff
+ (27,68)->7381: |2-6| || |7-8| = 41 rev-> 14 mismatch
+ digit add mod10
+ (27,68)->7381: (2+6)%10 || (7+8)%10 = 85 rev-> 58 mismatch
+ digit sub mod10
+ (27,68)->7381: (2-6)%10 || (7-8)%10 = 69 rev-> 96 mismatch
+ cross multiply
+ (27,68)->7381: 2*6 + 7*8 = 12 + 56 = 68 rev-> 86 mismatch
+ cross multiply rev
+ (27,68)->7381: 2*8 + 7*6 = 16 + 42 = 58 rev-> 85 mismatch
+ digit multiply
+ (27,68)->7381: 2*6 || 7*8 = 12 || 56 = 1256 rev-> 6521 mismatch
+ digit multiply rev
+ (27,68)->7381: 2*8 || 7*6 = 16 || 42 = 1642 rev-> 2461 mismatch
+ digit sum diff
+ (27,68)->7381: (2+7) - (6+8) = -5 rev-> -5 mismatch
+ digit sum sum
+ (27,68)->7381: (2+7) + (6+8) = 23 rev-> 32 mismatch
+ digit product diff
+ (27,68)->7381: 2*7 - 6*8 = 14 - 48 = -34 rev-> -43 mismatch
+ digit product sum
+ (27,68)->7381: 2*7 + 6*8 = 14 + 48 = 62 rev-> 26 mismatch
+ determinant
+ (27,68)->7381: 2*8 - 7*6 = 16 - 42 = -26 rev-> -62 mismatch
+ abs determinant
+ (27,68)->7381: |2*8 - 7*6| = |16 - 42| = 26 rev-> 62 mismatch
+
+Trying rare operations on identity [72 86] [expected (72,86)->7381]:
+ multiply+1
+ (72,86)->7381: (70 + 2) * 86 + 1 = 70 * 86 + 2 * 86 + 1 = 6020 + 172 + 1 = 6192 + 1 = 6193 mismatch
+ multiply-1
+ (72,86)->7381: (70 + 2) * 86 - 1 = 70 * 86 + 2 * 86 - 1 = 6020 + 172 - 1 = 6192 - 1 = 6191 mismatch
+ add+1
+ (72,86)->7381: 72 + 86 + 1 = 159 mismatch
+ add-1
+ (72,86)->7381: 72 + 86 - 1 = 157 mismatch
+ sub+1
+ (72,86)->7381: 72 - 86 + 1 = -13 mismatch
+ sub-1
+ (72,86)->7381: 72 - 86 - 1 = -15 mismatch
+ integer division (a/b)
+ (72,86)->7381: 72 / 86 = 0 mismatch
+ reverse division (b/a)
+ (72,86)->7381: 86 / 72 = 1 mismatch
+ reverse modulo (b mod a)
+ (72,86)->7381: 86 mod 72 = 14 mismatch
+ digit absolute diff
+ (72,86)->7381: |7-8| || |2-6| = 14 mismatch
+ digit add mod10
+ (72,86)->7381: (7+8)%10 || (2+6)%10 = 58 mismatch
+ digit sub mod10
+ (72,86)->7381: (7-8)%10 || (2-6)%10 = 96 mismatch
+ cross multiply
+ (72,86)->7381: 7*8 + 2*6 = 56 + 12 = 68 mismatch
+ cross multiply rev
+ (72,86)->7381: 7*6 + 2*8 = 42 + 16 = 58 mismatch
+ digit multiply
+ (72,86)->7381: 7*8 || 2*6 = 56 || 12 = 5612 mismatch
+ digit multiply rev
+ (72,86)->7381: 7*6 || 2*8 = 42 || 16 = 4216 mismatch
+ digit sum diff
+ (72,86)->7381: (7+2) - (8+6) = -5 mismatch
+ digit sum sum
+ (72,86)->7381: (7+2) + (8+6) = 23 mismatch
+ digit product diff
+ (72,86)->7381: 7*2 - 8*6 = 14 - 48 = -34 mismatch
+ digit product sum
+ (72,86)->7381: 7*2 + 8*6 = 14 + 48 = 62 mismatch
+ determinant
+ (72,86)->7381: 7*6 - 2*8 = 42 - 16 = 26 mismatch
+ abs determinant
+ (72,86)->7381: |7*6 - 2*8| = |42 - 16| = 26 mismatch
+
+Applying to 99*07:
+ We recall that the question operator is found in the examples.
+ reversed operands [99->99, 07->70] and reversed result
+ multiply+1 (99,70): (90 + 9) * 70 + 1 = 90 * 70 + 9 * 70 + 1 = 6300 + 630 + 1 = 6930 + 1 = 6931 rev-> 1396
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{1396}

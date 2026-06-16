@@ -1,0 +1,182 @@
+02}46 = 44
+14}29 = 15
+22<21 = 43
+13[34 = 1334
+59}74 = 84}
+
+The inputs are 02, 46, 14, 29, 22, 21, 13, 34, 59, 74
+
+The outputs are 44, 15, 43, 1334, 84}
+Some example outputs have the operator symbol as suffix }.
+We now consider the outputs to be 44, 15, 43, 1334, -84
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+02}46 -> }
+14}29 -> }
+22<21 -> <
+13[34 -> [
+59}74 -> }
+
+The operators
+}
+<
+[
+
+Looking at the question
+53<39 -> <
+The question operator is found in the examples.
+
+Looking at operator < [22<21 = 43]:
+
+Trying common operations reversed operands [22->22 21->12] and reversed result [expected (22,12)->43]:
+ addition
+ (22,12)->43: 22 + 12 = 34 rev-> 43 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (22,12)->43: (20 + 2) * 12 = 20 * 12 + 2 * 12 = 240 + 24 = 264 rev-> 462 mismatch
+ concatenation
+ (22,12)->43: 22 || 12 = 2212 rev-> 2122 mismatch
+ reverse concatenation
+ (22,12)->43: 12 || 22 = 1222 rev-> 2221 mismatch
+
+Trying common operations on identity [22 21] [expected (22,21)->43]:
+ addition
+ (22,21)->43: 22 + 21 = 43 match
+ correct, but skipping
+ multiplication
+ (22,21)->43: (20 + 2) * 21 = 20 * 21 + 2 * 21 = 420 + 42 = 462 mismatch
+ concatenation
+ (22,21)->43: 22 || 21 = 2221 mismatch
+ reverse concatenation
+ (22,21)->43: 21 || 22 = 2122 mismatch
+
+Trying difference operations reversed operands [22->22 21->12] and reversed result [expected (22,12)->43]:
+ subtraction (a-b)
+ (22,12)->43: 22 - 12 = 10 rev-> 01 mismatch
+ absolute difference
+ (22,12)->43: |22 - 12| = 10 rev-> 01 mismatch
+ max mod min
+ (22,12)->43: max(22,12) mod min(22,12) = 22 mod 12 = 10 rev-> 01 mismatch
+ negated absolute difference
+ (22,12)->43: -|22 - 12| = -10 rev-> -01 mismatch
+ reverse subtraction (b-a)
+ (22,12)->43: 12 - 22 = -10 rev-> -01 mismatch
+ modulo (a mod b)
+ (22,12)->43: 22 mod 12 = 10 rev-> 01 mismatch
+
+Trying difference operations on identity [22 21] [expected (22,21)->43]:
+ subtraction (a-b)
+ (22,21)->43: 22 - 21 = 1 mismatch
+ absolute difference
+ (22,21)->43: |22 - 21| = 1 mismatch
+ max mod min
+ (22,21)->43: max(22,21) mod min(22,21) = 22 mod 21 = 1 mismatch
+ negated absolute difference
+ (22,21)->43: -|22 - 21| = -1 mismatch
+ reverse subtraction (b-a)
+ (22,21)->43: 21 - 22 = -1 mismatch
+ modulo (a mod b)
+ (22,21)->43: 22 mod 21 = 1 mismatch
+
+Trying rare operations reversed operands [22->22 21->12] and reversed result [expected (22,12)->43]:
+ multiply+1
+ (22,12)->43: (20 + 2) * 12 + 1 = 20 * 12 + 2 * 12 + 1 = 240 + 24 + 1 = 264 + 1 = 265 rev-> 562 mismatch
+ multiply-1
+ (22,12)->43: (20 + 2) * 12 - 1 = 20 * 12 + 2 * 12 - 1 = 240 + 24 - 1 = 264 - 1 = 263 rev-> 362 mismatch
+ add+1
+ (22,12)->43: 22 + 12 + 1 = 35 rev-> 53 mismatch
+ add-1
+ (22,12)->43: 22 + 12 - 1 = 33 rev-> 33 mismatch
+ sub+1
+ (22,12)->43: 22 - 12 + 1 = 11 rev-> 11 mismatch
+ sub-1
+ (22,12)->43: 22 - 12 - 1 = 9 rev-> 9 mismatch
+ integer division (a/b)
+ (22,12)->43: 22 / 12 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (22,12)->43: 12 / 22 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (22,12)->43: 12 mod 22 = 12 rev-> 21 mismatch
+ digit absolute diff
+ (22,12)->43: |2-1| || |2-2| = 10 rev-> 01 mismatch
+ digit add mod10
+ (22,12)->43: (2+1)%10 || (2+2)%10 = 34 rev-> 43 match
+ correct, but skipping
+ digit sub mod10
+ (22,12)->43: (2-1)%10 || (2-2)%10 = 10 rev-> 01 mismatch
+ cross multiply
+ (22,12)->43: 2*1 + 2*2 = 2 + 4 = 6 rev-> 6 mismatch
+ cross multiply rev
+ (22,12)->43: 2*2 + 2*1 = 4 + 2 = 6 rev-> 6 mismatch
+ digit multiply
+ (22,12)->43: 2*1 || 2*2 = 2 || 4 = 24 rev-> 42 mismatch
+ digit multiply rev
+ (22,12)->43: 2*2 || 2*1 = 4 || 2 = 42 rev-> 24 mismatch
+ digit sum diff
+ (22,12)->43: (2+2) - (1+2) = 1 rev-> 1 mismatch
+ digit sum sum
+ (22,12)->43: (2+2) + (1+2) = 7 rev-> 7 mismatch
+ digit product diff
+ (22,12)->43: 2*2 - 1*2 = 4 - 2 = 2 rev-> 2 mismatch
+ digit product sum
+ (22,12)->43: 2*2 + 1*2 = 4 + 2 = 6 rev-> 6 mismatch
+ determinant
+ (22,12)->43: 2*2 - 2*1 = 4 - 2 = 2 rev-> 2 mismatch
+ abs determinant
+ (22,12)->43: |2*2 - 2*1| = |4 - 2| = 2 rev-> 2 mismatch
+
+Trying rare operations on identity [22 21] [expected (22,21)->43]:
+ multiply+1
+ (22,21)->43: (20 + 2) * 21 + 1 = 20 * 21 + 2 * 21 + 1 = 420 + 42 + 1 = 462 + 1 = 463 mismatch
+ multiply-1
+ (22,21)->43: (20 + 2) * 21 - 1 = 20 * 21 + 2 * 21 - 1 = 420 + 42 - 1 = 462 - 1 = 461 mismatch
+ add+1
+ (22,21)->43: 22 + 21 + 1 = 44 mismatch
+ add-1
+ (22,21)->43: 22 + 21 - 1 = 42 mismatch
+ sub+1
+ (22,21)->43: 22 - 21 + 1 = 2 mismatch
+ sub-1
+ (22,21)->43: 22 - 21 - 1 = 0 mismatch
+ integer division (a/b)
+ (22,21)->43: 22 / 21 = 1 mismatch
+ reverse division (b/a)
+ (22,21)->43: 21 / 22 = 0 mismatch
+ reverse modulo (b mod a)
+ (22,21)->43: 21 mod 22 = 21 mismatch
+ digit absolute diff
+ (22,21)->43: |2-2| || |2-1| = 01 mismatch
+ digit add mod10
+ (22,21)->43: (2+2)%10 || (2+1)%10 = 43 match
+ correct, but skipping
+ digit sub mod10
+ (22,21)->43: (2-2)%10 || (2-1)%10 = 01 mismatch
+ cross multiply
+ (22,21)->43: 2*2 + 2*1 = 4 + 2 = 6 mismatch
+ cross multiply rev
+ (22,21)->43: 2*1 + 2*2 = 2 + 4 = 6 mismatch
+ digit multiply
+ (22,21)->43: 2*2 || 2*1 = 4 || 2 = 42 mismatch
+ digit multiply rev
+ (22,21)->43: 2*1 || 2*2 = 2 || 4 = 24 mismatch
+ digit sum diff
+ (22,21)->43: (2+2) - (2+1) = 1 mismatch
+ digit sum sum
+ (22,21)->43: (2+2) + (2+1) = 7 mismatch
+ digit product diff
+ (22,21)->43: 2*2 - 2*1 = 4 - 2 = 2 mismatch
+ digit product sum
+ (22,21)->43: 2*2 + 2*1 = 4 + 2 = 6 mismatch
+ determinant
+ (22,21)->43: 2*1 - 2*2 = 2 - 4 = -2 mismatch
+ abs determinant
+ (22,21)->43: |2*1 - 2*2| = |2 - 4| = 2 mismatch
+
+Applying to 53<39:
+ We recall that the question operator is found in the examples.
+ reversed operands [53->35, 39->93] and reversed result
+ addition (35,93): 35 + 93 = 128 rev-> 821
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{821}

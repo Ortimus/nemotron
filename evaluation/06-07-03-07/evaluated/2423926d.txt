@@ -1,0 +1,176 @@
+39-24 = 15
+88+93 = 621
+38*99 = 6128
+67+99 = 471
+53*53 = 4221
+
+The inputs are 39, 24, 88, 93, 38, 99, 67, 99, 53, 53
+
+The outputs are 15, 621, 6128, 471, 4221
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+39-24 -> -
+88+93 -> +
+38*99 -> *
+67+99 -> +
+53*53 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+33+25 -> +
+The question operator is found in the examples.
+
+Looking at operator + [88+93 = 621, 67+99 = 471]:
+
+Trying common operations reversed operands [88->88, 93->39, 67->76, 99->99] and reversed result [expected (88,39)->621, (76,99)->471]:
+ addition
+ (88,39)->621: 88 + 39 = 127 rev-> 721 mismatch
+ multiplication
+ (76,99)->471: (70 + 6) * 99 = 70 * 99 + 6 * 99 = 6930 + 594 = 7524 rev-> 4257 mismatch
+ concatenation
+ (88,39)->621: 88 || 39 = 8839 rev-> 9388 mismatch
+ reverse concatenation
+ (76,99)->471: 99 || 76 = 9976 rev-> 6799 mismatch
+
+Trying common operations on identity [88, 93, 76, 99] [expected (88,93)->621, (76,99)->471]:
+ addition
+ (88,93)->621: 88 + 93 = 181 mismatch
+ multiplication
+ (76,99)->471: (70 + 6) * 99 = 70 * 99 + 6 * 99 = 6930 + 594 = 7524 mismatch
+ concatenation
+ (88,93)->621: 88 || 93 = 8893 mismatch
+ reverse concatenation
+ (76,99)->471: 99 || 76 = 9976 mismatch
+
+Trying difference operations reversed operands [88->88, 93->39, 76->67, 99->99] and reversed result [expected (88,39)->621, (67,99)->471]:
+ subtraction (a-b)
+ (88,39)->621: 88 - 39 = 49 rev-> 94 mismatch
+ absolute difference
+ (67,99)->471: |67 - 99| = 32 rev-> 23 mismatch
+ max mod min
+ (88,39)->621: max(88,39) mod min(88,39) = 88 mod 39 = 10 rev-> 01 mismatch
+ negated absolute difference
+ (67,99)->471: -|67 - 99| = -32 rev-> -23 mismatch
+ reverse subtraction (b-a)
+ (88,39)->621: 39 - 88 = -49 rev-> -94 mismatch
+ modulo (a mod b)
+ (67,99)->471: 67 mod 99 = 67 rev-> 76 mismatch
+
+Trying difference operations on identity [88, 93, 76, 99] [expected (88,93)->621, (76,99)->471]:
+ subtraction (a-b)
+ (88,93)->621: 88 - 93 = -5 mismatch
+ absolute difference
+ (76,99)->471: |76 - 99| = 23 mismatch
+ max mod min
+ (88,93)->621: max(88,93) mod min(88,93) = 93 mod 88 = 5 mismatch
+ negated absolute difference
+ (76,99)->471: -|76 - 99| = -23 mismatch
+ reverse subtraction (b-a)
+ (88,93)->621: 93 - 88 = 5 mismatch
+ modulo (a mod b)
+ (76,99)->471: 76 mod 99 = 76 mismatch
+
+Trying rare operations reversed operands [88->88, 93->39, 76->67, 99->99] and reversed result [expected (88,39)->621, (67,99)->471]:
+ multiply+1
+ (88,39)->621: (80 + 8) * 39 + 1 = 80 * 39 + 8 * 39 + 1 = 3120 + 312 + 1 = 3432 + 1 = 3433 rev-> 3343 mismatch
+ multiply-1
+ (67,99)->471: (60 + 7) * 99 - 1 = 60 * 99 + 7 * 99 - 1 = 5940 + 693 - 1 = 6633 - 1 = 6632 rev-> 2366 mismatch
+ add+1
+ (88,39)->621: 88 + 39 + 1 = 128 rev-> 821 mismatch
+ add-1
+ (67,99)->471: 67 + 99 - 1 = 165 rev-> 561 mismatch
+ sub+1
+ (88,39)->621: 88 - 39 + 1 = 50 rev-> 05 mismatch
+ sub-1
+ (67,99)->471: 67 - 99 - 1 = -33 rev-> -33 mismatch
+ integer division (a/b)
+ (88,39)->621: 88 / 39 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (67,99)->471: 99 / 67 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (88,39)->621: 39 mod 88 = 39 rev-> 93 mismatch
+ digit absolute diff
+ (67,99)->471: |6-9| || |7-9| = 32 rev-> 23 mismatch
+ digit add mod10
+ (88,39)->621: (8+3)%10 || (8+9)%10 = 17 rev-> 71 mismatch
+ digit sub mod10
+ (67,99)->471: (6-9)%10 || (7-9)%10 = 78 rev-> 87 mismatch
+ cross multiply
+ (88,39)->621: 8*3 + 8*9 = 24 + 72 = 96 rev-> 69 mismatch
+ cross multiply rev
+ (67,99)->471: 6*9 + 7*9 = 54 + 63 = 117 rev-> 711 mismatch
+ digit multiply
+ (88,39)->621: 8*3 || 8*9 = 24 || 72 = 2472 rev-> 2742 mismatch
+ digit multiply rev
+ (67,99)->471: 6*9 || 7*9 = 54 || 63 = 5463 rev-> 3645 mismatch
+ digit sum diff
+ (88,39)->621: (8+8) - (3+9) = 4 rev-> 4 mismatch
+ digit sum sum
+ (67,99)->471: (6+7) + (9+9) = 31 rev-> 13 mismatch
+ digit product diff
+ (88,39)->621: 8*8 - 3*9 = 64 - 27 = 37 rev-> 73 mismatch
+ digit product sum
+ (67,99)->471: 6*7 + 9*9 = 42 + 81 = 123 rev-> 321 mismatch
+ determinant
+ (88,39)->621: 8*9 - 8*3 = 72 - 24 = 48 rev-> 84 mismatch
+ abs determinant
+ (67,99)->471: |6*9 - 7*9| = |54 - 63| = 9 rev-> 9 mismatch
+
+Trying rare operations on identity [88, 93, 76, 99] [expected (88,93)->621, (76,99)->471]:
+ multiply+1
+ (88,93)->621: (80 + 8) * 93 + 1 = 80 * 93 + 8 * 93 + 1 = 7440 + 744 + 1 = 8184 + 1 = 8185 mismatch
+ multiply-1
+ (76,99)->471: (70 + 6) * 99 - 1 = 70 * 99 + 6 * 99 - 1 = 6930 + 594 - 1 = 7524 - 1 = 7523 mismatch
+ add+1
+ (88,93)->621: 88 + 93 + 1 = 182 mismatch
+ add-1
+ (76,99)->471: 76 + 99 - 1 = 174 mismatch
+ sub+1
+ (88,93)->621: 88 - 93 + 1 = -4 mismatch
+ sub-1
+ (76,99)->471: 76 - 99 - 1 = -24 mismatch
+ integer division (a/b)
+ (88,93)->621: 88 / 93 = 0 mismatch
+ reverse division (b/a)
+ (76,99)->471: 99 / 76 = 1 mismatch
+ reverse modulo (b mod a)
+ (88,93)->621: 93 mod 88 = 5 mismatch
+ digit absolute diff
+ (76,99)->471: |7-9| || |6-9| = 23 mismatch
+ digit add mod10
+ (88,93)->621: (8+9)%10 || (8+3)%10 = 71 mismatch
+ digit sub mod10
+ (76,99)->471: (7-9)%10 || (6-9)%10 = 87 mismatch
+ cross multiply
+ (88,93)->621: 8*9 + 8*3 = 72 + 24 = 96 mismatch
+ cross multiply rev
+ (76,99)->471: 7*9 + 6*9 = 63 + 54 = 117 mismatch
+ digit multiply
+ (88,93)->621: 8*9 || 8*3 = 72 || 24 = 7224 mismatch
+ digit multiply rev
+ (76,99)->471: 7*9 || 6*9 = 63 || 54 = 6354 mismatch
+ digit sum diff
+ (88,93)->621: (8+8) - (9+3) = 4 mismatch
+ digit sum sum
+ (76,99)->471: (7+6) + (9+9) = 31 mismatch
+ digit product diff
+ (88,93)->621: 8*8 - 9*3 = 64 - 27 = 37 mismatch
+ digit product sum
+ (76,99)->471: 7*6 + 9*9 = 42 + 81 = 123 mismatch
+ determinant
+ (88,93)->621: 8*3 - 8*9 = 24 - 72 = -48 mismatch
+ abs determinant
+ (76,99)->471: |7*9 - 6*9| = |63 - 54| = 9 mismatch
+
+Applying to 33+25:
+ We recall that the question operator is found in the examples.
+ reversed operands [33->33, 25->52] and reversed result
+ addition (33,52): 33 + 52 = 85 rev-> 58
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{58}

@@ -1,0 +1,182 @@
+52(28 = 79
+50-78 = 5078
+71\89 = \18
+36-79 = 3679
+87(18 = 104
+
+The inputs are 52, 28, 50, 78, 71, 89, 36, 79, 87, 18
+
+The outputs are 79, 5078, \18, 3679, 104
+Some example outputs have the operator symbol as prefix \.
+We now consider the outputs to be 79, 5078, -18, 3679, 104
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+52(28 -> (
+50-78 -> -
+71\89 -> \
+36-79 -> -
+87(18 -> (
+
+The operators
+(
+-
+\
+
+Looking at the question
+30-64 -> -
+The question operator is found in the examples.
+
+Looking at operator - [50-78 = 5078, 36-79 = 3679]:
+
+Trying common operations reversed operands [50->05 78->87, 36->63 79->97] and reversed result [expected (05,87)->5078, (63,97)->3679]:
+ addition
+ (05,87)->5078: 05 + 87 = 92 rev-> 29 mismatch
+ multiplication
+ (63,97)->3679: (60 + 3) * 97 = 60 * 97 + 3 * 97 = 5820 + 291 = 6111 rev-> 1116 mismatch
+ concatenation
+ (05,87)->5078: 05 || 87 = 0587 rev-> 7850 mismatch
+ reverse concatenation
+ (63,97)->3679: 97 || 63 = 9763 rev-> 3679 match
+ (05,87)->5078: 87 || 05 = 8705 rev-> 5078 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+Trying common operations on identity [50 78, 36 79] [expected (50,78)->5078, (36,79)->3679]:
+ addition
+ (50,78)->5078: 50 + 78 = 128 mismatch
+ multiplication
+ (36,79)->3679: (30 + 6) * 79 = 30 * 79 + 6 * 79 = 2370 + 474 = 2844 mismatch
+ concatenation
+ (50,78)->5078: 50 || 78 = 5078 match
+ (36,79)->3679: 36 || 79 = 3679 match
+ correct, but skipping
+ reverse concatenation
+ (36,79)->3679: 79 || 36 = 7936 mismatch
+
+Trying difference operations reversed operands [50->05 78->87, 36->63 79->97] and reversed result [expected (05,87)->5078, (63,97)->3679]:
+ subtraction (a-b)
+ (05,87)->5078: 05 - 87 = -82 rev-> -28 mismatch
+ absolute difference
+ (63,97)->3679: |63 - 97| = 34 rev-> 43 mismatch
+ max mod min
+ (05,87)->5078: max(05,87) mod min(05,87) = 87 mod 05 = 2 rev-> 2 mismatch
+ negated absolute difference
+ (63,97)->3679: -|63 - 97| = -34 rev-> -43 mismatch
+ reverse subtraction (b-a)
+ (05,87)->5078: 87 - 05 = 82 rev-> 28 mismatch
+ modulo (a mod b)
+ (63,97)->3679: 63 mod 97 = 63 rev-> 36 mismatch
+
+Trying difference operations on identity [50 78, 36 79] [expected (50,78)->5078, (36,79)->3679]:
+ subtraction (a-b)
+ (50,78)->5078: 50 - 78 = -28 mismatch
+ absolute difference
+ (36,79)->3679: |36 - 79| = 43 mismatch
+ max mod min
+ (50,78)->5078: max(50,78) mod min(50,78) = 78 mod 50 = 28 mismatch
+ negated absolute difference
+ (36,79)->3679: -|36 - 79| = -43 mismatch
+ reverse subtraction (b-a)
+ (50,78)->5078: 78 - 50 = 28 mismatch
+ modulo (a mod b)
+ (36,79)->3679: 36 mod 79 = 36 mismatch
+
+Trying rare operations reversed operands [50->05 78->87, 36->63 79->97] and reversed result [expected (05,87)->5078, (63,97)->3679]:
+ multiply+1
+ (05,87)->5078: (0 + 5) * 87 + 1 = 0 * 87 + 5 * 87 + 1 = 0 + 435 + 1 = 435 + 1 = 436 rev-> 634 mismatch
+ multiply-1
+ (63,97)->3679: (60 + 3) * 97 - 1 = 60 * 97 + 3 * 97 - 1 = 5820 + 291 - 1 = 6111 - 1 = 6110 rev-> 0116 mismatch
+ add+1
+ (05,87)->5078: 05 + 87 + 1 = 93 rev-> 39 mismatch
+ add-1
+ (63,97)->3679: 63 + 97 - 1 = 159 rev-> 951 mismatch
+ sub+1
+ (05,87)->5078: 05 - 87 + 1 = -81 rev-> -18 mismatch
+ sub-1
+ (63,97)->3679: 63 - 97 - 1 = -35 rev-> -53 mismatch
+ integer division (a/b)
+ (05,87)->5078: 05 / 87 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (63,97)->3679: 97 / 63 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (05,87)->5078: 87 mod 05 = 2 rev-> 2 mismatch
+ digit absolute diff
+ (63,97)->3679: |6-9| || |3-7| = 34 rev-> 43 mismatch
+ digit add mod10
+ (05,87)->5078: (0+8)%10 || (5+7)%10 = 82 rev-> 28 mismatch
+ digit sub mod10
+ (63,97)->3679: (6-9)%10 || (3-7)%10 = 76 rev-> 67 mismatch
+ cross multiply
+ (05,87)->5078: 0*8 + 5*7 = 0 + 35 = 35 rev-> 53 mismatch
+ cross multiply rev
+ (63,97)->3679: 6*7 + 3*9 = 42 + 27 = 69 rev-> 96 mismatch
+ digit multiply
+ (05,87)->5078: 0*8 || 5*7 = 0 || 35 = 035 rev-> 530 mismatch
+ digit multiply rev
+ (63,97)->3679: 6*7 || 3*9 = 42 || 27 = 4227 rev-> 7224 mismatch
+ digit sum diff
+ (05,87)->5078: (0+5) - (8+7) = -10 rev-> -01 mismatch
+ digit sum sum
+ (63,97)->3679: (6+3) + (9+7) = 25 rev-> 52 mismatch
+ digit product diff
+ (05,87)->5078: 0*5 - 8*7 = 0 - 56 = -56 rev-> -65 mismatch
+ digit product sum
+ (63,97)->3679: 6*3 + 9*7 = 18 + 63 = 81 rev-> 18 mismatch
+ determinant
+ (05,87)->5078: 0*7 - 5*8 = 0 - 40 = -40 rev-> -04 mismatch
+ abs determinant
+ (63,97)->3679: |6*7 - 3*9| = |42 - 27| = 15 rev-> 51 mismatch
+
+Trying rare operations on identity [50 78, 36 79] [expected (50,78)->5078, (36,79)->3679]:
+ multiply+1
+ (50,78)->5078: (50 + 0) * 78 + 1 = 50 * 78 + 0 * 78 + 1 = 3900 + 0 + 1 = 3900 + 1 = 3901 mismatch
+ multiply-1
+ (36,79)->3679: (30 + 6) * 79 - 1 = 30 * 79 + 6 * 79 - 1 = 2370 + 474 - 1 = 2844 - 1 = 2843 mismatch
+ add+1
+ (50,78)->5078: 50 + 78 + 1 = 129 mismatch
+ add-1
+ (36,79)->3679: 36 + 79 - 1 = 114 mismatch
+ sub+1
+ (50,78)->5078: 50 - 78 + 1 = -27 mismatch
+ sub-1
+ (36,79)->3679: 36 - 79 - 1 = -44 mismatch
+ integer division (a/b)
+ (50,78)->5078: 50 / 78 = 0 mismatch
+ reverse division (b/a)
+ (36,79)->3679: 79 / 36 = 2 mismatch
+ reverse modulo (b mod a)
+ (50,78)->5078: 78 mod 50 = 28 mismatch
+ digit absolute diff
+ (36,79)->3679: |3-7| || |6-9| = 43 mismatch
+ digit add mod10
+ (50,78)->5078: (5+7)%10 || (0+8)%10 = 28 mismatch
+ digit sub mod10
+ (36,79)->3679: (3-7)%10 || (6-9)%10 = 67 mismatch
+ cross multiply
+ (50,78)->5078: 5*7 + 0*8 = 35 + 0 = 35 mismatch
+ cross multiply rev
+ (36,79)->3679: 3*9 + 6*7 = 27 + 42 = 69 mismatch
+ digit multiply
+ (50,78)->5078: 5*7 || 0*8 = 35 || 0 = 350 mismatch
+ digit multiply rev
+ (36,79)->3679: 3*9 || 6*7 = 27 || 42 = 2742 mismatch
+ digit sum diff
+ (50,78)->5078: (5+0) - (7+8) = -10 mismatch
+ digit sum sum
+ (36,79)->3679: (3+6) + (7+9) = 25 mismatch
+ digit product diff
+ (50,78)->5078: 5*0 - 7*8 = 0 - 56 = -56 mismatch
+ digit product sum
+ (36,79)->3679: 3*6 + 7*9 = 18 + 63 = 81 mismatch
+ determinant
+ (50,78)->5078: 5*8 - 0*7 = 40 - 0 = 40 mismatch
+ abs determinant
+ (36,79)->3679: |3*9 - 6*7| = |27 - 42| = 15 mismatch
+
+Applying to 30-64:
+ We recall that the question operator is found in the examples.
+ reversed operands [30->03, 64->46] and reversed result
+ reverse concatenation (03,46): 46 || 03 = 4603 rev-> 3064
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{3064}

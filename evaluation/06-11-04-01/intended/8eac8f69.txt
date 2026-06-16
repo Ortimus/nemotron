@@ -1,0 +1,180 @@
+99(38 = 9938
+57+32 = 5271
+05(03 = 0503
+01+31 = 031
+
+The inputs are 99, 38, 57, 32, 05, 03, 01, 31
+
+The outputs are 9938, 5271, 0503, 031
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+99(38 -> (
+57+32 -> +
+05(03 -> (
+01+31 -> +
+
+The operators
+(
++
+
+Looking at the question
+21+94 -> +
+The question operator is found in the examples.
+
+Looking at operator + [57+32 = 5271, 01+31 = 031]:
+
+Trying common operations
+ reversed operands [57->75 32->23, 01->10 31->13] and reversed result [expected (75,23)->5271, (10,13)->031]
+ addition
+ (75,23)->5271: 75 + 23 = 98 rev-> 89 mismatch
+ multiplication
+ (10,13)->031: (10 + 0) * 13 = 10 * 13 + 0 * 13 = 130 + 0 = 130 rev-> 031 match
+ (75,23)->5271: (70 + 5) * 23 = 70 * 23 + 5 * 23 = 1610 + 115 = 1725 rev-> 5271 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (75,23)->5271: 75 || 23 = 7523 rev-> 3257 mismatch
+ reverse concatenation
+ (10,13)->031: 13 || 10 = 1310 rev-> 0131 mismatch
+
+ identity [57 32, 01 31] [expected (57,32)->5271, (01,31)->031]
+ addition
+ (57,32)->5271: 57 + 32 = 89 mismatch
+ multiplication
+ (01,31)->031: (0 + 1) * 31 = 0 * 31 + 1 * 31 = 0 + 31 = 31 mismatch
+ concatenation
+ (57,32)->5271: 57 || 32 = 5732 mismatch
+ reverse concatenation
+ (01,31)->031: 31 || 01 = 3101 mismatch
+
+Trying difference operations
+ reversed operands [57->75 32->23, 01->10 31->13] and reversed result [expected (75,23)->5271, (10,13)->031]
+ subtraction (a-b)
+ (75,23)->5271: 75 - 23 = 52 rev-> 25 mismatch
+ absolute difference
+ (10,13)->031: |10 - 13| = 3 rev-> 3 mismatch
+ max mod min
+ (75,23)->5271: max(75,23) mod min(75,23) = 75 mod 23 = 6 rev-> 6 mismatch
+ negated absolute difference
+ (10,13)->031: -|10 - 13| = -3 rev-> -3 mismatch
+ reverse subtraction (b-a)
+ (75,23)->5271: 23 - 75 = -52 rev-> -25 mismatch
+ modulo (a mod b)
+ (10,13)->031: 10 mod 13 = 10 rev-> 01 mismatch
+
+ identity [57 32, 01 31] [expected (57,32)->5271, (01,31)->031]
+ subtraction (a-b)
+ (57,32)->5271: 57 - 32 = 25 mismatch
+ absolute difference
+ (01,31)->031: |01 - 31| = 30 mismatch
+ max mod min
+ (57,32)->5271: max(57,32) mod min(57,32) = 57 mod 32 = 25 mismatch
+ negated absolute difference
+ (01,31)->031: -|01 - 31| = -30 mismatch
+ reverse subtraction (b-a)
+ (57,32)->5271: 32 - 57 = -25 mismatch
+ modulo (a mod b)
+ (01,31)->031: 01 mod 31 = 1 mismatch
+
+Trying rare operations
+ reversed operands [57->75 32->23, 01->10 31->13] and reversed result [expected (75,23)->5271, (10,13)->031]
+ multiply+1
+ (75,23)->5271: (70 + 5) * 23 + 1 = 70 * 23 + 5 * 23 + 1 = 1610 + 115 + 1 = 1725 + 1 = 1726 rev-> 6271 mismatch
+ multiply-1
+ (10,13)->031: (10 + 0) * 13 - 1 = 10 * 13 + 0 * 13 - 1 = 130 + 0 - 1 = 130 - 1 = 129 rev-> 921 mismatch
+ add+1
+ (75,23)->5271: 75 + 23 + 1 = 99 rev-> 99 mismatch
+ add-1
+ (10,13)->031: 10 + 13 - 1 = 22 rev-> 22 mismatch
+ sub+1
+ (75,23)->5271: 75 - 23 + 1 = 53 rev-> 35 mismatch
+ sub-1
+ (10,13)->031: 10 - 13 - 1 = -4 rev-> -4 mismatch
+ integer division (a/b)
+ (75,23)->5271: 75 / 23 = 3 rev-> 3 mismatch
+ reverse division (b/a)
+ (10,13)->031: 13 / 10 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (75,23)->5271: 23 mod 75 = 23 rev-> 32 mismatch
+ digit absolute diff
+ (10,13)->031: |1-1| || |0-3| = 03 rev-> 30 mismatch
+ digit add mod10
+ (75,23)->5271: (7+2)%10 || (5+3)%10 = 98 rev-> 89 mismatch
+ digit sub mod10
+ (10,13)->031: (1-1)%10 || (0-3)%10 = 07 rev-> 70 mismatch
+ cross multiply
+ (75,23)->5271: 7*2 + 5*3 = 14 + 15 = 29 rev-> 92 mismatch
+ cross multiply rev
+ (10,13)->031: 1*3 + 0*1 = 3 + 0 = 3 rev-> 3 mismatch
+ digit multiply
+ (75,23)->5271: 7*2 || 5*3 = 14 || 15 = 1415 rev-> 5141 mismatch
+ digit multiply rev
+ (10,13)->031: 1*3 || 0*1 = 3 || 0 = 30 rev-> 03 mismatch
+ digit sum diff
+ (75,23)->5271: (7+5) - (2+3) = 7 rev-> 7 mismatch
+ digit sum sum
+ (10,13)->031: (1+0) + (1+3) = 5 rev-> 5 mismatch
+ digit product diff
+ (75,23)->5271: 7*5 - 2*3 = 35 - 6 = 29 rev-> 92 mismatch
+ digit product sum
+ (10,13)->031: 1*0 + 1*3 = 0 + 3 = 3 rev-> 3 mismatch
+ determinant
+ (75,23)->5271: 7*3 - 5*2 = 21 - 10 = 11 rev-> 11 mismatch
+ abs determinant
+ (10,13)->031: |1*3 - 0*1| = |3 - 0| = 3 rev-> 3 mismatch
+
+ identity [57 32, 01 31] [expected (57,32)->5271, (01,31)->031]
+ multiply+1
+ (57,32)->5271: (50 + 7) * 32 + 1 = 50 * 32 + 7 * 32 + 1 = 1600 + 224 + 1 = 1824 + 1 = 1825 mismatch
+ multiply-1
+ (01,31)->031: (0 + 1) * 31 - 1 = 0 * 31 + 1 * 31 - 1 = 0 + 31 - 1 = 31 - 1 = 30 mismatch
+ add+1
+ (57,32)->5271: 57 + 32 + 1 = 90 mismatch
+ add-1
+ (01,31)->031: 01 + 31 - 1 = 31 mismatch
+ sub+1
+ (57,32)->5271: 57 - 32 + 1 = 26 mismatch
+ sub-1
+ (01,31)->031: 01 - 31 - 1 = -31 mismatch
+ integer division (a/b)
+ (57,32)->5271: 57 / 32 = 1 mismatch
+ reverse division (b/a)
+ (01,31)->031: 31 / 01 = 31 mismatch
+ reverse modulo (b mod a)
+ (57,32)->5271: 32 mod 57 = 32 mismatch
+ digit absolute diff
+ (01,31)->031: |0-3| || |1-1| = 30 mismatch
+ digit add mod10
+ (57,32)->5271: (5+3)%10 || (7+2)%10 = 89 mismatch
+ digit sub mod10
+ (01,31)->031: (0-3)%10 || (1-1)%10 = 70 mismatch
+ cross multiply
+ (57,32)->5271: 5*3 + 7*2 = 15 + 14 = 29 mismatch
+ cross multiply rev
+ (01,31)->031: 0*1 + 1*3 = 0 + 3 = 3 mismatch
+ digit multiply
+ (57,32)->5271: 5*3 || 7*2 = 15 || 14 = 1514 mismatch
+ digit multiply rev
+ (01,31)->031: 0*1 || 1*3 = 0 || 3 = 03 mismatch
+ digit sum diff
+ (57,32)->5271: (5+7) - (3+2) = 7 mismatch
+ digit sum sum
+ (01,31)->031: (0+1) + (3+1) = 5 mismatch
+ digit product diff
+ (57,32)->5271: 5*7 - 3*2 = 35 - 6 = 29 mismatch
+ digit product sum
+ (01,31)->031: 0*1 + 3*1 = 0 + 3 = 3 mismatch
+ determinant
+ (57,32)->5271: 5*2 - 7*3 = 10 - 21 = -11 mismatch
+ abs determinant
+ (01,31)->031: |0*1 - 1*3| = |0 - 3| = 3 mismatch
+
+correct, actions: reversed operands, reversed result, multiplication
+
+Applying to 21+94:
+ We recall that the question operator is found in the examples.
+ reversed operands [21->12, 94->49] and reversed result
+ multiplication
+ (12,49): (10 + 2) * 49 = 10 * 49 + 2 * 49 = 490 + 98 = 588 rev-> 885
+ Result is non-negative
+ \boxed{885}

@@ -1,0 +1,181 @@
+83>82 = 66
+26>97 = 141
+71>89 = 511
+49-07 = 0856
+
+The inputs are 83, 82, 26, 97, 71, 89, 49, 07
+
+The outputs are 66, 141, 511, 0856
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+83>82 -> >
+26>97 -> >
+71>89 -> >
+49-07 -> -
+
+The operators
+>
+-
+
+Looking at the question
+48>83 -> >
+The question operator is found in the examples.
+
+Looking at operator > [83>82 = 66, 26>97 = 141, 71>89 = 511]:
+
+Trying common operations
+ reversed operands [83->38 82->28, 26->62 97->79, 71->17 89->98] and reversed result [expected (38,28)->66, (62,79)->141, (17,98)->511]
+ addition
+ (38,28)->66: 38 + 28 = 66 rev-> 66 match
+ (62,79)->141: 62 + 79 = 141 rev-> 141 match
+ (17,98)->511: 17 + 98 = 115 rev-> 511 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (62,79)->141: (60 + 2) * 79 = 60 * 79 + 2 * 79 = 4740 + 158 = 4898 rev-> 8984 mismatch
+ concatenation
+ (17,98)->511: 17 || 98 = 1798 rev-> 8971 mismatch
+ reverse concatenation
+ (38,28)->66: 28 || 38 = 2838 rev-> 8382 mismatch
+
+ identity [83 82, 26 97, 71 89] [expected (83,82)->66, (26,97)->141, (71,89)->511]
+ addition
+ (83,82)->66: 83 + 82 = 165 mismatch
+ multiplication
+ (26,97)->141: (20 + 6) * 97 = 20 * 97 + 6 * 97 = 1940 + 582 = 2522 mismatch
+ concatenation
+ (71,89)->511: 71 || 89 = 7189 mismatch
+ reverse concatenation
+ (83,82)->66: 82 || 83 = 8283 mismatch
+
+Trying difference operations
+ reversed operands [83->38 82->28, 26->62 97->79, 71->17 89->98] and reversed result [expected (38,28)->66, (62,79)->141, (17,98)->511]
+ subtraction (a-b)
+ (38,28)->66: 38 - 28 = 10 rev-> 01 mismatch
+ absolute difference
+ (62,79)->141: |62 - 79| = 17 rev-> 71 mismatch
+ max mod min
+ (17,98)->511: max(17,98) mod min(17,98) = 98 mod 17 = 13 rev-> 31 mismatch
+ negated absolute difference
+ (38,28)->66: -|38 - 28| = -10 rev-> -01 mismatch
+ reverse subtraction (b-a)
+ (62,79)->141: 79 - 62 = 17 rev-> 71 mismatch
+ modulo (a mod b)
+ (17,98)->511: 17 mod 98 = 17 rev-> 71 mismatch
+
+ identity [83 82, 26 97, 71 89] [expected (83,82)->66, (26,97)->141, (71,89)->511]
+ subtraction (a-b)
+ (83,82)->66: 83 - 82 = 1 mismatch
+ absolute difference
+ (26,97)->141: |26 - 97| = 71 mismatch
+ max mod min
+ (71,89)->511: max(71,89) mod min(71,89) = 89 mod 71 = 18 mismatch
+ negated absolute difference
+ (83,82)->66: -|83 - 82| = -1 mismatch
+ reverse subtraction (b-a)
+ (26,97)->141: 97 - 26 = 71 mismatch
+ modulo (a mod b)
+ (71,89)->511: 71 mod 89 = 71 mismatch
+
+Trying rare operations
+ reversed operands [83->38 82->28, 26->62 97->79, 71->17 89->98] and reversed result [expected (38,28)->66, (62,79)->141, (17,98)->511]
+ multiply+1
+ (38,28)->66: (30 + 8) * 28 + 1 = 30 * 28 + 8 * 28 + 1 = 840 + 224 + 1 = 1064 + 1 = 1065 rev-> 5601 mismatch
+ multiply-1
+ (62,79)->141: (60 + 2) * 79 - 1 = 60 * 79 + 2 * 79 - 1 = 4740 + 158 - 1 = 4898 - 1 = 4897 rev-> 7984 mismatch
+ add+1
+ (17,98)->511: 17 + 98 + 1 = 116 rev-> 611 mismatch
+ add-1
+ (38,28)->66: 38 + 28 - 1 = 65 rev-> 56 mismatch
+ sub+1
+ (62,79)->141: 62 - 79 + 1 = -16 rev-> -61 mismatch
+ sub-1
+ (17,98)->511: 17 - 98 - 1 = -82 rev-> -28 mismatch
+ integer division (a/b)
+ (38,28)->66: 38 / 28 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (62,79)->141: 79 / 62 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (17,98)->511: 98 mod 17 = 13 rev-> 31 mismatch
+ digit absolute diff
+ (38,28)->66: |3-2| || |8-8| = 10 rev-> 01 mismatch
+ digit add mod10
+ (62,79)->141: (6+7)%10 || (2+9)%10 = 31 rev-> 13 mismatch
+ digit sub mod10
+ (17,98)->511: (1-9)%10 || (7-8)%10 = 29 rev-> 92 mismatch
+ cross multiply
+ (38,28)->66: 3*2 + 8*8 = 6 + 64 = 70 rev-> 07 mismatch
+ cross multiply rev
+ (62,79)->141: 6*9 + 2*7 = 54 + 14 = 68 rev-> 86 mismatch
+ digit multiply
+ (17,98)->511: 1*9 || 7*8 = 9 || 56 = 956 rev-> 659 mismatch
+ digit multiply rev
+ (38,28)->66: 3*8 || 8*2 = 24 || 16 = 2416 rev-> 6142 mismatch
+ digit sum diff
+ (62,79)->141: (6+2) - (7+9) = -8 rev-> -8 mismatch
+ digit sum sum
+ (17,98)->511: (1+7) + (9+8) = 25 rev-> 52 mismatch
+ digit product diff
+ (38,28)->66: 3*8 - 2*8 = 24 - 16 = 8 rev-> 8 mismatch
+ digit product sum
+ (62,79)->141: 6*2 + 7*9 = 12 + 63 = 75 rev-> 57 mismatch
+ determinant
+ (17,98)->511: 1*8 - 7*9 = 8 - 63 = -55 rev-> -55 mismatch
+ abs determinant
+ (38,28)->66: |3*8 - 8*2| = |24 - 16| = 8 rev-> 8 mismatch
+
+ identity [83 82, 26 97, 71 89] [expected (83,82)->66, (26,97)->141, (71,89)->511]
+ multiply+1
+ (83,82)->66: (80 + 3) * 82 + 1 = 80 * 82 + 3 * 82 + 1 = 6560 + 246 + 1 = 6806 + 1 = 6807 mismatch
+ multiply-1
+ (26,97)->141: (20 + 6) * 97 - 1 = 20 * 97 + 6 * 97 - 1 = 1940 + 582 - 1 = 2522 - 1 = 2521 mismatch
+ add+1
+ (71,89)->511: 71 + 89 + 1 = 161 mismatch
+ add-1
+ (83,82)->66: 83 + 82 - 1 = 164 mismatch
+ sub+1
+ (26,97)->141: 26 - 97 + 1 = -70 mismatch
+ sub-1
+ (71,89)->511: 71 - 89 - 1 = -19 mismatch
+ integer division (a/b)
+ (83,82)->66: 83 / 82 = 1 mismatch
+ reverse division (b/a)
+ (26,97)->141: 97 / 26 = 3 mismatch
+ reverse modulo (b mod a)
+ (71,89)->511: 89 mod 71 = 18 mismatch
+ digit absolute diff
+ (83,82)->66: |8-8| || |3-2| = 01 mismatch
+ digit add mod10
+ (26,97)->141: (2+9)%10 || (6+7)%10 = 13 mismatch
+ digit sub mod10
+ (71,89)->511: (7-8)%10 || (1-9)%10 = 92 mismatch
+ cross multiply
+ (83,82)->66: 8*8 + 3*2 = 64 + 6 = 70 mismatch
+ cross multiply rev
+ (26,97)->141: 2*7 + 6*9 = 14 + 54 = 68 mismatch
+ digit multiply
+ (71,89)->511: 7*8 || 1*9 = 56 || 9 = 569 mismatch
+ digit multiply rev
+ (83,82)->66: 8*2 || 3*8 = 16 || 24 = 1624 mismatch
+ digit sum diff
+ (26,97)->141: (2+6) - (9+7) = -8 mismatch
+ digit sum sum
+ (71,89)->511: (7+1) + (8+9) = 25 mismatch
+ digit product diff
+ (83,82)->66: 8*3 - 8*2 = 24 - 16 = 8 mismatch
+ digit product sum
+ (26,97)->141: 2*6 + 9*7 = 12 + 63 = 75 mismatch
+ determinant
+ (71,89)->511: 7*9 - 1*8 = 63 - 8 = 55 mismatch
+ abs determinant
+ (83,82)->66: |8*2 - 3*8| = |16 - 24| = 8 mismatch
+
+correct, actions: reversed operands, reversed result, addition
+
+Applying to 48>83:
+ We recall that the question operator is found in the examples.
+ reversed operands [48->84, 83->38] and reversed result
+ addition
+ (84,38): 84 + 38 = 122 rev-> 221
+ Result is non-negative
+ \boxed{221}

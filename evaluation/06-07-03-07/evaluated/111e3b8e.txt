@@ -1,0 +1,177 @@
+12*47 = 563
+63^39 = 101
+93*87 = 8090
+49*91 = 4458
+39"13 = 26
+
+The inputs are 12, 47, 63, 39, 93, 87, 49, 91, 39, 13
+
+The outputs are 563, 101, 8090, 4458, 26
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+12*47 -> *
+63^39 -> ^
+93*87 -> *
+49*91 -> *
+39"13 -> "
+
+The operators
+*
+^
+"
+
+Looking at the question
+32^10 -> ^
+The question operator is found in the examples.
+
+Looking at operator ^ [63^39 = 101]:
+
+Trying common operations reversed operands [63->36 39->93] and reversed result [expected (36,93)->101]:
+ addition
+ (36,93)->101: 36 + 93 = 129 rev-> 921 mismatch
+ multiplication
+ (36,93)->101: (30 + 6) * 93 = 30 * 93 + 6 * 93 = 2790 + 558 = 3348 rev-> 8433 mismatch
+ concatenation
+ (36,93)->101: 36 || 93 = 3693 rev-> 3963 mismatch
+ reverse concatenation
+ (36,93)->101: 93 || 36 = 9336 rev-> 6339 mismatch
+
+Trying common operations on identity [63 39] [expected (63,39)->101]:
+ addition
+ (63,39)->101: 63 + 39 = 102 mismatch
+ multiplication
+ (63,39)->101: (60 + 3) * 39 = 60 * 39 + 3 * 39 = 2340 + 117 = 2457 mismatch
+ concatenation
+ (63,39)->101: 63 || 39 = 6339 mismatch
+ reverse concatenation
+ (63,39)->101: 39 || 63 = 3963 mismatch
+
+Trying difference operations reversed operands [63->36 39->93] and reversed result [expected (36,93)->101]:
+ subtraction (a-b)
+ (36,93)->101: 36 - 93 = -57 rev-> -75 mismatch
+ absolute difference
+ (36,93)->101: |36 - 93| = 57 rev-> 75 mismatch
+ max mod min
+ (36,93)->101: max(36,93) mod min(36,93) = 93 mod 36 = 21 rev-> 12 mismatch
+ negated absolute difference
+ (36,93)->101: -|36 - 93| = -57 rev-> -75 mismatch
+ reverse subtraction (b-a)
+ (36,93)->101: 93 - 36 = 57 rev-> 75 mismatch
+ modulo (a mod b)
+ (36,93)->101: 36 mod 93 = 36 rev-> 63 mismatch
+
+Trying difference operations on identity [63 39] [expected (63,39)->101]:
+ subtraction (a-b)
+ (63,39)->101: 63 - 39 = 24 mismatch
+ absolute difference
+ (63,39)->101: |63 - 39| = 24 mismatch
+ max mod min
+ (63,39)->101: max(63,39) mod min(63,39) = 63 mod 39 = 24 mismatch
+ negated absolute difference
+ (63,39)->101: -|63 - 39| = -24 mismatch
+ reverse subtraction (b-a)
+ (63,39)->101: 39 - 63 = -24 mismatch
+ modulo (a mod b)
+ (63,39)->101: 63 mod 39 = 24 mismatch
+
+Trying rare operations reversed operands [63->36 39->93] and reversed result [expected (36,93)->101]:
+ multiply+1
+ (36,93)->101: (30 + 6) * 93 + 1 = 30 * 93 + 6 * 93 + 1 = 2790 + 558 + 1 = 3348 + 1 = 3349 rev-> 9433 mismatch
+ multiply-1
+ (36,93)->101: (30 + 6) * 93 - 1 = 30 * 93 + 6 * 93 - 1 = 2790 + 558 - 1 = 3348 - 1 = 3347 rev-> 7433 mismatch
+ add+1
+ (36,93)->101: 36 + 93 + 1 = 130 rev-> 031 mismatch
+ add-1
+ (36,93)->101: 36 + 93 - 1 = 128 rev-> 821 mismatch
+ sub+1
+ (36,93)->101: 36 - 93 + 1 = -56 rev-> -65 mismatch
+ sub-1
+ (36,93)->101: 36 - 93 - 1 = -58 rev-> -85 mismatch
+ integer division (a/b)
+ (36,93)->101: 36 / 93 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (36,93)->101: 93 / 36 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (36,93)->101: 93 mod 36 = 21 rev-> 12 mismatch
+ digit absolute diff
+ (36,93)->101: |3-9| || |6-3| = 63 rev-> 36 mismatch
+ digit add mod10
+ (36,93)->101: (3+9)%10 || (6+3)%10 = 29 rev-> 92 mismatch
+ digit sub mod10
+ (36,93)->101: (3-9)%10 || (6-3)%10 = 43 rev-> 34 mismatch
+ cross multiply
+ (36,93)->101: 3*9 + 6*3 = 27 + 18 = 45 rev-> 54 mismatch
+ cross multiply rev
+ (36,93)->101: 3*3 + 6*9 = 9 + 54 = 63 rev-> 36 mismatch
+ digit multiply
+ (36,93)->101: 3*9 || 6*3 = 27 || 18 = 2718 rev-> 8172 mismatch
+ digit multiply rev
+ (36,93)->101: 3*3 || 6*9 = 9 || 54 = 954 rev-> 459 mismatch
+ digit sum diff
+ (36,93)->101: (3+6) - (9+3) = -3 rev-> -3 mismatch
+ digit sum sum
+ (36,93)->101: (3+6) + (9+3) = 21 rev-> 12 mismatch
+ digit product diff
+ (36,93)->101: 3*6 - 9*3 = 18 - 27 = -9 rev-> -9 mismatch
+ digit product sum
+ (36,93)->101: 3*6 + 9*3 = 18 + 27 = 45 rev-> 54 mismatch
+ determinant
+ (36,93)->101: 3*3 - 6*9 = 9 - 54 = -45 rev-> -54 mismatch
+ abs determinant
+ (36,93)->101: |3*3 - 6*9| = |9 - 54| = 45 rev-> 54 mismatch
+
+Trying rare operations on identity [63 39] [expected (63,39)->101]:
+ multiply+1
+ (63,39)->101: (60 + 3) * 39 + 1 = 60 * 39 + 3 * 39 + 1 = 2340 + 117 + 1 = 2457 + 1 = 2458 mismatch
+ multiply-1
+ (63,39)->101: (60 + 3) * 39 - 1 = 60 * 39 + 3 * 39 - 1 = 2340 + 117 - 1 = 2457 - 1 = 2456 mismatch
+ add+1
+ (63,39)->101: 63 + 39 + 1 = 103 mismatch
+ add-1
+ (63,39)->101: 63 + 39 - 1 = 101 match
+ correct, actions: add-1
+ sub+1
+ (63,39)->101: 63 - 39 + 1 = 25 mismatch
+ sub-1
+ (63,39)->101: 63 - 39 - 1 = 23 mismatch
+ integer division (a/b)
+ (63,39)->101: 63 / 39 = 1 mismatch
+ reverse division (b/a)
+ (63,39)->101: 39 / 63 = 0 mismatch
+ reverse modulo (b mod a)
+ (63,39)->101: 39 mod 63 = 39 mismatch
+ digit absolute diff
+ (63,39)->101: |6-3| || |3-9| = 36 mismatch
+ digit add mod10
+ (63,39)->101: (6+3)%10 || (3+9)%10 = 92 mismatch
+ digit sub mod10
+ (63,39)->101: (6-3)%10 || (3-9)%10 = 34 mismatch
+ cross multiply
+ (63,39)->101: 6*3 + 3*9 = 18 + 27 = 45 mismatch
+ cross multiply rev
+ (63,39)->101: 6*9 + 3*3 = 54 + 9 = 63 mismatch
+ digit multiply
+ (63,39)->101: 6*3 || 3*9 = 18 || 27 = 1827 mismatch
+ digit multiply rev
+ (63,39)->101: 6*9 || 3*3 = 54 || 9 = 549 mismatch
+ digit sum diff
+ (63,39)->101: (6+3) - (3+9) = -3 mismatch
+ digit sum sum
+ (63,39)->101: (6+3) + (3+9) = 21 mismatch
+ digit product diff
+ (63,39)->101: 6*3 - 3*9 = 18 - 27 = -9 mismatch
+ digit product sum
+ (63,39)->101: 6*3 + 3*9 = 18 + 27 = 45 mismatch
+ determinant
+ (63,39)->101: 6*9 - 3*3 = 54 - 9 = 45 mismatch
+ abs determinant
+ (63,39)->101: |6*9 - 3*3| = |54 - 9| = 45 mismatch
+
+Applying to 32^10:
+ We recall that the question operator is found in the examples.
+ identity
+ add-1 (32,10): 32 + 10 - 1 = 41
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{41}

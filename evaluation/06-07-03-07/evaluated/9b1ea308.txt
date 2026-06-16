@@ -1,0 +1,178 @@
+37\35 = 02
+03|42 = 45
+81:87 = 8781
+18\91 = 26
+
+The inputs are 37, 35, 03, 42, 81, 87, 18, 91
+
+The outputs are 02, 45, 8781, 26
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+37\35 -> \
+03|42 -> |
+81:87 -> :
+18\91 -> \
+
+The operators
+\
+|
+:
+
+Looking at the question
+99|36 -> |
+The question operator is found in the examples.
+
+Looking at operator | [03|42 = 45]:
+
+Trying common operations reversed operands [03->30 42->24] and reversed result [expected (30,24)->45]:
+ addition
+ (30,24)->45: 30 + 24 = 54 rev-> 45 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (30,24)->45: (30 + 0) * 24 = 30 * 24 + 0 * 24 = 720 + 0 = 720 rev-> 027 mismatch
+ concatenation
+ (30,24)->45: 30 || 24 = 3024 rev-> 4203 mismatch
+ reverse concatenation
+ (30,24)->45: 24 || 30 = 2430 rev-> 0342 mismatch
+
+Trying common operations on identity [03 42] [expected (03,42)->45]:
+ addition
+ (03,42)->45: 03 + 42 = 45 match
+ correct, but skipping
+ multiplication
+ (03,42)->45: (0 + 3) * 42 = 0 * 42 + 3 * 42 = 0 + 126 = 126 mismatch
+ concatenation
+ (03,42)->45: 03 || 42 = 0342 mismatch
+ reverse concatenation
+ (03,42)->45: 42 || 03 = 4203 mismatch
+
+Trying difference operations reversed operands [03->30 42->24] and reversed result [expected (30,24)->45]:
+ subtraction (a-b)
+ (30,24)->45: 30 - 24 = 6 rev-> 6 mismatch
+ absolute difference
+ (30,24)->45: |30 - 24| = 6 rev-> 6 mismatch
+ max mod min
+ (30,24)->45: max(30,24) mod min(30,24) = 30 mod 24 = 6 rev-> 6 mismatch
+ negated absolute difference
+ (30,24)->45: -|30 - 24| = -6 rev-> -6 mismatch
+ reverse subtraction (b-a)
+ (30,24)->45: 24 - 30 = -6 rev-> -6 mismatch
+ modulo (a mod b)
+ (30,24)->45: 30 mod 24 = 6 rev-> 6 mismatch
+
+Trying difference operations on identity [03 42] [expected (03,42)->45]:
+ subtraction (a-b)
+ (03,42)->45: 03 - 42 = -39 mismatch
+ absolute difference
+ (03,42)->45: |03 - 42| = 39 mismatch
+ max mod min
+ (03,42)->45: max(03,42) mod min(03,42) = 42 mod 03 = 0 mismatch
+ negated absolute difference
+ (03,42)->45: -|03 - 42| = -39 mismatch
+ reverse subtraction (b-a)
+ (03,42)->45: 42 - 03 = 39 mismatch
+ modulo (a mod b)
+ (03,42)->45: 03 mod 42 = 3 mismatch
+
+Trying rare operations reversed operands [03->30 42->24] and reversed result [expected (30,24)->45]:
+ multiply+1
+ (30,24)->45: (30 + 0) * 24 + 1 = 30 * 24 + 0 * 24 + 1 = 720 + 0 + 1 = 720 + 1 = 721 rev-> 127 mismatch
+ multiply-1
+ (30,24)->45: (30 + 0) * 24 - 1 = 30 * 24 + 0 * 24 - 1 = 720 + 0 - 1 = 720 - 1 = 719 rev-> 917 mismatch
+ add+1
+ (30,24)->45: 30 + 24 + 1 = 55 rev-> 55 mismatch
+ add-1
+ (30,24)->45: 30 + 24 - 1 = 53 rev-> 35 mismatch
+ sub+1
+ (30,24)->45: 30 - 24 + 1 = 7 rev-> 7 mismatch
+ sub-1
+ (30,24)->45: 30 - 24 - 1 = 5 rev-> 5 mismatch
+ integer division (a/b)
+ (30,24)->45: 30 / 24 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (30,24)->45: 24 / 30 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (30,24)->45: 24 mod 30 = 24 rev-> 42 mismatch
+ digit absolute diff
+ (30,24)->45: |3-2| || |0-4| = 14 rev-> 41 mismatch
+ digit add mod10
+ (30,24)->45: (3+2)%10 || (0+4)%10 = 54 rev-> 45 match
+ correct, but skipping
+ digit sub mod10
+ (30,24)->45: (3-2)%10 || (0-4)%10 = 16 rev-> 61 mismatch
+ cross multiply
+ (30,24)->45: 3*2 + 0*4 = 6 + 0 = 6 rev-> 6 mismatch
+ cross multiply rev
+ (30,24)->45: 3*4 + 0*2 = 12 + 0 = 12 rev-> 21 mismatch
+ digit multiply
+ (30,24)->45: 3*2 || 0*4 = 6 || 0 = 60 rev-> 06 mismatch
+ digit multiply rev
+ (30,24)->45: 3*4 || 0*2 = 12 || 0 = 120 rev-> 021 mismatch
+ digit sum diff
+ (30,24)->45: (3+0) - (2+4) = -3 rev-> -3 mismatch
+ digit sum sum
+ (30,24)->45: (3+0) + (2+4) = 9 rev-> 9 mismatch
+ digit product diff
+ (30,24)->45: 3*0 - 2*4 = 0 - 8 = -8 rev-> -8 mismatch
+ digit product sum
+ (30,24)->45: 3*0 + 2*4 = 0 + 8 = 8 rev-> 8 mismatch
+ determinant
+ (30,24)->45: 3*4 - 0*2 = 12 - 0 = 12 rev-> 21 mismatch
+ abs determinant
+ (30,24)->45: |3*4 - 0*2| = |12 - 0| = 12 rev-> 21 mismatch
+
+Trying rare operations on identity [03 42] [expected (03,42)->45]:
+ multiply+1
+ (03,42)->45: (0 + 3) * 42 + 1 = 0 * 42 + 3 * 42 + 1 = 0 + 126 + 1 = 126 + 1 = 127 mismatch
+ multiply-1
+ (03,42)->45: (0 + 3) * 42 - 1 = 0 * 42 + 3 * 42 - 1 = 0 + 126 - 1 = 126 - 1 = 125 mismatch
+ add+1
+ (03,42)->45: 03 + 42 + 1 = 46 mismatch
+ add-1
+ (03,42)->45: 03 + 42 - 1 = 44 mismatch
+ sub+1
+ (03,42)->45: 03 - 42 + 1 = -38 mismatch
+ sub-1
+ (03,42)->45: 03 - 42 - 1 = -40 mismatch
+ integer division (a/b)
+ (03,42)->45: 03 / 42 = 0 mismatch
+ reverse division (b/a)
+ (03,42)->45: 42 / 03 = 14 mismatch
+ reverse modulo (b mod a)
+ (03,42)->45: 42 mod 03 = 0 mismatch
+ digit absolute diff
+ (03,42)->45: |0-4| || |3-2| = 41 mismatch
+ digit add mod10
+ (03,42)->45: (0+4)%10 || (3+2)%10 = 45 match
+ correct, but skipping
+ digit sub mod10
+ (03,42)->45: (0-4)%10 || (3-2)%10 = 61 mismatch
+ cross multiply
+ (03,42)->45: 0*4 + 3*2 = 0 + 6 = 6 mismatch
+ cross multiply rev
+ (03,42)->45: 0*2 + 3*4 = 0 + 12 = 12 mismatch
+ digit multiply
+ (03,42)->45: 0*4 || 3*2 = 0 || 6 = 06 mismatch
+ digit multiply rev
+ (03,42)->45: 0*2 || 3*4 = 0 || 12 = 012 mismatch
+ digit sum diff
+ (03,42)->45: (0+3) - (4+2) = -3 mismatch
+ digit sum sum
+ (03,42)->45: (0+3) + (4+2) = 9 mismatch
+ digit product diff
+ (03,42)->45: 0*3 - 4*2 = 0 - 8 = -8 mismatch
+ digit product sum
+ (03,42)->45: 0*3 + 4*2 = 0 + 8 = 8 mismatch
+ determinant
+ (03,42)->45: 0*2 - 3*4 = 0 - 12 = -12 mismatch
+ abs determinant
+ (03,42)->45: |0*2 - 3*4| = |0 - 12| = 12 mismatch
+
+Applying to 99|36:
+ We recall that the question operator is found in the examples.
+ reversed operands [99->99, 36->63] and reversed result
+ addition (99,63): 99 + 63 = 162 rev-> 261
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{261}

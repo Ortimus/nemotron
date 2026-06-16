@@ -1,0 +1,183 @@
+99-66 = 6533
+13:92 = 1
+49|31 = 80
+76|65 = 141
+
+The inputs are 99, 66, 13, 92, 49, 31, 76, 65
+
+The outputs are 6533, 1, 80, 141
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+99-66 -> -
+13:92 -> :
+49|31 -> |
+76|65 -> |
+
+The operators
+-
+:
+|
+
+Looking at the question
+90:15 -> :
+The question operator is found in the examples.
+
+Looking at operator : [13:92 = 1]:
+
+Trying common operations
+ reversed operands [13->31 92->29] and reversed result [expected (31,29)->1]
+ addition
+ (31,29)->1: 31 + 29 = 60 rev-> 06 mismatch
+ multiplication
+ (31,29)->1: (30 + 1) * 29 = 30 * 29 + 1 * 29 = 870 + 29 = 899 rev-> 998 mismatch
+ concatenation
+ (31,29)->1: 31 || 29 = 3129 rev-> 9213 mismatch
+ reverse concatenation
+ (31,29)->1: 29 || 31 = 2931 rev-> 1392 mismatch
+
+ identity [13 92] [expected (13,92)->1]
+ addition
+ (13,92)->1: 13 + 92 = 105 mismatch
+ multiplication
+ (13,92)->1: (10 + 3) * 92 = 10 * 92 + 3 * 92 = 920 + 276 = 1196 mismatch
+ concatenation
+ (13,92)->1: 13 || 92 = 1392 mismatch
+ reverse concatenation
+ (13,92)->1: 92 || 13 = 9213 mismatch
+
+Trying difference operations
+ reversed operands [13->31 92->29] and reversed result [expected (31,29)->1]
+ subtraction (a-b)
+ (31,29)->1: 31 - 29 = 2 rev-> 2 mismatch
+ absolute difference
+ (31,29)->1: |31 - 29| = 2 rev-> 2 mismatch
+ max mod min
+ (31,29)->1: max(31,29) mod min(31,29) = 31 mod 29 = 2 rev-> 2 mismatch
+ negated absolute difference
+ (31,29)->1: -|31 - 29| = -2 rev-> -2 mismatch
+ reverse subtraction (b-a)
+ (31,29)->1: 29 - 31 = -2 rev-> -2 mismatch
+ modulo (a mod b)
+ (31,29)->1: 31 mod 29 = 2 rev-> 2 mismatch
+
+ identity [13 92] [expected (13,92)->1]
+ subtraction (a-b)
+ (13,92)->1: 13 - 92 = -79 mismatch
+ absolute difference
+ (13,92)->1: |13 - 92| = 79 mismatch
+ max mod min
+ (13,92)->1: max(13,92) mod min(13,92) = 92 mod 13 = 1 match
+ correct, actions: max mod min
+ negated absolute difference
+ (13,92)->1: -|13 - 92| = -79 mismatch
+ reverse subtraction (b-a)
+ (13,92)->1: 92 - 13 = 79 mismatch
+ modulo (a mod b)
+ (13,92)->1: 13 mod 92 = 13 mismatch
+
+Trying rare operations
+ reversed operands [13->31 92->29] and reversed result [expected (31,29)->1]
+ multiply+1
+ (31,29)->1: (30 + 1) * 29 + 1 = 30 * 29 + 1 * 29 + 1 = 870 + 29 + 1 = 899 + 1 = 900 rev-> 009 mismatch
+ multiply-1
+ (31,29)->1: (30 + 1) * 29 - 1 = 30 * 29 + 1 * 29 - 1 = 870 + 29 - 1 = 899 - 1 = 898 rev-> 898 mismatch
+ add+1
+ (31,29)->1: 31 + 29 + 1 = 61 rev-> 16 mismatch
+ add-1
+ (31,29)->1: 31 + 29 - 1 = 59 rev-> 95 mismatch
+ sub+1
+ (31,29)->1: 31 - 29 + 1 = 3 rev-> 3 mismatch
+ sub-1
+ (31,29)->1: 31 - 29 - 1 = 1 rev-> 1 match
+ correct, but skipping
+ integer division (a/b)
+ (31,29)->1: 31 / 29 = 1 rev-> 1 match
+ correct, but skipping
+ reverse division (b/a)
+ (31,29)->1: 29 / 31 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (31,29)->1: 29 mod 31 = 29 rev-> 92 mismatch
+ digit absolute diff
+ (31,29)->1: |3-2| || |1-9| = 18 rev-> 81 mismatch
+ digit add mod10
+ (31,29)->1: (3+2)%10 || (1+9)%10 = 50 rev-> 05 mismatch
+ digit sub mod10
+ (31,29)->1: (3-2)%10 || (1-9)%10 = 12 rev-> 21 mismatch
+ cross multiply
+ (31,29)->1: 3*2 + 1*9 = 6 + 9 = 15 rev-> 51 mismatch
+ cross multiply rev
+ (31,29)->1: 3*9 + 1*2 = 27 + 2 = 29 rev-> 92 mismatch
+ digit multiply
+ (31,29)->1: 3*2 || 1*9 = 6 || 9 = 69 rev-> 96 mismatch
+ digit multiply rev
+ (31,29)->1: 3*9 || 1*2 = 27 || 2 = 272 rev-> 272 mismatch
+ digit sum diff
+ (31,29)->1: (3+1) - (2+9) = -7 rev-> -7 mismatch
+ digit sum sum
+ (31,29)->1: (3+1) + (2+9) = 15 rev-> 51 mismatch
+ digit product diff
+ (31,29)->1: 3*1 - 2*9 = 3 - 18 = -15 rev-> -51 mismatch
+ digit product sum
+ (31,29)->1: 3*1 + 2*9 = 3 + 18 = 21 rev-> 12 mismatch
+ determinant
+ (31,29)->1: 3*9 - 1*2 = 27 - 2 = 25 rev-> 52 mismatch
+ abs determinant
+ (31,29)->1: |3*9 - 1*2| = |27 - 2| = 25 rev-> 52 mismatch
+
+ identity [13 92] [expected (13,92)->1]
+ multiply+1
+ (13,92)->1: (10 + 3) * 92 + 1 = 10 * 92 + 3 * 92 + 1 = 920 + 276 + 1 = 1196 + 1 = 1197 mismatch
+ multiply-1
+ (13,92)->1: (10 + 3) * 92 - 1 = 10 * 92 + 3 * 92 - 1 = 920 + 276 - 1 = 1196 - 1 = 1195 mismatch
+ add+1
+ (13,92)->1: 13 + 92 + 1 = 106 mismatch
+ add-1
+ (13,92)->1: 13 + 92 - 1 = 104 mismatch
+ sub+1
+ (13,92)->1: 13 - 92 + 1 = -78 mismatch
+ sub-1
+ (13,92)->1: 13 - 92 - 1 = -80 mismatch
+ integer division (a/b)
+ (13,92)->1: 13 / 92 = 0 mismatch
+ reverse division (b/a)
+ (13,92)->1: 92 / 13 = 7 mismatch
+ reverse modulo (b mod a)
+ (13,92)->1: 92 mod 13 = 1 match
+ correct, but skipping
+ digit absolute diff
+ (13,92)->1: |1-9| || |3-2| = 81 mismatch
+ digit add mod10
+ (13,92)->1: (1+9)%10 || (3+2)%10 = 05 mismatch
+ digit sub mod10
+ (13,92)->1: (1-9)%10 || (3-2)%10 = 21 mismatch
+ cross multiply
+ (13,92)->1: 1*9 + 3*2 = 9 + 6 = 15 mismatch
+ cross multiply rev
+ (13,92)->1: 1*2 + 3*9 = 2 + 27 = 29 mismatch
+ digit multiply
+ (13,92)->1: 1*9 || 3*2 = 9 || 6 = 96 mismatch
+ digit multiply rev
+ (13,92)->1: 1*2 || 3*9 = 2 || 27 = 227 mismatch
+ digit sum diff
+ (13,92)->1: (1+3) - (9+2) = -7 mismatch
+ digit sum sum
+ (13,92)->1: (1+3) + (9+2) = 15 mismatch
+ digit product diff
+ (13,92)->1: 1*3 - 9*2 = 3 - 18 = -15 mismatch
+ digit product sum
+ (13,92)->1: 1*3 + 9*2 = 3 + 18 = 21 mismatch
+ determinant
+ (13,92)->1: 1*2 - 3*9 = 2 - 27 = -25 mismatch
+ abs determinant
+ (13,92)->1: |1*2 - 3*9| = |2 - 27| = 25 mismatch
+
+correct, actions: max mod min
+
+Applying to 90:15:
+ We recall that the question operator is found in the examples.
+ identity [90 15]
+ max mod min
+ (90,15): max(90,15) mod min(90,15) = 90 mod 15 = 0
+ Result is non-negative
+ \boxed{0}

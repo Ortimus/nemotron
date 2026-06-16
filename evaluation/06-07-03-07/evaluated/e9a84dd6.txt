@@ -1,0 +1,177 @@
+16*39 = 3916
+78*71 = 7178
+37+81 = 19
+77+41 = 19
+
+The inputs are 16, 39, 78, 71, 37, 81, 77, 41
+
+The outputs are 3916, 7178, 19, 19
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+16*39 -> *
+78*71 -> *
+37+81 -> +
+77+41 -> +
+
+The operators
+*
++
+
+Looking at the question
+97+89 -> +
+The question operator is found in the examples.
+
+Looking at operator + [37+81 = 19, 77+41 = 19]:
+
+Trying common operations reversed operands [37->73 81->18, 77->77 41->14] and reversed result [expected (73,18)->19, (77,14)->19]:
+ addition
+ (73,18)->19: 73 + 18 = 91 rev-> 19 match
+ (77,14)->19: 77 + 14 = 91 rev-> 19 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (77,14)->19: (70 + 7) * 14 = 70 * 14 + 7 * 14 = 980 + 98 = 1078 rev-> 8701 mismatch
+ concatenation
+ (73,18)->19: 73 || 18 = 7318 rev-> 8137 mismatch
+ reverse concatenation
+ (77,14)->19: 14 || 77 = 1477 rev-> 7741 mismatch
+
+Trying common operations on identity [37 81, 77 41] [expected (37,81)->19, (77,41)->19]:
+ addition
+ (37,81)->19: 37 + 81 = 118 mismatch
+ multiplication
+ (77,41)->19: (70 + 7) * 41 = 70 * 41 + 7 * 41 = 2870 + 287 = 3157 mismatch
+ concatenation
+ (37,81)->19: 37 || 81 = 3781 mismatch
+ reverse concatenation
+ (77,41)->19: 41 || 77 = 4177 mismatch
+
+Trying difference operations reversed operands [37->73 81->18, 77->77 41->14] and reversed result [expected (73,18)->19, (77,14)->19]:
+ subtraction (a-b)
+ (73,18)->19: 73 - 18 = 55 rev-> 55 mismatch
+ absolute difference
+ (77,14)->19: |77 - 14| = 63 rev-> 36 mismatch
+ max mod min
+ (73,18)->19: max(73,18) mod min(73,18) = 73 mod 18 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (77,14)->19: -|77 - 14| = -63 rev-> -36 mismatch
+ reverse subtraction (b-a)
+ (73,18)->19: 18 - 73 = -55 rev-> -55 mismatch
+ modulo (a mod b)
+ (77,14)->19: 77 mod 14 = 7 rev-> 7 mismatch
+
+Trying difference operations on identity [37 81, 77 41] [expected (37,81)->19, (77,41)->19]:
+ subtraction (a-b)
+ (37,81)->19: 37 - 81 = -44 mismatch
+ absolute difference
+ (77,41)->19: |77 - 41| = 36 mismatch
+ max mod min
+ (37,81)->19: max(37,81) mod min(37,81) = 81 mod 37 = 7 mismatch
+ negated absolute difference
+ (77,41)->19: -|77 - 41| = -36 mismatch
+ reverse subtraction (b-a)
+ (37,81)->19: 81 - 37 = 44 mismatch
+ modulo (a mod b)
+ (77,41)->19: 77 mod 41 = 36 mismatch
+
+Trying rare operations reversed operands [37->73 81->18, 77->77 41->14] and reversed result [expected (73,18)->19, (77,14)->19]:
+ multiply+1
+ (73,18)->19: (70 + 3) * 18 + 1 = 70 * 18 + 3 * 18 + 1 = 1260 + 54 + 1 = 1314 + 1 = 1315 rev-> 5131 mismatch
+ multiply-1
+ (77,14)->19: (70 + 7) * 14 - 1 = 70 * 14 + 7 * 14 - 1 = 980 + 98 - 1 = 1078 - 1 = 1077 rev-> 7701 mismatch
+ add+1
+ (73,18)->19: 73 + 18 + 1 = 92 rev-> 29 mismatch
+ add-1
+ (77,14)->19: 77 + 14 - 1 = 90 rev-> 09 mismatch
+ sub+1
+ (73,18)->19: 73 - 18 + 1 = 56 rev-> 65 mismatch
+ sub-1
+ (77,14)->19: 77 - 14 - 1 = 62 rev-> 26 mismatch
+ integer division (a/b)
+ (73,18)->19: 73 / 18 = 4 rev-> 4 mismatch
+ reverse division (b/a)
+ (77,14)->19: 14 / 77 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (73,18)->19: 18 mod 73 = 18 rev-> 81 mismatch
+ digit absolute diff
+ (77,14)->19: |7-1| || |7-4| = 63 rev-> 36 mismatch
+ digit add mod10
+ (73,18)->19: (7+1)%10 || (3+8)%10 = 81 rev-> 18 mismatch
+ digit sub mod10
+ (77,14)->19: (7-1)%10 || (7-4)%10 = 63 rev-> 36 mismatch
+ cross multiply
+ (73,18)->19: 7*1 + 3*8 = 7 + 24 = 31 rev-> 13 mismatch
+ cross multiply rev
+ (77,14)->19: 7*4 + 7*1 = 28 + 7 = 35 rev-> 53 mismatch
+ digit multiply
+ (73,18)->19: 7*1 || 3*8 = 7 || 24 = 724 rev-> 427 mismatch
+ digit multiply rev
+ (77,14)->19: 7*4 || 7*1 = 28 || 7 = 287 rev-> 782 mismatch
+ digit sum diff
+ (73,18)->19: (7+3) - (1+8) = 1 rev-> 1 mismatch
+ digit sum sum
+ (77,14)->19: (7+7) + (1+4) = 19 rev-> 91 mismatch
+ digit product diff
+ (73,18)->19: 7*3 - 1*8 = 21 - 8 = 13 rev-> 31 mismatch
+ digit product sum
+ (77,14)->19: 7*7 + 1*4 = 49 + 4 = 53 rev-> 35 mismatch
+ determinant
+ (73,18)->19: 7*8 - 3*1 = 56 - 3 = 53 rev-> 35 mismatch
+ abs determinant
+ (77,14)->19: |7*4 - 7*1| = |28 - 7| = 21 rev-> 12 mismatch
+
+Trying rare operations on identity [37 81, 77 41] [expected (37,81)->19, (77,41)->19]:
+ multiply+1
+ (37,81)->19: (30 + 7) * 81 + 1 = 30 * 81 + 7 * 81 + 1 = 2430 + 567 + 1 = 2997 + 1 = 2998 mismatch
+ multiply-1
+ (77,41)->19: (70 + 7) * 41 - 1 = 70 * 41 + 7 * 41 - 1 = 2870 + 287 - 1 = 3157 - 1 = 3156 mismatch
+ add+1
+ (37,81)->19: 37 + 81 + 1 = 119 mismatch
+ add-1
+ (77,41)->19: 77 + 41 - 1 = 117 mismatch
+ sub+1
+ (37,81)->19: 37 - 81 + 1 = -43 mismatch
+ sub-1
+ (77,41)->19: 77 - 41 - 1 = 35 mismatch
+ integer division (a/b)
+ (37,81)->19: 37 / 81 = 0 mismatch
+ reverse division (b/a)
+ (77,41)->19: 41 / 77 = 0 mismatch
+ reverse modulo (b mod a)
+ (37,81)->19: 81 mod 37 = 7 mismatch
+ digit absolute diff
+ (77,41)->19: |7-4| || |7-1| = 36 mismatch
+ digit add mod10
+ (37,81)->19: (3+8)%10 || (7+1)%10 = 18 mismatch
+ digit sub mod10
+ (77,41)->19: (7-4)%10 || (7-1)%10 = 36 mismatch
+ cross multiply
+ (37,81)->19: 3*8 + 7*1 = 24 + 7 = 31 mismatch
+ cross multiply rev
+ (77,41)->19: 7*1 + 7*4 = 7 + 28 = 35 mismatch
+ digit multiply
+ (37,81)->19: 3*8 || 7*1 = 24 || 7 = 247 mismatch
+ digit multiply rev
+ (77,41)->19: 7*1 || 7*4 = 7 || 28 = 728 mismatch
+ digit sum diff
+ (37,81)->19: (3+7) - (8+1) = 1 mismatch
+ digit sum sum
+ (77,41)->19: (7+7) + (4+1) = 19 match
+ (37,81)->19: (3+7) + (8+1) = 19 match
+ correct, but skipping
+ digit product diff
+ (37,81)->19: 3*7 - 8*1 = 21 - 8 = 13 mismatch
+ digit product sum
+ (77,41)->19: 7*7 + 4*1 = 49 + 4 = 53 mismatch
+ determinant
+ (37,81)->19: 3*1 - 7*8 = 3 - 56 = -53 mismatch
+ abs determinant
+ (77,41)->19: |7*1 - 7*4| = |7 - 28| = 21 mismatch
+
+Applying to 97+89:
+ We recall that the question operator is found in the examples.
+ reversed operands [97->79, 89->98] and reversed result
+ addition (79,98): 79 + 98 = 177 rev-> 771
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{771}

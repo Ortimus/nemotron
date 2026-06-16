@@ -1,0 +1,193 @@
+23%11 = 12
+77%50 = 27
+48"99 = 148
+
+The inputs are 23, 11, 77, 50, 48, 99
+
+The outputs are 12, 27, 148
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+23%11 -> %
+77%50 -> %
+48"99 -> "
+
+The operators
+%
+"
+
+Looking at the question
+45/78 -> /
+The question operator is not found in the examples. Investigating the most common example operator % instead. We will use addition for the question operator.
+
+Looking at operator % [23%11 = 12, 77%50 = 27]:
+
+Trying common operations
+ reversed operands [23->32 11->11, 77->77 50->05] and reversed result [expected (32,11)->12, (77,05)->27]
+ addition
+ (32,11)->12: 32 + 11 = 43 rev-> 34 mismatch
+ multiplication
+ (77,05)->27: (70 + 7) * 05 = 70 * 05 + 7 * 05 = 350 + 35 = 385 rev-> 583 mismatch
+ concatenation
+ (32,11)->12: 32 || 11 = 3211 rev-> 1123 mismatch
+ reverse concatenation
+ (77,05)->27: 05 || 77 = 0577 rev-> 7750 mismatch
+
+ identity [23 11, 77 50] [expected (23,11)->12, (77,50)->27]
+ addition
+ (23,11)->12: 23 + 11 = 34 mismatch
+ multiplication
+ (77,50)->27: (70 + 7) * 50 = 70 * 50 + 7 * 50 = 3500 + 350 = 3850 mismatch
+ concatenation
+ (23,11)->12: 23 || 11 = 2311 mismatch
+ reverse concatenation
+ (77,50)->27: 50 || 77 = 5077 mismatch
+
+Trying difference operations
+ reversed operands [23->32 11->11, 77->77 50->05] and reversed result [expected (32,11)->12, (77,05)->27]
+ subtraction (a-b)
+ (32,11)->12: 32 - 11 = 21 rev-> 12 match
+ (77,05)->27: 77 - 05 = 72 rev-> 27 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (77,05)->27: |77 - 05| = 72 rev-> 27 match
+ (32,11)->12: |32 - 11| = 21 rev-> 12 match
+ correct, but skipping
+ max mod min
+ (32,11)->12: max(32,11) mod min(32,11) = 32 mod 11 = 10 rev-> 01 mismatch
+ negated absolute difference
+ (77,05)->27: -|77 - 05| = -72 rev-> -27 mismatch
+ reverse subtraction (b-a)
+ (32,11)->12: 11 - 32 = -21 rev-> -12 mismatch
+ modulo (a mod b)
+ (77,05)->27: 77 mod 05 = 2 rev-> 2 mismatch
+
+ identity [23 11, 77 50] [expected (23,11)->12, (77,50)->27]
+ subtraction (a-b)
+ (23,11)->12: 23 - 11 = 12 match
+ (77,50)->27: 77 - 50 = 27 match
+ correct, but skipping
+ absolute difference
+ (77,50)->27: |77 - 50| = 27 match
+ (23,11)->12: |23 - 11| = 12 match
+ correct, but skipping
+ max mod min
+ (23,11)->12: max(23,11) mod min(23,11) = 23 mod 11 = 1 mismatch
+ negated absolute difference
+ (77,50)->27: -|77 - 50| = -27 mismatch
+ reverse subtraction (b-a)
+ (23,11)->12: 11 - 23 = -12 mismatch
+ modulo (a mod b)
+ (77,50)->27: 77 mod 50 = 27 match
+ (23,11)->12: 23 mod 11 = 1 mismatch
+
+Trying rare operations
+ reversed operands [23->32 11->11, 77->77 50->05] and reversed result [expected (32,11)->12, (77,05)->27]
+ multiply+1
+ (32,11)->12: (30 + 2) * 11 + 1 = 30 * 11 + 2 * 11 + 1 = 330 + 22 + 1 = 352 + 1 = 353 rev-> 353 mismatch
+ multiply-1
+ (77,05)->27: (70 + 7) * 05 - 1 = 70 * 05 + 7 * 05 - 1 = 350 + 35 - 1 = 385 - 1 = 384 rev-> 483 mismatch
+ add+1
+ (32,11)->12: 32 + 11 + 1 = 44 rev-> 44 mismatch
+ add-1
+ (77,05)->27: 77 + 05 - 1 = 81 rev-> 18 mismatch
+ sub+1
+ (32,11)->12: 32 - 11 + 1 = 22 rev-> 22 mismatch
+ sub-1
+ (77,05)->27: 77 - 05 - 1 = 71 rev-> 17 mismatch
+ integer division (a/b)
+ (32,11)->12: 32 / 11 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (77,05)->27: 05 / 77 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (32,11)->12: 11 mod 32 = 11 rev-> 11 mismatch
+ digit absolute diff
+ (77,05)->27: |7-0| || |7-5| = 72 rev-> 27 match
+ (32,11)->12: |3-1| || |2-1| = 21 rev-> 12 match
+ correct, but skipping
+ digit add mod10
+ (32,11)->12: (3+1)%10 || (2+1)%10 = 43 rev-> 34 mismatch
+ digit sub mod10
+ (77,05)->27: (7-0)%10 || (7-5)%10 = 72 rev-> 27 match
+ (32,11)->12: (3-1)%10 || (2-1)%10 = 21 rev-> 12 match
+ correct, but skipping
+ cross multiply
+ (32,11)->12: 3*1 + 2*1 = 3 + 2 = 5 rev-> 5 mismatch
+ cross multiply rev
+ (77,05)->27: 7*5 + 7*0 = 35 + 0 = 35 rev-> 53 mismatch
+ digit multiply
+ (32,11)->12: 3*1 || 2*1 = 3 || 2 = 32 rev-> 23 mismatch
+ digit multiply rev
+ (77,05)->27: 7*5 || 7*0 = 35 || 0 = 350 rev-> 053 mismatch
+ digit sum diff
+ (32,11)->12: (3+2) - (1+1) = 3 rev-> 3 mismatch
+ digit sum sum
+ (77,05)->27: (7+7) + (0+5) = 19 rev-> 91 mismatch
+ digit product diff
+ (32,11)->12: 3*2 - 1*1 = 6 - 1 = 5 rev-> 5 mismatch
+ digit product sum
+ (77,05)->27: 7*7 + 0*5 = 49 + 0 = 49 rev-> 94 mismatch
+ determinant
+ (32,11)->12: 3*1 - 2*1 = 3 - 2 = 1 rev-> 1 mismatch
+ abs determinant
+ (77,05)->27: |7*5 - 7*0| = |35 - 0| = 35 rev-> 53 mismatch
+
+ identity [23 11, 77 50] [expected (23,11)->12, (77,50)->27]
+ multiply+1
+ (23,11)->12: (20 + 3) * 11 + 1 = 20 * 11 + 3 * 11 + 1 = 220 + 33 + 1 = 253 + 1 = 254 mismatch
+ multiply-1
+ (77,50)->27: (70 + 7) * 50 - 1 = 70 * 50 + 7 * 50 - 1 = 3500 + 350 - 1 = 3850 - 1 = 3849 mismatch
+ add+1
+ (23,11)->12: 23 + 11 + 1 = 35 mismatch
+ add-1
+ (77,50)->27: 77 + 50 - 1 = 126 mismatch
+ sub+1
+ (23,11)->12: 23 - 11 + 1 = 13 mismatch
+ sub-1
+ (77,50)->27: 77 - 50 - 1 = 26 mismatch
+ integer division (a/b)
+ (23,11)->12: 23 / 11 = 2 mismatch
+ reverse division (b/a)
+ (77,50)->27: 50 / 77 = 0 mismatch
+ reverse modulo (b mod a)
+ (23,11)->12: 11 mod 23 = 11 mismatch
+ digit absolute diff
+ (77,50)->27: |7-5| || |7-0| = 27 match
+ (23,11)->12: |2-1| || |3-1| = 12 match
+ correct, but skipping
+ digit add mod10
+ (23,11)->12: (2+1)%10 || (3+1)%10 = 34 mismatch
+ digit sub mod10
+ (77,50)->27: (7-5)%10 || (7-0)%10 = 27 match
+ (23,11)->12: (2-1)%10 || (3-1)%10 = 12 match
+ correct, but skipping
+ cross multiply
+ (23,11)->12: 2*1 + 3*1 = 2 + 3 = 5 mismatch
+ cross multiply rev
+ (77,50)->27: 7*0 + 7*5 = 0 + 35 = 35 mismatch
+ digit multiply
+ (23,11)->12: 2*1 || 3*1 = 2 || 3 = 23 mismatch
+ digit multiply rev
+ (77,50)->27: 7*0 || 7*5 = 0 || 35 = 035 mismatch
+ digit sum diff
+ (23,11)->12: (2+3) - (1+1) = 3 mismatch
+ digit sum sum
+ (77,50)->27: (7+7) + (5+0) = 19 mismatch
+ digit product diff
+ (23,11)->12: 2*3 - 1*1 = 6 - 1 = 5 mismatch
+ digit product sum
+ (77,50)->27: 7*7 + 5*0 = 49 + 0 = 49 mismatch
+ determinant
+ (23,11)->12: 2*1 - 3*1 = 2 - 3 = -1 mismatch
+ abs determinant
+ (77,50)->27: |7*0 - 7*5| = |0 - 35| = 35 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 45/78:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [45->54, 78->87] and reversed result
+ addition
+ (54,87): 54 + 87 = 141 rev-> 141
+ Result is non-negative
+ \boxed{141}

@@ -1,0 +1,176 @@
+14-19 = -05
+35+39 = 3935
+62*58 = 1122
+
+The inputs are 14, 19, 35, 39, 62, 58
+
+The outputs are -05, 3935, 1122
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -05, 3935, 1122
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+14-19 -> -
+35+39 -> +
+62*58 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+31-53 -> -
+The question operator is found in the examples.
+
+Looking at operator - [14-19 = -05]:
+
+Trying common operations reversed operands [14->41 19->91] and reversed result [expected (41,91)->-05]:
+ addition
+ (41,91)->-05: 41 + 91 = 132 rev-> 231 mismatch
+ multiplication
+ (41,91)->-05: (40 + 1) * 91 = 40 * 91 + 1 * 91 = 3640 + 91 = 3731 rev-> 1373 mismatch
+ concatenation
+ (41,91)->-05: 41 || 91 = 4191 rev-> 1914 mismatch
+ reverse concatenation
+ (41,91)->-05: 91 || 41 = 9141 rev-> 1419 mismatch
+
+Trying common operations on identity [14 19] [expected (14,19)->-05]:
+ addition
+ (14,19)->-05: 14 + 19 = 33 mismatch
+ multiplication
+ (14,19)->-05: (10 + 4) * 19 = 10 * 19 + 4 * 19 = 190 + 76 = 266 mismatch
+ concatenation
+ (14,19)->-05: 14 || 19 = 1419 mismatch
+ reverse concatenation
+ (14,19)->-05: 19 || 14 = 1914 mismatch
+
+Trying difference operations reversed operands [14->41 19->91] and reversed result [expected (41,91)->-05]:
+ subtraction (a-b)
+ (41,91)->-05: 41 - 91 = -50 rev-> -05 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (41,91)->-05: |41 - 91| = 50 rev-> 05 mismatch
+ max mod min
+ (41,91)->-05: max(41,91) mod min(41,91) = 91 mod 41 = 9 rev-> 9 mismatch
+ negated absolute difference
+ (41,91)->-05: -|41 - 91| = -50 rev-> -05 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (41,91)->-05: 91 - 41 = 50 rev-> 05 mismatch
+ modulo (a mod b)
+ (41,91)->-05: 41 mod 91 = 41 rev-> 14 mismatch
+
+Trying difference operations on identity [14 19] [expected (14,19)->-05]:
+ subtraction (a-b)
+ (14,19)->-05: 14 - 19 = -5 mismatch
+ absolute difference
+ (14,19)->-05: |14 - 19| = 5 mismatch
+ max mod min
+ (14,19)->-05: max(14,19) mod min(14,19) = 19 mod 14 = 5 mismatch
+ negated absolute difference
+ (14,19)->-05: -|14 - 19| = -5 mismatch
+ reverse subtraction (b-a)
+ (14,19)->-05: 19 - 14 = 5 mismatch
+ modulo (a mod b)
+ (14,19)->-05: 14 mod 19 = 14 mismatch
+
+Trying rare operations reversed operands [14->41 19->91] and reversed result [expected (41,91)->-05]:
+ multiply+1
+ (41,91)->-05: (40 + 1) * 91 + 1 = 40 * 91 + 1 * 91 + 1 = 3640 + 91 + 1 = 3731 + 1 = 3732 rev-> 2373 mismatch
+ multiply-1
+ (41,91)->-05: (40 + 1) * 91 - 1 = 40 * 91 + 1 * 91 - 1 = 3640 + 91 - 1 = 3731 - 1 = 3730 rev-> 0373 mismatch
+ add+1
+ (41,91)->-05: 41 + 91 + 1 = 133 rev-> 331 mismatch
+ add-1
+ (41,91)->-05: 41 + 91 - 1 = 131 rev-> 131 mismatch
+ sub+1
+ (41,91)->-05: 41 - 91 + 1 = -49 rev-> -94 mismatch
+ sub-1
+ (41,91)->-05: 41 - 91 - 1 = -51 rev-> -15 mismatch
+ integer division (a/b)
+ (41,91)->-05: 41 / 91 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (41,91)->-05: 91 / 41 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (41,91)->-05: 91 mod 41 = 9 rev-> 9 mismatch
+ digit absolute diff
+ (41,91)->-05: |4-9| || |1-1| = 50 rev-> 05 mismatch
+ digit add mod10
+ (41,91)->-05: (4+9)%10 || (1+1)%10 = 32 rev-> 23 mismatch
+ digit sub mod10
+ (41,91)->-05: (4-9)%10 || (1-1)%10 = 50 rev-> 05 mismatch
+ cross multiply
+ (41,91)->-05: 4*9 + 1*1 = 36 + 1 = 37 rev-> 73 mismatch
+ cross multiply rev
+ (41,91)->-05: 4*1 + 1*9 = 4 + 9 = 13 rev-> 31 mismatch
+ digit multiply
+ (41,91)->-05: 4*9 || 1*1 = 36 || 1 = 361 rev-> 163 mismatch
+ digit multiply rev
+ (41,91)->-05: 4*1 || 1*9 = 4 || 9 = 49 rev-> 94 mismatch
+ digit sum diff
+ (41,91)->-05: (4+1) - (9+1) = -5 rev-> -5 mismatch
+ digit sum sum
+ (41,91)->-05: (4+1) + (9+1) = 15 rev-> 51 mismatch
+ digit product diff
+ (41,91)->-05: 4*1 - 9*1 = 4 - 9 = -5 rev-> -5 mismatch
+ digit product sum
+ (41,91)->-05: 4*1 + 9*1 = 4 + 9 = 13 rev-> 31 mismatch
+ determinant
+ (41,91)->-05: 4*1 - 1*9 = 4 - 9 = -5 rev-> -5 mismatch
+ abs determinant
+ (41,91)->-05: |4*1 - 1*9| = |4 - 9| = 5 rev-> 5 mismatch
+
+Trying rare operations on identity [14 19] [expected (14,19)->-05]:
+ multiply+1
+ (14,19)->-05: (10 + 4) * 19 + 1 = 10 * 19 + 4 * 19 + 1 = 190 + 76 + 1 = 266 + 1 = 267 mismatch
+ multiply-1
+ (14,19)->-05: (10 + 4) * 19 - 1 = 10 * 19 + 4 * 19 - 1 = 190 + 76 - 1 = 266 - 1 = 265 mismatch
+ add+1
+ (14,19)->-05: 14 + 19 + 1 = 34 mismatch
+ add-1
+ (14,19)->-05: 14 + 19 - 1 = 32 mismatch
+ sub+1
+ (14,19)->-05: 14 - 19 + 1 = -4 mismatch
+ sub-1
+ (14,19)->-05: 14 - 19 - 1 = -6 mismatch
+ integer division (a/b)
+ (14,19)->-05: 14 / 19 = 0 mismatch
+ reverse division (b/a)
+ (14,19)->-05: 19 / 14 = 1 mismatch
+ reverse modulo (b mod a)
+ (14,19)->-05: 19 mod 14 = 5 mismatch
+ digit absolute diff
+ (14,19)->-05: |1-1| || |4-9| = 05 mismatch
+ digit add mod10
+ (14,19)->-05: (1+1)%10 || (4+9)%10 = 23 mismatch
+ digit sub mod10
+ (14,19)->-05: (1-1)%10 || (4-9)%10 = 05 mismatch
+ cross multiply
+ (14,19)->-05: 1*1 + 4*9 = 1 + 36 = 37 mismatch
+ cross multiply rev
+ (14,19)->-05: 1*9 + 4*1 = 9 + 4 = 13 mismatch
+ digit multiply
+ (14,19)->-05: 1*1 || 4*9 = 1 || 36 = 136 mismatch
+ digit multiply rev
+ (14,19)->-05: 1*9 || 4*1 = 9 || 4 = 94 mismatch
+ digit sum diff
+ (14,19)->-05: (1+4) - (1+9) = -5 mismatch
+ digit sum sum
+ (14,19)->-05: (1+4) + (1+9) = 15 mismatch
+ digit product diff
+ (14,19)->-05: 1*4 - 1*9 = 4 - 9 = -5 mismatch
+ digit product sum
+ (14,19)->-05: 1*4 + 1*9 = 4 + 9 = 13 mismatch
+ determinant
+ (14,19)->-05: 1*9 - 4*1 = 9 - 4 = 5 mismatch
+ abs determinant
+ (14,19)->-05: |1*9 - 4*1| = |9 - 4| = 5 mismatch
+
+Applying to 31-53:
+ We recall that the question operator is found in the examples.
+ reversed operands [31->13, 53->35] and reversed result
+ subtraction (a-b) (13,35): 13 - 35 = -22 rev-> -22
+ Result is negative - we add back the operator prefix -: -22 -> -22
+
+\boxed{-22}

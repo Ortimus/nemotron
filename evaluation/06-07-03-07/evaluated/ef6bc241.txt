@@ -1,0 +1,178 @@
+65[76 = 321
+92$58 = $65
+95[31 = 27
+92'57 = 6712
+
+The inputs are 65, 76, 92, 58, 95, 31, 92, 57
+
+The outputs are 321, $65, 27, 6712
+Some example outputs have the operator symbol as prefix $.
+We now consider the outputs to be 321, -65, 27, 6712
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+65[76 -> [
+92$58 -> $
+95[31 -> [
+92'57 -> '
+
+The operators
+[
+$
+'
+
+Looking at the question
+73$29 -> $
+The question operator is found in the examples.
+
+Looking at operator $ [92$58 = -65]:
+
+Trying common operations reversed operands [92->29 58->85] and reversed result [expected (29,85)->-65]:
+ addition
+ (29,85)->-65: 29 + 85 = 114 rev-> 411 mismatch
+ multiplication
+ (29,85)->-65: (20 + 9) * 85 = 20 * 85 + 9 * 85 = 1700 + 765 = 2465 rev-> 5642 mismatch
+ concatenation
+ (29,85)->-65: 29 || 85 = 2985 rev-> 5892 mismatch
+ reverse concatenation
+ (29,85)->-65: 85 || 29 = 8529 rev-> 9258 mismatch
+
+Trying common operations on identity [92 58] [expected (92,58)->-65]:
+ addition
+ (92,58)->-65: 92 + 58 = 150 mismatch
+ multiplication
+ (92,58)->-65: (90 + 2) * 58 = 90 * 58 + 2 * 58 = 5220 + 116 = 5336 mismatch
+ concatenation
+ (92,58)->-65: 92 || 58 = 9258 mismatch
+ reverse concatenation
+ (92,58)->-65: 58 || 92 = 5892 mismatch
+
+Trying difference operations reversed operands [92->29 58->85] and reversed result [expected (29,85)->-65]:
+ subtraction (a-b)
+ (29,85)->-65: 29 - 85 = -56 rev-> -65 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (29,85)->-65: |29 - 85| = 56 rev-> 65 mismatch
+ max mod min
+ (29,85)->-65: max(29,85) mod min(29,85) = 85 mod 29 = 27 rev-> 72 mismatch
+ negated absolute difference
+ (29,85)->-65: -|29 - 85| = -56 rev-> -65 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (29,85)->-65: 85 - 29 = 56 rev-> 65 mismatch
+ modulo (a mod b)
+ (29,85)->-65: 29 mod 85 = 29 rev-> 92 mismatch
+
+Trying difference operations on identity [92 58] [expected (92,58)->-65]:
+ subtraction (a-b)
+ (92,58)->-65: 92 - 58 = 34 mismatch
+ absolute difference
+ (92,58)->-65: |92 - 58| = 34 mismatch
+ max mod min
+ (92,58)->-65: max(92,58) mod min(92,58) = 92 mod 58 = 34 mismatch
+ negated absolute difference
+ (92,58)->-65: -|92 - 58| = -34 mismatch
+ reverse subtraction (b-a)
+ (92,58)->-65: 58 - 92 = -34 mismatch
+ modulo (a mod b)
+ (92,58)->-65: 92 mod 58 = 34 mismatch
+
+Trying rare operations reversed operands [92->29 58->85] and reversed result [expected (29,85)->-65]:
+ multiply+1
+ (29,85)->-65: (20 + 9) * 85 + 1 = 20 * 85 + 9 * 85 + 1 = 1700 + 765 + 1 = 2465 + 1 = 2466 rev-> 6642 mismatch
+ multiply-1
+ (29,85)->-65: (20 + 9) * 85 - 1 = 20 * 85 + 9 * 85 - 1 = 1700 + 765 - 1 = 2465 - 1 = 2464 rev-> 4642 mismatch
+ add+1
+ (29,85)->-65: 29 + 85 + 1 = 115 rev-> 511 mismatch
+ add-1
+ (29,85)->-65: 29 + 85 - 1 = 113 rev-> 311 mismatch
+ sub+1
+ (29,85)->-65: 29 - 85 + 1 = -55 rev-> -55 mismatch
+ sub-1
+ (29,85)->-65: 29 - 85 - 1 = -57 rev-> -75 mismatch
+ integer division (a/b)
+ (29,85)->-65: 29 / 85 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (29,85)->-65: 85 / 29 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (29,85)->-65: 85 mod 29 = 27 rev-> 72 mismatch
+ digit absolute diff
+ (29,85)->-65: |2-8| || |9-5| = 64 rev-> 46 mismatch
+ digit add mod10
+ (29,85)->-65: (2+8)%10 || (9+5)%10 = 04 rev-> 40 mismatch
+ digit sub mod10
+ (29,85)->-65: (2-8)%10 || (9-5)%10 = 44 rev-> 44 mismatch
+ cross multiply
+ (29,85)->-65: 2*8 + 9*5 = 16 + 45 = 61 rev-> 16 mismatch
+ cross multiply rev
+ (29,85)->-65: 2*5 + 9*8 = 10 + 72 = 82 rev-> 28 mismatch
+ digit multiply
+ (29,85)->-65: 2*8 || 9*5 = 16 || 45 = 1645 rev-> 5461 mismatch
+ digit multiply rev
+ (29,85)->-65: 2*5 || 9*8 = 10 || 72 = 1072 rev-> 2701 mismatch
+ digit sum diff
+ (29,85)->-65: (2+9) - (8+5) = -2 rev-> -2 mismatch
+ digit sum sum
+ (29,85)->-65: (2+9) + (8+5) = 24 rev-> 42 mismatch
+ digit product diff
+ (29,85)->-65: 2*9 - 8*5 = 18 - 40 = -22 rev-> -22 mismatch
+ digit product sum
+ (29,85)->-65: 2*9 + 8*5 = 18 + 40 = 58 rev-> 85 mismatch
+ determinant
+ (29,85)->-65: 2*5 - 9*8 = 10 - 72 = -62 rev-> -26 mismatch
+ abs determinant
+ (29,85)->-65: |2*5 - 9*8| = |10 - 72| = 62 rev-> 26 mismatch
+
+Trying rare operations on identity [92 58] [expected (92,58)->-65]:
+ multiply+1
+ (92,58)->-65: (90 + 2) * 58 + 1 = 90 * 58 + 2 * 58 + 1 = 5220 + 116 + 1 = 5336 + 1 = 5337 mismatch
+ multiply-1
+ (92,58)->-65: (90 + 2) * 58 - 1 = 90 * 58 + 2 * 58 - 1 = 5220 + 116 - 1 = 5336 - 1 = 5335 mismatch
+ add+1
+ (92,58)->-65: 92 + 58 + 1 = 151 mismatch
+ add-1
+ (92,58)->-65: 92 + 58 - 1 = 149 mismatch
+ sub+1
+ (92,58)->-65: 92 - 58 + 1 = 35 mismatch
+ sub-1
+ (92,58)->-65: 92 - 58 - 1 = 33 mismatch
+ integer division (a/b)
+ (92,58)->-65: 92 / 58 = 1 mismatch
+ reverse division (b/a)
+ (92,58)->-65: 58 / 92 = 0 mismatch
+ reverse modulo (b mod a)
+ (92,58)->-65: 58 mod 92 = 58 mismatch
+ digit absolute diff
+ (92,58)->-65: |9-5| || |2-8| = 46 mismatch
+ digit add mod10
+ (92,58)->-65: (9+5)%10 || (2+8)%10 = 40 mismatch
+ digit sub mod10
+ (92,58)->-65: (9-5)%10 || (2-8)%10 = 44 mismatch
+ cross multiply
+ (92,58)->-65: 9*5 + 2*8 = 45 + 16 = 61 mismatch
+ cross multiply rev
+ (92,58)->-65: 9*8 + 2*5 = 72 + 10 = 82 mismatch
+ digit multiply
+ (92,58)->-65: 9*5 || 2*8 = 45 || 16 = 4516 mismatch
+ digit multiply rev
+ (92,58)->-65: 9*8 || 2*5 = 72 || 10 = 7210 mismatch
+ digit sum diff
+ (92,58)->-65: (9+2) - (5+8) = -2 mismatch
+ digit sum sum
+ (92,58)->-65: (9+2) + (5+8) = 24 mismatch
+ digit product diff
+ (92,58)->-65: 9*2 - 5*8 = 18 - 40 = -22 mismatch
+ digit product sum
+ (92,58)->-65: 9*2 + 5*8 = 18 + 40 = 58 mismatch
+ determinant
+ (92,58)->-65: 9*8 - 2*5 = 72 - 10 = 62 mismatch
+ abs determinant
+ (92,58)->-65: |9*8 - 2*5| = |72 - 10| = 62 mismatch
+
+Applying to 73$29:
+ We recall that the question operator is found in the examples.
+ reversed operands [73->37, 29->92] and reversed result
+ subtraction (a-b) (37,92): 37 - 92 = -55 rev-> -55
+ Result is negative - we add back the operator prefix $: -55 -> $55
+
+\boxed{$55}

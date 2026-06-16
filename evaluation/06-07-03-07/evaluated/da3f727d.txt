@@ -1,0 +1,188 @@
+72'53 = 124
+12$15 = 179
+48/25 = 23
+32$28 = 895
+26$57 = 1481
+
+The inputs are 72, 53, 12, 15, 48, 25, 32, 28, 26, 57
+
+The outputs are 124, 179, 23, 895, 1481
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+72'53 -> '
+12$15 -> $
+48/25 -> /
+32$28 -> $
+26$57 -> $
+
+The operators
+'
+$
+/
+
+Looking at the question
+59/73 -> /
+The question operator is found in the examples.
+
+Looking at operator / [48/25 = 23]:
+
+Trying common operations reversed operands [48->84 25->52] and reversed result [expected (84,52)->23]:
+ addition
+ (84,52)->23: 84 + 52 = 136 rev-> 631 mismatch
+ multiplication
+ (84,52)->23: (80 + 4) * 52 = 80 * 52 + 4 * 52 = 4160 + 208 = 4368 rev-> 8634 mismatch
+ concatenation
+ (84,52)->23: 84 || 52 = 8452 rev-> 2548 mismatch
+ reverse concatenation
+ (84,52)->23: 52 || 84 = 5284 rev-> 4825 mismatch
+
+Trying common operations on identity [48 25] [expected (48,25)->23]:
+ addition
+ (48,25)->23: 48 + 25 = 73 mismatch
+ multiplication
+ (48,25)->23: (40 + 8) * 25 = 40 * 25 + 8 * 25 = 1000 + 200 = 1200 mismatch
+ concatenation
+ (48,25)->23: 48 || 25 = 4825 mismatch
+ reverse concatenation
+ (48,25)->23: 25 || 48 = 2548 mismatch
+
+Trying difference operations reversed operands [48->84 25->52] and reversed result [expected (84,52)->23]:
+ subtraction (a-b)
+ (84,52)->23: 84 - 52 = 32 rev-> 23 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (84,52)->23: |84 - 52| = 32 rev-> 23 match
+ correct, but skipping
+ max mod min
+ (84,52)->23: max(84,52) mod min(84,52) = 84 mod 52 = 32 rev-> 23 match
+ correct, but skipping
+ negated absolute difference
+ (84,52)->23: -|84 - 52| = -32 rev-> -23 mismatch
+ reverse subtraction (b-a)
+ (84,52)->23: 52 - 84 = -32 rev-> -23 mismatch
+ modulo (a mod b)
+ (84,52)->23: 84 mod 52 = 32 rev-> 23 match
+ correct, but skipping
+
+Trying difference operations on identity [48 25] [expected (48,25)->23]:
+ subtraction (a-b)
+ (48,25)->23: 48 - 25 = 23 match
+ correct, but skipping
+ absolute difference
+ (48,25)->23: |48 - 25| = 23 match
+ correct, but skipping
+ max mod min
+ (48,25)->23: max(48,25) mod min(48,25) = 48 mod 25 = 23 match
+ correct, but skipping
+ negated absolute difference
+ (48,25)->23: -|48 - 25| = -23 mismatch
+ reverse subtraction (b-a)
+ (48,25)->23: 25 - 48 = -23 mismatch
+ modulo (a mod b)
+ (48,25)->23: 48 mod 25 = 23 match
+ correct, but skipping
+
+Trying rare operations reversed operands [48->84 25->52] and reversed result [expected (84,52)->23]:
+ multiply+1
+ (84,52)->23: (80 + 4) * 52 + 1 = 80 * 52 + 4 * 52 + 1 = 4160 + 208 + 1 = 4368 + 1 = 4369 rev-> 9634 mismatch
+ multiply-1
+ (84,52)->23: (80 + 4) * 52 - 1 = 80 * 52 + 4 * 52 - 1 = 4160 + 208 - 1 = 4368 - 1 = 4367 rev-> 7634 mismatch
+ add+1
+ (84,52)->23: 84 + 52 + 1 = 137 rev-> 731 mismatch
+ add-1
+ (84,52)->23: 84 + 52 - 1 = 135 rev-> 531 mismatch
+ sub+1
+ (84,52)->23: 84 - 52 + 1 = 33 rev-> 33 mismatch
+ sub-1
+ (84,52)->23: 84 - 52 - 1 = 31 rev-> 13 mismatch
+ integer division (a/b)
+ (84,52)->23: 84 / 52 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (84,52)->23: 52 / 84 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (84,52)->23: 52 mod 84 = 52 rev-> 25 mismatch
+ digit absolute diff
+ (84,52)->23: |8-5| || |4-2| = 32 rev-> 23 match
+ correct, but skipping
+ digit add mod10
+ (84,52)->23: (8+5)%10 || (4+2)%10 = 36 rev-> 63 mismatch
+ digit sub mod10
+ (84,52)->23: (8-5)%10 || (4-2)%10 = 32 rev-> 23 match
+ correct, but skipping
+ cross multiply
+ (84,52)->23: 8*5 + 4*2 = 40 + 8 = 48 rev-> 84 mismatch
+ cross multiply rev
+ (84,52)->23: 8*2 + 4*5 = 16 + 20 = 36 rev-> 63 mismatch
+ digit multiply
+ (84,52)->23: 8*5 || 4*2 = 40 || 8 = 408 rev-> 804 mismatch
+ digit multiply rev
+ (84,52)->23: 8*2 || 4*5 = 16 || 20 = 1620 rev-> 0261 mismatch
+ digit sum diff
+ (84,52)->23: (8+4) - (5+2) = 5 rev-> 5 mismatch
+ digit sum sum
+ (84,52)->23: (8+4) + (5+2) = 19 rev-> 91 mismatch
+ digit product diff
+ (84,52)->23: 8*4 - 5*2 = 32 - 10 = 22 rev-> 22 mismatch
+ digit product sum
+ (84,52)->23: 8*4 + 5*2 = 32 + 10 = 42 rev-> 24 mismatch
+ determinant
+ (84,52)->23: 8*2 - 4*5 = 16 - 20 = -4 rev-> -4 mismatch
+ abs determinant
+ (84,52)->23: |8*2 - 4*5| = |16 - 20| = 4 rev-> 4 mismatch
+
+Trying rare operations on identity [48 25] [expected (48,25)->23]:
+ multiply+1
+ (48,25)->23: (40 + 8) * 25 + 1 = 40 * 25 + 8 * 25 + 1 = 1000 + 200 + 1 = 1200 + 1 = 1201 mismatch
+ multiply-1
+ (48,25)->23: (40 + 8) * 25 - 1 = 40 * 25 + 8 * 25 - 1 = 1000 + 200 - 1 = 1200 - 1 = 1199 mismatch
+ add+1
+ (48,25)->23: 48 + 25 + 1 = 74 mismatch
+ add-1
+ (48,25)->23: 48 + 25 - 1 = 72 mismatch
+ sub+1
+ (48,25)->23: 48 - 25 + 1 = 24 mismatch
+ sub-1
+ (48,25)->23: 48 - 25 - 1 = 22 mismatch
+ integer division (a/b)
+ (48,25)->23: 48 / 25 = 1 mismatch
+ reverse division (b/a)
+ (48,25)->23: 25 / 48 = 0 mismatch
+ reverse modulo (b mod a)
+ (48,25)->23: 25 mod 48 = 25 mismatch
+ digit absolute diff
+ (48,25)->23: |4-2| || |8-5| = 23 match
+ correct, but skipping
+ digit add mod10
+ (48,25)->23: (4+2)%10 || (8+5)%10 = 63 mismatch
+ digit sub mod10
+ (48,25)->23: (4-2)%10 || (8-5)%10 = 23 match
+ correct, but skipping
+ cross multiply
+ (48,25)->23: 4*2 + 8*5 = 8 + 40 = 48 mismatch
+ cross multiply rev
+ (48,25)->23: 4*5 + 8*2 = 20 + 16 = 36 mismatch
+ digit multiply
+ (48,25)->23: 4*2 || 8*5 = 8 || 40 = 840 mismatch
+ digit multiply rev
+ (48,25)->23: 4*5 || 8*2 = 20 || 16 = 2016 mismatch
+ digit sum diff
+ (48,25)->23: (4+8) - (2+5) = 5 mismatch
+ digit sum sum
+ (48,25)->23: (4+8) + (2+5) = 19 mismatch
+ digit product diff
+ (48,25)->23: 4*8 - 2*5 = 32 - 10 = 22 mismatch
+ digit product sum
+ (48,25)->23: 4*8 + 2*5 = 32 + 10 = 42 mismatch
+ determinant
+ (48,25)->23: 4*5 - 8*2 = 20 - 16 = 4 mismatch
+ abs determinant
+ (48,25)->23: |4*5 - 8*2| = |20 - 16| = 4 mismatch
+
+Applying to 59/73:
+ We recall that the question operator is found in the examples.
+ reversed operands [59->95, 73->37] and reversed result
+ subtraction (a-b) (95,37): 95 - 37 = 58 rev-> 85
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{85}

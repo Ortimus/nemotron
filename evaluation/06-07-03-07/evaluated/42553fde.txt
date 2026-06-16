@@ -1,0 +1,176 @@
+16?21 = 37
+48?06 = 441
+12!65 = 6711
+
+The inputs are 16, 21, 48, 06, 12, 65
+
+The outputs are 37, 441, 6711
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+16?21 -> ?
+48?06 -> ?
+12!65 -> !
+
+The operators
+?
+!
+
+Looking at the question
+04?73 -> ?
+The question operator is found in the examples.
+
+Looking at operator ? [16?21 = 37, 48?06 = 441]:
+
+Trying common operations reversed operands [16->61 21->12, 48->84 06->60] and reversed result [expected (61,12)->37, (84,60)->441]:
+ addition
+ (61,12)->37: 61 + 12 = 73 rev-> 37 match
+ (84,60)->441: 84 + 60 = 144 rev-> 441 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (84,60)->441: (80 + 4) * 60 = 80 * 60 + 4 * 60 = 4800 + 240 = 5040 rev-> 0405 mismatch
+ concatenation
+ (61,12)->37: 61 || 12 = 6112 rev-> 2116 mismatch
+ reverse concatenation
+ (84,60)->441: 60 || 84 = 6084 rev-> 4806 mismatch
+
+Trying common operations on identity [16 21, 48 06] [expected (16,21)->37, (48,06)->441]:
+ addition
+ (16,21)->37: 16 + 21 = 37 match
+ (48,06)->441: 48 + 06 = 54 mismatch
+ multiplication
+ (48,06)->441: (40 + 8) * 06 = 40 * 06 + 8 * 06 = 240 + 48 = 288 mismatch
+ concatenation
+ (16,21)->37: 16 || 21 = 1621 mismatch
+ reverse concatenation
+ (48,06)->441: 06 || 48 = 0648 mismatch
+
+Trying difference operations reversed operands [16->61 21->12, 48->84 06->60] and reversed result [expected (61,12)->37, (84,60)->441]:
+ subtraction (a-b)
+ (61,12)->37: 61 - 12 = 49 rev-> 94 mismatch
+ absolute difference
+ (84,60)->441: |84 - 60| = 24 rev-> 42 mismatch
+ max mod min
+ (61,12)->37: max(61,12) mod min(61,12) = 61 mod 12 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (84,60)->441: -|84 - 60| = -24 rev-> -42 mismatch
+ reverse subtraction (b-a)
+ (61,12)->37: 12 - 61 = -49 rev-> -94 mismatch
+ modulo (a mod b)
+ (84,60)->441: 84 mod 60 = 24 rev-> 42 mismatch
+
+Trying difference operations on identity [16 21, 48 06] [expected (16,21)->37, (48,06)->441]:
+ subtraction (a-b)
+ (16,21)->37: 16 - 21 = -5 mismatch
+ absolute difference
+ (48,06)->441: |48 - 06| = 42 mismatch
+ max mod min
+ (16,21)->37: max(16,21) mod min(16,21) = 21 mod 16 = 5 mismatch
+ negated absolute difference
+ (48,06)->441: -|48 - 06| = -42 mismatch
+ reverse subtraction (b-a)
+ (16,21)->37: 21 - 16 = 5 mismatch
+ modulo (a mod b)
+ (48,06)->441: 48 mod 06 = 0 mismatch
+
+Trying rare operations reversed operands [16->61 21->12, 48->84 06->60] and reversed result [expected (61,12)->37, (84,60)->441]:
+ multiply+1
+ (61,12)->37: (60 + 1) * 12 + 1 = 60 * 12 + 1 * 12 + 1 = 720 + 12 + 1 = 732 + 1 = 733 rev-> 337 mismatch
+ multiply-1
+ (84,60)->441: (80 + 4) * 60 - 1 = 80 * 60 + 4 * 60 - 1 = 4800 + 240 - 1 = 5040 - 1 = 5039 rev-> 9305 mismatch
+ add+1
+ (61,12)->37: 61 + 12 + 1 = 74 rev-> 47 mismatch
+ add-1
+ (84,60)->441: 84 + 60 - 1 = 143 rev-> 341 mismatch
+ sub+1
+ (61,12)->37: 61 - 12 + 1 = 50 rev-> 05 mismatch
+ sub-1
+ (84,60)->441: 84 - 60 - 1 = 23 rev-> 32 mismatch
+ integer division (a/b)
+ (61,12)->37: 61 / 12 = 5 rev-> 5 mismatch
+ reverse division (b/a)
+ (84,60)->441: 60 / 84 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (61,12)->37: 12 mod 61 = 12 rev-> 21 mismatch
+ digit absolute diff
+ (84,60)->441: |8-6| || |4-0| = 24 rev-> 42 mismatch
+ digit add mod10
+ (61,12)->37: (6+1)%10 || (1+2)%10 = 73 rev-> 37 match
+ (84,60)->441: (8+6)%10 || (4+0)%10 = 44 rev-> 44 mismatch
+ digit sub mod10
+ (84,60)->441: (8-6)%10 || (4-0)%10 = 24 rev-> 42 mismatch
+ cross multiply
+ (61,12)->37: 6*1 + 1*2 = 6 + 2 = 8 rev-> 8 mismatch
+ cross multiply rev
+ (84,60)->441: 8*0 + 4*6 = 0 + 24 = 24 rev-> 42 mismatch
+ digit multiply
+ (61,12)->37: 6*1 || 1*2 = 6 || 2 = 62 rev-> 26 mismatch
+ digit multiply rev
+ (84,60)->441: 8*0 || 4*6 = 0 || 24 = 024 rev-> 420 mismatch
+ digit sum diff
+ (61,12)->37: (6+1) - (1+2) = 4 rev-> 4 mismatch
+ digit sum sum
+ (84,60)->441: (8+4) + (6+0) = 18 rev-> 81 mismatch
+ digit product diff
+ (61,12)->37: 6*1 - 1*2 = 6 - 2 = 4 rev-> 4 mismatch
+ digit product sum
+ (84,60)->441: 8*4 + 6*0 = 32 + 0 = 32 rev-> 23 mismatch
+ determinant
+ (61,12)->37: 6*2 - 1*1 = 12 - 1 = 11 rev-> 11 mismatch
+ abs determinant
+ (84,60)->441: |8*0 - 4*6| = |0 - 24| = 24 rev-> 42 mismatch
+
+Trying rare operations on identity [16 21, 48 06] [expected (16,21)->37, (48,06)->441]:
+ multiply+1
+ (16,21)->37: (10 + 6) * 21 + 1 = 10 * 21 + 6 * 21 + 1 = 210 + 126 + 1 = 336 + 1 = 337 mismatch
+ multiply-1
+ (48,06)->441: (40 + 8) * 06 - 1 = 40 * 06 + 8 * 06 - 1 = 240 + 48 - 1 = 288 - 1 = 287 mismatch
+ add+1
+ (16,21)->37: 16 + 21 + 1 = 38 mismatch
+ add-1
+ (48,06)->441: 48 + 06 - 1 = 53 mismatch
+ sub+1
+ (16,21)->37: 16 - 21 + 1 = -4 mismatch
+ sub-1
+ (48,06)->441: 48 - 06 - 1 = 41 mismatch
+ integer division (a/b)
+ (16,21)->37: 16 / 21 = 0 mismatch
+ reverse division (b/a)
+ (48,06)->441: 06 / 48 = 0 mismatch
+ reverse modulo (b mod a)
+ (16,21)->37: 21 mod 16 = 5 mismatch
+ digit absolute diff
+ (48,06)->441: |4-0| || |8-6| = 42 mismatch
+ digit add mod10
+ (16,21)->37: (1+2)%10 || (6+1)%10 = 37 match
+ (48,06)->441: (4+0)%10 || (8+6)%10 = 44 mismatch
+ digit sub mod10
+ (48,06)->441: (4-0)%10 || (8-6)%10 = 42 mismatch
+ cross multiply
+ (16,21)->37: 1*2 + 6*1 = 2 + 6 = 8 mismatch
+ cross multiply rev
+ (48,06)->441: 4*6 + 8*0 = 24 + 0 = 24 mismatch
+ digit multiply
+ (16,21)->37: 1*2 || 6*1 = 2 || 6 = 26 mismatch
+ digit multiply rev
+ (48,06)->441: 4*6 || 8*0 = 24 || 0 = 240 mismatch
+ digit sum diff
+ (16,21)->37: (1+6) - (2+1) = 4 mismatch
+ digit sum sum
+ (48,06)->441: (4+8) + (0+6) = 18 mismatch
+ digit product diff
+ (16,21)->37: 1*6 - 2*1 = 6 - 2 = 4 mismatch
+ digit product sum
+ (48,06)->441: 4*8 + 0*6 = 32 + 0 = 32 mismatch
+ determinant
+ (16,21)->37: 1*1 - 6*2 = 1 - 12 = -11 mismatch
+ abs determinant
+ (48,06)->441: |4*6 - 8*0| = |24 - 0| = 24 mismatch
+
+Applying to 04?73:
+ We recall that the question operator is found in the examples.
+ reversed operands [04->40, 73->37] and reversed result
+ addition (40,37): 40 + 37 = 77 rev-> 77
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{77}

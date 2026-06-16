@@ -1,0 +1,177 @@
+15+42 = 67
+97-91 = -06
+37+25 = 621
+72*93 = 3501
+
+The inputs are 15, 42, 97, 91, 37, 25, 72, 93
+
+The outputs are 67, -06, 621, 3501
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 67, -06, 621, 3501
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+15+42 -> +
+97-91 -> -
+37+25 -> +
+72*93 -> *
+
+The operators
++
+-
+*
+
+Looking at the question
+07*14 -> *
+The question operator is found in the examples.
+
+Looking at operator * [72*93 = 3501]:
+
+Trying common operations reversed operands [72->27 93->39] and reversed result [expected (27,39)->3501]:
+ addition
+ (27,39)->3501: 27 + 39 = 66 rev-> 66 mismatch
+ multiplication
+ (27,39)->3501: (20 + 7) * 39 = 20 * 39 + 7 * 39 = 780 + 273 = 1053 rev-> 3501 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (27,39)->3501: 27 || 39 = 2739 rev-> 9372 mismatch
+ reverse concatenation
+ (27,39)->3501: 39 || 27 = 3927 rev-> 7293 mismatch
+
+Trying common operations on identity [72 93] [expected (72,93)->3501]:
+ addition
+ (72,93)->3501: 72 + 93 = 165 mismatch
+ multiplication
+ (72,93)->3501: (70 + 2) * 93 = 70 * 93 + 2 * 93 = 6510 + 186 = 6696 mismatch
+ concatenation
+ (72,93)->3501: 72 || 93 = 7293 mismatch
+ reverse concatenation
+ (72,93)->3501: 93 || 72 = 9372 mismatch
+
+Trying difference operations reversed operands [72->27 93->39] and reversed result [expected (27,39)->3501]:
+ subtraction (a-b)
+ (27,39)->3501: 27 - 39 = -12 rev-> -21 mismatch
+ absolute difference
+ (27,39)->3501: |27 - 39| = 12 rev-> 21 mismatch
+ max mod min
+ (27,39)->3501: max(27,39) mod min(27,39) = 39 mod 27 = 12 rev-> 21 mismatch
+ negated absolute difference
+ (27,39)->3501: -|27 - 39| = -12 rev-> -21 mismatch
+ reverse subtraction (b-a)
+ (27,39)->3501: 39 - 27 = 12 rev-> 21 mismatch
+ modulo (a mod b)
+ (27,39)->3501: 27 mod 39 = 27 rev-> 72 mismatch
+
+Trying difference operations on identity [72 93] [expected (72,93)->3501]:
+ subtraction (a-b)
+ (72,93)->3501: 72 - 93 = -21 mismatch
+ absolute difference
+ (72,93)->3501: |72 - 93| = 21 mismatch
+ max mod min
+ (72,93)->3501: max(72,93) mod min(72,93) = 93 mod 72 = 21 mismatch
+ negated absolute difference
+ (72,93)->3501: -|72 - 93| = -21 mismatch
+ reverse subtraction (b-a)
+ (72,93)->3501: 93 - 72 = 21 mismatch
+ modulo (a mod b)
+ (72,93)->3501: 72 mod 93 = 72 mismatch
+
+Trying rare operations reversed operands [72->27 93->39] and reversed result [expected (27,39)->3501]:
+ multiply+1
+ (27,39)->3501: (20 + 7) * 39 + 1 = 20 * 39 + 7 * 39 + 1 = 780 + 273 + 1 = 1053 + 1 = 1054 rev-> 4501 mismatch
+ multiply-1
+ (27,39)->3501: (20 + 7) * 39 - 1 = 20 * 39 + 7 * 39 - 1 = 780 + 273 - 1 = 1053 - 1 = 1052 rev-> 2501 mismatch
+ add+1
+ (27,39)->3501: 27 + 39 + 1 = 67 rev-> 76 mismatch
+ add-1
+ (27,39)->3501: 27 + 39 - 1 = 65 rev-> 56 mismatch
+ sub+1
+ (27,39)->3501: 27 - 39 + 1 = -11 rev-> -11 mismatch
+ sub-1
+ (27,39)->3501: 27 - 39 - 1 = -13 rev-> -31 mismatch
+ integer division (a/b)
+ (27,39)->3501: 27 / 39 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (27,39)->3501: 39 / 27 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (27,39)->3501: 39 mod 27 = 12 rev-> 21 mismatch
+ digit absolute diff
+ (27,39)->3501: |2-3| || |7-9| = 12 rev-> 21 mismatch
+ digit add mod10
+ (27,39)->3501: (2+3)%10 || (7+9)%10 = 56 rev-> 65 mismatch
+ digit sub mod10
+ (27,39)->3501: (2-3)%10 || (7-9)%10 = 98 rev-> 89 mismatch
+ cross multiply
+ (27,39)->3501: 2*3 + 7*9 = 6 + 63 = 69 rev-> 96 mismatch
+ cross multiply rev
+ (27,39)->3501: 2*9 + 7*3 = 18 + 21 = 39 rev-> 93 mismatch
+ digit multiply
+ (27,39)->3501: 2*3 || 7*9 = 6 || 63 = 663 rev-> 366 mismatch
+ digit multiply rev
+ (27,39)->3501: 2*9 || 7*3 = 18 || 21 = 1821 rev-> 1281 mismatch
+ digit sum diff
+ (27,39)->3501: (2+7) - (3+9) = -3 rev-> -3 mismatch
+ digit sum sum
+ (27,39)->3501: (2+7) + (3+9) = 21 rev-> 12 mismatch
+ digit product diff
+ (27,39)->3501: 2*7 - 3*9 = 14 - 27 = -13 rev-> -31 mismatch
+ digit product sum
+ (27,39)->3501: 2*7 + 3*9 = 14 + 27 = 41 rev-> 14 mismatch
+ determinant
+ (27,39)->3501: 2*9 - 7*3 = 18 - 21 = -3 rev-> -3 mismatch
+ abs determinant
+ (27,39)->3501: |2*9 - 7*3| = |18 - 21| = 3 rev-> 3 mismatch
+
+Trying rare operations on identity [72 93] [expected (72,93)->3501]:
+ multiply+1
+ (72,93)->3501: (70 + 2) * 93 + 1 = 70 * 93 + 2 * 93 + 1 = 6510 + 186 + 1 = 6696 + 1 = 6697 mismatch
+ multiply-1
+ (72,93)->3501: (70 + 2) * 93 - 1 = 70 * 93 + 2 * 93 - 1 = 6510 + 186 - 1 = 6696 - 1 = 6695 mismatch
+ add+1
+ (72,93)->3501: 72 + 93 + 1 = 166 mismatch
+ add-1
+ (72,93)->3501: 72 + 93 - 1 = 164 mismatch
+ sub+1
+ (72,93)->3501: 72 - 93 + 1 = -20 mismatch
+ sub-1
+ (72,93)->3501: 72 - 93 - 1 = -22 mismatch
+ integer division (a/b)
+ (72,93)->3501: 72 / 93 = 0 mismatch
+ reverse division (b/a)
+ (72,93)->3501: 93 / 72 = 1 mismatch
+ reverse modulo (b mod a)
+ (72,93)->3501: 93 mod 72 = 21 mismatch
+ digit absolute diff
+ (72,93)->3501: |7-9| || |2-3| = 21 mismatch
+ digit add mod10
+ (72,93)->3501: (7+9)%10 || (2+3)%10 = 65 mismatch
+ digit sub mod10
+ (72,93)->3501: (7-9)%10 || (2-3)%10 = 89 mismatch
+ cross multiply
+ (72,93)->3501: 7*9 + 2*3 = 63 + 6 = 69 mismatch
+ cross multiply rev
+ (72,93)->3501: 7*3 + 2*9 = 21 + 18 = 39 mismatch
+ digit multiply
+ (72,93)->3501: 7*9 || 2*3 = 63 || 6 = 636 mismatch
+ digit multiply rev
+ (72,93)->3501: 7*3 || 2*9 = 21 || 18 = 2118 mismatch
+ digit sum diff
+ (72,93)->3501: (7+2) - (9+3) = -3 mismatch
+ digit sum sum
+ (72,93)->3501: (7+2) + (9+3) = 21 mismatch
+ digit product diff
+ (72,93)->3501: 7*2 - 9*3 = 14 - 27 = -13 mismatch
+ digit product sum
+ (72,93)->3501: 7*2 + 9*3 = 14 + 27 = 41 mismatch
+ determinant
+ (72,93)->3501: 7*3 - 2*9 = 21 - 18 = 3 mismatch
+ abs determinant
+ (72,93)->3501: |7*3 - 2*9| = |21 - 18| = 3 mismatch
+
+Applying to 07*14:
+ We recall that the question operator is found in the examples.
+ reversed operands [07->70, 14->41] and reversed result
+ multiplication (70,41): (70 + 0) * 41 = 70 * 41 + 0 * 41 = 2870 + 0 = 2870 rev-> 0782
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{0782}

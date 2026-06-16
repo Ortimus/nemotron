@@ -1,0 +1,180 @@
+64*81 = 928
+95+95 = 911
+97-03 = 94
+
+The inputs are 64, 81, 95, 95, 97, 03
+
+The outputs are 928, 911, 94
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+64*81 -> *
+95+95 -> +
+97-03 -> -
+
+The operators
+*
++
+-
+
+Looking at the question
+52-99 -> -
+The question operator is found in the examples.
+
+Looking at operator - [97-03 = 94]:
+
+Trying common operations reversed operands [97->79 03->30] and reversed result [expected (79,30)->94]:
+ addition
+ (79,30)->94: 79 + 30 = 109 rev-> 901 mismatch
+ multiplication
+ (79,30)->94: (70 + 9) * 30 = 70 * 30 + 9 * 30 = 2100 + 270 = 2370 rev-> 0732 mismatch
+ concatenation
+ (79,30)->94: 79 || 30 = 7930 rev-> 0397 mismatch
+ reverse concatenation
+ (79,30)->94: 30 || 79 = 3079 rev-> 9703 mismatch
+
+Trying common operations on identity [97 03] [expected (97,03)->94]:
+ addition
+ (97,03)->94: 97 + 03 = 100 mismatch
+ multiplication
+ (97,03)->94: (90 + 7) * 03 = 90 * 03 + 7 * 03 = 270 + 21 = 291 mismatch
+ concatenation
+ (97,03)->94: 97 || 03 = 9703 mismatch
+ reverse concatenation
+ (97,03)->94: 03 || 97 = 0397 mismatch
+
+Trying difference operations reversed operands [97->79 03->30] and reversed result [expected (79,30)->94]:
+ subtraction (a-b)
+ (79,30)->94: 79 - 30 = 49 rev-> 94 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (79,30)->94: |79 - 30| = 49 rev-> 94 match
+ correct, but skipping
+ max mod min
+ (79,30)->94: max(79,30) mod min(79,30) = 79 mod 30 = 19 rev-> 91 mismatch
+ negated absolute difference
+ (79,30)->94: -|79 - 30| = -49 rev-> -94 mismatch
+ reverse subtraction (b-a)
+ (79,30)->94: 30 - 79 = -49 rev-> -94 mismatch
+ modulo (a mod b)
+ (79,30)->94: 79 mod 30 = 19 rev-> 91 mismatch
+
+Trying difference operations on identity [97 03] [expected (97,03)->94]:
+ subtraction (a-b)
+ (97,03)->94: 97 - 03 = 94 match
+ correct, but skipping
+ absolute difference
+ (97,03)->94: |97 - 03| = 94 match
+ correct, but skipping
+ max mod min
+ (97,03)->94: max(97,03) mod min(97,03) = 97 mod 03 = 1 mismatch
+ negated absolute difference
+ (97,03)->94: -|97 - 03| = -94 mismatch
+ reverse subtraction (b-a)
+ (97,03)->94: 03 - 97 = -94 mismatch
+ modulo (a mod b)
+ (97,03)->94: 97 mod 03 = 1 mismatch
+
+Trying rare operations reversed operands [97->79 03->30] and reversed result [expected (79,30)->94]:
+ multiply+1
+ (79,30)->94: (70 + 9) * 30 + 1 = 70 * 30 + 9 * 30 + 1 = 2100 + 270 + 1 = 2370 + 1 = 2371 rev-> 1732 mismatch
+ multiply-1
+ (79,30)->94: (70 + 9) * 30 - 1 = 70 * 30 + 9 * 30 - 1 = 2100 + 270 - 1 = 2370 - 1 = 2369 rev-> 9632 mismatch
+ add+1
+ (79,30)->94: 79 + 30 + 1 = 110 rev-> 011 mismatch
+ add-1
+ (79,30)->94: 79 + 30 - 1 = 108 rev-> 801 mismatch
+ sub+1
+ (79,30)->94: 79 - 30 + 1 = 50 rev-> 05 mismatch
+ sub-1
+ (79,30)->94: 79 - 30 - 1 = 48 rev-> 84 mismatch
+ integer division (a/b)
+ (79,30)->94: 79 / 30 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (79,30)->94: 30 / 79 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (79,30)->94: 30 mod 79 = 30 rev-> 03 mismatch
+ digit absolute diff
+ (79,30)->94: |7-3| || |9-0| = 49 rev-> 94 match
+ correct, but skipping
+ digit add mod10
+ (79,30)->94: (7+3)%10 || (9+0)%10 = 09 rev-> 90 mismatch
+ digit sub mod10
+ (79,30)->94: (7-3)%10 || (9-0)%10 = 49 rev-> 94 match
+ correct, but skipping
+ cross multiply
+ (79,30)->94: 7*3 + 9*0 = 21 + 0 = 21 rev-> 12 mismatch
+ cross multiply rev
+ (79,30)->94: 7*0 + 9*3 = 0 + 27 = 27 rev-> 72 mismatch
+ digit multiply
+ (79,30)->94: 7*3 || 9*0 = 21 || 0 = 210 rev-> 012 mismatch
+ digit multiply rev
+ (79,30)->94: 7*0 || 9*3 = 0 || 27 = 027 rev-> 720 mismatch
+ digit sum diff
+ (79,30)->94: (7+9) - (3+0) = 13 rev-> 31 mismatch
+ digit sum sum
+ (79,30)->94: (7+9) + (3+0) = 19 rev-> 91 mismatch
+ digit product diff
+ (79,30)->94: 7*9 - 3*0 = 63 - 0 = 63 rev-> 36 mismatch
+ digit product sum
+ (79,30)->94: 7*9 + 3*0 = 63 + 0 = 63 rev-> 36 mismatch
+ determinant
+ (79,30)->94: 7*0 - 9*3 = 0 - 27 = -27 rev-> -72 mismatch
+ abs determinant
+ (79,30)->94: |7*0 - 9*3| = |0 - 27| = 27 rev-> 72 mismatch
+
+Trying rare operations on identity [97 03] [expected (97,03)->94]:
+ multiply+1
+ (97,03)->94: (90 + 7) * 03 + 1 = 90 * 03 + 7 * 03 + 1 = 270 + 21 + 1 = 291 + 1 = 292 mismatch
+ multiply-1
+ (97,03)->94: (90 + 7) * 03 - 1 = 90 * 03 + 7 * 03 - 1 = 270 + 21 - 1 = 291 - 1 = 290 mismatch
+ add+1
+ (97,03)->94: 97 + 03 + 1 = 101 mismatch
+ add-1
+ (97,03)->94: 97 + 03 - 1 = 99 mismatch
+ sub+1
+ (97,03)->94: 97 - 03 + 1 = 95 mismatch
+ sub-1
+ (97,03)->94: 97 - 03 - 1 = 93 mismatch
+ integer division (a/b)
+ (97,03)->94: 97 / 03 = 32 mismatch
+ reverse division (b/a)
+ (97,03)->94: 03 / 97 = 0 mismatch
+ reverse modulo (b mod a)
+ (97,03)->94: 03 mod 97 = 3 mismatch
+ digit absolute diff
+ (97,03)->94: |9-0| || |7-3| = 94 match
+ correct, but skipping
+ digit add mod10
+ (97,03)->94: (9+0)%10 || (7+3)%10 = 90 mismatch
+ digit sub mod10
+ (97,03)->94: (9-0)%10 || (7-3)%10 = 94 match
+ correct, but skipping
+ cross multiply
+ (97,03)->94: 9*0 + 7*3 = 0 + 21 = 21 mismatch
+ cross multiply rev
+ (97,03)->94: 9*3 + 7*0 = 27 + 0 = 27 mismatch
+ digit multiply
+ (97,03)->94: 9*0 || 7*3 = 0 || 21 = 021 mismatch
+ digit multiply rev
+ (97,03)->94: 9*3 || 7*0 = 27 || 0 = 270 mismatch
+ digit sum diff
+ (97,03)->94: (9+7) - (0+3) = 13 mismatch
+ digit sum sum
+ (97,03)->94: (9+7) + (0+3) = 19 mismatch
+ digit product diff
+ (97,03)->94: 9*7 - 0*3 = 63 - 0 = 63 mismatch
+ digit product sum
+ (97,03)->94: 9*7 + 0*3 = 63 + 0 = 63 mismatch
+ determinant
+ (97,03)->94: 9*3 - 7*0 = 27 - 0 = 27 mismatch
+ abs determinant
+ (97,03)->94: |9*3 - 7*0| = |27 - 0| = 27 mismatch
+
+Applying to 52-99:
+ We recall that the question operator is found in the examples.
+ reversed operands [52->25, 99->99] and reversed result
+ subtraction (a-b) (25,99): 25 - 99 = -74 rev-> -47
+ Result is negative - but none of the example outputs have a symbol prefix or suffix.
+
+\boxed{-47}

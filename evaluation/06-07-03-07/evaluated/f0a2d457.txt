@@ -1,0 +1,182 @@
+05/32 = 0532
+23/82 = 2382
+73<25 = 51
+95<05 = 9<
+45/79 = 4579
+
+The inputs are 05, 32, 23, 82, 73, 25, 95, 05, 45, 79
+
+The outputs are 0532, 2382, 51, 9<, 4579
+Some example outputs have the operator symbol as suffix <.
+We now consider the outputs to be 0532, 2382, 51, -9, 4579
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+05/32 -> /
+23/82 -> /
+73<25 -> <
+95<05 -> <
+45/79 -> /
+
+The operators
+/
+<
+
+Looking at the question
+86<09 -> <
+The question operator is found in the examples.
+
+Looking at operator < [73<25 = 51, 95<05 = -9]:
+
+Trying common operations reversed operands [73->37 25->52, 95->59 05->50] and reversed result [expected (37,52)->51, (59,50)->-9]:
+ addition
+ (37,52)->51: 37 + 52 = 89 rev-> 98 mismatch
+ multiplication
+ (59,50)->-9: (50 + 9) * 50 = 50 * 50 + 9 * 50 = 2500 + 450 = 2950 rev-> 0592 mismatch
+ concatenation
+ (37,52)->51: 37 || 52 = 3752 rev-> 2573 mismatch
+ reverse concatenation
+ (59,50)->-9: 50 || 59 = 5059 rev-> 9505 mismatch
+
+Trying common operations on identity [73 25, 95 05] [expected (73,25)->51, (95,05)->-9]:
+ addition
+ (73,25)->51: 73 + 25 = 98 mismatch
+ multiplication
+ (95,05)->-9: (90 + 5) * 05 = 90 * 05 + 5 * 05 = 450 + 25 = 475 mismatch
+ concatenation
+ (73,25)->51: 73 || 25 = 7325 mismatch
+ reverse concatenation
+ (95,05)->-9: 05 || 95 = 0595 mismatch
+
+Trying difference operations reversed operands [73->37 25->52, 95->59 05->50] and reversed result [expected (37,52)->51, (59,50)->-9]:
+ subtraction (a-b)
+ (37,52)->51: 37 - 52 = -15 rev-> -51 mismatch
+ absolute difference
+ (59,50)->-9: |59 - 50| = 9 rev-> 9 mismatch
+ max mod min
+ (37,52)->51: max(37,52) mod min(37,52) = 52 mod 37 = 15 rev-> 51 match
+ (59,50)->-9: max(59,50) mod min(59,50) = 59 mod 50 = 9 rev-> 9 mismatch
+ negated absolute difference
+ (59,50)->-9: -|59 - 50| = -9 rev-> -9 match
+ (37,52)->51: -|37 - 52| = -15 rev-> -51 mismatch
+ reverse subtraction (b-a)
+ (37,52)->51: 52 - 37 = 15 rev-> 51 match
+ (59,50)->-9: 50 - 59 = -9 rev-> -9 match
+ correct, actions: reversed operands, reversed result, reverse subtraction (b-a)
+ modulo (a mod b)
+ (59,50)->-9: 59 mod 50 = 9 rev-> 9 mismatch
+
+Trying difference operations on identity [73 25, 95 05] [expected (73,25)->51, (95,05)->-9]:
+ subtraction (a-b)
+ (73,25)->51: 73 - 25 = 48 mismatch
+ absolute difference
+ (95,05)->-9: |95 - 05| = 90 mismatch
+ max mod min
+ (73,25)->51: max(73,25) mod min(73,25) = 73 mod 25 = 23 mismatch
+ negated absolute difference
+ (95,05)->-9: -|95 - 05| = -90 mismatch
+ reverse subtraction (b-a)
+ (73,25)->51: 25 - 73 = -48 mismatch
+ modulo (a mod b)
+ (95,05)->-9: 95 mod 05 = 0 mismatch
+
+Trying rare operations reversed operands [73->37 25->52, 95->59 05->50] and reversed result [expected (37,52)->51, (59,50)->-9]:
+ multiply+1
+ (37,52)->51: (30 + 7) * 52 + 1 = 30 * 52 + 7 * 52 + 1 = 1560 + 364 + 1 = 1924 + 1 = 1925 rev-> 5291 mismatch
+ multiply-1
+ (59,50)->-9: (50 + 9) * 50 - 1 = 50 * 50 + 9 * 50 - 1 = 2500 + 450 - 1 = 2950 - 1 = 2949 rev-> 9492 mismatch
+ add+1
+ (37,52)->51: 37 + 52 + 1 = 90 rev-> 09 mismatch
+ add-1
+ (59,50)->-9: 59 + 50 - 1 = 108 rev-> 801 mismatch
+ sub+1
+ (37,52)->51: 37 - 52 + 1 = -14 rev-> -41 mismatch
+ sub-1
+ (59,50)->-9: 59 - 50 - 1 = 8 rev-> 8 mismatch
+ integer division (a/b)
+ (37,52)->51: 37 / 52 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (59,50)->-9: 50 / 59 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (37,52)->51: 52 mod 37 = 15 rev-> 51 match
+ (59,50)->-9: 50 mod 59 = 50 rev-> 05 mismatch
+ digit absolute diff
+ (59,50)->-9: |5-5| || |9-0| = 09 rev-> 90 mismatch
+ digit add mod10
+ (37,52)->51: (3+5)%10 || (7+2)%10 = 89 rev-> 98 mismatch
+ digit sub mod10
+ (59,50)->-9: (5-5)%10 || (9-0)%10 = 09 rev-> 90 mismatch
+ cross multiply
+ (37,52)->51: 3*5 + 7*2 = 15 + 14 = 29 rev-> 92 mismatch
+ cross multiply rev
+ (59,50)->-9: 5*0 + 9*5 = 0 + 45 = 45 rev-> 54 mismatch
+ digit multiply
+ (37,52)->51: 3*5 || 7*2 = 15 || 14 = 1514 rev-> 4151 mismatch
+ digit multiply rev
+ (59,50)->-9: 5*0 || 9*5 = 0 || 45 = 045 rev-> 540 mismatch
+ digit sum diff
+ (37,52)->51: (3+7) - (5+2) = 3 rev-> 3 mismatch
+ digit sum sum
+ (59,50)->-9: (5+9) + (5+0) = 19 rev-> 91 mismatch
+ digit product diff
+ (37,52)->51: 3*7 - 5*2 = 21 - 10 = 11 rev-> 11 mismatch
+ digit product sum
+ (59,50)->-9: 5*9 + 5*0 = 45 + 0 = 45 rev-> 54 mismatch
+ determinant
+ (37,52)->51: 3*2 - 7*5 = 6 - 35 = -29 rev-> -92 mismatch
+ abs determinant
+ (59,50)->-9: |5*0 - 9*5| = |0 - 45| = 45 rev-> 54 mismatch
+
+Trying rare operations on identity [73 25, 95 05] [expected (73,25)->51, (95,05)->-9]:
+ multiply+1
+ (73,25)->51: (70 + 3) * 25 + 1 = 70 * 25 + 3 * 25 + 1 = 1750 + 75 + 1 = 1825 + 1 = 1826 mismatch
+ multiply-1
+ (95,05)->-9: (90 + 5) * 05 - 1 = 90 * 05 + 5 * 05 - 1 = 450 + 25 - 1 = 475 - 1 = 474 mismatch
+ add+1
+ (73,25)->51: 73 + 25 + 1 = 99 mismatch
+ add-1
+ (95,05)->-9: 95 + 05 - 1 = 99 mismatch
+ sub+1
+ (73,25)->51: 73 - 25 + 1 = 49 mismatch
+ sub-1
+ (95,05)->-9: 95 - 05 - 1 = 89 mismatch
+ integer division (a/b)
+ (73,25)->51: 73 / 25 = 2 mismatch
+ reverse division (b/a)
+ (95,05)->-9: 05 / 95 = 0 mismatch
+ reverse modulo (b mod a)
+ (73,25)->51: 25 mod 73 = 25 mismatch
+ digit absolute diff
+ (95,05)->-9: |9-0| || |5-5| = 90 mismatch
+ digit add mod10
+ (73,25)->51: (7+2)%10 || (3+5)%10 = 98 mismatch
+ digit sub mod10
+ (95,05)->-9: (9-0)%10 || (5-5)%10 = 90 mismatch
+ cross multiply
+ (73,25)->51: 7*2 + 3*5 = 14 + 15 = 29 mismatch
+ cross multiply rev
+ (95,05)->-9: 9*5 + 5*0 = 45 + 0 = 45 mismatch
+ digit multiply
+ (73,25)->51: 7*2 || 3*5 = 14 || 15 = 1415 mismatch
+ digit multiply rev
+ (95,05)->-9: 9*5 || 5*0 = 45 || 0 = 450 mismatch
+ digit sum diff
+ (73,25)->51: (7+3) - (2+5) = 3 mismatch
+ digit sum sum
+ (95,05)->-9: (9+5) + (0+5) = 19 mismatch
+ digit product diff
+ (73,25)->51: 7*3 - 2*5 = 21 - 10 = 11 mismatch
+ digit product sum
+ (95,05)->-9: 9*5 + 0*5 = 45 + 0 = 45 mismatch
+ determinant
+ (73,25)->51: 7*5 - 3*2 = 35 - 6 = 29 mismatch
+ abs determinant
+ (95,05)->-9: |9*5 - 5*0| = |45 - 0| = 45 mismatch
+
+Applying to 86<09:
+ We recall that the question operator is found in the examples.
+ reversed operands [86->68, 09->90] and reversed result
+ reverse subtraction (b-a) (68,90): 90 - 68 = 22 rev-> 22
+ Result is non-negative, no suffix needed: 22
+
+\boxed{22}

@@ -1,0 +1,176 @@
+65+83 = 8365
+62-23 = -6
+69*72 = 2952
+
+The inputs are 65, 83, 62, 23, 69, 72
+
+The outputs are 8365, -6, 2952
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 8365, -6, 2952
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+65+83 -> +
+62-23 -> -
+69*72 -> *
+
+The operators
++
+-
+*
+
+Looking at the question
+72+44 -> +
+The question operator is found in the examples.
+
+Looking at operator + [65+83 = 8365]:
+
+Trying common operations reversed operands [65->56 83->38] and reversed result [expected (56,38)->8365]:
+ addition
+ (56,38)->8365: 56 + 38 = 94 rev-> 49 mismatch
+ multiplication
+ (56,38)->8365: (50 + 6) * 38 = 50 * 38 + 6 * 38 = 1900 + 228 = 2128 rev-> 8212 mismatch
+ concatenation
+ (56,38)->8365: 56 || 38 = 5638 rev-> 8365 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (56,38)->8365: 38 || 56 = 3856 rev-> 6583 mismatch
+
+Trying common operations on identity [65 83] [expected (65,83)->8365]:
+ addition
+ (65,83)->8365: 65 + 83 = 148 mismatch
+ multiplication
+ (65,83)->8365: (60 + 5) * 83 = 60 * 83 + 5 * 83 = 4980 + 415 = 5395 mismatch
+ concatenation
+ (65,83)->8365: 65 || 83 = 6583 mismatch
+ reverse concatenation
+ (65,83)->8365: 83 || 65 = 8365 match
+ correct, but skipping
+
+Trying difference operations reversed operands [65->56 83->38] and reversed result [expected (56,38)->8365]:
+ subtraction (a-b)
+ (56,38)->8365: 56 - 38 = 18 rev-> 81 mismatch
+ absolute difference
+ (56,38)->8365: |56 - 38| = 18 rev-> 81 mismatch
+ max mod min
+ (56,38)->8365: max(56,38) mod min(56,38) = 56 mod 38 = 18 rev-> 81 mismatch
+ negated absolute difference
+ (56,38)->8365: -|56 - 38| = -18 rev-> -81 mismatch
+ reverse subtraction (b-a)
+ (56,38)->8365: 38 - 56 = -18 rev-> -81 mismatch
+ modulo (a mod b)
+ (56,38)->8365: 56 mod 38 = 18 rev-> 81 mismatch
+
+Trying difference operations on identity [65 83] [expected (65,83)->8365]:
+ subtraction (a-b)
+ (65,83)->8365: 65 - 83 = -18 mismatch
+ absolute difference
+ (65,83)->8365: |65 - 83| = 18 mismatch
+ max mod min
+ (65,83)->8365: max(65,83) mod min(65,83) = 83 mod 65 = 18 mismatch
+ negated absolute difference
+ (65,83)->8365: -|65 - 83| = -18 mismatch
+ reverse subtraction (b-a)
+ (65,83)->8365: 83 - 65 = 18 mismatch
+ modulo (a mod b)
+ (65,83)->8365: 65 mod 83 = 65 mismatch
+
+Trying rare operations reversed operands [65->56 83->38] and reversed result [expected (56,38)->8365]:
+ multiply+1
+ (56,38)->8365: (50 + 6) * 38 + 1 = 50 * 38 + 6 * 38 + 1 = 1900 + 228 + 1 = 2128 + 1 = 2129 rev-> 9212 mismatch
+ multiply-1
+ (56,38)->8365: (50 + 6) * 38 - 1 = 50 * 38 + 6 * 38 - 1 = 1900 + 228 - 1 = 2128 - 1 = 2127 rev-> 7212 mismatch
+ add+1
+ (56,38)->8365: 56 + 38 + 1 = 95 rev-> 59 mismatch
+ add-1
+ (56,38)->8365: 56 + 38 - 1 = 93 rev-> 39 mismatch
+ sub+1
+ (56,38)->8365: 56 - 38 + 1 = 19 rev-> 91 mismatch
+ sub-1
+ (56,38)->8365: 56 - 38 - 1 = 17 rev-> 71 mismatch
+ integer division (a/b)
+ (56,38)->8365: 56 / 38 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (56,38)->8365: 38 / 56 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (56,38)->8365: 38 mod 56 = 38 rev-> 83 mismatch
+ digit absolute diff
+ (56,38)->8365: |5-3| || |6-8| = 22 rev-> 22 mismatch
+ digit add mod10
+ (56,38)->8365: (5+3)%10 || (6+8)%10 = 84 rev-> 48 mismatch
+ digit sub mod10
+ (56,38)->8365: (5-3)%10 || (6-8)%10 = 28 rev-> 82 mismatch
+ cross multiply
+ (56,38)->8365: 5*3 + 6*8 = 15 + 48 = 63 rev-> 36 mismatch
+ cross multiply rev
+ (56,38)->8365: 5*8 + 6*3 = 40 + 18 = 58 rev-> 85 mismatch
+ digit multiply
+ (56,38)->8365: 5*3 || 6*8 = 15 || 48 = 1548 rev-> 8451 mismatch
+ digit multiply rev
+ (56,38)->8365: 5*8 || 6*3 = 40 || 18 = 4018 rev-> 8104 mismatch
+ digit sum diff
+ (56,38)->8365: (5+6) - (3+8) = 0 rev-> 0 mismatch
+ digit sum sum
+ (56,38)->8365: (5+6) + (3+8) = 22 rev-> 22 mismatch
+ digit product diff
+ (56,38)->8365: 5*6 - 3*8 = 30 - 24 = 6 rev-> 6 mismatch
+ digit product sum
+ (56,38)->8365: 5*6 + 3*8 = 30 + 24 = 54 rev-> 45 mismatch
+ determinant
+ (56,38)->8365: 5*8 - 6*3 = 40 - 18 = 22 rev-> 22 mismatch
+ abs determinant
+ (56,38)->8365: |5*8 - 6*3| = |40 - 18| = 22 rev-> 22 mismatch
+
+Trying rare operations on identity [65 83] [expected (65,83)->8365]:
+ multiply+1
+ (65,83)->8365: (60 + 5) * 83 + 1 = 60 * 83 + 5 * 83 + 1 = 4980 + 415 + 1 = 5395 + 1 = 5396 mismatch
+ multiply-1
+ (65,83)->8365: (60 + 5) * 83 - 1 = 60 * 83 + 5 * 83 - 1 = 4980 + 415 - 1 = 5395 - 1 = 5394 mismatch
+ add+1
+ (65,83)->8365: 65 + 83 + 1 = 149 mismatch
+ add-1
+ (65,83)->8365: 65 + 83 - 1 = 147 mismatch
+ sub+1
+ (65,83)->8365: 65 - 83 + 1 = -17 mismatch
+ sub-1
+ (65,83)->8365: 65 - 83 - 1 = -19 mismatch
+ integer division (a/b)
+ (65,83)->8365: 65 / 83 = 0 mismatch
+ reverse division (b/a)
+ (65,83)->8365: 83 / 65 = 1 mismatch
+ reverse modulo (b mod a)
+ (65,83)->8365: 83 mod 65 = 18 mismatch
+ digit absolute diff
+ (65,83)->8365: |6-8| || |5-3| = 22 mismatch
+ digit add mod10
+ (65,83)->8365: (6+8)%10 || (5+3)%10 = 48 mismatch
+ digit sub mod10
+ (65,83)->8365: (6-8)%10 || (5-3)%10 = 82 mismatch
+ cross multiply
+ (65,83)->8365: 6*8 + 5*3 = 48 + 15 = 63 mismatch
+ cross multiply rev
+ (65,83)->8365: 6*3 + 5*8 = 18 + 40 = 58 mismatch
+ digit multiply
+ (65,83)->8365: 6*8 || 5*3 = 48 || 15 = 4815 mismatch
+ digit multiply rev
+ (65,83)->8365: 6*3 || 5*8 = 18 || 40 = 1840 mismatch
+ digit sum diff
+ (65,83)->8365: (6+5) - (8+3) = 0 mismatch
+ digit sum sum
+ (65,83)->8365: (6+5) + (8+3) = 22 mismatch
+ digit product diff
+ (65,83)->8365: 6*5 - 8*3 = 30 - 24 = 6 mismatch
+ digit product sum
+ (65,83)->8365: 6*5 + 8*3 = 30 + 24 = 54 mismatch
+ determinant
+ (65,83)->8365: 6*3 - 5*8 = 18 - 40 = -22 mismatch
+ abs determinant
+ (65,83)->8365: |6*3 - 5*8| = |18 - 40| = 22 mismatch
+
+Applying to 72+44:
+ We recall that the question operator is found in the examples.
+ reversed operands [72->27, 44->44] and reversed result
+ concatenation (27,44): 27 || 44 = 2744 rev-> 4472
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{4472}

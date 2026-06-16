@@ -1,0 +1,175 @@
+57-76 = 8
+07*33 = 0132
+26*48 = 8025
+17-76 = 4
+
+The inputs are 57, 76, 07, 33, 26, 48, 17, 76
+
+The outputs are 8, 0132, 8025, 4
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+57-76 -> -
+07*33 -> *
+26*48 -> *
+17-76 -> -
+
+The operators
+-
+*
+
+Looking at the question
+27*56 -> *
+The question operator is found in the examples.
+
+Looking at operator * [07*33 = 0132, 26*48 = 8025]:
+
+Trying common operations reversed operands [07->70 33->33, 26->62 48->84] and reversed result [expected (70,33)->0132, (62,84)->8025]:
+ addition
+ (70,33)->0132: 70 + 33 = 103 rev-> 301 mismatch
+ multiplication
+ (62,84)->8025: (60 + 2) * 84 = 60 * 84 + 2 * 84 = 5040 + 168 = 5208 rev-> 8025 match
+ (70,33)->0132: (70 + 0) * 33 = 70 * 33 + 0 * 33 = 2310 + 0 = 2310 rev-> 0132 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (70,33)->0132: 70 || 33 = 7033 rev-> 3307 mismatch
+ reverse concatenation
+ (62,84)->8025: 84 || 62 = 8462 rev-> 2648 mismatch
+
+Trying common operations on identity [07 33, 26 48] [expected (07,33)->0132, (26,48)->8025]:
+ addition
+ (07,33)->0132: 07 + 33 = 40 mismatch
+ multiplication
+ (26,48)->8025: (20 + 6) * 48 = 20 * 48 + 6 * 48 = 960 + 288 = 1248 mismatch
+ concatenation
+ (07,33)->0132: 07 || 33 = 0733 mismatch
+ reverse concatenation
+ (26,48)->8025: 48 || 26 = 4826 mismatch
+
+Trying difference operations reversed operands [07->70 33->33, 26->62 48->84] and reversed result [expected (70,33)->0132, (62,84)->8025]:
+ subtraction (a-b)
+ (70,33)->0132: 70 - 33 = 37 rev-> 73 mismatch
+ absolute difference
+ (62,84)->8025: |62 - 84| = 22 rev-> 22 mismatch
+ max mod min
+ (70,33)->0132: max(70,33) mod min(70,33) = 70 mod 33 = 4 rev-> 4 mismatch
+ negated absolute difference
+ (62,84)->8025: -|62 - 84| = -22 rev-> -22 mismatch
+ reverse subtraction (b-a)
+ (70,33)->0132: 33 - 70 = -37 rev-> -73 mismatch
+ modulo (a mod b)
+ (62,84)->8025: 62 mod 84 = 62 rev-> 26 mismatch
+
+Trying difference operations on identity [07 33, 26 48] [expected (07,33)->0132, (26,48)->8025]:
+ subtraction (a-b)
+ (07,33)->0132: 07 - 33 = -26 mismatch
+ absolute difference
+ (26,48)->8025: |26 - 48| = 22 mismatch
+ max mod min
+ (07,33)->0132: max(07,33) mod min(07,33) = 33 mod 07 = 5 mismatch
+ negated absolute difference
+ (26,48)->8025: -|26 - 48| = -22 mismatch
+ reverse subtraction (b-a)
+ (07,33)->0132: 33 - 07 = 26 mismatch
+ modulo (a mod b)
+ (26,48)->8025: 26 mod 48 = 26 mismatch
+
+Trying rare operations reversed operands [07->70 33->33, 26->62 48->84] and reversed result [expected (70,33)->0132, (62,84)->8025]:
+ multiply+1
+ (70,33)->0132: (70 + 0) * 33 + 1 = 70 * 33 + 0 * 33 + 1 = 2310 + 0 + 1 = 2310 + 1 = 2311 rev-> 1132 mismatch
+ multiply-1
+ (62,84)->8025: (60 + 2) * 84 - 1 = 60 * 84 + 2 * 84 - 1 = 5040 + 168 - 1 = 5208 - 1 = 5207 rev-> 7025 mismatch
+ add+1
+ (70,33)->0132: 70 + 33 + 1 = 104 rev-> 401 mismatch
+ add-1
+ (62,84)->8025: 62 + 84 - 1 = 145 rev-> 541 mismatch
+ sub+1
+ (70,33)->0132: 70 - 33 + 1 = 38 rev-> 83 mismatch
+ sub-1
+ (62,84)->8025: 62 - 84 - 1 = -23 rev-> -32 mismatch
+ integer division (a/b)
+ (70,33)->0132: 70 / 33 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (62,84)->8025: 84 / 62 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (70,33)->0132: 33 mod 70 = 33 rev-> 33 mismatch
+ digit absolute diff
+ (62,84)->8025: |6-8| || |2-4| = 22 rev-> 22 mismatch
+ digit add mod10
+ (70,33)->0132: (7+3)%10 || (0+3)%10 = 03 rev-> 30 mismatch
+ digit sub mod10
+ (62,84)->8025: (6-8)%10 || (2-4)%10 = 88 rev-> 88 mismatch
+ cross multiply
+ (70,33)->0132: 7*3 + 0*3 = 21 + 0 = 21 rev-> 12 mismatch
+ cross multiply rev
+ (62,84)->8025: 6*4 + 2*8 = 24 + 16 = 40 rev-> 04 mismatch
+ digit multiply
+ (70,33)->0132: 7*3 || 0*3 = 21 || 0 = 210 rev-> 012 mismatch
+ digit multiply rev
+ (62,84)->8025: 6*4 || 2*8 = 24 || 16 = 2416 rev-> 6142 mismatch
+ digit sum diff
+ (70,33)->0132: (7+0) - (3+3) = 1 rev-> 1 mismatch
+ digit sum sum
+ (62,84)->8025: (6+2) + (8+4) = 20 rev-> 02 mismatch
+ digit product diff
+ (70,33)->0132: 7*0 - 3*3 = 0 - 9 = -9 rev-> -9 mismatch
+ digit product sum
+ (62,84)->8025: 6*2 + 8*4 = 12 + 32 = 44 rev-> 44 mismatch
+ determinant
+ (70,33)->0132: 7*3 - 0*3 = 21 - 0 = 21 rev-> 12 mismatch
+ abs determinant
+ (62,84)->8025: |6*4 - 2*8| = |24 - 16| = 8 rev-> 8 mismatch
+
+Trying rare operations on identity [07 33, 26 48] [expected (07,33)->0132, (26,48)->8025]:
+ multiply+1
+ (07,33)->0132: (0 + 7) * 33 + 1 = 0 * 33 + 7 * 33 + 1 = 0 + 231 + 1 = 231 + 1 = 232 mismatch
+ multiply-1
+ (26,48)->8025: (20 + 6) * 48 - 1 = 20 * 48 + 6 * 48 - 1 = 960 + 288 - 1 = 1248 - 1 = 1247 mismatch
+ add+1
+ (07,33)->0132: 07 + 33 + 1 = 41 mismatch
+ add-1
+ (26,48)->8025: 26 + 48 - 1 = 73 mismatch
+ sub+1
+ (07,33)->0132: 07 - 33 + 1 = -25 mismatch
+ sub-1
+ (26,48)->8025: 26 - 48 - 1 = -23 mismatch
+ integer division (a/b)
+ (07,33)->0132: 07 / 33 = 0 mismatch
+ reverse division (b/a)
+ (26,48)->8025: 48 / 26 = 1 mismatch
+ reverse modulo (b mod a)
+ (07,33)->0132: 33 mod 07 = 5 mismatch
+ digit absolute diff
+ (26,48)->8025: |2-4| || |6-8| = 22 mismatch
+ digit add mod10
+ (07,33)->0132: (0+3)%10 || (7+3)%10 = 30 mismatch
+ digit sub mod10
+ (26,48)->8025: (2-4)%10 || (6-8)%10 = 88 mismatch
+ cross multiply
+ (07,33)->0132: 0*3 + 7*3 = 0 + 21 = 21 mismatch
+ cross multiply rev
+ (26,48)->8025: 2*8 + 6*4 = 16 + 24 = 40 mismatch
+ digit multiply
+ (07,33)->0132: 0*3 || 7*3 = 0 || 21 = 021 mismatch
+ digit multiply rev
+ (26,48)->8025: 2*8 || 6*4 = 16 || 24 = 1624 mismatch
+ digit sum diff
+ (07,33)->0132: (0+7) - (3+3) = 1 mismatch
+ digit sum sum
+ (26,48)->8025: (2+6) + (4+8) = 20 mismatch
+ digit product diff
+ (07,33)->0132: 0*7 - 3*3 = 0 - 9 = -9 mismatch
+ digit product sum
+ (26,48)->8025: 2*6 + 4*8 = 12 + 32 = 44 mismatch
+ determinant
+ (07,33)->0132: 0*3 - 7*3 = 0 - 21 = -21 mismatch
+ abs determinant
+ (26,48)->8025: |2*8 - 6*4| = |16 - 24| = 8 mismatch
+
+Applying to 27*56:
+ We recall that the question operator is found in the examples.
+ reversed operands [27->72, 56->65] and reversed result
+ multiplication (72,65): (70 + 2) * 65 = 70 * 65 + 2 * 65 = 4550 + 130 = 4680 rev-> 0864
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{0864}

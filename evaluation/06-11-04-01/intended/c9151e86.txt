@@ -1,0 +1,180 @@
+19*43 = 5903
+99*29 = 9019
+05-29 = 24
+88-83 = 05
+
+The inputs are 19, 43, 99, 29, 05, 29, 88, 83
+
+The outputs are 5903, 9019, 24, 05
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+19*43 -> *
+99*29 -> *
+05-29 -> -
+88-83 -> -
+
+The operators
+*
+-
+
+Looking at the question
+69*31 -> *
+The question operator is found in the examples.
+
+Looking at operator * [19*43 = 5903, 99*29 = 9019]:
+
+Trying common operations
+ reversed operands [19->91 43->34, 99->99 29->92] and reversed result [expected (91,34)->5903, (99,92)->9019]
+ addition
+ (91,34)->5903: 91 + 34 = 125 rev-> 521 mismatch
+ multiplication
+ (99,92)->9019: (90 + 9) * 92 = 90 * 92 + 9 * 92 = 8280 + 828 = 9108 rev-> 8019 mismatch
+ concatenation
+ (91,34)->5903: 91 || 34 = 9134 rev-> 4319 mismatch
+ reverse concatenation
+ (99,92)->9019: 92 || 99 = 9299 rev-> 9929 mismatch
+
+ identity [19 43, 99 29] [expected (19,43)->5903, (99,29)->9019]
+ addition
+ (19,43)->5903: 19 + 43 = 62 mismatch
+ multiplication
+ (99,29)->9019: (90 + 9) * 29 = 90 * 29 + 9 * 29 = 2610 + 261 = 2871 mismatch
+ concatenation
+ (19,43)->5903: 19 || 43 = 1943 mismatch
+ reverse concatenation
+ (99,29)->9019: 29 || 99 = 2999 mismatch
+
+Trying difference operations
+ reversed operands [19->91 43->34, 99->99 29->92] and reversed result [expected (91,34)->5903, (99,92)->9019]
+ subtraction (a-b)
+ (91,34)->5903: 91 - 34 = 57 rev-> 75 mismatch
+ absolute difference
+ (99,92)->9019: |99 - 92| = 7 rev-> 7 mismatch
+ max mod min
+ (91,34)->5903: max(91,34) mod min(91,34) = 91 mod 34 = 23 rev-> 32 mismatch
+ negated absolute difference
+ (99,92)->9019: -|99 - 92| = -7 rev-> -7 mismatch
+ reverse subtraction (b-a)
+ (91,34)->5903: 34 - 91 = -57 rev-> -75 mismatch
+ modulo (a mod b)
+ (99,92)->9019: 99 mod 92 = 7 rev-> 7 mismatch
+
+ identity [19 43, 99 29] [expected (19,43)->5903, (99,29)->9019]
+ subtraction (a-b)
+ (19,43)->5903: 19 - 43 = -24 mismatch
+ absolute difference
+ (99,29)->9019: |99 - 29| = 70 mismatch
+ max mod min
+ (19,43)->5903: max(19,43) mod min(19,43) = 43 mod 19 = 5 mismatch
+ negated absolute difference
+ (99,29)->9019: -|99 - 29| = -70 mismatch
+ reverse subtraction (b-a)
+ (19,43)->5903: 43 - 19 = 24 mismatch
+ modulo (a mod b)
+ (99,29)->9019: 99 mod 29 = 12 mismatch
+
+Trying rare operations
+ reversed operands [19->91 43->34, 99->99 29->92] and reversed result [expected (91,34)->5903, (99,92)->9019]
+ multiply+1
+ (91,34)->5903: (90 + 1) * 34 + 1 = 90 * 34 + 1 * 34 + 1 = 3060 + 34 + 1 = 3094 + 1 = 3095 rev-> 5903 match
+ (99,92)->9019: (90 + 9) * 92 + 1 = 90 * 92 + 9 * 92 + 1 = 8280 + 828 + 1 = 9108 + 1 = 9109 rev-> 9019 match
+ correct, actions: reversed operands, reversed result, multiply+1
+ multiply-1
+ (99,92)->9019: (90 + 9) * 92 - 1 = 90 * 92 + 9 * 92 - 1 = 8280 + 828 - 1 = 9108 - 1 = 9107 rev-> 7019 mismatch
+ add+1
+ (91,34)->5903: 91 + 34 + 1 = 126 rev-> 621 mismatch
+ add-1
+ (99,92)->9019: 99 + 92 - 1 = 190 rev-> 091 mismatch
+ sub+1
+ (91,34)->5903: 91 - 34 + 1 = 58 rev-> 85 mismatch
+ sub-1
+ (99,92)->9019: 99 - 92 - 1 = 6 rev-> 6 mismatch
+ integer division (a/b)
+ (91,34)->5903: 91 / 34 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (99,92)->9019: 92 / 99 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (91,34)->5903: 34 mod 91 = 34 rev-> 43 mismatch
+ digit absolute diff
+ (99,92)->9019: |9-9| || |9-2| = 07 rev-> 70 mismatch
+ digit add mod10
+ (91,34)->5903: (9+3)%10 || (1+4)%10 = 25 rev-> 52 mismatch
+ digit sub mod10
+ (99,92)->9019: (9-9)%10 || (9-2)%10 = 07 rev-> 70 mismatch
+ cross multiply
+ (91,34)->5903: 9*3 + 1*4 = 27 + 4 = 31 rev-> 13 mismatch
+ cross multiply rev
+ (99,92)->9019: 9*2 + 9*9 = 18 + 81 = 99 rev-> 99 mismatch
+ digit multiply
+ (91,34)->5903: 9*3 || 1*4 = 27 || 4 = 274 rev-> 472 mismatch
+ digit multiply rev
+ (99,92)->9019: 9*2 || 9*9 = 18 || 81 = 1881 rev-> 1881 mismatch
+ digit sum diff
+ (91,34)->5903: (9+1) - (3+4) = 3 rev-> 3 mismatch
+ digit sum sum
+ (99,92)->9019: (9+9) + (9+2) = 29 rev-> 92 mismatch
+ digit product diff
+ (91,34)->5903: 9*1 - 3*4 = 9 - 12 = -3 rev-> -3 mismatch
+ digit product sum
+ (99,92)->9019: 9*9 + 9*2 = 81 + 18 = 99 rev-> 99 mismatch
+ determinant
+ (91,34)->5903: 9*4 - 1*3 = 36 - 3 = 33 rev-> 33 mismatch
+ abs determinant
+ (99,92)->9019: |9*2 - 9*9| = |18 - 81| = 63 rev-> 36 mismatch
+
+ identity [19 43, 99 29] [expected (19,43)->5903, (99,29)->9019]
+ multiply+1
+ (19,43)->5903: (10 + 9) * 43 + 1 = 10 * 43 + 9 * 43 + 1 = 430 + 387 + 1 = 817 + 1 = 818 mismatch
+ multiply-1
+ (99,29)->9019: (90 + 9) * 29 - 1 = 90 * 29 + 9 * 29 - 1 = 2610 + 261 - 1 = 2871 - 1 = 2870 mismatch
+ add+1
+ (19,43)->5903: 19 + 43 + 1 = 63 mismatch
+ add-1
+ (99,29)->9019: 99 + 29 - 1 = 127 mismatch
+ sub+1
+ (19,43)->5903: 19 - 43 + 1 = -23 mismatch
+ sub-1
+ (99,29)->9019: 99 - 29 - 1 = 69 mismatch
+ integer division (a/b)
+ (19,43)->5903: 19 / 43 = 0 mismatch
+ reverse division (b/a)
+ (99,29)->9019: 29 / 99 = 0 mismatch
+ reverse modulo (b mod a)
+ (19,43)->5903: 43 mod 19 = 5 mismatch
+ digit absolute diff
+ (99,29)->9019: |9-2| || |9-9| = 70 mismatch
+ digit add mod10
+ (19,43)->5903: (1+4)%10 || (9+3)%10 = 52 mismatch
+ digit sub mod10
+ (99,29)->9019: (9-2)%10 || (9-9)%10 = 70 mismatch
+ cross multiply
+ (19,43)->5903: 1*4 + 9*3 = 4 + 27 = 31 mismatch
+ cross multiply rev
+ (99,29)->9019: 9*9 + 9*2 = 81 + 18 = 99 mismatch
+ digit multiply
+ (19,43)->5903: 1*4 || 9*3 = 4 || 27 = 427 mismatch
+ digit multiply rev
+ (99,29)->9019: 9*9 || 9*2 = 81 || 18 = 8118 mismatch
+ digit sum diff
+ (19,43)->5903: (1+9) - (4+3) = 3 mismatch
+ digit sum sum
+ (99,29)->9019: (9+9) + (2+9) = 29 mismatch
+ digit product diff
+ (19,43)->5903: 1*9 - 4*3 = 9 - 12 = -3 mismatch
+ digit product sum
+ (99,29)->9019: 9*9 + 2*9 = 81 + 18 = 99 mismatch
+ determinant
+ (19,43)->5903: 1*3 - 9*4 = 3 - 36 = -33 mismatch
+ abs determinant
+ (99,29)->9019: |9*9 - 9*2| = |81 - 18| = 63 mismatch
+
+correct, actions: reversed operands, reversed result, multiply+1
+
+Applying to 69*31:
+ We recall that the question operator is found in the examples.
+ reversed operands [69->96, 31->13] and reversed result
+ multiply+1
+ (96,13): (90 + 6) * 13 + 1 = 90 * 13 + 6 * 13 + 1 = 1170 + 78 + 1 = 1248 + 1 = 1249 rev-> 9421
+ Result is non-negative
+ \boxed{9421}

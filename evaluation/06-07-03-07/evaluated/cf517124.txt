@@ -1,0 +1,176 @@
+44^31 = 75
+95"96 = 01
+45^88 = 241
+
+The inputs are 44, 31, 95, 96, 45, 88
+
+The outputs are 75, 01, 241
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+44^31 -> ^
+95"96 -> "
+45^88 -> ^
+
+The operators
+^
+"
+
+Looking at the question
+03^21 -> ^
+The question operator is found in the examples.
+
+Looking at operator ^ [44^31 = 75, 45^88 = 241]:
+
+Trying common operations reversed operands [44->44 31->13, 45->54 88->88] and reversed result [expected (44,13)->75, (54,88)->241]:
+ addition
+ (44,13)->75: 44 + 13 = 57 rev-> 75 match
+ (54,88)->241: 54 + 88 = 142 rev-> 241 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (54,88)->241: (50 + 4) * 88 = 50 * 88 + 4 * 88 = 4400 + 352 = 4752 rev-> 2574 mismatch
+ concatenation
+ (44,13)->75: 44 || 13 = 4413 rev-> 3144 mismatch
+ reverse concatenation
+ (54,88)->241: 88 || 54 = 8854 rev-> 4588 mismatch
+
+Trying common operations on identity [44 31, 45 88] [expected (44,31)->75, (45,88)->241]:
+ addition
+ (44,31)->75: 44 + 31 = 75 match
+ (45,88)->241: 45 + 88 = 133 mismatch
+ multiplication
+ (45,88)->241: (40 + 5) * 88 = 40 * 88 + 5 * 88 = 3520 + 440 = 3960 mismatch
+ concatenation
+ (44,31)->75: 44 || 31 = 4431 mismatch
+ reverse concatenation
+ (45,88)->241: 88 || 45 = 8845 mismatch
+
+Trying difference operations reversed operands [44->44 31->13, 45->54 88->88] and reversed result [expected (44,13)->75, (54,88)->241]:
+ subtraction (a-b)
+ (44,13)->75: 44 - 13 = 31 rev-> 13 mismatch
+ absolute difference
+ (54,88)->241: |54 - 88| = 34 rev-> 43 mismatch
+ max mod min
+ (44,13)->75: max(44,13) mod min(44,13) = 44 mod 13 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (54,88)->241: -|54 - 88| = -34 rev-> -43 mismatch
+ reverse subtraction (b-a)
+ (44,13)->75: 13 - 44 = -31 rev-> -13 mismatch
+ modulo (a mod b)
+ (54,88)->241: 54 mod 88 = 54 rev-> 45 mismatch
+
+Trying difference operations on identity [44 31, 45 88] [expected (44,31)->75, (45,88)->241]:
+ subtraction (a-b)
+ (44,31)->75: 44 - 31 = 13 mismatch
+ absolute difference
+ (45,88)->241: |45 - 88| = 43 mismatch
+ max mod min
+ (44,31)->75: max(44,31) mod min(44,31) = 44 mod 31 = 13 mismatch
+ negated absolute difference
+ (45,88)->241: -|45 - 88| = -43 mismatch
+ reverse subtraction (b-a)
+ (44,31)->75: 31 - 44 = -13 mismatch
+ modulo (a mod b)
+ (45,88)->241: 45 mod 88 = 45 mismatch
+
+Trying rare operations reversed operands [44->44 31->13, 45->54 88->88] and reversed result [expected (44,13)->75, (54,88)->241]:
+ multiply+1
+ (44,13)->75: (40 + 4) * 13 + 1 = 40 * 13 + 4 * 13 + 1 = 520 + 52 + 1 = 572 + 1 = 573 rev-> 375 mismatch
+ multiply-1
+ (54,88)->241: (50 + 4) * 88 - 1 = 50 * 88 + 4 * 88 - 1 = 4400 + 352 - 1 = 4752 - 1 = 4751 rev-> 1574 mismatch
+ add+1
+ (44,13)->75: 44 + 13 + 1 = 58 rev-> 85 mismatch
+ add-1
+ (54,88)->241: 54 + 88 - 1 = 141 rev-> 141 mismatch
+ sub+1
+ (44,13)->75: 44 - 13 + 1 = 32 rev-> 23 mismatch
+ sub-1
+ (54,88)->241: 54 - 88 - 1 = -35 rev-> -53 mismatch
+ integer division (a/b)
+ (44,13)->75: 44 / 13 = 3 rev-> 3 mismatch
+ reverse division (b/a)
+ (54,88)->241: 88 / 54 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (44,13)->75: 13 mod 44 = 13 rev-> 31 mismatch
+ digit absolute diff
+ (54,88)->241: |5-8| || |4-8| = 34 rev-> 43 mismatch
+ digit add mod10
+ (44,13)->75: (4+1)%10 || (4+3)%10 = 57 rev-> 75 match
+ (54,88)->241: (5+8)%10 || (4+8)%10 = 32 rev-> 23 mismatch
+ digit sub mod10
+ (54,88)->241: (5-8)%10 || (4-8)%10 = 76 rev-> 67 mismatch
+ cross multiply
+ (44,13)->75: 4*1 + 4*3 = 4 + 12 = 16 rev-> 61 mismatch
+ cross multiply rev
+ (54,88)->241: 5*8 + 4*8 = 40 + 32 = 72 rev-> 27 mismatch
+ digit multiply
+ (44,13)->75: 4*1 || 4*3 = 4 || 12 = 412 rev-> 214 mismatch
+ digit multiply rev
+ (54,88)->241: 5*8 || 4*8 = 40 || 32 = 4032 rev-> 2304 mismatch
+ digit sum diff
+ (44,13)->75: (4+4) - (1+3) = 4 rev-> 4 mismatch
+ digit sum sum
+ (54,88)->241: (5+4) + (8+8) = 25 rev-> 52 mismatch
+ digit product diff
+ (44,13)->75: 4*4 - 1*3 = 16 - 3 = 13 rev-> 31 mismatch
+ digit product sum
+ (54,88)->241: 5*4 + 8*8 = 20 + 64 = 84 rev-> 48 mismatch
+ determinant
+ (44,13)->75: 4*3 - 4*1 = 12 - 4 = 8 rev-> 8 mismatch
+ abs determinant
+ (54,88)->241: |5*8 - 4*8| = |40 - 32| = 8 rev-> 8 mismatch
+
+Trying rare operations on identity [44 31, 45 88] [expected (44,31)->75, (45,88)->241]:
+ multiply+1
+ (44,31)->75: (40 + 4) * 31 + 1 = 40 * 31 + 4 * 31 + 1 = 1240 + 124 + 1 = 1364 + 1 = 1365 mismatch
+ multiply-1
+ (45,88)->241: (40 + 5) * 88 - 1 = 40 * 88 + 5 * 88 - 1 = 3520 + 440 - 1 = 3960 - 1 = 3959 mismatch
+ add+1
+ (44,31)->75: 44 + 31 + 1 = 76 mismatch
+ add-1
+ (45,88)->241: 45 + 88 - 1 = 132 mismatch
+ sub+1
+ (44,31)->75: 44 - 31 + 1 = 14 mismatch
+ sub-1
+ (45,88)->241: 45 - 88 - 1 = -44 mismatch
+ integer division (a/b)
+ (44,31)->75: 44 / 31 = 1 mismatch
+ reverse division (b/a)
+ (45,88)->241: 88 / 45 = 1 mismatch
+ reverse modulo (b mod a)
+ (44,31)->75: 31 mod 44 = 31 mismatch
+ digit absolute diff
+ (45,88)->241: |4-8| || |5-8| = 43 mismatch
+ digit add mod10
+ (44,31)->75: (4+3)%10 || (4+1)%10 = 75 match
+ (45,88)->241: (4+8)%10 || (5+8)%10 = 23 mismatch
+ digit sub mod10
+ (45,88)->241: (4-8)%10 || (5-8)%10 = 67 mismatch
+ cross multiply
+ (44,31)->75: 4*3 + 4*1 = 12 + 4 = 16 mismatch
+ cross multiply rev
+ (45,88)->241: 4*8 + 5*8 = 32 + 40 = 72 mismatch
+ digit multiply
+ (44,31)->75: 4*3 || 4*1 = 12 || 4 = 124 mismatch
+ digit multiply rev
+ (45,88)->241: 4*8 || 5*8 = 32 || 40 = 3240 mismatch
+ digit sum diff
+ (44,31)->75: (4+4) - (3+1) = 4 mismatch
+ digit sum sum
+ (45,88)->241: (4+5) + (8+8) = 25 mismatch
+ digit product diff
+ (44,31)->75: 4*4 - 3*1 = 16 - 3 = 13 mismatch
+ digit product sum
+ (45,88)->241: 4*5 + 8*8 = 20 + 64 = 84 mismatch
+ determinant
+ (44,31)->75: 4*1 - 4*3 = 4 - 12 = -8 mismatch
+ abs determinant
+ (45,88)->241: |4*8 - 5*8| = |32 - 40| = 8 mismatch
+
+Applying to 03^21:
+ We recall that the question operator is found in the examples.
+ reversed operands [03->30, 21->12] and reversed result
+ addition (30,12): 30 + 12 = 42 rev-> 24
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{24}

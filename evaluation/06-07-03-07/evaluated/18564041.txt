@@ -1,0 +1,593 @@
+Output bit columns with bitsum
+0 0000000 a
+1 0000000 a
+2 0000000 a
+3 0010100 2
+4 0010101 3
+5 1010101 4
+6 0001010 2
+7 0000010 1
+
+Inverted
+0 1111111 a
+1 1111111 a
+2 1111111 a
+3 1101011 5
+4 1101010 4
+5 0101010 3
+6 1110101 5
+7 1111101 6
+
+Matching
+0 0000000 a match 0 1 2
+1 0000000 a match 0 1 2
+2 0000000 a match 0 1 2
+3 0010100 2 match 3
+4 0010101 3 match 4
+5 1010101 4 match 5
+6 0001010 2 match 6
+7 0000010 1 match 7
+
+Inverted matching
+0 1111111 a match 0n 1n 2n
+1 1111111 a match 0n 1n 2n
+2 1111111 a match 0n 1n 2n
+3 1101011 5 match 3n
+4 1101010 4 match 4n
+5 0101010 3 match 5n
+6 1110101 5 match 6n
+7 1111101 6 match 7n
+
+Identity
+0 0010101 3 match 4
+1 1110101 5 match 6n
+2 1011111 6
+3 0001010 2 match 6
+4 1110110 5
+5 1000111 4
+6 1101000 3
+7 1111100 5
+
+Left
+none
+
+Right
+none
+
+Best Left: none
+Best Right: none
+
+Constant
+0 0000000 a match 0 1 2
+1 1111111 a
+
+Left
+0-0 0-1 0-2 0-absence
+
+Right
+none
+
+Best Left: C0 0 0: 3
+Best Right: none
+
+AND
+01 0010101 3 match 4
+12 1010101 4 match 5
+23 0001010 2 match 6
+34 0000010 1 match 7
+45 1000110 3
+56 1000000 1
+67 1101000 3
+70 0010100 2 match 3
+
+Left
+none
+
+Right
+34-7 23-6 12-5 01-4 70-3 67-absence
+
+02 0010101 3 match 4
+13 0000000 a match 0 1 2
+24 1010110 4
+35 0000010 1 match 7
+46 1100000 2
+57 1000100 2
+60 0000000 a match 0 1 2
+71 1110100 4
+
+Left
+60-0 71-absence
+13-0 24-absence
+
+Right
+35-7 24-absence
+
+03 0000000 a match 0 1 2
+14 1110100 4
+25 1000111 4
+36 0001000 1
+47 1110100 4
+50 0000101 2
+61 1100000 2
+72 1011100 4
+
+Left
+03-0 14-absence
+
+Right
+none
+
+04 0010100 2 match 3
+15 1000101 3
+26 1001000 2
+37 0001000 1
+40 0010100 2 match 3
+51 1000101 3
+62 1001000 2
+73 0001000 1
+
+Left
+none
+
+Right
+none
+
+Best Left: AND60: 1
+Best Right: AND34 23 12 01 70: 5
+
+OR
+01 1110101 5 match 6n
+12 1111111 a match 0n 1n 2n
+23 1011111 6
+34 1111110 6
+45 1110111 6
+56 1101111 6
+67 1111100 5
+70 1111101 6 match 7n
+
+Left
+12-0 23-absence
+
+Right
+70-7 67-absence
+
+02 1011111 6
+13 1111111 a match 0n 1n 2n
+24 1111111 a match 0n 1n 2n
+35 1001111 5
+46 1111110 6
+57 1111111 a match 0n 1n 2n
+60 1111101 6 match 7n
+71 1111101 6 match 7n
+
+Left
+57-0 60-absence
+24-0 35-absence
+13-0 24-1 35-absence
+
+Right
+60-7 57-absence
+71-7 60-absence
+
+03 0011111 5
+14 1110111 6
+25 1011111 6
+36 1101010 4 match 4n
+47 1111110 6
+50 1010111 5
+61 1111101 6 match 7n
+72 1111111 a match 0n 1n 2n
+
+Left
+72-0 03-absence
+
+Right
+61-7 50-absence
+
+04 1110111 6
+15 1110111 6
+26 1111111 a match 0n 1n 2n
+37 1111110 6
+40 1110111 6
+51 1110111 6
+62 1111111 a match 0n 1n 2n
+73 1111110 6
+
+Left
+62-0 73-absence
+26-0 37-absence
+
+Right
+none
+
+Best Left: NOR13 24: 2
+Best Right: NOR70: 1
+
+XOR
+01 1100000 2
+12 0101010 3 match 5n
+23 1010101 4 match 5
+34 1111100 5
+45 0110001 3
+56 0101111 5
+67 0010100 2 match 3
+70 1101001 4
+
+Left
+none
+
+Right
+none
+
+02 1001010 3
+13 1111111 a match 0n 1n 2n
+24 0101001 3
+35 1001101 4
+46 0011110 4
+57 0111011 5
+60 1111101 6 match 7n
+71 0001001 2
+
+Left
+13-0 24-absence
+
+Right
+60-7 57-absence
+
+03 0011111 5
+14 0000011 2
+25 0011000 2
+36 1100010 3
+47 0001010 2 match 6
+50 1010010 3
+61 0011101 4
+72 0100011 3
+
+Left
+none
+
+Right
+none
+
+04 1100011 4
+15 0110010 3
+26 0110111 5
+37 1110110 5
+40 1100011 4
+51 0110010 3
+62 0110111 5
+73 1110110 5
+
+Left
+none
+
+Right
+none
+
+Best Left: XNOR13: 1
+Best Right: XNOR60: 1
+
+AND-NOT
+01 0000000 a match 0 1 2
+12 0100000 1
+23 1010101 4 match 5
+34 0001000 1
+45 0110000 2
+56 0000111 3
+67 0000000 a match 0 1 2
+70 1101000 3
+
+Left
+67-0 70-absence
+01-0 12-absence
+
+Right
+none
+
+02 0000000 a match 0 1 2
+13 1110101 5
+24 0001001 2
+35 0001000 1
+46 0010110 3
+57 0000011 2
+60 1101000 3
+71 0001000 1
+
+Left
+02-0 13-absence
+
+Right
+none
+
+03 0010101 3 match 4
+14 0000001 1
+25 0011000 2
+36 0000010 1 match 7
+47 0000010 1 match 7
+50 1000010 2
+61 0001000 1
+72 0100000 1
+
+Left
+none
+
+Right
+36-7 25-absence
+47-7 36-absence
+
+04 0000001 1
+15 0110000 2
+26 0010111 4
+37 0000010 1 match 7
+40 1100010 3
+51 0000010 1 match 7
+62 0100000 1
+73 1110100 4
+
+Left
+none
+
+Right
+37-7 26-absence
+51-7 40-absence
+
+05 0010000 1
+16 0010101 3 match 4
+27 0000011 2
+30 0001010 2 match 6
+41 0000010 1 match 7
+52 0000000 a match 0 1 2
+63 1100000 2
+74 0001000 1
+
+Left
+52-0 63-absence
+
+Right
+41-7 30-6 27-absence
+
+06 0010101 3 match 4
+17 0000001 1
+20 1001010 3
+31 0001010 2 match 6
+42 0100000 1
+53 1000101 3
+64 0001000 1
+75 0111000 3
+
+Left
+none
+
+Right
+none
+
+07 0000001 1
+10 1100000 2
+21 0001010 2 match 6
+32 0000000 a match 0 1 2
+43 1110100 4
+54 0000001 1
+65 0101000 2
+76 0010100 2 match 3
+
+Left
+32-0 43-absence
+
+Right
+none
+
+Best Left: AND-NOT67: 1
+Best Right: AND-NOT41 30: 2
+
+OR-NOT
+01 0011111 5
+12 1110101 5
+23 1111111 a
+34 0001011 3
+45 1111110 6
+56 1010111 5
+67 1101011 5
+70 1111110 6
+
+Left
+none
+
+Right
+none
+
+02 0110101 4
+13 1110101 5
+24 1011111 6
+35 0111010 4
+46 1110111 6
+57 1000111 4
+60 1101010 4
+71 1111110 6
+
+Left
+none
+
+Right
+none
+
+03 1110101 5
+14 1111101 6
+25 1111111 a
+36 0011111 5
+47 1110111 6
+50 1101111 6
+61 1101010 4
+72 1111100 5
+
+Left
+none
+
+Right
+none
+
+04 0011101 4
+15 1111101 6
+26 1011111 6
+37 0001011 3
+40 1111110 6
+51 1001111 5
+62 1101000 3
+73 1111101 6
+
+Left
+none
+
+Right
+none
+
+05 0111101 5
+16 1110111 6
+27 1011111 6
+30 1101010 4
+41 1111110 6
+52 1100111 5
+63 1111101 6
+74 1111101 6
+
+Left
+none
+
+Right
+none
+
+06 0010111 4
+17 1110111 6
+20 1111111 a
+31 0001010 2 match 6
+42 1110110 5
+53 1110111 6
+64 1101001 4
+75 1111100 5
+
+Left
+none
+
+Right
+none
+
+07 0010111 4
+10 1111111 a
+21 1011111 6
+32 0101010 3
+43 1110111 6
+54 1001111 5
+65 1111000 4
+76 1111111 a
+
+Left
+none
+
+Right
+none
+
+Best Left: none
+Best Right: none
+
+Selecting
+
+Lefts
+Identity none
+Constant C0 0 0: 3
+AND AND60: 1
+OR NOR13 24: 2
+XOR XNOR13: 1
+AND-NOT AND-NOT67: 1
+OR-NOT none
+
+Rights
+Identity none
+Constant none
+AND AND34 23 12 01 70: 5
+OR NOR70: 1
+XOR XNOR60: 1
+AND-NOT AND-NOT41 30: 2
+OR-NOT none
+
+Left longest: 3
+Right longest: 5
+
+Right winner: Identity no, Constant no, AND yes, OR no, XOR no, AND-NOT no, OR-NOT no
+Left winner: Identity no, Constant yes, AND no, OR no, XOR no, AND-NOT no, OR-NOT no
+
+Best right: AND34 23 12 01 70: 5
+Best left: C0 0 0: 3
+
+Truncated right: AND34 23 12 01 70: 5
+Truncated left: C0 0 0: 3
+
+Tentative from right
+7 AND34
+6 AND23
+5 AND12
+4 AND01
+3 AND70
+2 pending
+1 pending
+0 pending
+
+Tentative
+0 C0
+1 C0
+2 C0
+3 AND70
+4 AND01
+5 AND12
+6 AND23
+7 AND34
+
+Preferred from right
+7 AND34
+6 AND23
+5 AND12
+4 AND01
+3 AND70
+2 C0
+1 C0
+0 C0
+
+Preferred from left
+0 C0
+1 C0
+2 C0
+3 AND70
+4 AND01
+5 AND12
+6 AND23
+7 AND34
+
+Matched
+0 C0
+1 C0
+2 C0
+3 AND70
+4 AND01
+5 AND12
+6 AND23
+7 AND34
+
+Applying to 00000010
+Input
+0 0
+1 0
+2 0
+3 0
+4 0
+5 0
+6 1
+7 0
+Output
+0 C0 = 0
+1 C0 = 0
+2 C0 = 0
+3 AND70 = AND(0,0) = 0
+4 AND01 = AND(0,0) = 0
+5 AND12 = AND(0,0) = 0
+6 AND23 = AND(0,0) = 0
+7 AND34 = AND(0,0) = 0
+
+\boxed{00000000}

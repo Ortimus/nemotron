@@ -1,0 +1,180 @@
+72^14 = 41
+63^22 = 41
+68^34 = 34
+
+The inputs are 72, 14, 63, 22, 68, 34
+
+The outputs are 41, 41, 34
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+72^14 -> ^
+63^22 -> ^
+68^34 -> ^
+
+The operators
+^
+
+Looking at the question
+49^76 -> ^
+The question operator is found in the examples.
+
+Looking at operator ^ [72^14 = 41, 63^22 = 41, 68^34 = 34]:
+
+Trying common operations reversed operands [72->27 14->41, 63->36 22->22, 68->86 34->43] and reversed result [expected (27,41)->41, (36,22)->41, (86,43)->34]:
+ addition
+ (27,41)->41: 27 + 41 = 68 rev-> 86 mismatch
+ multiplication
+ (36,22)->41: (30 + 6) * 22 = 30 * 22 + 6 * 22 = 660 + 132 = 792 rev-> 297 mismatch
+ concatenation
+ (86,43)->34: 86 || 43 = 8643 rev-> 3468 mismatch
+ reverse concatenation
+ (27,41)->41: 41 || 27 = 4127 rev-> 7214 mismatch
+
+Trying common operations on identity [72 14, 63 22, 68 34] [expected (72,14)->41, (63,22)->41, (68,34)->34]:
+ addition
+ (72,14)->41: 72 + 14 = 86 mismatch
+ multiplication
+ (63,22)->41: (60 + 3) * 22 = 60 * 22 + 3 * 22 = 1320 + 66 = 1386 mismatch
+ concatenation
+ (68,34)->34: 68 || 34 = 6834 mismatch
+ reverse concatenation
+ (72,14)->41: 14 || 72 = 1472 mismatch
+
+Trying difference operations reversed operands [72->27 14->41, 63->36 22->22, 68->86 34->43] and reversed result [expected (27,41)->41, (36,22)->41, (86,43)->34]:
+ subtraction (a-b)
+ (27,41)->41: 27 - 41 = -14 rev-> -41 mismatch
+ absolute difference
+ (36,22)->41: |36 - 22| = 14 rev-> 41 match
+ (86,43)->34: |86 - 43| = 43 rev-> 34 match
+ (27,41)->41: |27 - 41| = 14 rev-> 41 match
+ correct, actions: reversed operands, reversed result, absolute difference
+ max mod min
+ (86,43)->34: max(86,43) mod min(86,43) = 86 mod 43 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (27,41)->41: -|27 - 41| = -14 rev-> -41 mismatch
+ reverse subtraction (b-a)
+ (36,22)->41: 22 - 36 = -14 rev-> -41 mismatch
+ modulo (a mod b)
+ (86,43)->34: 86 mod 43 = 0 rev-> 0 mismatch
+
+Trying difference operations on identity [72 14, 63 22, 68 34] [expected (72,14)->41, (63,22)->41, (68,34)->34]:
+ subtraction (a-b)
+ (72,14)->41: 72 - 14 = 58 mismatch
+ absolute difference
+ (63,22)->41: |63 - 22| = 41 match
+ (68,34)->34: |68 - 34| = 34 match
+ (72,14)->41: |72 - 14| = 58 mismatch
+ max mod min
+ (68,34)->34: max(68,34) mod min(68,34) = 68 mod 34 = 0 mismatch
+ negated absolute difference
+ (72,14)->41: -|72 - 14| = -58 mismatch
+ reverse subtraction (b-a)
+ (63,22)->41: 22 - 63 = -41 mismatch
+ modulo (a mod b)
+ (68,34)->34: 68 mod 34 = 0 mismatch
+
+Trying rare operations reversed operands [72->27 14->41, 63->36 22->22, 68->86 34->43] and reversed result [expected (27,41)->41, (36,22)->41, (86,43)->34]:
+ multiply+1
+ (27,41)->41: (20 + 7) * 41 + 1 = 20 * 41 + 7 * 41 + 1 = 820 + 287 + 1 = 1107 + 1 = 1108 rev-> 8011 mismatch
+ multiply-1
+ (36,22)->41: (30 + 6) * 22 - 1 = 30 * 22 + 6 * 22 - 1 = 660 + 132 - 1 = 792 - 1 = 791 rev-> 197 mismatch
+ add+1
+ (86,43)->34: 86 + 43 + 1 = 130 rev-> 031 mismatch
+ add-1
+ (27,41)->41: 27 + 41 - 1 = 67 rev-> 76 mismatch
+ sub+1
+ (36,22)->41: 36 - 22 + 1 = 15 rev-> 51 mismatch
+ sub-1
+ (86,43)->34: 86 - 43 - 1 = 42 rev-> 24 mismatch
+ integer division (a/b)
+ (27,41)->41: 27 / 41 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (36,22)->41: 22 / 36 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (86,43)->34: 43 mod 86 = 43 rev-> 34 match
+ (27,41)->41: 41 mod 27 = 14 rev-> 41 match
+ (36,22)->41: 22 mod 36 = 22 rev-> 22 mismatch
+ digit absolute diff
+ (27,41)->41: |2-4| || |7-1| = 26 rev-> 62 mismatch
+ digit add mod10
+ (36,22)->41: (3+2)%10 || (6+2)%10 = 58 rev-> 85 mismatch
+ digit sub mod10
+ (86,43)->34: (8-4)%10 || (6-3)%10 = 43 rev-> 34 match
+ (27,41)->41: (2-4)%10 || (7-1)%10 = 86 rev-> 68 mismatch
+ cross multiply
+ (27,41)->41: 2*4 + 7*1 = 8 + 7 = 15 rev-> 51 mismatch
+ cross multiply rev
+ (36,22)->41: 3*2 + 6*2 = 6 + 12 = 18 rev-> 81 mismatch
+ digit multiply
+ (86,43)->34: 8*4 || 6*3 = 32 || 18 = 3218 rev-> 8123 mismatch
+ digit multiply rev
+ (27,41)->41: 2*1 || 7*4 = 2 || 28 = 228 rev-> 822 mismatch
+ digit sum diff
+ (36,22)->41: (3+6) - (2+2) = 5 rev-> 5 mismatch
+ digit sum sum
+ (86,43)->34: (8+6) + (4+3) = 21 rev-> 12 mismatch
+ digit product diff
+ (27,41)->41: 2*7 - 4*1 = 14 - 4 = 10 rev-> 01 mismatch
+ digit product sum
+ (36,22)->41: 3*6 + 2*2 = 18 + 4 = 22 rev-> 22 mismatch
+ determinant
+ (86,43)->34: 8*3 - 6*4 = 24 - 24 = 0 rev-> 0 mismatch
+ abs determinant
+ (27,41)->41: |2*1 - 7*4| = |2 - 28| = 26 rev-> 62 mismatch
+
+Trying rare operations on identity [72 14, 63 22, 68 34] [expected (72,14)->41, (63,22)->41, (68,34)->34]:
+ multiply+1
+ (72,14)->41: (70 + 2) * 14 + 1 = 70 * 14 + 2 * 14 + 1 = 980 + 28 + 1 = 1008 + 1 = 1009 mismatch
+ multiply-1
+ (63,22)->41: (60 + 3) * 22 - 1 = 60 * 22 + 3 * 22 - 1 = 1320 + 66 - 1 = 1386 - 1 = 1385 mismatch
+ add+1
+ (68,34)->34: 68 + 34 + 1 = 103 mismatch
+ add-1
+ (72,14)->41: 72 + 14 - 1 = 85 mismatch
+ sub+1
+ (63,22)->41: 63 - 22 + 1 = 42 mismatch
+ sub-1
+ (68,34)->34: 68 - 34 - 1 = 33 mismatch
+ integer division (a/b)
+ (72,14)->41: 72 / 14 = 5 mismatch
+ reverse division (b/a)
+ (63,22)->41: 22 / 63 = 0 mismatch
+ reverse modulo (b mod a)
+ (68,34)->34: 34 mod 68 = 34 match
+ (72,14)->41: 14 mod 72 = 14 mismatch
+ digit absolute diff
+ (72,14)->41: |7-1| || |2-4| = 62 mismatch
+ digit add mod10
+ (63,22)->41: (6+2)%10 || (3+2)%10 = 85 mismatch
+ digit sub mod10
+ (68,34)->34: (6-3)%10 || (8-4)%10 = 34 match
+ (72,14)->41: (7-1)%10 || (2-4)%10 = 68 mismatch
+ cross multiply
+ (72,14)->41: 7*1 + 2*4 = 7 + 8 = 15 mismatch
+ cross multiply rev
+ (63,22)->41: 6*2 + 3*2 = 12 + 6 = 18 mismatch
+ digit multiply
+ (68,34)->34: 6*3 || 8*4 = 18 || 32 = 1832 mismatch
+ digit multiply rev
+ (72,14)->41: 7*4 || 2*1 = 28 || 2 = 282 mismatch
+ digit sum diff
+ (63,22)->41: (6+3) - (2+2) = 5 mismatch
+ digit sum sum
+ (68,34)->34: (6+8) + (3+4) = 21 mismatch
+ digit product diff
+ (72,14)->41: 7*2 - 1*4 = 14 - 4 = 10 mismatch
+ digit product sum
+ (63,22)->41: 6*3 + 2*2 = 18 + 4 = 22 mismatch
+ determinant
+ (68,34)->34: 6*4 - 8*3 = 24 - 24 = 0 mismatch
+ abs determinant
+ (72,14)->41: |7*4 - 2*1| = |28 - 2| = 26 mismatch
+
+Applying to 49^76:
+ We recall that the question operator is found in the examples.
+ reversed operands [49->94, 76->67] and reversed result
+ absolute difference (94,67): |94 - 67| = 27 rev-> 72
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{72}

@@ -1,0 +1,182 @@
+58*91 = 6161
+52+78 = 311
+95*65 = 5033
+56-97 = -41
+32*14 = 449
+
+The inputs are 58, 91, 52, 78, 95, 65, 56, 97, 32, 14
+
+The outputs are 6161, 311, 5033, -41, 449
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 6161, 311, 5033, -41, 449
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+58*91 -> *
+52+78 -> +
+95*65 -> *
+56-97 -> -
+32*14 -> *
+
+The operators
+*
++
+-
+
+Looking at the question
+71-86 -> -
+The question operator is found in the examples.
+
+Looking at operator - [56-97 = -41]:
+
+Trying common operations reversed operands [56->65 97->79] and reversed result [expected (65,79)->-41]:
+ addition
+ (65,79)->-41: 65 + 79 = 144 rev-> 441 mismatch
+ multiplication
+ (65,79)->-41: (60 + 5) * 79 = 60 * 79 + 5 * 79 = 4740 + 395 = 5135 rev-> 5315 mismatch
+ concatenation
+ (65,79)->-41: 65 || 79 = 6579 rev-> 9756 mismatch
+ reverse concatenation
+ (65,79)->-41: 79 || 65 = 7965 rev-> 5697 mismatch
+
+Trying common operations on identity [56 97] [expected (56,97)->-41]:
+ addition
+ (56,97)->-41: 56 + 97 = 153 mismatch
+ multiplication
+ (56,97)->-41: (50 + 6) * 97 = 50 * 97 + 6 * 97 = 4850 + 582 = 5432 mismatch
+ concatenation
+ (56,97)->-41: 56 || 97 = 5697 mismatch
+ reverse concatenation
+ (56,97)->-41: 97 || 56 = 9756 mismatch
+
+Trying difference operations reversed operands [56->65 97->79] and reversed result [expected (65,79)->-41]:
+ subtraction (a-b)
+ (65,79)->-41: 65 - 79 = -14 rev-> -41 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (65,79)->-41: |65 - 79| = 14 rev-> 41 mismatch
+ max mod min
+ (65,79)->-41: max(65,79) mod min(65,79) = 79 mod 65 = 14 rev-> 41 mismatch
+ negated absolute difference
+ (65,79)->-41: -|65 - 79| = -14 rev-> -41 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (65,79)->-41: 79 - 65 = 14 rev-> 41 mismatch
+ modulo (a mod b)
+ (65,79)->-41: 65 mod 79 = 65 rev-> 56 mismatch
+
+Trying difference operations on identity [56 97] [expected (56,97)->-41]:
+ subtraction (a-b)
+ (56,97)->-41: 56 - 97 = -41 match
+ correct, but skipping
+ absolute difference
+ (56,97)->-41: |56 - 97| = 41 mismatch
+ max mod min
+ (56,97)->-41: max(56,97) mod min(56,97) = 97 mod 56 = 41 mismatch
+ negated absolute difference
+ (56,97)->-41: -|56 - 97| = -41 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (56,97)->-41: 97 - 56 = 41 mismatch
+ modulo (a mod b)
+ (56,97)->-41: 56 mod 97 = 56 mismatch
+
+Trying rare operations reversed operands [56->65 97->79] and reversed result [expected (65,79)->-41]:
+ multiply+1
+ (65,79)->-41: (60 + 5) * 79 + 1 = 60 * 79 + 5 * 79 + 1 = 4740 + 395 + 1 = 5135 + 1 = 5136 rev-> 6315 mismatch
+ multiply-1
+ (65,79)->-41: (60 + 5) * 79 - 1 = 60 * 79 + 5 * 79 - 1 = 4740 + 395 - 1 = 5135 - 1 = 5134 rev-> 4315 mismatch
+ add+1
+ (65,79)->-41: 65 + 79 + 1 = 145 rev-> 541 mismatch
+ add-1
+ (65,79)->-41: 65 + 79 - 1 = 143 rev-> 341 mismatch
+ sub+1
+ (65,79)->-41: 65 - 79 + 1 = -13 rev-> -31 mismatch
+ sub-1
+ (65,79)->-41: 65 - 79 - 1 = -15 rev-> -51 mismatch
+ integer division (a/b)
+ (65,79)->-41: 65 / 79 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (65,79)->-41: 79 / 65 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (65,79)->-41: 79 mod 65 = 14 rev-> 41 mismatch
+ digit absolute diff
+ (65,79)->-41: |6-7| || |5-9| = 14 rev-> 41 mismatch
+ digit add mod10
+ (65,79)->-41: (6+7)%10 || (5+9)%10 = 34 rev-> 43 mismatch
+ digit sub mod10
+ (65,79)->-41: (6-7)%10 || (5-9)%10 = 96 rev-> 69 mismatch
+ cross multiply
+ (65,79)->-41: 6*7 + 5*9 = 42 + 45 = 87 rev-> 78 mismatch
+ cross multiply rev
+ (65,79)->-41: 6*9 + 5*7 = 54 + 35 = 89 rev-> 98 mismatch
+ digit multiply
+ (65,79)->-41: 6*7 || 5*9 = 42 || 45 = 4245 rev-> 5424 mismatch
+ digit multiply rev
+ (65,79)->-41: 6*9 || 5*7 = 54 || 35 = 5435 rev-> 5345 mismatch
+ digit sum diff
+ (65,79)->-41: (6+5) - (7+9) = -5 rev-> -5 mismatch
+ digit sum sum
+ (65,79)->-41: (6+5) + (7+9) = 27 rev-> 72 mismatch
+ digit product diff
+ (65,79)->-41: 6*5 - 7*9 = 30 - 63 = -33 rev-> -33 mismatch
+ digit product sum
+ (65,79)->-41: 6*5 + 7*9 = 30 + 63 = 93 rev-> 39 mismatch
+ determinant
+ (65,79)->-41: 6*9 - 5*7 = 54 - 35 = 19 rev-> 91 mismatch
+ abs determinant
+ (65,79)->-41: |6*9 - 5*7| = |54 - 35| = 19 rev-> 91 mismatch
+
+Trying rare operations on identity [56 97] [expected (56,97)->-41]:
+ multiply+1
+ (56,97)->-41: (50 + 6) * 97 + 1 = 50 * 97 + 6 * 97 + 1 = 4850 + 582 + 1 = 5432 + 1 = 5433 mismatch
+ multiply-1
+ (56,97)->-41: (50 + 6) * 97 - 1 = 50 * 97 + 6 * 97 - 1 = 4850 + 582 - 1 = 5432 - 1 = 5431 mismatch
+ add+1
+ (56,97)->-41: 56 + 97 + 1 = 154 mismatch
+ add-1
+ (56,97)->-41: 56 + 97 - 1 = 152 mismatch
+ sub+1
+ (56,97)->-41: 56 - 97 + 1 = -40 mismatch
+ sub-1
+ (56,97)->-41: 56 - 97 - 1 = -42 mismatch
+ integer division (a/b)
+ (56,97)->-41: 56 / 97 = 0 mismatch
+ reverse division (b/a)
+ (56,97)->-41: 97 / 56 = 1 mismatch
+ reverse modulo (b mod a)
+ (56,97)->-41: 97 mod 56 = 41 mismatch
+ digit absolute diff
+ (56,97)->-41: |5-9| || |6-7| = 41 mismatch
+ digit add mod10
+ (56,97)->-41: (5+9)%10 || (6+7)%10 = 43 mismatch
+ digit sub mod10
+ (56,97)->-41: (5-9)%10 || (6-7)%10 = 69 mismatch
+ cross multiply
+ (56,97)->-41: 5*9 + 6*7 = 45 + 42 = 87 mismatch
+ cross multiply rev
+ (56,97)->-41: 5*7 + 6*9 = 35 + 54 = 89 mismatch
+ digit multiply
+ (56,97)->-41: 5*9 || 6*7 = 45 || 42 = 4542 mismatch
+ digit multiply rev
+ (56,97)->-41: 5*7 || 6*9 = 35 || 54 = 3554 mismatch
+ digit sum diff
+ (56,97)->-41: (5+6) - (9+7) = -5 mismatch
+ digit sum sum
+ (56,97)->-41: (5+6) + (9+7) = 27 mismatch
+ digit product diff
+ (56,97)->-41: 5*6 - 9*7 = 30 - 63 = -33 mismatch
+ digit product sum
+ (56,97)->-41: 5*6 + 9*7 = 30 + 63 = 93 mismatch
+ determinant
+ (56,97)->-41: 5*7 - 6*9 = 35 - 54 = -19 mismatch
+ abs determinant
+ (56,97)->-41: |5*7 - 6*9| = |35 - 54| = 19 mismatch
+
+Applying to 71-86:
+ We recall that the question operator is found in the examples.
+ reversed operands [71->17, 86->68] and reversed result
+ subtraction (a-b) (17,68): 17 - 68 = -51 rev-> -15
+ Result is negative - we add back the operator prefix -: -15 -> -15
+
+\boxed{-15}

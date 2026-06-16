@@ -1,0 +1,182 @@
+41*84 = 8441
+45+21 = 66
+95+58 = 441
+21*83 = 8321
+
+The inputs are 41, 84, 45, 21, 95, 58, 21, 83
+
+The outputs are 8441, 66, 441, 8321
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+41*84 -> *
+45+21 -> +
+95+58 -> +
+21*83 -> *
+
+The operators
+*
++
+
+Looking at the question
+31-45 -> -
+The question operator is not found in the examples. Investigating the most common example operator * instead. We will use addition for the question operator.
+
+Looking at operator * [41*84 = 8441, 21*83 = 8321]:
+
+Trying common operations
+ reversed operands [41->14 84->48, 21->12 83->38] and reversed result [expected (14,48)->8441, (12,38)->8321]
+ addition
+ (14,48)->8441: 14 + 48 = 62 rev-> 26 mismatch
+ multiplication
+ (12,38)->8321: (10 + 2) * 38 = 10 * 38 + 2 * 38 = 380 + 76 = 456 rev-> 654 mismatch
+ concatenation
+ (14,48)->8441: 14 || 48 = 1448 rev-> 8441 match
+ (12,38)->8321: 12 || 38 = 1238 rev-> 8321 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (12,38)->8321: 38 || 12 = 3812 rev-> 2183 mismatch
+
+ identity [41 84, 21 83] [expected (41,84)->8441, (21,83)->8321]
+ addition
+ (41,84)->8441: 41 + 84 = 125 mismatch
+ multiplication
+ (21,83)->8321: (20 + 1) * 83 = 20 * 83 + 1 * 83 = 1660 + 83 = 1743 mismatch
+ concatenation
+ (41,84)->8441: 41 || 84 = 4184 mismatch
+ reverse concatenation
+ (21,83)->8321: 83 || 21 = 8321 match
+ (41,84)->8441: 84 || 41 = 8441 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [41->14 84->48, 21->12 83->38] and reversed result [expected (14,48)->8441, (12,38)->8321]
+ subtraction (a-b)
+ (14,48)->8441: 14 - 48 = -34 rev-> -43 mismatch
+ absolute difference
+ (12,38)->8321: |12 - 38| = 26 rev-> 62 mismatch
+ max mod min
+ (14,48)->8441: max(14,48) mod min(14,48) = 48 mod 14 = 6 rev-> 6 mismatch
+ negated absolute difference
+ (12,38)->8321: -|12 - 38| = -26 rev-> -62 mismatch
+ reverse subtraction (b-a)
+ (14,48)->8441: 48 - 14 = 34 rev-> 43 mismatch
+ modulo (a mod b)
+ (12,38)->8321: 12 mod 38 = 12 rev-> 21 mismatch
+
+ identity [41 84, 21 83] [expected (41,84)->8441, (21,83)->8321]
+ subtraction (a-b)
+ (41,84)->8441: 41 - 84 = -43 mismatch
+ absolute difference
+ (21,83)->8321: |21 - 83| = 62 mismatch
+ max mod min
+ (41,84)->8441: max(41,84) mod min(41,84) = 84 mod 41 = 2 mismatch
+ negated absolute difference
+ (21,83)->8321: -|21 - 83| = -62 mismatch
+ reverse subtraction (b-a)
+ (41,84)->8441: 84 - 41 = 43 mismatch
+ modulo (a mod b)
+ (21,83)->8321: 21 mod 83 = 21 mismatch
+
+Trying rare operations
+ reversed operands [41->14 84->48, 21->12 83->38] and reversed result [expected (14,48)->8441, (12,38)->8321]
+ multiply+1
+ (14,48)->8441: (10 + 4) * 48 + 1 = 10 * 48 + 4 * 48 + 1 = 480 + 192 + 1 = 672 + 1 = 673 rev-> 376 mismatch
+ multiply-1
+ (12,38)->8321: (10 + 2) * 38 - 1 = 10 * 38 + 2 * 38 - 1 = 380 + 76 - 1 = 456 - 1 = 455 rev-> 554 mismatch
+ add+1
+ (14,48)->8441: 14 + 48 + 1 = 63 rev-> 36 mismatch
+ add-1
+ (12,38)->8321: 12 + 38 - 1 = 49 rev-> 94 mismatch
+ sub+1
+ (14,48)->8441: 14 - 48 + 1 = -33 rev-> -33 mismatch
+ sub-1
+ (12,38)->8321: 12 - 38 - 1 = -27 rev-> -72 mismatch
+ integer division (a/b)
+ (14,48)->8441: 14 / 48 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (12,38)->8321: 38 / 12 = 3 rev-> 3 mismatch
+ reverse modulo (b mod a)
+ (14,48)->8441: 48 mod 14 = 6 rev-> 6 mismatch
+ digit absolute diff
+ (12,38)->8321: |1-3| || |2-8| = 26 rev-> 62 mismatch
+ digit add mod10
+ (14,48)->8441: (1+4)%10 || (4+8)%10 = 52 rev-> 25 mismatch
+ digit sub mod10
+ (12,38)->8321: (1-3)%10 || (2-8)%10 = 84 rev-> 48 mismatch
+ cross multiply
+ (14,48)->8441: 1*4 + 4*8 = 4 + 32 = 36 rev-> 63 mismatch
+ cross multiply rev
+ (12,38)->8321: 1*8 + 2*3 = 8 + 6 = 14 rev-> 41 mismatch
+ digit multiply
+ (14,48)->8441: 1*4 || 4*8 = 4 || 32 = 432 rev-> 234 mismatch
+ digit multiply rev
+ (12,38)->8321: 1*8 || 2*3 = 8 || 6 = 86 rev-> 68 mismatch
+ digit sum diff
+ (14,48)->8441: (1+4) - (4+8) = -7 rev-> -7 mismatch
+ digit sum sum
+ (12,38)->8321: (1+2) + (3+8) = 14 rev-> 41 mismatch
+ digit product diff
+ (14,48)->8441: 1*4 - 4*8 = 4 - 32 = -28 rev-> -82 mismatch
+ digit product sum
+ (12,38)->8321: 1*2 + 3*8 = 2 + 24 = 26 rev-> 62 mismatch
+ determinant
+ (14,48)->8441: 1*8 - 4*4 = 8 - 16 = -8 rev-> -8 mismatch
+ abs determinant
+ (12,38)->8321: |1*8 - 2*3| = |8 - 6| = 2 rev-> 2 mismatch
+
+ identity [41 84, 21 83] [expected (41,84)->8441, (21,83)->8321]
+ multiply+1
+ (41,84)->8441: (40 + 1) * 84 + 1 = 40 * 84 + 1 * 84 + 1 = 3360 + 84 + 1 = 3444 + 1 = 3445 mismatch
+ multiply-1
+ (21,83)->8321: (20 + 1) * 83 - 1 = 20 * 83 + 1 * 83 - 1 = 1660 + 83 - 1 = 1743 - 1 = 1742 mismatch
+ add+1
+ (41,84)->8441: 41 + 84 + 1 = 126 mismatch
+ add-1
+ (21,83)->8321: 21 + 83 - 1 = 103 mismatch
+ sub+1
+ (41,84)->8441: 41 - 84 + 1 = -42 mismatch
+ sub-1
+ (21,83)->8321: 21 - 83 - 1 = -63 mismatch
+ integer division (a/b)
+ (41,84)->8441: 41 / 84 = 0 mismatch
+ reverse division (b/a)
+ (21,83)->8321: 83 / 21 = 3 mismatch
+ reverse modulo (b mod a)
+ (41,84)->8441: 84 mod 41 = 2 mismatch
+ digit absolute diff
+ (21,83)->8321: |2-8| || |1-3| = 62 mismatch
+ digit add mod10
+ (41,84)->8441: (4+8)%10 || (1+4)%10 = 25 mismatch
+ digit sub mod10
+ (21,83)->8321: (2-8)%10 || (1-3)%10 = 48 mismatch
+ cross multiply
+ (41,84)->8441: 4*8 + 1*4 = 32 + 4 = 36 mismatch
+ cross multiply rev
+ (21,83)->8321: 2*3 + 1*8 = 6 + 8 = 14 mismatch
+ digit multiply
+ (41,84)->8441: 4*8 || 1*4 = 32 || 4 = 324 mismatch
+ digit multiply rev
+ (21,83)->8321: 2*3 || 1*8 = 6 || 8 = 68 mismatch
+ digit sum diff
+ (41,84)->8441: (4+1) - (8+4) = -7 mismatch
+ digit sum sum
+ (21,83)->8321: (2+1) + (8+3) = 14 mismatch
+ digit product diff
+ (41,84)->8441: 4*1 - 8*4 = 4 - 32 = -28 mismatch
+ digit product sum
+ (21,83)->8321: 2*1 + 8*3 = 2 + 24 = 26 mismatch
+ determinant
+ (41,84)->8441: 4*4 - 1*8 = 16 - 8 = 8 mismatch
+ abs determinant
+ (21,83)->8321: |2*3 - 1*8| = |6 - 8| = 2 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 31-45:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [31->13, 45->54] and reversed result
+ addition
+ (13,54): 13 + 54 = 67 rev-> 76
+ Result is non-negative
+ \boxed{76}

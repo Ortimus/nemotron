@@ -1,0 +1,186 @@
+67(30 = 2010
+85`55 = `30
+91(23 = 2093
+45(43 = 1935
+83(26 = 2158
+
+The inputs are 67, 30, 85, 55, 91, 23, 45, 43, 83, 26
+
+The outputs are 2010, `30, 2093, 1935, 2158
+Some example outputs have the operator symbol as prefix `.
+We now consider the outputs to be 2010, -30, 2093, 1935, 2158
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+67(30 -> (
+85`55 -> `
+91(23 -> (
+45(43 -> (
+83(26 -> (
+
+The operators
+(
+`
+
+Looking at the question
+27(65 -> (
+The question operator is found in the examples.
+
+Looking at operator ( [67(30 = 2010, 91(23 = 2093, 45(43 = 1935, 83(26 = 2158]:
+
+Trying common operations
+ reversed operands [67->76 30->03, 91->19 23->32, 45->54 43->34, 83->38 26->62] and reversed result [expected (76,03)->2010, (19,32)->2093, (54,34)->1935, (38,62)->2158]
+ addition
+ (76,03)->2010: 76 + 03 = 79 rev-> 97 mismatch
+ multiplication
+ (19,32)->2093: (10 + 9) * 32 = 10 * 32 + 9 * 32 = 320 + 288 = 608 rev-> 806 mismatch
+ concatenation
+ (54,34)->1935: 54 || 34 = 5434 rev-> 4345 mismatch
+ reverse concatenation
+ (38,62)->2158: 62 || 38 = 6238 rev-> 8326 mismatch
+
+ identity [67 30, 91 23, 45 43, 83 26] [expected (67,30)->2010, (91,23)->2093, (45,43)->1935, (83,26)->2158]
+ addition
+ (67,30)->2010: 67 + 30 = 97 mismatch
+ multiplication
+ (91,23)->2093: (90 + 1) * 23 = 90 * 23 + 1 * 23 = 2070 + 23 = 2093 match
+ (45,43)->1935: (40 + 5) * 43 = 40 * 43 + 5 * 43 = 1720 + 215 = 1935 match
+ (83,26)->2158: (80 + 3) * 26 = 80 * 26 + 3 * 26 = 2080 + 78 = 2158 match
+ (67,30)->2010: (60 + 7) * 30 = 60 * 30 + 7 * 30 = 1800 + 210 = 2010 match
+ correct, actions: multiplication
+ concatenation
+ (45,43)->1935: 45 || 43 = 4543 mismatch
+ reverse concatenation
+ (83,26)->2158: 26 || 83 = 2683 mismatch
+
+Trying difference operations
+ reversed operands [67->76 30->03, 91->19 23->32, 45->54 43->34, 83->38 26->62] and reversed result [expected (76,03)->2010, (19,32)->2093, (54,34)->1935, (38,62)->2158]
+ subtraction (a-b)
+ (76,03)->2010: 76 - 03 = 73 rev-> 37 mismatch
+ absolute difference
+ (19,32)->2093: |19 - 32| = 13 rev-> 31 mismatch
+ max mod min
+ (54,34)->1935: max(54,34) mod min(54,34) = 54 mod 34 = 20 rev-> 02 mismatch
+ negated absolute difference
+ (38,62)->2158: -|38 - 62| = -24 rev-> -42 mismatch
+ reverse subtraction (b-a)
+ (76,03)->2010: 03 - 76 = -73 rev-> -37 mismatch
+ modulo (a mod b)
+ (19,32)->2093: 19 mod 32 = 19 rev-> 91 mismatch
+
+ identity [67 30, 91 23, 45 43, 83 26] [expected (67,30)->2010, (91,23)->2093, (45,43)->1935, (83,26)->2158]
+ subtraction (a-b)
+ (67,30)->2010: 67 - 30 = 37 mismatch
+ absolute difference
+ (91,23)->2093: |91 - 23| = 68 mismatch
+ max mod min
+ (45,43)->1935: max(45,43) mod min(45,43) = 45 mod 43 = 2 mismatch
+ negated absolute difference
+ (83,26)->2158: -|83 - 26| = -57 mismatch
+ reverse subtraction (b-a)
+ (67,30)->2010: 30 - 67 = -37 mismatch
+ modulo (a mod b)
+ (91,23)->2093: 91 mod 23 = 22 mismatch
+
+Trying rare operations
+ reversed operands [67->76 30->03, 91->19 23->32, 45->54 43->34, 83->38 26->62] and reversed result [expected (76,03)->2010, (19,32)->2093, (54,34)->1935, (38,62)->2158]
+ multiply+1
+ (76,03)->2010: (70 + 6) * 03 + 1 = 70 * 03 + 6 * 03 + 1 = 210 + 18 + 1 = 228 + 1 = 229 rev-> 922 mismatch
+ multiply-1
+ (19,32)->2093: (10 + 9) * 32 - 1 = 10 * 32 + 9 * 32 - 1 = 320 + 288 - 1 = 608 - 1 = 607 rev-> 706 mismatch
+ add+1
+ (54,34)->1935: 54 + 34 + 1 = 89 rev-> 98 mismatch
+ add-1
+ (38,62)->2158: 38 + 62 - 1 = 99 rev-> 99 mismatch
+ sub+1
+ (76,03)->2010: 76 - 03 + 1 = 74 rev-> 47 mismatch
+ sub-1
+ (19,32)->2093: 19 - 32 - 1 = -14 rev-> -41 mismatch
+ integer division (a/b)
+ (54,34)->1935: 54 / 34 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (38,62)->2158: 62 / 38 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (76,03)->2010: 03 mod 76 = 3 rev-> 3 mismatch
+ digit absolute diff
+ (19,32)->2093: |1-3| || |9-2| = 27 rev-> 72 mismatch
+ digit add mod10
+ (54,34)->1935: (5+3)%10 || (4+4)%10 = 88 rev-> 88 mismatch
+ digit sub mod10
+ (38,62)->2158: (3-6)%10 || (8-2)%10 = 76 rev-> 67 mismatch
+ cross multiply
+ (76,03)->2010: 7*0 + 6*3 = 0 + 18 = 18 rev-> 81 mismatch
+ cross multiply rev
+ (19,32)->2093: 1*2 + 9*3 = 2 + 27 = 29 rev-> 92 mismatch
+ digit multiply
+ (54,34)->1935: 5*3 || 4*4 = 15 || 16 = 1516 rev-> 6151 mismatch
+ digit multiply rev
+ (38,62)->2158: 3*2 || 8*6 = 6 || 48 = 648 rev-> 846 mismatch
+ digit sum diff
+ (76,03)->2010: (7+6) - (0+3) = 10 rev-> 01 mismatch
+ digit sum sum
+ (19,32)->2093: (1+9) + (3+2) = 15 rev-> 51 mismatch
+ digit product diff
+ (54,34)->1935: 5*4 - 3*4 = 20 - 12 = 8 rev-> 8 mismatch
+ digit product sum
+ (38,62)->2158: 3*8 + 6*2 = 24 + 12 = 36 rev-> 63 mismatch
+ determinant
+ (76,03)->2010: 7*3 - 6*0 = 21 - 0 = 21 rev-> 12 mismatch
+ abs determinant
+ (19,32)->2093: |1*2 - 9*3| = |2 - 27| = 25 rev-> 52 mismatch
+
+ identity [67 30, 91 23, 45 43, 83 26] [expected (67,30)->2010, (91,23)->2093, (45,43)->1935, (83,26)->2158]
+ multiply+1
+ (67,30)->2010: (60 + 7) * 30 + 1 = 60 * 30 + 7 * 30 + 1 = 1800 + 210 + 1 = 2010 + 1 = 2011 mismatch
+ multiply-1
+ (91,23)->2093: (90 + 1) * 23 - 1 = 90 * 23 + 1 * 23 - 1 = 2070 + 23 - 1 = 2093 - 1 = 2092 mismatch
+ add+1
+ (45,43)->1935: 45 + 43 + 1 = 89 mismatch
+ add-1
+ (83,26)->2158: 83 + 26 - 1 = 108 mismatch
+ sub+1
+ (67,30)->2010: 67 - 30 + 1 = 38 mismatch
+ sub-1
+ (91,23)->2093: 91 - 23 - 1 = 67 mismatch
+ integer division (a/b)
+ (45,43)->1935: 45 / 43 = 1 mismatch
+ reverse division (b/a)
+ (83,26)->2158: 26 / 83 = 0 mismatch
+ reverse modulo (b mod a)
+ (67,30)->2010: 30 mod 67 = 30 mismatch
+ digit absolute diff
+ (91,23)->2093: |9-2| || |1-3| = 72 mismatch
+ digit add mod10
+ (45,43)->1935: (4+4)%10 || (5+3)%10 = 88 mismatch
+ digit sub mod10
+ (83,26)->2158: (8-2)%10 || (3-6)%10 = 67 mismatch
+ cross multiply
+ (67,30)->2010: 6*3 + 7*0 = 18 + 0 = 18 mismatch
+ cross multiply rev
+ (91,23)->2093: 9*3 + 1*2 = 27 + 2 = 29 mismatch
+ digit multiply
+ (45,43)->1935: 4*4 || 5*3 = 16 || 15 = 1615 mismatch
+ digit multiply rev
+ (83,26)->2158: 8*6 || 3*2 = 48 || 6 = 486 mismatch
+ digit sum diff
+ (67,30)->2010: (6+7) - (3+0) = 10 mismatch
+ digit sum sum
+ (91,23)->2093: (9+1) + (2+3) = 15 mismatch
+ digit product diff
+ (45,43)->1935: 4*5 - 4*3 = 20 - 12 = 8 mismatch
+ digit product sum
+ (83,26)->2158: 8*3 + 2*6 = 24 + 12 = 36 mismatch
+ determinant
+ (67,30)->2010: 6*0 - 7*3 = 0 - 21 = -21 mismatch
+ abs determinant
+ (91,23)->2093: |9*3 - 1*2| = |27 - 2| = 25 mismatch
+
+correct, actions: multiplication
+
+Applying to 27(65:
+ We recall that the question operator is found in the examples.
+ identity [27 65]
+ multiplication
+ (27,65): (20 + 7) * 65 = 20 * 65 + 7 * 65 = 1300 + 455 = 1755
+ Result is non-negative
+ \boxed{1755}

@@ -1,0 +1,183 @@
+97%32 = 3103
+25/84 = 109
+31%85 = 2634
+59/46 = 105
+45/67 = 112
+
+The inputs are 97, 32, 25, 84, 31, 85, 59, 46, 45, 67
+
+The outputs are 3103, 109, 2634, 105, 112
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+97%32 -> %
+25/84 -> /
+31%85 -> %
+59/46 -> /
+45/67 -> /
+
+The operators
+%
+/
+
+Looking at the question
+50^86 -> ^
+The question operator is not found in the examples. Investigating the most common example operator / instead. We will use addition for the question operator.
+
+Looking at operator / [25/84 = 109, 59/46 = 105, 45/67 = 112]:
+
+Trying common operations
+ reversed operands [25->52 84->48, 59->95 46->64, 45->54 67->76] and reversed result [expected (52,48)->109, (95,64)->105, (54,76)->112]
+ addition
+ (52,48)->109: 52 + 48 = 100 rev-> 001 mismatch
+ multiplication
+ (95,64)->105: (90 + 5) * 64 = 90 * 64 + 5 * 64 = 5760 + 320 = 6080 rev-> 0806 mismatch
+ concatenation
+ (54,76)->112: 54 || 76 = 5476 rev-> 6745 mismatch
+ reverse concatenation
+ (52,48)->109: 48 || 52 = 4852 rev-> 2584 mismatch
+
+ identity [25 84, 59 46, 45 67] [expected (25,84)->109, (59,46)->105, (45,67)->112]
+ addition
+ (25,84)->109: 25 + 84 = 109 match
+ (59,46)->105: 59 + 46 = 105 match
+ (45,67)->112: 45 + 67 = 112 match
+ correct, actions: addition
+ multiplication
+ (59,46)->105: (50 + 9) * 46 = 50 * 46 + 9 * 46 = 2300 + 414 = 2714 mismatch
+ concatenation
+ (45,67)->112: 45 || 67 = 4567 mismatch
+ reverse concatenation
+ (25,84)->109: 84 || 25 = 8425 mismatch
+
+Trying difference operations
+ reversed operands [25->52 84->48, 59->95 46->64, 45->54 67->76] and reversed result [expected (52,48)->109, (95,64)->105, (54,76)->112]
+ subtraction (a-b)
+ (52,48)->109: 52 - 48 = 4 rev-> 4 mismatch
+ absolute difference
+ (95,64)->105: |95 - 64| = 31 rev-> 13 mismatch
+ max mod min
+ (54,76)->112: max(54,76) mod min(54,76) = 76 mod 54 = 22 rev-> 22 mismatch
+ negated absolute difference
+ (52,48)->109: -|52 - 48| = -4 rev-> -4 mismatch
+ reverse subtraction (b-a)
+ (95,64)->105: 64 - 95 = -31 rev-> -13 mismatch
+ modulo (a mod b)
+ (54,76)->112: 54 mod 76 = 54 rev-> 45 mismatch
+
+ identity [25 84, 59 46, 45 67] [expected (25,84)->109, (59,46)->105, (45,67)->112]
+ subtraction (a-b)
+ (25,84)->109: 25 - 84 = -59 mismatch
+ absolute difference
+ (59,46)->105: |59 - 46| = 13 mismatch
+ max mod min
+ (45,67)->112: max(45,67) mod min(45,67) = 67 mod 45 = 22 mismatch
+ negated absolute difference
+ (25,84)->109: -|25 - 84| = -59 mismatch
+ reverse subtraction (b-a)
+ (59,46)->105: 46 - 59 = -13 mismatch
+ modulo (a mod b)
+ (45,67)->112: 45 mod 67 = 45 mismatch
+
+Trying rare operations
+ reversed operands [25->52 84->48, 59->95 46->64, 45->54 67->76] and reversed result [expected (52,48)->109, (95,64)->105, (54,76)->112]
+ multiply+1
+ (52,48)->109: (50 + 2) * 48 + 1 = 50 * 48 + 2 * 48 + 1 = 2400 + 96 + 1 = 2496 + 1 = 2497 rev-> 7942 mismatch
+ multiply-1
+ (95,64)->105: (90 + 5) * 64 - 1 = 90 * 64 + 5 * 64 - 1 = 5760 + 320 - 1 = 6080 - 1 = 6079 rev-> 9706 mismatch
+ add+1
+ (54,76)->112: 54 + 76 + 1 = 131 rev-> 131 mismatch
+ add-1
+ (52,48)->109: 52 + 48 - 1 = 99 rev-> 99 mismatch
+ sub+1
+ (95,64)->105: 95 - 64 + 1 = 32 rev-> 23 mismatch
+ sub-1
+ (54,76)->112: 54 - 76 - 1 = -23 rev-> -32 mismatch
+ integer division (a/b)
+ (52,48)->109: 52 / 48 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (95,64)->105: 64 / 95 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (54,76)->112: 76 mod 54 = 22 rev-> 22 mismatch
+ digit absolute diff
+ (52,48)->109: |5-4| || |2-8| = 16 rev-> 61 mismatch
+ digit add mod10
+ (95,64)->105: (9+6)%10 || (5+4)%10 = 59 rev-> 95 mismatch
+ digit sub mod10
+ (54,76)->112: (5-7)%10 || (4-6)%10 = 88 rev-> 88 mismatch
+ cross multiply
+ (52,48)->109: 5*4 + 2*8 = 20 + 16 = 36 rev-> 63 mismatch
+ cross multiply rev
+ (95,64)->105: 9*4 + 5*6 = 36 + 30 = 66 rev-> 66 mismatch
+ digit multiply
+ (54,76)->112: 5*7 || 4*6 = 35 || 24 = 3524 rev-> 4253 mismatch
+ digit multiply rev
+ (52,48)->109: 5*8 || 2*4 = 40 || 8 = 408 rev-> 804 mismatch
+ digit sum diff
+ (95,64)->105: (9+5) - (6+4) = 4 rev-> 4 mismatch
+ digit sum sum
+ (54,76)->112: (5+4) + (7+6) = 22 rev-> 22 mismatch
+ digit product diff
+ (52,48)->109: 5*2 - 4*8 = 10 - 32 = -22 rev-> -22 mismatch
+ digit product sum
+ (95,64)->105: 9*5 + 6*4 = 45 + 24 = 69 rev-> 96 mismatch
+ determinant
+ (54,76)->112: 5*6 - 4*7 = 30 - 28 = 2 rev-> 2 mismatch
+ abs determinant
+ (52,48)->109: |5*8 - 2*4| = |40 - 8| = 32 rev-> 23 mismatch
+
+ identity [25 84, 59 46, 45 67] [expected (25,84)->109, (59,46)->105, (45,67)->112]
+ multiply+1
+ (25,84)->109: (20 + 5) * 84 + 1 = 20 * 84 + 5 * 84 + 1 = 1680 + 420 + 1 = 2100 + 1 = 2101 mismatch
+ multiply-1
+ (59,46)->105: (50 + 9) * 46 - 1 = 50 * 46 + 9 * 46 - 1 = 2300 + 414 - 1 = 2714 - 1 = 2713 mismatch
+ add+1
+ (45,67)->112: 45 + 67 + 1 = 113 mismatch
+ add-1
+ (25,84)->109: 25 + 84 - 1 = 108 mismatch
+ sub+1
+ (59,46)->105: 59 - 46 + 1 = 14 mismatch
+ sub-1
+ (45,67)->112: 45 - 67 - 1 = -23 mismatch
+ integer division (a/b)
+ (25,84)->109: 25 / 84 = 0 mismatch
+ reverse division (b/a)
+ (59,46)->105: 46 / 59 = 0 mismatch
+ reverse modulo (b mod a)
+ (45,67)->112: 67 mod 45 = 22 mismatch
+ digit absolute diff
+ (25,84)->109: |2-8| || |5-4| = 61 mismatch
+ digit add mod10
+ (59,46)->105: (5+4)%10 || (9+6)%10 = 95 mismatch
+ digit sub mod10
+ (45,67)->112: (4-6)%10 || (5-7)%10 = 88 mismatch
+ cross multiply
+ (25,84)->109: 2*8 + 5*4 = 16 + 20 = 36 mismatch
+ cross multiply rev
+ (59,46)->105: 5*6 + 9*4 = 30 + 36 = 66 mismatch
+ digit multiply
+ (45,67)->112: 4*6 || 5*7 = 24 || 35 = 2435 mismatch
+ digit multiply rev
+ (25,84)->109: 2*4 || 5*8 = 8 || 40 = 840 mismatch
+ digit sum diff
+ (59,46)->105: (5+9) - (4+6) = 4 mismatch
+ digit sum sum
+ (45,67)->112: (4+5) + (6+7) = 22 mismatch
+ digit product diff
+ (25,84)->109: 2*5 - 8*4 = 10 - 32 = -22 mismatch
+ digit product sum
+ (59,46)->105: 5*9 + 4*6 = 45 + 24 = 69 mismatch
+ determinant
+ (45,67)->112: 4*7 - 5*6 = 28 - 30 = -2 mismatch
+ abs determinant
+ (25,84)->109: |2*4 - 5*8| = |8 - 40| = 32 mismatch
+
+correct, actions: addition
+
+Applying to 50^86:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ identity [50 86]
+ addition
+ (50,86): 50 + 86 = 136
+ Result is non-negative
+ \boxed{136}

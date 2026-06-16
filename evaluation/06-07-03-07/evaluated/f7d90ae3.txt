@@ -1,0 +1,177 @@
+61`23 = 38
+84/48 = 8448
+87`85 = 2
+73/54 = 7354
+
+The inputs are 61, 23, 84, 48, 87, 85, 73, 54
+
+The outputs are 38, 8448, 2, 7354
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+61`23 -> `
+84/48 -> /
+87`85 -> `
+73/54 -> /
+
+The operators
+`
+/
+
+Looking at the question
+98/19 -> /
+The question operator is found in the examples.
+
+Looking at operator / [84/48 = 8448, 73/54 = 7354]:
+
+Trying common operations reversed operands [84->48 48->84, 73->37 54->45] and reversed result [expected (48,84)->8448, (37,45)->7354]:
+ addition
+ (48,84)->8448: 48 + 84 = 132 rev-> 231 mismatch
+ multiplication
+ (37,45)->7354: (30 + 7) * 45 = 30 * 45 + 7 * 45 = 1350 + 315 = 1665 rev-> 5661 mismatch
+ concatenation
+ (48,84)->8448: 48 || 84 = 4884 rev-> 4884 mismatch
+ reverse concatenation
+ (37,45)->7354: 45 || 37 = 4537 rev-> 7354 match
+ (48,84)->8448: 84 || 48 = 8448 rev-> 8448 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+Trying common operations on identity [84 48, 73 54] [expected (84,48)->8448, (73,54)->7354]:
+ addition
+ (84,48)->8448: 84 + 48 = 132 mismatch
+ multiplication
+ (73,54)->7354: (70 + 3) * 54 = 70 * 54 + 3 * 54 = 3780 + 162 = 3942 mismatch
+ concatenation
+ (84,48)->8448: 84 || 48 = 8448 match
+ (73,54)->7354: 73 || 54 = 7354 match
+ correct, but skipping
+ reverse concatenation
+ (73,54)->7354: 54 || 73 = 5473 mismatch
+
+Trying difference operations reversed operands [84->48 48->84, 73->37 54->45] and reversed result [expected (48,84)->8448, (37,45)->7354]:
+ subtraction (a-b)
+ (48,84)->8448: 48 - 84 = -36 rev-> -63 mismatch
+ absolute difference
+ (37,45)->7354: |37 - 45| = 8 rev-> 8 mismatch
+ max mod min
+ (48,84)->8448: max(48,84) mod min(48,84) = 84 mod 48 = 36 rev-> 63 mismatch
+ negated absolute difference
+ (37,45)->7354: -|37 - 45| = -8 rev-> -8 mismatch
+ reverse subtraction (b-a)
+ (48,84)->8448: 84 - 48 = 36 rev-> 63 mismatch
+ modulo (a mod b)
+ (37,45)->7354: 37 mod 45 = 37 rev-> 73 mismatch
+
+Trying difference operations on identity [84 48, 73 54] [expected (84,48)->8448, (73,54)->7354]:
+ subtraction (a-b)
+ (84,48)->8448: 84 - 48 = 36 mismatch
+ absolute difference
+ (73,54)->7354: |73 - 54| = 19 mismatch
+ max mod min
+ (84,48)->8448: max(84,48) mod min(84,48) = 84 mod 48 = 36 mismatch
+ negated absolute difference
+ (73,54)->7354: -|73 - 54| = -19 mismatch
+ reverse subtraction (b-a)
+ (84,48)->8448: 48 - 84 = -36 mismatch
+ modulo (a mod b)
+ (73,54)->7354: 73 mod 54 = 19 mismatch
+
+Trying rare operations reversed operands [84->48 48->84, 73->37 54->45] and reversed result [expected (48,84)->8448, (37,45)->7354]:
+ multiply+1
+ (48,84)->8448: (40 + 8) * 84 + 1 = 40 * 84 + 8 * 84 + 1 = 3360 + 672 + 1 = 4032 + 1 = 4033 rev-> 3304 mismatch
+ multiply-1
+ (37,45)->7354: (30 + 7) * 45 - 1 = 30 * 45 + 7 * 45 - 1 = 1350 + 315 - 1 = 1665 - 1 = 1664 rev-> 4661 mismatch
+ add+1
+ (48,84)->8448: 48 + 84 + 1 = 133 rev-> 331 mismatch
+ add-1
+ (37,45)->7354: 37 + 45 - 1 = 81 rev-> 18 mismatch
+ sub+1
+ (48,84)->8448: 48 - 84 + 1 = -35 rev-> -53 mismatch
+ sub-1
+ (37,45)->7354: 37 - 45 - 1 = -9 rev-> -9 mismatch
+ integer division (a/b)
+ (48,84)->8448: 48 / 84 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (37,45)->7354: 45 / 37 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (48,84)->8448: 84 mod 48 = 36 rev-> 63 mismatch
+ digit absolute diff
+ (37,45)->7354: |3-4| || |7-5| = 12 rev-> 21 mismatch
+ digit add mod10
+ (48,84)->8448: (4+8)%10 || (8+4)%10 = 22 rev-> 22 mismatch
+ digit sub mod10
+ (37,45)->7354: (3-4)%10 || (7-5)%10 = 92 rev-> 29 mismatch
+ cross multiply
+ (48,84)->8448: 4*8 + 8*4 = 32 + 32 = 64 rev-> 46 mismatch
+ cross multiply rev
+ (37,45)->7354: 3*5 + 7*4 = 15 + 28 = 43 rev-> 34 mismatch
+ digit multiply
+ (48,84)->8448: 4*8 || 8*4 = 32 || 32 = 3232 rev-> 2323 mismatch
+ digit multiply rev
+ (37,45)->7354: 3*5 || 7*4 = 15 || 28 = 1528 rev-> 8251 mismatch
+ digit sum diff
+ (48,84)->8448: (4+8) - (8+4) = 0 rev-> 0 mismatch
+ digit sum sum
+ (37,45)->7354: (3+7) + (4+5) = 19 rev-> 91 mismatch
+ digit product diff
+ (48,84)->8448: 4*8 - 8*4 = 32 - 32 = 0 rev-> 0 mismatch
+ digit product sum
+ (37,45)->7354: 3*7 + 4*5 = 21 + 20 = 41 rev-> 14 mismatch
+ determinant
+ (48,84)->8448: 4*4 - 8*8 = 16 - 64 = -48 rev-> -84 mismatch
+ abs determinant
+ (37,45)->7354: |3*5 - 7*4| = |15 - 28| = 13 rev-> 31 mismatch
+
+Trying rare operations on identity [84 48, 73 54] [expected (84,48)->8448, (73,54)->7354]:
+ multiply+1
+ (84,48)->8448: (80 + 4) * 48 + 1 = 80 * 48 + 4 * 48 + 1 = 3840 + 192 + 1 = 4032 + 1 = 4033 mismatch
+ multiply-1
+ (73,54)->7354: (70 + 3) * 54 - 1 = 70 * 54 + 3 * 54 - 1 = 3780 + 162 - 1 = 3942 - 1 = 3941 mismatch
+ add+1
+ (84,48)->8448: 84 + 48 + 1 = 133 mismatch
+ add-1
+ (73,54)->7354: 73 + 54 - 1 = 126 mismatch
+ sub+1
+ (84,48)->8448: 84 - 48 + 1 = 37 mismatch
+ sub-1
+ (73,54)->7354: 73 - 54 - 1 = 18 mismatch
+ integer division (a/b)
+ (84,48)->8448: 84 / 48 = 1 mismatch
+ reverse division (b/a)
+ (73,54)->7354: 54 / 73 = 0 mismatch
+ reverse modulo (b mod a)
+ (84,48)->8448: 48 mod 84 = 48 mismatch
+ digit absolute diff
+ (73,54)->7354: |7-5| || |3-4| = 21 mismatch
+ digit add mod10
+ (84,48)->8448: (8+4)%10 || (4+8)%10 = 22 mismatch
+ digit sub mod10
+ (73,54)->7354: (7-5)%10 || (3-4)%10 = 29 mismatch
+ cross multiply
+ (84,48)->8448: 8*4 + 4*8 = 32 + 32 = 64 mismatch
+ cross multiply rev
+ (73,54)->7354: 7*4 + 3*5 = 28 + 15 = 43 mismatch
+ digit multiply
+ (84,48)->8448: 8*4 || 4*8 = 32 || 32 = 3232 mismatch
+ digit multiply rev
+ (73,54)->7354: 7*4 || 3*5 = 28 || 15 = 2815 mismatch
+ digit sum diff
+ (84,48)->8448: (8+4) - (4+8) = 0 mismatch
+ digit sum sum
+ (73,54)->7354: (7+3) + (5+4) = 19 mismatch
+ digit product diff
+ (84,48)->8448: 8*4 - 4*8 = 32 - 32 = 0 mismatch
+ digit product sum
+ (73,54)->7354: 7*3 + 5*4 = 21 + 20 = 41 mismatch
+ determinant
+ (84,48)->8448: 8*8 - 4*4 = 64 - 16 = 48 mismatch
+ abs determinant
+ (73,54)->7354: |7*4 - 3*5| = |28 - 15| = 13 mismatch
+
+Applying to 98/19:
+ We recall that the question operator is found in the examples.
+ reversed operands [98->89, 19->91] and reversed result
+ reverse concatenation (89,91): 91 || 89 = 9189 rev-> 9819
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{9819}

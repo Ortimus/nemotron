@@ -1,0 +1,185 @@
+27-99 = -72
+72+71 = 7172
+81*83 = 486
+86*15 = 8643
+
+The inputs are 27, 99, 72, 71, 81, 83, 86, 15
+
+The outputs are -72, 7172, 486, 8643
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -72, 7172, 486, 8643
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+27-99 -> -
+72+71 -> +
+81*83 -> *
+86*15 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+68-08 -> -
+The question operator is found in the examples.
+
+Looking at operator - [27-99 = -72]:
+
+Trying common operations
+ reversed operands [27->72 99->99] and reversed result [expected (72,99)->-72]
+ addition
+ (72,99)->-72: 72 + 99 = 171 rev-> 171 mismatch
+ multiplication
+ (72,99)->-72: (70 + 2) * 99 = 70 * 99 + 2 * 99 = 6930 + 198 = 7128 rev-> 8217 mismatch
+ concatenation
+ (72,99)->-72: 72 || 99 = 7299 rev-> 9927 mismatch
+ reverse concatenation
+ (72,99)->-72: 99 || 72 = 9972 rev-> 2799 mismatch
+
+ identity [27 99] [expected (27,99)->-72]
+ addition
+ (27,99)->-72: 27 + 99 = 126 mismatch
+ multiplication
+ (27,99)->-72: (20 + 7) * 99 = 20 * 99 + 7 * 99 = 1980 + 693 = 2673 mismatch
+ concatenation
+ (27,99)->-72: 27 || 99 = 2799 mismatch
+ reverse concatenation
+ (27,99)->-72: 99 || 27 = 9927 mismatch
+
+Trying difference operations
+ reversed operands [27->72 99->99] and reversed result [expected (72,99)->-72]
+ subtraction (a-b)
+ (72,99)->-72: 72 - 99 = -27 rev-> -72 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (72,99)->-72: |72 - 99| = 27 rev-> 72 mismatch
+ max mod min
+ (72,99)->-72: max(72,99) mod min(72,99) = 99 mod 72 = 27 rev-> 72 mismatch
+ negated absolute difference
+ (72,99)->-72: -|72 - 99| = -27 rev-> -72 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (72,99)->-72: 99 - 72 = 27 rev-> 72 mismatch
+ modulo (a mod b)
+ (72,99)->-72: 72 mod 99 = 72 rev-> 27 mismatch
+
+ identity [27 99] [expected (27,99)->-72]
+ subtraction (a-b)
+ (27,99)->-72: 27 - 99 = -72 match
+ correct, but skipping
+ absolute difference
+ (27,99)->-72: |27 - 99| = 72 mismatch
+ max mod min
+ (27,99)->-72: max(27,99) mod min(27,99) = 99 mod 27 = 18 mismatch
+ negated absolute difference
+ (27,99)->-72: -|27 - 99| = -72 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (27,99)->-72: 99 - 27 = 72 mismatch
+ modulo (a mod b)
+ (27,99)->-72: 27 mod 99 = 27 mismatch
+
+Trying rare operations
+ reversed operands [27->72 99->99] and reversed result [expected (72,99)->-72]
+ multiply+1
+ (72,99)->-72: (70 + 2) * 99 + 1 = 70 * 99 + 2 * 99 + 1 = 6930 + 198 + 1 = 7128 + 1 = 7129 rev-> 9217 mismatch
+ multiply-1
+ (72,99)->-72: (70 + 2) * 99 - 1 = 70 * 99 + 2 * 99 - 1 = 6930 + 198 - 1 = 7128 - 1 = 7127 rev-> 7217 mismatch
+ add+1
+ (72,99)->-72: 72 + 99 + 1 = 172 rev-> 271 mismatch
+ add-1
+ (72,99)->-72: 72 + 99 - 1 = 170 rev-> 071 mismatch
+ sub+1
+ (72,99)->-72: 72 - 99 + 1 = -26 rev-> -62 mismatch
+ sub-1
+ (72,99)->-72: 72 - 99 - 1 = -28 rev-> -82 mismatch
+ integer division (a/b)
+ (72,99)->-72: 72 / 99 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (72,99)->-72: 99 / 72 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (72,99)->-72: 99 mod 72 = 27 rev-> 72 mismatch
+ digit absolute diff
+ (72,99)->-72: |7-9| || |2-9| = 27 rev-> 72 mismatch
+ digit add mod10
+ (72,99)->-72: (7+9)%10 || (2+9)%10 = 61 rev-> 16 mismatch
+ digit sub mod10
+ (72,99)->-72: (7-9)%10 || (2-9)%10 = 83 rev-> 38 mismatch
+ cross multiply
+ (72,99)->-72: 7*9 + 2*9 = 63 + 18 = 81 rev-> 18 mismatch
+ cross multiply rev
+ (72,99)->-72: 7*9 + 2*9 = 63 + 18 = 81 rev-> 18 mismatch
+ digit multiply
+ (72,99)->-72: 7*9 || 2*9 = 63 || 18 = 6318 rev-> 8136 mismatch
+ digit multiply rev
+ (72,99)->-72: 7*9 || 2*9 = 63 || 18 = 6318 rev-> 8136 mismatch
+ digit sum diff
+ (72,99)->-72: (7+2) - (9+9) = -9 rev-> -9 mismatch
+ digit sum sum
+ (72,99)->-72: (7+2) + (9+9) = 27 rev-> 72 mismatch
+ digit product diff
+ (72,99)->-72: 7*2 - 9*9 = 14 - 81 = -67 rev-> -76 mismatch
+ digit product sum
+ (72,99)->-72: 7*2 + 9*9 = 14 + 81 = 95 rev-> 59 mismatch
+ determinant
+ (72,99)->-72: 7*9 - 2*9 = 63 - 18 = 45 rev-> 54 mismatch
+ abs determinant
+ (72,99)->-72: |7*9 - 2*9| = |63 - 18| = 45 rev-> 54 mismatch
+
+ identity [27 99] [expected (27,99)->-72]
+ multiply+1
+ (27,99)->-72: (20 + 7) * 99 + 1 = 20 * 99 + 7 * 99 + 1 = 1980 + 693 + 1 = 2673 + 1 = 2674 mismatch
+ multiply-1
+ (27,99)->-72: (20 + 7) * 99 - 1 = 20 * 99 + 7 * 99 - 1 = 1980 + 693 - 1 = 2673 - 1 = 2672 mismatch
+ add+1
+ (27,99)->-72: 27 + 99 + 1 = 127 mismatch
+ add-1
+ (27,99)->-72: 27 + 99 - 1 = 125 mismatch
+ sub+1
+ (27,99)->-72: 27 - 99 + 1 = -71 mismatch
+ sub-1
+ (27,99)->-72: 27 - 99 - 1 = -73 mismatch
+ integer division (a/b)
+ (27,99)->-72: 27 / 99 = 0 mismatch
+ reverse division (b/a)
+ (27,99)->-72: 99 / 27 = 3 mismatch
+ reverse modulo (b mod a)
+ (27,99)->-72: 99 mod 27 = 18 mismatch
+ digit absolute diff
+ (27,99)->-72: |2-9| || |7-9| = 72 mismatch
+ digit add mod10
+ (27,99)->-72: (2+9)%10 || (7+9)%10 = 16 mismatch
+ digit sub mod10
+ (27,99)->-72: (2-9)%10 || (7-9)%10 = 38 mismatch
+ cross multiply
+ (27,99)->-72: 2*9 + 7*9 = 18 + 63 = 81 mismatch
+ cross multiply rev
+ (27,99)->-72: 2*9 + 7*9 = 18 + 63 = 81 mismatch
+ digit multiply
+ (27,99)->-72: 2*9 || 7*9 = 18 || 63 = 1863 mismatch
+ digit multiply rev
+ (27,99)->-72: 2*9 || 7*9 = 18 || 63 = 1863 mismatch
+ digit sum diff
+ (27,99)->-72: (2+7) - (9+9) = -9 mismatch
+ digit sum sum
+ (27,99)->-72: (2+7) + (9+9) = 27 mismatch
+ digit product diff
+ (27,99)->-72: 2*7 - 9*9 = 14 - 81 = -67 mismatch
+ digit product sum
+ (27,99)->-72: 2*7 + 9*9 = 14 + 81 = 95 mismatch
+ determinant
+ (27,99)->-72: 2*9 - 7*9 = 18 - 63 = -45 mismatch
+ abs determinant
+ (27,99)->-72: |2*9 - 7*9| = |18 - 63| = 45 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 68-08:
+ We recall that the question operator is found in the examples.
+ reversed operands [68->86, 08->80] and reversed result
+ subtraction (a-b)
+ (86,80): 86 - 80 = 6 rev-> 6
+ Result is non-negative
+ \boxed{6}

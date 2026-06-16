@@ -1,0 +1,172 @@
+64-65 = 201
+28-68 = 861
+82/15 = 8241
+
+The inputs are 64, 65, 28, 68, 82, 15
+
+The outputs are 201, 861, 8241
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+64-65 -> -
+28-68 -> -
+82/15 -> /
+
+The operators
+-
+/
+
+Looking at the question
+85/77 -> /
+The question operator is found in the examples.
+
+Looking at operator / [82/15 = 8241]:
+
+Trying common operations reversed operands [82->28 15->51] and reversed result [expected (28,51)->8241]:
+ addition
+ (28,51)->8241: 28 + 51 = 79 rev-> 97 mismatch
+ multiplication
+ (28,51)->8241: (20 + 8) * 51 = 20 * 51 + 8 * 51 = 1020 + 408 = 1428 rev-> 8241 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (28,51)->8241: 28 || 51 = 2851 rev-> 1582 mismatch
+ reverse concatenation
+ (28,51)->8241: 51 || 28 = 5128 rev-> 8215 mismatch
+
+Trying common operations on identity [82 15] [expected (82,15)->8241]:
+ addition
+ (82,15)->8241: 82 + 15 = 97 mismatch
+ multiplication
+ (82,15)->8241: (80 + 2) * 15 = 80 * 15 + 2 * 15 = 1200 + 30 = 1230 mismatch
+ concatenation
+ (82,15)->8241: 82 || 15 = 8215 mismatch
+ reverse concatenation
+ (82,15)->8241: 15 || 82 = 1582 mismatch
+
+Trying difference operations reversed operands [82->28 15->51] and reversed result [expected (28,51)->8241]:
+ subtraction (a-b)
+ (28,51)->8241: 28 - 51 = -23 rev-> -32 mismatch
+ absolute difference
+ (28,51)->8241: |28 - 51| = 23 rev-> 32 mismatch
+ max mod min
+ (28,51)->8241: max(28,51) mod min(28,51) = 51 mod 28 = 23 rev-> 32 mismatch
+ negated absolute difference
+ (28,51)->8241: -|28 - 51| = -23 rev-> -32 mismatch
+ reverse subtraction (b-a)
+ (28,51)->8241: 51 - 28 = 23 rev-> 32 mismatch
+ modulo (a mod b)
+ (28,51)->8241: 28 mod 51 = 28 rev-> 82 mismatch
+
+Trying difference operations on identity [82 15] [expected (82,15)->8241]:
+ subtraction (a-b)
+ (82,15)->8241: 82 - 15 = 67 mismatch
+ absolute difference
+ (82,15)->8241: |82 - 15| = 67 mismatch
+ max mod min
+ (82,15)->8241: max(82,15) mod min(82,15) = 82 mod 15 = 7 mismatch
+ negated absolute difference
+ (82,15)->8241: -|82 - 15| = -67 mismatch
+ reverse subtraction (b-a)
+ (82,15)->8241: 15 - 82 = -67 mismatch
+ modulo (a mod b)
+ (82,15)->8241: 82 mod 15 = 7 mismatch
+
+Trying rare operations reversed operands [82->28 15->51] and reversed result [expected (28,51)->8241]:
+ multiply+1
+ (28,51)->8241: (20 + 8) * 51 + 1 = 20 * 51 + 8 * 51 + 1 = 1020 + 408 + 1 = 1428 + 1 = 1429 rev-> 9241 mismatch
+ multiply-1
+ (28,51)->8241: (20 + 8) * 51 - 1 = 20 * 51 + 8 * 51 - 1 = 1020 + 408 - 1 = 1428 - 1 = 1427 rev-> 7241 mismatch
+ add+1
+ (28,51)->8241: 28 + 51 + 1 = 80 rev-> 08 mismatch
+ add-1
+ (28,51)->8241: 28 + 51 - 1 = 78 rev-> 87 mismatch
+ sub+1
+ (28,51)->8241: 28 - 51 + 1 = -22 rev-> -22 mismatch
+ sub-1
+ (28,51)->8241: 28 - 51 - 1 = -24 rev-> -42 mismatch
+ integer division (a/b)
+ (28,51)->8241: 28 / 51 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (28,51)->8241: 51 / 28 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (28,51)->8241: 51 mod 28 = 23 rev-> 32 mismatch
+ digit absolute diff
+ (28,51)->8241: |2-5| || |8-1| = 37 rev-> 73 mismatch
+ digit add mod10
+ (28,51)->8241: (2+5)%10 || (8+1)%10 = 79 rev-> 97 mismatch
+ digit sub mod10
+ (28,51)->8241: (2-5)%10 || (8-1)%10 = 77 rev-> 77 mismatch
+ cross multiply
+ (28,51)->8241: 2*5 + 8*1 = 10 + 8 = 18 rev-> 81 mismatch
+ cross multiply rev
+ (28,51)->8241: 2*1 + 8*5 = 2 + 40 = 42 rev-> 24 mismatch
+ digit multiply
+ (28,51)->8241: 2*5 || 8*1 = 10 || 8 = 108 rev-> 801 mismatch
+ digit multiply rev
+ (28,51)->8241: 2*1 || 8*5 = 2 || 40 = 240 rev-> 042 mismatch
+ digit sum diff
+ (28,51)->8241: (2+8) - (5+1) = 4 rev-> 4 mismatch
+ digit sum sum
+ (28,51)->8241: (2+8) + (5+1) = 16 rev-> 61 mismatch
+ digit product diff
+ (28,51)->8241: 2*8 - 5*1 = 16 - 5 = 11 rev-> 11 mismatch
+ digit product sum
+ (28,51)->8241: 2*8 + 5*1 = 16 + 5 = 21 rev-> 12 mismatch
+ determinant
+ (28,51)->8241: 2*1 - 8*5 = 2 - 40 = -38 rev-> -83 mismatch
+ abs determinant
+ (28,51)->8241: |2*1 - 8*5| = |2 - 40| = 38 rev-> 83 mismatch
+
+Trying rare operations on identity [82 15] [expected (82,15)->8241]:
+ multiply+1
+ (82,15)->8241: (80 + 2) * 15 + 1 = 80 * 15 + 2 * 15 + 1 = 1200 + 30 + 1 = 1230 + 1 = 1231 mismatch
+ multiply-1
+ (82,15)->8241: (80 + 2) * 15 - 1 = 80 * 15 + 2 * 15 - 1 = 1200 + 30 - 1 = 1230 - 1 = 1229 mismatch
+ add+1
+ (82,15)->8241: 82 + 15 + 1 = 98 mismatch
+ add-1
+ (82,15)->8241: 82 + 15 - 1 = 96 mismatch
+ sub+1
+ (82,15)->8241: 82 - 15 + 1 = 68 mismatch
+ sub-1
+ (82,15)->8241: 82 - 15 - 1 = 66 mismatch
+ integer division (a/b)
+ (82,15)->8241: 82 / 15 = 5 mismatch
+ reverse division (b/a)
+ (82,15)->8241: 15 / 82 = 0 mismatch
+ reverse modulo (b mod a)
+ (82,15)->8241: 15 mod 82 = 15 mismatch
+ digit absolute diff
+ (82,15)->8241: |8-1| || |2-5| = 73 mismatch
+ digit add mod10
+ (82,15)->8241: (8+1)%10 || (2+5)%10 = 97 mismatch
+ digit sub mod10
+ (82,15)->8241: (8-1)%10 || (2-5)%10 = 77 mismatch
+ cross multiply
+ (82,15)->8241: 8*1 + 2*5 = 8 + 10 = 18 mismatch
+ cross multiply rev
+ (82,15)->8241: 8*5 + 2*1 = 40 + 2 = 42 mismatch
+ digit multiply
+ (82,15)->8241: 8*1 || 2*5 = 8 || 10 = 810 mismatch
+ digit multiply rev
+ (82,15)->8241: 8*5 || 2*1 = 40 || 2 = 402 mismatch
+ digit sum diff
+ (82,15)->8241: (8+2) - (1+5) = 4 mismatch
+ digit sum sum
+ (82,15)->8241: (8+2) + (1+5) = 16 mismatch
+ digit product diff
+ (82,15)->8241: 8*2 - 1*5 = 16 - 5 = 11 mismatch
+ digit product sum
+ (82,15)->8241: 8*2 + 1*5 = 16 + 5 = 21 mismatch
+ determinant
+ (82,15)->8241: 8*5 - 2*1 = 40 - 2 = 38 mismatch
+ abs determinant
+ (82,15)->8241: |8*5 - 2*1| = |40 - 2| = 38 mismatch
+
+Applying to 85/77:
+ We recall that the question operator is found in the examples.
+ reversed operands [85->58, 77->77] and reversed result
+ multiplication (58,77): (50 + 8) * 77 = 50 * 77 + 8 * 77 = 3850 + 616 = 4466 rev-> 6644
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{6644}

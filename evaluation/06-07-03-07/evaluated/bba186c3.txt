@@ -1,0 +1,176 @@
+14-04 = 18
+99-07 = 961
+66*95 = 7
+
+The inputs are 14, 04, 99, 07, 66, 95
+
+The outputs are 18, 961, 7
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+14-04 -> -
+99-07 -> -
+66*95 -> *
+
+The operators
+-
+*
+
+Looking at the question
+71)42 -> )
+The question operator is not found in the examples. Investigating the most common example operator - instead. We will use addition for the question operator.
+
+Looking at operator - [14-04 = 18, 99-07 = 961]:
+
+Trying common operations reversed operands [14->41 04->40, 99->99 07->70] and reversed result [expected (41,40)->18, (99,70)->961]:
+ addition
+ (41,40)->18: 41 + 40 = 81 rev-> 18 match
+ (99,70)->961: 99 + 70 = 169 rev-> 961 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (99,70)->961: (90 + 9) * 70 = 90 * 70 + 9 * 70 = 6300 + 630 = 6930 rev-> 0396 mismatch
+ concatenation
+ (41,40)->18: 41 || 40 = 4140 rev-> 0414 mismatch
+ reverse concatenation
+ (99,70)->961: 70 || 99 = 7099 rev-> 9907 mismatch
+
+Trying common operations on identity [14 04, 99 07] [expected (14,04)->18, (99,07)->961]:
+ addition
+ (14,04)->18: 14 + 04 = 18 match
+ (99,07)->961: 99 + 07 = 106 mismatch
+ multiplication
+ (99,07)->961: (90 + 9) * 07 = 90 * 07 + 9 * 07 = 630 + 63 = 693 mismatch
+ concatenation
+ (14,04)->18: 14 || 04 = 1404 mismatch
+ reverse concatenation
+ (99,07)->961: 07 || 99 = 0799 mismatch
+
+Trying difference operations reversed operands [14->41 04->40, 99->99 07->70] and reversed result [expected (41,40)->18, (99,70)->961]:
+ subtraction (a-b)
+ (41,40)->18: 41 - 40 = 1 rev-> 1 mismatch
+ absolute difference
+ (99,70)->961: |99 - 70| = 29 rev-> 92 mismatch
+ max mod min
+ (41,40)->18: max(41,40) mod min(41,40) = 41 mod 40 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (99,70)->961: -|99 - 70| = -29 rev-> -92 mismatch
+ reverse subtraction (b-a)
+ (41,40)->18: 40 - 41 = -1 rev-> -1 mismatch
+ modulo (a mod b)
+ (99,70)->961: 99 mod 70 = 29 rev-> 92 mismatch
+
+Trying difference operations on identity [14 04, 99 07] [expected (14,04)->18, (99,07)->961]:
+ subtraction (a-b)
+ (14,04)->18: 14 - 04 = 10 mismatch
+ absolute difference
+ (99,07)->961: |99 - 07| = 92 mismatch
+ max mod min
+ (14,04)->18: max(14,04) mod min(14,04) = 14 mod 04 = 2 mismatch
+ negated absolute difference
+ (99,07)->961: -|99 - 07| = -92 mismatch
+ reverse subtraction (b-a)
+ (14,04)->18: 04 - 14 = -10 mismatch
+ modulo (a mod b)
+ (99,07)->961: 99 mod 07 = 1 mismatch
+
+Trying rare operations reversed operands [14->41 04->40, 99->99 07->70] and reversed result [expected (41,40)->18, (99,70)->961]:
+ multiply+1
+ (41,40)->18: (40 + 1) * 40 + 1 = 40 * 40 + 1 * 40 + 1 = 1600 + 40 + 1 = 1640 + 1 = 1641 rev-> 1461 mismatch
+ multiply-1
+ (99,70)->961: (90 + 9) * 70 - 1 = 90 * 70 + 9 * 70 - 1 = 6300 + 630 - 1 = 6930 - 1 = 6929 rev-> 9296 mismatch
+ add+1
+ (41,40)->18: 41 + 40 + 1 = 82 rev-> 28 mismatch
+ add-1
+ (99,70)->961: 99 + 70 - 1 = 168 rev-> 861 mismatch
+ sub+1
+ (41,40)->18: 41 - 40 + 1 = 2 rev-> 2 mismatch
+ sub-1
+ (99,70)->961: 99 - 70 - 1 = 28 rev-> 82 mismatch
+ integer division (a/b)
+ (41,40)->18: 41 / 40 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (99,70)->961: 70 / 99 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (41,40)->18: 40 mod 41 = 40 rev-> 04 mismatch
+ digit absolute diff
+ (99,70)->961: |9-7| || |9-0| = 29 rev-> 92 mismatch
+ digit add mod10
+ (41,40)->18: (4+4)%10 || (1+0)%10 = 81 rev-> 18 match
+ (99,70)->961: (9+7)%10 || (9+0)%10 = 69 rev-> 96 mismatch
+ digit sub mod10
+ (99,70)->961: (9-7)%10 || (9-0)%10 = 29 rev-> 92 mismatch
+ cross multiply
+ (41,40)->18: 4*4 + 1*0 = 16 + 0 = 16 rev-> 61 mismatch
+ cross multiply rev
+ (99,70)->961: 9*0 + 9*7 = 0 + 63 = 63 rev-> 36 mismatch
+ digit multiply
+ (41,40)->18: 4*4 || 1*0 = 16 || 0 = 160 rev-> 061 mismatch
+ digit multiply rev
+ (99,70)->961: 9*0 || 9*7 = 0 || 63 = 063 rev-> 360 mismatch
+ digit sum diff
+ (41,40)->18: (4+1) - (4+0) = 1 rev-> 1 mismatch
+ digit sum sum
+ (99,70)->961: (9+9) + (7+0) = 25 rev-> 52 mismatch
+ digit product diff
+ (41,40)->18: 4*1 - 4*0 = 4 - 0 = 4 rev-> 4 mismatch
+ digit product sum
+ (99,70)->961: 9*9 + 7*0 = 81 + 0 = 81 rev-> 18 mismatch
+ determinant
+ (41,40)->18: 4*0 - 1*4 = 0 - 4 = -4 rev-> -4 mismatch
+ abs determinant
+ (99,70)->961: |9*0 - 9*7| = |0 - 63| = 63 rev-> 36 mismatch
+
+Trying rare operations on identity [14 04, 99 07] [expected (14,04)->18, (99,07)->961]:
+ multiply+1
+ (14,04)->18: (10 + 4) * 04 + 1 = 10 * 04 + 4 * 04 + 1 = 40 + 16 + 1 = 56 + 1 = 57 mismatch
+ multiply-1
+ (99,07)->961: (90 + 9) * 07 - 1 = 90 * 07 + 9 * 07 - 1 = 630 + 63 - 1 = 693 - 1 = 692 mismatch
+ add+1
+ (14,04)->18: 14 + 04 + 1 = 19 mismatch
+ add-1
+ (99,07)->961: 99 + 07 - 1 = 105 mismatch
+ sub+1
+ (14,04)->18: 14 - 04 + 1 = 11 mismatch
+ sub-1
+ (99,07)->961: 99 - 07 - 1 = 91 mismatch
+ integer division (a/b)
+ (14,04)->18: 14 / 04 = 3 mismatch
+ reverse division (b/a)
+ (99,07)->961: 07 / 99 = 0 mismatch
+ reverse modulo (b mod a)
+ (14,04)->18: 04 mod 14 = 4 mismatch
+ digit absolute diff
+ (99,07)->961: |9-0| || |9-7| = 92 mismatch
+ digit add mod10
+ (14,04)->18: (1+0)%10 || (4+4)%10 = 18 match
+ (99,07)->961: (9+0)%10 || (9+7)%10 = 96 mismatch
+ digit sub mod10
+ (99,07)->961: (9-0)%10 || (9-7)%10 = 92 mismatch
+ cross multiply
+ (14,04)->18: 1*0 + 4*4 = 0 + 16 = 16 mismatch
+ cross multiply rev
+ (99,07)->961: 9*7 + 9*0 = 63 + 0 = 63 mismatch
+ digit multiply
+ (14,04)->18: 1*0 || 4*4 = 0 || 16 = 016 mismatch
+ digit multiply rev
+ (99,07)->961: 9*7 || 9*0 = 63 || 0 = 630 mismatch
+ digit sum diff
+ (14,04)->18: (1+4) - (0+4) = 1 mismatch
+ digit sum sum
+ (99,07)->961: (9+9) + (0+7) = 25 mismatch
+ digit product diff
+ (14,04)->18: 1*4 - 0*4 = 4 - 0 = 4 mismatch
+ digit product sum
+ (99,07)->961: 9*9 + 0*7 = 81 + 0 = 81 mismatch
+ determinant
+ (14,04)->18: 1*4 - 4*0 = 4 - 0 = 4 mismatch
+ abs determinant
+ (99,07)->961: |9*7 - 9*0| = |63 - 0| = 63 mismatch
+
+Applying to 71)42:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [71->17, 42->24] and reversed result
+ addition (17,24): 17 + 24 = 41 rev-> 14
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{14}

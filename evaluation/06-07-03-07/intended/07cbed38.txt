@@ -1,0 +1,178 @@
+45^08 = 0234
+37}95 = 131
+99^88 = 2178
+
+The inputs are 45, 08, 37, 95, 99, 88
+
+The outputs are 0234, 131, 2178
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+45^08 -> ^
+37}95 -> }
+99^88 -> ^
+
+The operators
+^
+}
+
+Looking at the question
+52}51 -> }
+The question operator is found in the examples.
+
+Looking at operator } [37}95 = 131]:
+
+Trying common operations
+ reversed operands [37->73 95->59] and reversed result [expected (73,59)->131]
+ addition
+ (73,59)->131: 73 + 59 = 132 rev-> 231 mismatch
+ multiplication
+ (73,59)->131: (70 + 3) * 59 = 70 * 59 + 3 * 59 = 4130 + 177 = 4307 rev-> 7034 mismatch
+ concatenation
+ (73,59)->131: 73 || 59 = 7359 rev-> 9537 mismatch
+ reverse concatenation
+ (73,59)->131: 59 || 73 = 5973 rev-> 3795 mismatch
+
+ identity [37 95] [expected (37,95)->131]
+ addition
+ (37,95)->131: 37 + 95 = 132 mismatch
+ multiplication
+ (37,95)->131: (30 + 7) * 95 = 30 * 95 + 7 * 95 = 2850 + 665 = 3515 mismatch
+ concatenation
+ (37,95)->131: 37 || 95 = 3795 mismatch
+ reverse concatenation
+ (37,95)->131: 95 || 37 = 9537 mismatch
+
+Trying difference operations
+ reversed operands [37->73 95->59] and reversed result [expected (73,59)->131]
+ subtraction (a-b)
+ (73,59)->131: 73 - 59 = 14 rev-> 41 mismatch
+ absolute difference
+ (73,59)->131: |73 - 59| = 14 rev-> 41 mismatch
+ max mod min
+ (73,59)->131: max(73,59) mod min(73,59) = 73 mod 59 = 14 rev-> 41 mismatch
+ negated absolute difference
+ (73,59)->131: -|73 - 59| = -14 rev-> -41 mismatch
+ reverse subtraction (b-a)
+ (73,59)->131: 59 - 73 = -14 rev-> -41 mismatch
+ modulo (a mod b)
+ (73,59)->131: 73 mod 59 = 14 rev-> 41 mismatch
+
+ identity [37 95] [expected (37,95)->131]
+ subtraction (a-b)
+ (37,95)->131: 37 - 95 = -58 mismatch
+ absolute difference
+ (37,95)->131: |37 - 95| = 58 mismatch
+ max mod min
+ (37,95)->131: max(37,95) mod min(37,95) = 95 mod 37 = 21 mismatch
+ negated absolute difference
+ (37,95)->131: -|37 - 95| = -58 mismatch
+ reverse subtraction (b-a)
+ (37,95)->131: 95 - 37 = 58 mismatch
+ modulo (a mod b)
+ (37,95)->131: 37 mod 95 = 37 mismatch
+
+Trying rare operations
+ reversed operands [37->73 95->59] and reversed result [expected (73,59)->131]
+ multiply+1
+ (73,59)->131: (70 + 3) * 59 + 1 = 70 * 59 + 3 * 59 + 1 = 4130 + 177 + 1 = 4307 + 1 = 4308 rev-> 8034 mismatch
+ multiply-1
+ (73,59)->131: (70 + 3) * 59 - 1 = 70 * 59 + 3 * 59 - 1 = 4130 + 177 - 1 = 4307 - 1 = 4306 rev-> 6034 mismatch
+ add+1
+ (73,59)->131: 73 + 59 + 1 = 133 rev-> 331 mismatch
+ add-1
+ (73,59)->131: 73 + 59 - 1 = 131 rev-> 131 match
+ correct, actions: reversed operands, reversed result, add-1
+ sub+1
+ (73,59)->131: 73 - 59 + 1 = 15 rev-> 51 mismatch
+ sub-1
+ (73,59)->131: 73 - 59 - 1 = 13 rev-> 31 mismatch
+ integer division (a/b)
+ (73,59)->131: 73 / 59 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (73,59)->131: 59 / 73 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (73,59)->131: 59 mod 73 = 59 rev-> 95 mismatch
+ digit absolute diff
+ (73,59)->131: |7-5| || |3-9| = 26 rev-> 62 mismatch
+ digit add mod10
+ (73,59)->131: (7+5)%10 || (3+9)%10 = 22 rev-> 22 mismatch
+ digit sub mod10
+ (73,59)->131: (7-5)%10 || (3-9)%10 = 24 rev-> 42 mismatch
+ cross multiply
+ (73,59)->131: 7*5 + 3*9 = 35 + 27 = 62 rev-> 26 mismatch
+ cross multiply rev
+ (73,59)->131: 7*9 + 3*5 = 63 + 15 = 78 rev-> 87 mismatch
+ digit multiply
+ (73,59)->131: 7*5 || 3*9 = 35 || 27 = 3527 rev-> 7253 mismatch
+ digit multiply rev
+ (73,59)->131: 7*9 || 3*5 = 63 || 15 = 6315 rev-> 5136 mismatch
+ digit sum diff
+ (73,59)->131: (7+3) - (5+9) = -4 rev-> -4 mismatch
+ digit sum sum
+ (73,59)->131: (7+3) + (5+9) = 24 rev-> 42 mismatch
+ digit product diff
+ (73,59)->131: 7*3 - 5*9 = 21 - 45 = -24 rev-> -42 mismatch
+ digit product sum
+ (73,59)->131: 7*3 + 5*9 = 21 + 45 = 66 rev-> 66 mismatch
+ determinant
+ (73,59)->131: 7*9 - 3*5 = 63 - 15 = 48 rev-> 84 mismatch
+ abs determinant
+ (73,59)->131: |7*9 - 3*5| = |63 - 15| = 48 rev-> 84 mismatch
+
+ identity [37 95] [expected (37,95)->131]
+ multiply+1
+ (37,95)->131: (30 + 7) * 95 + 1 = 30 * 95 + 7 * 95 + 1 = 2850 + 665 + 1 = 3515 + 1 = 3516 mismatch
+ multiply-1
+ (37,95)->131: (30 + 7) * 95 - 1 = 30 * 95 + 7 * 95 - 1 = 2850 + 665 - 1 = 3515 - 1 = 3514 mismatch
+ add+1
+ (37,95)->131: 37 + 95 + 1 = 133 mismatch
+ add-1
+ (37,95)->131: 37 + 95 - 1 = 131 match
+ correct, but skipping
+ sub+1
+ (37,95)->131: 37 - 95 + 1 = -57 mismatch
+ sub-1
+ (37,95)->131: 37 - 95 - 1 = -59 mismatch
+ integer division (a/b)
+ (37,95)->131: 37 / 95 = 0 mismatch
+ reverse division (b/a)
+ (37,95)->131: 95 / 37 = 2 mismatch
+ reverse modulo (b mod a)
+ (37,95)->131: 95 mod 37 = 21 mismatch
+ digit absolute diff
+ (37,95)->131: |3-9| || |7-5| = 62 mismatch
+ digit add mod10
+ (37,95)->131: (3+9)%10 || (7+5)%10 = 22 mismatch
+ digit sub mod10
+ (37,95)->131: (3-9)%10 || (7-5)%10 = 42 mismatch
+ cross multiply
+ (37,95)->131: 3*9 + 7*5 = 27 + 35 = 62 mismatch
+ cross multiply rev
+ (37,95)->131: 3*5 + 7*9 = 15 + 63 = 78 mismatch
+ digit multiply
+ (37,95)->131: 3*9 || 7*5 = 27 || 35 = 2735 mismatch
+ digit multiply rev
+ (37,95)->131: 3*5 || 7*9 = 15 || 63 = 1563 mismatch
+ digit sum diff
+ (37,95)->131: (3+7) - (9+5) = -4 mismatch
+ digit sum sum
+ (37,95)->131: (3+7) + (9+5) = 24 mismatch
+ digit product diff
+ (37,95)->131: 3*7 - 9*5 = 21 - 45 = -24 mismatch
+ digit product sum
+ (37,95)->131: 3*7 + 9*5 = 21 + 45 = 66 mismatch
+ determinant
+ (37,95)->131: 3*5 - 7*9 = 15 - 63 = -48 mismatch
+ abs determinant
+ (37,95)->131: |3*5 - 7*9| = |15 - 63| = 48 mismatch
+
+correct, actions: reversed operands, reversed result, add-1
+
+Applying to 52}51:
+ We recall that the question operator is found in the examples.
+ reversed operands [52->25, 51->15] and reversed result
+ add-1
+ (25,15): 25 + 15 - 1 = 39 rev-> 93
+ Result is non-negative
+ \boxed{93}

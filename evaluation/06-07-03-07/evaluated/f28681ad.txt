@@ -1,0 +1,178 @@
+85+03 = 88
+26*56 = 5626
+76+36 = 031
+66+56 = 131
+43-13 = 3
+
+The inputs are 85, 03, 26, 56, 76, 36, 66, 56, 43, 13
+
+The outputs are 88, 5626, 031, 131, 3
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+85+03 -> +
+26*56 -> *
+76+36 -> +
+66+56 -> +
+43-13 -> -
+
+The operators
++
+*
+-
+
+Looking at the question
+14*43 -> *
+The question operator is found in the examples.
+
+Looking at operator * [26*56 = 5626]:
+
+Trying common operations reversed operands [26->62 56->65] and reversed result [expected (62,65)->5626]:
+ addition
+ (62,65)->5626: 62 + 65 = 127 rev-> 721 mismatch
+ multiplication
+ (62,65)->5626: (60 + 2) * 65 = 60 * 65 + 2 * 65 = 3900 + 130 = 4030 rev-> 0304 mismatch
+ concatenation
+ (62,65)->5626: 62 || 65 = 6265 rev-> 5626 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (62,65)->5626: 65 || 62 = 6562 rev-> 2656 mismatch
+
+Trying common operations on identity [26 56] [expected (26,56)->5626]:
+ addition
+ (26,56)->5626: 26 + 56 = 82 mismatch
+ multiplication
+ (26,56)->5626: (20 + 6) * 56 = 20 * 56 + 6 * 56 = 1120 + 336 = 1456 mismatch
+ concatenation
+ (26,56)->5626: 26 || 56 = 2656 mismatch
+ reverse concatenation
+ (26,56)->5626: 56 || 26 = 5626 match
+ correct, but skipping
+
+Trying difference operations reversed operands [26->62 56->65] and reversed result [expected (62,65)->5626]:
+ subtraction (a-b)
+ (62,65)->5626: 62 - 65 = -3 rev-> -3 mismatch
+ absolute difference
+ (62,65)->5626: |62 - 65| = 3 rev-> 3 mismatch
+ max mod min
+ (62,65)->5626: max(62,65) mod min(62,65) = 65 mod 62 = 3 rev-> 3 mismatch
+ negated absolute difference
+ (62,65)->5626: -|62 - 65| = -3 rev-> -3 mismatch
+ reverse subtraction (b-a)
+ (62,65)->5626: 65 - 62 = 3 rev-> 3 mismatch
+ modulo (a mod b)
+ (62,65)->5626: 62 mod 65 = 62 rev-> 26 mismatch
+
+Trying difference operations on identity [26 56] [expected (26,56)->5626]:
+ subtraction (a-b)
+ (26,56)->5626: 26 - 56 = -30 mismatch
+ absolute difference
+ (26,56)->5626: |26 - 56| = 30 mismatch
+ max mod min
+ (26,56)->5626: max(26,56) mod min(26,56) = 56 mod 26 = 4 mismatch
+ negated absolute difference
+ (26,56)->5626: -|26 - 56| = -30 mismatch
+ reverse subtraction (b-a)
+ (26,56)->5626: 56 - 26 = 30 mismatch
+ modulo (a mod b)
+ (26,56)->5626: 26 mod 56 = 26 mismatch
+
+Trying rare operations reversed operands [26->62 56->65] and reversed result [expected (62,65)->5626]:
+ multiply+1
+ (62,65)->5626: (60 + 2) * 65 + 1 = 60 * 65 + 2 * 65 + 1 = 3900 + 130 + 1 = 4030 + 1 = 4031 rev-> 1304 mismatch
+ multiply-1
+ (62,65)->5626: (60 + 2) * 65 - 1 = 60 * 65 + 2 * 65 - 1 = 3900 + 130 - 1 = 4030 - 1 = 4029 rev-> 9204 mismatch
+ add+1
+ (62,65)->5626: 62 + 65 + 1 = 128 rev-> 821 mismatch
+ add-1
+ (62,65)->5626: 62 + 65 - 1 = 126 rev-> 621 mismatch
+ sub+1
+ (62,65)->5626: 62 - 65 + 1 = -2 rev-> -2 mismatch
+ sub-1
+ (62,65)->5626: 62 - 65 - 1 = -4 rev-> -4 mismatch
+ integer division (a/b)
+ (62,65)->5626: 62 / 65 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (62,65)->5626: 65 / 62 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (62,65)->5626: 65 mod 62 = 3 rev-> 3 mismatch
+ digit absolute diff
+ (62,65)->5626: |6-6| || |2-5| = 03 rev-> 30 mismatch
+ digit add mod10
+ (62,65)->5626: (6+6)%10 || (2+5)%10 = 27 rev-> 72 mismatch
+ digit sub mod10
+ (62,65)->5626: (6-6)%10 || (2-5)%10 = 07 rev-> 70 mismatch
+ cross multiply
+ (62,65)->5626: 6*6 + 2*5 = 36 + 10 = 46 rev-> 64 mismatch
+ cross multiply rev
+ (62,65)->5626: 6*5 + 2*6 = 30 + 12 = 42 rev-> 24 mismatch
+ digit multiply
+ (62,65)->5626: 6*6 || 2*5 = 36 || 10 = 3610 rev-> 0163 mismatch
+ digit multiply rev
+ (62,65)->5626: 6*5 || 2*6 = 30 || 12 = 3012 rev-> 2103 mismatch
+ digit sum diff
+ (62,65)->5626: (6+2) - (6+5) = -3 rev-> -3 mismatch
+ digit sum sum
+ (62,65)->5626: (6+2) + (6+5) = 19 rev-> 91 mismatch
+ digit product diff
+ (62,65)->5626: 6*2 - 6*5 = 12 - 30 = -18 rev-> -81 mismatch
+ digit product sum
+ (62,65)->5626: 6*2 + 6*5 = 12 + 30 = 42 rev-> 24 mismatch
+ determinant
+ (62,65)->5626: 6*5 - 2*6 = 30 - 12 = 18 rev-> 81 mismatch
+ abs determinant
+ (62,65)->5626: |6*5 - 2*6| = |30 - 12| = 18 rev-> 81 mismatch
+
+Trying rare operations on identity [26 56] [expected (26,56)->5626]:
+ multiply+1
+ (26,56)->5626: (20 + 6) * 56 + 1 = 20 * 56 + 6 * 56 + 1 = 1120 + 336 + 1 = 1456 + 1 = 1457 mismatch
+ multiply-1
+ (26,56)->5626: (20 + 6) * 56 - 1 = 20 * 56 + 6 * 56 - 1 = 1120 + 336 - 1 = 1456 - 1 = 1455 mismatch
+ add+1
+ (26,56)->5626: 26 + 56 + 1 = 83 mismatch
+ add-1
+ (26,56)->5626: 26 + 56 - 1 = 81 mismatch
+ sub+1
+ (26,56)->5626: 26 - 56 + 1 = -29 mismatch
+ sub-1
+ (26,56)->5626: 26 - 56 - 1 = -31 mismatch
+ integer division (a/b)
+ (26,56)->5626: 26 / 56 = 0 mismatch
+ reverse division (b/a)
+ (26,56)->5626: 56 / 26 = 2 mismatch
+ reverse modulo (b mod a)
+ (26,56)->5626: 56 mod 26 = 4 mismatch
+ digit absolute diff
+ (26,56)->5626: |2-5| || |6-6| = 30 mismatch
+ digit add mod10
+ (26,56)->5626: (2+5)%10 || (6+6)%10 = 72 mismatch
+ digit sub mod10
+ (26,56)->5626: (2-5)%10 || (6-6)%10 = 70 mismatch
+ cross multiply
+ (26,56)->5626: 2*5 + 6*6 = 10 + 36 = 46 mismatch
+ cross multiply rev
+ (26,56)->5626: 2*6 + 6*5 = 12 + 30 = 42 mismatch
+ digit multiply
+ (26,56)->5626: 2*5 || 6*6 = 10 || 36 = 1036 mismatch
+ digit multiply rev
+ (26,56)->5626: 2*6 || 6*5 = 12 || 30 = 1230 mismatch
+ digit sum diff
+ (26,56)->5626: (2+6) - (5+6) = -3 mismatch
+ digit sum sum
+ (26,56)->5626: (2+6) + (5+6) = 19 mismatch
+ digit product diff
+ (26,56)->5626: 2*6 - 5*6 = 12 - 30 = -18 mismatch
+ digit product sum
+ (26,56)->5626: 2*6 + 5*6 = 12 + 30 = 42 mismatch
+ determinant
+ (26,56)->5626: 2*6 - 6*5 = 12 - 30 = -18 mismatch
+ abs determinant
+ (26,56)->5626: |2*6 - 6*5| = |12 - 30| = 18 mismatch
+
+Applying to 14*43:
+ We recall that the question operator is found in the examples.
+ reversed operands [14->41, 43->34] and reversed result
+ concatenation (41,34): 41 || 34 = 4134 rev-> 4314
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{4314}

@@ -1,0 +1,176 @@
+42-16 = -73
+43*45 = 6381
+28-17 = -11
+14-53 = -6
+
+The inputs are 42, 16, 43, 45, 28, 17, 14, 53
+
+The outputs are -73, 6381, -11, -6
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -73, 6381, -11, -6
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+42-16 -> -
+43*45 -> *
+28-17 -> -
+14-53 -> -
+
+The operators
+-
+*
+
+Looking at the question
+53*76 -> *
+The question operator is found in the examples.
+
+Looking at operator * [43*45 = 6381]:
+
+Trying common operations reversed operands [43->34 45->54] and reversed result [expected (34,54)->6381]:
+ addition
+ (34,54)->6381: 34 + 54 = 88 rev-> 88 mismatch
+ multiplication
+ (34,54)->6381: (30 + 4) * 54 = 30 * 54 + 4 * 54 = 1620 + 216 = 1836 rev-> 6381 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (34,54)->6381: 34 || 54 = 3454 rev-> 4543 mismatch
+ reverse concatenation
+ (34,54)->6381: 54 || 34 = 5434 rev-> 4345 mismatch
+
+Trying common operations on identity [43 45] [expected (43,45)->6381]:
+ addition
+ (43,45)->6381: 43 + 45 = 88 mismatch
+ multiplication
+ (43,45)->6381: (40 + 3) * 45 = 40 * 45 + 3 * 45 = 1800 + 135 = 1935 mismatch
+ concatenation
+ (43,45)->6381: 43 || 45 = 4345 mismatch
+ reverse concatenation
+ (43,45)->6381: 45 || 43 = 4543 mismatch
+
+Trying difference operations reversed operands [43->34 45->54] and reversed result [expected (34,54)->6381]:
+ subtraction (a-b)
+ (34,54)->6381: 34 - 54 = -20 rev-> -02 mismatch
+ absolute difference
+ (34,54)->6381: |34 - 54| = 20 rev-> 02 mismatch
+ max mod min
+ (34,54)->6381: max(34,54) mod min(34,54) = 54 mod 34 = 20 rev-> 02 mismatch
+ negated absolute difference
+ (34,54)->6381: -|34 - 54| = -20 rev-> -02 mismatch
+ reverse subtraction (b-a)
+ (34,54)->6381: 54 - 34 = 20 rev-> 02 mismatch
+ modulo (a mod b)
+ (34,54)->6381: 34 mod 54 = 34 rev-> 43 mismatch
+
+Trying difference operations on identity [43 45] [expected (43,45)->6381]:
+ subtraction (a-b)
+ (43,45)->6381: 43 - 45 = -2 mismatch
+ absolute difference
+ (43,45)->6381: |43 - 45| = 2 mismatch
+ max mod min
+ (43,45)->6381: max(43,45) mod min(43,45) = 45 mod 43 = 2 mismatch
+ negated absolute difference
+ (43,45)->6381: -|43 - 45| = -2 mismatch
+ reverse subtraction (b-a)
+ (43,45)->6381: 45 - 43 = 2 mismatch
+ modulo (a mod b)
+ (43,45)->6381: 43 mod 45 = 43 mismatch
+
+Trying rare operations reversed operands [43->34 45->54] and reversed result [expected (34,54)->6381]:
+ multiply+1
+ (34,54)->6381: (30 + 4) * 54 + 1 = 30 * 54 + 4 * 54 + 1 = 1620 + 216 + 1 = 1836 + 1 = 1837 rev-> 7381 mismatch
+ multiply-1
+ (34,54)->6381: (30 + 4) * 54 - 1 = 30 * 54 + 4 * 54 - 1 = 1620 + 216 - 1 = 1836 - 1 = 1835 rev-> 5381 mismatch
+ add+1
+ (34,54)->6381: 34 + 54 + 1 = 89 rev-> 98 mismatch
+ add-1
+ (34,54)->6381: 34 + 54 - 1 = 87 rev-> 78 mismatch
+ sub+1
+ (34,54)->6381: 34 - 54 + 1 = -19 rev-> -91 mismatch
+ sub-1
+ (34,54)->6381: 34 - 54 - 1 = -21 rev-> -12 mismatch
+ integer division (a/b)
+ (34,54)->6381: 34 / 54 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (34,54)->6381: 54 / 34 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (34,54)->6381: 54 mod 34 = 20 rev-> 02 mismatch
+ digit absolute diff
+ (34,54)->6381: |3-5| || |4-4| = 20 rev-> 02 mismatch
+ digit add mod10
+ (34,54)->6381: (3+5)%10 || (4+4)%10 = 88 rev-> 88 mismatch
+ digit sub mod10
+ (34,54)->6381: (3-5)%10 || (4-4)%10 = 80 rev-> 08 mismatch
+ cross multiply
+ (34,54)->6381: 3*5 + 4*4 = 15 + 16 = 31 rev-> 13 mismatch
+ cross multiply rev
+ (34,54)->6381: 3*4 + 4*5 = 12 + 20 = 32 rev-> 23 mismatch
+ digit multiply
+ (34,54)->6381: 3*5 || 4*4 = 15 || 16 = 1516 rev-> 6151 mismatch
+ digit multiply rev
+ (34,54)->6381: 3*4 || 4*5 = 12 || 20 = 1220 rev-> 0221 mismatch
+ digit sum diff
+ (34,54)->6381: (3+4) - (5+4) = -2 rev-> -2 mismatch
+ digit sum sum
+ (34,54)->6381: (3+4) + (5+4) = 16 rev-> 61 mismatch
+ digit product diff
+ (34,54)->6381: 3*4 - 5*4 = 12 - 20 = -8 rev-> -8 mismatch
+ digit product sum
+ (34,54)->6381: 3*4 + 5*4 = 12 + 20 = 32 rev-> 23 mismatch
+ determinant
+ (34,54)->6381: 3*4 - 4*5 = 12 - 20 = -8 rev-> -8 mismatch
+ abs determinant
+ (34,54)->6381: |3*4 - 4*5| = |12 - 20| = 8 rev-> 8 mismatch
+
+Trying rare operations on identity [43 45] [expected (43,45)->6381]:
+ multiply+1
+ (43,45)->6381: (40 + 3) * 45 + 1 = 40 * 45 + 3 * 45 + 1 = 1800 + 135 + 1 = 1935 + 1 = 1936 mismatch
+ multiply-1
+ (43,45)->6381: (40 + 3) * 45 - 1 = 40 * 45 + 3 * 45 - 1 = 1800 + 135 - 1 = 1935 - 1 = 1934 mismatch
+ add+1
+ (43,45)->6381: 43 + 45 + 1 = 89 mismatch
+ add-1
+ (43,45)->6381: 43 + 45 - 1 = 87 mismatch
+ sub+1
+ (43,45)->6381: 43 - 45 + 1 = -1 mismatch
+ sub-1
+ (43,45)->6381: 43 - 45 - 1 = -3 mismatch
+ integer division (a/b)
+ (43,45)->6381: 43 / 45 = 0 mismatch
+ reverse division (b/a)
+ (43,45)->6381: 45 / 43 = 1 mismatch
+ reverse modulo (b mod a)
+ (43,45)->6381: 45 mod 43 = 2 mismatch
+ digit absolute diff
+ (43,45)->6381: |4-4| || |3-5| = 02 mismatch
+ digit add mod10
+ (43,45)->6381: (4+4)%10 || (3+5)%10 = 88 mismatch
+ digit sub mod10
+ (43,45)->6381: (4-4)%10 || (3-5)%10 = 08 mismatch
+ cross multiply
+ (43,45)->6381: 4*4 + 3*5 = 16 + 15 = 31 mismatch
+ cross multiply rev
+ (43,45)->6381: 4*5 + 3*4 = 20 + 12 = 32 mismatch
+ digit multiply
+ (43,45)->6381: 4*4 || 3*5 = 16 || 15 = 1615 mismatch
+ digit multiply rev
+ (43,45)->6381: 4*5 || 3*4 = 20 || 12 = 2012 mismatch
+ digit sum diff
+ (43,45)->6381: (4+3) - (4+5) = -2 mismatch
+ digit sum sum
+ (43,45)->6381: (4+3) + (4+5) = 16 mismatch
+ digit product diff
+ (43,45)->6381: 4*3 - 4*5 = 12 - 20 = -8 mismatch
+ digit product sum
+ (43,45)->6381: 4*3 + 4*5 = 12 + 20 = 32 mismatch
+ determinant
+ (43,45)->6381: 4*5 - 3*4 = 20 - 12 = 8 mismatch
+ abs determinant
+ (43,45)->6381: |4*5 - 3*4| = |20 - 12| = 8 mismatch
+
+Applying to 53*76:
+ We recall that the question operator is found in the examples.
+ reversed operands [53->35, 76->67] and reversed result
+ multiplication (35,67): (30 + 5) * 67 = 30 * 67 + 5 * 67 = 2010 + 335 = 2345 rev-> 5432
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{5432}

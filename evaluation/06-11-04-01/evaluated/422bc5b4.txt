@@ -1,0 +1,181 @@
+29]10 = 2910
+51`33 = 1683
+53&60 = 7
+
+The inputs are 29, 10, 51, 33, 53, 60
+
+The outputs are 2910, 1683, 7
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+29]10 -> ]
+51`33 -> `
+53&60 -> &
+
+The operators
+]
+`
+&
+
+Looking at the question
+80&87 -> &
+The question operator is found in the examples.
+
+Looking at operator & [53&60 = 7]:
+
+Trying common operations
+ reversed operands [53->35 60->06] and reversed result [expected (35,06)->7]
+ addition
+ (35,06)->7: 35 + 06 = 41 rev-> 14 mismatch
+ multiplication
+ (35,06)->7: (30 + 5) * 06 = 30 * 06 + 5 * 06 = 180 + 30 = 210 rev-> 012 mismatch
+ concatenation
+ (35,06)->7: 35 || 06 = 3506 rev-> 6053 mismatch
+ reverse concatenation
+ (35,06)->7: 06 || 35 = 0635 rev-> 5360 mismatch
+
+ identity [53 60] [expected (53,60)->7]
+ addition
+ (53,60)->7: 53 + 60 = 113 mismatch
+ multiplication
+ (53,60)->7: (50 + 3) * 60 = 50 * 60 + 3 * 60 = 3000 + 180 = 3180 mismatch
+ concatenation
+ (53,60)->7: 53 || 60 = 5360 mismatch
+ reverse concatenation
+ (53,60)->7: 60 || 53 = 6053 mismatch
+
+Trying difference operations
+ reversed operands [53->35 60->06] and reversed result [expected (35,06)->7]
+ subtraction (a-b)
+ (35,06)->7: 35 - 06 = 29 rev-> 92 mismatch
+ absolute difference
+ (35,06)->7: |35 - 06| = 29 rev-> 92 mismatch
+ max mod min
+ (35,06)->7: max(35,06) mod min(35,06) = 35 mod 06 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (35,06)->7: -|35 - 06| = -29 rev-> -92 mismatch
+ reverse subtraction (b-a)
+ (35,06)->7: 06 - 35 = -29 rev-> -92 mismatch
+ modulo (a mod b)
+ (35,06)->7: 35 mod 06 = 5 rev-> 5 mismatch
+
+ identity [53 60] [expected (53,60)->7]
+ subtraction (a-b)
+ (53,60)->7: 53 - 60 = -7 mismatch
+ absolute difference
+ (53,60)->7: |53 - 60| = 7 match
+ correct, actions: absolute difference
+ max mod min
+ (53,60)->7: max(53,60) mod min(53,60) = 60 mod 53 = 7 match
+ correct, but skipping
+ negated absolute difference
+ (53,60)->7: -|53 - 60| = -7 mismatch
+ reverse subtraction (b-a)
+ (53,60)->7: 60 - 53 = 7 match
+ correct, but skipping
+ modulo (a mod b)
+ (53,60)->7: 53 mod 60 = 53 mismatch
+
+Trying rare operations
+ reversed operands [53->35 60->06] and reversed result [expected (35,06)->7]
+ multiply+1
+ (35,06)->7: (30 + 5) * 06 + 1 = 30 * 06 + 5 * 06 + 1 = 180 + 30 + 1 = 210 + 1 = 211 rev-> 112 mismatch
+ multiply-1
+ (35,06)->7: (30 + 5) * 06 - 1 = 30 * 06 + 5 * 06 - 1 = 180 + 30 - 1 = 210 - 1 = 209 rev-> 902 mismatch
+ add+1
+ (35,06)->7: 35 + 06 + 1 = 42 rev-> 24 mismatch
+ add-1
+ (35,06)->7: 35 + 06 - 1 = 40 rev-> 04 mismatch
+ sub+1
+ (35,06)->7: 35 - 06 + 1 = 30 rev-> 03 mismatch
+ sub-1
+ (35,06)->7: 35 - 06 - 1 = 28 rev-> 82 mismatch
+ integer division (a/b)
+ (35,06)->7: 35 / 06 = 5 rev-> 5 mismatch
+ reverse division (b/a)
+ (35,06)->7: 06 / 35 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (35,06)->7: 06 mod 35 = 6 rev-> 6 mismatch
+ digit absolute diff
+ (35,06)->7: |3-0| || |5-6| = 31 rev-> 13 mismatch
+ digit add mod10
+ (35,06)->7: (3+0)%10 || (5+6)%10 = 31 rev-> 13 mismatch
+ digit sub mod10
+ (35,06)->7: (3-0)%10 || (5-6)%10 = 39 rev-> 93 mismatch
+ cross multiply
+ (35,06)->7: 3*0 + 5*6 = 0 + 30 = 30 rev-> 03 mismatch
+ cross multiply rev
+ (35,06)->7: 3*6 + 5*0 = 18 + 0 = 18 rev-> 81 mismatch
+ digit multiply
+ (35,06)->7: 3*0 || 5*6 = 0 || 30 = 030 rev-> 030 mismatch
+ digit multiply rev
+ (35,06)->7: 3*6 || 5*0 = 18 || 0 = 180 rev-> 081 mismatch
+ digit sum diff
+ (35,06)->7: (3+5) - (0+6) = 2 rev-> 2 mismatch
+ digit sum sum
+ (35,06)->7: (3+5) + (0+6) = 14 rev-> 41 mismatch
+ digit product diff
+ (35,06)->7: 3*5 - 0*6 = 15 - 0 = 15 rev-> 51 mismatch
+ digit product sum
+ (35,06)->7: 3*5 + 0*6 = 15 + 0 = 15 rev-> 51 mismatch
+ determinant
+ (35,06)->7: 3*6 - 5*0 = 18 - 0 = 18 rev-> 81 mismatch
+ abs determinant
+ (35,06)->7: |3*6 - 5*0| = |18 - 0| = 18 rev-> 81 mismatch
+
+ identity [53 60] [expected (53,60)->7]
+ multiply+1
+ (53,60)->7: (50 + 3) * 60 + 1 = 50 * 60 + 3 * 60 + 1 = 3000 + 180 + 1 = 3180 + 1 = 3181 mismatch
+ multiply-1
+ (53,60)->7: (50 + 3) * 60 - 1 = 50 * 60 + 3 * 60 - 1 = 3000 + 180 - 1 = 3180 - 1 = 3179 mismatch
+ add+1
+ (53,60)->7: 53 + 60 + 1 = 114 mismatch
+ add-1
+ (53,60)->7: 53 + 60 - 1 = 112 mismatch
+ sub+1
+ (53,60)->7: 53 - 60 + 1 = -6 mismatch
+ sub-1
+ (53,60)->7: 53 - 60 - 1 = -8 mismatch
+ integer division (a/b)
+ (53,60)->7: 53 / 60 = 0 mismatch
+ reverse division (b/a)
+ (53,60)->7: 60 / 53 = 1 mismatch
+ reverse modulo (b mod a)
+ (53,60)->7: 60 mod 53 = 7 match
+ correct, but skipping
+ digit absolute diff
+ (53,60)->7: |5-6| || |3-0| = 13 mismatch
+ digit add mod10
+ (53,60)->7: (5+6)%10 || (3+0)%10 = 13 mismatch
+ digit sub mod10
+ (53,60)->7: (5-6)%10 || (3-0)%10 = 93 mismatch
+ cross multiply
+ (53,60)->7: 5*6 + 3*0 = 30 + 0 = 30 mismatch
+ cross multiply rev
+ (53,60)->7: 5*0 + 3*6 = 0 + 18 = 18 mismatch
+ digit multiply
+ (53,60)->7: 5*6 || 3*0 = 30 || 0 = 300 mismatch
+ digit multiply rev
+ (53,60)->7: 5*0 || 3*6 = 0 || 18 = 018 mismatch
+ digit sum diff
+ (53,60)->7: (5+3) - (6+0) = 2 mismatch
+ digit sum sum
+ (53,60)->7: (5+3) + (6+0) = 14 mismatch
+ digit product diff
+ (53,60)->7: 5*3 - 6*0 = 15 - 0 = 15 mismatch
+ digit product sum
+ (53,60)->7: 5*3 + 6*0 = 15 + 0 = 15 mismatch
+ determinant
+ (53,60)->7: 5*0 - 3*6 = 0 - 18 = -18 mismatch
+ abs determinant
+ (53,60)->7: |5*0 - 3*6| = |0 - 18| = 18 mismatch
+
+correct, actions: absolute difference
+
+Applying to 80&87:
+ We recall that the question operator is found in the examples.
+ identity [80 87]
+ absolute difference
+ (80,87): |80 - 87| = 7
+ Result is non-negative
+ \boxed{7}

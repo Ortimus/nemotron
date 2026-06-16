@@ -1,0 +1,177 @@
+20+44 = 2044
+15}39 = 1539
+35}43 = 3543
+82+31 = 8231
+
+The inputs are 20, 44, 15, 39, 35, 43, 82, 31
+
+The outputs are 2044, 1539, 3543, 8231
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+20+44 -> +
+15}39 -> }
+35}43 -> }
+82+31 -> +
+
+The operators
++
+}
+
+Looking at the question
+18+67 -> +
+The question operator is found in the examples.
+
+Looking at operator + [20+44 = 2044, 82+31 = 8231]:
+
+Trying common operations reversed operands [20->02 44->44, 82->28 31->13] and reversed result [expected (02,44)->2044, (28,13)->8231]:
+ addition
+ (02,44)->2044: 02 + 44 = 46 rev-> 64 mismatch
+ multiplication
+ (28,13)->8231: (20 + 8) * 13 = 20 * 13 + 8 * 13 = 260 + 104 = 364 rev-> 463 mismatch
+ concatenation
+ (02,44)->2044: 02 || 44 = 0244 rev-> 4420 mismatch
+ reverse concatenation
+ (28,13)->8231: 13 || 28 = 1328 rev-> 8231 match
+ (02,44)->2044: 44 || 02 = 4402 rev-> 2044 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+Trying common operations on identity [20 44, 82 31] [expected (20,44)->2044, (82,31)->8231]:
+ addition
+ (20,44)->2044: 20 + 44 = 64 mismatch
+ multiplication
+ (82,31)->8231: (80 + 2) * 31 = 80 * 31 + 2 * 31 = 2480 + 62 = 2542 mismatch
+ concatenation
+ (20,44)->2044: 20 || 44 = 2044 match
+ (82,31)->8231: 82 || 31 = 8231 match
+ correct, but skipping
+ reverse concatenation
+ (82,31)->8231: 31 || 82 = 3182 mismatch
+
+Trying difference operations reversed operands [20->02 44->44, 82->28 31->13] and reversed result [expected (02,44)->2044, (28,13)->8231]:
+ subtraction (a-b)
+ (02,44)->2044: 02 - 44 = -42 rev-> -24 mismatch
+ absolute difference
+ (28,13)->8231: |28 - 13| = 15 rev-> 51 mismatch
+ max mod min
+ (02,44)->2044: max(02,44) mod min(02,44) = 44 mod 02 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (28,13)->8231: -|28 - 13| = -15 rev-> -51 mismatch
+ reverse subtraction (b-a)
+ (02,44)->2044: 44 - 02 = 42 rev-> 24 mismatch
+ modulo (a mod b)
+ (28,13)->8231: 28 mod 13 = 2 rev-> 2 mismatch
+
+Trying difference operations on identity [20 44, 82 31] [expected (20,44)->2044, (82,31)->8231]:
+ subtraction (a-b)
+ (20,44)->2044: 20 - 44 = -24 mismatch
+ absolute difference
+ (82,31)->8231: |82 - 31| = 51 mismatch
+ max mod min
+ (20,44)->2044: max(20,44) mod min(20,44) = 44 mod 20 = 4 mismatch
+ negated absolute difference
+ (82,31)->8231: -|82 - 31| = -51 mismatch
+ reverse subtraction (b-a)
+ (20,44)->2044: 44 - 20 = 24 mismatch
+ modulo (a mod b)
+ (82,31)->8231: 82 mod 31 = 20 mismatch
+
+Trying rare operations reversed operands [20->02 44->44, 82->28 31->13] and reversed result [expected (02,44)->2044, (28,13)->8231]:
+ multiply+1
+ (02,44)->2044: (0 + 2) * 44 + 1 = 0 * 44 + 2 * 44 + 1 = 0 + 88 + 1 = 88 + 1 = 89 rev-> 98 mismatch
+ multiply-1
+ (28,13)->8231: (20 + 8) * 13 - 1 = 20 * 13 + 8 * 13 - 1 = 260 + 104 - 1 = 364 - 1 = 363 rev-> 363 mismatch
+ add+1
+ (02,44)->2044: 02 + 44 + 1 = 47 rev-> 74 mismatch
+ add-1
+ (28,13)->8231: 28 + 13 - 1 = 40 rev-> 04 mismatch
+ sub+1
+ (02,44)->2044: 02 - 44 + 1 = -41 rev-> -14 mismatch
+ sub-1
+ (28,13)->8231: 28 - 13 - 1 = 14 rev-> 41 mismatch
+ integer division (a/b)
+ (02,44)->2044: 02 / 44 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (28,13)->8231: 13 / 28 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (02,44)->2044: 44 mod 02 = 0 rev-> 0 mismatch
+ digit absolute diff
+ (28,13)->8231: |2-1| || |8-3| = 15 rev-> 51 mismatch
+ digit add mod10
+ (02,44)->2044: (0+4)%10 || (2+4)%10 = 46 rev-> 64 mismatch
+ digit sub mod10
+ (28,13)->8231: (2-1)%10 || (8-3)%10 = 15 rev-> 51 mismatch
+ cross multiply
+ (02,44)->2044: 0*4 + 2*4 = 0 + 8 = 8 rev-> 8 mismatch
+ cross multiply rev
+ (28,13)->8231: 2*3 + 8*1 = 6 + 8 = 14 rev-> 41 mismatch
+ digit multiply
+ (02,44)->2044: 0*4 || 2*4 = 0 || 8 = 08 rev-> 80 mismatch
+ digit multiply rev
+ (28,13)->8231: 2*3 || 8*1 = 6 || 8 = 68 rev-> 86 mismatch
+ digit sum diff
+ (02,44)->2044: (0+2) - (4+4) = -6 rev-> -6 mismatch
+ digit sum sum
+ (28,13)->8231: (2+8) + (1+3) = 14 rev-> 41 mismatch
+ digit product diff
+ (02,44)->2044: 0*2 - 4*4 = 0 - 16 = -16 rev-> -61 mismatch
+ digit product sum
+ (28,13)->8231: 2*8 + 1*3 = 16 + 3 = 19 rev-> 91 mismatch
+ determinant
+ (02,44)->2044: 0*4 - 2*4 = 0 - 8 = -8 rev-> -8 mismatch
+ abs determinant
+ (28,13)->8231: |2*3 - 8*1| = |6 - 8| = 2 rev-> 2 mismatch
+
+Trying rare operations on identity [20 44, 82 31] [expected (20,44)->2044, (82,31)->8231]:
+ multiply+1
+ (20,44)->2044: (20 + 0) * 44 + 1 = 20 * 44 + 0 * 44 + 1 = 880 + 0 + 1 = 880 + 1 = 881 mismatch
+ multiply-1
+ (82,31)->8231: (80 + 2) * 31 - 1 = 80 * 31 + 2 * 31 - 1 = 2480 + 62 - 1 = 2542 - 1 = 2541 mismatch
+ add+1
+ (20,44)->2044: 20 + 44 + 1 = 65 mismatch
+ add-1
+ (82,31)->8231: 82 + 31 - 1 = 112 mismatch
+ sub+1
+ (20,44)->2044: 20 - 44 + 1 = -23 mismatch
+ sub-1
+ (82,31)->8231: 82 - 31 - 1 = 50 mismatch
+ integer division (a/b)
+ (20,44)->2044: 20 / 44 = 0 mismatch
+ reverse division (b/a)
+ (82,31)->8231: 31 / 82 = 0 mismatch
+ reverse modulo (b mod a)
+ (20,44)->2044: 44 mod 20 = 4 mismatch
+ digit absolute diff
+ (82,31)->8231: |8-3| || |2-1| = 51 mismatch
+ digit add mod10
+ (20,44)->2044: (2+4)%10 || (0+4)%10 = 64 mismatch
+ digit sub mod10
+ (82,31)->8231: (8-3)%10 || (2-1)%10 = 51 mismatch
+ cross multiply
+ (20,44)->2044: 2*4 + 0*4 = 8 + 0 = 8 mismatch
+ cross multiply rev
+ (82,31)->8231: 8*1 + 2*3 = 8 + 6 = 14 mismatch
+ digit multiply
+ (20,44)->2044: 2*4 || 0*4 = 8 || 0 = 80 mismatch
+ digit multiply rev
+ (82,31)->8231: 8*1 || 2*3 = 8 || 6 = 86 mismatch
+ digit sum diff
+ (20,44)->2044: (2+0) - (4+4) = -6 mismatch
+ digit sum sum
+ (82,31)->8231: (8+2) + (3+1) = 14 mismatch
+ digit product diff
+ (20,44)->2044: 2*0 - 4*4 = 0 - 16 = -16 mismatch
+ digit product sum
+ (82,31)->8231: 8*2 + 3*1 = 16 + 3 = 19 mismatch
+ determinant
+ (20,44)->2044: 2*4 - 0*4 = 8 - 0 = 8 mismatch
+ abs determinant
+ (82,31)->8231: |8*1 - 2*3| = |8 - 6| = 2 mismatch
+
+Applying to 18+67:
+ We recall that the question operator is found in the examples.
+ reversed operands [18->81, 67->76] and reversed result
+ reverse concatenation (81,76): 76 || 81 = 7681 rev-> 1867
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{1867}

@@ -1,0 +1,183 @@
+40^13 = 1
+86(19 = 8619
+58{88 = 5104
+99(67 = 9967
+
+The inputs are 40, 13, 86, 19, 58, 88, 99, 67
+
+The outputs are 1, 8619, 5104, 9967
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+40^13 -> ^
+86(19 -> (
+58{88 -> {
+99(67 -> (
+
+The operators
+^
+(
+{
+
+Looking at the question
+47(96 -> (
+The question operator is found in the examples.
+
+Looking at operator ( [86(19 = 8619, 99(67 = 9967]:
+
+Trying common operations
+ reversed operands [86->68 19->91, 99->99 67->76] and reversed result [expected (68,91)->8619, (99,76)->9967]
+ addition
+ (68,91)->8619: 68 + 91 = 159 rev-> 951 mismatch
+ multiplication
+ (99,76)->9967: (90 + 9) * 76 = 90 * 76 + 9 * 76 = 6840 + 684 = 7524 rev-> 4257 mismatch
+ concatenation
+ (68,91)->8619: 68 || 91 = 6891 rev-> 1986 mismatch
+ reverse concatenation
+ (99,76)->9967: 76 || 99 = 7699 rev-> 9967 match
+ (68,91)->8619: 91 || 68 = 9168 rev-> 8619 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+ identity [86 19, 99 67] [expected (86,19)->8619, (99,67)->9967]
+ addition
+ (86,19)->8619: 86 + 19 = 105 mismatch
+ multiplication
+ (99,67)->9967: (90 + 9) * 67 = 90 * 67 + 9 * 67 = 6030 + 603 = 6633 mismatch
+ concatenation
+ (86,19)->8619: 86 || 19 = 8619 match
+ (99,67)->9967: 99 || 67 = 9967 match
+ correct, but skipping
+ reverse concatenation
+ (99,67)->9967: 67 || 99 = 6799 mismatch
+
+Trying difference operations
+ reversed operands [86->68 19->91, 99->99 67->76] and reversed result [expected (68,91)->8619, (99,76)->9967]
+ subtraction (a-b)
+ (68,91)->8619: 68 - 91 = -23 rev-> -32 mismatch
+ absolute difference
+ (99,76)->9967: |99 - 76| = 23 rev-> 32 mismatch
+ max mod min
+ (68,91)->8619: max(68,91) mod min(68,91) = 91 mod 68 = 23 rev-> 32 mismatch
+ negated absolute difference
+ (99,76)->9967: -|99 - 76| = -23 rev-> -32 mismatch
+ reverse subtraction (b-a)
+ (68,91)->8619: 91 - 68 = 23 rev-> 32 mismatch
+ modulo (a mod b)
+ (99,76)->9967: 99 mod 76 = 23 rev-> 32 mismatch
+
+ identity [86 19, 99 67] [expected (86,19)->8619, (99,67)->9967]
+ subtraction (a-b)
+ (86,19)->8619: 86 - 19 = 67 mismatch
+ absolute difference
+ (99,67)->9967: |99 - 67| = 32 mismatch
+ max mod min
+ (86,19)->8619: max(86,19) mod min(86,19) = 86 mod 19 = 10 mismatch
+ negated absolute difference
+ (99,67)->9967: -|99 - 67| = -32 mismatch
+ reverse subtraction (b-a)
+ (86,19)->8619: 19 - 86 = -67 mismatch
+ modulo (a mod b)
+ (99,67)->9967: 99 mod 67 = 32 mismatch
+
+Trying rare operations
+ reversed operands [86->68 19->91, 99->99 67->76] and reversed result [expected (68,91)->8619, (99,76)->9967]
+ multiply+1
+ (68,91)->8619: (60 + 8) * 91 + 1 = 60 * 91 + 8 * 91 + 1 = 5460 + 728 + 1 = 6188 + 1 = 6189 rev-> 9816 mismatch
+ multiply-1
+ (99,76)->9967: (90 + 9) * 76 - 1 = 90 * 76 + 9 * 76 - 1 = 6840 + 684 - 1 = 7524 - 1 = 7523 rev-> 3257 mismatch
+ add+1
+ (68,91)->8619: 68 + 91 + 1 = 160 rev-> 061 mismatch
+ add-1
+ (99,76)->9967: 99 + 76 - 1 = 174 rev-> 471 mismatch
+ sub+1
+ (68,91)->8619: 68 - 91 + 1 = -22 rev-> -22 mismatch
+ sub-1
+ (99,76)->9967: 99 - 76 - 1 = 22 rev-> 22 mismatch
+ integer division (a/b)
+ (68,91)->8619: 68 / 91 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (99,76)->9967: 76 / 99 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (68,91)->8619: 91 mod 68 = 23 rev-> 32 mismatch
+ digit absolute diff
+ (99,76)->9967: |9-7| || |9-6| = 23 rev-> 32 mismatch
+ digit add mod10
+ (68,91)->8619: (6+9)%10 || (8+1)%10 = 59 rev-> 95 mismatch
+ digit sub mod10
+ (99,76)->9967: (9-7)%10 || (9-6)%10 = 23 rev-> 32 mismatch
+ cross multiply
+ (68,91)->8619: 6*9 + 8*1 = 54 + 8 = 62 rev-> 26 mismatch
+ cross multiply rev
+ (99,76)->9967: 9*6 + 9*7 = 54 + 63 = 117 rev-> 711 mismatch
+ digit multiply
+ (68,91)->8619: 6*9 || 8*1 = 54 || 8 = 548 rev-> 845 mismatch
+ digit multiply rev
+ (99,76)->9967: 9*6 || 9*7 = 54 || 63 = 5463 rev-> 3645 mismatch
+ digit sum diff
+ (68,91)->8619: (6+8) - (9+1) = 4 rev-> 4 mismatch
+ digit sum sum
+ (99,76)->9967: (9+9) + (7+6) = 31 rev-> 13 mismatch
+ digit product diff
+ (68,91)->8619: 6*8 - 9*1 = 48 - 9 = 39 rev-> 93 mismatch
+ digit product sum
+ (99,76)->9967: 9*9 + 7*6 = 81 + 42 = 123 rev-> 321 mismatch
+ determinant
+ (68,91)->8619: 6*1 - 8*9 = 6 - 72 = -66 rev-> -66 mismatch
+ abs determinant
+ (99,76)->9967: |9*6 - 9*7| = |54 - 63| = 9 rev-> 9 mismatch
+
+ identity [86 19, 99 67] [expected (86,19)->8619, (99,67)->9967]
+ multiply+1
+ (86,19)->8619: (80 + 6) * 19 + 1 = 80 * 19 + 6 * 19 + 1 = 1520 + 114 + 1 = 1634 + 1 = 1635 mismatch
+ multiply-1
+ (99,67)->9967: (90 + 9) * 67 - 1 = 90 * 67 + 9 * 67 - 1 = 6030 + 603 - 1 = 6633 - 1 = 6632 mismatch
+ add+1
+ (86,19)->8619: 86 + 19 + 1 = 106 mismatch
+ add-1
+ (99,67)->9967: 99 + 67 - 1 = 165 mismatch
+ sub+1
+ (86,19)->8619: 86 - 19 + 1 = 68 mismatch
+ sub-1
+ (99,67)->9967: 99 - 67 - 1 = 31 mismatch
+ integer division (a/b)
+ (86,19)->8619: 86 / 19 = 4 mismatch
+ reverse division (b/a)
+ (99,67)->9967: 67 / 99 = 0 mismatch
+ reverse modulo (b mod a)
+ (86,19)->8619: 19 mod 86 = 19 mismatch
+ digit absolute diff
+ (99,67)->9967: |9-6| || |9-7| = 32 mismatch
+ digit add mod10
+ (86,19)->8619: (8+1)%10 || (6+9)%10 = 95 mismatch
+ digit sub mod10
+ (99,67)->9967: (9-6)%10 || (9-7)%10 = 32 mismatch
+ cross multiply
+ (86,19)->8619: 8*1 + 6*9 = 8 + 54 = 62 mismatch
+ cross multiply rev
+ (99,67)->9967: 9*7 + 9*6 = 63 + 54 = 117 mismatch
+ digit multiply
+ (86,19)->8619: 8*1 || 6*9 = 8 || 54 = 854 mismatch
+ digit multiply rev
+ (99,67)->9967: 9*7 || 9*6 = 63 || 54 = 6354 mismatch
+ digit sum diff
+ (86,19)->8619: (8+6) - (1+9) = 4 mismatch
+ digit sum sum
+ (99,67)->9967: (9+9) + (6+7) = 31 mismatch
+ digit product diff
+ (86,19)->8619: 8*6 - 1*9 = 48 - 9 = 39 mismatch
+ digit product sum
+ (99,67)->9967: 9*9 + 6*7 = 81 + 42 = 123 mismatch
+ determinant
+ (86,19)->8619: 8*9 - 6*1 = 72 - 6 = 66 mismatch
+ abs determinant
+ (99,67)->9967: |9*7 - 9*6| = |63 - 54| = 9 mismatch
+
+correct, actions: reversed operands, reversed result, reverse concatenation
+
+Applying to 47(96:
+ We recall that the question operator is found in the examples.
+ reversed operands [47->74, 96->69] and reversed result
+ reverse concatenation
+ (74,69): 69 || 74 = 6974 rev-> 4796
+ Result is non-negative
+ \boxed{4796}

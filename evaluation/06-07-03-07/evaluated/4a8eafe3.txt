@@ -1,0 +1,176 @@
+65+27 = 921
+02*91 = 183
+84*44 = 3112
+82+62 = 55
+
+The inputs are 65, 27, 02, 91, 84, 44, 82, 62
+
+The outputs are 921, 183, 3112, 55
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+65+27 -> +
+02*91 -> *
+84*44 -> *
+82+62 -> +
+
+The operators
++
+*
+
+Looking at the question
+95*68 -> *
+The question operator is found in the examples.
+
+Looking at operator * [02*91 = 183, 84*44 = 3112]:
+
+Trying common operations reversed operands [02->20 91->19, 84->48 44->44] and reversed result [expected (20,19)->183, (48,44)->3112]:
+ addition
+ (20,19)->183: 20 + 19 = 39 rev-> 93 mismatch
+ multiplication
+ (48,44)->3112: (40 + 8) * 44 = 40 * 44 + 8 * 44 = 1760 + 352 = 2112 rev-> 2112 mismatch
+ concatenation
+ (20,19)->183: 20 || 19 = 2019 rev-> 9102 mismatch
+ reverse concatenation
+ (48,44)->3112: 44 || 48 = 4448 rev-> 8444 mismatch
+
+Trying common operations on identity [02 91, 84 44] [expected (02,91)->183, (84,44)->3112]:
+ addition
+ (02,91)->183: 02 + 91 = 93 mismatch
+ multiplication
+ (84,44)->3112: (80 + 4) * 44 = 80 * 44 + 4 * 44 = 3520 + 176 = 3696 mismatch
+ concatenation
+ (02,91)->183: 02 || 91 = 0291 mismatch
+ reverse concatenation
+ (84,44)->3112: 44 || 84 = 4484 mismatch
+
+Trying difference operations reversed operands [02->20 91->19, 84->48 44->44] and reversed result [expected (20,19)->183, (48,44)->3112]:
+ subtraction (a-b)
+ (20,19)->183: 20 - 19 = 1 rev-> 1 mismatch
+ absolute difference
+ (48,44)->3112: |48 - 44| = 4 rev-> 4 mismatch
+ max mod min
+ (20,19)->183: max(20,19) mod min(20,19) = 20 mod 19 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (48,44)->3112: -|48 - 44| = -4 rev-> -4 mismatch
+ reverse subtraction (b-a)
+ (20,19)->183: 19 - 20 = -1 rev-> -1 mismatch
+ modulo (a mod b)
+ (48,44)->3112: 48 mod 44 = 4 rev-> 4 mismatch
+
+Trying difference operations on identity [02 91, 84 44] [expected (02,91)->183, (84,44)->3112]:
+ subtraction (a-b)
+ (02,91)->183: 02 - 91 = -89 mismatch
+ absolute difference
+ (84,44)->3112: |84 - 44| = 40 mismatch
+ max mod min
+ (02,91)->183: max(02,91) mod min(02,91) = 91 mod 02 = 1 mismatch
+ negated absolute difference
+ (84,44)->3112: -|84 - 44| = -40 mismatch
+ reverse subtraction (b-a)
+ (02,91)->183: 91 - 02 = 89 mismatch
+ modulo (a mod b)
+ (84,44)->3112: 84 mod 44 = 40 mismatch
+
+Trying rare operations reversed operands [02->20 91->19, 84->48 44->44] and reversed result [expected (20,19)->183, (48,44)->3112]:
+ multiply+1
+ (20,19)->183: (20 + 0) * 19 + 1 = 20 * 19 + 0 * 19 + 1 = 380 + 0 + 1 = 380 + 1 = 381 rev-> 183 match
+ (48,44)->3112: (40 + 8) * 44 + 1 = 40 * 44 + 8 * 44 + 1 = 1760 + 352 + 1 = 2112 + 1 = 2113 rev-> 3112 match
+ correct, actions: reversed operands, reversed result, multiply+1
+ multiply-1
+ (48,44)->3112: (40 + 8) * 44 - 1 = 40 * 44 + 8 * 44 - 1 = 1760 + 352 - 1 = 2112 - 1 = 2111 rev-> 1112 mismatch
+ add+1
+ (20,19)->183: 20 + 19 + 1 = 40 rev-> 04 mismatch
+ add-1
+ (48,44)->3112: 48 + 44 - 1 = 91 rev-> 19 mismatch
+ sub+1
+ (20,19)->183: 20 - 19 + 1 = 2 rev-> 2 mismatch
+ sub-1
+ (48,44)->3112: 48 - 44 - 1 = 3 rev-> 3 mismatch
+ integer division (a/b)
+ (20,19)->183: 20 / 19 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (48,44)->3112: 44 / 48 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (20,19)->183: 19 mod 20 = 19 rev-> 91 mismatch
+ digit absolute diff
+ (48,44)->3112: |4-4| || |8-4| = 04 rev-> 40 mismatch
+ digit add mod10
+ (20,19)->183: (2+1)%10 || (0+9)%10 = 39 rev-> 93 mismatch
+ digit sub mod10
+ (48,44)->3112: (4-4)%10 || (8-4)%10 = 04 rev-> 40 mismatch
+ cross multiply
+ (20,19)->183: 2*1 + 0*9 = 2 + 0 = 2 rev-> 2 mismatch
+ cross multiply rev
+ (48,44)->3112: 4*4 + 8*4 = 16 + 32 = 48 rev-> 84 mismatch
+ digit multiply
+ (20,19)->183: 2*1 || 0*9 = 2 || 0 = 20 rev-> 02 mismatch
+ digit multiply rev
+ (48,44)->3112: 4*4 || 8*4 = 16 || 32 = 1632 rev-> 2361 mismatch
+ digit sum diff
+ (20,19)->183: (2+0) - (1+9) = -8 rev-> -8 mismatch
+ digit sum sum
+ (48,44)->3112: (4+8) + (4+4) = 20 rev-> 02 mismatch
+ digit product diff
+ (20,19)->183: 2*0 - 1*9 = 0 - 9 = -9 rev-> -9 mismatch
+ digit product sum
+ (48,44)->3112: 4*8 + 4*4 = 32 + 16 = 48 rev-> 84 mismatch
+ determinant
+ (20,19)->183: 2*9 - 0*1 = 18 - 0 = 18 rev-> 81 mismatch
+ abs determinant
+ (48,44)->3112: |4*4 - 8*4| = |16 - 32| = 16 rev-> 61 mismatch
+
+Trying rare operations on identity [02 91, 84 44] [expected (02,91)->183, (84,44)->3112]:
+ multiply+1
+ (02,91)->183: (0 + 2) * 91 + 1 = 0 * 91 + 2 * 91 + 1 = 0 + 182 + 1 = 182 + 1 = 183 match
+ (84,44)->3112: (80 + 4) * 44 + 1 = 80 * 44 + 4 * 44 + 1 = 3520 + 176 + 1 = 3696 + 1 = 3697 mismatch
+ multiply-1
+ (84,44)->3112: (80 + 4) * 44 - 1 = 80 * 44 + 4 * 44 - 1 = 3520 + 176 - 1 = 3696 - 1 = 3695 mismatch
+ add+1
+ (02,91)->183: 02 + 91 + 1 = 94 mismatch
+ add-1
+ (84,44)->3112: 84 + 44 - 1 = 127 mismatch
+ sub+1
+ (02,91)->183: 02 - 91 + 1 = -88 mismatch
+ sub-1
+ (84,44)->3112: 84 - 44 - 1 = 39 mismatch
+ integer division (a/b)
+ (02,91)->183: 02 / 91 = 0 mismatch
+ reverse division (b/a)
+ (84,44)->3112: 44 / 84 = 0 mismatch
+ reverse modulo (b mod a)
+ (02,91)->183: 91 mod 02 = 1 mismatch
+ digit absolute diff
+ (84,44)->3112: |8-4| || |4-4| = 40 mismatch
+ digit add mod10
+ (02,91)->183: (0+9)%10 || (2+1)%10 = 93 mismatch
+ digit sub mod10
+ (84,44)->3112: (8-4)%10 || (4-4)%10 = 40 mismatch
+ cross multiply
+ (02,91)->183: 0*9 + 2*1 = 0 + 2 = 2 mismatch
+ cross multiply rev
+ (84,44)->3112: 8*4 + 4*4 = 32 + 16 = 48 mismatch
+ digit multiply
+ (02,91)->183: 0*9 || 2*1 = 0 || 2 = 02 mismatch
+ digit multiply rev
+ (84,44)->3112: 8*4 || 4*4 = 32 || 16 = 3216 mismatch
+ digit sum diff
+ (02,91)->183: (0+2) - (9+1) = -8 mismatch
+ digit sum sum
+ (84,44)->3112: (8+4) + (4+4) = 20 mismatch
+ digit product diff
+ (02,91)->183: 0*2 - 9*1 = 0 - 9 = -9 mismatch
+ digit product sum
+ (84,44)->3112: 8*4 + 4*4 = 32 + 16 = 48 mismatch
+ determinant
+ (02,91)->183: 0*1 - 2*9 = 0 - 18 = -18 mismatch
+ abs determinant
+ (84,44)->3112: |8*4 - 4*4| = |32 - 16| = 16 mismatch
+
+Applying to 95*68:
+ We recall that the question operator is found in the examples.
+ reversed operands [95->59, 68->86] and reversed result
+ multiply+1 (59,86): (50 + 9) * 86 + 1 = 50 * 86 + 9 * 86 + 1 = 4300 + 774 + 1 = 5074 + 1 = 5075 rev-> 5705
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{5705}

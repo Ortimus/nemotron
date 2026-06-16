@@ -1,0 +1,183 @@
+57!47 = 2679
+81!68 = 5508
+19%20 = 1920
+60'70 = '10
+
+The inputs are 57, 47, 81, 68, 19, 20, 60, 70
+
+The outputs are 2679, 5508, 1920, '10
+Some example outputs have the operator symbol as prefix '.
+We now consider the outputs to be 2679, 5508, 1920, -10
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+57!47 -> !
+81!68 -> !
+19%20 -> %
+60'70 -> '
+
+The operators
+!
+%
+'
+
+Looking at the question
+46!85 -> !
+The question operator is found in the examples.
+
+Looking at operator ! [57!47 = 2679, 81!68 = 5508]:
+
+Trying common operations
+ reversed operands [57->75 47->74, 81->18 68->86] and reversed result [expected (75,74)->2679, (18,86)->5508]
+ addition
+ (75,74)->2679: 75 + 74 = 149 rev-> 941 mismatch
+ multiplication
+ (18,86)->5508: (10 + 8) * 86 = 10 * 86 + 8 * 86 = 860 + 688 = 1548 rev-> 8451 mismatch
+ concatenation
+ (75,74)->2679: 75 || 74 = 7574 rev-> 4757 mismatch
+ reverse concatenation
+ (18,86)->5508: 86 || 18 = 8618 rev-> 8168 mismatch
+
+ identity [57 47, 81 68] [expected (57,47)->2679, (81,68)->5508]
+ addition
+ (57,47)->2679: 57 + 47 = 104 mismatch
+ multiplication
+ (81,68)->5508: (80 + 1) * 68 = 80 * 68 + 1 * 68 = 5440 + 68 = 5508 match
+ (57,47)->2679: (50 + 7) * 47 = 50 * 47 + 7 * 47 = 2350 + 329 = 2679 match
+ correct, actions: multiplication
+ concatenation
+ (57,47)->2679: 57 || 47 = 5747 mismatch
+ reverse concatenation
+ (81,68)->5508: 68 || 81 = 6881 mismatch
+
+Trying difference operations
+ reversed operands [57->75 47->74, 81->18 68->86] and reversed result [expected (75,74)->2679, (18,86)->5508]
+ subtraction (a-b)
+ (75,74)->2679: 75 - 74 = 1 rev-> 1 mismatch
+ absolute difference
+ (18,86)->5508: |18 - 86| = 68 rev-> 86 mismatch
+ max mod min
+ (75,74)->2679: max(75,74) mod min(75,74) = 75 mod 74 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (18,86)->5508: -|18 - 86| = -68 rev-> -86 mismatch
+ reverse subtraction (b-a)
+ (75,74)->2679: 74 - 75 = -1 rev-> -1 mismatch
+ modulo (a mod b)
+ (18,86)->5508: 18 mod 86 = 18 rev-> 81 mismatch
+
+ identity [57 47, 81 68] [expected (57,47)->2679, (81,68)->5508]
+ subtraction (a-b)
+ (57,47)->2679: 57 - 47 = 10 mismatch
+ absolute difference
+ (81,68)->5508: |81 - 68| = 13 mismatch
+ max mod min
+ (57,47)->2679: max(57,47) mod min(57,47) = 57 mod 47 = 10 mismatch
+ negated absolute difference
+ (81,68)->5508: -|81 - 68| = -13 mismatch
+ reverse subtraction (b-a)
+ (57,47)->2679: 47 - 57 = -10 mismatch
+ modulo (a mod b)
+ (81,68)->5508: 81 mod 68 = 13 mismatch
+
+Trying rare operations
+ reversed operands [57->75 47->74, 81->18 68->86] and reversed result [expected (75,74)->2679, (18,86)->5508]
+ multiply+1
+ (75,74)->2679: (70 + 5) * 74 + 1 = 70 * 74 + 5 * 74 + 1 = 5180 + 370 + 1 = 5550 + 1 = 5551 rev-> 1555 mismatch
+ multiply-1
+ (18,86)->5508: (10 + 8) * 86 - 1 = 10 * 86 + 8 * 86 - 1 = 860 + 688 - 1 = 1548 - 1 = 1547 rev-> 7451 mismatch
+ add+1
+ (75,74)->2679: 75 + 74 + 1 = 150 rev-> 051 mismatch
+ add-1
+ (18,86)->5508: 18 + 86 - 1 = 103 rev-> 301 mismatch
+ sub+1
+ (75,74)->2679: 75 - 74 + 1 = 2 rev-> 2 mismatch
+ sub-1
+ (18,86)->5508: 18 - 86 - 1 = -69 rev-> -96 mismatch
+ integer division (a/b)
+ (75,74)->2679: 75 / 74 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (18,86)->5508: 86 / 18 = 4 rev-> 4 mismatch
+ reverse modulo (b mod a)
+ (75,74)->2679: 74 mod 75 = 74 rev-> 47 mismatch
+ digit absolute diff
+ (18,86)->5508: |1-8| || |8-6| = 72 rev-> 27 mismatch
+ digit add mod10
+ (75,74)->2679: (7+7)%10 || (5+4)%10 = 49 rev-> 94 mismatch
+ digit sub mod10
+ (18,86)->5508: (1-8)%10 || (8-6)%10 = 32 rev-> 23 mismatch
+ cross multiply
+ (75,74)->2679: 7*7 + 5*4 = 49 + 20 = 69 rev-> 96 mismatch
+ cross multiply rev
+ (18,86)->5508: 1*6 + 8*8 = 6 + 64 = 70 rev-> 07 mismatch
+ digit multiply
+ (75,74)->2679: 7*7 || 5*4 = 49 || 20 = 4920 rev-> 0294 mismatch
+ digit multiply rev
+ (18,86)->5508: 1*6 || 8*8 = 6 || 64 = 664 rev-> 466 mismatch
+ digit sum diff
+ (75,74)->2679: (7+5) - (7+4) = 1 rev-> 1 mismatch
+ digit sum sum
+ (18,86)->5508: (1+8) + (8+6) = 23 rev-> 32 mismatch
+ digit product diff
+ (75,74)->2679: 7*5 - 7*4 = 35 - 28 = 7 rev-> 7 mismatch
+ digit product sum
+ (18,86)->5508: 1*8 + 8*6 = 8 + 48 = 56 rev-> 65 mismatch
+ determinant
+ (75,74)->2679: 7*4 - 5*7 = 28 - 35 = -7 rev-> -7 mismatch
+ abs determinant
+ (18,86)->5508: |1*6 - 8*8| = |6 - 64| = 58 rev-> 85 mismatch
+
+ identity [57 47, 81 68] [expected (57,47)->2679, (81,68)->5508]
+ multiply+1
+ (57,47)->2679: (50 + 7) * 47 + 1 = 50 * 47 + 7 * 47 + 1 = 2350 + 329 + 1 = 2679 + 1 = 2680 mismatch
+ multiply-1
+ (81,68)->5508: (80 + 1) * 68 - 1 = 80 * 68 + 1 * 68 - 1 = 5440 + 68 - 1 = 5508 - 1 = 5507 mismatch
+ add+1
+ (57,47)->2679: 57 + 47 + 1 = 105 mismatch
+ add-1
+ (81,68)->5508: 81 + 68 - 1 = 148 mismatch
+ sub+1
+ (57,47)->2679: 57 - 47 + 1 = 11 mismatch
+ sub-1
+ (81,68)->5508: 81 - 68 - 1 = 12 mismatch
+ integer division (a/b)
+ (57,47)->2679: 57 / 47 = 1 mismatch
+ reverse division (b/a)
+ (81,68)->5508: 68 / 81 = 0 mismatch
+ reverse modulo (b mod a)
+ (57,47)->2679: 47 mod 57 = 47 mismatch
+ digit absolute diff
+ (81,68)->5508: |8-6| || |1-8| = 27 mismatch
+ digit add mod10
+ (57,47)->2679: (5+4)%10 || (7+7)%10 = 94 mismatch
+ digit sub mod10
+ (81,68)->5508: (8-6)%10 || (1-8)%10 = 23 mismatch
+ cross multiply
+ (57,47)->2679: 5*4 + 7*7 = 20 + 49 = 69 mismatch
+ cross multiply rev
+ (81,68)->5508: 8*8 + 1*6 = 64 + 6 = 70 mismatch
+ digit multiply
+ (57,47)->2679: 5*4 || 7*7 = 20 || 49 = 2049 mismatch
+ digit multiply rev
+ (81,68)->5508: 8*8 || 1*6 = 64 || 6 = 646 mismatch
+ digit sum diff
+ (57,47)->2679: (5+7) - (4+7) = 1 mismatch
+ digit sum sum
+ (81,68)->5508: (8+1) + (6+8) = 23 mismatch
+ digit product diff
+ (57,47)->2679: 5*7 - 4*7 = 35 - 28 = 7 mismatch
+ digit product sum
+ (81,68)->5508: 8*1 + 6*8 = 8 + 48 = 56 mismatch
+ determinant
+ (57,47)->2679: 5*7 - 7*4 = 35 - 28 = 7 mismatch
+ abs determinant
+ (81,68)->5508: |8*8 - 1*6| = |64 - 6| = 58 mismatch
+
+correct, actions: multiplication
+
+Applying to 46!85:
+ We recall that the question operator is found in the examples.
+ identity [46 85]
+ multiplication
+ (46,85): (40 + 6) * 85 = 40 * 85 + 6 * 85 = 3400 + 510 = 3910
+ Result is non-negative
+ \boxed{3910}

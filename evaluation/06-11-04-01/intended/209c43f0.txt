@@ -1,0 +1,181 @@
+10^12 = 21
+92!90 = 8280
+98^33 = 130
+48:26 = 22
+
+The inputs are 10, 12, 92, 90, 98, 33, 48, 26
+
+The outputs are 21, 8280, 130, 22
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+10^12 -> ^
+92!90 -> !
+98^33 -> ^
+48:26 -> :
+
+The operators
+^
+!
+:
+
+Looking at the question
+18^84 -> ^
+The question operator is found in the examples.
+
+Looking at operator ^ [10^12 = 21, 98^33 = 130]:
+
+Trying common operations
+ reversed operands [10->01 12->21, 98->89 33->33] and reversed result [expected (01,21)->21, (89,33)->130]
+ addition
+ (01,21)->21: 01 + 21 = 22 rev-> 22 mismatch
+ multiplication
+ (89,33)->130: (80 + 9) * 33 = 80 * 33 + 9 * 33 = 2640 + 297 = 2937 rev-> 7392 mismatch
+ concatenation
+ (01,21)->21: 01 || 21 = 0121 rev-> 1210 mismatch
+ reverse concatenation
+ (89,33)->130: 33 || 89 = 3389 rev-> 9833 mismatch
+
+ identity [10 12, 98 33] [expected (10,12)->21, (98,33)->130]
+ addition
+ (10,12)->21: 10 + 12 = 22 mismatch
+ multiplication
+ (98,33)->130: (90 + 8) * 33 = 90 * 33 + 8 * 33 = 2970 + 264 = 3234 mismatch
+ concatenation
+ (10,12)->21: 10 || 12 = 1012 mismatch
+ reverse concatenation
+ (98,33)->130: 33 || 98 = 3398 mismatch
+
+Trying difference operations
+ reversed operands [10->01 12->21, 98->89 33->33] and reversed result [expected (01,21)->21, (89,33)->130]
+ subtraction (a-b)
+ (01,21)->21: 01 - 21 = -20 rev-> -02 mismatch
+ absolute difference
+ (89,33)->130: |89 - 33| = 56 rev-> 65 mismatch
+ max mod min
+ (01,21)->21: max(01,21) mod min(01,21) = 21 mod 01 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (89,33)->130: -|89 - 33| = -56 rev-> -65 mismatch
+ reverse subtraction (b-a)
+ (01,21)->21: 21 - 01 = 20 rev-> 02 mismatch
+ modulo (a mod b)
+ (89,33)->130: 89 mod 33 = 23 rev-> 32 mismatch
+
+ identity [10 12, 98 33] [expected (10,12)->21, (98,33)->130]
+ subtraction (a-b)
+ (10,12)->21: 10 - 12 = -2 mismatch
+ absolute difference
+ (98,33)->130: |98 - 33| = 65 mismatch
+ max mod min
+ (10,12)->21: max(10,12) mod min(10,12) = 12 mod 10 = 2 mismatch
+ negated absolute difference
+ (98,33)->130: -|98 - 33| = -65 mismatch
+ reverse subtraction (b-a)
+ (10,12)->21: 12 - 10 = 2 mismatch
+ modulo (a mod b)
+ (98,33)->130: 98 mod 33 = 32 mismatch
+
+Trying rare operations
+ reversed operands [10->01 12->21, 98->89 33->33] and reversed result [expected (01,21)->21, (89,33)->130]
+ multiply+1
+ (01,21)->21: (0 + 1) * 21 + 1 = 0 * 21 + 1 * 21 + 1 = 0 + 21 + 1 = 21 + 1 = 22 rev-> 22 mismatch
+ multiply-1
+ (89,33)->130: (80 + 9) * 33 - 1 = 80 * 33 + 9 * 33 - 1 = 2640 + 297 - 1 = 2937 - 1 = 2936 rev-> 6392 mismatch
+ add+1
+ (01,21)->21: 01 + 21 + 1 = 23 rev-> 32 mismatch
+ add-1
+ (89,33)->130: 89 + 33 - 1 = 121 rev-> 121 mismatch
+ sub+1
+ (01,21)->21: 01 - 21 + 1 = -19 rev-> -91 mismatch
+ sub-1
+ (89,33)->130: 89 - 33 - 1 = 55 rev-> 55 mismatch
+ integer division (a/b)
+ (01,21)->21: 01 / 21 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (89,33)->130: 33 / 89 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (01,21)->21: 21 mod 01 = 0 rev-> 0 mismatch
+ digit absolute diff
+ (89,33)->130: |8-3| || |9-3| = 56 rev-> 65 mismatch
+ digit add mod10
+ (01,21)->21: (0+2)%10 || (1+1)%10 = 22 rev-> 22 mismatch
+ digit sub mod10
+ (89,33)->130: (8-3)%10 || (9-3)%10 = 56 rev-> 65 mismatch
+ cross multiply
+ (01,21)->21: 0*2 + 1*1 = 0 + 1 = 1 rev-> 1 mismatch
+ cross multiply rev
+ (89,33)->130: 8*3 + 9*3 = 24 + 27 = 51 rev-> 15 mismatch
+ digit multiply
+ (01,21)->21: 0*2 || 1*1 = 0 || 1 = 01 rev-> 10 mismatch
+ digit multiply rev
+ (89,33)->130: 8*3 || 9*3 = 24 || 27 = 2427 rev-> 7242 mismatch
+ digit sum diff
+ (01,21)->21: (0+1) - (2+1) = -2 rev-> -2 mismatch
+ digit sum sum
+ (89,33)->130: (8+9) + (3+3) = 23 rev-> 32 mismatch
+ digit product diff
+ (01,21)->21: 0*1 - 2*1 = 0 - 2 = -2 rev-> -2 mismatch
+ digit product sum
+ (89,33)->130: 8*9 + 3*3 = 72 + 9 = 81 rev-> 18 mismatch
+ determinant
+ (01,21)->21: 0*1 - 1*2 = 0 - 2 = -2 rev-> -2 mismatch
+ abs determinant
+ (89,33)->130: |8*3 - 9*3| = |24 - 27| = 3 rev-> 3 mismatch
+
+ identity [10 12, 98 33] [expected (10,12)->21, (98,33)->130]
+ multiply+1
+ (10,12)->21: (10 + 0) * 12 + 1 = 10 * 12 + 0 * 12 + 1 = 120 + 0 + 1 = 120 + 1 = 121 mismatch
+ multiply-1
+ (98,33)->130: (90 + 8) * 33 - 1 = 90 * 33 + 8 * 33 - 1 = 2970 + 264 - 1 = 3234 - 1 = 3233 mismatch
+ add+1
+ (10,12)->21: 10 + 12 + 1 = 23 mismatch
+ add-1
+ (98,33)->130: 98 + 33 - 1 = 130 match
+ (10,12)->21: 10 + 12 - 1 = 21 match
+ correct, actions: add-1
+ sub+1
+ (10,12)->21: 10 - 12 + 1 = -1 mismatch
+ sub-1
+ (98,33)->130: 98 - 33 - 1 = 64 mismatch
+ integer division (a/b)
+ (10,12)->21: 10 / 12 = 0 mismatch
+ reverse division (b/a)
+ (98,33)->130: 33 / 98 = 0 mismatch
+ reverse modulo (b mod a)
+ (10,12)->21: 12 mod 10 = 2 mismatch
+ digit absolute diff
+ (98,33)->130: |9-3| || |8-3| = 65 mismatch
+ digit add mod10
+ (10,12)->21: (1+1)%10 || (0+2)%10 = 22 mismatch
+ digit sub mod10
+ (98,33)->130: (9-3)%10 || (8-3)%10 = 65 mismatch
+ cross multiply
+ (10,12)->21: 1*1 + 0*2 = 1 + 0 = 1 mismatch
+ cross multiply rev
+ (98,33)->130: 9*3 + 8*3 = 27 + 24 = 51 mismatch
+ digit multiply
+ (10,12)->21: 1*1 || 0*2 = 1 || 0 = 10 mismatch
+ digit multiply rev
+ (98,33)->130: 9*3 || 8*3 = 27 || 24 = 2724 mismatch
+ digit sum diff
+ (10,12)->21: (1+0) - (1+2) = -2 mismatch
+ digit sum sum
+ (98,33)->130: (9+8) + (3+3) = 23 mismatch
+ digit product diff
+ (10,12)->21: 1*0 - 1*2 = 0 - 2 = -2 mismatch
+ digit product sum
+ (98,33)->130: 9*8 + 3*3 = 72 + 9 = 81 mismatch
+ determinant
+ (10,12)->21: 1*2 - 0*1 = 2 - 0 = 2 mismatch
+ abs determinant
+ (98,33)->130: |9*3 - 8*3| = |27 - 24| = 3 mismatch
+
+correct, actions: add-1
+
+Applying to 18^84:
+ We recall that the question operator is found in the examples.
+ identity [18 84]
+ add-1
+ (18,84): 18 + 84 - 1 = 101
+ Result is non-negative
+ \boxed{101}

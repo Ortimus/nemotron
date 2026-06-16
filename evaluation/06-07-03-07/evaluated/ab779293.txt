@@ -1,0 +1,181 @@
+44?30 = 1321
+28?40 = 1121
+63[25 = 38
+14:20 = 35
+94[89 = 5
+
+The inputs are 44, 30, 28, 40, 63, 25, 14, 20, 94, 89
+
+The outputs are 1321, 1121, 38, 35, 5
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+44?30 -> ?
+28?40 -> ?
+63[25 -> [
+14:20 -> :
+94[89 -> [
+
+The operators
+?
+[
+:
+
+Looking at the question
+89[11 -> [
+The question operator is found in the examples.
+
+Looking at operator [ [63[25 = 38, 94[89 = 5]:
+
+Trying common operations reversed operands [63->36 25->52, 94->49 89->98] and reversed result [expected (36,52)->38, (49,98)->5]:
+ addition
+ (36,52)->38: 36 + 52 = 88 rev-> 88 mismatch
+ multiplication
+ (49,98)->5: (40 + 9) * 98 = 40 * 98 + 9 * 98 = 3920 + 882 = 4802 rev-> 2084 mismatch
+ concatenation
+ (36,52)->38: 36 || 52 = 3652 rev-> 2563 mismatch
+ reverse concatenation
+ (49,98)->5: 98 || 49 = 9849 rev-> 9489 mismatch
+
+Trying common operations on identity [63 25, 94 89] [expected (63,25)->38, (94,89)->5]:
+ addition
+ (63,25)->38: 63 + 25 = 88 mismatch
+ multiplication
+ (94,89)->5: (90 + 4) * 89 = 90 * 89 + 4 * 89 = 8010 + 356 = 8366 mismatch
+ concatenation
+ (63,25)->38: 63 || 25 = 6325 mismatch
+ reverse concatenation
+ (94,89)->5: 89 || 94 = 8994 mismatch
+
+Trying difference operations reversed operands [63->36 25->52, 94->49 89->98] and reversed result [expected (36,52)->38, (49,98)->5]:
+ subtraction (a-b)
+ (36,52)->38: 36 - 52 = -16 rev-> -61 mismatch
+ absolute difference
+ (49,98)->5: |49 - 98| = 49 rev-> 94 mismatch
+ max mod min
+ (36,52)->38: max(36,52) mod min(36,52) = 52 mod 36 = 16 rev-> 61 mismatch
+ negated absolute difference
+ (49,98)->5: -|49 - 98| = -49 rev-> -94 mismatch
+ reverse subtraction (b-a)
+ (36,52)->38: 52 - 36 = 16 rev-> 61 mismatch
+ modulo (a mod b)
+ (49,98)->5: 49 mod 98 = 49 rev-> 94 mismatch
+
+Trying difference operations on identity [63 25, 94 89] [expected (63,25)->38, (94,89)->5]:
+ subtraction (a-b)
+ (63,25)->38: 63 - 25 = 38 match
+ (94,89)->5: 94 - 89 = 5 match
+ correct, actions: subtraction (a-b)
+ absolute difference
+ (94,89)->5: |94 - 89| = 5 match
+ (63,25)->38: |63 - 25| = 38 match
+ correct, but skipping
+ max mod min
+ (63,25)->38: max(63,25) mod min(63,25) = 63 mod 25 = 13 mismatch
+ negated absolute difference
+ (94,89)->5: -|94 - 89| = -5 mismatch
+ reverse subtraction (b-a)
+ (63,25)->38: 25 - 63 = -38 mismatch
+ modulo (a mod b)
+ (94,89)->5: 94 mod 89 = 5 match
+ (63,25)->38: 63 mod 25 = 13 mismatch
+
+Trying rare operations reversed operands [63->36 25->52, 94->49 89->98] and reversed result [expected (36,52)->38, (49,98)->5]:
+ multiply+1
+ (36,52)->38: (30 + 6) * 52 + 1 = 30 * 52 + 6 * 52 + 1 = 1560 + 312 + 1 = 1872 + 1 = 1873 rev-> 3781 mismatch
+ multiply-1
+ (49,98)->5: (40 + 9) * 98 - 1 = 40 * 98 + 9 * 98 - 1 = 3920 + 882 - 1 = 4802 - 1 = 4801 rev-> 1084 mismatch
+ add+1
+ (36,52)->38: 36 + 52 + 1 = 89 rev-> 98 mismatch
+ add-1
+ (49,98)->5: 49 + 98 - 1 = 146 rev-> 641 mismatch
+ sub+1
+ (36,52)->38: 36 - 52 + 1 = -15 rev-> -51 mismatch
+ sub-1
+ (49,98)->5: 49 - 98 - 1 = -50 rev-> -05 mismatch
+ integer division (a/b)
+ (36,52)->38: 36 / 52 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (49,98)->5: 98 / 49 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (36,52)->38: 52 mod 36 = 16 rev-> 61 mismatch
+ digit absolute diff
+ (49,98)->5: |4-9| || |9-8| = 51 rev-> 15 mismatch
+ digit add mod10
+ (36,52)->38: (3+5)%10 || (6+2)%10 = 88 rev-> 88 mismatch
+ digit sub mod10
+ (49,98)->5: (4-9)%10 || (9-8)%10 = 51 rev-> 15 mismatch
+ cross multiply
+ (36,52)->38: 3*5 + 6*2 = 15 + 12 = 27 rev-> 72 mismatch
+ cross multiply rev
+ (49,98)->5: 4*8 + 9*9 = 32 + 81 = 113 rev-> 311 mismatch
+ digit multiply
+ (36,52)->38: 3*5 || 6*2 = 15 || 12 = 1512 rev-> 2151 mismatch
+ digit multiply rev
+ (49,98)->5: 4*8 || 9*9 = 32 || 81 = 3281 rev-> 1823 mismatch
+ digit sum diff
+ (36,52)->38: (3+6) - (5+2) = 2 rev-> 2 mismatch
+ digit sum sum
+ (49,98)->5: (4+9) + (9+8) = 30 rev-> 03 mismatch
+ digit product diff
+ (36,52)->38: 3*6 - 5*2 = 18 - 10 = 8 rev-> 8 mismatch
+ digit product sum
+ (49,98)->5: 4*9 + 9*8 = 36 + 72 = 108 rev-> 801 mismatch
+ determinant
+ (36,52)->38: 3*2 - 6*5 = 6 - 30 = -24 rev-> -42 mismatch
+ abs determinant
+ (49,98)->5: |4*8 - 9*9| = |32 - 81| = 49 rev-> 94 mismatch
+
+Trying rare operations on identity [63 25, 94 89] [expected (63,25)->38, (94,89)->5]:
+ multiply+1
+ (63,25)->38: (60 + 3) * 25 + 1 = 60 * 25 + 3 * 25 + 1 = 1500 + 75 + 1 = 1575 + 1 = 1576 mismatch
+ multiply-1
+ (94,89)->5: (90 + 4) * 89 - 1 = 90 * 89 + 4 * 89 - 1 = 8010 + 356 - 1 = 8366 - 1 = 8365 mismatch
+ add+1
+ (63,25)->38: 63 + 25 + 1 = 89 mismatch
+ add-1
+ (94,89)->5: 94 + 89 - 1 = 182 mismatch
+ sub+1
+ (63,25)->38: 63 - 25 + 1 = 39 mismatch
+ sub-1
+ (94,89)->5: 94 - 89 - 1 = 4 mismatch
+ integer division (a/b)
+ (63,25)->38: 63 / 25 = 2 mismatch
+ reverse division (b/a)
+ (94,89)->5: 89 / 94 = 0 mismatch
+ reverse modulo (b mod a)
+ (63,25)->38: 25 mod 63 = 25 mismatch
+ digit absolute diff
+ (94,89)->5: |9-8| || |4-9| = 15 mismatch
+ digit add mod10
+ (63,25)->38: (6+2)%10 || (3+5)%10 = 88 mismatch
+ digit sub mod10
+ (94,89)->5: (9-8)%10 || (4-9)%10 = 15 mismatch
+ cross multiply
+ (63,25)->38: 6*2 + 3*5 = 12 + 15 = 27 mismatch
+ cross multiply rev
+ (94,89)->5: 9*9 + 4*8 = 81 + 32 = 113 mismatch
+ digit multiply
+ (63,25)->38: 6*2 || 3*5 = 12 || 15 = 1215 mismatch
+ digit multiply rev
+ (94,89)->5: 9*9 || 4*8 = 81 || 32 = 8132 mismatch
+ digit sum diff
+ (63,25)->38: (6+3) - (2+5) = 2 mismatch
+ digit sum sum
+ (94,89)->5: (9+4) + (8+9) = 30 mismatch
+ digit product diff
+ (63,25)->38: 6*3 - 2*5 = 18 - 10 = 8 mismatch
+ digit product sum
+ (94,89)->5: 9*4 + 8*9 = 36 + 72 = 108 mismatch
+ determinant
+ (63,25)->38: 6*5 - 3*2 = 30 - 6 = 24 mismatch
+ abs determinant
+ (94,89)->5: |9*9 - 4*8| = |81 - 32| = 49 mismatch
+
+Applying to 89[11:
+ We recall that the question operator is found in the examples.
+ identity
+ subtraction (a-b) (89,11): 89 - 11 = 78
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{78}

@@ -1,0 +1,179 @@
+24-99 = 51
+97-87 = 1
+02-73 = 71
+
+The inputs are 24, 99, 97, 87, 02, 73
+
+The outputs are 51, 1, 71
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+24-99 -> -
+97-87 -> -
+02-73 -> -
+
+The operators
+-
+
+Looking at the question
+21*44 -> *
+The question operator is not found in the examples. Investigating the most common example operator - instead. We will use addition for the question operator.
+
+Looking at operator - [24-99 = 51, 97-87 = 1, 02-73 = 71]:
+
+Trying common operations reversed operands [24->42 99->99, 97->79 87->78, 02->20 73->37] and reversed result [expected (42,99)->51, (79,78)->1, (20,37)->71]:
+ addition
+ (42,99)->51: 42 + 99 = 141 rev-> 141 mismatch
+ multiplication
+ (79,78)->1: (70 + 9) * 78 = 70 * 78 + 9 * 78 = 5460 + 702 = 6162 rev-> 2616 mismatch
+ concatenation
+ (20,37)->71: 20 || 37 = 2037 rev-> 7302 mismatch
+ reverse concatenation
+ (42,99)->51: 99 || 42 = 9942 rev-> 2499 mismatch
+
+Trying common operations on identity [24 99, 97 87, 02 73] [expected (24,99)->51, (97,87)->1, (02,73)->71]:
+ addition
+ (24,99)->51: 24 + 99 = 123 mismatch
+ multiplication
+ (97,87)->1: (90 + 7) * 87 = 90 * 87 + 7 * 87 = 7830 + 609 = 8439 mismatch
+ concatenation
+ (02,73)->71: 02 || 73 = 0273 mismatch
+ reverse concatenation
+ (24,99)->51: 99 || 24 = 9924 mismatch
+
+Trying difference operations reversed operands [24->42 99->99, 97->79 87->78, 02->20 73->37] and reversed result [expected (42,99)->51, (79,78)->1, (20,37)->71]:
+ subtraction (a-b)
+ (42,99)->51: 42 - 99 = -57 rev-> -75 mismatch
+ absolute difference
+ (79,78)->1: |79 - 78| = 1 rev-> 1 match
+ (20,37)->71: |20 - 37| = 17 rev-> 71 match
+ (42,99)->51: |42 - 99| = 57 rev-> 75 mismatch
+ max mod min
+ (20,37)->71: max(20,37) mod min(20,37) = 37 mod 20 = 17 rev-> 71 match
+ (42,99)->51: max(42,99) mod min(42,99) = 99 mod 42 = 15 rev-> 51 match
+ (79,78)->1: max(79,78) mod min(79,78) = 79 mod 78 = 1 rev-> 1 match
+ correct, actions: reversed operands, reversed result, max mod min
+ negated absolute difference
+ (42,99)->51: -|42 - 99| = -57 rev-> -75 mismatch
+ reverse subtraction (b-a)
+ (79,78)->1: 78 - 79 = -1 rev-> -1 mismatch
+ modulo (a mod b)
+ (20,37)->71: 20 mod 37 = 20 rev-> 02 mismatch
+
+Trying difference operations on identity [24 99, 97 87, 02 73] [expected (24,99)->51, (97,87)->1, (02,73)->71]:
+ subtraction (a-b)
+ (24,99)->51: 24 - 99 = -75 mismatch
+ absolute difference
+ (97,87)->1: |97 - 87| = 10 mismatch
+ max mod min
+ (02,73)->71: max(02,73) mod min(02,73) = 73 mod 02 = 1 mismatch
+ negated absolute difference
+ (24,99)->51: -|24 - 99| = -75 mismatch
+ reverse subtraction (b-a)
+ (97,87)->1: 87 - 97 = -10 mismatch
+ modulo (a mod b)
+ (02,73)->71: 02 mod 73 = 2 mismatch
+
+Trying rare operations reversed operands [24->42 99->99, 97->79 87->78, 02->20 73->37] and reversed result [expected (42,99)->51, (79,78)->1, (20,37)->71]:
+ multiply+1
+ (42,99)->51: (40 + 2) * 99 + 1 = 40 * 99 + 2 * 99 + 1 = 3960 + 198 + 1 = 4158 + 1 = 4159 rev-> 9514 mismatch
+ multiply-1
+ (79,78)->1: (70 + 9) * 78 - 1 = 70 * 78 + 9 * 78 - 1 = 5460 + 702 - 1 = 6162 - 1 = 6161 rev-> 1616 mismatch
+ add+1
+ (20,37)->71: 20 + 37 + 1 = 58 rev-> 85 mismatch
+ add-1
+ (42,99)->51: 42 + 99 - 1 = 140 rev-> 041 mismatch
+ sub+1
+ (79,78)->1: 79 - 78 + 1 = 2 rev-> 2 mismatch
+ sub-1
+ (20,37)->71: 20 - 37 - 1 = -18 rev-> -81 mismatch
+ integer division (a/b)
+ (42,99)->51: 42 / 99 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (79,78)->1: 78 / 79 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (20,37)->71: 37 mod 20 = 17 rev-> 71 match
+ (42,99)->51: 99 mod 42 = 15 rev-> 51 match
+ (79,78)->1: 78 mod 79 = 78 rev-> 87 mismatch
+ digit absolute diff
+ (42,99)->51: |4-9| || |2-9| = 57 rev-> 75 mismatch
+ digit add mod10
+ (79,78)->1: (7+7)%10 || (9+8)%10 = 47 rev-> 74 mismatch
+ digit sub mod10
+ (20,37)->71: (2-3)%10 || (0-7)%10 = 93 rev-> 39 mismatch
+ cross multiply
+ (42,99)->51: 4*9 + 2*9 = 36 + 18 = 54 rev-> 45 mismatch
+ cross multiply rev
+ (79,78)->1: 7*8 + 9*7 = 56 + 63 = 119 rev-> 911 mismatch
+ digit multiply
+ (20,37)->71: 2*3 || 0*7 = 6 || 0 = 60 rev-> 06 mismatch
+ digit multiply rev
+ (42,99)->51: 4*9 || 2*9 = 36 || 18 = 3618 rev-> 8163 mismatch
+ digit sum diff
+ (79,78)->1: (7+9) - (7+8) = 1 rev-> 1 match
+ (20,37)->71: (2+0) - (3+7) = -8 rev-> -8 mismatch
+ digit sum sum
+ (20,37)->71: (2+0) + (3+7) = 12 rev-> 21 mismatch
+ digit product diff
+ (42,99)->51: 4*2 - 9*9 = 8 - 81 = -73 rev-> -37 mismatch
+ digit product sum
+ (79,78)->1: 7*9 + 7*8 = 63 + 56 = 119 rev-> 911 mismatch
+ determinant
+ (20,37)->71: 2*7 - 0*3 = 14 - 0 = 14 rev-> 41 mismatch
+ abs determinant
+ (42,99)->51: |4*9 - 2*9| = |36 - 18| = 18 rev-> 81 mismatch
+
+Trying rare operations on identity [24 99, 97 87, 02 73] [expected (24,99)->51, (97,87)->1, (02,73)->71]:
+ multiply+1
+ (24,99)->51: (20 + 4) * 99 + 1 = 20 * 99 + 4 * 99 + 1 = 1980 + 396 + 1 = 2376 + 1 = 2377 mismatch
+ multiply-1
+ (97,87)->1: (90 + 7) * 87 - 1 = 90 * 87 + 7 * 87 - 1 = 7830 + 609 - 1 = 8439 - 1 = 8438 mismatch
+ add+1
+ (02,73)->71: 02 + 73 + 1 = 76 mismatch
+ add-1
+ (24,99)->51: 24 + 99 - 1 = 122 mismatch
+ sub+1
+ (97,87)->1: 97 - 87 + 1 = 11 mismatch
+ sub-1
+ (02,73)->71: 02 - 73 - 1 = -72 mismatch
+ integer division (a/b)
+ (24,99)->51: 24 / 99 = 0 mismatch
+ reverse division (b/a)
+ (97,87)->1: 87 / 97 = 0 mismatch
+ reverse modulo (b mod a)
+ (02,73)->71: 73 mod 02 = 1 mismatch
+ digit absolute diff
+ (24,99)->51: |2-9| || |4-9| = 75 mismatch
+ digit add mod10
+ (97,87)->1: (9+8)%10 || (7+7)%10 = 74 mismatch
+ digit sub mod10
+ (02,73)->71: (0-7)%10 || (2-3)%10 = 39 mismatch
+ cross multiply
+ (24,99)->51: 2*9 + 4*9 = 18 + 36 = 54 mismatch
+ cross multiply rev
+ (97,87)->1: 9*7 + 7*8 = 63 + 56 = 119 mismatch
+ digit multiply
+ (02,73)->71: 0*7 || 2*3 = 0 || 6 = 06 mismatch
+ digit multiply rev
+ (24,99)->51: 2*9 || 4*9 = 18 || 36 = 1836 mismatch
+ digit sum diff
+ (97,87)->1: (9+7) - (8+7) = 1 match
+ (02,73)->71: (0+2) - (7+3) = -8 mismatch
+ digit sum sum
+ (02,73)->71: (0+2) + (7+3) = 12 mismatch
+ digit product diff
+ (24,99)->51: 2*4 - 9*9 = 8 - 81 = -73 mismatch
+ digit product sum
+ (97,87)->1: 9*7 + 8*7 = 63 + 56 = 119 mismatch
+ determinant
+ (02,73)->71: 0*3 - 2*7 = 0 - 14 = -14 mismatch
+ abs determinant
+ (24,99)->51: |2*9 - 4*9| = |18 - 36| = 18 mismatch
+
+Applying to 21*44:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [21->12, 44->44] and reversed result
+ addition (12,44): 12 + 44 = 56 rev-> 65
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{65}

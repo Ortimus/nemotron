@@ -1,0 +1,175 @@
+52-27 = -74
+02+79 = 611
+13*13 = 1313
+
+The inputs are 52, 27, 02, 79, 13, 13
+
+The outputs are -74, 611, 1313
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -74, 611, 1313
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+52-27 -> -
+02+79 -> +
+13*13 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+53+04 -> +
+The question operator is found in the examples.
+
+Looking at operator + [02+79 = 611]:
+
+Trying common operations reversed operands [02->20 79->97] and reversed result [expected (20,97)->611]:
+ addition
+ (20,97)->611: 20 + 97 = 117 rev-> 711 mismatch
+ multiplication
+ (20,97)->611: (20 + 0) * 97 = 20 * 97 + 0 * 97 = 1940 + 0 = 1940 rev-> 0491 mismatch
+ concatenation
+ (20,97)->611: 20 || 97 = 2097 rev-> 7902 mismatch
+ reverse concatenation
+ (20,97)->611: 97 || 20 = 9720 rev-> 0279 mismatch
+
+Trying common operations on identity [02 79] [expected (02,79)->611]:
+ addition
+ (02,79)->611: 02 + 79 = 81 mismatch
+ multiplication
+ (02,79)->611: (0 + 2) * 79 = 0 * 79 + 2 * 79 = 0 + 158 = 158 mismatch
+ concatenation
+ (02,79)->611: 02 || 79 = 0279 mismatch
+ reverse concatenation
+ (02,79)->611: 79 || 02 = 7902 mismatch
+
+Trying difference operations reversed operands [02->20 79->97] and reversed result [expected (20,97)->611]:
+ subtraction (a-b)
+ (20,97)->611: 20 - 97 = -77 rev-> -77 mismatch
+ absolute difference
+ (20,97)->611: |20 - 97| = 77 rev-> 77 mismatch
+ max mod min
+ (20,97)->611: max(20,97) mod min(20,97) = 97 mod 20 = 17 rev-> 71 mismatch
+ negated absolute difference
+ (20,97)->611: -|20 - 97| = -77 rev-> -77 mismatch
+ reverse subtraction (b-a)
+ (20,97)->611: 97 - 20 = 77 rev-> 77 mismatch
+ modulo (a mod b)
+ (20,97)->611: 20 mod 97 = 20 rev-> 02 mismatch
+
+Trying difference operations on identity [02 79] [expected (02,79)->611]:
+ subtraction (a-b)
+ (02,79)->611: 02 - 79 = -77 mismatch
+ absolute difference
+ (02,79)->611: |02 - 79| = 77 mismatch
+ max mod min
+ (02,79)->611: max(02,79) mod min(02,79) = 79 mod 02 = 1 mismatch
+ negated absolute difference
+ (02,79)->611: -|02 - 79| = -77 mismatch
+ reverse subtraction (b-a)
+ (02,79)->611: 79 - 02 = 77 mismatch
+ modulo (a mod b)
+ (02,79)->611: 02 mod 79 = 2 mismatch
+
+Trying rare operations reversed operands [02->20 79->97] and reversed result [expected (20,97)->611]:
+ multiply+1
+ (20,97)->611: (20 + 0) * 97 + 1 = 20 * 97 + 0 * 97 + 1 = 1940 + 0 + 1 = 1940 + 1 = 1941 rev-> 1491 mismatch
+ multiply-1
+ (20,97)->611: (20 + 0) * 97 - 1 = 20 * 97 + 0 * 97 - 1 = 1940 + 0 - 1 = 1940 - 1 = 1939 rev-> 9391 mismatch
+ add+1
+ (20,97)->611: 20 + 97 + 1 = 118 rev-> 811 mismatch
+ add-1
+ (20,97)->611: 20 + 97 - 1 = 116 rev-> 611 match
+ correct, actions: reversed operands, reversed result, add-1
+ sub+1
+ (20,97)->611: 20 - 97 + 1 = -76 rev-> -67 mismatch
+ sub-1
+ (20,97)->611: 20 - 97 - 1 = -78 rev-> -87 mismatch
+ integer division (a/b)
+ (20,97)->611: 20 / 97 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (20,97)->611: 97 / 20 = 4 rev-> 4 mismatch
+ reverse modulo (b mod a)
+ (20,97)->611: 97 mod 20 = 17 rev-> 71 mismatch
+ digit absolute diff
+ (20,97)->611: |2-9| || |0-7| = 77 rev-> 77 mismatch
+ digit add mod10
+ (20,97)->611: (2+9)%10 || (0+7)%10 = 17 rev-> 71 mismatch
+ digit sub mod10
+ (20,97)->611: (2-9)%10 || (0-7)%10 = 33 rev-> 33 mismatch
+ cross multiply
+ (20,97)->611: 2*9 + 0*7 = 18 + 0 = 18 rev-> 81 mismatch
+ cross multiply rev
+ (20,97)->611: 2*7 + 0*9 = 14 + 0 = 14 rev-> 41 mismatch
+ digit multiply
+ (20,97)->611: 2*9 || 0*7 = 18 || 0 = 180 rev-> 081 mismatch
+ digit multiply rev
+ (20,97)->611: 2*7 || 0*9 = 14 || 0 = 140 rev-> 041 mismatch
+ digit sum diff
+ (20,97)->611: (2+0) - (9+7) = -14 rev-> -41 mismatch
+ digit sum sum
+ (20,97)->611: (2+0) + (9+7) = 18 rev-> 81 mismatch
+ digit product diff
+ (20,97)->611: 2*0 - 9*7 = 0 - 63 = -63 rev-> -36 mismatch
+ digit product sum
+ (20,97)->611: 2*0 + 9*7 = 0 + 63 = 63 rev-> 36 mismatch
+ determinant
+ (20,97)->611: 2*7 - 0*9 = 14 - 0 = 14 rev-> 41 mismatch
+ abs determinant
+ (20,97)->611: |2*7 - 0*9| = |14 - 0| = 14 rev-> 41 mismatch
+
+Trying rare operations on identity [02 79] [expected (02,79)->611]:
+ multiply+1
+ (02,79)->611: (0 + 2) * 79 + 1 = 0 * 79 + 2 * 79 + 1 = 0 + 158 + 1 = 158 + 1 = 159 mismatch
+ multiply-1
+ (02,79)->611: (0 + 2) * 79 - 1 = 0 * 79 + 2 * 79 - 1 = 0 + 158 - 1 = 158 - 1 = 157 mismatch
+ add+1
+ (02,79)->611: 02 + 79 + 1 = 82 mismatch
+ add-1
+ (02,79)->611: 02 + 79 - 1 = 80 mismatch
+ sub+1
+ (02,79)->611: 02 - 79 + 1 = -76 mismatch
+ sub-1
+ (02,79)->611: 02 - 79 - 1 = -78 mismatch
+ integer division (a/b)
+ (02,79)->611: 02 / 79 = 0 mismatch
+ reverse division (b/a)
+ (02,79)->611: 79 / 02 = 39 mismatch
+ reverse modulo (b mod a)
+ (02,79)->611: 79 mod 02 = 1 mismatch
+ digit absolute diff
+ (02,79)->611: |0-7| || |2-9| = 77 mismatch
+ digit add mod10
+ (02,79)->611: (0+7)%10 || (2+9)%10 = 71 mismatch
+ digit sub mod10
+ (02,79)->611: (0-7)%10 || (2-9)%10 = 33 mismatch
+ cross multiply
+ (02,79)->611: 0*7 + 2*9 = 0 + 18 = 18 mismatch
+ cross multiply rev
+ (02,79)->611: 0*9 + 2*7 = 0 + 14 = 14 mismatch
+ digit multiply
+ (02,79)->611: 0*7 || 2*9 = 0 || 18 = 018 mismatch
+ digit multiply rev
+ (02,79)->611: 0*9 || 2*7 = 0 || 14 = 014 mismatch
+ digit sum diff
+ (02,79)->611: (0+2) - (7+9) = -14 mismatch
+ digit sum sum
+ (02,79)->611: (0+2) + (7+9) = 18 mismatch
+ digit product diff
+ (02,79)->611: 0*2 - 7*9 = 0 - 63 = -63 mismatch
+ digit product sum
+ (02,79)->611: 0*2 + 7*9 = 0 + 63 = 63 mismatch
+ determinant
+ (02,79)->611: 0*9 - 2*7 = 0 - 14 = -14 mismatch
+ abs determinant
+ (02,79)->611: |0*9 - 2*7| = |0 - 14| = 14 mismatch
+
+Applying to 53+04:
+ We recall that the question operator is found in the examples.
+ reversed operands [53->35, 04->40] and reversed result
+ add-1 (35,40): 35 + 40 - 1 = 74 rev-> 47
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{47}

@@ -1,0 +1,184 @@
+63|08 = 6308
+14|62 = 1462
+61/34 = 886
+26|16 = 2616
+
+The inputs are 63, 08, 14, 62, 61, 34, 26, 16
+
+The outputs are 6308, 1462, 886, 2616
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+63|08 -> |
+14|62 -> |
+61/34 -> /
+26|16 -> |
+
+The operators
+|
+/
+
+Looking at the question
+52[96 -> [
+The question operator is not found in the examples. Investigating the most common example operator | instead. We will use addition for the question operator.
+
+Looking at operator | [63|08 = 6308, 14|62 = 1462, 26|16 = 2616]:
+
+Trying common operations
+ reversed operands [63->36 08->80, 14->41 62->26, 26->62 16->61] and reversed result [expected (36,80)->6308, (41,26)->1462, (62,61)->2616]
+ addition
+ (36,80)->6308: 36 + 80 = 116 rev-> 611 mismatch
+ multiplication
+ (41,26)->1462: (40 + 1) * 26 = 40 * 26 + 1 * 26 = 1040 + 26 = 1066 rev-> 6601 mismatch
+ concatenation
+ (62,61)->2616: 62 || 61 = 6261 rev-> 1626 mismatch
+ reverse concatenation
+ (36,80)->6308: 80 || 36 = 8036 rev-> 6308 match
+ (41,26)->1462: 26 || 41 = 2641 rev-> 1462 match
+ (62,61)->2616: 61 || 62 = 6162 rev-> 2616 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+ identity [63 08, 14 62, 26 16] [expected (63,08)->6308, (14,62)->1462, (26,16)->2616]
+ addition
+ (63,08)->6308: 63 + 08 = 71 mismatch
+ multiplication
+ (14,62)->1462: (10 + 4) * 62 = 10 * 62 + 4 * 62 = 620 + 248 = 868 mismatch
+ concatenation
+ (26,16)->2616: 26 || 16 = 2616 match
+ (63,08)->6308: 63 || 08 = 6308 match
+ (14,62)->1462: 14 || 62 = 1462 match
+ correct, but skipping
+ reverse concatenation
+ (63,08)->6308: 08 || 63 = 0863 mismatch
+
+Trying difference operations
+ reversed operands [63->36 08->80, 14->41 62->26, 26->62 16->61] and reversed result [expected (36,80)->6308, (41,26)->1462, (62,61)->2616]
+ subtraction (a-b)
+ (36,80)->6308: 36 - 80 = -44 rev-> -44 mismatch
+ absolute difference
+ (41,26)->1462: |41 - 26| = 15 rev-> 51 mismatch
+ max mod min
+ (62,61)->2616: max(62,61) mod min(62,61) = 62 mod 61 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (36,80)->6308: -|36 - 80| = -44 rev-> -44 mismatch
+ reverse subtraction (b-a)
+ (41,26)->1462: 26 - 41 = -15 rev-> -51 mismatch
+ modulo (a mod b)
+ (62,61)->2616: 62 mod 61 = 1 rev-> 1 mismatch
+
+ identity [63 08, 14 62, 26 16] [expected (63,08)->6308, (14,62)->1462, (26,16)->2616]
+ subtraction (a-b)
+ (63,08)->6308: 63 - 08 = 55 mismatch
+ absolute difference
+ (14,62)->1462: |14 - 62| = 48 mismatch
+ max mod min
+ (26,16)->2616: max(26,16) mod min(26,16) = 26 mod 16 = 10 mismatch
+ negated absolute difference
+ (63,08)->6308: -|63 - 08| = -55 mismatch
+ reverse subtraction (b-a)
+ (14,62)->1462: 62 - 14 = 48 mismatch
+ modulo (a mod b)
+ (26,16)->2616: 26 mod 16 = 10 mismatch
+
+Trying rare operations
+ reversed operands [63->36 08->80, 14->41 62->26, 26->62 16->61] and reversed result [expected (36,80)->6308, (41,26)->1462, (62,61)->2616]
+ multiply+1
+ (36,80)->6308: (30 + 6) * 80 + 1 = 30 * 80 + 6 * 80 + 1 = 2400 + 480 + 1 = 2880 + 1 = 2881 rev-> 1882 mismatch
+ multiply-1
+ (41,26)->1462: (40 + 1) * 26 - 1 = 40 * 26 + 1 * 26 - 1 = 1040 + 26 - 1 = 1066 - 1 = 1065 rev-> 5601 mismatch
+ add+1
+ (62,61)->2616: 62 + 61 + 1 = 124 rev-> 421 mismatch
+ add-1
+ (36,80)->6308: 36 + 80 - 1 = 115 rev-> 511 mismatch
+ sub+1
+ (41,26)->1462: 41 - 26 + 1 = 16 rev-> 61 mismatch
+ sub-1
+ (62,61)->2616: 62 - 61 - 1 = 0 rev-> 0 mismatch
+ integer division (a/b)
+ (36,80)->6308: 36 / 80 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (41,26)->1462: 26 / 41 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (62,61)->2616: 61 mod 62 = 61 rev-> 16 mismatch
+ digit absolute diff
+ (36,80)->6308: |3-8| || |6-0| = 56 rev-> 65 mismatch
+ digit add mod10
+ (41,26)->1462: (4+2)%10 || (1+6)%10 = 67 rev-> 76 mismatch
+ digit sub mod10
+ (62,61)->2616: (6-6)%10 || (2-1)%10 = 01 rev-> 10 mismatch
+ cross multiply
+ (36,80)->6308: 3*8 + 6*0 = 24 + 0 = 24 rev-> 42 mismatch
+ cross multiply rev
+ (41,26)->1462: 4*6 + 1*2 = 24 + 2 = 26 rev-> 62 mismatch
+ digit multiply
+ (62,61)->2616: 6*6 || 2*1 = 36 || 2 = 362 rev-> 263 mismatch
+ digit multiply rev
+ (36,80)->6308: 3*0 || 6*8 = 0 || 48 = 048 rev-> 840 mismatch
+ digit sum diff
+ (41,26)->1462: (4+1) - (2+6) = -3 rev-> -3 mismatch
+ digit sum sum
+ (62,61)->2616: (6+2) + (6+1) = 15 rev-> 51 mismatch
+ digit product diff
+ (36,80)->6308: 3*6 - 8*0 = 18 - 0 = 18 rev-> 81 mismatch
+ digit product sum
+ (41,26)->1462: 4*1 + 2*6 = 4 + 12 = 16 rev-> 61 mismatch
+ determinant
+ (62,61)->2616: 6*1 - 2*6 = 6 - 12 = -6 rev-> -6 mismatch
+ abs determinant
+ (36,80)->6308: |3*0 - 6*8| = |0 - 48| = 48 rev-> 84 mismatch
+
+ identity [63 08, 14 62, 26 16] [expected (63,08)->6308, (14,62)->1462, (26,16)->2616]
+ multiply+1
+ (63,08)->6308: (60 + 3) * 08 + 1 = 60 * 08 + 3 * 08 + 1 = 480 + 24 + 1 = 504 + 1 = 505 mismatch
+ multiply-1
+ (14,62)->1462: (10 + 4) * 62 - 1 = 10 * 62 + 4 * 62 - 1 = 620 + 248 - 1 = 868 - 1 = 867 mismatch
+ add+1
+ (26,16)->2616: 26 + 16 + 1 = 43 mismatch
+ add-1
+ (63,08)->6308: 63 + 08 - 1 = 70 mismatch
+ sub+1
+ (14,62)->1462: 14 - 62 + 1 = -47 mismatch
+ sub-1
+ (26,16)->2616: 26 - 16 - 1 = 9 mismatch
+ integer division (a/b)
+ (63,08)->6308: 63 / 08 = 7 mismatch
+ reverse division (b/a)
+ (14,62)->1462: 62 / 14 = 4 mismatch
+ reverse modulo (b mod a)
+ (26,16)->2616: 16 mod 26 = 16 mismatch
+ digit absolute diff
+ (63,08)->6308: |6-0| || |3-8| = 65 mismatch
+ digit add mod10
+ (14,62)->1462: (1+6)%10 || (4+2)%10 = 76 mismatch
+ digit sub mod10
+ (26,16)->2616: (2-1)%10 || (6-6)%10 = 10 mismatch
+ cross multiply
+ (63,08)->6308: 6*0 + 3*8 = 0 + 24 = 24 mismatch
+ cross multiply rev
+ (14,62)->1462: 1*2 + 4*6 = 2 + 24 = 26 mismatch
+ digit multiply
+ (26,16)->2616: 2*1 || 6*6 = 2 || 36 = 236 mismatch
+ digit multiply rev
+ (63,08)->6308: 6*8 || 3*0 = 48 || 0 = 480 mismatch
+ digit sum diff
+ (14,62)->1462: (1+4) - (6+2) = -3 mismatch
+ digit sum sum
+ (26,16)->2616: (2+6) + (1+6) = 15 mismatch
+ digit product diff
+ (63,08)->6308: 6*3 - 0*8 = 18 - 0 = 18 mismatch
+ digit product sum
+ (14,62)->1462: 1*4 + 6*2 = 4 + 12 = 16 mismatch
+ determinant
+ (26,16)->2616: 2*6 - 6*1 = 12 - 6 = 6 mismatch
+ abs determinant
+ (63,08)->6308: |6*8 - 3*0| = |48 - 0| = 48 mismatch
+
+correct, actions: reversed operands, reversed result, reverse concatenation
+
+Applying to 52[96:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [52->25, 96->69] and reversed result
+ addition
+ (25,69): 25 + 69 = 94 rev-> 49
+ Result is non-negative
+ \boxed{49}

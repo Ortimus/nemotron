@@ -1,0 +1,186 @@
+52-57 = 0
+15-59 = 44
+38*46 = 2135
+
+The inputs are 52, 57, 15, 59, 38, 46
+
+The outputs are 0, 44, 2135
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+52-57 -> -
+15-59 -> -
+38*46 -> *
+
+The operators
+-
+*
+
+Looking at the question
+71-46 -> -
+The question operator is found in the examples.
+
+Looking at operator - [52-57 = 0, 15-59 = 44]:
+
+Trying common operations
+ reversed operands [52->25 57->75, 15->51 59->95] and reversed result [expected (25,75)->0, (51,95)->44]
+ addition
+ (25,75)->0: 25 + 75 = 100 rev-> 001 mismatch
+ multiplication
+ (51,95)->44: (50 + 1) * 95 = 50 * 95 + 1 * 95 = 4750 + 95 = 4845 rev-> 5484 mismatch
+ concatenation
+ (25,75)->0: 25 || 75 = 2575 rev-> 5752 mismatch
+ reverse concatenation
+ (51,95)->44: 95 || 51 = 9551 rev-> 1559 mismatch
+
+ identity [52 57, 15 59] [expected (52,57)->0, (15,59)->44]
+ addition
+ (52,57)->0: 52 + 57 = 109 mismatch
+ multiplication
+ (15,59)->44: (10 + 5) * 59 = 10 * 59 + 5 * 59 = 590 + 295 = 885 mismatch
+ concatenation
+ (52,57)->0: 52 || 57 = 5257 mismatch
+ reverse concatenation
+ (15,59)->44: 59 || 15 = 5915 mismatch
+
+Trying difference operations
+ reversed operands [52->25 57->75, 15->51 59->95] and reversed result [expected (25,75)->0, (51,95)->44]
+ subtraction (a-b)
+ (25,75)->0: 25 - 75 = -50 rev-> -05 mismatch
+ absolute difference
+ (51,95)->44: |51 - 95| = 44 rev-> 44 match
+ (25,75)->0: |25 - 75| = 50 rev-> 05 mismatch
+ max mod min
+ (25,75)->0: max(25,75) mod min(25,75) = 75 mod 25 = 0 rev-> 0 match
+ (51,95)->44: max(51,95) mod min(51,95) = 95 mod 51 = 44 rev-> 44 match
+ correct, actions: reversed operands, reversed result, max mod min
+ negated absolute difference
+ (51,95)->44: -|51 - 95| = -44 rev-> -44 mismatch
+ reverse subtraction (b-a)
+ (25,75)->0: 75 - 25 = 50 rev-> 05 mismatch
+ modulo (a mod b)
+ (51,95)->44: 51 mod 95 = 51 rev-> 15 mismatch
+
+ identity [52 57, 15 59] [expected (52,57)->0, (15,59)->44]
+ subtraction (a-b)
+ (52,57)->0: 52 - 57 = -5 mismatch
+ absolute difference
+ (15,59)->44: |15 - 59| = 44 match
+ (52,57)->0: |52 - 57| = 5 mismatch
+ max mod min
+ (52,57)->0: max(52,57) mod min(52,57) = 57 mod 52 = 5 mismatch
+ negated absolute difference
+ (15,59)->44: -|15 - 59| = -44 mismatch
+ reverse subtraction (b-a)
+ (52,57)->0: 57 - 52 = 5 mismatch
+ modulo (a mod b)
+ (15,59)->44: 15 mod 59 = 15 mismatch
+
+Trying rare operations
+ reversed operands [52->25 57->75, 15->51 59->95] and reversed result [expected (25,75)->0, (51,95)->44]
+ multiply+1
+ (25,75)->0: (20 + 5) * 75 + 1 = 20 * 75 + 5 * 75 + 1 = 1500 + 375 + 1 = 1875 + 1 = 1876 rev-> 6781 mismatch
+ multiply-1
+ (51,95)->44: (50 + 1) * 95 - 1 = 50 * 95 + 1 * 95 - 1 = 4750 + 95 - 1 = 4845 - 1 = 4844 rev-> 4484 mismatch
+ add+1
+ (25,75)->0: 25 + 75 + 1 = 101 rev-> 101 mismatch
+ add-1
+ (51,95)->44: 51 + 95 - 1 = 145 rev-> 541 mismatch
+ sub+1
+ (25,75)->0: 25 - 75 + 1 = -49 rev-> -94 mismatch
+ sub-1
+ (51,95)->44: 51 - 95 - 1 = -45 rev-> -54 mismatch
+ integer division (a/b)
+ (25,75)->0: 25 / 75 = 0 rev-> 0 match
+ (51,95)->44: 51 / 95 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (51,95)->44: 95 / 51 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (25,75)->0: 75 mod 25 = 0 rev-> 0 match
+ (51,95)->44: 95 mod 51 = 44 rev-> 44 match
+ correct, but skipping
+ digit absolute diff
+ (51,95)->44: |5-9| || |1-5| = 44 rev-> 44 match
+ (25,75)->0: |2-7| || |5-5| = 50 rev-> 05 mismatch
+ digit add mod10
+ (25,75)->0: (2+7)%10 || (5+5)%10 = 90 rev-> 09 mismatch
+ digit sub mod10
+ (51,95)->44: (5-9)%10 || (1-5)%10 = 66 rev-> 66 mismatch
+ cross multiply
+ (25,75)->0: 2*7 + 5*5 = 14 + 25 = 39 rev-> 93 mismatch
+ cross multiply rev
+ (51,95)->44: 5*5 + 1*9 = 25 + 9 = 34 rev-> 43 mismatch
+ digit multiply
+ (25,75)->0: 2*7 || 5*5 = 14 || 25 = 1425 rev-> 5241 mismatch
+ digit multiply rev
+ (51,95)->44: 5*5 || 1*9 = 25 || 9 = 259 rev-> 952 mismatch
+ digit sum diff
+ (25,75)->0: (2+5) - (7+5) = -5 rev-> -5 mismatch
+ digit sum sum
+ (51,95)->44: (5+1) + (9+5) = 20 rev-> 02 mismatch
+ digit product diff
+ (25,75)->0: 2*5 - 7*5 = 10 - 35 = -25 rev-> -52 mismatch
+ digit product sum
+ (51,95)->44: 5*1 + 9*5 = 5 + 45 = 50 rev-> 05 mismatch
+ determinant
+ (25,75)->0: 2*5 - 5*7 = 10 - 35 = -25 rev-> -52 mismatch
+ abs determinant
+ (51,95)->44: |5*5 - 1*9| = |25 - 9| = 16 rev-> 61 mismatch
+
+ identity [52 57, 15 59] [expected (52,57)->0, (15,59)->44]
+ multiply+1
+ (52,57)->0: (50 + 2) * 57 + 1 = 50 * 57 + 2 * 57 + 1 = 2850 + 114 + 1 = 2964 + 1 = 2965 mismatch
+ multiply-1
+ (15,59)->44: (10 + 5) * 59 - 1 = 10 * 59 + 5 * 59 - 1 = 590 + 295 - 1 = 885 - 1 = 884 mismatch
+ add+1
+ (52,57)->0: 52 + 57 + 1 = 110 mismatch
+ add-1
+ (15,59)->44: 15 + 59 - 1 = 73 mismatch
+ sub+1
+ (52,57)->0: 52 - 57 + 1 = -4 mismatch
+ sub-1
+ (15,59)->44: 15 - 59 - 1 = -45 mismatch
+ integer division (a/b)
+ (52,57)->0: 52 / 57 = 0 match
+ (15,59)->44: 15 / 59 = 0 mismatch
+ reverse division (b/a)
+ (15,59)->44: 59 / 15 = 3 mismatch
+ reverse modulo (b mod a)
+ (52,57)->0: 57 mod 52 = 5 mismatch
+ digit absolute diff
+ (15,59)->44: |1-5| || |5-9| = 44 match
+ (52,57)->0: |5-5| || |2-7| = 05 mismatch
+ digit add mod10
+ (52,57)->0: (5+5)%10 || (2+7)%10 = 09 mismatch
+ digit sub mod10
+ (15,59)->44: (1-5)%10 || (5-9)%10 = 66 mismatch
+ cross multiply
+ (52,57)->0: 5*5 + 2*7 = 25 + 14 = 39 mismatch
+ cross multiply rev
+ (15,59)->44: 1*9 + 5*5 = 9 + 25 = 34 mismatch
+ digit multiply
+ (52,57)->0: 5*5 || 2*7 = 25 || 14 = 2514 mismatch
+ digit multiply rev
+ (15,59)->44: 1*9 || 5*5 = 9 || 25 = 925 mismatch
+ digit sum diff
+ (52,57)->0: (5+2) - (5+7) = -5 mismatch
+ digit sum sum
+ (15,59)->44: (1+5) + (5+9) = 20 mismatch
+ digit product diff
+ (52,57)->0: 5*2 - 5*7 = 10 - 35 = -25 mismatch
+ digit product sum
+ (15,59)->44: 1*5 + 5*9 = 5 + 45 = 50 mismatch
+ determinant
+ (52,57)->0: 5*7 - 2*5 = 35 - 10 = 25 mismatch
+ abs determinant
+ (15,59)->44: |1*9 - 5*5| = |9 - 25| = 16 mismatch
+
+correct, actions: reversed operands, reversed result, max mod min
+
+Applying to 71-46:
+ We recall that the question operator is found in the examples.
+ reversed operands [71->17, 46->64] and reversed result
+ max mod min
+ (17,64): max(17,64) mod min(17,64) = 64 mod 17 = 13 rev-> 31
+ Result is non-negative
+ \boxed{31}

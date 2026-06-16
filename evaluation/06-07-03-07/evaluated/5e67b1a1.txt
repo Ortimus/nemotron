@@ -1,0 +1,178 @@
+93{16 = 001
+18}99 = 9108
+99{97 = 871
+11<35 = 24<
+
+The inputs are 93, 16, 18, 99, 99, 97, 11, 35
+
+The outputs are 001, 9108, 871, 24<
+Some example outputs have the operator symbol as suffix <.
+We now consider the outputs to be 001, 9108, 871, -24
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+93{16 -> {
+18}99 -> }
+99{97 -> {
+11<35 -> <
+
+The operators
+{
+}
+<
+
+Looking at the question
+32{31 -> {
+The question operator is found in the examples.
+
+Looking at operator { [93{16 = 001, 99{97 = 871]:
+
+Trying common operations reversed operands [93->39 16->61, 99->99 97->79] and reversed result [expected (39,61)->001, (99,79)->871]:
+ addition
+ (39,61)->001: 39 + 61 = 100 rev-> 001 match
+ (99,79)->871: 99 + 79 = 178 rev-> 871 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (99,79)->871: (90 + 9) * 79 = 90 * 79 + 9 * 79 = 7110 + 711 = 7821 rev-> 1287 mismatch
+ concatenation
+ (39,61)->001: 39 || 61 = 3961 rev-> 1693 mismatch
+ reverse concatenation
+ (99,79)->871: 79 || 99 = 7999 rev-> 9997 mismatch
+
+Trying common operations on identity [93 16, 99 97] [expected (93,16)->001, (99,97)->871]:
+ addition
+ (93,16)->001: 93 + 16 = 109 mismatch
+ multiplication
+ (99,97)->871: (90 + 9) * 97 = 90 * 97 + 9 * 97 = 8730 + 873 = 9603 mismatch
+ concatenation
+ (93,16)->001: 93 || 16 = 9316 mismatch
+ reverse concatenation
+ (99,97)->871: 97 || 99 = 9799 mismatch
+
+Trying difference operations reversed operands [93->39 16->61, 99->99 97->79] and reversed result [expected (39,61)->001, (99,79)->871]:
+ subtraction (a-b)
+ (39,61)->001: 39 - 61 = -22 rev-> -22 mismatch
+ absolute difference
+ (99,79)->871: |99 - 79| = 20 rev-> 02 mismatch
+ max mod min
+ (39,61)->001: max(39,61) mod min(39,61) = 61 mod 39 = 22 rev-> 22 mismatch
+ negated absolute difference
+ (99,79)->871: -|99 - 79| = -20 rev-> -02 mismatch
+ reverse subtraction (b-a)
+ (39,61)->001: 61 - 39 = 22 rev-> 22 mismatch
+ modulo (a mod b)
+ (99,79)->871: 99 mod 79 = 20 rev-> 02 mismatch
+
+Trying difference operations on identity [93 16, 99 97] [expected (93,16)->001, (99,97)->871]:
+ subtraction (a-b)
+ (93,16)->001: 93 - 16 = 77 mismatch
+ absolute difference
+ (99,97)->871: |99 - 97| = 2 mismatch
+ max mod min
+ (93,16)->001: max(93,16) mod min(93,16) = 93 mod 16 = 13 mismatch
+ negated absolute difference
+ (99,97)->871: -|99 - 97| = -2 mismatch
+ reverse subtraction (b-a)
+ (93,16)->001: 16 - 93 = -77 mismatch
+ modulo (a mod b)
+ (99,97)->871: 99 mod 97 = 2 mismatch
+
+Trying rare operations reversed operands [93->39 16->61, 99->99 97->79] and reversed result [expected (39,61)->001, (99,79)->871]:
+ multiply+1
+ (39,61)->001: (30 + 9) * 61 + 1 = 30 * 61 + 9 * 61 + 1 = 1830 + 549 + 1 = 2379 + 1 = 2380 rev-> 0832 mismatch
+ multiply-1
+ (99,79)->871: (90 + 9) * 79 - 1 = 90 * 79 + 9 * 79 - 1 = 7110 + 711 - 1 = 7821 - 1 = 7820 rev-> 0287 mismatch
+ add+1
+ (39,61)->001: 39 + 61 + 1 = 101 rev-> 101 mismatch
+ add-1
+ (99,79)->871: 99 + 79 - 1 = 177 rev-> 771 mismatch
+ sub+1
+ (39,61)->001: 39 - 61 + 1 = -21 rev-> -12 mismatch
+ sub-1
+ (99,79)->871: 99 - 79 - 1 = 19 rev-> 91 mismatch
+ integer division (a/b)
+ (39,61)->001: 39 / 61 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (99,79)->871: 79 / 99 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (39,61)->001: 61 mod 39 = 22 rev-> 22 mismatch
+ digit absolute diff
+ (99,79)->871: |9-7| || |9-9| = 20 rev-> 02 mismatch
+ digit add mod10
+ (39,61)->001: (3+6)%10 || (9+1)%10 = 90 rev-> 09 mismatch
+ digit sub mod10
+ (99,79)->871: (9-7)%10 || (9-9)%10 = 20 rev-> 02 mismatch
+ cross multiply
+ (39,61)->001: 3*6 + 9*1 = 18 + 9 = 27 rev-> 72 mismatch
+ cross multiply rev
+ (99,79)->871: 9*9 + 9*7 = 81 + 63 = 144 rev-> 441 mismatch
+ digit multiply
+ (39,61)->001: 3*6 || 9*1 = 18 || 9 = 189 rev-> 981 mismatch
+ digit multiply rev
+ (99,79)->871: 9*9 || 9*7 = 81 || 63 = 8163 rev-> 3618 mismatch
+ digit sum diff
+ (39,61)->001: (3+9) - (6+1) = 5 rev-> 5 mismatch
+ digit sum sum
+ (99,79)->871: (9+9) + (7+9) = 34 rev-> 43 mismatch
+ digit product diff
+ (39,61)->001: 3*9 - 6*1 = 27 - 6 = 21 rev-> 12 mismatch
+ digit product sum
+ (99,79)->871: 9*9 + 7*9 = 81 + 63 = 144 rev-> 441 mismatch
+ determinant
+ (39,61)->001: 3*1 - 9*6 = 3 - 54 = -51 rev-> -15 mismatch
+ abs determinant
+ (99,79)->871: |9*9 - 9*7| = |81 - 63| = 18 rev-> 81 mismatch
+
+Trying rare operations on identity [93 16, 99 97] [expected (93,16)->001, (99,97)->871]:
+ multiply+1
+ (93,16)->001: (90 + 3) * 16 + 1 = 90 * 16 + 3 * 16 + 1 = 1440 + 48 + 1 = 1488 + 1 = 1489 mismatch
+ multiply-1
+ (99,97)->871: (90 + 9) * 97 - 1 = 90 * 97 + 9 * 97 - 1 = 8730 + 873 - 1 = 9603 - 1 = 9602 mismatch
+ add+1
+ (93,16)->001: 93 + 16 + 1 = 110 mismatch
+ add-1
+ (99,97)->871: 99 + 97 - 1 = 195 mismatch
+ sub+1
+ (93,16)->001: 93 - 16 + 1 = 78 mismatch
+ sub-1
+ (99,97)->871: 99 - 97 - 1 = 1 mismatch
+ integer division (a/b)
+ (93,16)->001: 93 / 16 = 5 mismatch
+ reverse division (b/a)
+ (99,97)->871: 97 / 99 = 0 mismatch
+ reverse modulo (b mod a)
+ (93,16)->001: 16 mod 93 = 16 mismatch
+ digit absolute diff
+ (99,97)->871: |9-9| || |9-7| = 02 mismatch
+ digit add mod10
+ (93,16)->001: (9+1)%10 || (3+6)%10 = 09 mismatch
+ digit sub mod10
+ (99,97)->871: (9-9)%10 || (9-7)%10 = 02 mismatch
+ cross multiply
+ (93,16)->001: 9*1 + 3*6 = 9 + 18 = 27 mismatch
+ cross multiply rev
+ (99,97)->871: 9*7 + 9*9 = 63 + 81 = 144 mismatch
+ digit multiply
+ (93,16)->001: 9*1 || 3*6 = 9 || 18 = 918 mismatch
+ digit multiply rev
+ (99,97)->871: 9*7 || 9*9 = 63 || 81 = 6381 mismatch
+ digit sum diff
+ (93,16)->001: (9+3) - (1+6) = 5 mismatch
+ digit sum sum
+ (99,97)->871: (9+9) + (9+7) = 34 mismatch
+ digit product diff
+ (93,16)->001: 9*3 - 1*6 = 27 - 6 = 21 mismatch
+ digit product sum
+ (99,97)->871: 9*9 + 9*7 = 81 + 63 = 144 mismatch
+ determinant
+ (93,16)->001: 9*6 - 3*1 = 54 - 3 = 51 mismatch
+ abs determinant
+ (99,97)->871: |9*7 - 9*9| = |63 - 81| = 18 mismatch
+
+Applying to 32{31:
+ We recall that the question operator is found in the examples.
+ reversed operands [32->23, 31->13] and reversed result
+ addition (23,13): 23 + 13 = 36 rev-> 63
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{63}

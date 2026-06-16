@@ -1,0 +1,178 @@
+55`39 = 16
+61\65 = 126
+42>23 = 4223
+17\21 = 38
+
+The inputs are 55, 39, 61, 65, 42, 23, 17, 21
+
+The outputs are 16, 126, 4223, 38
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+55`39 -> `
+61\65 -> \
+42>23 -> >
+17\21 -> \
+
+The operators
+`
+\
+>
+
+Looking at the question
+81`20 -> `
+The question operator is found in the examples.
+
+Looking at operator ` [55`39 = 16]:
+
+Trying common operations reversed operands [55->55 39->93] and reversed result [expected (55,93)->16]:
+ addition
+ (55,93)->16: 55 + 93 = 148 rev-> 841 mismatch
+ multiplication
+ (55,93)->16: (50 + 5) * 93 = 50 * 93 + 5 * 93 = 4650 + 465 = 5115 rev-> 5115 mismatch
+ concatenation
+ (55,93)->16: 55 || 93 = 5593 rev-> 3955 mismatch
+ reverse concatenation
+ (55,93)->16: 93 || 55 = 9355 rev-> 5539 mismatch
+
+Trying common operations on identity [55 39] [expected (55,39)->16]:
+ addition
+ (55,39)->16: 55 + 39 = 94 mismatch
+ multiplication
+ (55,39)->16: (50 + 5) * 39 = 50 * 39 + 5 * 39 = 1950 + 195 = 2145 mismatch
+ concatenation
+ (55,39)->16: 55 || 39 = 5539 mismatch
+ reverse concatenation
+ (55,39)->16: 39 || 55 = 3955 mismatch
+
+Trying difference operations reversed operands [55->55 39->93] and reversed result [expected (55,93)->16]:
+ subtraction (a-b)
+ (55,93)->16: 55 - 93 = -38 rev-> -83 mismatch
+ absolute difference
+ (55,93)->16: |55 - 93| = 38 rev-> 83 mismatch
+ max mod min
+ (55,93)->16: max(55,93) mod min(55,93) = 93 mod 55 = 38 rev-> 83 mismatch
+ negated absolute difference
+ (55,93)->16: -|55 - 93| = -38 rev-> -83 mismatch
+ reverse subtraction (b-a)
+ (55,93)->16: 93 - 55 = 38 rev-> 83 mismatch
+ modulo (a mod b)
+ (55,93)->16: 55 mod 93 = 55 rev-> 55 mismatch
+
+Trying difference operations on identity [55 39] [expected (55,39)->16]:
+ subtraction (a-b)
+ (55,39)->16: 55 - 39 = 16 match
+ correct, actions: subtraction (a-b)
+ absolute difference
+ (55,39)->16: |55 - 39| = 16 match
+ correct, but skipping
+ max mod min
+ (55,39)->16: max(55,39) mod min(55,39) = 55 mod 39 = 16 match
+ correct, but skipping
+ negated absolute difference
+ (55,39)->16: -|55 - 39| = -16 mismatch
+ reverse subtraction (b-a)
+ (55,39)->16: 39 - 55 = -16 mismatch
+ modulo (a mod b)
+ (55,39)->16: 55 mod 39 = 16 match
+ correct, but skipping
+
+Trying rare operations reversed operands [55->55 39->93] and reversed result [expected (55,93)->16]:
+ multiply+1
+ (55,93)->16: (50 + 5) * 93 + 1 = 50 * 93 + 5 * 93 + 1 = 4650 + 465 + 1 = 5115 + 1 = 5116 rev-> 6115 mismatch
+ multiply-1
+ (55,93)->16: (50 + 5) * 93 - 1 = 50 * 93 + 5 * 93 - 1 = 4650 + 465 - 1 = 5115 - 1 = 5114 rev-> 4115 mismatch
+ add+1
+ (55,93)->16: 55 + 93 + 1 = 149 rev-> 941 mismatch
+ add-1
+ (55,93)->16: 55 + 93 - 1 = 147 rev-> 741 mismatch
+ sub+1
+ (55,93)->16: 55 - 93 + 1 = -37 rev-> -73 mismatch
+ sub-1
+ (55,93)->16: 55 - 93 - 1 = -39 rev-> -93 mismatch
+ integer division (a/b)
+ (55,93)->16: 55 / 93 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (55,93)->16: 93 / 55 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (55,93)->16: 93 mod 55 = 38 rev-> 83 mismatch
+ digit absolute diff
+ (55,93)->16: |5-9| || |5-3| = 42 rev-> 24 mismatch
+ digit add mod10
+ (55,93)->16: (5+9)%10 || (5+3)%10 = 48 rev-> 84 mismatch
+ digit sub mod10
+ (55,93)->16: (5-9)%10 || (5-3)%10 = 62 rev-> 26 mismatch
+ cross multiply
+ (55,93)->16: 5*9 + 5*3 = 45 + 15 = 60 rev-> 06 mismatch
+ cross multiply rev
+ (55,93)->16: 5*3 + 5*9 = 15 + 45 = 60 rev-> 06 mismatch
+ digit multiply
+ (55,93)->16: 5*9 || 5*3 = 45 || 15 = 4515 rev-> 5154 mismatch
+ digit multiply rev
+ (55,93)->16: 5*3 || 5*9 = 15 || 45 = 1545 rev-> 5451 mismatch
+ digit sum diff
+ (55,93)->16: (5+5) - (9+3) = -2 rev-> -2 mismatch
+ digit sum sum
+ (55,93)->16: (5+5) + (9+3) = 22 rev-> 22 mismatch
+ digit product diff
+ (55,93)->16: 5*5 - 9*3 = 25 - 27 = -2 rev-> -2 mismatch
+ digit product sum
+ (55,93)->16: 5*5 + 9*3 = 25 + 27 = 52 rev-> 25 mismatch
+ determinant
+ (55,93)->16: 5*3 - 5*9 = 15 - 45 = -30 rev-> -03 mismatch
+ abs determinant
+ (55,93)->16: |5*3 - 5*9| = |15 - 45| = 30 rev-> 03 mismatch
+
+Trying rare operations on identity [55 39] [expected (55,39)->16]:
+ multiply+1
+ (55,39)->16: (50 + 5) * 39 + 1 = 50 * 39 + 5 * 39 + 1 = 1950 + 195 + 1 = 2145 + 1 = 2146 mismatch
+ multiply-1
+ (55,39)->16: (50 + 5) * 39 - 1 = 50 * 39 + 5 * 39 - 1 = 1950 + 195 - 1 = 2145 - 1 = 2144 mismatch
+ add+1
+ (55,39)->16: 55 + 39 + 1 = 95 mismatch
+ add-1
+ (55,39)->16: 55 + 39 - 1 = 93 mismatch
+ sub+1
+ (55,39)->16: 55 - 39 + 1 = 17 mismatch
+ sub-1
+ (55,39)->16: 55 - 39 - 1 = 15 mismatch
+ integer division (a/b)
+ (55,39)->16: 55 / 39 = 1 mismatch
+ reverse division (b/a)
+ (55,39)->16: 39 / 55 = 0 mismatch
+ reverse modulo (b mod a)
+ (55,39)->16: 39 mod 55 = 39 mismatch
+ digit absolute diff
+ (55,39)->16: |5-3| || |5-9| = 24 mismatch
+ digit add mod10
+ (55,39)->16: (5+3)%10 || (5+9)%10 = 84 mismatch
+ digit sub mod10
+ (55,39)->16: (5-3)%10 || (5-9)%10 = 26 mismatch
+ cross multiply
+ (55,39)->16: 5*3 + 5*9 = 15 + 45 = 60 mismatch
+ cross multiply rev
+ (55,39)->16: 5*9 + 5*3 = 45 + 15 = 60 mismatch
+ digit multiply
+ (55,39)->16: 5*3 || 5*9 = 15 || 45 = 1545 mismatch
+ digit multiply rev
+ (55,39)->16: 5*9 || 5*3 = 45 || 15 = 4515 mismatch
+ digit sum diff
+ (55,39)->16: (5+5) - (3+9) = -2 mismatch
+ digit sum sum
+ (55,39)->16: (5+5) + (3+9) = 22 mismatch
+ digit product diff
+ (55,39)->16: 5*5 - 3*9 = 25 - 27 = -2 mismatch
+ digit product sum
+ (55,39)->16: 5*5 + 3*9 = 25 + 27 = 52 mismatch
+ determinant
+ (55,39)->16: 5*9 - 5*3 = 45 - 15 = 30 mismatch
+ abs determinant
+ (55,39)->16: |5*9 - 5*3| = |45 - 15| = 30 mismatch
+
+Applying to 81`20:
+ We recall that the question operator is found in the examples.
+ identity
+ subtraction (a-b) (81,20): 81 - 20 = 61
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{61}

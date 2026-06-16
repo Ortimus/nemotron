@@ -1,0 +1,181 @@
+44+54 = 98
+75-06 = -3
+93*77 = 7793
+
+The inputs are 44, 54, 75, 06, 93, 77
+
+The outputs are 98, -3, 7793
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 98, -3, 7793
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+44+54 -> +
+75-06 -> -
+93*77 -> *
+
+The operators
++
+-
+*
+
+Looking at the question
+74*42 -> *
+The question operator is found in the examples.
+
+Looking at operator * [93*77 = 7793]:
+
+Trying common operations
+ reversed operands [93->39 77->77] and reversed result [expected (39,77)->7793]
+ addition
+ (39,77)->7793: 39 + 77 = 116 rev-> 611 mismatch
+ multiplication
+ (39,77)->7793: (30 + 9) * 77 = 30 * 77 + 9 * 77 = 2310 + 693 = 3003 rev-> 3003 mismatch
+ concatenation
+ (39,77)->7793: 39 || 77 = 3977 rev-> 7793 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (39,77)->7793: 77 || 39 = 7739 rev-> 9377 mismatch
+
+ identity [93 77] [expected (93,77)->7793]
+ addition
+ (93,77)->7793: 93 + 77 = 170 mismatch
+ multiplication
+ (93,77)->7793: (90 + 3) * 77 = 90 * 77 + 3 * 77 = 6930 + 231 = 7161 mismatch
+ concatenation
+ (93,77)->7793: 93 || 77 = 9377 mismatch
+ reverse concatenation
+ (93,77)->7793: 77 || 93 = 7793 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [93->39 77->77] and reversed result [expected (39,77)->7793]
+ subtraction (a-b)
+ (39,77)->7793: 39 - 77 = -38 rev-> -83 mismatch
+ absolute difference
+ (39,77)->7793: |39 - 77| = 38 rev-> 83 mismatch
+ max mod min
+ (39,77)->7793: max(39,77) mod min(39,77) = 77 mod 39 = 38 rev-> 83 mismatch
+ negated absolute difference
+ (39,77)->7793: -|39 - 77| = -38 rev-> -83 mismatch
+ reverse subtraction (b-a)
+ (39,77)->7793: 77 - 39 = 38 rev-> 83 mismatch
+ modulo (a mod b)
+ (39,77)->7793: 39 mod 77 = 39 rev-> 93 mismatch
+
+ identity [93 77] [expected (93,77)->7793]
+ subtraction (a-b)
+ (93,77)->7793: 93 - 77 = 16 mismatch
+ absolute difference
+ (93,77)->7793: |93 - 77| = 16 mismatch
+ max mod min
+ (93,77)->7793: max(93,77) mod min(93,77) = 93 mod 77 = 16 mismatch
+ negated absolute difference
+ (93,77)->7793: -|93 - 77| = -16 mismatch
+ reverse subtraction (b-a)
+ (93,77)->7793: 77 - 93 = -16 mismatch
+ modulo (a mod b)
+ (93,77)->7793: 93 mod 77 = 16 mismatch
+
+Trying rare operations
+ reversed operands [93->39 77->77] and reversed result [expected (39,77)->7793]
+ multiply+1
+ (39,77)->7793: (30 + 9) * 77 + 1 = 30 * 77 + 9 * 77 + 1 = 2310 + 693 + 1 = 3003 + 1 = 3004 rev-> 4003 mismatch
+ multiply-1
+ (39,77)->7793: (30 + 9) * 77 - 1 = 30 * 77 + 9 * 77 - 1 = 2310 + 693 - 1 = 3003 - 1 = 3002 rev-> 2003 mismatch
+ add+1
+ (39,77)->7793: 39 + 77 + 1 = 117 rev-> 711 mismatch
+ add-1
+ (39,77)->7793: 39 + 77 - 1 = 115 rev-> 511 mismatch
+ sub+1
+ (39,77)->7793: 39 - 77 + 1 = -37 rev-> -73 mismatch
+ sub-1
+ (39,77)->7793: 39 - 77 - 1 = -39 rev-> -93 mismatch
+ integer division (a/b)
+ (39,77)->7793: 39 / 77 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (39,77)->7793: 77 / 39 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (39,77)->7793: 77 mod 39 = 38 rev-> 83 mismatch
+ digit absolute diff
+ (39,77)->7793: |3-7| || |9-7| = 42 rev-> 24 mismatch
+ digit add mod10
+ (39,77)->7793: (3+7)%10 || (9+7)%10 = 06 rev-> 60 mismatch
+ digit sub mod10
+ (39,77)->7793: (3-7)%10 || (9-7)%10 = 62 rev-> 26 mismatch
+ cross multiply
+ (39,77)->7793: 3*7 + 9*7 = 21 + 63 = 84 rev-> 48 mismatch
+ cross multiply rev
+ (39,77)->7793: 3*7 + 9*7 = 21 + 63 = 84 rev-> 48 mismatch
+ digit multiply
+ (39,77)->7793: 3*7 || 9*7 = 21 || 63 = 2163 rev-> 3612 mismatch
+ digit multiply rev
+ (39,77)->7793: 3*7 || 9*7 = 21 || 63 = 2163 rev-> 3612 mismatch
+ digit sum diff
+ (39,77)->7793: (3+9) - (7+7) = -2 rev-> -2 mismatch
+ digit sum sum
+ (39,77)->7793: (3+9) + (7+7) = 26 rev-> 62 mismatch
+ digit product diff
+ (39,77)->7793: 3*9 - 7*7 = 27 - 49 = -22 rev-> -22 mismatch
+ digit product sum
+ (39,77)->7793: 3*9 + 7*7 = 27 + 49 = 76 rev-> 67 mismatch
+ determinant
+ (39,77)->7793: 3*7 - 9*7 = 21 - 63 = -42 rev-> -24 mismatch
+ abs determinant
+ (39,77)->7793: |3*7 - 9*7| = |21 - 63| = 42 rev-> 24 mismatch
+
+ identity [93 77] [expected (93,77)->7793]
+ multiply+1
+ (93,77)->7793: (90 + 3) * 77 + 1 = 90 * 77 + 3 * 77 + 1 = 6930 + 231 + 1 = 7161 + 1 = 7162 mismatch
+ multiply-1
+ (93,77)->7793: (90 + 3) * 77 - 1 = 90 * 77 + 3 * 77 - 1 = 6930 + 231 - 1 = 7161 - 1 = 7160 mismatch
+ add+1
+ (93,77)->7793: 93 + 77 + 1 = 171 mismatch
+ add-1
+ (93,77)->7793: 93 + 77 - 1 = 169 mismatch
+ sub+1
+ (93,77)->7793: 93 - 77 + 1 = 17 mismatch
+ sub-1
+ (93,77)->7793: 93 - 77 - 1 = 15 mismatch
+ integer division (a/b)
+ (93,77)->7793: 93 / 77 = 1 mismatch
+ reverse division (b/a)
+ (93,77)->7793: 77 / 93 = 0 mismatch
+ reverse modulo (b mod a)
+ (93,77)->7793: 77 mod 93 = 77 mismatch
+ digit absolute diff
+ (93,77)->7793: |9-7| || |3-7| = 24 mismatch
+ digit add mod10
+ (93,77)->7793: (9+7)%10 || (3+7)%10 = 60 mismatch
+ digit sub mod10
+ (93,77)->7793: (9-7)%10 || (3-7)%10 = 26 mismatch
+ cross multiply
+ (93,77)->7793: 9*7 + 3*7 = 63 + 21 = 84 mismatch
+ cross multiply rev
+ (93,77)->7793: 9*7 + 3*7 = 63 + 21 = 84 mismatch
+ digit multiply
+ (93,77)->7793: 9*7 || 3*7 = 63 || 21 = 6321 mismatch
+ digit multiply rev
+ (93,77)->7793: 9*7 || 3*7 = 63 || 21 = 6321 mismatch
+ digit sum diff
+ (93,77)->7793: (9+3) - (7+7) = -2 mismatch
+ digit sum sum
+ (93,77)->7793: (9+3) + (7+7) = 26 mismatch
+ digit product diff
+ (93,77)->7793: 9*3 - 7*7 = 27 - 49 = -22 mismatch
+ digit product sum
+ (93,77)->7793: 9*3 + 7*7 = 27 + 49 = 76 mismatch
+ determinant
+ (93,77)->7793: 9*7 - 3*7 = 63 - 21 = 42 mismatch
+ abs determinant
+ (93,77)->7793: |9*7 - 3*7| = |63 - 21| = 42 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 74*42:
+ We recall that the question operator is found in the examples.
+ reversed operands [74->47, 42->24] and reversed result
+ concatenation
+ (47,24): 47 || 24 = 4724 rev-> 4274
+ Result is non-negative
+ \boxed{4274}

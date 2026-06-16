@@ -1,0 +1,177 @@
+22)64 = 86
+27%16 = 11%
+85%17 = 31
+
+The inputs are 22, 64, 27, 16, 85, 17
+
+The outputs are 86, 11%, 31
+Some example outputs have the operator symbol as suffix %.
+We now consider the outputs to be 86, -11, 31
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+22)64 -> )
+27%16 -> %
+85%17 -> %
+
+The operators
+)
+%
+
+Looking at the question
+75)79 -> )
+The question operator is found in the examples.
+
+Looking at operator ) [22)64 = 86]:
+
+Trying common operations reversed operands [22->22 64->46] and reversed result [expected (22,46)->86]:
+ addition
+ (22,46)->86: 22 + 46 = 68 rev-> 86 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (22,46)->86: (20 + 2) * 46 = 20 * 46 + 2 * 46 = 920 + 92 = 1012 rev-> 2101 mismatch
+ concatenation
+ (22,46)->86: 22 || 46 = 2246 rev-> 6422 mismatch
+ reverse concatenation
+ (22,46)->86: 46 || 22 = 4622 rev-> 2264 mismatch
+
+Trying common operations on identity [22 64] [expected (22,64)->86]:
+ addition
+ (22,64)->86: 22 + 64 = 86 match
+ correct, but skipping
+ multiplication
+ (22,64)->86: (20 + 2) * 64 = 20 * 64 + 2 * 64 = 1280 + 128 = 1408 mismatch
+ concatenation
+ (22,64)->86: 22 || 64 = 2264 mismatch
+ reverse concatenation
+ (22,64)->86: 64 || 22 = 6422 mismatch
+
+Trying difference operations reversed operands [22->22 64->46] and reversed result [expected (22,46)->86]:
+ subtraction (a-b)
+ (22,46)->86: 22 - 46 = -24 rev-> -42 mismatch
+ absolute difference
+ (22,46)->86: |22 - 46| = 24 rev-> 42 mismatch
+ max mod min
+ (22,46)->86: max(22,46) mod min(22,46) = 46 mod 22 = 2 rev-> 2 mismatch
+ negated absolute difference
+ (22,46)->86: -|22 - 46| = -24 rev-> -42 mismatch
+ reverse subtraction (b-a)
+ (22,46)->86: 46 - 22 = 24 rev-> 42 mismatch
+ modulo (a mod b)
+ (22,46)->86: 22 mod 46 = 22 rev-> 22 mismatch
+
+Trying difference operations on identity [22 64] [expected (22,64)->86]:
+ subtraction (a-b)
+ (22,64)->86: 22 - 64 = -42 mismatch
+ absolute difference
+ (22,64)->86: |22 - 64| = 42 mismatch
+ max mod min
+ (22,64)->86: max(22,64) mod min(22,64) = 64 mod 22 = 20 mismatch
+ negated absolute difference
+ (22,64)->86: -|22 - 64| = -42 mismatch
+ reverse subtraction (b-a)
+ (22,64)->86: 64 - 22 = 42 mismatch
+ modulo (a mod b)
+ (22,64)->86: 22 mod 64 = 22 mismatch
+
+Trying rare operations reversed operands [22->22 64->46] and reversed result [expected (22,46)->86]:
+ multiply+1
+ (22,46)->86: (20 + 2) * 46 + 1 = 20 * 46 + 2 * 46 + 1 = 920 + 92 + 1 = 1012 + 1 = 1013 rev-> 3101 mismatch
+ multiply-1
+ (22,46)->86: (20 + 2) * 46 - 1 = 20 * 46 + 2 * 46 - 1 = 920 + 92 - 1 = 1012 - 1 = 1011 rev-> 1101 mismatch
+ add+1
+ (22,46)->86: 22 + 46 + 1 = 69 rev-> 96 mismatch
+ add-1
+ (22,46)->86: 22 + 46 - 1 = 67 rev-> 76 mismatch
+ sub+1
+ (22,46)->86: 22 - 46 + 1 = -23 rev-> -32 mismatch
+ sub-1
+ (22,46)->86: 22 - 46 - 1 = -25 rev-> -52 mismatch
+ integer division (a/b)
+ (22,46)->86: 22 / 46 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (22,46)->86: 46 / 22 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (22,46)->86: 46 mod 22 = 2 rev-> 2 mismatch
+ digit absolute diff
+ (22,46)->86: |2-4| || |2-6| = 24 rev-> 42 mismatch
+ digit add mod10
+ (22,46)->86: (2+4)%10 || (2+6)%10 = 68 rev-> 86 match
+ correct, but skipping
+ digit sub mod10
+ (22,46)->86: (2-4)%10 || (2-6)%10 = 86 rev-> 68 mismatch
+ cross multiply
+ (22,46)->86: 2*4 + 2*6 = 8 + 12 = 20 rev-> 02 mismatch
+ cross multiply rev
+ (22,46)->86: 2*6 + 2*4 = 12 + 8 = 20 rev-> 02 mismatch
+ digit multiply
+ (22,46)->86: 2*4 || 2*6 = 8 || 12 = 812 rev-> 218 mismatch
+ digit multiply rev
+ (22,46)->86: 2*6 || 2*4 = 12 || 8 = 128 rev-> 821 mismatch
+ digit sum diff
+ (22,46)->86: (2+2) - (4+6) = -6 rev-> -6 mismatch
+ digit sum sum
+ (22,46)->86: (2+2) + (4+6) = 14 rev-> 41 mismatch
+ digit product diff
+ (22,46)->86: 2*2 - 4*6 = 4 - 24 = -20 rev-> -02 mismatch
+ digit product sum
+ (22,46)->86: 2*2 + 4*6 = 4 + 24 = 28 rev-> 82 mismatch
+ determinant
+ (22,46)->86: 2*6 - 2*4 = 12 - 8 = 4 rev-> 4 mismatch
+ abs determinant
+ (22,46)->86: |2*6 - 2*4| = |12 - 8| = 4 rev-> 4 mismatch
+
+Trying rare operations on identity [22 64] [expected (22,64)->86]:
+ multiply+1
+ (22,64)->86: (20 + 2) * 64 + 1 = 20 * 64 + 2 * 64 + 1 = 1280 + 128 + 1 = 1408 + 1 = 1409 mismatch
+ multiply-1
+ (22,64)->86: (20 + 2) * 64 - 1 = 20 * 64 + 2 * 64 - 1 = 1280 + 128 - 1 = 1408 - 1 = 1407 mismatch
+ add+1
+ (22,64)->86: 22 + 64 + 1 = 87 mismatch
+ add-1
+ (22,64)->86: 22 + 64 - 1 = 85 mismatch
+ sub+1
+ (22,64)->86: 22 - 64 + 1 = -41 mismatch
+ sub-1
+ (22,64)->86: 22 - 64 - 1 = -43 mismatch
+ integer division (a/b)
+ (22,64)->86: 22 / 64 = 0 mismatch
+ reverse division (b/a)
+ (22,64)->86: 64 / 22 = 2 mismatch
+ reverse modulo (b mod a)
+ (22,64)->86: 64 mod 22 = 20 mismatch
+ digit absolute diff
+ (22,64)->86: |2-6| || |2-4| = 42 mismatch
+ digit add mod10
+ (22,64)->86: (2+6)%10 || (2+4)%10 = 86 match
+ correct, but skipping
+ digit sub mod10
+ (22,64)->86: (2-6)%10 || (2-4)%10 = 68 mismatch
+ cross multiply
+ (22,64)->86: 2*6 + 2*4 = 12 + 8 = 20 mismatch
+ cross multiply rev
+ (22,64)->86: 2*4 + 2*6 = 8 + 12 = 20 mismatch
+ digit multiply
+ (22,64)->86: 2*6 || 2*4 = 12 || 8 = 128 mismatch
+ digit multiply rev
+ (22,64)->86: 2*4 || 2*6 = 8 || 12 = 812 mismatch
+ digit sum diff
+ (22,64)->86: (2+2) - (6+4) = -6 mismatch
+ digit sum sum
+ (22,64)->86: (2+2) + (6+4) = 14 mismatch
+ digit product diff
+ (22,64)->86: 2*2 - 6*4 = 4 - 24 = -20 mismatch
+ digit product sum
+ (22,64)->86: 2*2 + 6*4 = 4 + 24 = 28 mismatch
+ determinant
+ (22,64)->86: 2*4 - 2*6 = 8 - 12 = -4 mismatch
+ abs determinant
+ (22,64)->86: |2*4 - 2*6| = |8 - 12| = 4 mismatch
+
+Applying to 75)79:
+ We recall that the question operator is found in the examples.
+ reversed operands [75->57, 79->97] and reversed result
+ addition (57,97): 57 + 97 = 154 rev-> 451
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{451}

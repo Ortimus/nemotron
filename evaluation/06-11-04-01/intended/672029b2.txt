@@ -1,0 +1,178 @@
+27*77 = 4455
+18*84 = 8883
+78*99 = 3168
+
+The inputs are 27, 77, 18, 84, 78, 99
+
+The outputs are 4455, 8883, 3168
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+27*77 -> *
+18*84 -> *
+78*99 -> *
+
+The operators
+*
+
+Looking at the question
+98-83 -> -
+The question operator is not found in the examples. Investigating the most common example operator * instead. We will use addition for the question operator.
+
+Looking at operator * [27*77 = 4455, 18*84 = 8883, 78*99 = 3168]:
+
+Trying common operations
+ reversed operands [27->72 77->77, 18->81 84->48, 78->87 99->99] and reversed result [expected (72,77)->4455, (81,48)->8883, (87,99)->3168]
+ addition
+ (72,77)->4455: 72 + 77 = 149 rev-> 941 mismatch
+ multiplication
+ (81,48)->8883: (80 + 1) * 48 = 80 * 48 + 1 * 48 = 3840 + 48 = 3888 rev-> 8883 match
+ (87,99)->3168: (80 + 7) * 99 = 80 * 99 + 7 * 99 = 7920 + 693 = 8613 rev-> 3168 match
+ (72,77)->4455: (70 + 2) * 77 = 70 * 77 + 2 * 77 = 5390 + 154 = 5544 rev-> 4455 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (87,99)->3168: 87 || 99 = 8799 rev-> 9978 mismatch
+ reverse concatenation
+ (72,77)->4455: 77 || 72 = 7772 rev-> 2777 mismatch
+
+ identity [27 77, 18 84, 78 99] [expected (27,77)->4455, (18,84)->8883, (78,99)->3168]
+ addition
+ (27,77)->4455: 27 + 77 = 104 mismatch
+ multiplication
+ (18,84)->8883: (10 + 8) * 84 = 10 * 84 + 8 * 84 = 840 + 672 = 1512 mismatch
+ concatenation
+ (78,99)->3168: 78 || 99 = 7899 mismatch
+ reverse concatenation
+ (27,77)->4455: 77 || 27 = 7727 mismatch
+
+Trying difference operations
+ reversed operands [27->72 77->77, 18->81 84->48, 78->87 99->99] and reversed result [expected (72,77)->4455, (81,48)->8883, (87,99)->3168]
+ subtraction (a-b)
+ (72,77)->4455: 72 - 77 = -5 rev-> -5 mismatch
+ absolute difference
+ (81,48)->8883: |81 - 48| = 33 rev-> 33 mismatch
+ max mod min
+ (87,99)->3168: max(87,99) mod min(87,99) = 99 mod 87 = 12 rev-> 21 mismatch
+ negated absolute difference
+ (72,77)->4455: -|72 - 77| = -5 rev-> -5 mismatch
+ reverse subtraction (b-a)
+ (81,48)->8883: 48 - 81 = -33 rev-> -33 mismatch
+ modulo (a mod b)
+ (87,99)->3168: 87 mod 99 = 87 rev-> 78 mismatch
+
+ identity [27 77, 18 84, 78 99] [expected (27,77)->4455, (18,84)->8883, (78,99)->3168]
+ subtraction (a-b)
+ (27,77)->4455: 27 - 77 = -50 mismatch
+ absolute difference
+ (18,84)->8883: |18 - 84| = 66 mismatch
+ max mod min
+ (78,99)->3168: max(78,99) mod min(78,99) = 99 mod 78 = 21 mismatch
+ negated absolute difference
+ (27,77)->4455: -|27 - 77| = -50 mismatch
+ reverse subtraction (b-a)
+ (18,84)->8883: 84 - 18 = 66 mismatch
+ modulo (a mod b)
+ (78,99)->3168: 78 mod 99 = 78 mismatch
+
+Trying rare operations
+ reversed operands [27->72 77->77, 18->81 84->48, 78->87 99->99] and reversed result [expected (72,77)->4455, (81,48)->8883, (87,99)->3168]
+ multiply+1
+ (72,77)->4455: (70 + 2) * 77 + 1 = 70 * 77 + 2 * 77 + 1 = 5390 + 154 + 1 = 5544 + 1 = 5545 rev-> 5455 mismatch
+ multiply-1
+ (81,48)->8883: (80 + 1) * 48 - 1 = 80 * 48 + 1 * 48 - 1 = 3840 + 48 - 1 = 3888 - 1 = 3887 rev-> 7883 mismatch
+ add+1
+ (87,99)->3168: 87 + 99 + 1 = 187 rev-> 781 mismatch
+ add-1
+ (72,77)->4455: 72 + 77 - 1 = 148 rev-> 841 mismatch
+ sub+1
+ (81,48)->8883: 81 - 48 + 1 = 34 rev-> 43 mismatch
+ sub-1
+ (87,99)->3168: 87 - 99 - 1 = -13 rev-> -31 mismatch
+ integer division (a/b)
+ (72,77)->4455: 72 / 77 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (81,48)->8883: 48 / 81 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (87,99)->3168: 99 mod 87 = 12 rev-> 21 mismatch
+ digit absolute diff
+ (72,77)->4455: |7-7| || |2-7| = 05 rev-> 50 mismatch
+ digit add mod10
+ (81,48)->8883: (8+4)%10 || (1+8)%10 = 29 rev-> 92 mismatch
+ digit sub mod10
+ (87,99)->3168: (8-9)%10 || (7-9)%10 = 98 rev-> 89 mismatch
+ cross multiply
+ (72,77)->4455: 7*7 + 2*7 = 49 + 14 = 63 rev-> 36 mismatch
+ cross multiply rev
+ (81,48)->8883: 8*8 + 1*4 = 64 + 4 = 68 rev-> 86 mismatch
+ digit multiply
+ (87,99)->3168: 8*9 || 7*9 = 72 || 63 = 7263 rev-> 3627 mismatch
+ digit multiply rev
+ (72,77)->4455: 7*7 || 2*7 = 49 || 14 = 4914 rev-> 4194 mismatch
+ digit sum diff
+ (81,48)->8883: (8+1) - (4+8) = -3 rev-> -3 mismatch
+ digit sum sum
+ (87,99)->3168: (8+7) + (9+9) = 33 rev-> 33 mismatch
+ digit product diff
+ (72,77)->4455: 7*2 - 7*7 = 14 - 49 = -35 rev-> -53 mismatch
+ digit product sum
+ (81,48)->8883: 8*1 + 4*8 = 8 + 32 = 40 rev-> 04 mismatch
+ determinant
+ (87,99)->3168: 8*9 - 7*9 = 72 - 63 = 9 rev-> 9 mismatch
+ abs determinant
+ (72,77)->4455: |7*7 - 2*7| = |49 - 14| = 35 rev-> 53 mismatch
+
+ identity [27 77, 18 84, 78 99] [expected (27,77)->4455, (18,84)->8883, (78,99)->3168]
+ multiply+1
+ (27,77)->4455: (20 + 7) * 77 + 1 = 20 * 77 + 7 * 77 + 1 = 1540 + 539 + 1 = 2079 + 1 = 2080 mismatch
+ multiply-1
+ (18,84)->8883: (10 + 8) * 84 - 1 = 10 * 84 + 8 * 84 - 1 = 840 + 672 - 1 = 1512 - 1 = 1511 mismatch
+ add+1
+ (78,99)->3168: 78 + 99 + 1 = 178 mismatch
+ add-1
+ (27,77)->4455: 27 + 77 - 1 = 103 mismatch
+ sub+1
+ (18,84)->8883: 18 - 84 + 1 = -65 mismatch
+ sub-1
+ (78,99)->3168: 78 - 99 - 1 = -22 mismatch
+ integer division (a/b)
+ (27,77)->4455: 27 / 77 = 0 mismatch
+ reverse division (b/a)
+ (18,84)->8883: 84 / 18 = 4 mismatch
+ reverse modulo (b mod a)
+ (78,99)->3168: 99 mod 78 = 21 mismatch
+ digit absolute diff
+ (27,77)->4455: |2-7| || |7-7| = 50 mismatch
+ digit add mod10
+ (18,84)->8883: (1+8)%10 || (8+4)%10 = 92 mismatch
+ digit sub mod10
+ (78,99)->3168: (7-9)%10 || (8-9)%10 = 89 mismatch
+ cross multiply
+ (27,77)->4455: 2*7 + 7*7 = 14 + 49 = 63 mismatch
+ cross multiply rev
+ (18,84)->8883: 1*4 + 8*8 = 4 + 64 = 68 mismatch
+ digit multiply
+ (78,99)->3168: 7*9 || 8*9 = 63 || 72 = 6372 mismatch
+ digit multiply rev
+ (27,77)->4455: 2*7 || 7*7 = 14 || 49 = 1449 mismatch
+ digit sum diff
+ (18,84)->8883: (1+8) - (8+4) = -3 mismatch
+ digit sum sum
+ (78,99)->3168: (7+8) + (9+9) = 33 mismatch
+ digit product diff
+ (27,77)->4455: 2*7 - 7*7 = 14 - 49 = -35 mismatch
+ digit product sum
+ (18,84)->8883: 1*8 + 8*4 = 8 + 32 = 40 mismatch
+ determinant
+ (78,99)->3168: 7*9 - 8*9 = 63 - 72 = -9 mismatch
+ abs determinant
+ (27,77)->4455: |2*7 - 7*7| = |14 - 49| = 35 mismatch
+
+correct, actions: reversed operands, reversed result, multiplication
+
+Applying to 98-83:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [98->89, 83->38] and reversed result
+ addition
+ (89,38): 89 + 38 = 127 rev-> 721
+ Result is non-negative
+ \boxed{721}

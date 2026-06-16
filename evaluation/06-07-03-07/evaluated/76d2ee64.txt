@@ -1,0 +1,180 @@
+82-66 = -83
+97-87 = -1
+04*03 = 0021
+61*04 = 046
+06+39 = 3906
+
+The inputs are 82, 66, 97, 87, 04, 03, 61, 04, 06, 39
+
+The outputs are -83, -1, 0021, 046, 3906
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -83, -1, 0021, 046, 3906
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+82-66 -> -
+97-87 -> -
+04*03 -> *
+61*04 -> *
+06+39 -> +
+
+The operators
+-
+*
++
+
+Looking at the question
+02+94 -> +
+The question operator is found in the examples.
+
+Looking at operator + [06+39 = 3906]:
+
+Trying common operations reversed operands [06->60 39->93] and reversed result [expected (60,93)->3906]:
+ addition
+ (60,93)->3906: 60 + 93 = 153 rev-> 351 mismatch
+ multiplication
+ (60,93)->3906: (60 + 0) * 93 = 60 * 93 + 0 * 93 = 5580 + 0 = 5580 rev-> 0855 mismatch
+ concatenation
+ (60,93)->3906: 60 || 93 = 6093 rev-> 3906 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (60,93)->3906: 93 || 60 = 9360 rev-> 0639 mismatch
+
+Trying common operations on identity [06 39] [expected (06,39)->3906]:
+ addition
+ (06,39)->3906: 06 + 39 = 45 mismatch
+ multiplication
+ (06,39)->3906: (0 + 6) * 39 = 0 * 39 + 6 * 39 = 0 + 234 = 234 mismatch
+ concatenation
+ (06,39)->3906: 06 || 39 = 0639 mismatch
+ reverse concatenation
+ (06,39)->3906: 39 || 06 = 3906 match
+ correct, but skipping
+
+Trying difference operations reversed operands [06->60 39->93] and reversed result [expected (60,93)->3906]:
+ subtraction (a-b)
+ (60,93)->3906: 60 - 93 = -33 rev-> -33 mismatch
+ absolute difference
+ (60,93)->3906: |60 - 93| = 33 rev-> 33 mismatch
+ max mod min
+ (60,93)->3906: max(60,93) mod min(60,93) = 93 mod 60 = 33 rev-> 33 mismatch
+ negated absolute difference
+ (60,93)->3906: -|60 - 93| = -33 rev-> -33 mismatch
+ reverse subtraction (b-a)
+ (60,93)->3906: 93 - 60 = 33 rev-> 33 mismatch
+ modulo (a mod b)
+ (60,93)->3906: 60 mod 93 = 60 rev-> 06 mismatch
+
+Trying difference operations on identity [06 39] [expected (06,39)->3906]:
+ subtraction (a-b)
+ (06,39)->3906: 06 - 39 = -33 mismatch
+ absolute difference
+ (06,39)->3906: |06 - 39| = 33 mismatch
+ max mod min
+ (06,39)->3906: max(06,39) mod min(06,39) = 39 mod 06 = 3 mismatch
+ negated absolute difference
+ (06,39)->3906: -|06 - 39| = -33 mismatch
+ reverse subtraction (b-a)
+ (06,39)->3906: 39 - 06 = 33 mismatch
+ modulo (a mod b)
+ (06,39)->3906: 06 mod 39 = 6 mismatch
+
+Trying rare operations reversed operands [06->60 39->93] and reversed result [expected (60,93)->3906]:
+ multiply+1
+ (60,93)->3906: (60 + 0) * 93 + 1 = 60 * 93 + 0 * 93 + 1 = 5580 + 0 + 1 = 5580 + 1 = 5581 rev-> 1855 mismatch
+ multiply-1
+ (60,93)->3906: (60 + 0) * 93 - 1 = 60 * 93 + 0 * 93 - 1 = 5580 + 0 - 1 = 5580 - 1 = 5579 rev-> 9755 mismatch
+ add+1
+ (60,93)->3906: 60 + 93 + 1 = 154 rev-> 451 mismatch
+ add-1
+ (60,93)->3906: 60 + 93 - 1 = 152 rev-> 251 mismatch
+ sub+1
+ (60,93)->3906: 60 - 93 + 1 = -32 rev-> -23 mismatch
+ sub-1
+ (60,93)->3906: 60 - 93 - 1 = -34 rev-> -43 mismatch
+ integer division (a/b)
+ (60,93)->3906: 60 / 93 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (60,93)->3906: 93 / 60 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (60,93)->3906: 93 mod 60 = 33 rev-> 33 mismatch
+ digit absolute diff
+ (60,93)->3906: |6-9| || |0-3| = 33 rev-> 33 mismatch
+ digit add mod10
+ (60,93)->3906: (6+9)%10 || (0+3)%10 = 53 rev-> 35 mismatch
+ digit sub mod10
+ (60,93)->3906: (6-9)%10 || (0-3)%10 = 77 rev-> 77 mismatch
+ cross multiply
+ (60,93)->3906: 6*9 + 0*3 = 54 + 0 = 54 rev-> 45 mismatch
+ cross multiply rev
+ (60,93)->3906: 6*3 + 0*9 = 18 + 0 = 18 rev-> 81 mismatch
+ digit multiply
+ (60,93)->3906: 6*9 || 0*3 = 54 || 0 = 540 rev-> 045 mismatch
+ digit multiply rev
+ (60,93)->3906: 6*3 || 0*9 = 18 || 0 = 180 rev-> 081 mismatch
+ digit sum diff
+ (60,93)->3906: (6+0) - (9+3) = -6 rev-> -6 mismatch
+ digit sum sum
+ (60,93)->3906: (6+0) + (9+3) = 18 rev-> 81 mismatch
+ digit product diff
+ (60,93)->3906: 6*0 - 9*3 = 0 - 27 = -27 rev-> -72 mismatch
+ digit product sum
+ (60,93)->3906: 6*0 + 9*3 = 0 + 27 = 27 rev-> 72 mismatch
+ determinant
+ (60,93)->3906: 6*3 - 0*9 = 18 - 0 = 18 rev-> 81 mismatch
+ abs determinant
+ (60,93)->3906: |6*3 - 0*9| = |18 - 0| = 18 rev-> 81 mismatch
+
+Trying rare operations on identity [06 39] [expected (06,39)->3906]:
+ multiply+1
+ (06,39)->3906: (0 + 6) * 39 + 1 = 0 * 39 + 6 * 39 + 1 = 0 + 234 + 1 = 234 + 1 = 235 mismatch
+ multiply-1
+ (06,39)->3906: (0 + 6) * 39 - 1 = 0 * 39 + 6 * 39 - 1 = 0 + 234 - 1 = 234 - 1 = 233 mismatch
+ add+1
+ (06,39)->3906: 06 + 39 + 1 = 46 mismatch
+ add-1
+ (06,39)->3906: 06 + 39 - 1 = 44 mismatch
+ sub+1
+ (06,39)->3906: 06 - 39 + 1 = -32 mismatch
+ sub-1
+ (06,39)->3906: 06 - 39 - 1 = -34 mismatch
+ integer division (a/b)
+ (06,39)->3906: 06 / 39 = 0 mismatch
+ reverse division (b/a)
+ (06,39)->3906: 39 / 06 = 6 mismatch
+ reverse modulo (b mod a)
+ (06,39)->3906: 39 mod 06 = 3 mismatch
+ digit absolute diff
+ (06,39)->3906: |0-3| || |6-9| = 33 mismatch
+ digit add mod10
+ (06,39)->3906: (0+3)%10 || (6+9)%10 = 35 mismatch
+ digit sub mod10
+ (06,39)->3906: (0-3)%10 || (6-9)%10 = 77 mismatch
+ cross multiply
+ (06,39)->3906: 0*3 + 6*9 = 0 + 54 = 54 mismatch
+ cross multiply rev
+ (06,39)->3906: 0*9 + 6*3 = 0 + 18 = 18 mismatch
+ digit multiply
+ (06,39)->3906: 0*3 || 6*9 = 0 || 54 = 054 mismatch
+ digit multiply rev
+ (06,39)->3906: 0*9 || 6*3 = 0 || 18 = 018 mismatch
+ digit sum diff
+ (06,39)->3906: (0+6) - (3+9) = -6 mismatch
+ digit sum sum
+ (06,39)->3906: (0+6) + (3+9) = 18 mismatch
+ digit product diff
+ (06,39)->3906: 0*6 - 3*9 = 0 - 27 = -27 mismatch
+ digit product sum
+ (06,39)->3906: 0*6 + 3*9 = 0 + 27 = 27 mismatch
+ determinant
+ (06,39)->3906: 0*9 - 6*3 = 0 - 18 = -18 mismatch
+ abs determinant
+ (06,39)->3906: |0*9 - 6*3| = |0 - 18| = 18 mismatch
+
+Applying to 02+94:
+ We recall that the question operator is found in the examples.
+ reversed operands [02->20, 94->49] and reversed result
+ concatenation (20,49): 20 || 49 = 2049 rev-> 9402
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{9402}

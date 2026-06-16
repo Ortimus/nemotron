@@ -1,0 +1,178 @@
+82*77 = 6512
+87+18 = 061
+06+02 = 18
+86+39 = 261
+48*15 = 4824
+
+The inputs are 82, 77, 87, 18, 06, 02, 86, 39, 48, 15
+
+The outputs are 6512, 061, 18, 261, 4824
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+82*77 -> *
+87+18 -> +
+06+02 -> +
+86+39 -> +
+48*15 -> *
+
+The operators
+*
++
+
+Looking at the question
+57+82 -> +
+The question operator is found in the examples.
+
+Looking at operator + [87+18 = 061, 06+02 = 18, 86+39 = 261]:
+
+Trying common operations reversed operands [87->78 18->81, 06->60 02->20, 86->68 39->93] and reversed result [expected (78,81)->061, (60,20)->18, (68,93)->261]:
+ addition
+ (78,81)->061: 78 + 81 = 159 rev-> 951 mismatch
+ multiplication
+ (60,20)->18: (60 + 0) * 20 = 60 * 20 + 0 * 20 = 1200 + 0 = 1200 rev-> 0021 mismatch
+ concatenation
+ (68,93)->261: 68 || 93 = 6893 rev-> 3986 mismatch
+ reverse concatenation
+ (78,81)->061: 81 || 78 = 8178 rev-> 8718 mismatch
+
+Trying common operations on identity [87 18, 06 02, 86 39] [expected (87,18)->061, (06,02)->18, (86,39)->261]:
+ addition
+ (87,18)->061: 87 + 18 = 105 mismatch
+ multiplication
+ (06,02)->18: (0 + 6) * 02 = 0 * 02 + 6 * 02 = 0 + 12 = 12 mismatch
+ concatenation
+ (86,39)->261: 86 || 39 = 8639 mismatch
+ reverse concatenation
+ (87,18)->061: 18 || 87 = 1887 mismatch
+
+Trying difference operations reversed operands [87->78 18->81, 06->60 02->20, 86->68 39->93] and reversed result [expected (78,81)->061, (60,20)->18, (68,93)->261]:
+ subtraction (a-b)
+ (78,81)->061: 78 - 81 = -3 rev-> -3 mismatch
+ absolute difference
+ (60,20)->18: |60 - 20| = 40 rev-> 04 mismatch
+ max mod min
+ (68,93)->261: max(68,93) mod min(68,93) = 93 mod 68 = 25 rev-> 52 mismatch
+ negated absolute difference
+ (78,81)->061: -|78 - 81| = -3 rev-> -3 mismatch
+ reverse subtraction (b-a)
+ (60,20)->18: 20 - 60 = -40 rev-> -04 mismatch
+ modulo (a mod b)
+ (68,93)->261: 68 mod 93 = 68 rev-> 86 mismatch
+
+Trying difference operations on identity [87 18, 06 02, 86 39] [expected (87,18)->061, (06,02)->18, (86,39)->261]:
+ subtraction (a-b)
+ (87,18)->061: 87 - 18 = 69 mismatch
+ absolute difference
+ (06,02)->18: |06 - 02| = 4 mismatch
+ max mod min
+ (86,39)->261: max(86,39) mod min(86,39) = 86 mod 39 = 8 mismatch
+ negated absolute difference
+ (87,18)->061: -|87 - 18| = -69 mismatch
+ reverse subtraction (b-a)
+ (06,02)->18: 02 - 06 = -4 mismatch
+ modulo (a mod b)
+ (86,39)->261: 86 mod 39 = 8 mismatch
+
+Trying rare operations reversed operands [87->78 18->81, 06->60 02->20, 86->68 39->93] and reversed result [expected (78,81)->061, (60,20)->18, (68,93)->261]:
+ multiply+1
+ (78,81)->061: (70 + 8) * 81 + 1 = 70 * 81 + 8 * 81 + 1 = 5670 + 648 + 1 = 6318 + 1 = 6319 rev-> 9136 mismatch
+ multiply-1
+ (60,20)->18: (60 + 0) * 20 - 1 = 60 * 20 + 0 * 20 - 1 = 1200 + 0 - 1 = 1200 - 1 = 1199 rev-> 9911 mismatch
+ add+1
+ (68,93)->261: 68 + 93 + 1 = 162 rev-> 261 match
+ (78,81)->061: 78 + 81 + 1 = 160 rev-> 061 match
+ (60,20)->18: 60 + 20 + 1 = 81 rev-> 18 match
+ correct, actions: reversed operands, reversed result, add+1
+ add-1
+ (78,81)->061: 78 + 81 - 1 = 158 rev-> 851 mismatch
+ sub+1
+ (60,20)->18: 60 - 20 + 1 = 41 rev-> 14 mismatch
+ sub-1
+ (68,93)->261: 68 - 93 - 1 = -26 rev-> -62 mismatch
+ integer division (a/b)
+ (78,81)->061: 78 / 81 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (60,20)->18: 20 / 60 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (68,93)->261: 93 mod 68 = 25 rev-> 52 mismatch
+ digit absolute diff
+ (78,81)->061: |7-8| || |8-1| = 17 rev-> 71 mismatch
+ digit add mod10
+ (60,20)->18: (6+2)%10 || (0+0)%10 = 80 rev-> 08 mismatch
+ digit sub mod10
+ (68,93)->261: (6-9)%10 || (8-3)%10 = 75 rev-> 57 mismatch
+ cross multiply
+ (78,81)->061: 7*8 + 8*1 = 56 + 8 = 64 rev-> 46 mismatch
+ cross multiply rev
+ (60,20)->18: 6*0 + 0*2 = 0 + 0 = 0 rev-> 0 mismatch
+ digit multiply
+ (68,93)->261: 6*9 || 8*3 = 54 || 24 = 5424 rev-> 4245 mismatch
+ digit multiply rev
+ (78,81)->061: 7*1 || 8*8 = 7 || 64 = 764 rev-> 467 mismatch
+ digit sum diff
+ (60,20)->18: (6+0) - (2+0) = 4 rev-> 4 mismatch
+ digit sum sum
+ (68,93)->261: (6+8) + (9+3) = 26 rev-> 62 mismatch
+ digit product diff
+ (78,81)->061: 7*8 - 8*1 = 56 - 8 = 48 rev-> 84 mismatch
+ digit product sum
+ (60,20)->18: 6*0 + 2*0 = 0 + 0 = 0 rev-> 0 mismatch
+ determinant
+ (68,93)->261: 6*3 - 8*9 = 18 - 72 = -54 rev-> -45 mismatch
+ abs determinant
+ (78,81)->061: |7*1 - 8*8| = |7 - 64| = 57 rev-> 75 mismatch
+
+Trying rare operations on identity [87 18, 06 02, 86 39] [expected (87,18)->061, (06,02)->18, (86,39)->261]:
+ multiply+1
+ (87,18)->061: (80 + 7) * 18 + 1 = 80 * 18 + 7 * 18 + 1 = 1440 + 126 + 1 = 1566 + 1 = 1567 mismatch
+ multiply-1
+ (06,02)->18: (0 + 6) * 02 - 1 = 0 * 02 + 6 * 02 - 1 = 0 + 12 - 1 = 12 - 1 = 11 mismatch
+ add+1
+ (86,39)->261: 86 + 39 + 1 = 126 mismatch
+ add-1
+ (87,18)->061: 87 + 18 - 1 = 104 mismatch
+ sub+1
+ (06,02)->18: 06 - 02 + 1 = 5 mismatch
+ sub-1
+ (86,39)->261: 86 - 39 - 1 = 46 mismatch
+ integer division (a/b)
+ (87,18)->061: 87 / 18 = 4 mismatch
+ reverse division (b/a)
+ (06,02)->18: 02 / 06 = 0 mismatch
+ reverse modulo (b mod a)
+ (86,39)->261: 39 mod 86 = 39 mismatch
+ digit absolute diff
+ (87,18)->061: |8-1| || |7-8| = 71 mismatch
+ digit add mod10
+ (06,02)->18: (0+0)%10 || (6+2)%10 = 08 mismatch
+ digit sub mod10
+ (86,39)->261: (8-3)%10 || (6-9)%10 = 57 mismatch
+ cross multiply
+ (87,18)->061: 8*1 + 7*8 = 8 + 56 = 64 mismatch
+ cross multiply rev
+ (06,02)->18: 0*2 + 6*0 = 0 + 0 = 0 mismatch
+ digit multiply
+ (86,39)->261: 8*3 || 6*9 = 24 || 54 = 2454 mismatch
+ digit multiply rev
+ (87,18)->061: 8*8 || 7*1 = 64 || 7 = 647 mismatch
+ digit sum diff
+ (06,02)->18: (0+6) - (0+2) = 4 mismatch
+ digit sum sum
+ (86,39)->261: (8+6) + (3+9) = 26 mismatch
+ digit product diff
+ (87,18)->061: 8*7 - 1*8 = 56 - 8 = 48 mismatch
+ digit product sum
+ (06,02)->18: 0*6 + 0*2 = 0 + 0 = 0 mismatch
+ determinant
+ (86,39)->261: 8*9 - 6*3 = 72 - 18 = 54 mismatch
+ abs determinant
+ (87,18)->061: |8*8 - 7*1| = |64 - 7| = 57 mismatch
+
+Applying to 57+82:
+ We recall that the question operator is found in the examples.
+ reversed operands [57->75, 82->28] and reversed result
+ add+1 (75,28): 75 + 28 + 1 = 104 rev-> 401
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{401}

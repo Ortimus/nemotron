@@ -1,0 +1,177 @@
+10?30 = 40
+87]69 = 6004
+11@87 = @76
+96@41 = @55
+
+The inputs are 10, 30, 87, 69, 11, 87, 96, 41
+
+The outputs are 40, 6004, @76, @55
+Some example outputs have the operator symbol as prefix @.
+We now consider the outputs to be 40, 6004, -76, -55
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+10?30 -> ?
+87]69 -> ]
+11@87 -> @
+96@41 -> @
+
+The operators
+?
+]
+@
+
+Looking at the question
+78]15 -> ]
+The question operator is found in the examples.
+
+Looking at operator ] [87]69 = 6004]:
+
+Trying common operations reversed operands [87->78 69->96] and reversed result [expected (78,96)->6004]:
+ addition
+ (78,96)->6004: 78 + 96 = 174 rev-> 471 mismatch
+ multiplication
+ (78,96)->6004: (70 + 8) * 96 = 70 * 96 + 8 * 96 = 6720 + 768 = 7488 rev-> 8847 mismatch
+ concatenation
+ (78,96)->6004: 78 || 96 = 7896 rev-> 6987 mismatch
+ reverse concatenation
+ (78,96)->6004: 96 || 78 = 9678 rev-> 8769 mismatch
+
+Trying common operations on identity [87 69] [expected (87,69)->6004]:
+ addition
+ (87,69)->6004: 87 + 69 = 156 mismatch
+ multiplication
+ (87,69)->6004: (80 + 7) * 69 = 80 * 69 + 7 * 69 = 5520 + 483 = 6003 mismatch
+ concatenation
+ (87,69)->6004: 87 || 69 = 8769 mismatch
+ reverse concatenation
+ (87,69)->6004: 69 || 87 = 6987 mismatch
+
+Trying difference operations reversed operands [87->78 69->96] and reversed result [expected (78,96)->6004]:
+ subtraction (a-b)
+ (78,96)->6004: 78 - 96 = -18 rev-> -81 mismatch
+ absolute difference
+ (78,96)->6004: |78 - 96| = 18 rev-> 81 mismatch
+ max mod min
+ (78,96)->6004: max(78,96) mod min(78,96) = 96 mod 78 = 18 rev-> 81 mismatch
+ negated absolute difference
+ (78,96)->6004: -|78 - 96| = -18 rev-> -81 mismatch
+ reverse subtraction (b-a)
+ (78,96)->6004: 96 - 78 = 18 rev-> 81 mismatch
+ modulo (a mod b)
+ (78,96)->6004: 78 mod 96 = 78 rev-> 87 mismatch
+
+Trying difference operations on identity [87 69] [expected (87,69)->6004]:
+ subtraction (a-b)
+ (87,69)->6004: 87 - 69 = 18 mismatch
+ absolute difference
+ (87,69)->6004: |87 - 69| = 18 mismatch
+ max mod min
+ (87,69)->6004: max(87,69) mod min(87,69) = 87 mod 69 = 18 mismatch
+ negated absolute difference
+ (87,69)->6004: -|87 - 69| = -18 mismatch
+ reverse subtraction (b-a)
+ (87,69)->6004: 69 - 87 = -18 mismatch
+ modulo (a mod b)
+ (87,69)->6004: 87 mod 69 = 18 mismatch
+
+Trying rare operations reversed operands [87->78 69->96] and reversed result [expected (78,96)->6004]:
+ multiply+1
+ (78,96)->6004: (70 + 8) * 96 + 1 = 70 * 96 + 8 * 96 + 1 = 6720 + 768 + 1 = 7488 + 1 = 7489 rev-> 9847 mismatch
+ multiply-1
+ (78,96)->6004: (70 + 8) * 96 - 1 = 70 * 96 + 8 * 96 - 1 = 6720 + 768 - 1 = 7488 - 1 = 7487 rev-> 7847 mismatch
+ add+1
+ (78,96)->6004: 78 + 96 + 1 = 175 rev-> 571 mismatch
+ add-1
+ (78,96)->6004: 78 + 96 - 1 = 173 rev-> 371 mismatch
+ sub+1
+ (78,96)->6004: 78 - 96 + 1 = -17 rev-> -71 mismatch
+ sub-1
+ (78,96)->6004: 78 - 96 - 1 = -19 rev-> -91 mismatch
+ integer division (a/b)
+ (78,96)->6004: 78 / 96 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (78,96)->6004: 96 / 78 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (78,96)->6004: 96 mod 78 = 18 rev-> 81 mismatch
+ digit absolute diff
+ (78,96)->6004: |7-9| || |8-6| = 22 rev-> 22 mismatch
+ digit add mod10
+ (78,96)->6004: (7+9)%10 || (8+6)%10 = 64 rev-> 46 mismatch
+ digit sub mod10
+ (78,96)->6004: (7-9)%10 || (8-6)%10 = 82 rev-> 28 mismatch
+ cross multiply
+ (78,96)->6004: 7*9 + 8*6 = 63 + 48 = 111 rev-> 111 mismatch
+ cross multiply rev
+ (78,96)->6004: 7*6 + 8*9 = 42 + 72 = 114 rev-> 411 mismatch
+ digit multiply
+ (78,96)->6004: 7*9 || 8*6 = 63 || 48 = 6348 rev-> 8436 mismatch
+ digit multiply rev
+ (78,96)->6004: 7*6 || 8*9 = 42 || 72 = 4272 rev-> 2724 mismatch
+ digit sum diff
+ (78,96)->6004: (7+8) - (9+6) = 0 rev-> 0 mismatch
+ digit sum sum
+ (78,96)->6004: (7+8) + (9+6) = 30 rev-> 03 mismatch
+ digit product diff
+ (78,96)->6004: 7*8 - 9*6 = 56 - 54 = 2 rev-> 2 mismatch
+ digit product sum
+ (78,96)->6004: 7*8 + 9*6 = 56 + 54 = 110 rev-> 011 mismatch
+ determinant
+ (78,96)->6004: 7*6 - 8*9 = 42 - 72 = -30 rev-> -03 mismatch
+ abs determinant
+ (78,96)->6004: |7*6 - 8*9| = |42 - 72| = 30 rev-> 03 mismatch
+
+Trying rare operations on identity [87 69] [expected (87,69)->6004]:
+ multiply+1
+ (87,69)->6004: (80 + 7) * 69 + 1 = 80 * 69 + 7 * 69 + 1 = 5520 + 483 + 1 = 6003 + 1 = 6004 match
+ correct, actions: multiply+1
+ multiply-1
+ (87,69)->6004: (80 + 7) * 69 - 1 = 80 * 69 + 7 * 69 - 1 = 5520 + 483 - 1 = 6003 - 1 = 6002 mismatch
+ add+1
+ (87,69)->6004: 87 + 69 + 1 = 157 mismatch
+ add-1
+ (87,69)->6004: 87 + 69 - 1 = 155 mismatch
+ sub+1
+ (87,69)->6004: 87 - 69 + 1 = 19 mismatch
+ sub-1
+ (87,69)->6004: 87 - 69 - 1 = 17 mismatch
+ integer division (a/b)
+ (87,69)->6004: 87 / 69 = 1 mismatch
+ reverse division (b/a)
+ (87,69)->6004: 69 / 87 = 0 mismatch
+ reverse modulo (b mod a)
+ (87,69)->6004: 69 mod 87 = 69 mismatch
+ digit absolute diff
+ (87,69)->6004: |8-6| || |7-9| = 22 mismatch
+ digit add mod10
+ (87,69)->6004: (8+6)%10 || (7+9)%10 = 46 mismatch
+ digit sub mod10
+ (87,69)->6004: (8-6)%10 || (7-9)%10 = 28 mismatch
+ cross multiply
+ (87,69)->6004: 8*6 + 7*9 = 48 + 63 = 111 mismatch
+ cross multiply rev
+ (87,69)->6004: 8*9 + 7*6 = 72 + 42 = 114 mismatch
+ digit multiply
+ (87,69)->6004: 8*6 || 7*9 = 48 || 63 = 4863 mismatch
+ digit multiply rev
+ (87,69)->6004: 8*9 || 7*6 = 72 || 42 = 7242 mismatch
+ digit sum diff
+ (87,69)->6004: (8+7) - (6+9) = 0 mismatch
+ digit sum sum
+ (87,69)->6004: (8+7) + (6+9) = 30 mismatch
+ digit product diff
+ (87,69)->6004: 8*7 - 6*9 = 56 - 54 = 2 mismatch
+ digit product sum
+ (87,69)->6004: 8*7 + 6*9 = 56 + 54 = 110 mismatch
+ determinant
+ (87,69)->6004: 8*9 - 7*6 = 72 - 42 = 30 mismatch
+ abs determinant
+ (87,69)->6004: |8*9 - 7*6| = |72 - 42| = 30 mismatch
+
+Applying to 78]15:
+ We recall that the question operator is found in the examples.
+ identity
+ multiply+1 (78,15): (70 + 8) * 15 + 1 = 70 * 15 + 8 * 15 + 1 = 1050 + 120 + 1 = 1170 + 1 = 1171
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{1171}

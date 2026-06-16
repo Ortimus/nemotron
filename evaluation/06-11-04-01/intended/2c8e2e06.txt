@@ -1,0 +1,183 @@
+97>98 = 194
+53&45 = 8
+35)79 = 2764
+12)34 = 407
+
+The inputs are 97, 98, 53, 45, 35, 79, 12, 34
+
+The outputs are 194, 8, 2764, 407
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+97>98 -> >
+53&45 -> &
+35)79 -> )
+12)34 -> )
+
+The operators
+>
+&
+)
+
+Looking at the question
+38&90 -> &
+The question operator is found in the examples.
+
+Looking at operator & [53&45 = 8]:
+
+Trying common operations
+ reversed operands [53->35 45->54] and reversed result [expected (35,54)->8]
+ addition
+ (35,54)->8: 35 + 54 = 89 rev-> 98 mismatch
+ multiplication
+ (35,54)->8: (30 + 5) * 54 = 30 * 54 + 5 * 54 = 1620 + 270 = 1890 rev-> 0981 mismatch
+ concatenation
+ (35,54)->8: 35 || 54 = 3554 rev-> 4553 mismatch
+ reverse concatenation
+ (35,54)->8: 54 || 35 = 5435 rev-> 5345 mismatch
+
+ identity [53 45] [expected (53,45)->8]
+ addition
+ (53,45)->8: 53 + 45 = 98 mismatch
+ multiplication
+ (53,45)->8: (50 + 3) * 45 = 50 * 45 + 3 * 45 = 2250 + 135 = 2385 mismatch
+ concatenation
+ (53,45)->8: 53 || 45 = 5345 mismatch
+ reverse concatenation
+ (53,45)->8: 45 || 53 = 4553 mismatch
+
+Trying difference operations
+ reversed operands [53->35 45->54] and reversed result [expected (35,54)->8]
+ subtraction (a-b)
+ (35,54)->8: 35 - 54 = -19 rev-> -91 mismatch
+ absolute difference
+ (35,54)->8: |35 - 54| = 19 rev-> 91 mismatch
+ max mod min
+ (35,54)->8: max(35,54) mod min(35,54) = 54 mod 35 = 19 rev-> 91 mismatch
+ negated absolute difference
+ (35,54)->8: -|35 - 54| = -19 rev-> -91 mismatch
+ reverse subtraction (b-a)
+ (35,54)->8: 54 - 35 = 19 rev-> 91 mismatch
+ modulo (a mod b)
+ (35,54)->8: 35 mod 54 = 35 rev-> 53 mismatch
+
+ identity [53 45] [expected (53,45)->8]
+ subtraction (a-b)
+ (53,45)->8: 53 - 45 = 8 match
+ correct, actions: subtraction (a-b)
+ absolute difference
+ (53,45)->8: |53 - 45| = 8 match
+ correct, but skipping
+ max mod min
+ (53,45)->8: max(53,45) mod min(53,45) = 53 mod 45 = 8 match
+ correct, but skipping
+ negated absolute difference
+ (53,45)->8: -|53 - 45| = -8 mismatch
+ reverse subtraction (b-a)
+ (53,45)->8: 45 - 53 = -8 mismatch
+ modulo (a mod b)
+ (53,45)->8: 53 mod 45 = 8 match
+ correct, but skipping
+
+Trying rare operations
+ reversed operands [53->35 45->54] and reversed result [expected (35,54)->8]
+ multiply+1
+ (35,54)->8: (30 + 5) * 54 + 1 = 30 * 54 + 5 * 54 + 1 = 1620 + 270 + 1 = 1890 + 1 = 1891 rev-> 1981 mismatch
+ multiply-1
+ (35,54)->8: (30 + 5) * 54 - 1 = 30 * 54 + 5 * 54 - 1 = 1620 + 270 - 1 = 1890 - 1 = 1889 rev-> 9881 mismatch
+ add+1
+ (35,54)->8: 35 + 54 + 1 = 90 rev-> 09 mismatch
+ add-1
+ (35,54)->8: 35 + 54 - 1 = 88 rev-> 88 mismatch
+ sub+1
+ (35,54)->8: 35 - 54 + 1 = -18 rev-> -81 mismatch
+ sub-1
+ (35,54)->8: 35 - 54 - 1 = -20 rev-> -02 mismatch
+ integer division (a/b)
+ (35,54)->8: 35 / 54 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (35,54)->8: 54 / 35 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (35,54)->8: 54 mod 35 = 19 rev-> 91 mismatch
+ digit absolute diff
+ (35,54)->8: |3-5| || |5-4| = 21 rev-> 12 mismatch
+ digit add mod10
+ (35,54)->8: (3+5)%10 || (5+4)%10 = 89 rev-> 98 mismatch
+ digit sub mod10
+ (35,54)->8: (3-5)%10 || (5-4)%10 = 81 rev-> 18 mismatch
+ cross multiply
+ (35,54)->8: 3*5 + 5*4 = 15 + 20 = 35 rev-> 53 mismatch
+ cross multiply rev
+ (35,54)->8: 3*4 + 5*5 = 12 + 25 = 37 rev-> 73 mismatch
+ digit multiply
+ (35,54)->8: 3*5 || 5*4 = 15 || 20 = 1520 rev-> 0251 mismatch
+ digit multiply rev
+ (35,54)->8: 3*4 || 5*5 = 12 || 25 = 1225 rev-> 5221 mismatch
+ digit sum diff
+ (35,54)->8: (3+5) - (5+4) = -1 rev-> -1 mismatch
+ digit sum sum
+ (35,54)->8: (3+5) + (5+4) = 17 rev-> 71 mismatch
+ digit product diff
+ (35,54)->8: 3*5 - 5*4 = 15 - 20 = -5 rev-> -5 mismatch
+ digit product sum
+ (35,54)->8: 3*5 + 5*4 = 15 + 20 = 35 rev-> 53 mismatch
+ determinant
+ (35,54)->8: 3*4 - 5*5 = 12 - 25 = -13 rev-> -31 mismatch
+ abs determinant
+ (35,54)->8: |3*4 - 5*5| = |12 - 25| = 13 rev-> 31 mismatch
+
+ identity [53 45] [expected (53,45)->8]
+ multiply+1
+ (53,45)->8: (50 + 3) * 45 + 1 = 50 * 45 + 3 * 45 + 1 = 2250 + 135 + 1 = 2385 + 1 = 2386 mismatch
+ multiply-1
+ (53,45)->8: (50 + 3) * 45 - 1 = 50 * 45 + 3 * 45 - 1 = 2250 + 135 - 1 = 2385 - 1 = 2384 mismatch
+ add+1
+ (53,45)->8: 53 + 45 + 1 = 99 mismatch
+ add-1
+ (53,45)->8: 53 + 45 - 1 = 97 mismatch
+ sub+1
+ (53,45)->8: 53 - 45 + 1 = 9 mismatch
+ sub-1
+ (53,45)->8: 53 - 45 - 1 = 7 mismatch
+ integer division (a/b)
+ (53,45)->8: 53 / 45 = 1 mismatch
+ reverse division (b/a)
+ (53,45)->8: 45 / 53 = 0 mismatch
+ reverse modulo (b mod a)
+ (53,45)->8: 45 mod 53 = 45 mismatch
+ digit absolute diff
+ (53,45)->8: |5-4| || |3-5| = 12 mismatch
+ digit add mod10
+ (53,45)->8: (5+4)%10 || (3+5)%10 = 98 mismatch
+ digit sub mod10
+ (53,45)->8: (5-4)%10 || (3-5)%10 = 18 mismatch
+ cross multiply
+ (53,45)->8: 5*4 + 3*5 = 20 + 15 = 35 mismatch
+ cross multiply rev
+ (53,45)->8: 5*5 + 3*4 = 25 + 12 = 37 mismatch
+ digit multiply
+ (53,45)->8: 5*4 || 3*5 = 20 || 15 = 2015 mismatch
+ digit multiply rev
+ (53,45)->8: 5*5 || 3*4 = 25 || 12 = 2512 mismatch
+ digit sum diff
+ (53,45)->8: (5+3) - (4+5) = -1 mismatch
+ digit sum sum
+ (53,45)->8: (5+3) + (4+5) = 17 mismatch
+ digit product diff
+ (53,45)->8: 5*3 - 4*5 = 15 - 20 = -5 mismatch
+ digit product sum
+ (53,45)->8: 5*3 + 4*5 = 15 + 20 = 35 mismatch
+ determinant
+ (53,45)->8: 5*5 - 3*4 = 25 - 12 = 13 mismatch
+ abs determinant
+ (53,45)->8: |5*5 - 3*4| = |25 - 12| = 13 mismatch
+
+correct, actions: subtraction (a-b)
+
+Applying to 38&90:
+ We recall that the question operator is found in the examples.
+ identity [38 90]
+ subtraction (a-b)
+ (38,90): 38 - 90 = -52
+ Result is negative - but none of the example outputs have a symbol prefix or suffix
+ \boxed{-52}

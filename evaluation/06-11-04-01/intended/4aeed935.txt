@@ -1,0 +1,183 @@
+24*74 = 7424
+75+78 = 7875
+31+96 = 9631
+07-19 = -12
+
+The inputs are 24, 74, 75, 78, 31, 96, 07, 19
+
+The outputs are 7424, 7875, 9631, -12
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 7424, 7875, 9631, -12
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+24*74 -> *
+75+78 -> +
+31+96 -> +
+07-19 -> -
+
+The operators
+*
++
+-
+
+Looking at the question
+55*14 -> *
+The question operator is found in the examples.
+
+Looking at operator * [24*74 = 7424]:
+
+Trying common operations
+ reversed operands [24->42 74->47] and reversed result [expected (42,47)->7424]
+ addition
+ (42,47)->7424: 42 + 47 = 89 rev-> 98 mismatch
+ multiplication
+ (42,47)->7424: (40 + 2) * 47 = 40 * 47 + 2 * 47 = 1880 + 94 = 1974 rev-> 4791 mismatch
+ concatenation
+ (42,47)->7424: 42 || 47 = 4247 rev-> 7424 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (42,47)->7424: 47 || 42 = 4742 rev-> 2474 mismatch
+
+ identity [24 74] [expected (24,74)->7424]
+ addition
+ (24,74)->7424: 24 + 74 = 98 mismatch
+ multiplication
+ (24,74)->7424: (20 + 4) * 74 = 20 * 74 + 4 * 74 = 1480 + 296 = 1776 mismatch
+ concatenation
+ (24,74)->7424: 24 || 74 = 2474 mismatch
+ reverse concatenation
+ (24,74)->7424: 74 || 24 = 7424 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [24->42 74->47] and reversed result [expected (42,47)->7424]
+ subtraction (a-b)
+ (42,47)->7424: 42 - 47 = -5 rev-> -5 mismatch
+ absolute difference
+ (42,47)->7424: |42 - 47| = 5 rev-> 5 mismatch
+ max mod min
+ (42,47)->7424: max(42,47) mod min(42,47) = 47 mod 42 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (42,47)->7424: -|42 - 47| = -5 rev-> -5 mismatch
+ reverse subtraction (b-a)
+ (42,47)->7424: 47 - 42 = 5 rev-> 5 mismatch
+ modulo (a mod b)
+ (42,47)->7424: 42 mod 47 = 42 rev-> 24 mismatch
+
+ identity [24 74] [expected (24,74)->7424]
+ subtraction (a-b)
+ (24,74)->7424: 24 - 74 = -50 mismatch
+ absolute difference
+ (24,74)->7424: |24 - 74| = 50 mismatch
+ max mod min
+ (24,74)->7424: max(24,74) mod min(24,74) = 74 mod 24 = 2 mismatch
+ negated absolute difference
+ (24,74)->7424: -|24 - 74| = -50 mismatch
+ reverse subtraction (b-a)
+ (24,74)->7424: 74 - 24 = 50 mismatch
+ modulo (a mod b)
+ (24,74)->7424: 24 mod 74 = 24 mismatch
+
+Trying rare operations
+ reversed operands [24->42 74->47] and reversed result [expected (42,47)->7424]
+ multiply+1
+ (42,47)->7424: (40 + 2) * 47 + 1 = 40 * 47 + 2 * 47 + 1 = 1880 + 94 + 1 = 1974 + 1 = 1975 rev-> 5791 mismatch
+ multiply-1
+ (42,47)->7424: (40 + 2) * 47 - 1 = 40 * 47 + 2 * 47 - 1 = 1880 + 94 - 1 = 1974 - 1 = 1973 rev-> 3791 mismatch
+ add+1
+ (42,47)->7424: 42 + 47 + 1 = 90 rev-> 09 mismatch
+ add-1
+ (42,47)->7424: 42 + 47 - 1 = 88 rev-> 88 mismatch
+ sub+1
+ (42,47)->7424: 42 - 47 + 1 = -4 rev-> -4 mismatch
+ sub-1
+ (42,47)->7424: 42 - 47 - 1 = -6 rev-> -6 mismatch
+ integer division (a/b)
+ (42,47)->7424: 42 / 47 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (42,47)->7424: 47 / 42 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (42,47)->7424: 47 mod 42 = 5 rev-> 5 mismatch
+ digit absolute diff
+ (42,47)->7424: |4-4| || |2-7| = 05 rev-> 50 mismatch
+ digit add mod10
+ (42,47)->7424: (4+4)%10 || (2+7)%10 = 89 rev-> 98 mismatch
+ digit sub mod10
+ (42,47)->7424: (4-4)%10 || (2-7)%10 = 05 rev-> 50 mismatch
+ cross multiply
+ (42,47)->7424: 4*4 + 2*7 = 16 + 14 = 30 rev-> 03 mismatch
+ cross multiply rev
+ (42,47)->7424: 4*7 + 2*4 = 28 + 8 = 36 rev-> 63 mismatch
+ digit multiply
+ (42,47)->7424: 4*4 || 2*7 = 16 || 14 = 1614 rev-> 4161 mismatch
+ digit multiply rev
+ (42,47)->7424: 4*7 || 2*4 = 28 || 8 = 288 rev-> 882 mismatch
+ digit sum diff
+ (42,47)->7424: (4+2) - (4+7) = -5 rev-> -5 mismatch
+ digit sum sum
+ (42,47)->7424: (4+2) + (4+7) = 17 rev-> 71 mismatch
+ digit product diff
+ (42,47)->7424: 4*2 - 4*7 = 8 - 28 = -20 rev-> -02 mismatch
+ digit product sum
+ (42,47)->7424: 4*2 + 4*7 = 8 + 28 = 36 rev-> 63 mismatch
+ determinant
+ (42,47)->7424: 4*7 - 2*4 = 28 - 8 = 20 rev-> 02 mismatch
+ abs determinant
+ (42,47)->7424: |4*7 - 2*4| = |28 - 8| = 20 rev-> 02 mismatch
+
+ identity [24 74] [expected (24,74)->7424]
+ multiply+1
+ (24,74)->7424: (20 + 4) * 74 + 1 = 20 * 74 + 4 * 74 + 1 = 1480 + 296 + 1 = 1776 + 1 = 1777 mismatch
+ multiply-1
+ (24,74)->7424: (20 + 4) * 74 - 1 = 20 * 74 + 4 * 74 - 1 = 1480 + 296 - 1 = 1776 - 1 = 1775 mismatch
+ add+1
+ (24,74)->7424: 24 + 74 + 1 = 99 mismatch
+ add-1
+ (24,74)->7424: 24 + 74 - 1 = 97 mismatch
+ sub+1
+ (24,74)->7424: 24 - 74 + 1 = -49 mismatch
+ sub-1
+ (24,74)->7424: 24 - 74 - 1 = -51 mismatch
+ integer division (a/b)
+ (24,74)->7424: 24 / 74 = 0 mismatch
+ reverse division (b/a)
+ (24,74)->7424: 74 / 24 = 3 mismatch
+ reverse modulo (b mod a)
+ (24,74)->7424: 74 mod 24 = 2 mismatch
+ digit absolute diff
+ (24,74)->7424: |2-7| || |4-4| = 50 mismatch
+ digit add mod10
+ (24,74)->7424: (2+7)%10 || (4+4)%10 = 98 mismatch
+ digit sub mod10
+ (24,74)->7424: (2-7)%10 || (4-4)%10 = 50 mismatch
+ cross multiply
+ (24,74)->7424: 2*7 + 4*4 = 14 + 16 = 30 mismatch
+ cross multiply rev
+ (24,74)->7424: 2*4 + 4*7 = 8 + 28 = 36 mismatch
+ digit multiply
+ (24,74)->7424: 2*7 || 4*4 = 14 || 16 = 1416 mismatch
+ digit multiply rev
+ (24,74)->7424: 2*4 || 4*7 = 8 || 28 = 828 mismatch
+ digit sum diff
+ (24,74)->7424: (2+4) - (7+4) = -5 mismatch
+ digit sum sum
+ (24,74)->7424: (2+4) + (7+4) = 17 mismatch
+ digit product diff
+ (24,74)->7424: 2*4 - 7*4 = 8 - 28 = -20 mismatch
+ digit product sum
+ (24,74)->7424: 2*4 + 7*4 = 8 + 28 = 36 mismatch
+ determinant
+ (24,74)->7424: 2*4 - 4*7 = 8 - 28 = -20 mismatch
+ abs determinant
+ (24,74)->7424: |2*4 - 4*7| = |8 - 28| = 20 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 55*14:
+ We recall that the question operator is found in the examples.
+ reversed operands [55->55, 14->41] and reversed result
+ concatenation
+ (55,41): 55 || 41 = 5541 rev-> 1455
+ Result is non-negative
+ \boxed{1455}

@@ -1,0 +1,179 @@
+61-22 = -6
+51+72 = 24
+63*47 = 4763
+18*63 = 6318
+08*67 = 6708
+
+The inputs are 61, 22, 51, 72, 63, 47, 18, 63, 08, 67
+
+The outputs are -6, 24, 4763, 6318, 6708
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -6, 24, 4763, 6318, 6708
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+61-22 -> -
+51+72 -> +
+63*47 -> *
+18*63 -> *
+08*67 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+06+65 -> +
+The question operator is found in the examples.
+
+Looking at operator + [51+72 = 24]:
+
+Trying common operations reversed operands [51->15 72->27] and reversed result [expected (15,27)->24]:
+ addition
+ (15,27)->24: 15 + 27 = 42 rev-> 24 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (15,27)->24: (10 + 5) * 27 = 10 * 27 + 5 * 27 = 270 + 135 = 405 rev-> 504 mismatch
+ concatenation
+ (15,27)->24: 15 || 27 = 1527 rev-> 7251 mismatch
+ reverse concatenation
+ (15,27)->24: 27 || 15 = 2715 rev-> 5172 mismatch
+
+Trying common operations on identity [51 72] [expected (51,72)->24]:
+ addition
+ (51,72)->24: 51 + 72 = 123 mismatch
+ multiplication
+ (51,72)->24: (50 + 1) * 72 = 50 * 72 + 1 * 72 = 3600 + 72 = 3672 mismatch
+ concatenation
+ (51,72)->24: 51 || 72 = 5172 mismatch
+ reverse concatenation
+ (51,72)->24: 72 || 51 = 7251 mismatch
+
+Trying difference operations reversed operands [51->15 72->27] and reversed result [expected (15,27)->24]:
+ subtraction (a-b)
+ (15,27)->24: 15 - 27 = -12 rev-> -21 mismatch
+ absolute difference
+ (15,27)->24: |15 - 27| = 12 rev-> 21 mismatch
+ max mod min
+ (15,27)->24: max(15,27) mod min(15,27) = 27 mod 15 = 12 rev-> 21 mismatch
+ negated absolute difference
+ (15,27)->24: -|15 - 27| = -12 rev-> -21 mismatch
+ reverse subtraction (b-a)
+ (15,27)->24: 27 - 15 = 12 rev-> 21 mismatch
+ modulo (a mod b)
+ (15,27)->24: 15 mod 27 = 15 rev-> 51 mismatch
+
+Trying difference operations on identity [51 72] [expected (51,72)->24]:
+ subtraction (a-b)
+ (51,72)->24: 51 - 72 = -21 mismatch
+ absolute difference
+ (51,72)->24: |51 - 72| = 21 mismatch
+ max mod min
+ (51,72)->24: max(51,72) mod min(51,72) = 72 mod 51 = 21 mismatch
+ negated absolute difference
+ (51,72)->24: -|51 - 72| = -21 mismatch
+ reverse subtraction (b-a)
+ (51,72)->24: 72 - 51 = 21 mismatch
+ modulo (a mod b)
+ (51,72)->24: 51 mod 72 = 51 mismatch
+
+Trying rare operations reversed operands [51->15 72->27] and reversed result [expected (15,27)->24]:
+ multiply+1
+ (15,27)->24: (10 + 5) * 27 + 1 = 10 * 27 + 5 * 27 + 1 = 270 + 135 + 1 = 405 + 1 = 406 rev-> 604 mismatch
+ multiply-1
+ (15,27)->24: (10 + 5) * 27 - 1 = 10 * 27 + 5 * 27 - 1 = 270 + 135 - 1 = 405 - 1 = 404 rev-> 404 mismatch
+ add+1
+ (15,27)->24: 15 + 27 + 1 = 43 rev-> 34 mismatch
+ add-1
+ (15,27)->24: 15 + 27 - 1 = 41 rev-> 14 mismatch
+ sub+1
+ (15,27)->24: 15 - 27 + 1 = -11 rev-> -11 mismatch
+ sub-1
+ (15,27)->24: 15 - 27 - 1 = -13 rev-> -31 mismatch
+ integer division (a/b)
+ (15,27)->24: 15 / 27 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (15,27)->24: 27 / 15 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (15,27)->24: 27 mod 15 = 12 rev-> 21 mismatch
+ digit absolute diff
+ (15,27)->24: |1-2| || |5-7| = 12 rev-> 21 mismatch
+ digit add mod10
+ (15,27)->24: (1+2)%10 || (5+7)%10 = 32 rev-> 23 mismatch
+ digit sub mod10
+ (15,27)->24: (1-2)%10 || (5-7)%10 = 98 rev-> 89 mismatch
+ cross multiply
+ (15,27)->24: 1*2 + 5*7 = 2 + 35 = 37 rev-> 73 mismatch
+ cross multiply rev
+ (15,27)->24: 1*7 + 5*2 = 7 + 10 = 17 rev-> 71 mismatch
+ digit multiply
+ (15,27)->24: 1*2 || 5*7 = 2 || 35 = 235 rev-> 532 mismatch
+ digit multiply rev
+ (15,27)->24: 1*7 || 5*2 = 7 || 10 = 710 rev-> 017 mismatch
+ digit sum diff
+ (15,27)->24: (1+5) - (2+7) = -3 rev-> -3 mismatch
+ digit sum sum
+ (15,27)->24: (1+5) + (2+7) = 15 rev-> 51 mismatch
+ digit product diff
+ (15,27)->24: 1*5 - 2*7 = 5 - 14 = -9 rev-> -9 mismatch
+ digit product sum
+ (15,27)->24: 1*5 + 2*7 = 5 + 14 = 19 rev-> 91 mismatch
+ determinant
+ (15,27)->24: 1*7 - 5*2 = 7 - 10 = -3 rev-> -3 mismatch
+ abs determinant
+ (15,27)->24: |1*7 - 5*2| = |7 - 10| = 3 rev-> 3 mismatch
+
+Trying rare operations on identity [51 72] [expected (51,72)->24]:
+ multiply+1
+ (51,72)->24: (50 + 1) * 72 + 1 = 50 * 72 + 1 * 72 + 1 = 3600 + 72 + 1 = 3672 + 1 = 3673 mismatch
+ multiply-1
+ (51,72)->24: (50 + 1) * 72 - 1 = 50 * 72 + 1 * 72 - 1 = 3600 + 72 - 1 = 3672 - 1 = 3671 mismatch
+ add+1
+ (51,72)->24: 51 + 72 + 1 = 124 mismatch
+ add-1
+ (51,72)->24: 51 + 72 - 1 = 122 mismatch
+ sub+1
+ (51,72)->24: 51 - 72 + 1 = -20 mismatch
+ sub-1
+ (51,72)->24: 51 - 72 - 1 = -22 mismatch
+ integer division (a/b)
+ (51,72)->24: 51 / 72 = 0 mismatch
+ reverse division (b/a)
+ (51,72)->24: 72 / 51 = 1 mismatch
+ reverse modulo (b mod a)
+ (51,72)->24: 72 mod 51 = 21 mismatch
+ digit absolute diff
+ (51,72)->24: |5-7| || |1-2| = 21 mismatch
+ digit add mod10
+ (51,72)->24: (5+7)%10 || (1+2)%10 = 23 mismatch
+ digit sub mod10
+ (51,72)->24: (5-7)%10 || (1-2)%10 = 89 mismatch
+ cross multiply
+ (51,72)->24: 5*7 + 1*2 = 35 + 2 = 37 mismatch
+ cross multiply rev
+ (51,72)->24: 5*2 + 1*7 = 10 + 7 = 17 mismatch
+ digit multiply
+ (51,72)->24: 5*7 || 1*2 = 35 || 2 = 352 mismatch
+ digit multiply rev
+ (51,72)->24: 5*2 || 1*7 = 10 || 7 = 107 mismatch
+ digit sum diff
+ (51,72)->24: (5+1) - (7+2) = -3 mismatch
+ digit sum sum
+ (51,72)->24: (5+1) + (7+2) = 15 mismatch
+ digit product diff
+ (51,72)->24: 5*1 - 7*2 = 5 - 14 = -9 mismatch
+ digit product sum
+ (51,72)->24: 5*1 + 7*2 = 5 + 14 = 19 mismatch
+ determinant
+ (51,72)->24: 5*2 - 1*7 = 10 - 7 = 3 mismatch
+ abs determinant
+ (51,72)->24: |5*2 - 1*7| = |10 - 7| = 3 mismatch
+
+Applying to 06+65:
+ We recall that the question operator is found in the examples.
+ reversed operands [06->60, 65->56] and reversed result
+ addition (60,56): 60 + 56 = 116 rev-> 611
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{611}

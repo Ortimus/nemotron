@@ -1,0 +1,182 @@
+41+57 = 88
+62*67 = 7791
+12-19 = -07
+27-79 = -52
+
+The inputs are 41, 57, 62, 67, 12, 19, 27, 79
+
+The outputs are 88, 7791, -07, -52
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 88, 7791, -07, -52
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+41+57 -> +
+62*67 -> *
+12-19 -> -
+27-79 -> -
+
+The operators
++
+*
+-
+
+Looking at the question
+31+39 -> +
+The question operator is found in the examples.
+
+Looking at operator + [41+57 = 88]:
+
+Trying common operations
+ reversed operands [41->14 57->75] and reversed result [expected (14,75)->88]
+ addition
+ (14,75)->88: 14 + 75 = 89 rev-> 98 mismatch
+ multiplication
+ (14,75)->88: (10 + 4) * 75 = 10 * 75 + 4 * 75 = 750 + 300 = 1050 rev-> 0501 mismatch
+ concatenation
+ (14,75)->88: 14 || 75 = 1475 rev-> 5741 mismatch
+ reverse concatenation
+ (14,75)->88: 75 || 14 = 7514 rev-> 4157 mismatch
+
+ identity [41 57] [expected (41,57)->88]
+ addition
+ (41,57)->88: 41 + 57 = 98 mismatch
+ multiplication
+ (41,57)->88: (40 + 1) * 57 = 40 * 57 + 1 * 57 = 2280 + 57 = 2337 mismatch
+ concatenation
+ (41,57)->88: 41 || 57 = 4157 mismatch
+ reverse concatenation
+ (41,57)->88: 57 || 41 = 5741 mismatch
+
+Trying difference operations
+ reversed operands [41->14 57->75] and reversed result [expected (14,75)->88]
+ subtraction (a-b)
+ (14,75)->88: 14 - 75 = -61 rev-> -16 mismatch
+ absolute difference
+ (14,75)->88: |14 - 75| = 61 rev-> 16 mismatch
+ max mod min
+ (14,75)->88: max(14,75) mod min(14,75) = 75 mod 14 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (14,75)->88: -|14 - 75| = -61 rev-> -16 mismatch
+ reverse subtraction (b-a)
+ (14,75)->88: 75 - 14 = 61 rev-> 16 mismatch
+ modulo (a mod b)
+ (14,75)->88: 14 mod 75 = 14 rev-> 41 mismatch
+
+ identity [41 57] [expected (41,57)->88]
+ subtraction (a-b)
+ (41,57)->88: 41 - 57 = -16 mismatch
+ absolute difference
+ (41,57)->88: |41 - 57| = 16 mismatch
+ max mod min
+ (41,57)->88: max(41,57) mod min(41,57) = 57 mod 41 = 16 mismatch
+ negated absolute difference
+ (41,57)->88: -|41 - 57| = -16 mismatch
+ reverse subtraction (b-a)
+ (41,57)->88: 57 - 41 = 16 mismatch
+ modulo (a mod b)
+ (41,57)->88: 41 mod 57 = 41 mismatch
+
+Trying rare operations
+ reversed operands [41->14 57->75] and reversed result [expected (14,75)->88]
+ multiply+1
+ (14,75)->88: (10 + 4) * 75 + 1 = 10 * 75 + 4 * 75 + 1 = 750 + 300 + 1 = 1050 + 1 = 1051 rev-> 1501 mismatch
+ multiply-1
+ (14,75)->88: (10 + 4) * 75 - 1 = 10 * 75 + 4 * 75 - 1 = 750 + 300 - 1 = 1050 - 1 = 1049 rev-> 9401 mismatch
+ add+1
+ (14,75)->88: 14 + 75 + 1 = 90 rev-> 09 mismatch
+ add-1
+ (14,75)->88: 14 + 75 - 1 = 88 rev-> 88 match
+ correct, actions: reversed operands, reversed result, add-1
+ sub+1
+ (14,75)->88: 14 - 75 + 1 = -60 rev-> -06 mismatch
+ sub-1
+ (14,75)->88: 14 - 75 - 1 = -62 rev-> -26 mismatch
+ integer division (a/b)
+ (14,75)->88: 14 / 75 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (14,75)->88: 75 / 14 = 5 rev-> 5 mismatch
+ reverse modulo (b mod a)
+ (14,75)->88: 75 mod 14 = 5 rev-> 5 mismatch
+ digit absolute diff
+ (14,75)->88: |1-7| || |4-5| = 61 rev-> 16 mismatch
+ digit add mod10
+ (14,75)->88: (1+7)%10 || (4+5)%10 = 89 rev-> 98 mismatch
+ digit sub mod10
+ (14,75)->88: (1-7)%10 || (4-5)%10 = 49 rev-> 94 mismatch
+ cross multiply
+ (14,75)->88: 1*7 + 4*5 = 7 + 20 = 27 rev-> 72 mismatch
+ cross multiply rev
+ (14,75)->88: 1*5 + 4*7 = 5 + 28 = 33 rev-> 33 mismatch
+ digit multiply
+ (14,75)->88: 1*7 || 4*5 = 7 || 20 = 720 rev-> 027 mismatch
+ digit multiply rev
+ (14,75)->88: 1*5 || 4*7 = 5 || 28 = 528 rev-> 825 mismatch
+ digit sum diff
+ (14,75)->88: (1+4) - (7+5) = -7 rev-> -7 mismatch
+ digit sum sum
+ (14,75)->88: (1+4) + (7+5) = 17 rev-> 71 mismatch
+ digit product diff
+ (14,75)->88: 1*4 - 7*5 = 4 - 35 = -31 rev-> -13 mismatch
+ digit product sum
+ (14,75)->88: 1*4 + 7*5 = 4 + 35 = 39 rev-> 93 mismatch
+ determinant
+ (14,75)->88: 1*5 - 4*7 = 5 - 28 = -23 rev-> -32 mismatch
+ abs determinant
+ (14,75)->88: |1*5 - 4*7| = |5 - 28| = 23 rev-> 32 mismatch
+
+ identity [41 57] [expected (41,57)->88]
+ multiply+1
+ (41,57)->88: (40 + 1) * 57 + 1 = 40 * 57 + 1 * 57 + 1 = 2280 + 57 + 1 = 2337 + 1 = 2338 mismatch
+ multiply-1
+ (41,57)->88: (40 + 1) * 57 - 1 = 40 * 57 + 1 * 57 - 1 = 2280 + 57 - 1 = 2337 - 1 = 2336 mismatch
+ add+1
+ (41,57)->88: 41 + 57 + 1 = 99 mismatch
+ add-1
+ (41,57)->88: 41 + 57 - 1 = 97 mismatch
+ sub+1
+ (41,57)->88: 41 - 57 + 1 = -15 mismatch
+ sub-1
+ (41,57)->88: 41 - 57 - 1 = -17 mismatch
+ integer division (a/b)
+ (41,57)->88: 41 / 57 = 0 mismatch
+ reverse division (b/a)
+ (41,57)->88: 57 / 41 = 1 mismatch
+ reverse modulo (b mod a)
+ (41,57)->88: 57 mod 41 = 16 mismatch
+ digit absolute diff
+ (41,57)->88: |4-5| || |1-7| = 16 mismatch
+ digit add mod10
+ (41,57)->88: (4+5)%10 || (1+7)%10 = 98 mismatch
+ digit sub mod10
+ (41,57)->88: (4-5)%10 || (1-7)%10 = 94 mismatch
+ cross multiply
+ (41,57)->88: 4*5 + 1*7 = 20 + 7 = 27 mismatch
+ cross multiply rev
+ (41,57)->88: 4*7 + 1*5 = 28 + 5 = 33 mismatch
+ digit multiply
+ (41,57)->88: 4*5 || 1*7 = 20 || 7 = 207 mismatch
+ digit multiply rev
+ (41,57)->88: 4*7 || 1*5 = 28 || 5 = 285 mismatch
+ digit sum diff
+ (41,57)->88: (4+1) - (5+7) = -7 mismatch
+ digit sum sum
+ (41,57)->88: (4+1) + (5+7) = 17 mismatch
+ digit product diff
+ (41,57)->88: 4*1 - 5*7 = 4 - 35 = -31 mismatch
+ digit product sum
+ (41,57)->88: 4*1 + 5*7 = 4 + 35 = 39 mismatch
+ determinant
+ (41,57)->88: 4*7 - 1*5 = 28 - 5 = 23 mismatch
+ abs determinant
+ (41,57)->88: |4*7 - 1*5| = |28 - 5| = 23 mismatch
+
+correct, actions: reversed operands, reversed result, add-1
+
+Applying to 31+39:
+ We recall that the question operator is found in the examples.
+ reversed operands [31->13, 39->93] and reversed result
+ add-1
+ (13,93): 13 + 93 - 1 = 105 rev-> 501
+ Result is non-negative
+ \boxed{501}

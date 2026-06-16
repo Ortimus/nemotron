@@ -1,0 +1,176 @@
+97?96 = 01?
+36!09 = 351
+73@82 = 7382
+
+The inputs are 97, 96, 36, 09, 73, 82
+
+The outputs are 01?, 351, 7382
+Some example outputs have the operator symbol as suffix ?.
+We now consider the outputs to be -01, 351, 7382
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+97?96 -> ?
+36!09 -> !
+73@82 -> @
+
+The operators
+?
+!
+@
+
+Looking at the question
+44@45 -> @
+The question operator is found in the examples.
+
+Looking at operator @ [73@82 = 7382]:
+
+Trying common operations reversed operands [73->37 82->28] and reversed result [expected (37,28)->7382]:
+ addition
+ (37,28)->7382: 37 + 28 = 65 rev-> 56 mismatch
+ multiplication
+ (37,28)->7382: (30 + 7) * 28 = 30 * 28 + 7 * 28 = 840 + 196 = 1036 rev-> 6301 mismatch
+ concatenation
+ (37,28)->7382: 37 || 28 = 3728 rev-> 8273 mismatch
+ reverse concatenation
+ (37,28)->7382: 28 || 37 = 2837 rev-> 7382 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+Trying common operations on identity [73 82] [expected (73,82)->7382]:
+ addition
+ (73,82)->7382: 73 + 82 = 155 mismatch
+ multiplication
+ (73,82)->7382: (70 + 3) * 82 = 70 * 82 + 3 * 82 = 5740 + 246 = 5986 mismatch
+ concatenation
+ (73,82)->7382: 73 || 82 = 7382 match
+ correct, but skipping
+ reverse concatenation
+ (73,82)->7382: 82 || 73 = 8273 mismatch
+
+Trying difference operations reversed operands [73->37 82->28] and reversed result [expected (37,28)->7382]:
+ subtraction (a-b)
+ (37,28)->7382: 37 - 28 = 9 rev-> 9 mismatch
+ absolute difference
+ (37,28)->7382: |37 - 28| = 9 rev-> 9 mismatch
+ max mod min
+ (37,28)->7382: max(37,28) mod min(37,28) = 37 mod 28 = 9 rev-> 9 mismatch
+ negated absolute difference
+ (37,28)->7382: -|37 - 28| = -9 rev-> -9 mismatch
+ reverse subtraction (b-a)
+ (37,28)->7382: 28 - 37 = -9 rev-> -9 mismatch
+ modulo (a mod b)
+ (37,28)->7382: 37 mod 28 = 9 rev-> 9 mismatch
+
+Trying difference operations on identity [73 82] [expected (73,82)->7382]:
+ subtraction (a-b)
+ (73,82)->7382: 73 - 82 = -9 mismatch
+ absolute difference
+ (73,82)->7382: |73 - 82| = 9 mismatch
+ max mod min
+ (73,82)->7382: max(73,82) mod min(73,82) = 82 mod 73 = 9 mismatch
+ negated absolute difference
+ (73,82)->7382: -|73 - 82| = -9 mismatch
+ reverse subtraction (b-a)
+ (73,82)->7382: 82 - 73 = 9 mismatch
+ modulo (a mod b)
+ (73,82)->7382: 73 mod 82 = 73 mismatch
+
+Trying rare operations reversed operands [73->37 82->28] and reversed result [expected (37,28)->7382]:
+ multiply+1
+ (37,28)->7382: (30 + 7) * 28 + 1 = 30 * 28 + 7 * 28 + 1 = 840 + 196 + 1 = 1036 + 1 = 1037 rev-> 7301 mismatch
+ multiply-1
+ (37,28)->7382: (30 + 7) * 28 - 1 = 30 * 28 + 7 * 28 - 1 = 840 + 196 - 1 = 1036 - 1 = 1035 rev-> 5301 mismatch
+ add+1
+ (37,28)->7382: 37 + 28 + 1 = 66 rev-> 66 mismatch
+ add-1
+ (37,28)->7382: 37 + 28 - 1 = 64 rev-> 46 mismatch
+ sub+1
+ (37,28)->7382: 37 - 28 + 1 = 10 rev-> 01 mismatch
+ sub-1
+ (37,28)->7382: 37 - 28 - 1 = 8 rev-> 8 mismatch
+ integer division (a/b)
+ (37,28)->7382: 37 / 28 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (37,28)->7382: 28 / 37 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (37,28)->7382: 28 mod 37 = 28 rev-> 82 mismatch
+ digit absolute diff
+ (37,28)->7382: |3-2| || |7-8| = 11 rev-> 11 mismatch
+ digit add mod10
+ (37,28)->7382: (3+2)%10 || (7+8)%10 = 55 rev-> 55 mismatch
+ digit sub mod10
+ (37,28)->7382: (3-2)%10 || (7-8)%10 = 19 rev-> 91 mismatch
+ cross multiply
+ (37,28)->7382: 3*2 + 7*8 = 6 + 56 = 62 rev-> 26 mismatch
+ cross multiply rev
+ (37,28)->7382: 3*8 + 7*2 = 24 + 14 = 38 rev-> 83 mismatch
+ digit multiply
+ (37,28)->7382: 3*2 || 7*8 = 6 || 56 = 656 rev-> 656 mismatch
+ digit multiply rev
+ (37,28)->7382: 3*8 || 7*2 = 24 || 14 = 2414 rev-> 4142 mismatch
+ digit sum diff
+ (37,28)->7382: (3+7) - (2+8) = 0 rev-> 0 mismatch
+ digit sum sum
+ (37,28)->7382: (3+7) + (2+8) = 20 rev-> 02 mismatch
+ digit product diff
+ (37,28)->7382: 3*7 - 2*8 = 21 - 16 = 5 rev-> 5 mismatch
+ digit product sum
+ (37,28)->7382: 3*7 + 2*8 = 21 + 16 = 37 rev-> 73 mismatch
+ determinant
+ (37,28)->7382: 3*8 - 7*2 = 24 - 14 = 10 rev-> 01 mismatch
+ abs determinant
+ (37,28)->7382: |3*8 - 7*2| = |24 - 14| = 10 rev-> 01 mismatch
+
+Trying rare operations on identity [73 82] [expected (73,82)->7382]:
+ multiply+1
+ (73,82)->7382: (70 + 3) * 82 + 1 = 70 * 82 + 3 * 82 + 1 = 5740 + 246 + 1 = 5986 + 1 = 5987 mismatch
+ multiply-1
+ (73,82)->7382: (70 + 3) * 82 - 1 = 70 * 82 + 3 * 82 - 1 = 5740 + 246 - 1 = 5986 - 1 = 5985 mismatch
+ add+1
+ (73,82)->7382: 73 + 82 + 1 = 156 mismatch
+ add-1
+ (73,82)->7382: 73 + 82 - 1 = 154 mismatch
+ sub+1
+ (73,82)->7382: 73 - 82 + 1 = -8 mismatch
+ sub-1
+ (73,82)->7382: 73 - 82 - 1 = -10 mismatch
+ integer division (a/b)
+ (73,82)->7382: 73 / 82 = 0 mismatch
+ reverse division (b/a)
+ (73,82)->7382: 82 / 73 = 1 mismatch
+ reverse modulo (b mod a)
+ (73,82)->7382: 82 mod 73 = 9 mismatch
+ digit absolute diff
+ (73,82)->7382: |7-8| || |3-2| = 11 mismatch
+ digit add mod10
+ (73,82)->7382: (7+8)%10 || (3+2)%10 = 55 mismatch
+ digit sub mod10
+ (73,82)->7382: (7-8)%10 || (3-2)%10 = 91 mismatch
+ cross multiply
+ (73,82)->7382: 7*8 + 3*2 = 56 + 6 = 62 mismatch
+ cross multiply rev
+ (73,82)->7382: 7*2 + 3*8 = 14 + 24 = 38 mismatch
+ digit multiply
+ (73,82)->7382: 7*8 || 3*2 = 56 || 6 = 566 mismatch
+ digit multiply rev
+ (73,82)->7382: 7*2 || 3*8 = 14 || 24 = 1424 mismatch
+ digit sum diff
+ (73,82)->7382: (7+3) - (8+2) = 0 mismatch
+ digit sum sum
+ (73,82)->7382: (7+3) + (8+2) = 20 mismatch
+ digit product diff
+ (73,82)->7382: 7*3 - 8*2 = 21 - 16 = 5 mismatch
+ digit product sum
+ (73,82)->7382: 7*3 + 8*2 = 21 + 16 = 37 mismatch
+ determinant
+ (73,82)->7382: 7*2 - 3*8 = 14 - 24 = -10 mismatch
+ abs determinant
+ (73,82)->7382: |7*2 - 3*8| = |14 - 24| = 10 mismatch
+
+Applying to 44@45:
+ We recall that the question operator is found in the examples.
+ reversed operands [44->44, 45->54] and reversed result
+ reverse concatenation (44,54): 54 || 44 = 5444 rev-> 4445
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{4445}

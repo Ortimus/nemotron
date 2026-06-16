@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluation — intended vs evaluated</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #f5f5f5;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+    }
+    nav { text-align: center; padding: 14px 0; font-size: 16px; flex: 0 0 auto; background: #fff; border-bottom: 1px solid #e6e6e6; }
+    nav a { color: #2196f3; text-decoration: none; }
+
+    .bar {
+        flex: 0 0 auto; display: flex; align-items: center; gap: 16px;
+        padding: 6px 16px; background: #4a5568; color: #fff; font-size: 13px;
+    }
+    .bar select { font-size: 13px; padding: 2px 6px; border-radius: 4px; border: none; }
+    .bar .score { font-variant-numeric: tabular-nums; }
+    .quad { display: flex; gap: 8px; font-size: 12px; margin-left: auto; }
+    .quad span { padding: 1px 7px; border-radius: 10px; background: rgba(255,255,255,.15); white-space: nowrap; }
+
+    .app { flex: 1 1 auto; display: flex; min-height: 0; }
+
+    /* ---- left sidebar: collapsible category bars ---- */
+    .sidebar { flex: 0 0 360px; background: #fff; border-right: 1px solid #e0e0e0; overflow-y: auto; overflow-x: hidden; font-size: 13px; }
+    .cat { border-bottom: 1px solid #eee; }
+    .cat-bar { display: flex; align-items: center; gap: 6px; padding: 8px 10px; cursor: pointer; user-select: none; }
+    .cat-bar:hover { background: #f8fafc; }
+    .cat-bar .caret { flex: 0 0 10px; color: #888; transition: transform .12s; }
+    .cat.open .cat-bar .caret { transform: rotate(90deg); }
+    .cat-name { font-weight: 600; flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cat-pct { flex: 0 0 auto; font-variant-numeric: tabular-nums; color: #555; white-space: nowrap; }
+    .pill { font-size: 11px; padding: 0 5px; border-radius: 8px; line-height: 16px; }
+    .pill.red { background: #fde2e1; color: #b42318; }
+    .pill.yellow { background: #fdf2c9; color: #946200; }
+    .pill.orange { background: #ffedd5; color: #9a3412; }
+    .cat-mini { height: 4px; border-radius: 2px; margin: 0 10px 6px; background: #e5e7eb; overflow: hidden; display: flex; }
+    .cat-mini i { display: block; height: 100%; }
+    .cat-mini i.green { background: #34c759; } .cat-mini i.blue { background: #3b82f6; }
+    .cat-mini i.yellow { background: #f5c518; } .cat-mini i.orange { background: #f97316; }
+    .cat-mini i.red { background: #ef4444; } .cat-mini i.gray { background: #cbd5e1; }
+
+    .plist { display: none; }
+    .cat.open .plist { display: block; }
+    .prow { display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 24px; cursor: pointer; border-left: 4px solid transparent; font-variant-numeric: tabular-nums; }
+    .prow:hover { background: #f1f5f9; }
+    .prow.sel { background: #e0f2fe; }
+    .prow.red { border-left-color: #ef4444; } .prow.yellow { border-left-color: #f5c518; } .prow.green { border-left-color: #34c759; }
+    .prow.blue { border-left-color: #3b82f6; } .prow.orange { border-left-color: #f97316; }
+    .prow .pid { font-family: 'SF Mono', Monaco, monospace; font-size: 12px; flex: 1 1 auto; min-width: 0; }
+    .prow .pflt { color: #64748b; font-size: 11px; flex: 0 0 auto; }
+    .prow .pnd { color: #888; font-size: 11px; flex: 0 0 auto; }
+    .fault { text-transform: lowercase; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; }
+    .dot.red { background: #ef4444; } .dot.yellow { background: #f5c518; } .dot.green { background: #34c759; }
+    .dot.blue { background: #3b82f6; } .dot.orange { background: #f97316; } .dot.gray { background: #cbd5e1; }
+
+    /* ---- right side: diff ---- */
+    .diff { flex: 1 1 auto; display: flex; flex-direction: column; min-width: 0; }
+    .diff-header { flex: 0 0 auto; background: #fff; border-bottom: 1px solid #e0e0e0; padding: 8px 14px; font-size: 13px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .diff-header .pid { font-family: 'SF Mono', Monaco, monospace; font-weight: 600; font-size: 14px; }
+    .badge { padding: 1px 8px; border-radius: 10px; font-size: 12px; font-weight: 500; }
+    .badge.ok { background: #d1fae5; color: #065f46; } .badge.bad { background: #fee2e2; color: #991b1b; }
+    .badge.warn { background: #fef3c7; color: #92400e; } .badge.mut { background: #eef2f6; color: #475569; }
+    .diff-header .kv { color: #475569; } .diff-header .kv b { color: #111; font-family: 'SF Mono', Monaco, monospace; }
+    .diff-header .grow { flex: 1; }
+    .diff-header button { font-size: 12px; padding: 3px 9px; border: 1px solid #cbd5e1; background: #fff; border-radius: 5px; cursor: pointer; }
+    .diff-header button:hover { background: #f1f5f9; }
+    .annot { flex: 0 0 auto; background: #fffbea; border-bottom: 1px solid #f5e6a8; padding: 8px 14px; font-size: 13px; white-space: pre-wrap; font-family: 'SF Mono', Monaco, monospace; max-height: 140px; overflow: auto; }
+    .annot b { font-family: -apple-system, sans-serif; }
+
+    .colhead { display: flex; flex: 0 0 auto; border-bottom: 1px solid #e0e0e0; background:#fafafa; }
+    .colhead div { flex: 1 1 0; width: 33.34%; padding: 5px 12px; font-size: 12px; font-weight: 600; color: #475569; }
+    .colhead div.h-int, .colhead div.h-eval { border-right: 1px solid #e0e0e0; }
+
+    .diff-scroll { flex: 1 1 auto; overflow: auto; background: #fff; }
+    table.diff-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-family: 'SF Mono', Monaco, 'Courier New', monospace; font-size: 12px; line-height: 1.5; }
+    table.diff-table td { width: 33.34%; vertical-align: top; padding: 0; border-right: 1px solid #eee; }
+    .cell { display: flex; white-space: pre-wrap; word-break: break-word; }
+    .gutter { flex: 0 0 42px; text-align: right; padding: 0 6px; color: #b8c0cc; user-select: none; background: #fafafa; border-right: 1px solid #f0f0f0; }
+    .ltext { flex: 1; padding: 0 8px; }
+    /* keep a text selection inside the column where the drag started */
+    .diff-scroll.sel-left  td.mid,  .diff-scroll.sel-left  td.right,
+    .diff-scroll.sel-mid   td.left, .diff-scroll.sel-mid   td.right,
+    .diff-scroll.sel-right td.left, .diff-scroll.sel-right td.mid { user-select: none; -webkit-user-select: none; }
+    /* per-cell backgrounds: intended (left) green vs evaluated (mid) red;
+       current reasoning (right) blue where it differs from intended */
+    td.eq .cell { background: #fff; }
+    td.blank .cell { background: #f6f8fa; }
+    td.d-left .cell { background: #e7f7ec; }
+    td.d-right .cell { background: #fdeceb; }
+    td.d-rsn .cell { background: #eaf2fd; }
+    /* exact intra-line difference */
+    .hl-int { background: #8fdca9; border-radius: 2px; }
+    .hl-eval { background: #f3a9a2; border-radius: 2px; }
+    .hl-rsn { background: #a9c7f3; border-radius: 2px; }
+    tr.firstdiff td { box-shadow: inset 0 2px 0 #6366f1; }
+    tr.fold td { text-align: center; color: #64748b; background: #f8fafc; cursor: pointer; padding: 2px; }
+    tr.fold:hover td { background: #eef2f6; }
+
+    .placeholder { padding: 30px; color: #64748b; font-size: 14px; line-height: 1.7; }
+    .placeholder table { border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+    .placeholder th, .placeholder td { border: 1px solid #e0e0e0; padding: 4px 10px; text-align: right; }
+    .placeholder th:first-child, .placeholder td:first-child { text-align: left; }
+    .loading { padding: 30px; color: #888; }
+</style>
+</head>
+<body>
+<nav>
+    <a href="synthetic.html">Synthetic</a> &middot;
+    <a href="corpus.html">Corpus</a> &middot;
+    <a href="training.html">Training</a> &middot;
+    <a href="metrics.html">Metrics</a> &middot;
+    <strong style="font-size:22px;">Evaluation</strong>
+</nav>
+<script>
+document.querySelectorAll('nav a').forEach(a => { const base = a.getAttribute('href').split('?')[0]; a.addEventListener('click', e => { e.preventDefault(); window.location.href = base + location.search; }); });
+</script>
+<div class="bar">
+    <label>snapshot <select id="snap-select"></select></label>
+    <span class="score" id="score"></span>
+    <div class="quad" id="quad"></div>
+</div>
+<div class="app">
+    <aside class="sidebar" id="sidebar"><div class="loading">Loading…</div></aside>
+    <section class="diff">
+        <div class="diff-header" id="diff-header">
+            <span class="kv">Pick a problem on the left to compare intended vs evaluated vs current reasoning.</span>
+        </div>
+        <div class="annot" id="annot" style="display:none;"></div>
+        <div class="colhead" id="colhead" style="display:none;"><div class="h-int">Intended (snapshot corpus)</div><div class="h-eval">Evaluated (model output)</div><div class="h-rsn">Current reasoning</div></div>
+        <div class="diff-scroll" id="diff-scroll"><div class="placeholder" id="placeholder"></div></div>
+    </section>
+</div>
+
+<script>
+const BASE = 'evaluation';
+const CONTEXT = 3;
+let logpath = null;
+let meta = null;
+let problems = [];
+let byCat = {};
+let catEls = {};
+let selected = null;
+let collapse = false;   // default: show all lines, highlight the exact diverged spans
+
+// severity order, best -> worst: green, blue, yellow, orange, red
+function classify(p) {
+    if (p.s === false) return p.id_ ? 'blue' : 'orange'; // unsolvable: faithful vs diverged
+    // s is true or null (null = category with no unsolvable variant, i.e. always solvable)
+    if (p.ok === false) return 'red';                    // solvable but answered wrong
+    if (p.id_ === false) return 'yellow';                // correct but trace diverged
+    return 'green';                                       // correct & trace identical
+}
+const SEV = { red: 0, orange: 1, yellow: 2, blue: 3, green: 4, gray: 5 };
+
+function escapeHtml(s) {
+    return (s == null ? '' : String(s)).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+async function fetchText(url) {
+    const r = await fetch(url + '?_=' + Date.now());
+    if (!r.ok) throw new Error(r.status + ' ' + url);
+    return r.text();
+}
+
+async function init() {
+    let snaps;
+    try { snaps = JSON.parse(await fetchText(`${BASE}/snapshots.json`)); }
+    catch (e) {
+        document.getElementById('sidebar').innerHTML =
+            `<div class="loading">No snapshots.json — run <code>uv run evaluate.py</code> first.<br>(${e.message})</div>`;
+        return;
+    }
+    if (!snaps.length) { document.getElementById('sidebar').innerHTML = '<div class="loading">No snapshots yet.</div>'; return; }
+
+    const sel = document.getElementById('snap-select');
+    sel.innerHTML = snaps.map(s => `<option>${s}</option>`).join('');
+    const params = new URLSearchParams(location.search);
+    const wanted = params.get('logpath');
+    logpath = wanted && snaps.includes(wanted) ? wanted : snaps[0];
+    sel.value = logpath;
+    sel.onchange = () => {
+        logpath = sel.value; selected = null;
+        const u = new URL(location.href); u.searchParams.set('logpath', logpath); u.searchParams.delete('problem');
+        history.replaceState({}, '', u);
+        loadIndex();
+    };
+    await loadIndex();
+
+    const wantPid = params.get('problem');
+    if (wantPid) { const p = problems.find(x => x.id === wantPid); if (p) selectProblem(p); }
+}
+
+async function loadIndex() {
+    document.getElementById('sidebar').innerHTML = '<div class="loading">Loading…</div>';
+    const lines = (await fetchText(`${BASE}/${logpath}/index.jsonl`)).trim().split('\n').filter(Boolean).map(JSON.parse);
+    meta = lines[0];
+    problems = lines.slice(1);
+    byCat = {};
+    for (const p of problems) (byCat[p.c] ||= []).push(p);
+    const earliest = p => (p.dl < 0 ? Infinity : p.dl);  // identical traces sort last
+    for (const c in byCat) byCat[c].sort((a, b) =>
+        (SEV[classify(a)] - SEV[classify(b)]) || (earliest(a) - earliest(b)) || a.id.localeCompare(b.id));
+    renderHeaderStats();
+    renderSidebar();
+    renderPlaceholder();
+}
+
+function renderHeaderStats() {
+    const t = meta.totals || {};
+    document.getElementById('score').textContent = t.correct != null ? `${t.correct}/${t.total} · ${t.percentage}` : '';
+    const q = meta.quadrants || {};
+    document.getElementById('quad').innerHTML =
+        `<span title="identical trace &amp; correct">✓ aligned ${q.ic||0}</span>` +
+        `<span title="diverged trace but still correct">~ diverged-ok ${q.dc||0}</span>` +
+        `<span title="identical trace but wrong/ambiguous answer">✗ faithful-wrong ${q.iw||0}</span>` +
+        `<span title="diverged trace and wrong">✗ model-wrong ${q.dw||0}</span>`;
+}
+
+function catMeta(cat) { return (meta.categories || []).find(c => c.category === cat); }
+
+let _buildProw;
+function expandCategory(cat) {
+    const e = catEls[cat];
+    if (!e) return;
+    e.div.classList.add('open');
+    if (!e.plist.dataset.built) {
+        e.plist.dataset.built = '1';
+        const frag = document.createDocumentFragment();
+        for (const p of e.list) frag.appendChild(buildProw(p));
+        e.plist.appendChild(frag);
+    }
+}
+
+function renderSidebar() {
+    const sb = document.getElementById('sidebar');
+    sb.innerHTML = '';
+    catEls = {};
+    for (const cat of Object.keys(byCat).sort()) {
+        const list = byCat[cat];
+        const cnt = { green: 0, blue: 0, yellow: 0, orange: 0, red: 0, gray: 0 };
+        for (const p of list) cnt[classify(p)]++;
+        const cm = catMeta(cat);
+        const pct = (x) => (100 * x / list.length).toFixed(2) + '%';
+        const div = document.createElement('div');
+        div.className = 'cat';
+        div.innerHTML =
+            `<div class="cat-bar">
+                <span class="caret">▶</span>
+                <span class="cat-name">${cat}</span>
+                ${cnt.red ? `<span class="pill red" title="solvable but wrong">${cnt.red}</span>` : ''}
+                ${cnt.orange ? `<span class="pill orange" title="unsolvable, trace diverged">${cnt.orange}</span>` : ''}
+                ${cnt.yellow ? `<span class="pill yellow" title="trace misalignment">${cnt.yellow}</span>` : ''}
+                <span class="cat-pct">${cm ? cm.percentage : ''}</span>
+             </div>
+             <div class="cat-mini">
+                <i class="green" style="width:${pct(cnt.green)}"></i>
+                <i class="blue" style="width:${pct(cnt.blue)}"></i>
+                <i class="yellow" style="width:${pct(cnt.yellow)}"></i>
+                <i class="orange" style="width:${pct(cnt.orange)}"></i>
+                <i class="red" style="width:${pct(cnt.red + cnt.gray)}"></i>
+             </div>
+             <div class="plist"></div>`;
+        const plist = div.querySelector('.plist');
+        catEls[cat] = { div, plist, list };
+        div.querySelector('.cat-bar').onclick = () => {
+            if (div.classList.contains('open')) div.classList.remove('open');
+            else expandCategory(cat);
+        };
+        sb.appendChild(div);
+    }
+}
+
+function buildProw(p) {
+    const cls = classify(p);
+    const row = document.createElement('div');
+    row.className = `prow ${cls}`;
+    row.dataset.id = p.id;
+    row.innerHTML =
+        `<span class="dot ${cls}"></span>` +
+        `<span class="pid">${p.id}</span>` +
+        (p.flt ? `<span class="pflt fault" title="annotated fault">${p.flt}</span>` : '') +
+        `<span class="pnd" title="first divergence line">${p.id_ ? '=' : 'L' + (p.dl + 1)}</span>`;
+    row.onclick = () => selectProblem(p);
+    return row;
+}
+
+function renderPlaceholder() {
+    const rows = (meta.categories || []).map(c =>
+        `<tr><td>${c.category}</td><td>${c.correct}/${c.total}</td><td>${c.percentage}</td><td>${c.contribution}</td></tr>`).join('');
+    document.getElementById('diff-header').innerHTML =
+        `<span class="kv">Pick a problem on the left to compare intended vs evaluated vs current reasoning.</span>`;
+    document.getElementById('annot').style.display = 'none';
+    document.getElementById('colhead').style.display = 'none';
+    document.getElementById('diff-scroll').innerHTML =
+        `<div class="placeholder">
+            <b>Snapshot ${meta.timestamp}</b> — intended (snapshot corpus trace) vs evaluated (adapter output) vs current reasoning (live, scaffolding stripped).
+            <table><thead><tr><th>category</th><th>correct</th><th>%</th><th>contribution</th></tr></thead>
+            <tbody>${rows}</tbody></table>
+            <p style="margin-top:14px">Expand a category on the left (best → worst):
+            <b style="color:#1f9d4d">green</b> correct &amp; trace identical ·
+            <b style="color:#2563eb">blue</b> unsolvable, trace faithful ·
+            <b style="color:#946200">yellow</b> correct but trace diverged ·
+            <b style="color:#c2410c">orange</b> unsolvable, trace diverged ·
+            <b style="color:#b42318">red</b> solvable but answered wrong.
+            The <b>L<i>n</i></b> on each problem is the line of the first divergence.</p>
+         </div>`;
+}
+
+// ---- line-level diff (LCS) ----
+function diffLines(a, b) {
+    const n = a.length, m = b.length;
+    const dp = Array.from({ length: n + 1 }, () => new Int32Array(m + 1));
+    for (let i = n - 1; i >= 0; i--)
+        for (let j = m - 1; j >= 0; j--)
+            dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    const rows = [];
+    let i = 0, j = 0;
+    while (i < n && j < m) {
+        if (a[i] === b[j]) { rows.push({ t: 'equal', l: a[i], r: b[j], li: i, ri: j }); i++; j++; }
+        else if (dp[i + 1][j] >= dp[i][j + 1]) { rows.push({ t: 'delete', l: a[i], r: null, li: i, ri: null }); i++; }
+        else { rows.push({ t: 'insert', l: null, r: b[j], li: null, ri: j }); j++; }
+    }
+    while (i < n) { rows.push({ t: 'delete', l: a[i], r: null, li: i, ri: null }); i++; }
+    while (j < m) { rows.push({ t: 'insert', l: null, r: b[j], li: null, ri: j }); j++; }
+    // pair adjacent delete/insert runs into replace rows for side-by-side
+    const merged = [];
+    for (let k = 0; k < rows.length; k++) {
+        const cur = rows[k];
+        if (cur.t === 'delete') {
+            const run = [cur]; let kk = k + 1;
+            while (kk < rows.length && rows[kk].t === 'delete') run.push(rows[kk++]);
+            const ins = []; while (kk < rows.length && rows[kk].t === 'insert') ins.push(rows[kk++]);
+            const max = Math.max(run.length, ins.length);
+            for (let x = 0; x < max; x++) {
+                const d = run[x], s = ins[x];
+                if (d && s) merged.push({ t: 'replace', l: d.l, r: s.r, li: d.li, ri: s.ri });
+                else if (d) merged.push({ t: 'delete', l: d.l, r: null, li: d.li, ri: null });
+                else merged.push({ t: 'insert', l: null, r: s.r, li: null, ri: s.ri });
+            }
+            k = kk - 1;
+        } else merged.push(cur);
+    }
+    return merged;
+}
+
+// ---- intra-line char diff: highlight exactly where two lines differ ----
+function renderRuns(arr, cls) {
+    let out = '', buf = '', mode = null;
+    const flush = () => { if (buf !== '') out += mode ? `<span class="${cls}">${escapeHtml(buf)}</span>` : escapeHtml(buf); buf = ''; };
+    for (const { h, c } of arr) { if (h !== mode) { flush(); mode = h; } buf += c; }
+    flush();
+    return out || '&nbsp;';
+}
+function inlineDiff(a, b, clsA = 'hl-int', clsB = 'hl-eval') {
+    const n = a.length, m = b.length;
+    if (n * m > 250000)  // pathologically long lines: highlight whole line
+        return { l: `<span class="${clsA}">${escapeHtml(a)}</span>`, r: `<span class="${clsB}">${escapeHtml(b)}</span>` };
+    const dp = Array.from({ length: n + 1 }, () => new Int32Array(m + 1));
+    for (let i = n - 1; i >= 0; i--)
+        for (let j = m - 1; j >= 0; j--)
+            dp[i][j] = a[i] === b[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    const left = [], right = [];
+    let i = 0, j = 0;
+    while (i < n && j < m) {
+        if (a[i] === b[j]) { left.push({ h: false, c: a[i] }); right.push({ h: false, c: b[j] }); i++; j++; }
+        else if (dp[i + 1][j] >= dp[i][j + 1]) { left.push({ h: true, c: a[i] }); i++; }
+        else { right.push({ h: true, c: b[j] }); j++; }
+    }
+    while (i < n) { left.push({ h: true, c: a[i] }); i++; }
+    while (j < m) { right.push({ h: true, c: b[j] }); j++; }
+    return { l: renderRuns(left, clsA), r: renderRuns(right, clsB) };
+}
+
+// Standalone 【 (U+3010), 】 (U+3011), – (U+2013): the scaffolding chars that
+// clean_tokens strips from the corpus, removed here so the raw reasoning column
+// lines up with the (already-cleaned) intended column.
+function stripScaffold(s) { return s.replace(/[【】–]/g, ''); }
+
+function cellHtml(html, ln, colCls, bgCls) {
+    const inner = html == null
+        ? `<span class="gutter"></span><span class="ltext"></span>`
+        : `<span class="gutter">${ln == null ? '' : ln + 1}</span><span class="ltext">${html}</span>`;
+    return `<td class="${colCls} ${bgCls}"><div class="cell">${inner}</div></td>`;
+}
+
+// Merge two pairwise alignments (intended↔evaluated, intended↔reasoning) on the
+// shared intended spine into unified {li, ri, ki} rows.
+function buildTriRows(INT, EVA, RSN) {
+    const A = diffLines(INT, EVA);   // rows have li = intended idx, ri = eval idx
+    const B = diffLines(INT, RSN);   // rows have li = intended idx, ri = reasoning idx
+    const evalOf = {}, rsnOf = {}, evalIns = {}, rsnIns = {};
+    let last = -1;
+    for (const r of A) { if (r.li != null) { evalOf[r.li] = r.ri; last = r.li; } else (evalIns[last] ||= []).push(r.ri); }
+    last = -1;
+    for (const r of B) { if (r.li != null) { rsnOf[r.li] = r.ri; last = r.li; } else (rsnIns[last] ||= []).push(r.ri); }
+    const rows = [];
+    const flush = (idx) => {
+        for (const j of (evalIns[idx] || [])) rows.push({ li: null, ri: j, ki: null });
+        for (const k of (rsnIns[idx] || [])) rows.push({ li: null, ri: null, ki: k });
+    };
+    flush(-1);
+    for (let i = 0; i < INT.length; i++) {
+        rows.push({ li: i, ri: i in evalOf ? evalOf[i] : null, ki: i in rsnOf ? rsnOf[i] : null });
+        flush(i);
+    }
+    return rows;
+}
+
+function makeRowTr(row, INT, EVA, RSN, isFirstDiff) {
+    const tr = document.createElement('tr');
+    if (isFirstDiff) tr.className = 'firstdiff';
+    const iTxt = row.li != null ? INT[row.li] : null;
+    const eTxt = row.ri != null ? EVA[row.ri] : null;
+    const rTxt = row.ki != null ? RSN[row.ki] : null;
+    const evalDiff = (iTxt != null && eTxt != null) ? iTxt !== eTxt : (iTxt != null || eTxt != null);
+    const rsnDiff = (iTxt != null && rTxt != null) ? iTxt !== rTxt : (rTxt != null);
+
+    let iHtml, eHtml;
+    if (iTxt != null && eTxt != null && iTxt !== eTxt) { const d = inlineDiff(iTxt, eTxt); iHtml = d.l; eHtml = d.r; }
+    else { iHtml = iTxt == null ? null : (escapeHtml(iTxt) || '&nbsp;'); eHtml = eTxt == null ? null : (escapeHtml(eTxt) || '&nbsp;'); }
+    let rHtml;
+    if (iTxt != null && rTxt != null && iTxt !== rTxt) rHtml = inlineDiff(iTxt, rTxt, 'hl-int', 'hl-rsn').r;
+    else rHtml = rTxt == null ? null : (escapeHtml(rTxt) || '&nbsp;');
+
+    tr.innerHTML =
+        cellHtml(iHtml, row.li, 'left', iTxt == null ? 'blank' : evalDiff ? 'd-left' : 'eq') +
+        cellHtml(eHtml, row.ri, 'mid', eTxt == null ? 'blank' : evalDiff ? 'd-right' : 'eq') +
+        cellHtml(rHtml, row.ki, 'right', rTxt == null ? 'blank' : rsnDiff ? 'd-rsn' : 'eq');
+    return tr;
+}
+
+async function selectProblem(p) {
+    selected = p;
+    expandCategory(p.c);
+    document.querySelectorAll('.prow.sel').forEach(e => e.classList.remove('sel'));
+    const rows = document.querySelectorAll(`.prow[data-id="${p.id}"]`);
+    rows.forEach(e => e.classList.add('sel'));
+    if (rows[0]) rows[0].scrollIntoView({ block: 'nearest' });
+
+    const u = new URL(location.href);
+    u.searchParams.set('logpath', logpath); u.searchParams.set('problem', p.id);
+    history.replaceState({}, '', u);
+
+    document.getElementById('diff-scroll').innerHTML = '<div class="loading">Loading traces…</div>';
+    let intended = '', evaluated = '', reasoning = '', annotation = null;
+    try { intended = await fetchText(`${BASE}/${logpath}/intended/${p.id}.txt`); } catch (e) {}
+    try { evaluated = await fetchText(`${BASE}/${logpath}/evaluated/${p.id}.txt`); } catch (e) {}
+    // Current reasoning lives at the repo root, not in the snapshot — read it
+    // directly and strip the scaffolding chars so it lines up with intended.
+    try { reasoning = stripScaffold(await fetchText(`reasoning/${p.id}.txt`)); } catch (e) {}
+    try { annotation = await fetchText(`${BASE}/${logpath}/annotations/${p.id}.txt`); } catch (e) {}
+
+    renderDiffHeader(p);
+    renderAnnotation(annotation);
+    renderDiff(intended.replace(/\n$/, ''), evaluated.replace(/\n$/, ''), reasoning.replace(/\n$/, ''));
+}
+
+function renderDiffHeader(p) {
+    const h = document.getElementById('diff-header');
+    const cls = classify(p);
+    const okBadge = p.ok ? `<span class="badge ok">correct</span>` : `<span class="badge bad">wrong</span>`;
+    const solv = p.s === true ? `<span class="badge mut">solvable</span>`
+               : p.s === false ? `<span class="badge warn">unsolvable</span>` : '';
+    const align = p.id_ ? `<span class="badge ok">trace identical</span>`
+                        : `<span class="badge warn">trace diverged · L${p.dl + 1}</span>`;
+    h.innerHTML =
+        `<span class="dot ${cls}"></span>` +
+        `<span class="pid">${p.id}</span>` +
+        `<span class="badge mut">${p.c}</span>` +
+        okBadge + solv + align +
+        (p.flt ? `<span class="badge warn fault">${p.flt}</span>` : '') +
+        `<span class="kv">expected <b>${escapeHtml(p.ans)}</b></span>` +
+        `<span class="kv">predicted <b>${escapeHtml(p.pred)}</b></span>` +
+        (p.mlp != null ? `<span class="kv">min logprob <b>${p.mlp}</b></span>` : '') +
+        `<span class="kv" id="firstdiff-info"></span>` +
+        `<span class="grow"></span>` +
+        `<button id="btn-fold">${collapse ? 'Show all lines' : 'Fold unchanged'}</button>` +
+        (p.id_ ? '' : `<button id="btn-jump">Jump to first diff</button>`);
+    document.getElementById('btn-fold').onclick = () => { collapse = !collapse; if (selected) selectProblem(selected); };
+    const jb = document.getElementById('btn-jump');
+    if (jb) jb.onclick = () => { const el = document.querySelector('tr.firstdiff'); if (el) el.scrollIntoView({ block: 'center', behavior: 'smooth' }); };
+}
+
+function renderAnnotation(text) {
+    const a = document.getElementById('annot');
+    if (!text || !text.trim()) { a.style.display = 'none'; return; }
+    a.style.display = 'block';
+    const m = text.trim().match(/^FAULT:\s*(\S+)\s*([\s\S]*)$/);
+    if (m) a.innerHTML = `<b>fault</b> <span class="fault">${escapeHtml(m[1])}</span> — ${escapeHtml(m[2].trim())}`;
+    else a.innerHTML = `<b>annotation:</b> ` + escapeHtml(text.trim());
+}
+
+function renderDiff(intended, evaluated, reasoning) {
+    document.getElementById('colhead').style.display = 'flex';
+    const INT = intended.split('\n'), EVA = evaluated.split('\n'), RSN = reasoning.split('\n');
+    const rows = buildTriRows(INT, EVA, RSN);
+    // The primary signal is still intended-vs-evaluated divergence: first row
+    // whose intended and evaluated lines disagree (or one side is missing).
+    const isEvalDiff = (r) => {
+        const i = r.li != null ? INT[r.li] : null, e = r.ri != null ? EVA[r.ri] : null;
+        return (i != null && e != null) ? i !== e : (i != null || e != null);
+    };
+    const firstDiffIdx = rows.findIndex(isEvalDiff);
+
+    const info = document.getElementById('firstdiff-info');
+    if (info) {
+        if (firstDiffIdx === -1) info.innerHTML = 'traces match exactly';
+        else {
+            const r = rows[firstDiffIdx];
+            const li = r.li != null ? r.li + 1 : '–', ri = r.ri != null ? r.ri + 1 : '–';
+            info.innerHTML = `first diff @ intended L<b>${li}</b> / evaluated L<b>${ri}</b>`;
+        }
+    }
+
+    const show = new Array(rows.length).fill(!collapse);
+    if (collapse) rows.forEach((r, i) => {
+        if (isEvalDiff(r)) for (let k = i - CONTEXT; k <= i + CONTEXT; k++) if (k >= 0 && k < rows.length) show[k] = true;
+    });
+
+    const tb = document.createElement('tbody');
+    let i = 0;
+    while (i < rows.length) {
+        if (collapse && !show[i]) {
+            let j = i; while (j < rows.length && !show[j]) j++;
+            const lo = i, hi = j;
+            const tr = document.createElement('tr');
+            tr.className = 'fold';
+            tr.innerHTML = `<td colspan="3">⋯ ${hi - lo} unchanged lines ⋯</td>`;
+            tr.onclick = () => {
+                const frag = document.createDocumentFragment();
+                for (let k = lo; k < hi; k++) frag.appendChild(makeRowTr(rows[k], INT, EVA, RSN, k === firstDiffIdx));
+                tr.replaceWith(frag);
+            };
+            tb.appendChild(tr);
+            i = j;
+        } else { tb.appendChild(makeRowTr(rows[i], INT, EVA, RSN, i === firstDiffIdx)); i++; }
+    }
+    const table = document.createElement('table');
+    table.className = 'diff-table';
+    table.appendChild(tb);
+    const scroll = document.getElementById('diff-scroll');
+    scroll.innerHTML = '';
+    scroll.appendChild(table);
+    // Jump straight to the first divergence — otherwise a long identical prefix
+    // looks like nothing differs and the view appears "stuck" at the top.
+    const fd = scroll.querySelector('tr.firstdiff');
+    if (fd) fd.scrollIntoView({ block: 'center' });
+    else scroll.scrollTop = 0;
+}
+
+// Restrict text selection to the column where the drag started, so copying one
+// side of the diff doesn't drag across both columns.
+document.getElementById('diff-scroll').addEventListener('mousedown', (e) => {
+    const td = e.target.closest('td.left, td.mid, td.right');
+    const s = document.getElementById('diff-scroll');
+    s.classList.remove('sel-left', 'sel-mid', 'sel-right');
+    if (td) s.classList.add(td.classList.contains('left') ? 'sel-left' : td.classList.contains('mid') ? 'sel-mid' : 'sel-right');
+});
+
+init();
+</script>
+</body>
+</html>

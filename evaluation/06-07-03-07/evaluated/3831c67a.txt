@@ -1,0 +1,176 @@
+32+26 = 58
+83-49 = -65
+11*27 = 2711
+
+The inputs are 32, 26, 83, 49, 11, 27
+
+The outputs are 58, -65, 2711
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 58, -65, 2711
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+32+26 -> +
+83-49 -> -
+11*27 -> *
+
+The operators
++
+-
+*
+
+Looking at the question
+46*51 -> *
+The question operator is found in the examples.
+
+Looking at operator * [11*27 = 2711]:
+
+Trying common operations reversed operands [11->11 27->72] and reversed result [expected (11,72)->2711]:
+ addition
+ (11,72)->2711: 11 + 72 = 83 rev-> 38 mismatch
+ multiplication
+ (11,72)->2711: (10 + 1) * 72 = 10 * 72 + 1 * 72 = 720 + 72 = 792 rev-> 297 mismatch
+ concatenation
+ (11,72)->2711: 11 || 72 = 1172 rev-> 2711 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (11,72)->2711: 72 || 11 = 7211 rev-> 1127 mismatch
+
+Trying common operations on identity [11 27] [expected (11,27)->2711]:
+ addition
+ (11,27)->2711: 11 + 27 = 38 mismatch
+ multiplication
+ (11,27)->2711: (10 + 1) * 27 = 10 * 27 + 1 * 27 = 270 + 27 = 297 mismatch
+ concatenation
+ (11,27)->2711: 11 || 27 = 1127 mismatch
+ reverse concatenation
+ (11,27)->2711: 27 || 11 = 2711 match
+ correct, but skipping
+
+Trying difference operations reversed operands [11->11 27->72] and reversed result [expected (11,72)->2711]:
+ subtraction (a-b)
+ (11,72)->2711: 11 - 72 = -61 rev-> -16 mismatch
+ absolute difference
+ (11,72)->2711: |11 - 72| = 61 rev-> 16 mismatch
+ max mod min
+ (11,72)->2711: max(11,72) mod min(11,72) = 72 mod 11 = 6 rev-> 6 mismatch
+ negated absolute difference
+ (11,72)->2711: -|11 - 72| = -61 rev-> -16 mismatch
+ reverse subtraction (b-a)
+ (11,72)->2711: 72 - 11 = 61 rev-> 16 mismatch
+ modulo (a mod b)
+ (11,72)->2711: 11 mod 72 = 11 rev-> 11 mismatch
+
+Trying difference operations on identity [11 27] [expected (11,27)->2711]:
+ subtraction (a-b)
+ (11,27)->2711: 11 - 27 = -16 mismatch
+ absolute difference
+ (11,27)->2711: |11 - 27| = 16 mismatch
+ max mod min
+ (11,27)->2711: max(11,27) mod min(11,27) = 27 mod 11 = 5 mismatch
+ negated absolute difference
+ (11,27)->2711: -|11 - 27| = -16 mismatch
+ reverse subtraction (b-a)
+ (11,27)->2711: 27 - 11 = 16 mismatch
+ modulo (a mod b)
+ (11,27)->2711: 11 mod 27 = 11 mismatch
+
+Trying rare operations reversed operands [11->11 27->72] and reversed result [expected (11,72)->2711]:
+ multiply+1
+ (11,72)->2711: (10 + 1) * 72 + 1 = 10 * 72 + 1 * 72 + 1 = 720 + 72 + 1 = 792 + 1 = 793 rev-> 397 mismatch
+ multiply-1
+ (11,72)->2711: (10 + 1) * 72 - 1 = 10 * 72 + 1 * 72 - 1 = 720 + 72 - 1 = 792 - 1 = 791 rev-> 197 mismatch
+ add+1
+ (11,72)->2711: 11 + 72 + 1 = 84 rev-> 48 mismatch
+ add-1
+ (11,72)->2711: 11 + 72 - 1 = 82 rev-> 28 mismatch
+ sub+1
+ (11,72)->2711: 11 - 72 + 1 = -60 rev-> -06 mismatch
+ sub-1
+ (11,72)->2711: 11 - 72 - 1 = -62 rev-> -26 mismatch
+ integer division (a/b)
+ (11,72)->2711: 11 / 72 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (11,72)->2711: 72 / 11 = 6 rev-> 6 mismatch
+ reverse modulo (b mod a)
+ (11,72)->2711: 72 mod 11 = 6 rev-> 6 mismatch
+ digit absolute diff
+ (11,72)->2711: |1-7| || |1-2| = 61 rev-> 16 mismatch
+ digit add mod10
+ (11,72)->2711: (1+7)%10 || (1+2)%10 = 83 rev-> 38 mismatch
+ digit sub mod10
+ (11,72)->2711: (1-7)%10 || (1-2)%10 = 49 rev-> 94 mismatch
+ cross multiply
+ (11,72)->2711: 1*7 + 1*2 = 7 + 2 = 9 rev-> 9 mismatch
+ cross multiply rev
+ (11,72)->2711: 1*2 + 1*7 = 2 + 7 = 9 rev-> 9 mismatch
+ digit multiply
+ (11,72)->2711: 1*7 || 1*2 = 7 || 2 = 72 rev-> 27 mismatch
+ digit multiply rev
+ (11,72)->2711: 1*2 || 1*7 = 2 || 7 = 27 rev-> 72 mismatch
+ digit sum diff
+ (11,72)->2711: (1+1) - (7+2) = -7 rev-> -7 mismatch
+ digit sum sum
+ (11,72)->2711: (1+1) + (7+2) = 11 rev-> 11 mismatch
+ digit product diff
+ (11,72)->2711: 1*1 - 7*2 = 1 - 14 = -13 rev-> -31 mismatch
+ digit product sum
+ (11,72)->2711: 1*1 + 7*2 = 1 + 14 = 15 rev-> 51 mismatch
+ determinant
+ (11,72)->2711: 1*2 - 1*7 = 2 - 7 = -5 rev-> -5 mismatch
+ abs determinant
+ (11,72)->2711: |1*2 - 1*7| = |2 - 7| = 5 rev-> 5 mismatch
+
+Trying rare operations on identity [11 27] [expected (11,27)->2711]:
+ multiply+1
+ (11,27)->2711: (10 + 1) * 27 + 1 = 10 * 27 + 1 * 27 + 1 = 270 + 27 + 1 = 297 + 1 = 298 mismatch
+ multiply-1
+ (11,27)->2711: (10 + 1) * 27 - 1 = 10 * 27 + 1 * 27 - 1 = 270 + 27 - 1 = 297 - 1 = 296 mismatch
+ add+1
+ (11,27)->2711: 11 + 27 + 1 = 39 mismatch
+ add-1
+ (11,27)->2711: 11 + 27 - 1 = 37 mismatch
+ sub+1
+ (11,27)->2711: 11 - 27 + 1 = -15 mismatch
+ sub-1
+ (11,27)->2711: 11 - 27 - 1 = -17 mismatch
+ integer division (a/b)
+ (11,27)->2711: 11 / 27 = 0 mismatch
+ reverse division (b/a)
+ (11,27)->2711: 27 / 11 = 2 mismatch
+ reverse modulo (b mod a)
+ (11,27)->2711: 27 mod 11 = 5 mismatch
+ digit absolute diff
+ (11,27)->2711: |1-2| || |1-7| = 16 mismatch
+ digit add mod10
+ (11,27)->2711: (1+2)%10 || (1+7)%10 = 38 mismatch
+ digit sub mod10
+ (11,27)->2711: (1-2)%10 || (1-7)%10 = 94 mismatch
+ cross multiply
+ (11,27)->2711: 1*2 + 1*7 = 2 + 7 = 9 mismatch
+ cross multiply rev
+ (11,27)->2711: 1*7 + 1*2 = 7 + 2 = 9 mismatch
+ digit multiply
+ (11,27)->2711: 1*2 || 1*7 = 2 || 7 = 27 mismatch
+ digit multiply rev
+ (11,27)->2711: 1*7 || 1*2 = 7 || 2 = 72 mismatch
+ digit sum diff
+ (11,27)->2711: (1+1) - (2+7) = -7 mismatch
+ digit sum sum
+ (11,27)->2711: (1+1) + (2+7) = 11 mismatch
+ digit product diff
+ (11,27)->2711: 1*1 - 2*7 = 1 - 14 = -13 mismatch
+ digit product sum
+ (11,27)->2711: 1*1 + 2*7 = 1 + 14 = 15 mismatch
+ determinant
+ (11,27)->2711: 1*7 - 1*2 = 7 - 2 = 5 mismatch
+ abs determinant
+ (11,27)->2711: |1*7 - 1*2| = |7 - 2| = 5 mismatch
+
+Applying to 46*51:
+ We recall that the question operator is found in the examples.
+ reversed operands [46->64, 51->15] and reversed result
+ concatenation (64,15): 64 || 15 = 6415 rev-> 5146
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{5146}

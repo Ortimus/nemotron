@@ -1,0 +1,182 @@
+55@23 = 78
+28>11 = 17>
+41/64 = 446
+28@44 = 621
+
+The inputs are 55, 23, 28, 11, 41, 64, 28, 44
+
+The outputs are 78, 17>, 446, 621
+Some example outputs have the operator symbol as suffix >.
+We now consider the outputs to be 78, -17, 446, 621
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+55@23 -> @
+28>11 -> >
+41/64 -> /
+28@44 -> @
+
+The operators
+@
+>
+/
+
+Looking at the question
+37/98 -> /
+The question operator is found in the examples.
+
+Looking at operator / [41/64 = 446]:
+
+Trying common operations
+ reversed operands [41->14 64->46] and reversed result [expected (14,46)->446]
+ addition
+ (14,46)->446: 14 + 46 = 60 rev-> 06 mismatch
+ multiplication
+ (14,46)->446: (10 + 4) * 46 = 10 * 46 + 4 * 46 = 460 + 184 = 644 rev-> 446 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (14,46)->446: 14 || 46 = 1446 rev-> 6441 mismatch
+ reverse concatenation
+ (14,46)->446: 46 || 14 = 4614 rev-> 4164 mismatch
+
+ identity [41 64] [expected (41,64)->446]
+ addition
+ (41,64)->446: 41 + 64 = 105 mismatch
+ multiplication
+ (41,64)->446: (40 + 1) * 64 = 40 * 64 + 1 * 64 = 2560 + 64 = 2624 mismatch
+ concatenation
+ (41,64)->446: 41 || 64 = 4164 mismatch
+ reverse concatenation
+ (41,64)->446: 64 || 41 = 6441 mismatch
+
+Trying difference operations
+ reversed operands [41->14 64->46] and reversed result [expected (14,46)->446]
+ subtraction (a-b)
+ (14,46)->446: 14 - 46 = -32 rev-> -23 mismatch
+ absolute difference
+ (14,46)->446: |14 - 46| = 32 rev-> 23 mismatch
+ max mod min
+ (14,46)->446: max(14,46) mod min(14,46) = 46 mod 14 = 4 rev-> 4 mismatch
+ negated absolute difference
+ (14,46)->446: -|14 - 46| = -32 rev-> -23 mismatch
+ reverse subtraction (b-a)
+ (14,46)->446: 46 - 14 = 32 rev-> 23 mismatch
+ modulo (a mod b)
+ (14,46)->446: 14 mod 46 = 14 rev-> 41 mismatch
+
+ identity [41 64] [expected (41,64)->446]
+ subtraction (a-b)
+ (41,64)->446: 41 - 64 = -23 mismatch
+ absolute difference
+ (41,64)->446: |41 - 64| = 23 mismatch
+ max mod min
+ (41,64)->446: max(41,64) mod min(41,64) = 64 mod 41 = 23 mismatch
+ negated absolute difference
+ (41,64)->446: -|41 - 64| = -23 mismatch
+ reverse subtraction (b-a)
+ (41,64)->446: 64 - 41 = 23 mismatch
+ modulo (a mod b)
+ (41,64)->446: 41 mod 64 = 41 mismatch
+
+Trying rare operations
+ reversed operands [41->14 64->46] and reversed result [expected (14,46)->446]
+ multiply+1
+ (14,46)->446: (10 + 4) * 46 + 1 = 10 * 46 + 4 * 46 + 1 = 460 + 184 + 1 = 644 + 1 = 645 rev-> 546 mismatch
+ multiply-1
+ (14,46)->446: (10 + 4) * 46 - 1 = 10 * 46 + 4 * 46 - 1 = 460 + 184 - 1 = 644 - 1 = 643 rev-> 346 mismatch
+ add+1
+ (14,46)->446: 14 + 46 + 1 = 61 rev-> 16 mismatch
+ add-1
+ (14,46)->446: 14 + 46 - 1 = 59 rev-> 95 mismatch
+ sub+1
+ (14,46)->446: 14 - 46 + 1 = -31 rev-> -13 mismatch
+ sub-1
+ (14,46)->446: 14 - 46 - 1 = -33 rev-> -33 mismatch
+ integer division (a/b)
+ (14,46)->446: 14 / 46 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (14,46)->446: 46 / 14 = 3 rev-> 3 mismatch
+ reverse modulo (b mod a)
+ (14,46)->446: 46 mod 14 = 4 rev-> 4 mismatch
+ digit absolute diff
+ (14,46)->446: |1-4| || |4-6| = 32 rev-> 23 mismatch
+ digit add mod10
+ (14,46)->446: (1+4)%10 || (4+6)%10 = 50 rev-> 05 mismatch
+ digit sub mod10
+ (14,46)->446: (1-4)%10 || (4-6)%10 = 78 rev-> 87 mismatch
+ cross multiply
+ (14,46)->446: 1*4 + 4*6 = 4 + 24 = 28 rev-> 82 mismatch
+ cross multiply rev
+ (14,46)->446: 1*6 + 4*4 = 6 + 16 = 22 rev-> 22 mismatch
+ digit multiply
+ (14,46)->446: 1*4 || 4*6 = 4 || 24 = 424 rev-> 424 mismatch
+ digit multiply rev
+ (14,46)->446: 1*6 || 4*4 = 6 || 16 = 616 rev-> 616 mismatch
+ digit sum diff
+ (14,46)->446: (1+4) - (4+6) = -5 rev-> -5 mismatch
+ digit sum sum
+ (14,46)->446: (1+4) + (4+6) = 15 rev-> 51 mismatch
+ digit product diff
+ (14,46)->446: 1*4 - 4*6 = 4 - 24 = -20 rev-> -02 mismatch
+ digit product sum
+ (14,46)->446: 1*4 + 4*6 = 4 + 24 = 28 rev-> 82 mismatch
+ determinant
+ (14,46)->446: 1*6 - 4*4 = 6 - 16 = -10 rev-> -01 mismatch
+ abs determinant
+ (14,46)->446: |1*6 - 4*4| = |6 - 16| = 10 rev-> 01 mismatch
+
+ identity [41 64] [expected (41,64)->446]
+ multiply+1
+ (41,64)->446: (40 + 1) * 64 + 1 = 40 * 64 + 1 * 64 + 1 = 2560 + 64 + 1 = 2624 + 1 = 2625 mismatch
+ multiply-1
+ (41,64)->446: (40 + 1) * 64 - 1 = 40 * 64 + 1 * 64 - 1 = 2560 + 64 - 1 = 2624 - 1 = 2623 mismatch
+ add+1
+ (41,64)->446: 41 + 64 + 1 = 106 mismatch
+ add-1
+ (41,64)->446: 41 + 64 - 1 = 104 mismatch
+ sub+1
+ (41,64)->446: 41 - 64 + 1 = -22 mismatch
+ sub-1
+ (41,64)->446: 41 - 64 - 1 = -24 mismatch
+ integer division (a/b)
+ (41,64)->446: 41 / 64 = 0 mismatch
+ reverse division (b/a)
+ (41,64)->446: 64 / 41 = 1 mismatch
+ reverse modulo (b mod a)
+ (41,64)->446: 64 mod 41 = 23 mismatch
+ digit absolute diff
+ (41,64)->446: |4-6| || |1-4| = 23 mismatch
+ digit add mod10
+ (41,64)->446: (4+6)%10 || (1+4)%10 = 05 mismatch
+ digit sub mod10
+ (41,64)->446: (4-6)%10 || (1-4)%10 = 87 mismatch
+ cross multiply
+ (41,64)->446: 4*6 + 1*4 = 24 + 4 = 28 mismatch
+ cross multiply rev
+ (41,64)->446: 4*4 + 1*6 = 16 + 6 = 22 mismatch
+ digit multiply
+ (41,64)->446: 4*6 || 1*4 = 24 || 4 = 244 mismatch
+ digit multiply rev
+ (41,64)->446: 4*4 || 1*6 = 16 || 6 = 166 mismatch
+ digit sum diff
+ (41,64)->446: (4+1) - (6+4) = -5 mismatch
+ digit sum sum
+ (41,64)->446: (4+1) + (6+4) = 15 mismatch
+ digit product diff
+ (41,64)->446: 4*1 - 6*4 = 4 - 24 = -20 mismatch
+ digit product sum
+ (41,64)->446: 4*1 + 6*4 = 4 + 24 = 28 mismatch
+ determinant
+ (41,64)->446: 4*4 - 1*6 = 16 - 6 = 10 mismatch
+ abs determinant
+ (41,64)->446: |4*4 - 1*6| = |16 - 6| = 10 mismatch
+
+correct, actions: reversed operands, reversed result, multiplication
+
+Applying to 37/98:
+ We recall that the question operator is found in the examples.
+ reversed operands [37->73, 98->89] and reversed result
+ multiplication
+ (73,89): (70 + 3) * 89 = 70 * 89 + 3 * 89 = 6230 + 267 = 6497 rev-> 7946
+ Result is non-negative
+ \boxed{7946}

@@ -1,0 +1,175 @@
+83+84 = 78
+34-39 = -05
+96+63 = 601
+
+The inputs are 83, 84, 34, 39, 96, 63
+
+The outputs are 78, -05, 601
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 78, -05, 601
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+83+84 -> +
+34-39 -> -
+96+63 -> +
+
+The operators
++
+-
+
+Looking at the question
+46-83 -> -
+The question operator is found in the examples.
+
+Looking at operator - [34-39 = -05]:
+
+Trying common operations reversed operands [34->43 39->93] and reversed result [expected (43,93)->-05]:
+ addition
+ (43,93)->-05: 43 + 93 = 136 rev-> 631 mismatch
+ multiplication
+ (43,93)->-05: (40 + 3) * 93 = 40 * 93 + 3 * 93 = 3720 + 279 = 3999 rev-> 9993 mismatch
+ concatenation
+ (43,93)->-05: 43 || 93 = 4393 rev-> 3934 mismatch
+ reverse concatenation
+ (43,93)->-05: 93 || 43 = 9343 rev-> 3439 mismatch
+
+Trying common operations on identity [34 39] [expected (34,39)->-05]:
+ addition
+ (34,39)->-05: 34 + 39 = 73 mismatch
+ multiplication
+ (34,39)->-05: (30 + 4) * 39 = 30 * 39 + 4 * 39 = 1170 + 156 = 1326 mismatch
+ concatenation
+ (34,39)->-05: 34 || 39 = 3439 mismatch
+ reverse concatenation
+ (34,39)->-05: 39 || 34 = 3934 mismatch
+
+Trying difference operations reversed operands [34->43 39->93] and reversed result [expected (43,93)->-05]:
+ subtraction (a-b)
+ (43,93)->-05: 43 - 93 = -50 rev-> -05 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (43,93)->-05: |43 - 93| = 50 rev-> 05 mismatch
+ max mod min
+ (43,93)->-05: max(43,93) mod min(43,93) = 93 mod 43 = 7 rev-> 7 mismatch
+ negated absolute difference
+ (43,93)->-05: -|43 - 93| = -50 rev-> -05 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (43,93)->-05: 93 - 43 = 50 rev-> 05 mismatch
+ modulo (a mod b)
+ (43,93)->-05: 43 mod 93 = 43 rev-> 34 mismatch
+
+Trying difference operations on identity [34 39] [expected (34,39)->-05]:
+ subtraction (a-b)
+ (34,39)->-05: 34 - 39 = -5 mismatch
+ absolute difference
+ (34,39)->-05: |34 - 39| = 5 mismatch
+ max mod min
+ (34,39)->-05: max(34,39) mod min(34,39) = 39 mod 34 = 5 mismatch
+ negated absolute difference
+ (34,39)->-05: -|34 - 39| = -5 mismatch
+ reverse subtraction (b-a)
+ (34,39)->-05: 39 - 34 = 5 mismatch
+ modulo (a mod b)
+ (34,39)->-05: 34 mod 39 = 34 mismatch
+
+Trying rare operations reversed operands [34->43 39->93] and reversed result [expected (43,93)->-05]:
+ multiply+1
+ (43,93)->-05: (40 + 3) * 93 + 1 = 40 * 93 + 3 * 93 + 1 = 3720 + 279 + 1 = 3999 + 1 = 4000 rev-> 0004 mismatch
+ multiply-1
+ (43,93)->-05: (40 + 3) * 93 - 1 = 40 * 93 + 3 * 93 - 1 = 3720 + 279 - 1 = 3999 - 1 = 3998 rev-> 8993 mismatch
+ add+1
+ (43,93)->-05: 43 + 93 + 1 = 137 rev-> 731 mismatch
+ add-1
+ (43,93)->-05: 43 + 93 - 1 = 135 rev-> 531 mismatch
+ sub+1
+ (43,93)->-05: 43 - 93 + 1 = -49 rev-> -94 mismatch
+ sub-1
+ (43,93)->-05: 43 - 93 - 1 = -51 rev-> -15 mismatch
+ integer division (a/b)
+ (43,93)->-05: 43 / 93 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (43,93)->-05: 93 / 43 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (43,93)->-05: 93 mod 43 = 7 rev-> 7 mismatch
+ digit absolute diff
+ (43,93)->-05: |4-9| || |3-3| = 50 rev-> 05 mismatch
+ digit add mod10
+ (43,93)->-05: (4+9)%10 || (3+3)%10 = 36 rev-> 63 mismatch
+ digit sub mod10
+ (43,93)->-05: (4-9)%10 || (3-3)%10 = 50 rev-> 05 mismatch
+ cross multiply
+ (43,93)->-05: 4*9 + 3*3 = 36 + 9 = 45 rev-> 54 mismatch
+ cross multiply rev
+ (43,93)->-05: 4*3 + 3*9 = 12 + 27 = 39 rev-> 93 mismatch
+ digit multiply
+ (43,93)->-05: 4*9 || 3*3 = 36 || 9 = 369 rev-> 963 mismatch
+ digit multiply rev
+ (43,93)->-05: 4*3 || 3*9 = 12 || 27 = 1227 rev-> 7221 mismatch
+ digit sum diff
+ (43,93)->-05: (4+3) - (9+3) = -5 rev-> -5 mismatch
+ digit sum sum
+ (43,93)->-05: (4+3) + (9+3) = 19 rev-> 91 mismatch
+ digit product diff
+ (43,93)->-05: 4*3 - 9*3 = 12 - 27 = -15 rev-> -51 mismatch
+ digit product sum
+ (43,93)->-05: 4*3 + 9*3 = 12 + 27 = 39 rev-> 93 mismatch
+ determinant
+ (43,93)->-05: 4*3 - 3*9 = 12 - 27 = -15 rev-> -51 mismatch
+ abs determinant
+ (43,93)->-05: |4*3 - 3*9| = |12 - 27| = 15 rev-> 51 mismatch
+
+Trying rare operations on identity [34 39] [expected (34,39)->-05]:
+ multiply+1
+ (34,39)->-05: (30 + 4) * 39 + 1 = 30 * 39 + 4 * 39 + 1 = 1170 + 156 + 1 = 1326 + 1 = 1327 mismatch
+ multiply-1
+ (34,39)->-05: (30 + 4) * 39 - 1 = 30 * 39 + 4 * 39 - 1 = 1170 + 156 - 1 = 1326 - 1 = 1325 mismatch
+ add+1
+ (34,39)->-05: 34 + 39 + 1 = 74 mismatch
+ add-1
+ (34,39)->-05: 34 + 39 - 1 = 72 mismatch
+ sub+1
+ (34,39)->-05: 34 - 39 + 1 = -4 mismatch
+ sub-1
+ (34,39)->-05: 34 - 39 - 1 = -6 mismatch
+ integer division (a/b)
+ (34,39)->-05: 34 / 39 = 0 mismatch
+ reverse division (b/a)
+ (34,39)->-05: 39 / 34 = 1 mismatch
+ reverse modulo (b mod a)
+ (34,39)->-05: 39 mod 34 = 5 mismatch
+ digit absolute diff
+ (34,39)->-05: |3-3| || |4-9| = 05 mismatch
+ digit add mod10
+ (34,39)->-05: (3+3)%10 || (4+9)%10 = 63 mismatch
+ digit sub mod10
+ (34,39)->-05: (3-3)%10 || (4-9)%10 = 05 mismatch
+ cross multiply
+ (34,39)->-05: 3*3 + 4*9 = 9 + 36 = 45 mismatch
+ cross multiply rev
+ (34,39)->-05: 3*9 + 4*3 = 27 + 12 = 39 mismatch
+ digit multiply
+ (34,39)->-05: 3*3 || 4*9 = 9 || 36 = 936 mismatch
+ digit multiply rev
+ (34,39)->-05: 3*9 || 4*3 = 27 || 12 = 2712 mismatch
+ digit sum diff
+ (34,39)->-05: (3+4) - (3+9) = -5 mismatch
+ digit sum sum
+ (34,39)->-05: (3+4) + (3+9) = 19 mismatch
+ digit product diff
+ (34,39)->-05: 3*4 - 3*9 = 12 - 27 = -15 mismatch
+ digit product sum
+ (34,39)->-05: 3*4 + 3*9 = 12 + 27 = 39 mismatch
+ determinant
+ (34,39)->-05: 3*9 - 4*3 = 27 - 12 = 15 mismatch
+ abs determinant
+ (34,39)->-05: |3*9 - 4*3| = |27 - 12| = 15 mismatch
+
+Applying to 46-83:
+ We recall that the question operator is found in the examples.
+ reversed operands [46->64, 83->38] and reversed result
+ subtraction (a-b) (64,38): 64 - 38 = 26 rev-> 62
+ Result is non-negative, no prefix needed: 62
+
+\boxed{62}

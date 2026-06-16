@@ -1,0 +1,179 @@
+36]04 = 32
+74:33 = 3374
+83]77 = ]93
+81]76 = ]94
+34?86 = 111
+
+The inputs are 36, 04, 74, 33, 83, 77, 81, 76, 34, 86
+
+The outputs are 32, 3374, ]93, ]94, 111
+Some example outputs have the operator symbol as prefix ].
+We now consider the outputs to be 32, 3374, -93, -94, 111
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+36]04 -> ]
+74:33 -> :
+83]77 -> ]
+81]76 -> ]
+34?86 -> ?
+
+The operators
+]
+:
+?
+
+Looking at the question
+22?34 -> ?
+The question operator is found in the examples.
+
+Looking at operator ? [34?86 = 111]:
+
+Trying common operations reversed operands [34->43 86->68] and reversed result [expected (43,68)->111]:
+ addition
+ (43,68)->111: 43 + 68 = 111 rev-> 111 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (43,68)->111: (40 + 3) * 68 = 40 * 68 + 3 * 68 = 2720 + 204 = 2924 rev-> 4292 mismatch
+ concatenation
+ (43,68)->111: 43 || 68 = 4368 rev-> 8634 mismatch
+ reverse concatenation
+ (43,68)->111: 68 || 43 = 6843 rev-> 3486 mismatch
+
+Trying common operations on identity [34 86] [expected (34,86)->111]:
+ addition
+ (34,86)->111: 34 + 86 = 120 mismatch
+ multiplication
+ (34,86)->111: (30 + 4) * 86 = 30 * 86 + 4 * 86 = 2580 + 344 = 2924 mismatch
+ concatenation
+ (34,86)->111: 34 || 86 = 3486 mismatch
+ reverse concatenation
+ (34,86)->111: 86 || 34 = 8634 mismatch
+
+Trying difference operations reversed operands [34->43 86->68] and reversed result [expected (43,68)->111]:
+ subtraction (a-b)
+ (43,68)->111: 43 - 68 = -25 rev-> -52 mismatch
+ absolute difference
+ (43,68)->111: |43 - 68| = 25 rev-> 52 mismatch
+ max mod min
+ (43,68)->111: max(43,68) mod min(43,68) = 68 mod 43 = 25 rev-> 52 mismatch
+ negated absolute difference
+ (43,68)->111: -|43 - 68| = -25 rev-> -52 mismatch
+ reverse subtraction (b-a)
+ (43,68)->111: 68 - 43 = 25 rev-> 52 mismatch
+ modulo (a mod b)
+ (43,68)->111: 43 mod 68 = 43 rev-> 34 mismatch
+
+Trying difference operations on identity [34 86] [expected (34,86)->111]:
+ subtraction (a-b)
+ (34,86)->111: 34 - 86 = -52 mismatch
+ absolute difference
+ (34,86)->111: |34 - 86| = 52 mismatch
+ max mod min
+ (34,86)->111: max(34,86) mod min(34,86) = 86 mod 34 = 18 mismatch
+ negated absolute difference
+ (34,86)->111: -|34 - 86| = -52 mismatch
+ reverse subtraction (b-a)
+ (34,86)->111: 86 - 34 = 52 mismatch
+ modulo (a mod b)
+ (34,86)->111: 34 mod 86 = 34 mismatch
+
+Trying rare operations reversed operands [34->43 86->68] and reversed result [expected (43,68)->111]:
+ multiply+1
+ (43,68)->111: (40 + 3) * 68 + 1 = 40 * 68 + 3 * 68 + 1 = 2720 + 204 + 1 = 2924 + 1 = 2925 rev-> 5292 mismatch
+ multiply-1
+ (43,68)->111: (40 + 3) * 68 - 1 = 40 * 68 + 3 * 68 - 1 = 2720 + 204 - 1 = 2924 - 1 = 2923 rev-> 3292 mismatch
+ add+1
+ (43,68)->111: 43 + 68 + 1 = 112 rev-> 211 mismatch
+ add-1
+ (43,68)->111: 43 + 68 - 1 = 110 rev-> 011 mismatch
+ sub+1
+ (43,68)->111: 43 - 68 + 1 = -24 rev-> -42 mismatch
+ sub-1
+ (43,68)->111: 43 - 68 - 1 = -26 rev-> -62 mismatch
+ integer division (a/b)
+ (43,68)->111: 43 / 68 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (43,68)->111: 68 / 43 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (43,68)->111: 68 mod 43 = 25 rev-> 52 mismatch
+ digit absolute diff
+ (43,68)->111: |4-6| || |3-8| = 25 rev-> 52 mismatch
+ digit add mod10
+ (43,68)->111: (4+6)%10 || (3+8)%10 = 01 rev-> 10 mismatch
+ digit sub mod10
+ (43,68)->111: (4-6)%10 || (3-8)%10 = 85 rev-> 58 mismatch
+ cross multiply
+ (43,68)->111: 4*6 + 3*8 = 24 + 24 = 48 rev-> 84 mismatch
+ cross multiply rev
+ (43,68)->111: 4*8 + 3*6 = 32 + 18 = 50 rev-> 05 mismatch
+ digit multiply
+ (43,68)->111: 4*6 || 3*8 = 24 || 24 = 2424 rev-> 4242 mismatch
+ digit multiply rev
+ (43,68)->111: 4*8 || 3*6 = 32 || 18 = 3218 rev-> 8123 mismatch
+ digit sum diff
+ (43,68)->111: (4+3) - (6+8) = -7 rev-> -7 mismatch
+ digit sum sum
+ (43,68)->111: (4+3) + (6+8) = 21 rev-> 12 mismatch
+ digit product diff
+ (43,68)->111: 4*3 - 6*8 = 12 - 48 = -36 rev-> -63 mismatch
+ digit product sum
+ (43,68)->111: 4*3 + 6*8 = 12 + 48 = 60 rev-> 06 mismatch
+ determinant
+ (43,68)->111: 4*8 - 3*6 = 32 - 18 = 14 rev-> 41 mismatch
+ abs determinant
+ (43,68)->111: |4*8 - 3*6| = |32 - 18| = 14 rev-> 41 mismatch
+
+Trying rare operations on identity [34 86] [expected (34,86)->111]:
+ multiply+1
+ (34,86)->111: (30 + 4) * 86 + 1 = 30 * 86 + 4 * 86 + 1 = 2580 + 344 + 1 = 2924 + 1 = 2925 mismatch
+ multiply-1
+ (34,86)->111: (30 + 4) * 86 - 1 = 30 * 86 + 4 * 86 - 1 = 2580 + 344 - 1 = 2924 - 1 = 2923 mismatch
+ add+1
+ (34,86)->111: 34 + 86 + 1 = 121 mismatch
+ add-1
+ (34,86)->111: 34 + 86 - 1 = 119 mismatch
+ sub+1
+ (34,86)->111: 34 - 86 + 1 = -51 mismatch
+ sub-1
+ (34,86)->111: 34 - 86 - 1 = -53 mismatch
+ integer division (a/b)
+ (34,86)->111: 34 / 86 = 0 mismatch
+ reverse division (b/a)
+ (34,86)->111: 86 / 34 = 2 mismatch
+ reverse modulo (b mod a)
+ (34,86)->111: 86 mod 34 = 18 mismatch
+ digit absolute diff
+ (34,86)->111: |3-8| || |4-6| = 52 mismatch
+ digit add mod10
+ (34,86)->111: (3+8)%10 || (4+6)%10 = 10 mismatch
+ digit sub mod10
+ (34,86)->111: (3-8)%10 || (4-6)%10 = 58 mismatch
+ cross multiply
+ (34,86)->111: 3*8 + 4*6 = 24 + 24 = 48 mismatch
+ cross multiply rev
+ (34,86)->111: 3*6 + 4*8 = 18 + 32 = 50 mismatch
+ digit multiply
+ (34,86)->111: 3*8 || 4*6 = 24 || 24 = 2424 mismatch
+ digit multiply rev
+ (34,86)->111: 3*6 || 4*8 = 18 || 32 = 1832 mismatch
+ digit sum diff
+ (34,86)->111: (3+4) - (8+6) = -7 mismatch
+ digit sum sum
+ (34,86)->111: (3+4) + (8+6) = 21 mismatch
+ digit product diff
+ (34,86)->111: 3*4 - 8*6 = 12 - 48 = -36 mismatch
+ digit product sum
+ (34,86)->111: 3*4 + 8*6 = 12 + 48 = 60 mismatch
+ determinant
+ (34,86)->111: 3*6 - 4*8 = 18 - 32 = -14 mismatch
+ abs determinant
+ (34,86)->111: |3*6 - 4*8| = |18 - 32| = 14 mismatch
+
+Applying to 22?34:
+ We recall that the question operator is found in the examples.
+ reversed operands [22->22, 34->43] and reversed result
+ addition (22,43): 22 + 43 = 65 rev-> 56
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{56}

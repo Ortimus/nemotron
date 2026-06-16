@@ -1,0 +1,178 @@
+36/55 = 811
+13@04 = 0421
+53@71 = 595
+
+The inputs are 36, 55, 13, 04, 53, 71
+
+The outputs are 811, 0421, 595
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+36/55 -> /
+13@04 -> @
+53@71 -> @
+
+The operators
+/
+@
+
+Looking at the question
+24@32 -> @
+The question operator is found in the examples.
+
+Looking at operator @ [13@04 = 0421, 53@71 = 595]:
+
+Trying common operations
+ reversed operands [13->31 04->40, 53->35 71->17] and reversed result [expected (31,40)->0421, (35,17)->595]
+ addition
+ (31,40)->0421: 31 + 40 = 71 rev-> 17 mismatch
+ multiplication
+ (35,17)->595: (30 + 5) * 17 = 30 * 17 + 5 * 17 = 510 + 85 = 595 rev-> 595 match
+ (31,40)->0421: (30 + 1) * 40 = 30 * 40 + 1 * 40 = 1200 + 40 = 1240 rev-> 0421 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (31,40)->0421: 31 || 40 = 3140 rev-> 0413 mismatch
+ reverse concatenation
+ (35,17)->595: 17 || 35 = 1735 rev-> 5371 mismatch
+
+ identity [13 04, 53 71] [expected (13,04)->0421, (53,71)->595]
+ addition
+ (13,04)->0421: 13 + 04 = 17 mismatch
+ multiplication
+ (53,71)->595: (50 + 3) * 71 = 50 * 71 + 3 * 71 = 3550 + 213 = 3763 mismatch
+ concatenation
+ (13,04)->0421: 13 || 04 = 1304 mismatch
+ reverse concatenation
+ (53,71)->595: 71 || 53 = 7153 mismatch
+
+Trying difference operations
+ reversed operands [13->31 04->40, 53->35 71->17] and reversed result [expected (31,40)->0421, (35,17)->595]
+ subtraction (a-b)
+ (31,40)->0421: 31 - 40 = -9 rev-> -9 mismatch
+ absolute difference
+ (35,17)->595: |35 - 17| = 18 rev-> 81 mismatch
+ max mod min
+ (31,40)->0421: max(31,40) mod min(31,40) = 40 mod 31 = 9 rev-> 9 mismatch
+ negated absolute difference
+ (35,17)->595: -|35 - 17| = -18 rev-> -81 mismatch
+ reverse subtraction (b-a)
+ (31,40)->0421: 40 - 31 = 9 rev-> 9 mismatch
+ modulo (a mod b)
+ (35,17)->595: 35 mod 17 = 1 rev-> 1 mismatch
+
+ identity [13 04, 53 71] [expected (13,04)->0421, (53,71)->595]
+ subtraction (a-b)
+ (13,04)->0421: 13 - 04 = 9 mismatch
+ absolute difference
+ (53,71)->595: |53 - 71| = 18 mismatch
+ max mod min
+ (13,04)->0421: max(13,04) mod min(13,04) = 13 mod 04 = 1 mismatch
+ negated absolute difference
+ (53,71)->595: -|53 - 71| = -18 mismatch
+ reverse subtraction (b-a)
+ (13,04)->0421: 04 - 13 = -9 mismatch
+ modulo (a mod b)
+ (53,71)->595: 53 mod 71 = 53 mismatch
+
+Trying rare operations
+ reversed operands [13->31 04->40, 53->35 71->17] and reversed result [expected (31,40)->0421, (35,17)->595]
+ multiply+1
+ (31,40)->0421: (30 + 1) * 40 + 1 = 30 * 40 + 1 * 40 + 1 = 1200 + 40 + 1 = 1240 + 1 = 1241 rev-> 1421 mismatch
+ multiply-1
+ (35,17)->595: (30 + 5) * 17 - 1 = 30 * 17 + 5 * 17 - 1 = 510 + 85 - 1 = 595 - 1 = 594 rev-> 495 mismatch
+ add+1
+ (31,40)->0421: 31 + 40 + 1 = 72 rev-> 27 mismatch
+ add-1
+ (35,17)->595: 35 + 17 - 1 = 51 rev-> 15 mismatch
+ sub+1
+ (31,40)->0421: 31 - 40 + 1 = -8 rev-> -8 mismatch
+ sub-1
+ (35,17)->595: 35 - 17 - 1 = 17 rev-> 71 mismatch
+ integer division (a/b)
+ (31,40)->0421: 31 / 40 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (35,17)->595: 17 / 35 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (31,40)->0421: 40 mod 31 = 9 rev-> 9 mismatch
+ digit absolute diff
+ (35,17)->595: |3-1| || |5-7| = 22 rev-> 22 mismatch
+ digit add mod10
+ (31,40)->0421: (3+4)%10 || (1+0)%10 = 71 rev-> 17 mismatch
+ digit sub mod10
+ (35,17)->595: (3-1)%10 || (5-7)%10 = 28 rev-> 82 mismatch
+ cross multiply
+ (31,40)->0421: 3*4 + 1*0 = 12 + 0 = 12 rev-> 21 mismatch
+ cross multiply rev
+ (35,17)->595: 3*7 + 5*1 = 21 + 5 = 26 rev-> 62 mismatch
+ digit multiply
+ (31,40)->0421: 3*4 || 1*0 = 12 || 0 = 120 rev-> 021 mismatch
+ digit multiply rev
+ (35,17)->595: 3*7 || 5*1 = 21 || 5 = 215 rev-> 512 mismatch
+ digit sum diff
+ (31,40)->0421: (3+1) - (4+0) = 0 rev-> 0 mismatch
+ digit sum sum
+ (35,17)->595: (3+5) + (1+7) = 16 rev-> 61 mismatch
+ digit product diff
+ (31,40)->0421: 3*1 - 4*0 = 3 - 0 = 3 rev-> 3 mismatch
+ digit product sum
+ (35,17)->595: 3*5 + 1*7 = 15 + 7 = 22 rev-> 22 mismatch
+ determinant
+ (31,40)->0421: 3*0 - 1*4 = 0 - 4 = -4 rev-> -4 mismatch
+ abs determinant
+ (35,17)->595: |3*7 - 5*1| = |21 - 5| = 16 rev-> 61 mismatch
+
+ identity [13 04, 53 71] [expected (13,04)->0421, (53,71)->595]
+ multiply+1
+ (13,04)->0421: (10 + 3) * 04 + 1 = 10 * 04 + 3 * 04 + 1 = 40 + 12 + 1 = 52 + 1 = 53 mismatch
+ multiply-1
+ (53,71)->595: (50 + 3) * 71 - 1 = 50 * 71 + 3 * 71 - 1 = 3550 + 213 - 1 = 3763 - 1 = 3762 mismatch
+ add+1
+ (13,04)->0421: 13 + 04 + 1 = 18 mismatch
+ add-1
+ (53,71)->595: 53 + 71 - 1 = 123 mismatch
+ sub+1
+ (13,04)->0421: 13 - 04 + 1 = 10 mismatch
+ sub-1
+ (53,71)->595: 53 - 71 - 1 = -19 mismatch
+ integer division (a/b)
+ (13,04)->0421: 13 / 04 = 3 mismatch
+ reverse division (b/a)
+ (53,71)->595: 71 / 53 = 1 mismatch
+ reverse modulo (b mod a)
+ (13,04)->0421: 04 mod 13 = 4 mismatch
+ digit absolute diff
+ (53,71)->595: |5-7| || |3-1| = 22 mismatch
+ digit add mod10
+ (13,04)->0421: (1+0)%10 || (3+4)%10 = 17 mismatch
+ digit sub mod10
+ (53,71)->595: (5-7)%10 || (3-1)%10 = 82 mismatch
+ cross multiply
+ (13,04)->0421: 1*0 + 3*4 = 0 + 12 = 12 mismatch
+ cross multiply rev
+ (53,71)->595: 5*1 + 3*7 = 5 + 21 = 26 mismatch
+ digit multiply
+ (13,04)->0421: 1*0 || 3*4 = 0 || 12 = 012 mismatch
+ digit multiply rev
+ (53,71)->595: 5*1 || 3*7 = 5 || 21 = 521 mismatch
+ digit sum diff
+ (13,04)->0421: (1+3) - (0+4) = 0 mismatch
+ digit sum sum
+ (53,71)->595: (5+3) + (7+1) = 16 mismatch
+ digit product diff
+ (13,04)->0421: 1*3 - 0*4 = 3 - 0 = 3 mismatch
+ digit product sum
+ (53,71)->595: 5*3 + 7*1 = 15 + 7 = 22 mismatch
+ determinant
+ (13,04)->0421: 1*4 - 3*0 = 4 - 0 = 4 mismatch
+ abs determinant
+ (53,71)->595: |5*1 - 3*7| = |5 - 21| = 16 mismatch
+
+correct, actions: reversed operands, reversed result, multiplication
+
+Applying to 24@32:
+ We recall that the question operator is found in the examples.
+ reversed operands [24->42, 32->23] and reversed result
+ multiplication
+ (42,23): (40 + 2) * 23 = 40 * 23 + 2 * 23 = 920 + 46 = 966 rev-> 669
+ Result is non-negative
+ \boxed{669}

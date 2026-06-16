@@ -1,0 +1,180 @@
+23@13 = 199
+79*69 = 391
+26$74 = 51$
+68$13 = 55$
+65@03 = 9761
+
+The inputs are 23, 13, 79, 69, 26, 74, 68, 13, 65, 03
+
+The outputs are 199, 391, 51$, 55$, 9761
+Some example outputs have the operator symbol as suffix $.
+We now consider the outputs to be 199, 391, -51, -55, 9761
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+23@13 -> @
+79*69 -> *
+26$74 -> $
+68$13 -> $
+65@03 -> @
+
+The operators
+@
+*
+$
+
+Looking at the question
+11@94 -> @
+The question operator is found in the examples.
+
+Looking at operator @ [23@13 = 199, 65@03 = 9761]:
+
+Trying common operations reversed operands [23->32 13->31, 65->56 03->30] and reversed result [expected (32,31)->199, (56,30)->9761]:
+ addition
+ (32,31)->199: 32 + 31 = 63 rev-> 36 mismatch
+ multiplication
+ (56,30)->9761: (50 + 6) * 30 = 50 * 30 + 6 * 30 = 1500 + 180 = 1680 rev-> 0861 mismatch
+ concatenation
+ (32,31)->199: 32 || 31 = 3231 rev-> 1323 mismatch
+ reverse concatenation
+ (56,30)->9761: 30 || 56 = 3056 rev-> 6503 mismatch
+
+Trying common operations on identity [23 13, 65 03] [expected (23,13)->199, (65,03)->9761]:
+ addition
+ (23,13)->199: 23 + 13 = 36 mismatch
+ multiplication
+ (65,03)->9761: (60 + 5) * 03 = 60 * 03 + 5 * 03 = 180 + 15 = 195 mismatch
+ concatenation
+ (23,13)->199: 23 || 13 = 2313 mismatch
+ reverse concatenation
+ (65,03)->9761: 03 || 65 = 0365 mismatch
+
+Trying difference operations reversed operands [23->32 13->31, 65->56 03->30] and reversed result [expected (32,31)->199, (56,30)->9761]:
+ subtraction (a-b)
+ (32,31)->199: 32 - 31 = 1 rev-> 1 mismatch
+ absolute difference
+ (56,30)->9761: |56 - 30| = 26 rev-> 62 mismatch
+ max mod min
+ (32,31)->199: max(32,31) mod min(32,31) = 32 mod 31 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (56,30)->9761: -|56 - 30| = -26 rev-> -62 mismatch
+ reverse subtraction (b-a)
+ (32,31)->199: 31 - 32 = -1 rev-> -1 mismatch
+ modulo (a mod b)
+ (56,30)->9761: 56 mod 30 = 26 rev-> 62 mismatch
+
+Trying difference operations on identity [23 13, 65 03] [expected (23,13)->199, (65,03)->9761]:
+ subtraction (a-b)
+ (23,13)->199: 23 - 13 = 10 mismatch
+ absolute difference
+ (65,03)->9761: |65 - 03| = 62 mismatch
+ max mod min
+ (23,13)->199: max(23,13) mod min(23,13) = 23 mod 13 = 10 mismatch
+ negated absolute difference
+ (65,03)->9761: -|65 - 03| = -62 mismatch
+ reverse subtraction (b-a)
+ (23,13)->199: 13 - 23 = -10 mismatch
+ modulo (a mod b)
+ (65,03)->9761: 65 mod 03 = 2 mismatch
+
+Trying rare operations reversed operands [23->32 13->31, 65->56 03->30] and reversed result [expected (32,31)->199, (56,30)->9761]:
+ multiply+1
+ (32,31)->199: (30 + 2) * 31 + 1 = 30 * 31 + 2 * 31 + 1 = 930 + 62 + 1 = 992 + 1 = 993 rev-> 399 mismatch
+ multiply-1
+ (56,30)->9761: (50 + 6) * 30 - 1 = 50 * 30 + 6 * 30 - 1 = 1500 + 180 - 1 = 1680 - 1 = 1679 rev-> 9761 match
+ (32,31)->199: (30 + 2) * 31 - 1 = 30 * 31 + 2 * 31 - 1 = 930 + 62 - 1 = 992 - 1 = 991 rev-> 199 match
+ correct, actions: reversed operands, reversed result, multiply-1
+ add+1
+ (32,31)->199: 32 + 31 + 1 = 64 rev-> 46 mismatch
+ add-1
+ (56,30)->9761: 56 + 30 - 1 = 85 rev-> 58 mismatch
+ sub+1
+ (32,31)->199: 32 - 31 + 1 = 2 rev-> 2 mismatch
+ sub-1
+ (56,30)->9761: 56 - 30 - 1 = 25 rev-> 52 mismatch
+ integer division (a/b)
+ (32,31)->199: 32 / 31 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (56,30)->9761: 30 / 56 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (32,31)->199: 31 mod 32 = 31 rev-> 13 mismatch
+ digit absolute diff
+ (56,30)->9761: |5-3| || |6-0| = 26 rev-> 62 mismatch
+ digit add mod10
+ (32,31)->199: (3+3)%10 || (2+1)%10 = 63 rev-> 36 mismatch
+ digit sub mod10
+ (56,30)->9761: (5-3)%10 || (6-0)%10 = 26 rev-> 62 mismatch
+ cross multiply
+ (32,31)->199: 3*3 + 2*1 = 9 + 2 = 11 rev-> 11 mismatch
+ cross multiply rev
+ (56,30)->9761: 5*0 + 6*3 = 0 + 18 = 18 rev-> 81 mismatch
+ digit multiply
+ (32,31)->199: 3*3 || 2*1 = 9 || 2 = 92 rev-> 29 mismatch
+ digit multiply rev
+ (56,30)->9761: 5*0 || 6*3 = 0 || 18 = 018 rev-> 810 mismatch
+ digit sum diff
+ (32,31)->199: (3+2) - (3+1) = 1 rev-> 1 mismatch
+ digit sum sum
+ (56,30)->9761: (5+6) + (3+0) = 14 rev-> 41 mismatch
+ digit product diff
+ (32,31)->199: 3*2 - 3*1 = 6 - 3 = 3 rev-> 3 mismatch
+ digit product sum
+ (56,30)->9761: 5*6 + 3*0 = 30 + 0 = 30 rev-> 03 mismatch
+ determinant
+ (32,31)->199: 3*1 - 2*3 = 3 - 6 = -3 rev-> -3 mismatch
+ abs determinant
+ (56,30)->9761: |5*0 - 6*3| = |0 - 18| = 18 rev-> 81 mismatch
+
+Trying rare operations on identity [23 13, 65 03] [expected (23,13)->199, (65,03)->9761]:
+ multiply+1
+ (23,13)->199: (20 + 3) * 13 + 1 = 20 * 13 + 3 * 13 + 1 = 260 + 39 + 1 = 299 + 1 = 300 mismatch
+ multiply-1
+ (65,03)->9761: (60 + 5) * 03 - 1 = 60 * 03 + 5 * 03 - 1 = 180 + 15 - 1 = 195 - 1 = 194 mismatch
+ add+1
+ (23,13)->199: 23 + 13 + 1 = 37 mismatch
+ add-1
+ (65,03)->9761: 65 + 03 - 1 = 67 mismatch
+ sub+1
+ (23,13)->199: 23 - 13 + 1 = 11 mismatch
+ sub-1
+ (65,03)->9761: 65 - 03 - 1 = 61 mismatch
+ integer division (a/b)
+ (23,13)->199: 23 / 13 = 1 mismatch
+ reverse division (b/a)
+ (65,03)->9761: 03 / 65 = 0 mismatch
+ reverse modulo (b mod a)
+ (23,13)->199: 13 mod 23 = 13 mismatch
+ digit absolute diff
+ (65,03)->9761: |6-0| || |5-3| = 62 mismatch
+ digit add mod10
+ (23,13)->199: (2+1)%10 || (3+3)%10 = 36 mismatch
+ digit sub mod10
+ (65,03)->9761: (6-0)%10 || (5-3)%10 = 62 mismatch
+ cross multiply
+ (23,13)->199: 2*1 + 3*3 = 2 + 9 = 11 mismatch
+ cross multiply rev
+ (65,03)->9761: 6*3 + 5*0 = 18 + 0 = 18 mismatch
+ digit multiply
+ (23,13)->199: 2*1 || 3*3 = 2 || 9 = 29 mismatch
+ digit multiply rev
+ (65,03)->9761: 6*3 || 5*0 = 18 || 0 = 180 mismatch
+ digit sum diff
+ (23,13)->199: (2+3) - (1+3) = 1 mismatch
+ digit sum sum
+ (65,03)->9761: (6+5) + (0+3) = 14 mismatch
+ digit product diff
+ (23,13)->199: 2*3 - 1*3 = 6 - 3 = 3 mismatch
+ digit product sum
+ (65,03)->9761: 6*5 + 0*3 = 30 + 0 = 30 mismatch
+ determinant
+ (23,13)->199: 2*3 - 3*1 = 6 - 3 = 3 mismatch
+ abs determinant
+ (65,03)->9761: |6*3 - 5*0| = |18 - 0| = 18 mismatch
+
+Applying to 11@94:
+ We recall that the question operator is found in the examples.
+ reversed operands [11->11, 94->49] and reversed result
+ multiply-1 (11,49): (10 + 1) * 49 - 1 = 10 * 49 + 1 * 49 - 1 = 490 + 49 - 1 = 539 - 1 = 538 rev-> 835
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{835}

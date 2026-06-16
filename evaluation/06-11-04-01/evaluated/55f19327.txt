@@ -1,0 +1,207 @@
+47-84 = 131
+72\97 = 6983
+72-20 = 92
+20:20 = 0
+44\21 = 923
+
+The inputs are 47, 84, 72, 97, 72, 20, 20, 20, 44, 21
+
+The outputs are 131, 6983, 92, 0, 923
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+47-84 -> -
+72\97 -> \
+72-20 -> -
+20:20 -> :
+44\21 -> \
+
+The operators
+-
+\
+:
+
+Looking at the question
+77:38 -> :
+The question operator is found in the examples.
+
+Looking at operator : [20:20 = 0]:
+
+Trying common operations
+ reversed operands [20->02 20->02] and reversed result [expected (02,02)->0]
+ addition
+ (02,02)->0: 02 + 02 = 4 -> reversed 4 != 0
+ multiplication
+ (02,02)->0: (0 + 2) * 02 = 0 * 02 + 2 * 02 = 0 + 40 = 40 -> reversed 04 != 0
+ concatenation
+ (02,02)->0: 02 || 02 = 0202 -> reversed 2020 != 0
+ reverse concatenation
+ (02,02)->0: 02 || 02 = 0202 -> reversed 2020 != 0
+
+ identity [20 20] [expected (20,20)->0]
+ addition
+ (20,20)->0: 20 + 20 = 40 != 0
+ multiplication
+ (20,20)->0: (20 + 0) * 20 = 20 * 20 + 0 * 20 = 400 + 0 = 400 != 0
+ concatenation
+ (20,20)->0: 20 || 20 = 2020 != 0
+ reverse concatenation
+ (20,20)->0: 20 || 20 = 2020 != 0
+
+Trying difference operations
+ reversed operands [20->02 20->02] and reversed result [expected (02,02)->0]
+ subtraction (a-b)
+ (02,02)->0: 02 - 02 = 0 -> reversed 0 = 0 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (02,02)->0: |02 - 02| = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ max mod min
+ (02,02)->0: max(02,02) mod min(02,02) = 02 mod 02 = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ negated absolute difference
+ (02,02)->0: -|02 - 02| = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (02,02)->0: 02 - 02 = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ modulo (a mod b)
+ (02,02)->0: 02 mod 02 = 0 -> reversed 0 = 0 match
+ correct, but skipping
+
+ identity [20 20] [expected (20,20)->0]
+ subtraction (a-b)
+ (20,20)->0: 20 - 20 = 0 -> 0 = 0 match
+ correct, but skipping
+ absolute difference
+ (20,20)->0: |20 - 20| = 0 -> 0 = 0 match
+ correct, but skipping
+ max mod min
+ (20,20)->0: max(20,20) mod min(20,20) = 20 mod 20 = 0 -> 0 = 0 match
+ correct, but skipping
+ negated absolute difference
+ (20,20)->0: -|20 - 20| = 0 -> 0 = 0 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (20,20)->0: 20 - 20 = 0 -> 0 = 0 match
+ correct, but skipping
+ modulo (a mod b)
+ (20,20)->0: 20 mod 20 = 0 -> 0 = 0 match
+ correct, but skipping
+
+Trying rare operations
+ reversed operands [20->02 20->02] and reversed result [expected (02,02)->0]
+ multiply+1
+ (02,02)->0: (0 + 2) * 02 + 1 = 0 * 02 + 2 * 02 + 1 = 0 + 40 + 1 = 40 + 1 = 41 -> reversed 14 != 0
+ multiply-1
+ (02,02)->0: (0 + 2) * 02 - 1 = 0 * 02 + 2 * 02 - 1 = 0 + 40 - 1 = 40 - 1 = 39 -> reversed 93 != 0
+ add+1
+ (02,02)->0: 02 + 02 + 1 = 44 -> reversed 44 != 0
+ add-1
+ (02,02)->0: 02 + 02 - 1 = 43 -> reversed 34 != 0
+ sub+1
+ (02,02)->0: 02 - 02 + 1 = 1 -> reversed 1 != 0
+ sub-1
+ (02,02)->0: 02 - 02 - 1 = -1 -> reversed -1 != 0
+ integer division (a/b)
+ (02,02)->0: 02 / 02 = 1 -> reversed 1 != 0
+ reverse division (b/a)
+ (02,02)->0: 02 / 02 = 1 -> reversed 1 != 0
+ reverse modulo (b mod a)
+ (02,02)->0: 02 mod 02 = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ digit absolute diff
+ (02,02)->0: |0-0| || |2-2| = 00 -> reversed 00 != 0
+ digit add mod10
+ (02,02)->0: (0+0)%10 || (2+2)%10 = 04 -> reversed 40 != 0
+ digit sub mod10
+ (02,02)->0: (0-0)%10 || (2-2)%10 = 00 -> reversed 00 != 0
+ cross multiply
+ (02,02)->0: 0*0 + 2*2 = 0 + 4 = 4 -> reversed 4 != 0
+ cross multiply rev
+ (02,02)->0: 0*2 + 2*0 = 0 + 0 = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ digit multiply
+ (02,02)->0: 0*0 || 2*2 = 0 || 4 = 04 -> reversed 40 != 0
+ digit multiply rev
+ (02,02)->0: 0*2 || 2*0 = 0 || 0 = 00 -> reversed 00 != 0
+ digit sum diff
+ (02,02)->0: (0+2) - (0+2) = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ digit sum sum
+ (02,02)->0: (0+2) + (0+2) = 4 -> reversed 4 != 0
+ digit product diff
+ (02,02)->0: 0*2 - 0*2 = 0 - 0 = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ digit product sum
+ (02,02)->0: 0*2 + 0*2 = 0 + 0 = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ determinant
+ (02,02)->0: 0*2 - 2*0 = 0 - 0 = 0 -> reversed 0 = 0 match
+ correct, but skipping
+ abs determinant
+ (02,02)->0: |0*2 - 2*0| = |0 - 0| = 0 -> reversed 0 = 0 match
+ correct, but skipping
+
+ identity [20 20] [expected (20,20)->0]
+ multiply+1
+ (20,20)->0: (20 + 0) * 20 + 1 = 20 * 20 + 0 * 20 + 1 = 400 + 0 + 1 = 400 + 1 = 401 -> 401 != 0
+ multiply-1
+ (20,20)->0: (20 + 0) * 20 - 1 = 20 * 20 + 0 * 20 - 1 = 400 + 0 - 1 = 400 - 1 = 399 -> 399 != 0
+ add+1
+ (20,20)->0: 20 + 20 + 1 = 41 -> 41 != 0
+ add-1
+ (20,20)->0: 20 + 20 - 1 = 39 -> 39 != 0
+ sub+1
+ (20,20)->0: 20 - 20 + 1 = 1 -> 1 != 0
+ sub-1
+ (20,20)->0: 20 - 20 - 1 = -1 -> -1 != 0
+ integer division (a/b)
+ (20,20)->0: 20 / 20 = 1 -> 1 != 0
+ reverse division (b/a)
+ (20,20)->0: 20 / 20 = 1 -> 1 != 0
+ reverse modulo (b mod a)
+ (20,20)->0: 20 mod 20 = 0 -> 0 = 0 match
+ correct, but skipping
+ digit absolute diff
+ (20,20)->0: |2-2| || |0-0| = 00 -> 00 != 0
+ digit add mod10
+ (20,20)->0: (2+2)%10 || (0+0)%10 = 40 -> 40 != 0
+ digit sub mod10
+ (20,20)->0: (2-2)%10 || (0-0)%10 = 00 -> 00 != 0
+ cross multiply
+ (20,20)->0: 2*2 + 0*0 = 4 + 0 = 4 -> 4 != 0
+ cross multiply rev
+ (20,20)->0: 2*0 + 0*2 = 0 + 0 = 0 -> 0 = 0 match
+ correct, but skipping
+ digit multiply
+ (20,20)->0: 2*2 || 0*0 = 4 || 0 = 40 -> 40 != 0
+ digit multiply rev
+ (20,20)->0: 2*0 || 0*2 = 0 || 0 = 00 -> 00 != 0
+ digit sum diff
+ (20,20)->0: (2+0) - (2+0) = 0 -> 0 = 0 match
+ correct, but skipping
+ digit sum sum
+ (20,20)->0: (2+0) + (2+0) = 4 -> 4 != 0
+ digit product diff
+ (20,20)->0: 2*0 - 2*0 = 0 - 0 = 0 -> 0 = 0 match
+ correct, but skipping
+ digit product sum
+ (20,20)->0: 2*0 + 2*0 = 0 + 0 = 0 -> 0 = 0 match
+ correct, but skipping
+ determinant
+ (20,20)->0: 2*0 - 0*2 = 0 - 0 = 0 -> 0 = 0 match
+ correct, but skipping
+ abs determinant
+ (20,20)->0: |2*0 - 0*2| = |0 - 0| = 0 -> 0 = 0 match
+ correct, but skipping
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 77:38:
+ We recall that the question operator is found in the examples.
+ reversed operands [77->77, 38->83] and reversed result
+ subtraction (a-b)
+ (77,83): 77 - 83 = -6 -> reversed -6
+ Result is negative - but none of the example outputs have a symbol prefix or suffix
+ \boxed{-6}

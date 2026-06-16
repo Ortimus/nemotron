@@ -1,0 +1,182 @@
+44-28 = -83
+56-18 = -61
+53*21 = 2153
+41+68 = 001
+29+56 = 751
+
+The inputs are 44, 28, 56, 18, 53, 21, 41, 68, 29, 56
+
+The outputs are -83, -61, 2153, 001, 751
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -83, -61, 2153, 001, 751
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+44-28 -> -
+56-18 -> -
+53*21 -> *
+41+68 -> +
+29+56 -> +
+
+The operators
+-
+*
++
+
+Looking at the question
+03-59 -> -
+The question operator is found in the examples.
+
+Looking at operator - [44-28 = -83, 56-18 = -61]:
+
+Trying common operations reversed operands [44->44 28->82, 56->65 18->81] and reversed result [expected (44,82)->-83, (65,81)->-61]:
+ addition
+ (44,82)->-83: 44 + 82 = 126 rev-> 621 mismatch
+ multiplication
+ (65,81)->-61: (60 + 5) * 81 = 60 * 81 + 5 * 81 = 4860 + 405 = 5265 rev-> 5625 mismatch
+ concatenation
+ (44,82)->-83: 44 || 82 = 4482 rev-> 2844 mismatch
+ reverse concatenation
+ (65,81)->-61: 81 || 65 = 8165 rev-> 5618 mismatch
+
+Trying common operations on identity [44 28, 56 18] [expected (44,28)->-83, (56,18)->-61]:
+ addition
+ (44,28)->-83: 44 + 28 = 72 mismatch
+ multiplication
+ (56,18)->-61: (50 + 6) * 18 = 50 * 18 + 6 * 18 = 900 + 108 = 1008 mismatch
+ concatenation
+ (44,28)->-83: 44 || 28 = 4428 mismatch
+ reverse concatenation
+ (56,18)->-61: 18 || 56 = 1856 mismatch
+
+Trying difference operations reversed operands [44->44 28->82, 56->65 18->81] and reversed result [expected (44,82)->-83, (65,81)->-61]:
+ subtraction (a-b)
+ (44,82)->-83: 44 - 82 = -38 rev-> -83 match
+ (65,81)->-61: 65 - 81 = -16 rev-> -61 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (65,81)->-61: |65 - 81| = 16 rev-> 61 mismatch
+ max mod min
+ (44,82)->-83: max(44,82) mod min(44,82) = 82 mod 44 = 38 rev-> 83 mismatch
+ negated absolute difference
+ (65,81)->-61: -|65 - 81| = -16 rev-> -61 match
+ (44,82)->-83: -|44 - 82| = -38 rev-> -83 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (44,82)->-83: 82 - 44 = 38 rev-> 83 mismatch
+ modulo (a mod b)
+ (65,81)->-61: 65 mod 81 = 65 rev-> 56 mismatch
+
+Trying difference operations on identity [44 28, 56 18] [expected (44,28)->-83, (56,18)->-61]:
+ subtraction (a-b)
+ (44,28)->-83: 44 - 28 = 16 mismatch
+ absolute difference
+ (56,18)->-61: |56 - 18| = 38 mismatch
+ max mod min
+ (44,28)->-83: max(44,28) mod min(44,28) = 44 mod 28 = 16 mismatch
+ negated absolute difference
+ (56,18)->-61: -|56 - 18| = -38 mismatch
+ reverse subtraction (b-a)
+ (44,28)->-83: 28 - 44 = -16 mismatch
+ modulo (a mod b)
+ (56,18)->-61: 56 mod 18 = 2 mismatch
+
+Trying rare operations reversed operands [44->44 28->82, 56->65 18->81] and reversed result [expected (44,82)->-83, (65,81)->-61]:
+ multiply+1
+ (44,82)->-83: (40 + 4) * 82 + 1 = 40 * 82 + 4 * 82 + 1 = 3280 + 328 + 1 = 3608 + 1 = 3609 rev-> 9063 mismatch
+ multiply-1
+ (65,81)->-61: (60 + 5) * 81 - 1 = 60 * 81 + 5 * 81 - 1 = 4860 + 405 - 1 = 5265 - 1 = 5264 rev-> 4625 mismatch
+ add+1
+ (44,82)->-83: 44 + 82 + 1 = 127 rev-> 721 mismatch
+ add-1
+ (65,81)->-61: 65 + 81 - 1 = 145 rev-> 541 mismatch
+ sub+1
+ (44,82)->-83: 44 - 82 + 1 = -37 rev-> -73 mismatch
+ sub-1
+ (65,81)->-61: 65 - 81 - 1 = -17 rev-> -71 mismatch
+ integer division (a/b)
+ (44,82)->-83: 44 / 82 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (65,81)->-61: 81 / 65 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (44,82)->-83: 82 mod 44 = 38 rev-> 83 mismatch
+ digit absolute diff
+ (65,81)->-61: |6-8| || |5-1| = 24 rev-> 42 mismatch
+ digit add mod10
+ (44,82)->-83: (4+8)%10 || (4+2)%10 = 26 rev-> 62 mismatch
+ digit sub mod10
+ (65,81)->-61: (6-8)%10 || (5-1)%10 = 84 rev-> 48 mismatch
+ cross multiply
+ (44,82)->-83: 4*8 + 4*2 = 32 + 8 = 40 rev-> 04 mismatch
+ cross multiply rev
+ (65,81)->-61: 6*1 + 5*8 = 6 + 40 = 46 rev-> 64 mismatch
+ digit multiply
+ (44,82)->-83: 4*8 || 4*2 = 32 || 8 = 328 rev-> 823 mismatch
+ digit multiply rev
+ (65,81)->-61: 6*1 || 5*8 = 6 || 40 = 640 rev-> 046 mismatch
+ digit sum diff
+ (44,82)->-83: (4+4) - (8+2) = -2 rev-> -2 mismatch
+ digit sum sum
+ (65,81)->-61: (6+5) + (8+1) = 20 rev-> 02 mismatch
+ digit product diff
+ (44,82)->-83: 4*4 - 8*2 = 16 - 16 = 0 rev-> 0 mismatch
+ digit product sum
+ (65,81)->-61: 6*5 + 8*1 = 30 + 8 = 38 rev-> 83 mismatch
+ determinant
+ (44,82)->-83: 4*2 - 4*8 = 8 - 32 = -24 rev-> -42 mismatch
+ abs determinant
+ (65,81)->-61: |6*1 - 5*8| = |6 - 40| = 34 rev-> 43 mismatch
+
+Trying rare operations on identity [44 28, 56 18] [expected (44,28)->-83, (56,18)->-61]:
+ multiply+1
+ (44,28)->-83: (40 + 4) * 28 + 1 = 40 * 28 + 4 * 28 + 1 = 1120 + 112 + 1 = 1232 + 1 = 1233 mismatch
+ multiply-1
+ (56,18)->-61: (50 + 6) * 18 - 1 = 50 * 18 + 6 * 18 - 1 = 900 + 108 - 1 = 1008 - 1 = 1007 mismatch
+ add+1
+ (44,28)->-83: 44 + 28 + 1 = 73 mismatch
+ add-1
+ (56,18)->-61: 56 + 18 - 1 = 73 mismatch
+ sub+1
+ (44,28)->-83: 44 - 28 + 1 = 17 mismatch
+ sub-1
+ (56,18)->-61: 56 - 18 - 1 = 37 mismatch
+ integer division (a/b)
+ (44,28)->-83: 44 / 28 = 1 mismatch
+ reverse division (b/a)
+ (56,18)->-61: 18 / 56 = 0 mismatch
+ reverse modulo (b mod a)
+ (44,28)->-83: 28 mod 44 = 28 mismatch
+ digit absolute diff
+ (56,18)->-61: |5-1| || |6-8| = 42 mismatch
+ digit add mod10
+ (44,28)->-83: (4+2)%10 || (4+8)%10 = 62 mismatch
+ digit sub mod10
+ (56,18)->-61: (5-1)%10 || (6-8)%10 = 48 mismatch
+ cross multiply
+ (44,28)->-83: 4*2 + 4*8 = 8 + 32 = 40 mismatch
+ cross multiply rev
+ (56,18)->-61: 5*8 + 6*1 = 40 + 6 = 46 mismatch
+ digit multiply
+ (44,28)->-83: 4*2 || 4*8 = 8 || 32 = 832 mismatch
+ digit multiply rev
+ (56,18)->-61: 5*8 || 6*1 = 40 || 6 = 406 mismatch
+ digit sum diff
+ (44,28)->-83: (4+4) - (2+8) = -2 mismatch
+ digit sum sum
+ (56,18)->-61: (5+6) + (1+8) = 20 mismatch
+ digit product diff
+ (44,28)->-83: 4*4 - 2*8 = 16 - 16 = 0 mismatch
+ digit product sum
+ (56,18)->-61: 5*6 + 1*8 = 30 + 8 = 38 mismatch
+ determinant
+ (44,28)->-83: 4*8 - 4*2 = 32 - 8 = 24 mismatch
+ abs determinant
+ (56,18)->-61: |5*8 - 6*1| = |40 - 6| = 34 mismatch
+
+Applying to 03-59:
+ We recall that the question operator is found in the examples.
+ reversed operands [03->30, 59->95] and reversed result
+ subtraction (a-b) (30,95): 30 - 95 = -65 rev-> -56
+ Result is negative - we add back the operator prefix -: -56 -> -56
+
+\boxed{-56}

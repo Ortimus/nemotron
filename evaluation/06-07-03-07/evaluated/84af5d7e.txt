@@ -1,0 +1,180 @@
+61-23 = -61
+62-64 = -02
+47+74 = 7447
+48*52 = 9902
+57*37 = 4745
+
+The inputs are 61, 23, 62, 64, 47, 74, 48, 52, 57, 37
+
+The outputs are -61, -02, 7447, 9902, 4745
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -61, -02, 7447, 9902, 4745
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+61-23 -> -
+62-64 -> -
+47+74 -> +
+48*52 -> *
+57*37 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+55+61 -> +
+The question operator is found in the examples.
+
+Looking at operator + [47+74 = 7447]:
+
+Trying common operations reversed operands [47->74 74->47] and reversed result [expected (74,47)->7447]:
+ addition
+ (74,47)->7447: 74 + 47 = 121 rev-> 121 mismatch
+ multiplication
+ (74,47)->7447: (70 + 4) * 47 = 70 * 47 + 4 * 47 = 3290 + 188 = 3478 rev-> 8743 mismatch
+ concatenation
+ (74,47)->7447: 74 || 47 = 7447 rev-> 7447 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (74,47)->7447: 47 || 74 = 4774 rev-> 4774 mismatch
+
+Trying common operations on identity [47 74] [expected (47,74)->7447]:
+ addition
+ (47,74)->7447: 47 + 74 = 121 mismatch
+ multiplication
+ (47,74)->7447: (40 + 7) * 74 = 40 * 74 + 7 * 74 = 2960 + 518 = 3478 mismatch
+ concatenation
+ (47,74)->7447: 47 || 74 = 4774 mismatch
+ reverse concatenation
+ (47,74)->7447: 74 || 47 = 7447 match
+ correct, but skipping
+
+Trying difference operations reversed operands [47->74 74->47] and reversed result [expected (74,47)->7447]:
+ subtraction (a-b)
+ (74,47)->7447: 74 - 47 = 27 rev-> 72 mismatch
+ absolute difference
+ (74,47)->7447: |74 - 47| = 27 rev-> 72 mismatch
+ max mod min
+ (74,47)->7447: max(74,47) mod min(74,47) = 74 mod 47 = 27 rev-> 72 mismatch
+ negated absolute difference
+ (74,47)->7447: -|74 - 47| = -27 rev-> -72 mismatch
+ reverse subtraction (b-a)
+ (74,47)->7447: 47 - 74 = -27 rev-> -72 mismatch
+ modulo (a mod b)
+ (74,47)->7447: 74 mod 47 = 27 rev-> 72 mismatch
+
+Trying difference operations on identity [47 74] [expected (47,74)->7447]:
+ subtraction (a-b)
+ (47,74)->7447: 47 - 74 = -27 mismatch
+ absolute difference
+ (47,74)->7447: |47 - 74| = 27 mismatch
+ max mod min
+ (47,74)->7447: max(47,74) mod min(47,74) = 74 mod 47 = 27 mismatch
+ negated absolute difference
+ (47,74)->7447: -|47 - 74| = -27 mismatch
+ reverse subtraction (b-a)
+ (47,74)->7447: 74 - 47 = 27 mismatch
+ modulo (a mod b)
+ (47,74)->7447: 47 mod 74 = 47 mismatch
+
+Trying rare operations reversed operands [47->74 74->47] and reversed result [expected (74,47)->7447]:
+ multiply+1
+ (74,47)->7447: (70 + 4) * 47 + 1 = 70 * 47 + 4 * 47 + 1 = 3290 + 188 + 1 = 3478 + 1 = 3479 rev-> 9743 mismatch
+ multiply-1
+ (74,47)->7447: (70 + 4) * 47 - 1 = 70 * 47 + 4 * 47 - 1 = 3290 + 188 - 1 = 3478 - 1 = 3477 rev-> 7743 mismatch
+ add+1
+ (74,47)->7447: 74 + 47 + 1 = 122 rev-> 221 mismatch
+ add-1
+ (74,47)->7447: 74 + 47 - 1 = 120 rev-> 021 mismatch
+ sub+1
+ (74,47)->7447: 74 - 47 + 1 = 28 rev-> 82 mismatch
+ sub-1
+ (74,47)->7447: 74 - 47 - 1 = 26 rev-> 62 mismatch
+ integer division (a/b)
+ (74,47)->7447: 74 / 47 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (74,47)->7447: 47 / 74 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (74,47)->7447: 47 mod 74 = 47 rev-> 74 mismatch
+ digit absolute diff
+ (74,47)->7447: |7-4| || |4-7| = 33 rev-> 33 mismatch
+ digit add mod10
+ (74,47)->7447: (7+4)%10 || (4+7)%10 = 11 rev-> 11 mismatch
+ digit sub mod10
+ (74,47)->7447: (7-4)%10 || (4-7)%10 = 37 rev-> 73 mismatch
+ cross multiply
+ (74,47)->7447: 7*4 + 4*7 = 28 + 28 = 56 rev-> 65 mismatch
+ cross multiply rev
+ (74,47)->7447: 7*7 + 4*4 = 49 + 16 = 65 rev-> 56 mismatch
+ digit multiply
+ (74,47)->7447: 7*4 || 4*7 = 28 || 28 = 2828 rev-> 8282 mismatch
+ digit multiply rev
+ (74,47)->7447: 7*7 || 4*4 = 49 || 16 = 4916 rev-> 6194 mismatch
+ digit sum diff
+ (74,47)->7447: (7+4) - (4+7) = 0 rev-> 0 mismatch
+ digit sum sum
+ (74,47)->7447: (7+4) + (4+7) = 22 rev-> 22 mismatch
+ digit product diff
+ (74,47)->7447: 7*4 - 4*7 = 28 - 28 = 0 rev-> 0 mismatch
+ digit product sum
+ (74,47)->7447: 7*4 + 4*7 = 28 + 28 = 56 rev-> 65 mismatch
+ determinant
+ (74,47)->7447: 7*7 - 4*4 = 49 - 16 = 33 rev-> 33 mismatch
+ abs determinant
+ (74,47)->7447: |7*7 - 4*4| = |49 - 16| = 33 rev-> 33 mismatch
+
+Trying rare operations on identity [47 74] [expected (47,74)->7447]:
+ multiply+1
+ (47,74)->7447: (40 + 7) * 74 + 1 = 40 * 74 + 7 * 74 + 1 = 2960 + 518 + 1 = 3478 + 1 = 3479 mismatch
+ multiply-1
+ (47,74)->7447: (40 + 7) * 74 - 1 = 40 * 74 + 7 * 74 - 1 = 2960 + 518 - 1 = 3478 - 1 = 3477 mismatch
+ add+1
+ (47,74)->7447: 47 + 74 + 1 = 122 mismatch
+ add-1
+ (47,74)->7447: 47 + 74 - 1 = 120 mismatch
+ sub+1
+ (47,74)->7447: 47 - 74 + 1 = -26 mismatch
+ sub-1
+ (47,74)->7447: 47 - 74 - 1 = -28 mismatch
+ integer division (a/b)
+ (47,74)->7447: 47 / 74 = 0 mismatch
+ reverse division (b/a)
+ (47,74)->7447: 74 / 47 = 1 mismatch
+ reverse modulo (b mod a)
+ (47,74)->7447: 74 mod 47 = 27 mismatch
+ digit absolute diff
+ (47,74)->7447: |4-7| || |7-4| = 33 mismatch
+ digit add mod10
+ (47,74)->7447: (4+7)%10 || (7+4)%10 = 11 mismatch
+ digit sub mod10
+ (47,74)->7447: (4-7)%10 || (7-4)%10 = 73 mismatch
+ cross multiply
+ (47,74)->7447: 4*7 + 7*4 = 28 + 28 = 56 mismatch
+ cross multiply rev
+ (47,74)->7447: 4*4 + 7*7 = 16 + 49 = 65 mismatch
+ digit multiply
+ (47,74)->7447: 4*7 || 7*4 = 28 || 28 = 2828 mismatch
+ digit multiply rev
+ (47,74)->7447: 4*4 || 7*7 = 16 || 49 = 1649 mismatch
+ digit sum diff
+ (47,74)->7447: (4+7) - (7+4) = 0 mismatch
+ digit sum sum
+ (47,74)->7447: (4+7) + (7+4) = 22 mismatch
+ digit product diff
+ (47,74)->7447: 4*7 - 7*4 = 28 - 28 = 0 mismatch
+ digit product sum
+ (47,74)->7447: 4*7 + 7*4 = 28 + 28 = 56 mismatch
+ determinant
+ (47,74)->7447: 4*4 - 7*7 = 16 - 49 = -33 mismatch
+ abs determinant
+ (47,74)->7447: |4*4 - 7*7| = |16 - 49| = 33 mismatch
+
+Applying to 55+61:
+ We recall that the question operator is found in the examples.
+ reversed operands [55->55, 61->16] and reversed result
+ concatenation (55,16): 55 || 16 = 5516 rev-> 6155
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{6155}

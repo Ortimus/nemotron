@@ -1,0 +1,178 @@
+51^81 = 132
+90/42 = 48
+63^32 = 95
+
+The inputs are 51, 81, 90, 42, 63, 32
+
+The outputs are 132, 48, 95
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+51^81 -> ^
+90/42 -> /
+63^32 -> ^
+
+The operators
+^
+/
+
+Looking at the question
+86{99 -> {
+The question operator is not found in the examples. Investigating the most common example operator ^ instead. We will use addition for the question operator.
+
+Looking at operator ^ [51^81 = 132, 63^32 = 95]:
+
+Trying common operations
+ reversed operands [51->15 81->18, 63->36 32->23] and reversed result [expected (15,18)->132, (36,23)->95]
+ addition
+ (15,18)->132: 15 + 18 = 33 rev-> 33 mismatch
+ multiplication
+ (36,23)->95: (30 + 6) * 23 = 30 * 23 + 6 * 23 = 690 + 138 = 828 rev-> 828 mismatch
+ concatenation
+ (15,18)->132: 15 || 18 = 1518 rev-> 8151 mismatch
+ reverse concatenation
+ (36,23)->95: 23 || 36 = 2336 rev-> 6332 mismatch
+
+ identity [51 81, 63 32] [expected (51,81)->132, (63,32)->95]
+ addition
+ (51,81)->132: 51 + 81 = 132 match
+ (63,32)->95: 63 + 32 = 95 match
+ correct, actions: addition
+ multiplication
+ (63,32)->95: (60 + 3) * 32 = 60 * 32 + 3 * 32 = 1920 + 96 = 2016 mismatch
+ concatenation
+ (51,81)->132: 51 || 81 = 5181 mismatch
+ reverse concatenation
+ (63,32)->95: 32 || 63 = 3263 mismatch
+
+Trying difference operations
+ reversed operands [51->15 81->18, 63->36 32->23] and reversed result [expected (15,18)->132, (36,23)->95]
+ subtraction (a-b)
+ (15,18)->132: 15 - 18 = -3 rev-> -3 mismatch
+ absolute difference
+ (36,23)->95: |36 - 23| = 13 rev-> 31 mismatch
+ max mod min
+ (15,18)->132: max(15,18) mod min(15,18) = 18 mod 15 = 3 rev-> 3 mismatch
+ negated absolute difference
+ (36,23)->95: -|36 - 23| = -13 rev-> -31 mismatch
+ reverse subtraction (b-a)
+ (15,18)->132: 18 - 15 = 3 rev-> 3 mismatch
+ modulo (a mod b)
+ (36,23)->95: 36 mod 23 = 13 rev-> 31 mismatch
+
+ identity [51 81, 63 32] [expected (51,81)->132, (63,32)->95]
+ subtraction (a-b)
+ (51,81)->132: 51 - 81 = -30 mismatch
+ absolute difference
+ (63,32)->95: |63 - 32| = 31 mismatch
+ max mod min
+ (51,81)->132: max(51,81) mod min(51,81) = 81 mod 51 = 30 mismatch
+ negated absolute difference
+ (63,32)->95: -|63 - 32| = -31 mismatch
+ reverse subtraction (b-a)
+ (51,81)->132: 81 - 51 = 30 mismatch
+ modulo (a mod b)
+ (63,32)->95: 63 mod 32 = 31 mismatch
+
+Trying rare operations
+ reversed operands [51->15 81->18, 63->36 32->23] and reversed result [expected (15,18)->132, (36,23)->95]
+ multiply+1
+ (15,18)->132: (10 + 5) * 18 + 1 = 10 * 18 + 5 * 18 + 1 = 180 + 90 + 1 = 270 + 1 = 271 rev-> 172 mismatch
+ multiply-1
+ (36,23)->95: (30 + 6) * 23 - 1 = 30 * 23 + 6 * 23 - 1 = 690 + 138 - 1 = 828 - 1 = 827 rev-> 728 mismatch
+ add+1
+ (15,18)->132: 15 + 18 + 1 = 34 rev-> 43 mismatch
+ add-1
+ (36,23)->95: 36 + 23 - 1 = 58 rev-> 85 mismatch
+ sub+1
+ (15,18)->132: 15 - 18 + 1 = -2 rev-> -2 mismatch
+ sub-1
+ (36,23)->95: 36 - 23 - 1 = 12 rev-> 21 mismatch
+ integer division (a/b)
+ (15,18)->132: 15 / 18 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (36,23)->95: 23 / 36 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (15,18)->132: 18 mod 15 = 3 rev-> 3 mismatch
+ digit absolute diff
+ (36,23)->95: |3-2| || |6-3| = 13 rev-> 31 mismatch
+ digit add mod10
+ (15,18)->132: (1+1)%10 || (5+8)%10 = 23 rev-> 32 mismatch
+ digit sub mod10
+ (36,23)->95: (3-2)%10 || (6-3)%10 = 13 rev-> 31 mismatch
+ cross multiply
+ (15,18)->132: 1*1 + 5*8 = 1 + 40 = 41 rev-> 14 mismatch
+ cross multiply rev
+ (36,23)->95: 3*3 + 6*2 = 9 + 12 = 21 rev-> 12 mismatch
+ digit multiply
+ (15,18)->132: 1*1 || 5*8 = 1 || 40 = 140 rev-> 041 mismatch
+ digit multiply rev
+ (36,23)->95: 3*3 || 6*2 = 9 || 12 = 912 rev-> 219 mismatch
+ digit sum diff
+ (15,18)->132: (1+5) - (1+8) = -3 rev-> -3 mismatch
+ digit sum sum
+ (36,23)->95: (3+6) + (2+3) = 14 rev-> 41 mismatch
+ digit product diff
+ (15,18)->132: 1*5 - 1*8 = 5 - 8 = -3 rev-> -3 mismatch
+ digit product sum
+ (36,23)->95: 3*6 + 2*3 = 18 + 6 = 24 rev-> 42 mismatch
+ determinant
+ (15,18)->132: 1*8 - 5*1 = 8 - 5 = 3 rev-> 3 mismatch
+ abs determinant
+ (36,23)->95: |3*3 - 6*2| = |9 - 12| = 3 rev-> 3 mismatch
+
+ identity [51 81, 63 32] [expected (51,81)->132, (63,32)->95]
+ multiply+1
+ (51,81)->132: (50 + 1) * 81 + 1 = 50 * 81 + 1 * 81 + 1 = 4050 + 81 + 1 = 4131 + 1 = 4132 mismatch
+ multiply-1
+ (63,32)->95: (60 + 3) * 32 - 1 = 60 * 32 + 3 * 32 - 1 = 1920 + 96 - 1 = 2016 - 1 = 2015 mismatch
+ add+1
+ (51,81)->132: 51 + 81 + 1 = 133 mismatch
+ add-1
+ (63,32)->95: 63 + 32 - 1 = 94 mismatch
+ sub+1
+ (51,81)->132: 51 - 81 + 1 = -29 mismatch
+ sub-1
+ (63,32)->95: 63 - 32 - 1 = 30 mismatch
+ integer division (a/b)
+ (51,81)->132: 51 / 81 = 0 mismatch
+ reverse division (b/a)
+ (63,32)->95: 32 / 63 = 0 mismatch
+ reverse modulo (b mod a)
+ (51,81)->132: 81 mod 51 = 30 mismatch
+ digit absolute diff
+ (63,32)->95: |6-3| || |3-2| = 31 mismatch
+ digit add mod10
+ (51,81)->132: (5+8)%10 || (1+1)%10 = 32 mismatch
+ digit sub mod10
+ (63,32)->95: (6-3)%10 || (3-2)%10 = 31 mismatch
+ cross multiply
+ (51,81)->132: 5*8 + 1*1 = 40 + 1 = 41 mismatch
+ cross multiply rev
+ (63,32)->95: 6*2 + 3*3 = 12 + 9 = 21 mismatch
+ digit multiply
+ (51,81)->132: 5*8 || 1*1 = 40 || 1 = 401 mismatch
+ digit multiply rev
+ (63,32)->95: 6*2 || 3*3 = 12 || 9 = 129 mismatch
+ digit sum diff
+ (51,81)->132: (5+1) - (8+1) = -3 mismatch
+ digit sum sum
+ (63,32)->95: (6+3) + (3+2) = 14 mismatch
+ digit product diff
+ (51,81)->132: 5*1 - 8*1 = 5 - 8 = -3 mismatch
+ digit product sum
+ (63,32)->95: 6*3 + 3*2 = 18 + 6 = 24 mismatch
+ determinant
+ (51,81)->132: 5*1 - 1*8 = 5 - 8 = -3 mismatch
+ abs determinant
+ (63,32)->95: |6*2 - 3*3| = |12 - 9| = 3 mismatch
+
+correct, actions: addition
+
+Applying to 86{99:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ identity [86 99]
+ addition
+ (86,99): 86 + 99 = 185
+ Result is non-negative
+ \boxed{185}

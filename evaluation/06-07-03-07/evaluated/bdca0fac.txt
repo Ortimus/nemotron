@@ -1,0 +1,177 @@
+71-32 = -6
+35+63 = 6335
+69*27 = 2196
+39+09 = 0939
+
+The inputs are 71, 32, 35, 63, 69, 27, 39, 09
+
+The outputs are -6, 6335, 2196, 0939
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be -6, 6335, 2196, 0939
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+71-32 -> -
+35+63 -> +
+69*27 -> *
+39+09 -> +
+
+The operators
+-
++
+*
+
+Looking at the question
+45*89 -> *
+The question operator is found in the examples.
+
+Looking at operator * [69*27 = 2196]:
+
+Trying common operations reversed operands [69->96 27->72] and reversed result [expected (96,72)->2196]:
+ addition
+ (96,72)->2196: 96 + 72 = 168 rev-> 861 mismatch
+ multiplication
+ (96,72)->2196: (90 + 6) * 72 = 90 * 72 + 6 * 72 = 6480 + 432 = 6912 rev-> 2196 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (96,72)->2196: 96 || 72 = 9672 rev-> 2769 mismatch
+ reverse concatenation
+ (96,72)->2196: 72 || 96 = 7296 rev-> 6927 mismatch
+
+Trying common operations on identity [69 27] [expected (69,27)->2196]:
+ addition
+ (69,27)->2196: 69 + 27 = 96 mismatch
+ multiplication
+ (69,27)->2196: (60 + 9) * 27 = 60 * 27 + 9 * 27 = 1620 + 243 = 1863 mismatch
+ concatenation
+ (69,27)->2196: 69 || 27 = 6927 mismatch
+ reverse concatenation
+ (69,27)->2196: 27 || 69 = 2769 mismatch
+
+Trying difference operations reversed operands [69->96 27->72] and reversed result [expected (96,72)->2196]:
+ subtraction (a-b)
+ (96,72)->2196: 96 - 72 = 24 rev-> 42 mismatch
+ absolute difference
+ (96,72)->2196: |96 - 72| = 24 rev-> 42 mismatch
+ max mod min
+ (96,72)->2196: max(96,72) mod min(96,72) = 96 mod 72 = 24 rev-> 42 mismatch
+ negated absolute difference
+ (96,72)->2196: -|96 - 72| = -24 rev-> -42 mismatch
+ reverse subtraction (b-a)
+ (96,72)->2196: 72 - 96 = -24 rev-> -42 mismatch
+ modulo (a mod b)
+ (96,72)->2196: 96 mod 72 = 24 rev-> 42 mismatch
+
+Trying difference operations on identity [69 27] [expected (69,27)->2196]:
+ subtraction (a-b)
+ (69,27)->2196: 69 - 27 = 42 mismatch
+ absolute difference
+ (69,27)->2196: |69 - 27| = 42 mismatch
+ max mod min
+ (69,27)->2196: max(69,27) mod min(69,27) = 69 mod 27 = 15 mismatch
+ negated absolute difference
+ (69,27)->2196: -|69 - 27| = -42 mismatch
+ reverse subtraction (b-a)
+ (69,27)->2196: 27 - 69 = -42 mismatch
+ modulo (a mod b)
+ (69,27)->2196: 69 mod 27 = 15 mismatch
+
+Trying rare operations reversed operands [69->96 27->72] and reversed result [expected (96,72)->2196]:
+ multiply+1
+ (96,72)->2196: (90 + 6) * 72 + 1 = 90 * 72 + 6 * 72 + 1 = 6480 + 432 + 1 = 6912 + 1 = 6913 rev-> 3196 mismatch
+ multiply-1
+ (96,72)->2196: (90 + 6) * 72 - 1 = 90 * 72 + 6 * 72 - 1 = 6480 + 432 - 1 = 6912 - 1 = 6911 rev-> 1196 mismatch
+ add+1
+ (96,72)->2196: 96 + 72 + 1 = 169 rev-> 961 mismatch
+ add-1
+ (96,72)->2196: 96 + 72 - 1 = 167 rev-> 761 mismatch
+ sub+1
+ (96,72)->2196: 96 - 72 + 1 = 25 rev-> 52 mismatch
+ sub-1
+ (96,72)->2196: 96 - 72 - 1 = 23 rev-> 32 mismatch
+ integer division (a/b)
+ (96,72)->2196: 96 / 72 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (96,72)->2196: 72 / 96 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (96,72)->2196: 72 mod 96 = 72 rev-> 27 mismatch
+ digit absolute diff
+ (96,72)->2196: |9-7| || |6-2| = 24 rev-> 42 mismatch
+ digit add mod10
+ (96,72)->2196: (9+7)%10 || (6+2)%10 = 68 rev-> 86 mismatch
+ digit sub mod10
+ (96,72)->2196: (9-7)%10 || (6-2)%10 = 24 rev-> 42 mismatch
+ cross multiply
+ (96,72)->2196: 9*7 + 6*2 = 63 + 12 = 75 rev-> 57 mismatch
+ cross multiply rev
+ (96,72)->2196: 9*2 + 6*7 = 18 + 42 = 60 rev-> 06 mismatch
+ digit multiply
+ (96,72)->2196: 9*7 || 6*2 = 63 || 12 = 6312 rev-> 2136 mismatch
+ digit multiply rev
+ (96,72)->2196: 9*2 || 6*7 = 18 || 42 = 1842 rev-> 2481 mismatch
+ digit sum diff
+ (96,72)->2196: (9+6) - (7+2) = 6 rev-> 6 mismatch
+ digit sum sum
+ (96,72)->2196: (9+6) + (7+2) = 24 rev-> 42 mismatch
+ digit product diff
+ (96,72)->2196: 9*6 - 7*2 = 54 - 14 = 40 rev-> 04 mismatch
+ digit product sum
+ (96,72)->2196: 9*6 + 7*2 = 54 + 14 = 68 rev-> 86 mismatch
+ determinant
+ (96,72)->2196: 9*2 - 6*7 = 18 - 42 = -24 rev-> -42 mismatch
+ abs determinant
+ (96,72)->2196: |9*2 - 6*7| = |18 - 42| = 24 rev-> 42 mismatch
+
+Trying rare operations on identity [69 27] [expected (69,27)->2196]:
+ multiply+1
+ (69,27)->2196: (60 + 9) * 27 + 1 = 60 * 27 + 9 * 27 + 1 = 1620 + 243 + 1 = 1863 + 1 = 1864 mismatch
+ multiply-1
+ (69,27)->2196: (60 + 9) * 27 - 1 = 60 * 27 + 9 * 27 - 1 = 1620 + 243 - 1 = 1863 - 1 = 1862 mismatch
+ add+1
+ (69,27)->2196: 69 + 27 + 1 = 97 mismatch
+ add-1
+ (69,27)->2196: 69 + 27 - 1 = 95 mismatch
+ sub+1
+ (69,27)->2196: 69 - 27 + 1 = 43 mismatch
+ sub-1
+ (69,27)->2196: 69 - 27 - 1 = 41 mismatch
+ integer division (a/b)
+ (69,27)->2196: 69 / 27 = 2 mismatch
+ reverse division (b/a)
+ (69,27)->2196: 27 / 69 = 0 mismatch
+ reverse modulo (b mod a)
+ (69,27)->2196: 27 mod 69 = 27 mismatch
+ digit absolute diff
+ (69,27)->2196: |6-2| || |9-7| = 42 mismatch
+ digit add mod10
+ (69,27)->2196: (6+2)%10 || (9+7)%10 = 86 mismatch
+ digit sub mod10
+ (69,27)->2196: (6-2)%10 || (9-7)%10 = 42 mismatch
+ cross multiply
+ (69,27)->2196: 6*2 + 9*7 = 12 + 63 = 75 mismatch
+ cross multiply rev
+ (69,27)->2196: 6*7 + 9*2 = 42 + 18 = 60 mismatch
+ digit multiply
+ (69,27)->2196: 6*2 || 9*7 = 12 || 63 = 1263 mismatch
+ digit multiply rev
+ (69,27)->2196: 6*7 || 9*2 = 42 || 18 = 4218 mismatch
+ digit sum diff
+ (69,27)->2196: (6+9) - (2+7) = 6 mismatch
+ digit sum sum
+ (69,27)->2196: (6+9) + (2+7) = 24 mismatch
+ digit product diff
+ (69,27)->2196: 6*9 - 2*7 = 54 - 14 = 40 mismatch
+ digit product sum
+ (69,27)->2196: 6*9 + 2*7 = 54 + 14 = 68 mismatch
+ determinant
+ (69,27)->2196: 6*7 - 9*2 = 42 - 18 = 24 mismatch
+ abs determinant
+ (69,27)->2196: |6*7 - 9*2| = |42 - 18| = 24 mismatch
+
+Applying to 45*89:
+ We recall that the question operator is found in the examples.
+ reversed operands [45->54, 89->98] and reversed result
+ multiplication (54,98): (50 + 4) * 98 = 50 * 98 + 4 * 98 = 4900 + 392 = 5292 rev-> 2925
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{2925}

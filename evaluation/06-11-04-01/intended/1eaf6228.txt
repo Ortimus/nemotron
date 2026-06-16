@@ -1,0 +1,193 @@
+25-55 = 3
+94+41 = 26
+25+29 = 341
+35-35 = 0
+
+The inputs are 25, 55, 94, 41, 25, 29, 35, 35
+
+The outputs are 3, 26, 341, 0
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+25-55 -> -
+94+41 -> +
+25+29 -> +
+35-35 -> -
+
+The operators
+-
++
+
+Looking at the question
+42*61 -> *
+The question operator is not found in the examples. Investigating the most common example operator - instead. We will use addition for the question operator.
+
+Looking at operator - [25-55 = 3, 35-35 = 0]:
+
+Trying common operations
+ reversed operands [25->52 55->55, 35->53 35->53] and reversed result [expected (52,55)->3, (53,53)->0]
+ addition
+ (52,55)->3: 52 + 55 = 107 rev-> 701 mismatch
+ multiplication
+ (53,53)->0: (50 + 3) * 53 = 50 * 53 + 3 * 53 = 2650 + 159 = 2809 rev-> 9082 mismatch
+ concatenation
+ (52,55)->3: 52 || 55 = 5255 rev-> 5525 mismatch
+ reverse concatenation
+ (53,53)->0: 53 || 53 = 5353 rev-> 3535 mismatch
+
+ identity [25 55, 35 35] [expected (25,55)->3, (35,35)->0]
+ addition
+ (25,55)->3: 25 + 55 = 80 mismatch
+ multiplication
+ (35,35)->0: (30 + 5) * 35 = 30 * 35 + 5 * 35 = 1050 + 175 = 1225 mismatch
+ concatenation
+ (25,55)->3: 25 || 55 = 2555 mismatch
+ reverse concatenation
+ (35,35)->0: 35 || 35 = 3535 mismatch
+
+Trying difference operations
+ reversed operands [25->52 55->55, 35->53 35->53] and reversed result [expected (52,55)->3, (53,53)->0]
+ subtraction (a-b)
+ (52,55)->3: 52 - 55 = -3 rev-> -3 mismatch
+ absolute difference
+ (53,53)->0: |53 - 53| = 0 rev-> 0 match
+ (52,55)->3: |52 - 55| = 3 rev-> 3 match
+ correct, actions: reversed operands, reversed result, absolute difference
+ max mod min
+ (52,55)->3: max(52,55) mod min(52,55) = 55 mod 52 = 3 rev-> 3 match
+ (53,53)->0: max(53,53) mod min(53,53) = 53 mod 53 = 0 rev-> 0 match
+ correct, but skipping
+ negated absolute difference
+ (53,53)->0: -|53 - 53| = 0 rev-> 0 match
+ (52,55)->3: -|52 - 55| = -3 rev-> -3 mismatch
+ reverse subtraction (b-a)
+ (52,55)->3: 55 - 52 = 3 rev-> 3 match
+ (53,53)->0: 53 - 53 = 0 rev-> 0 match
+ correct, but skipping
+ modulo (a mod b)
+ (53,53)->0: 53 mod 53 = 0 rev-> 0 match
+ (52,55)->3: 52 mod 55 = 52 rev-> 25 mismatch
+
+ identity [25 55, 35 35] [expected (25,55)->3, (35,35)->0]
+ subtraction (a-b)
+ (25,55)->3: 25 - 55 = -30 mismatch
+ absolute difference
+ (35,35)->0: |35 - 35| = 0 match
+ (25,55)->3: |25 - 55| = 30 mismatch
+ max mod min
+ (25,55)->3: max(25,55) mod min(25,55) = 55 mod 25 = 5 mismatch
+ negated absolute difference
+ (35,35)->0: -|35 - 35| = 0 match
+ (25,55)->3: -|25 - 55| = -30 mismatch
+ reverse subtraction (b-a)
+ (25,55)->3: 55 - 25 = 30 mismatch
+ modulo (a mod b)
+ (35,35)->0: 35 mod 35 = 0 match
+ (25,55)->3: 25 mod 55 = 25 mismatch
+
+Trying rare operations
+ reversed operands [25->52 55->55, 35->53 35->53] and reversed result [expected (52,55)->3, (53,53)->0]
+ multiply+1
+ (52,55)->3: (50 + 2) * 55 + 1 = 50 * 55 + 2 * 55 + 1 = 2750 + 110 + 1 = 2860 + 1 = 2861 rev-> 1682 mismatch
+ multiply-1
+ (53,53)->0: (50 + 3) * 53 - 1 = 50 * 53 + 3 * 53 - 1 = 2650 + 159 - 1 = 2809 - 1 = 2808 rev-> 8082 mismatch
+ add+1
+ (52,55)->3: 52 + 55 + 1 = 108 rev-> 801 mismatch
+ add-1
+ (53,53)->0: 53 + 53 - 1 = 105 rev-> 501 mismatch
+ sub+1
+ (52,55)->3: 52 - 55 + 1 = -2 rev-> -2 mismatch
+ sub-1
+ (53,53)->0: 53 - 53 - 1 = -1 rev-> -1 mismatch
+ integer division (a/b)
+ (52,55)->3: 52 / 55 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (53,53)->0: 53 / 53 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (52,55)->3: 55 mod 52 = 3 rev-> 3 match
+ (53,53)->0: 53 mod 53 = 0 rev-> 0 match
+ correct, but skipping
+ digit absolute diff
+ (53,53)->0: |5-5| || |3-3| = 00 rev-> 00 mismatch
+ digit add mod10
+ (52,55)->3: (5+5)%10 || (2+5)%10 = 07 rev-> 70 mismatch
+ digit sub mod10
+ (53,53)->0: (5-5)%10 || (3-3)%10 = 00 rev-> 00 mismatch
+ cross multiply
+ (52,55)->3: 5*5 + 2*5 = 25 + 10 = 35 rev-> 53 mismatch
+ cross multiply rev
+ (53,53)->0: 5*3 + 3*5 = 15 + 15 = 30 rev-> 03 mismatch
+ digit multiply
+ (52,55)->3: 5*5 || 2*5 = 25 || 10 = 2510 rev-> 0152 mismatch
+ digit multiply rev
+ (53,53)->0: 5*3 || 3*5 = 15 || 15 = 1515 rev-> 5151 mismatch
+ digit sum diff
+ (52,55)->3: (5+2) - (5+5) = -3 rev-> -3 mismatch
+ digit sum sum
+ (53,53)->0: (5+3) + (5+3) = 16 rev-> 61 mismatch
+ digit product diff
+ (52,55)->3: 5*2 - 5*5 = 10 - 25 = -15 rev-> -51 mismatch
+ digit product sum
+ (53,53)->0: 5*3 + 5*3 = 15 + 15 = 30 rev-> 03 mismatch
+ determinant
+ (52,55)->3: 5*5 - 2*5 = 25 - 10 = 15 rev-> 51 mismatch
+ abs determinant
+ (53,53)->0: |5*3 - 3*5| = |15 - 15| = 0 rev-> 0 match
+ (52,55)->3: |5*5 - 2*5| = |25 - 10| = 15 rev-> 51 mismatch
+
+ identity [25 55, 35 35] [expected (25,55)->3, (35,35)->0]
+ multiply+1
+ (25,55)->3: (20 + 5) * 55 + 1 = 20 * 55 + 5 * 55 + 1 = 1100 + 275 + 1 = 1375 + 1 = 1376 mismatch
+ multiply-1
+ (35,35)->0: (30 + 5) * 35 - 1 = 30 * 35 + 5 * 35 - 1 = 1050 + 175 - 1 = 1225 - 1 = 1224 mismatch
+ add+1
+ (25,55)->3: 25 + 55 + 1 = 81 mismatch
+ add-1
+ (35,35)->0: 35 + 35 - 1 = 69 mismatch
+ sub+1
+ (25,55)->3: 25 - 55 + 1 = -29 mismatch
+ sub-1
+ (35,35)->0: 35 - 35 - 1 = -1 mismatch
+ integer division (a/b)
+ (25,55)->3: 25 / 55 = 0 mismatch
+ reverse division (b/a)
+ (35,35)->0: 35 / 35 = 1 mismatch
+ reverse modulo (b mod a)
+ (25,55)->3: 55 mod 25 = 5 mismatch
+ digit absolute diff
+ (35,35)->0: |3-3| || |5-5| = 00 mismatch
+ digit add mod10
+ (25,55)->3: (2+5)%10 || (5+5)%10 = 70 mismatch
+ digit sub mod10
+ (35,35)->0: (3-3)%10 || (5-5)%10 = 00 mismatch
+ cross multiply
+ (25,55)->3: 2*5 + 5*5 = 10 + 25 = 35 mismatch
+ cross multiply rev
+ (35,35)->0: 3*5 + 5*3 = 15 + 15 = 30 mismatch
+ digit multiply
+ (25,55)->3: 2*5 || 5*5 = 10 || 25 = 1025 mismatch
+ digit multiply rev
+ (35,35)->0: 3*5 || 5*3 = 15 || 15 = 1515 mismatch
+ digit sum diff
+ (25,55)->3: (2+5) - (5+5) = -3 mismatch
+ digit sum sum
+ (35,35)->0: (3+5) + (3+5) = 16 mismatch
+ digit product diff
+ (25,55)->3: 2*5 - 5*5 = 10 - 25 = -15 mismatch
+ digit product sum
+ (35,35)->0: 3*5 + 3*5 = 15 + 15 = 30 mismatch
+ determinant
+ (25,55)->3: 2*5 - 5*5 = 10 - 25 = -15 mismatch
+ abs determinant
+ (35,35)->0: |3*5 - 5*3| = |15 - 15| = 0 match
+ (25,55)->3: |2*5 - 5*5| = |10 - 25| = 15 mismatch
+
+correct, actions: reversed operands, reversed result, absolute difference
+
+Applying to 42*61:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [42->24, 61->16] and reversed result
+ addition
+ (24,16): 24 + 16 = 40 rev-> 04
+ Result is non-negative
+ \boxed{04}

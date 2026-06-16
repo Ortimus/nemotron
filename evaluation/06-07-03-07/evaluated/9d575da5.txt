@@ -1,0 +1,175 @@
+78-42 = 36
+27*08 = 1675
+61-86 = 25
+03+68 = 611
+
+The inputs are 78, 42, 27, 08, 61, 86, 03, 68
+
+The outputs are 36, 1675, 25, 611
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+78-42 -> -
+27*08 -> *
+61-86 -> -
+03+68 -> +
+
+The operators
+-
+*
++
+
+Looking at the question
+32+88 -> +
+The question operator is found in the examples.
+
+Looking at operator + [03+68 = 611]:
+
+Trying common operations reversed operands [03->30 68->86] and reversed result [expected (30,86)->611]:
+ addition
+ (30,86)->611: 30 + 86 = 116 rev-> 611 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (30,86)->611: (30 + 0) * 86 = 30 * 86 + 0 * 86 = 2580 + 0 = 2580 rev-> 0852 mismatch
+ concatenation
+ (30,86)->611: 30 || 86 = 3086 rev-> 6803 mismatch
+ reverse concatenation
+ (30,86)->611: 86 || 30 = 8630 rev-> 0368 mismatch
+
+Trying common operations on identity [03 68] [expected (03,68)->611]:
+ addition
+ (03,68)->611: 03 + 68 = 71 mismatch
+ multiplication
+ (03,68)->611: (0 + 3) * 68 = 0 * 68 + 3 * 68 = 0 + 204 = 204 mismatch
+ concatenation
+ (03,68)->611: 03 || 68 = 0368 mismatch
+ reverse concatenation
+ (03,68)->611: 68 || 03 = 6803 mismatch
+
+Trying difference operations reversed operands [03->30 68->86] and reversed result [expected (30,86)->611]:
+ subtraction (a-b)
+ (30,86)->611: 30 - 86 = -56 rev-> -65 mismatch
+ absolute difference
+ (30,86)->611: |30 - 86| = 56 rev-> 65 mismatch
+ max mod min
+ (30,86)->611: max(30,86) mod min(30,86) = 86 mod 30 = 26 rev-> 62 mismatch
+ negated absolute difference
+ (30,86)->611: -|30 - 86| = -56 rev-> -65 mismatch
+ reverse subtraction (b-a)
+ (30,86)->611: 86 - 30 = 56 rev-> 65 mismatch
+ modulo (a mod b)
+ (30,86)->611: 30 mod 86 = 30 rev-> 03 mismatch
+
+Trying difference operations on identity [03 68] [expected (03,68)->611]:
+ subtraction (a-b)
+ (03,68)->611: 03 - 68 = -65 mismatch
+ absolute difference
+ (03,68)->611: |03 - 68| = 65 mismatch
+ max mod min
+ (03,68)->611: max(03,68) mod min(03,68) = 68 mod 03 = 2 mismatch
+ negated absolute difference
+ (03,68)->611: -|03 - 68| = -65 mismatch
+ reverse subtraction (b-a)
+ (03,68)->611: 68 - 03 = 65 mismatch
+ modulo (a mod b)
+ (03,68)->611: 03 mod 68 = 3 mismatch
+
+Trying rare operations reversed operands [03->30 68->86] and reversed result [expected (30,86)->611]:
+ multiply+1
+ (30,86)->611: (30 + 0) * 86 + 1 = 30 * 86 + 0 * 86 + 1 = 2580 + 0 + 1 = 2580 + 1 = 2581 rev-> 1852 mismatch
+ multiply-1
+ (30,86)->611: (30 + 0) * 86 - 1 = 30 * 86 + 0 * 86 - 1 = 2580 + 0 - 1 = 2580 - 1 = 2579 rev-> 9752 mismatch
+ add+1
+ (30,86)->611: 30 + 86 + 1 = 117 rev-> 711 mismatch
+ add-1
+ (30,86)->611: 30 + 86 - 1 = 115 rev-> 511 mismatch
+ sub+1
+ (30,86)->611: 30 - 86 + 1 = -55 rev-> -55 mismatch
+ sub-1
+ (30,86)->611: 30 - 86 - 1 = -57 rev-> -75 mismatch
+ integer division (a/b)
+ (30,86)->611: 30 / 86 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (30,86)->611: 86 / 30 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (30,86)->611: 86 mod 30 = 26 rev-> 62 mismatch
+ digit absolute diff
+ (30,86)->611: |3-8| || |0-6| = 56 rev-> 65 mismatch
+ digit add mod10
+ (30,86)->611: (3+8)%10 || (0+6)%10 = 16 rev-> 61 mismatch
+ digit sub mod10
+ (30,86)->611: (3-8)%10 || (0-6)%10 = 54 rev-> 45 mismatch
+ cross multiply
+ (30,86)->611: 3*8 + 0*6 = 24 + 0 = 24 rev-> 42 mismatch
+ cross multiply rev
+ (30,86)->611: 3*6 + 0*8 = 18 + 0 = 18 rev-> 81 mismatch
+ digit multiply
+ (30,86)->611: 3*8 || 0*6 = 24 || 0 = 240 rev-> 042 mismatch
+ digit multiply rev
+ (30,86)->611: 3*6 || 0*8 = 18 || 0 = 180 rev-> 081 mismatch
+ digit sum diff
+ (30,86)->611: (3+0) - (8+6) = -11 rev-> -11 mismatch
+ digit sum sum
+ (30,86)->611: (3+0) + (8+6) = 17 rev-> 71 mismatch
+ digit product diff
+ (30,86)->611: 3*0 - 8*6 = 0 - 48 = -48 rev-> -84 mismatch
+ digit product sum
+ (30,86)->611: 3*0 + 8*6 = 0 + 48 = 48 rev-> 84 mismatch
+ determinant
+ (30,86)->611: 3*6 - 0*8 = 18 - 0 = 18 rev-> 81 mismatch
+ abs determinant
+ (30,86)->611: |3*6 - 0*8| = |18 - 0| = 18 rev-> 81 mismatch
+
+Trying rare operations on identity [03 68] [expected (03,68)->611]:
+ multiply+1
+ (03,68)->611: (0 + 3) * 68 + 1 = 0 * 68 + 3 * 68 + 1 = 0 + 204 + 1 = 204 + 1 = 205 mismatch
+ multiply-1
+ (03,68)->611: (0 + 3) * 68 - 1 = 0 * 68 + 3 * 68 - 1 = 0 + 204 - 1 = 204 - 1 = 203 mismatch
+ add+1
+ (03,68)->611: 03 + 68 + 1 = 72 mismatch
+ add-1
+ (03,68)->611: 03 + 68 - 1 = 70 mismatch
+ sub+1
+ (03,68)->611: 03 - 68 + 1 = -64 mismatch
+ sub-1
+ (03,68)->611: 03 - 68 - 1 = -66 mismatch
+ integer division (a/b)
+ (03,68)->611: 03 / 68 = 0 mismatch
+ reverse division (b/a)
+ (03,68)->611: 68 / 03 = 22 mismatch
+ reverse modulo (b mod a)
+ (03,68)->611: 68 mod 03 = 2 mismatch
+ digit absolute diff
+ (03,68)->611: |0-6| || |3-8| = 65 mismatch
+ digit add mod10
+ (03,68)->611: (0+6)%10 || (3+8)%10 = 61 mismatch
+ digit sub mod10
+ (03,68)->611: (0-6)%10 || (3-8)%10 = 45 mismatch
+ cross multiply
+ (03,68)->611: 0*6 + 3*8 = 0 + 24 = 24 mismatch
+ cross multiply rev
+ (03,68)->611: 0*8 + 3*6 = 0 + 18 = 18 mismatch
+ digit multiply
+ (03,68)->611: 0*6 || 3*8 = 0 || 24 = 024 mismatch
+ digit multiply rev
+ (03,68)->611: 0*8 || 3*6 = 0 || 18 = 018 mismatch
+ digit sum diff
+ (03,68)->611: (0+3) - (6+8) = -11 mismatch
+ digit sum sum
+ (03,68)->611: (0+3) + (6+8) = 17 mismatch
+ digit product diff
+ (03,68)->611: 0*3 - 6*8 = 0 - 48 = -48 mismatch
+ digit product sum
+ (03,68)->611: 0*3 + 6*8 = 0 + 48 = 48 mismatch
+ determinant
+ (03,68)->611: 0*8 - 3*6 = 0 - 18 = -18 mismatch
+ abs determinant
+ (03,68)->611: |0*8 - 3*6| = |0 - 18| = 18 mismatch
+
+Applying to 32+88:
+ We recall that the question operator is found in the examples.
+ reversed operands [32->23, 88->88] and reversed result
+ addition (23,88): 23 + 88 = 111 rev-> 111
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{111}

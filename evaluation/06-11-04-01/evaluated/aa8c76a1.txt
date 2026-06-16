@@ -1,0 +1,181 @@
+23*34 = 3423
+85+56 = 421
+53-45 = -91
+
+The inputs are 23, 34, 85, 56, 53, 45
+
+The outputs are 3423, 421, -91
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 3423, 421, -91
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+23*34 -> *
+85+56 -> +
+53-45 -> -
+
+The operators
+*
++
+-
+
+Looking at the question
+61*08 -> *
+The question operator is found in the examples.
+
+Looking at operator * [23*34 = 3423]:
+
+Trying common operations
+ reversed operands [23->32 34->43] and reversed result [expected (32,43)->3423]
+ addition
+ (32,43)->3423: 32 + 43 = 75 rev-> 57 mismatch
+ multiplication
+ (32,43)->3423: (30 + 2) * 43 = 30 * 43 + 2 * 43 = 1290 + 86 = 1376 rev-> 6731 mismatch
+ concatenation
+ (32,43)->3423: 32 || 43 = 3243 rev-> 3423 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (32,43)->3423: 43 || 32 = 4332 rev-> 2334 mismatch
+
+ identity [23 34] [expected (23,34)->3423]
+ addition
+ (23,34)->3423: 23 + 34 = 57 mismatch
+ multiplication
+ (23,34)->3423: (20 + 3) * 34 = 20 * 34 + 3 * 34 = 680 + 102 = 782 mismatch
+ concatenation
+ (23,34)->3423: 23 || 34 = 2334 mismatch
+ reverse concatenation
+ (23,34)->3423: 34 || 23 = 3423 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [23->32 34->43] and reversed result [expected (32,43)->3423]
+ subtraction (a-b)
+ (32,43)->3423: 32 - 43 = -11 rev-> -11 mismatch
+ absolute difference
+ (32,43)->3423: |32 - 43| = 11 rev-> 11 mismatch
+ max mod min
+ (32,43)->3423: max(32,43) mod min(32,43) = 43 mod 32 = 11 rev-> 11 mismatch
+ negated absolute difference
+ (32,43)->3423: -|32 - 43| = -11 rev-> -11 mismatch
+ reverse subtraction (b-a)
+ (32,43)->3423: 43 - 32 = 11 rev-> 11 mismatch
+ modulo (a mod b)
+ (32,43)->3423: 32 mod 43 = 32 rev-> 23 mismatch
+
+ identity [23 34] [expected (23,34)->3423]
+ subtraction (a-b)
+ (23,34)->3423: 23 - 34 = -11 mismatch
+ absolute difference
+ (23,34)->3423: |23 - 34| = 11 mismatch
+ max mod min
+ (23,34)->3423: max(23,34) mod min(23,34) = 34 mod 23 = 11 mismatch
+ negated absolute difference
+ (23,34)->3423: -|23 - 34| = -11 mismatch
+ reverse subtraction (b-a)
+ (23,34)->3423: 34 - 23 = 11 mismatch
+ modulo (a mod b)
+ (23,34)->3423: 23 mod 34 = 23 mismatch
+
+Trying rare operations
+ reversed operands [23->32 34->43] and reversed result [expected (32,43)->3423]
+ multiply+1
+ (32,43)->3423: (30 + 2) * 43 + 1 = 30 * 43 + 2 * 43 + 1 = 1290 + 86 + 1 = 1376 + 1 = 1377 rev-> 7731 mismatch
+ multiply-1
+ (32,43)->3423: (30 + 2) * 43 - 1 = 30 * 43 + 2 * 43 - 1 = 1290 + 86 - 1 = 1376 - 1 = 1375 rev-> 5731 mismatch
+ add+1
+ (32,43)->3423: 32 + 43 + 1 = 76 rev-> 67 mismatch
+ add-1
+ (32,43)->3423: 32 + 43 - 1 = 74 rev-> 47 mismatch
+ sub+1
+ (32,43)->3423: 32 - 43 + 1 = -10 rev-> -01 mismatch
+ sub-1
+ (32,43)->3423: 32 - 43 - 1 = -12 rev-> -21 mismatch
+ integer division (a/b)
+ (32,43)->3423: 32 / 43 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (32,43)->3423: 43 / 32 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (32,43)->3423: 43 mod 32 = 11 rev-> 11 mismatch
+ digit absolute diff
+ (32,43)->3423: |3-4| || |2-3| = 11 rev-> 11 mismatch
+ digit add mod10
+ (32,43)->3423: (3+4)%10 || (2+3)%10 = 75 rev-> 57 mismatch
+ digit sub mod10
+ (32,43)->3423: (3-4)%10 || (2-3)%10 = 99 rev-> 99 mismatch
+ cross multiply
+ (32,43)->3423: 3*4 + 2*3 = 12 + 6 = 18 rev-> 81 mismatch
+ cross multiply rev
+ (32,43)->3423: 3*3 + 2*4 = 9 + 8 = 17 rev-> 71 mismatch
+ digit multiply
+ (32,43)->3423: 3*4 || 2*3 = 12 || 6 = 126 rev-> 621 mismatch
+ digit multiply rev
+ (32,43)->3423: 3*3 || 2*4 = 9 || 8 = 98 rev-> 89 mismatch
+ digit sum diff
+ (32,43)->3423: (3+2) - (4+3) = -2 rev-> -2 mismatch
+ digit sum sum
+ (32,43)->3423: (3+2) + (4+3) = 12 rev-> 21 mismatch
+ digit product diff
+ (32,43)->3423: 3*2 - 4*3 = 6 - 12 = -6 rev-> -6 mismatch
+ digit product sum
+ (32,43)->3423: 3*2 + 4*3 = 6 + 12 = 18 rev-> 81 mismatch
+ determinant
+ (32,43)->3423: 3*3 - 2*4 = 9 - 8 = 1 rev-> 1 mismatch
+ abs determinant
+ (32,43)->3423: |3*3 - 2*4| = |9 - 8| = 1 rev-> 1 mismatch
+
+ identity [23 34] [expected (23,34)->3423]
+ multiply+1
+ (23,34)->3423: (20 + 3) * 34 + 1 = 20 * 34 + 3 * 34 + 1 = 680 + 102 + 1 = 782 + 1 = 783 mismatch
+ multiply-1
+ (23,34)->3423: (20 + 3) * 34 - 1 = 20 * 34 + 3 * 34 - 1 = 680 + 102 - 1 = 782 - 1 = 781 mismatch
+ add+1
+ (23,34)->3423: 23 + 34 + 1 = 58 mismatch
+ add-1
+ (23,34)->3423: 23 + 34 - 1 = 56 mismatch
+ sub+1
+ (23,34)->3423: 23 - 34 + 1 = -10 mismatch
+ sub-1
+ (23,34)->3423: 23 - 34 - 1 = -12 mismatch
+ integer division (a/b)
+ (23,34)->3423: 23 / 34 = 0 mismatch
+ reverse division (b/a)
+ (23,34)->3423: 34 / 23 = 1 mismatch
+ reverse modulo (b mod a)
+ (23,34)->3423: 34 mod 23 = 11 mismatch
+ digit absolute diff
+ (23,34)->3423: |2-3| || |3-4| = 11 mismatch
+ digit add mod10
+ (23,34)->3423: (2+3)%10 || (3+4)%10 = 57 mismatch
+ digit sub mod10
+ (23,34)->3423: (2-3)%10 || (3-4)%10 = 99 mismatch
+ cross multiply
+ (23,34)->3423: 2*3 + 3*4 = 6 + 12 = 18 mismatch
+ cross multiply rev
+ (23,34)->3423: 2*4 + 3*3 = 8 + 9 = 17 mismatch
+ digit multiply
+ (23,34)->3423: 2*3 || 3*4 = 6 || 12 = 612 mismatch
+ digit multiply rev
+ (23,34)->3423: 2*4 || 3*3 = 8 || 9 = 89 mismatch
+ digit sum diff
+ (23,34)->3423: (2+3) - (3+4) = -2 mismatch
+ digit sum sum
+ (23,34)->3423: (2+3) + (3+4) = 12 mismatch
+ digit product diff
+ (23,34)->3423: 2*3 - 3*4 = 6 - 12 = -6 mismatch
+ digit product sum
+ (23,34)->3423: 2*3 + 3*4 = 6 + 12 = 18 mismatch
+ determinant
+ (23,34)->3423: 2*4 - 3*3 = 8 - 9 = -1 mismatch
+ abs determinant
+ (23,34)->3423: |2*4 - 3*3| = |8 - 9| = 1 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 61*08:
+ We recall that the question operator is found in the examples.
+ reversed operands [61->16, 08->80] and reversed result
+ concatenation
+ (16,80): 16 || 80 = 1680 rev-> 0861
+ Result is non-negative
+ \boxed{0861}

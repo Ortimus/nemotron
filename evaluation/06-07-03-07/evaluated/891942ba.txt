@@ -1,0 +1,186 @@
+72+29 = 2972
+91-11 = 8
+66*11 = 627
+88+19 = 1988
+
+The inputs are 72, 29, 91, 11, 66, 11, 88, 19
+
+The outputs are 2972, 8, 627, 1988
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+72+29 -> +
+91-11 -> -
+66*11 -> *
+88+19 -> +
+
+The operators
++
+-
+*
+
+Looking at the question
+85-88 -> -
+The question operator is found in the examples.
+
+Looking at operator - [91-11 = 8]:
+
+Trying common operations reversed operands [91->19 11->11] and reversed result [expected (19,11)->8]:
+ addition
+ (19,11)->8: 19 + 11 = 30 rev-> 03 mismatch
+ multiplication
+ (19,11)->8: (10 + 9) * 11 = 10 * 11 + 9 * 11 = 110 + 99 = 209 rev-> 902 mismatch
+ concatenation
+ (19,11)->8: 19 || 11 = 1911 rev-> 1191 mismatch
+ reverse concatenation
+ (19,11)->8: 11 || 19 = 1119 rev-> 9111 mismatch
+
+Trying common operations on identity [91 11] [expected (91,11)->8]:
+ addition
+ (91,11)->8: 91 + 11 = 102 mismatch
+ multiplication
+ (91,11)->8: (90 + 1) * 11 = 90 * 11 + 1 * 11 = 990 + 11 = 1001 mismatch
+ concatenation
+ (91,11)->8: 91 || 11 = 9111 mismatch
+ reverse concatenation
+ (91,11)->8: 11 || 91 = 1191 mismatch
+
+Trying difference operations reversed operands [91->19 11->11] and reversed result [expected (19,11)->8]:
+ subtraction (a-b)
+ (19,11)->8: 19 - 11 = 8 rev-> 8 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (19,11)->8: |19 - 11| = 8 rev-> 8 match
+ correct, but skipping
+ max mod min
+ (19,11)->8: max(19,11) mod min(19,11) = 19 mod 11 = 8 rev-> 8 match
+ correct, but skipping
+ negated absolute difference
+ (19,11)->8: -|19 - 11| = -8 rev-> -8 mismatch
+ reverse subtraction (b-a)
+ (19,11)->8: 11 - 19 = -8 rev-> -8 mismatch
+ modulo (a mod b)
+ (19,11)->8: 19 mod 11 = 8 rev-> 8 match
+ correct, but skipping
+
+Trying difference operations on identity [91 11] [expected (91,11)->8]:
+ subtraction (a-b)
+ (91,11)->8: 91 - 11 = 80 mismatch
+ absolute difference
+ (91,11)->8: |91 - 11| = 80 mismatch
+ max mod min
+ (91,11)->8: max(91,11) mod min(91,11) = 91 mod 11 = 3 mismatch
+ negated absolute difference
+ (91,11)->8: -|91 - 11| = -80 mismatch
+ reverse subtraction (b-a)
+ (91,11)->8: 11 - 91 = -80 mismatch
+ modulo (a mod b)
+ (91,11)->8: 91 mod 11 = 3 mismatch
+
+Trying rare operations reversed operands [91->19 11->11] and reversed result [expected (19,11)->8]:
+ multiply+1
+ (19,11)->8: (10 + 9) * 11 + 1 = 10 * 11 + 9 * 11 + 1 = 110 + 99 + 1 = 209 + 1 = 210 rev-> 012 mismatch
+ multiply-1
+ (19,11)->8: (10 + 9) * 11 - 1 = 10 * 11 + 9 * 11 - 1 = 110 + 99 - 1 = 209 - 1 = 208 rev-> 802 mismatch
+ add+1
+ (19,11)->8: 19 + 11 + 1 = 31 rev-> 13 mismatch
+ add-1
+ (19,11)->8: 19 + 11 - 1 = 29 rev-> 92 mismatch
+ sub+1
+ (19,11)->8: 19 - 11 + 1 = 9 rev-> 9 mismatch
+ sub-1
+ (19,11)->8: 19 - 11 - 1 = 7 rev-> 7 mismatch
+ integer division (a/b)
+ (19,11)->8: 19 / 11 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (19,11)->8: 11 / 19 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (19,11)->8: 11 mod 19 = 11 rev-> 11 mismatch
+ digit absolute diff
+ (19,11)->8: |1-1| || |9-1| = 08 rev-> 80 mismatch
+ digit add mod10
+ (19,11)->8: (1+1)%10 || (9+1)%10 = 20 rev-> 02 mismatch
+ digit sub mod10
+ (19,11)->8: (1-1)%10 || (9-1)%10 = 08 rev-> 80 mismatch
+ cross multiply
+ (19,11)->8: 1*1 + 9*1 = 1 + 9 = 10 rev-> 01 mismatch
+ cross multiply rev
+ (19,11)->8: 1*1 + 9*1 = 1 + 9 = 10 rev-> 01 mismatch
+ digit multiply
+ (19,11)->8: 1*1 || 9*1 = 1 || 9 = 19 rev-> 91 mismatch
+ digit multiply rev
+ (19,11)->8: 1*1 || 9*1 = 1 || 9 = 19 rev-> 91 mismatch
+ digit sum diff
+ (19,11)->8: (1+9) - (1+1) = 8 rev-> 8 match
+ correct, but skipping
+ digit sum sum
+ (19,11)->8: (1+9) + (1+1) = 12 rev-> 21 mismatch
+ digit product diff
+ (19,11)->8: 1*9 - 1*1 = 9 - 1 = 8 rev-> 8 match
+ correct, but skipping
+ digit product sum
+ (19,11)->8: 1*9 + 1*1 = 9 + 1 = 10 rev-> 01 mismatch
+ determinant
+ (19,11)->8: 1*1 - 9*1 = 1 - 9 = -8 rev-> -8 mismatch
+ abs determinant
+ (19,11)->8: |1*1 - 9*1| = |1 - 9| = 8 rev-> 8 match
+ correct, but skipping
+
+Trying rare operations on identity [91 11] [expected (91,11)->8]:
+ multiply+1
+ (91,11)->8: (90 + 1) * 11 + 1 = 90 * 11 + 1 * 11 + 1 = 990 + 11 + 1 = 1001 + 1 = 1002 mismatch
+ multiply-1
+ (91,11)->8: (90 + 1) * 11 - 1 = 90 * 11 + 1 * 11 - 1 = 990 + 11 - 1 = 1001 - 1 = 1000 mismatch
+ add+1
+ (91,11)->8: 91 + 11 + 1 = 103 mismatch
+ add-1
+ (91,11)->8: 91 + 11 - 1 = 101 mismatch
+ sub+1
+ (91,11)->8: 91 - 11 + 1 = 81 mismatch
+ sub-1
+ (91,11)->8: 91 - 11 - 1 = 79 mismatch
+ integer division (a/b)
+ (91,11)->8: 91 / 11 = 8 match
+ correct, but skipping
+ reverse division (b/a)
+ (91,11)->8: 11 / 91 = 0 mismatch
+ reverse modulo (b mod a)
+ (91,11)->8: 11 mod 91 = 11 mismatch
+ digit absolute diff
+ (91,11)->8: |9-1| || |1-1| = 80 mismatch
+ digit add mod10
+ (91,11)->8: (9+1)%10 || (1+1)%10 = 02 mismatch
+ digit sub mod10
+ (91,11)->8: (9-1)%10 || (1-1)%10 = 80 mismatch
+ cross multiply
+ (91,11)->8: 9*1 + 1*1 = 9 + 1 = 10 mismatch
+ cross multiply rev
+ (91,11)->8: 9*1 + 1*1 = 9 + 1 = 10 mismatch
+ digit multiply
+ (91,11)->8: 9*1 || 1*1 = 9 || 1 = 91 mismatch
+ digit multiply rev
+ (91,11)->8: 9*1 || 1*1 = 9 || 1 = 91 mismatch
+ digit sum diff
+ (91,11)->8: (9+1) - (1+1) = 8 match
+ correct, but skipping
+ digit sum sum
+ (91,11)->8: (9+1) + (1+1) = 12 mismatch
+ digit product diff
+ (91,11)->8: 9*1 - 1*1 = 9 - 1 = 8 match
+ correct, but skipping
+ digit product sum
+ (91,11)->8: 9*1 + 1*1 = 9 + 1 = 10 mismatch
+ determinant
+ (91,11)->8: 9*1 - 1*1 = 9 - 1 = 8 match
+ correct, but skipping
+ abs determinant
+ (91,11)->8: |9*1 - 1*1| = |9 - 1| = 8 match
+ correct, but skipping
+
+Applying to 85-88:
+ We recall that the question operator is found in the examples.
+ reversed operands [85->58, 88->88] and reversed result
+ subtraction (a-b) (58,88): 58 - 88 = -30 rev-> -03
+ Result is negative - but none of the example outputs have a symbol prefix or suffix.
+
+\boxed{-03}

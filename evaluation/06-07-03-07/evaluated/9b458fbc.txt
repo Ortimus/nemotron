@@ -1,0 +1,182 @@
+84:48 = 4032
+20@34 = 2034
+12:85 = 1020
+42[50 = 8
+
+The inputs are 84, 48, 20, 34, 12, 85, 42, 50
+
+The outputs are 4032, 2034, 1020, 8
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+84:48 -> :
+20@34 -> @
+12:85 -> :
+42[50 -> [
+
+The operators
+:
+@
+[
+
+Looking at the question
+34[73 -> [
+The question operator is found in the examples.
+
+Looking at operator [ [42[50 = 8]:
+
+Trying common operations reversed operands [42->24 50->05] and reversed result [expected (24,05)->8]:
+ addition
+ (24,05)->8: 24 + 05 = 29 rev-> 92 mismatch
+ multiplication
+ (24,05)->8: (20 + 4) * 05 = 20 * 05 + 4 * 05 = 100 + 20 = 120 rev-> 021 mismatch
+ concatenation
+ (24,05)->8: 24 || 05 = 2405 rev-> 5042 mismatch
+ reverse concatenation
+ (24,05)->8: 05 || 24 = 0524 rev-> 4250 mismatch
+
+Trying common operations on identity [42 50] [expected (42,50)->8]:
+ addition
+ (42,50)->8: 42 + 50 = 92 mismatch
+ multiplication
+ (42,50)->8: (40 + 2) * 50 = 40 * 50 + 2 * 50 = 2000 + 100 = 2100 mismatch
+ concatenation
+ (42,50)->8: 42 || 50 = 4250 mismatch
+ reverse concatenation
+ (42,50)->8: 50 || 42 = 5042 mismatch
+
+Trying difference operations reversed operands [42->24 50->05] and reversed result [expected (24,05)->8]:
+ subtraction (a-b)
+ (24,05)->8: 24 - 05 = 19 rev-> 91 mismatch
+ absolute difference
+ (24,05)->8: |24 - 05| = 19 rev-> 91 mismatch
+ max mod min
+ (24,05)->8: max(24,05) mod min(24,05) = 24 mod 05 = 4 rev-> 4 mismatch
+ negated absolute difference
+ (24,05)->8: -|24 - 05| = -19 rev-> -91 mismatch
+ reverse subtraction (b-a)
+ (24,05)->8: 05 - 24 = -19 rev-> -91 mismatch
+ modulo (a mod b)
+ (24,05)->8: 24 mod 05 = 4 rev-> 4 mismatch
+
+Trying difference operations on identity [42 50] [expected (42,50)->8]:
+ subtraction (a-b)
+ (42,50)->8: 42 - 50 = -8 mismatch
+ absolute difference
+ (42,50)->8: |42 - 50| = 8 match
+ correct, actions: absolute difference
+ max mod min
+ (42,50)->8: max(42,50) mod min(42,50) = 50 mod 42 = 8 match
+ correct, but skipping
+ negated absolute difference
+ (42,50)->8: -|42 - 50| = -8 mismatch
+ reverse subtraction (b-a)
+ (42,50)->8: 50 - 42 = 8 match
+ correct, but skipping
+ modulo (a mod b)
+ (42,50)->8: 42 mod 50 = 42 mismatch
+
+Trying rare operations reversed operands [42->24 50->05] and reversed result [expected (24,05)->8]:
+ multiply+1
+ (24,05)->8: (20 + 4) * 05 + 1 = 20 * 05 + 4 * 05 + 1 = 100 + 20 + 1 = 120 + 1 = 121 rev-> 121 mismatch
+ multiply-1
+ (24,05)->8: (20 + 4) * 05 - 1 = 20 * 05 + 4 * 05 - 1 = 100 + 20 - 1 = 120 - 1 = 119 rev-> 911 mismatch
+ add+1
+ (24,05)->8: 24 + 05 + 1 = 30 rev-> 03 mismatch
+ add-1
+ (24,05)->8: 24 + 05 - 1 = 28 rev-> 82 mismatch
+ sub+1
+ (24,05)->8: 24 - 05 + 1 = 20 rev-> 02 mismatch
+ sub-1
+ (24,05)->8: 24 - 05 - 1 = 18 rev-> 81 mismatch
+ integer division (a/b)
+ (24,05)->8: 24 / 05 = 4 rev-> 4 mismatch
+ reverse division (b/a)
+ (24,05)->8: 05 / 24 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (24,05)->8: 05 mod 24 = 5 rev-> 5 mismatch
+ digit absolute diff
+ (24,05)->8: |2-0| || |4-5| = 21 rev-> 12 mismatch
+ digit add mod10
+ (24,05)->8: (2+0)%10 || (4+5)%10 = 29 rev-> 92 mismatch
+ digit sub mod10
+ (24,05)->8: (2-0)%10 || (4-5)%10 = 29 rev-> 92 mismatch
+ cross multiply
+ (24,05)->8: 2*0 + 4*5 = 0 + 20 = 20 rev-> 02 mismatch
+ cross multiply rev
+ (24,05)->8: 2*5 + 4*0 = 10 + 0 = 10 rev-> 01 mismatch
+ digit multiply
+ (24,05)->8: 2*0 || 4*5 = 0 || 20 = 020 rev-> 020 mismatch
+ digit multiply rev
+ (24,05)->8: 2*5 || 4*0 = 10 || 0 = 100 rev-> 001 mismatch
+ digit sum diff
+ (24,05)->8: (2+4) - (0+5) = 1 rev-> 1 mismatch
+ digit sum sum
+ (24,05)->8: (2+4) + (0+5) = 11 rev-> 11 mismatch
+ digit product diff
+ (24,05)->8: 2*4 - 0*5 = 8 - 0 = 8 rev-> 8 match
+ correct, but skipping
+ digit product sum
+ (24,05)->8: 2*4 + 0*5 = 8 + 0 = 8 rev-> 8 match
+ correct, but skipping
+ determinant
+ (24,05)->8: 2*5 - 4*0 = 10 - 0 = 10 rev-> 01 mismatch
+ abs determinant
+ (24,05)->8: |2*5 - 4*0| = |10 - 0| = 10 rev-> 01 mismatch
+
+Trying rare operations on identity [42 50] [expected (42,50)->8]:
+ multiply+1
+ (42,50)->8: (40 + 2) * 50 + 1 = 40 * 50 + 2 * 50 + 1 = 2000 + 100 + 1 = 2100 + 1 = 2101 mismatch
+ multiply-1
+ (42,50)->8: (40 + 2) * 50 - 1 = 40 * 50 + 2 * 50 - 1 = 2000 + 100 - 1 = 2100 - 1 = 2099 mismatch
+ add+1
+ (42,50)->8: 42 + 50 + 1 = 93 mismatch
+ add-1
+ (42,50)->8: 42 + 50 - 1 = 91 mismatch
+ sub+1
+ (42,50)->8: 42 - 50 + 1 = -7 mismatch
+ sub-1
+ (42,50)->8: 42 - 50 - 1 = -9 mismatch
+ integer division (a/b)
+ (42,50)->8: 42 / 50 = 0 mismatch
+ reverse division (b/a)
+ (42,50)->8: 50 / 42 = 1 mismatch
+ reverse modulo (b mod a)
+ (42,50)->8: 50 mod 42 = 8 match
+ correct, but skipping
+ digit absolute diff
+ (42,50)->8: |4-5| || |2-0| = 12 mismatch
+ digit add mod10
+ (42,50)->8: (4+5)%10 || (2+0)%10 = 92 mismatch
+ digit sub mod10
+ (42,50)->8: (4-5)%10 || (2-0)%10 = 92 mismatch
+ cross multiply
+ (42,50)->8: 4*5 + 2*0 = 20 + 0 = 20 mismatch
+ cross multiply rev
+ (42,50)->8: 4*0 + 2*5 = 0 + 10 = 10 mismatch
+ digit multiply
+ (42,50)->8: 4*5 || 2*0 = 20 || 0 = 200 mismatch
+ digit multiply rev
+ (42,50)->8: 4*0 || 2*5 = 0 || 10 = 010 mismatch
+ digit sum diff
+ (42,50)->8: (4+2) - (5+0) = 1 mismatch
+ digit sum sum
+ (42,50)->8: (4+2) + (5+0) = 11 mismatch
+ digit product diff
+ (42,50)->8: 4*2 - 5*0 = 8 - 0 = 8 match
+ correct, but skipping
+ digit product sum
+ (42,50)->8: 4*2 + 5*0 = 8 + 0 = 8 match
+ correct, but skipping
+ determinant
+ (42,50)->8: 4*0 - 2*5 = 0 - 10 = -10 mismatch
+ abs determinant
+ (42,50)->8: |4*0 - 2*5| = |0 - 10| = 10 mismatch
+
+Applying to 34[73:
+ We recall that the question operator is found in the examples.
+ identity
+ absolute difference (34,73): |34 - 73| = 39
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{39}

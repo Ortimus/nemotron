@@ -1,0 +1,288 @@
+Output bit columns with bitsum
+0 0001100 2
+1 0001100 2
+2 0011111 5
+3 0001011 3
+4 0000001 1
+5 0000000 a
+6 0101000 2
+7 1001000 2
+
+Inverted
+0 1110011 5
+1 1110011 5
+2 1100000 2
+3 1110100 4
+4 1111110 6
+5 1111111 a
+6 1010111 5
+7 0110111 5
+
+Matching
+0 0001100 2 match 0 1
+1 0001100 2 match 0 1
+2 0011111 5 match 2
+3 0001011 3 match 3
+4 0000001 1 match 4
+5 0000000 a match 5
+6 0101000 2 match 6
+7 1001000 2 match 7
+
+Inverted matching
+0 1110011 5 match 0n 1n
+1 1110011 5 match 0n 1n
+2 1100000 2 match 2n
+3 1110100 4 match 3n
+4 1111110 6 match 4n
+5 1111111 a match 5n
+6 1010111 5 match 6n
+7 0110111 5 match 7n
+
+I
+0 1111010 5
+1 1001100 3
+2 0101100 3
+3 1011111 6
+4 0011111 5 match 2
+5 1101011 5
+6 0010001 2
+7 0101000 2 match 6
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+Best Left: none
+Best Right: none
+
+---
+
+C
+C 1111111 a match 5n
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+Best Left: none
+Best Right: none
+
+---
+
+AND
+01 1001000 2 match 7 R1
+12 0001100 2 match 0 1 L1
+23 0001100 2 match 0 1 L2
+34 0011111 5 match 2
+45 0001011 3 match 3
+56 0000001 1 match 4
+67 0000000 a match 5
+70 0101000 2 match 6
+
+Left
+L1 12-0 23-1 34-2 45-3 56-4 67-5 70-6 01-7 complete win
+L2 23-0 34-absence loss
+L3-absence loss
+
+Right
+R1 01-7 70-6 67-5 56-4 45-3 34-2 23-1 12-0 complete win
+R2-absence loss
+
+Best Left: AND 12-0 23-1 34-2 45-3 56-4 67-5 70-6 01-7 complete
+Best Right: AND 01-7 70-6 67-5 56-4 45-3 34-2 23-1 12-0 complete
+
+---
+
+OR
+01 1111110 6 match 4n
+12 1101100 4
+23 1111111 a match 5n
+34 1011111 6
+45 1111111 a match 5n
+56 1111011 6
+67 0111001 4
+70 1111010 5
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+Best Left: none
+Best Right: none
+
+---
+
+XOR
+01 0110110 4
+12 1100000 2 match 2n
+23 1110011 5 match 0n 1n L1
+34 1000000 1
+45 1110100 4 match 3n
+56 1111010 5
+67 0111001 4
+70 1010010 3
+
+Left
+L1 23-0n 34-absence win
+L2-absence loss
+
+Right
+R1-absence loss
+
+Best Left: XOR 23-0n
+Best Right: none
+
+---
+
+AND-NOT
+01 0110010 3
+12 1000000 1
+23 0100000 1
+34 1000000 1
+45 0010100 2
+56 1101010 4
+67 0010001 2
+70 0000000 a match 5
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+Best Left: none
+Best Right: none
+
+---
+
+OR-NOT
+01 1111011 6
+12 1011111 6
+23 0101100 3
+34 1111111 a match 5n
+45 0011111 5 match 2
+56 1101111 6
+67 1010111 5 match 6n
+70 0101101 4
+
+Left
+L1-absence loss
+
+Right
+R1-absence loss
+
+Best Left: none
+Best Right: none
+
+Selecting
+
+Lefts
+I none
+C none
+AND 12-0 23-1 34-2 45-3 56-4 67-5 70-6 01-7 complete length 8
+OR none
+XOR 23-0n length 1
+AND-NOT none
+OR-NOT none
+
+Rights
+I none
+C none
+AND 01-7 70-6 67-5 56-4 45-3 34-2 23-1 12-0 complete length 8
+OR none
+XOR none
+AND-NOT none
+OR-NOT none
+
+Left longest: 8
+Right longest: 8
+
+Left winner: I none, C none, AND win, OR none, XOR lost, AND-NOT none, OR-NOT none
+Right winner: I none, C none, AND win, OR none, XOR none, AND-NOT none, OR-NOT none
+
+Longest Left: AND 12-0 23-1 34-2 45-3 56-4 67-5 70-6 01-7 complete
+Longest Right: AND 01-7 70-6 67-5 56-4 45-3 34-2 23-1 12-0 complete
+
+8 + 8 = 16 > 8
+Right will be truncated to length 8 - 8 = 0
+
+Truncated left: AND 12-0 23-1 34-2 45-3 56-4 67-5 70-6 01-7 complete
+Truncated right: none truncated
+
+Tentative from right
+7 ?
+6 ?
+5 ?
+4 ?
+3 ?
+2 ?
+1 ?
+0 ?
+
+Tentative
+0 AND 12
+1 AND 23
+2 AND 34
+3 AND 45
+4 AND 56
+5 AND 67
+6 AND 70
+7 AND 01
+
+Preferred from left
+0 AND 12
+1 AND 23
+2 AND 34
+3 AND 45
+4 AND 56
+5 AND 67
+6 AND 70
+7 AND 01
+
+Preferred from right
+7 AND 01
+6 AND 70
+5 AND 67
+4 AND 56
+3 AND 45
+2 AND 34
+1 AND 23
+0 AND 12
+
+Matched
+0 AND 12
+1 AND 23
+2 AND 34
+3 AND 45
+4 AND 56
+5 AND 67
+6 AND 70
+7 AND 01
+
+Applying to 11000010
+Input
+I 0 = 1
+I 1 = 1
+I 2 = 0
+I 3 = 0
+I 4 = 0
+I 5 = 0
+I 6 = 1
+I 7 = 0
+Output
+0 AND 12 = AND(I 1,I 2) = AND(1,0) = 0
+1 AND 23 = AND(I 2,I 3) = AND(0,0) = 0
+2 AND 34 = AND(I 3,I 4) = AND(0,0) = 0
+3 AND 45 = AND(I 4,I 5) = AND(0,0) = 0
+4 AND 56 = AND(I 5,I 6) = AND(0,1) = 0
+5 AND 67 = AND(I 6,I 7) = AND(1,0) = 0
+6 AND 70 = AND(I 7,I 0) = AND(0,1) = 0
+7 AND 01 = AND(I 0,I 1) = AND(1,1) = 1
+
+\boxed{00000001}

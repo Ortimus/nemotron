@@ -1,0 +1,180 @@
+17$24 = 1724
+64^02 = 029
+26[97 = 71
+
+The inputs are 17, 24, 64, 02, 26, 97
+
+The outputs are 1724, 029, 71
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+17$24 -> $
+64^02 -> ^
+26[97 -> [
+
+The operators
+$
+^
+[
+
+Looking at the question
+22[38 -> [
+The question operator is found in the examples.
+
+Looking at operator [ [26[97 = 71]:
+
+Trying common operations reversed operands [26->62 97->79] and reversed result [expected (62,79)->71]:
+ addition
+ (62,79)->71: 62 + 79 = 141 rev-> 141 mismatch
+ multiplication
+ (62,79)->71: (60 + 2) * 79 = 60 * 79 + 2 * 79 = 4740 + 158 = 4898 rev-> 8984 mismatch
+ concatenation
+ (62,79)->71: 62 || 79 = 6279 rev-> 9726 mismatch
+ reverse concatenation
+ (62,79)->71: 79 || 62 = 7962 rev-> 2697 mismatch
+
+Trying common operations on identity [26 97] [expected (26,97)->71]:
+ addition
+ (26,97)->71: 26 + 97 = 123 mismatch
+ multiplication
+ (26,97)->71: (20 + 6) * 97 = 20 * 97 + 6 * 97 = 1940 + 582 = 2522 mismatch
+ concatenation
+ (26,97)->71: 26 || 97 = 2697 mismatch
+ reverse concatenation
+ (26,97)->71: 97 || 26 = 9726 mismatch
+
+Trying difference operations reversed operands [26->62 97->79] and reversed result [expected (62,79)->71]:
+ subtraction (a-b)
+ (62,79)->71: 62 - 79 = -17 rev-> -71 mismatch
+ absolute difference
+ (62,79)->71: |62 - 79| = 17 rev-> 71 match
+ correct, actions: reversed operands, reversed result, absolute difference
+ max mod min
+ (62,79)->71: max(62,79) mod min(62,79) = 79 mod 62 = 17 rev-> 71 match
+ correct, but skipping
+ negated absolute difference
+ (62,79)->71: -|62 - 79| = -17 rev-> -71 mismatch
+ reverse subtraction (b-a)
+ (62,79)->71: 79 - 62 = 17 rev-> 71 match
+ correct, but skipping
+ modulo (a mod b)
+ (62,79)->71: 62 mod 79 = 62 rev-> 26 mismatch
+
+Trying difference operations on identity [26 97] [expected (26,97)->71]:
+ subtraction (a-b)
+ (26,97)->71: 26 - 97 = -71 mismatch
+ absolute difference
+ (26,97)->71: |26 - 97| = 71 match
+ correct, but skipping
+ max mod min
+ (26,97)->71: max(26,97) mod min(26,97) = 97 mod 26 = 19 mismatch
+ negated absolute difference
+ (26,97)->71: -|26 - 97| = -71 mismatch
+ reverse subtraction (b-a)
+ (26,97)->71: 97 - 26 = 71 match
+ correct, but skipping
+ modulo (a mod b)
+ (26,97)->71: 26 mod 97 = 26 mismatch
+
+Trying rare operations reversed operands [26->62 97->79] and reversed result [expected (62,79)->71]:
+ multiply+1
+ (62,79)->71: (60 + 2) * 79 + 1 = 60 * 79 + 2 * 79 + 1 = 4740 + 158 + 1 = 4898 + 1 = 4899 rev-> 9984 mismatch
+ multiply-1
+ (62,79)->71: (60 + 2) * 79 - 1 = 60 * 79 + 2 * 79 - 1 = 4740 + 158 - 1 = 4898 - 1 = 4897 rev-> 7984 mismatch
+ add+1
+ (62,79)->71: 62 + 79 + 1 = 142 rev-> 241 mismatch
+ add-1
+ (62,79)->71: 62 + 79 - 1 = 140 rev-> 041 mismatch
+ sub+1
+ (62,79)->71: 62 - 79 + 1 = -16 rev-> -61 mismatch
+ sub-1
+ (62,79)->71: 62 - 79 - 1 = -18 rev-> -81 mismatch
+ integer division (a/b)
+ (62,79)->71: 62 / 79 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (62,79)->71: 79 / 62 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (62,79)->71: 79 mod 62 = 17 rev-> 71 match
+ correct, but skipping
+ digit absolute diff
+ (62,79)->71: |6-7| || |2-9| = 17 rev-> 71 match
+ correct, but skipping
+ digit add mod10
+ (62,79)->71: (6+7)%10 || (2+9)%10 = 31 rev-> 13 mismatch
+ digit sub mod10
+ (62,79)->71: (6-7)%10 || (2-9)%10 = 93 rev-> 39 mismatch
+ cross multiply
+ (62,79)->71: 6*7 + 2*9 = 42 + 18 = 60 rev-> 06 mismatch
+ cross multiply rev
+ (62,79)->71: 6*9 + 2*7 = 54 + 14 = 68 rev-> 86 mismatch
+ digit multiply
+ (62,79)->71: 6*7 || 2*9 = 42 || 18 = 4218 rev-> 8124 mismatch
+ digit multiply rev
+ (62,79)->71: 6*9 || 2*7 = 54 || 14 = 5414 rev-> 4145 mismatch
+ digit sum diff
+ (62,79)->71: (6+2) - (7+9) = -8 rev-> -8 mismatch
+ digit sum sum
+ (62,79)->71: (6+2) + (7+9) = 24 rev-> 42 mismatch
+ digit product diff
+ (62,79)->71: 6*2 - 7*9 = 12 - 63 = -51 rev-> -15 mismatch
+ digit product sum
+ (62,79)->71: 6*2 + 7*9 = 12 + 63 = 75 rev-> 57 mismatch
+ determinant
+ (62,79)->71: 6*9 - 2*7 = 54 - 14 = 40 rev-> 04 mismatch
+ abs determinant
+ (62,79)->71: |6*9 - 2*7| = |54 - 14| = 40 rev-> 04 mismatch
+
+Trying rare operations on identity [26 97] [expected (26,97)->71]:
+ multiply+1
+ (26,97)->71: (20 + 6) * 97 + 1 = 20 * 97 + 6 * 97 + 1 = 1940 + 582 + 1 = 2522 + 1 = 2523 mismatch
+ multiply-1
+ (26,97)->71: (20 + 6) * 97 - 1 = 20 * 97 + 6 * 97 - 1 = 1940 + 582 - 1 = 2522 - 1 = 2521 mismatch
+ add+1
+ (26,97)->71: 26 + 97 + 1 = 124 mismatch
+ add-1
+ (26,97)->71: 26 + 97 - 1 = 122 mismatch
+ sub+1
+ (26,97)->71: 26 - 97 + 1 = -70 mismatch
+ sub-1
+ (26,97)->71: 26 - 97 - 1 = -72 mismatch
+ integer division (a/b)
+ (26,97)->71: 26 / 97 = 0 mismatch
+ reverse division (b/a)
+ (26,97)->71: 97 / 26 = 3 mismatch
+ reverse modulo (b mod a)
+ (26,97)->71: 97 mod 26 = 19 mismatch
+ digit absolute diff
+ (26,97)->71: |2-9| || |6-7| = 71 match
+ correct, but skipping
+ digit add mod10
+ (26,97)->71: (2+9)%10 || (6+7)%10 = 13 mismatch
+ digit sub mod10
+ (26,97)->71: (2-9)%10 || (6-7)%10 = 39 mismatch
+ cross multiply
+ (26,97)->71: 2*9 + 6*7 = 18 + 42 = 60 mismatch
+ cross multiply rev
+ (26,97)->71: 2*7 + 6*9 = 14 + 54 = 68 mismatch
+ digit multiply
+ (26,97)->71: 2*9 || 6*7 = 18 || 42 = 1842 mismatch
+ digit multiply rev
+ (26,97)->71: 2*7 || 6*9 = 14 || 54 = 1454 mismatch
+ digit sum diff
+ (26,97)->71: (2+6) - (9+7) = -8 mismatch
+ digit sum sum
+ (26,97)->71: (2+6) + (9+7) = 24 mismatch
+ digit product diff
+ (26,97)->71: 2*6 - 9*7 = 12 - 63 = -51 mismatch
+ digit product sum
+ (26,97)->71: 2*6 + 9*7 = 12 + 63 = 75 mismatch
+ determinant
+ (26,97)->71: 2*7 - 6*9 = 14 - 54 = -40 mismatch
+ abs determinant
+ (26,97)->71: |2*7 - 6*9| = |14 - 54| = 40 mismatch
+
+Applying to 22[38:
+ We recall that the question operator is found in the examples.
+ reversed operands [22->22, 38->83] and reversed result
+ absolute difference (22,83): |22 - 83| = 61 rev-> 16
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{16}

@@ -1,0 +1,178 @@
+83*91 = 127
+06-94 = 11
+69+22 = 711
+46-71 = 74
+16+95 = 911
+
+The inputs are 83, 91, 06, 94, 69, 22, 46, 71, 16, 95
+
+The outputs are 127, 11, 711, 74, 911
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+83*91 -> *
+06-94 -> -
+69+22 -> +
+46-71 -> -
+16+95 -> +
+
+The operators
+*
+-
++
+
+Looking at the question
+08+03 -> +
+The question operator is found in the examples.
+
+Looking at operator + [69+22 = 711, 16+95 = 911]:
+
+Trying common operations reversed operands [69->96 22->22, 16->61 95->59] and reversed result [expected (96,22)->711, (61,59)->911]:
+ addition
+ (96,22)->711: 96 + 22 = 118 rev-> 811 mismatch
+ multiplication
+ (61,59)->911: (60 + 1) * 59 = 60 * 59 + 1 * 59 = 3540 + 59 = 3599 rev-> 9953 mismatch
+ concatenation
+ (96,22)->711: 96 || 22 = 9622 rev-> 2269 mismatch
+ reverse concatenation
+ (61,59)->911: 59 || 61 = 5961 rev-> 1695 mismatch
+
+Trying common operations on identity [69 22, 16 95] [expected (69,22)->711, (16,95)->911]:
+ addition
+ (69,22)->711: 69 + 22 = 91 mismatch
+ multiplication
+ (16,95)->911: (10 + 6) * 95 = 10 * 95 + 6 * 95 = 950 + 570 = 1520 mismatch
+ concatenation
+ (69,22)->711: 69 || 22 = 6922 mismatch
+ reverse concatenation
+ (16,95)->911: 95 || 16 = 9516 mismatch
+
+Trying difference operations reversed operands [69->96 22->22, 16->61 95->59] and reversed result [expected (96,22)->711, (61,59)->911]:
+ subtraction (a-b)
+ (96,22)->711: 96 - 22 = 74 rev-> 47 mismatch
+ absolute difference
+ (61,59)->911: |61 - 59| = 2 rev-> 2 mismatch
+ max mod min
+ (96,22)->711: max(96,22) mod min(96,22) = 96 mod 22 = 8 rev-> 8 mismatch
+ negated absolute difference
+ (61,59)->911: -|61 - 59| = -2 rev-> -2 mismatch
+ reverse subtraction (b-a)
+ (96,22)->711: 22 - 96 = -74 rev-> -47 mismatch
+ modulo (a mod b)
+ (61,59)->911: 61 mod 59 = 2 rev-> 2 mismatch
+
+Trying difference operations on identity [69 22, 16 95] [expected (69,22)->711, (16,95)->911]:
+ subtraction (a-b)
+ (69,22)->711: 69 - 22 = 47 mismatch
+ absolute difference
+ (16,95)->911: |16 - 95| = 79 mismatch
+ max mod min
+ (69,22)->711: max(69,22) mod min(69,22) = 69 mod 22 = 3 mismatch
+ negated absolute difference
+ (16,95)->911: -|16 - 95| = -79 mismatch
+ reverse subtraction (b-a)
+ (69,22)->711: 22 - 69 = -47 mismatch
+ modulo (a mod b)
+ (16,95)->911: 16 mod 95 = 16 mismatch
+
+Trying rare operations reversed operands [69->96 22->22, 16->61 95->59] and reversed result [expected (96,22)->711, (61,59)->911]:
+ multiply+1
+ (96,22)->711: (90 + 6) * 22 + 1 = 90 * 22 + 6 * 22 + 1 = 1980 + 132 + 1 = 2112 + 1 = 2113 rev-> 3112 mismatch
+ multiply-1
+ (61,59)->911: (60 + 1) * 59 - 1 = 60 * 59 + 1 * 59 - 1 = 3540 + 59 - 1 = 3599 - 1 = 3598 rev-> 8953 mismatch
+ add+1
+ (96,22)->711: 96 + 22 + 1 = 119 rev-> 911 mismatch
+ add-1
+ (61,59)->911: 61 + 59 - 1 = 119 rev-> 911 match
+ (96,22)->711: 96 + 22 - 1 = 117 rev-> 711 match
+ correct, actions: reversed operands, reversed result, add-1
+ sub+1
+ (96,22)->711: 96 - 22 + 1 = 75 rev-> 57 mismatch
+ sub-1
+ (61,59)->911: 61 - 59 - 1 = 1 rev-> 1 mismatch
+ integer division (a/b)
+ (96,22)->711: 96 / 22 = 4 rev-> 4 mismatch
+ reverse division (b/a)
+ (61,59)->911: 59 / 61 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (96,22)->711: 22 mod 96 = 22 rev-> 22 mismatch
+ digit absolute diff
+ (61,59)->911: |6-5| || |1-9| = 18 rev-> 81 mismatch
+ digit add mod10
+ (96,22)->711: (9+2)%10 || (6+2)%10 = 18 rev-> 81 mismatch
+ digit sub mod10
+ (61,59)->911: (6-5)%10 || (1-9)%10 = 12 rev-> 21 mismatch
+ cross multiply
+ (96,22)->711: 9*2 + 6*2 = 18 + 12 = 30 rev-> 03 mismatch
+ cross multiply rev
+ (61,59)->911: 6*9 + 1*5 = 54 + 5 = 59 rev-> 95 mismatch
+ digit multiply
+ (96,22)->711: 9*2 || 6*2 = 18 || 12 = 1812 rev-> 2181 mismatch
+ digit multiply rev
+ (61,59)->911: 6*9 || 1*5 = 54 || 5 = 545 rev-> 545 mismatch
+ digit sum diff
+ (96,22)->711: (9+6) - (2+2) = 11 rev-> 11 mismatch
+ digit sum sum
+ (61,59)->911: (6+1) + (5+9) = 21 rev-> 12 mismatch
+ digit product diff
+ (96,22)->711: 9*6 - 2*2 = 54 - 4 = 50 rev-> 05 mismatch
+ digit product sum
+ (61,59)->911: 6*1 + 5*9 = 6 + 45 = 51 rev-> 15 mismatch
+ determinant
+ (96,22)->711: 9*2 - 6*2 = 18 - 12 = 6 rev-> 6 mismatch
+ abs determinant
+ (61,59)->911: |6*9 - 1*5| = |54 - 5| = 49 rev-> 94 mismatch
+
+Trying rare operations on identity [69 22, 16 95] [expected (69,22)->711, (16,95)->911]:
+ multiply+1
+ (69,22)->711: (60 + 9) * 22 + 1 = 60 * 22 + 9 * 22 + 1 = 1320 + 198 + 1 = 1518 + 1 = 1519 mismatch
+ multiply-1
+ (16,95)->911: (10 + 6) * 95 - 1 = 10 * 95 + 6 * 95 - 1 = 950 + 570 - 1 = 1520 - 1 = 1519 mismatch
+ add+1
+ (69,22)->711: 69 + 22 + 1 = 92 mismatch
+ add-1
+ (16,95)->911: 16 + 95 - 1 = 110 mismatch
+ sub+1
+ (69,22)->711: 69 - 22 + 1 = 48 mismatch
+ sub-1
+ (16,95)->911: 16 - 95 - 1 = -80 mismatch
+ integer division (a/b)
+ (69,22)->711: 69 / 22 = 3 mismatch
+ reverse division (b/a)
+ (16,95)->911: 95 / 16 = 5 mismatch
+ reverse modulo (b mod a)
+ (69,22)->711: 22 mod 69 = 22 mismatch
+ digit absolute diff
+ (16,95)->911: |1-9| || |6-5| = 81 mismatch
+ digit add mod10
+ (69,22)->711: (6+2)%10 || (9+2)%10 = 81 mismatch
+ digit sub mod10
+ (16,95)->911: (1-9)%10 || (6-5)%10 = 21 mismatch
+ cross multiply
+ (69,22)->711: 6*2 + 9*2 = 12 + 18 = 30 mismatch
+ cross multiply rev
+ (16,95)->911: 1*5 + 6*9 = 5 + 54 = 59 mismatch
+ digit multiply
+ (69,22)->711: 6*2 || 9*2 = 12 || 18 = 1218 mismatch
+ digit multiply rev
+ (16,95)->911: 1*5 || 6*9 = 5 || 54 = 554 mismatch
+ digit sum diff
+ (69,22)->711: (6+9) - (2+2) = 11 mismatch
+ digit sum sum
+ (16,95)->911: (1+6) + (9+5) = 21 mismatch
+ digit product diff
+ (69,22)->711: 6*9 - 2*2 = 54 - 4 = 50 mismatch
+ digit product sum
+ (16,95)->911: 1*6 + 9*5 = 6 + 45 = 51 mismatch
+ determinant
+ (69,22)->711: 6*2 - 9*2 = 12 - 18 = -6 mismatch
+ abs determinant
+ (16,95)->911: |1*5 - 6*9| = |5 - 54| = 49 mismatch
+
+Applying to 08+03:
+ We recall that the question operator is found in the examples.
+ reversed operands [08->80, 03->30] and reversed result
+ add-1 (80,30): 80 + 30 - 1 = 109 rev-> 901
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{901}

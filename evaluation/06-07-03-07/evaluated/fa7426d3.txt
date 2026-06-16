@@ -1,0 +1,178 @@
+87<82 = 601
+43/93 = /5
+15/77 = /62
+05/23 = 81
+83/76 = /92
+
+The inputs are 87, 82, 43, 93, 15, 77, 05, 23, 83, 76
+
+The outputs are 601, /5, /62, 81, /92
+Some example outputs have the operator symbol as prefix /.
+We now consider the outputs to be 601, -5, -62, 81, -92
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+87<82 -> <
+43/93 -> /
+15/77 -> /
+05/23 -> /
+83/76 -> /
+
+The operators
+<
+/
+
+Looking at the question
+14<51 -> <
+The question operator is found in the examples.
+
+Looking at operator < [87<82 = 601]:
+
+Trying common operations reversed operands [87->78 82->28] and reversed result [expected (78,28)->601]:
+ addition
+ (78,28)->601: 78 + 28 = 106 rev-> 601 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (78,28)->601: (70 + 8) * 28 = 70 * 28 + 8 * 28 = 1960 + 224 = 2184 rev-> 4812 mismatch
+ concatenation
+ (78,28)->601: 78 || 28 = 7828 rev-> 8287 mismatch
+ reverse concatenation
+ (78,28)->601: 28 || 78 = 2878 rev-> 8782 mismatch
+
+Trying common operations on identity [87 82] [expected (87,82)->601]:
+ addition
+ (87,82)->601: 87 + 82 = 169 mismatch
+ multiplication
+ (87,82)->601: (80 + 7) * 82 = 80 * 82 + 7 * 82 = 6560 + 574 = 7134 mismatch
+ concatenation
+ (87,82)->601: 87 || 82 = 8782 mismatch
+ reverse concatenation
+ (87,82)->601: 82 || 87 = 8287 mismatch
+
+Trying difference operations reversed operands [87->78 82->28] and reversed result [expected (78,28)->601]:
+ subtraction (a-b)
+ (78,28)->601: 78 - 28 = 50 rev-> 05 mismatch
+ absolute difference
+ (78,28)->601: |78 - 28| = 50 rev-> 05 mismatch
+ max mod min
+ (78,28)->601: max(78,28) mod min(78,28) = 78 mod 28 = 22 rev-> 22 mismatch
+ negated absolute difference
+ (78,28)->601: -|78 - 28| = -50 rev-> -05 mismatch
+ reverse subtraction (b-a)
+ (78,28)->601: 28 - 78 = -50 rev-> -05 mismatch
+ modulo (a mod b)
+ (78,28)->601: 78 mod 28 = 22 rev-> 22 mismatch
+
+Trying difference operations on identity [87 82] [expected (87,82)->601]:
+ subtraction (a-b)
+ (87,82)->601: 87 - 82 = 5 mismatch
+ absolute difference
+ (87,82)->601: |87 - 82| = 5 mismatch
+ max mod min
+ (87,82)->601: max(87,82) mod min(87,82) = 87 mod 82 = 5 mismatch
+ negated absolute difference
+ (87,82)->601: -|87 - 82| = -5 mismatch
+ reverse subtraction (b-a)
+ (87,82)->601: 82 - 87 = -5 mismatch
+ modulo (a mod b)
+ (87,82)->601: 87 mod 82 = 5 mismatch
+
+Trying rare operations reversed operands [87->78 82->28] and reversed result [expected (78,28)->601]:
+ multiply+1
+ (78,28)->601: (70 + 8) * 28 + 1 = 70 * 28 + 8 * 28 + 1 = 1960 + 224 + 1 = 2184 + 1 = 2185 rev-> 5812 mismatch
+ multiply-1
+ (78,28)->601: (70 + 8) * 28 - 1 = 70 * 28 + 8 * 28 - 1 = 1960 + 224 - 1 = 2184 - 1 = 2183 rev-> 3812 mismatch
+ add+1
+ (78,28)->601: 78 + 28 + 1 = 107 rev-> 701 mismatch
+ add-1
+ (78,28)->601: 78 + 28 - 1 = 105 rev-> 501 mismatch
+ sub+1
+ (78,28)->601: 78 - 28 + 1 = 51 rev-> 15 mismatch
+ sub-1
+ (78,28)->601: 78 - 28 - 1 = 49 rev-> 94 mismatch
+ integer division (a/b)
+ (78,28)->601: 78 / 28 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (78,28)->601: 28 / 78 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (78,28)->601: 28 mod 78 = 28 rev-> 82 mismatch
+ digit absolute diff
+ (78,28)->601: |7-2| || |8-8| = 50 rev-> 05 mismatch
+ digit add mod10
+ (78,28)->601: (7+2)%10 || (8+8)%10 = 96 rev-> 69 mismatch
+ digit sub mod10
+ (78,28)->601: (7-2)%10 || (8-8)%10 = 50 rev-> 05 mismatch
+ cross multiply
+ (78,28)->601: 7*2 + 8*8 = 14 + 64 = 78 rev-> 87 mismatch
+ cross multiply rev
+ (78,28)->601: 7*8 + 8*2 = 56 + 16 = 72 rev-> 27 mismatch
+ digit multiply
+ (78,28)->601: 7*2 || 8*8 = 14 || 64 = 1464 rev-> 4641 mismatch
+ digit multiply rev
+ (78,28)->601: 7*8 || 8*2 = 56 || 16 = 5616 rev-> 6165 mismatch
+ digit sum diff
+ (78,28)->601: (7+8) - (2+8) = 5 rev-> 5 mismatch
+ digit sum sum
+ (78,28)->601: (7+8) + (2+8) = 25 rev-> 52 mismatch
+ digit product diff
+ (78,28)->601: 7*8 - 2*8 = 56 - 16 = 40 rev-> 04 mismatch
+ digit product sum
+ (78,28)->601: 7*8 + 2*8 = 56 + 16 = 72 rev-> 27 mismatch
+ determinant
+ (78,28)->601: 7*8 - 8*2 = 56 - 16 = 40 rev-> 04 mismatch
+ abs determinant
+ (78,28)->601: |7*8 - 8*2| = |56 - 16| = 40 rev-> 04 mismatch
+
+Trying rare operations on identity [87 82] [expected (87,82)->601]:
+ multiply+1
+ (87,82)->601: (80 + 7) * 82 + 1 = 80 * 82 + 7 * 82 + 1 = 6560 + 574 + 1 = 7134 + 1 = 7135 mismatch
+ multiply-1
+ (87,82)->601: (80 + 7) * 82 - 1 = 80 * 82 + 7 * 82 - 1 = 6560 + 574 - 1 = 7134 - 1 = 7133 mismatch
+ add+1
+ (87,82)->601: 87 + 82 + 1 = 170 mismatch
+ add-1
+ (87,82)->601: 87 + 82 - 1 = 168 mismatch
+ sub+1
+ (87,82)->601: 87 - 82 + 1 = 6 mismatch
+ sub-1
+ (87,82)->601: 87 - 82 - 1 = 4 mismatch
+ integer division (a/b)
+ (87,82)->601: 87 / 82 = 1 mismatch
+ reverse division (b/a)
+ (87,82)->601: 82 / 87 = 0 mismatch
+ reverse modulo (b mod a)
+ (87,82)->601: 82 mod 87 = 82 mismatch
+ digit absolute diff
+ (87,82)->601: |8-8| || |7-2| = 05 mismatch
+ digit add mod10
+ (87,82)->601: (8+8)%10 || (7+2)%10 = 69 mismatch
+ digit sub mod10
+ (87,82)->601: (8-8)%10 || (7-2)%10 = 05 mismatch
+ cross multiply
+ (87,82)->601: 8*8 + 7*2 = 64 + 14 = 78 mismatch
+ cross multiply rev
+ (87,82)->601: 8*2 + 7*8 = 16 + 56 = 72 mismatch
+ digit multiply
+ (87,82)->601: 8*8 || 7*2 = 64 || 14 = 6414 mismatch
+ digit multiply rev
+ (87,82)->601: 8*2 || 7*8 = 16 || 56 = 1656 mismatch
+ digit sum diff
+ (87,82)->601: (8+7) - (8+2) = 5 mismatch
+ digit sum sum
+ (87,82)->601: (8+7) + (8+2) = 25 mismatch
+ digit product diff
+ (87,82)->601: 8*7 - 8*2 = 56 - 16 = 40 mismatch
+ digit product sum
+ (87,82)->601: 8*7 + 8*2 = 56 + 16 = 72 mismatch
+ determinant
+ (87,82)->601: 8*2 - 7*8 = 16 - 56 = -40 mismatch
+ abs determinant
+ (87,82)->601: |8*2 - 7*8| = |16 - 56| = 40 mismatch
+
+Applying to 14<51:
+ We recall that the question operator is found in the examples.
+ reversed operands [14->41, 51->15] and reversed result
+ addition (41,15): 41 + 15 = 56 rev-> 65
+ Result is non-negative, and none of the example outputs have a symbol prefix or suffix anyway.
+
+\boxed{65}

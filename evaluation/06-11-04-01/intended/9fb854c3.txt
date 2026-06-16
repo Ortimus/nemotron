@@ -1,0 +1,184 @@
+65*34 = 3465
+26-16 = 1
+09*81 = 8109
+
+The inputs are 65, 34, 26, 16, 09, 81
+
+The outputs are 3465, 1, 8109
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+65*34 -> *
+26-16 -> -
+09*81 -> *
+
+The operators
+*
+-
+
+Looking at the question
+83-43 -> -
+The question operator is found in the examples.
+
+Looking at operator - [26-16 = 1]:
+
+Trying common operations
+ reversed operands [26->62 16->61] and reversed result [expected (62,61)->1]
+ addition
+ (62,61)->1: 62 + 61 = 123 rev-> 321 mismatch
+ multiplication
+ (62,61)->1: (60 + 2) * 61 = 60 * 61 + 2 * 61 = 3660 + 122 = 3782 rev-> 2873 mismatch
+ concatenation
+ (62,61)->1: 62 || 61 = 6261 rev-> 1626 mismatch
+ reverse concatenation
+ (62,61)->1: 61 || 62 = 6162 rev-> 2616 mismatch
+
+ identity [26 16] [expected (26,16)->1]
+ addition
+ (26,16)->1: 26 + 16 = 42 mismatch
+ multiplication
+ (26,16)->1: (20 + 6) * 16 = 20 * 16 + 6 * 16 = 320 + 96 = 416 mismatch
+ concatenation
+ (26,16)->1: 26 || 16 = 2616 mismatch
+ reverse concatenation
+ (26,16)->1: 16 || 26 = 1626 mismatch
+
+Trying difference operations
+ reversed operands [26->62 16->61] and reversed result [expected (62,61)->1]
+ subtraction (a-b)
+ (62,61)->1: 62 - 61 = 1 rev-> 1 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (62,61)->1: |62 - 61| = 1 rev-> 1 match
+ correct, but skipping
+ max mod min
+ (62,61)->1: max(62,61) mod min(62,61) = 62 mod 61 = 1 rev-> 1 match
+ correct, but skipping
+ negated absolute difference
+ (62,61)->1: -|62 - 61| = -1 rev-> -1 mismatch
+ reverse subtraction (b-a)
+ (62,61)->1: 61 - 62 = -1 rev-> -1 mismatch
+ modulo (a mod b)
+ (62,61)->1: 62 mod 61 = 1 rev-> 1 match
+ correct, but skipping
+
+ identity [26 16] [expected (26,16)->1]
+ subtraction (a-b)
+ (26,16)->1: 26 - 16 = 10 mismatch
+ absolute difference
+ (26,16)->1: |26 - 16| = 10 mismatch
+ max mod min
+ (26,16)->1: max(26,16) mod min(26,16) = 26 mod 16 = 10 mismatch
+ negated absolute difference
+ (26,16)->1: -|26 - 16| = -10 mismatch
+ reverse subtraction (b-a)
+ (26,16)->1: 16 - 26 = -10 mismatch
+ modulo (a mod b)
+ (26,16)->1: 26 mod 16 = 10 mismatch
+
+Trying rare operations
+ reversed operands [26->62 16->61] and reversed result [expected (62,61)->1]
+ multiply+1
+ (62,61)->1: (60 + 2) * 61 + 1 = 60 * 61 + 2 * 61 + 1 = 3660 + 122 + 1 = 3782 + 1 = 3783 rev-> 3873 mismatch
+ multiply-1
+ (62,61)->1: (60 + 2) * 61 - 1 = 60 * 61 + 2 * 61 - 1 = 3660 + 122 - 1 = 3782 - 1 = 3781 rev-> 1873 mismatch
+ add+1
+ (62,61)->1: 62 + 61 + 1 = 124 rev-> 421 mismatch
+ add-1
+ (62,61)->1: 62 + 61 - 1 = 122 rev-> 221 mismatch
+ sub+1
+ (62,61)->1: 62 - 61 + 1 = 2 rev-> 2 mismatch
+ sub-1
+ (62,61)->1: 62 - 61 - 1 = 0 rev-> 0 mismatch
+ integer division (a/b)
+ (62,61)->1: 62 / 61 = 1 rev-> 1 match
+ correct, but skipping
+ reverse division (b/a)
+ (62,61)->1: 61 / 62 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (62,61)->1: 61 mod 62 = 61 rev-> 16 mismatch
+ digit absolute diff
+ (62,61)->1: |6-6| || |2-1| = 01 rev-> 10 mismatch
+ digit add mod10
+ (62,61)->1: (6+6)%10 || (2+1)%10 = 23 rev-> 32 mismatch
+ digit sub mod10
+ (62,61)->1: (6-6)%10 || (2-1)%10 = 01 rev-> 10 mismatch
+ cross multiply
+ (62,61)->1: 6*6 + 2*1 = 36 + 2 = 38 rev-> 83 mismatch
+ cross multiply rev
+ (62,61)->1: 6*1 + 2*6 = 6 + 12 = 18 rev-> 81 mismatch
+ digit multiply
+ (62,61)->1: 6*6 || 2*1 = 36 || 2 = 362 rev-> 263 mismatch
+ digit multiply rev
+ (62,61)->1: 6*1 || 2*6 = 6 || 12 = 612 rev-> 216 mismatch
+ digit sum diff
+ (62,61)->1: (6+2) - (6+1) = 1 rev-> 1 match
+ correct, but skipping
+ digit sum sum
+ (62,61)->1: (6+2) + (6+1) = 15 rev-> 51 mismatch
+ digit product diff
+ (62,61)->1: 6*2 - 6*1 = 12 - 6 = 6 rev-> 6 mismatch
+ digit product sum
+ (62,61)->1: 6*2 + 6*1 = 12 + 6 = 18 rev-> 81 mismatch
+ determinant
+ (62,61)->1: 6*1 - 2*6 = 6 - 12 = -6 rev-> -6 mismatch
+ abs determinant
+ (62,61)->1: |6*1 - 2*6| = |6 - 12| = 6 rev-> 6 mismatch
+
+ identity [26 16] [expected (26,16)->1]
+ multiply+1
+ (26,16)->1: (20 + 6) * 16 + 1 = 20 * 16 + 6 * 16 + 1 = 320 + 96 + 1 = 416 + 1 = 417 mismatch
+ multiply-1
+ (26,16)->1: (20 + 6) * 16 - 1 = 20 * 16 + 6 * 16 - 1 = 320 + 96 - 1 = 416 - 1 = 415 mismatch
+ add+1
+ (26,16)->1: 26 + 16 + 1 = 43 mismatch
+ add-1
+ (26,16)->1: 26 + 16 - 1 = 41 mismatch
+ sub+1
+ (26,16)->1: 26 - 16 + 1 = 11 mismatch
+ sub-1
+ (26,16)->1: 26 - 16 - 1 = 9 mismatch
+ integer division (a/b)
+ (26,16)->1: 26 / 16 = 1 match
+ correct, but skipping
+ reverse division (b/a)
+ (26,16)->1: 16 / 26 = 0 mismatch
+ reverse modulo (b mod a)
+ (26,16)->1: 16 mod 26 = 16 mismatch
+ digit absolute diff
+ (26,16)->1: |2-1| || |6-6| = 10 mismatch
+ digit add mod10
+ (26,16)->1: (2+1)%10 || (6+6)%10 = 32 mismatch
+ digit sub mod10
+ (26,16)->1: (2-1)%10 || (6-6)%10 = 10 mismatch
+ cross multiply
+ (26,16)->1: 2*1 + 6*6 = 2 + 36 = 38 mismatch
+ cross multiply rev
+ (26,16)->1: 2*6 + 6*1 = 12 + 6 = 18 mismatch
+ digit multiply
+ (26,16)->1: 2*1 || 6*6 = 2 || 36 = 236 mismatch
+ digit multiply rev
+ (26,16)->1: 2*6 || 6*1 = 12 || 6 = 126 mismatch
+ digit sum diff
+ (26,16)->1: (2+6) - (1+6) = 1 match
+ correct, but skipping
+ digit sum sum
+ (26,16)->1: (2+6) + (1+6) = 15 mismatch
+ digit product diff
+ (26,16)->1: 2*6 - 1*6 = 12 - 6 = 6 mismatch
+ digit product sum
+ (26,16)->1: 2*6 + 1*6 = 12 + 6 = 18 mismatch
+ determinant
+ (26,16)->1: 2*6 - 6*1 = 12 - 6 = 6 mismatch
+ abs determinant
+ (26,16)->1: |2*6 - 6*1| = |12 - 6| = 6 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 83-43:
+ We recall that the question operator is found in the examples.
+ reversed operands [83->38, 43->34] and reversed result
+ subtraction (a-b)
+ (38,34): 38 - 34 = 4 rev-> 4
+ Result is non-negative
+ \boxed{4}

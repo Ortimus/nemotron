@@ -1,0 +1,183 @@
+46*21 = 967
+39-82 = 56
+17+13 = 101
+94+72 = 57
+79+11 = 701
+
+The inputs are 46, 21, 39, 82, 17, 13, 94, 72, 79, 11
+
+The outputs are 967, 56, 101, 57, 701
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+46*21 -> *
+39-82 -> -
+17+13 -> +
+94+72 -> +
+79+11 -> +
+
+The operators
+*
+-
++
+
+Looking at the question
+97-57 -> -
+The question operator is found in the examples.
+
+Looking at operator - [39-82 = 56]:
+
+Trying common operations
+ reversed operands [39->93 82->28] and reversed result [expected (93,28)->56]
+ addition
+ (93,28)->56: 93 + 28 = 121 rev-> 121 mismatch
+ multiplication
+ (93,28)->56: (90 + 3) * 28 = 90 * 28 + 3 * 28 = 2520 + 84 = 2604 rev-> 4062 mismatch
+ concatenation
+ (93,28)->56: 93 || 28 = 9328 rev-> 8239 mismatch
+ reverse concatenation
+ (93,28)->56: 28 || 93 = 2893 rev-> 3982 mismatch
+
+ identity [39 82] [expected (39,82)->56]
+ addition
+ (39,82)->56: 39 + 82 = 121 mismatch
+ multiplication
+ (39,82)->56: (30 + 9) * 82 = 30 * 82 + 9 * 82 = 2460 + 738 = 3198 mismatch
+ concatenation
+ (39,82)->56: 39 || 82 = 3982 mismatch
+ reverse concatenation
+ (39,82)->56: 82 || 39 = 8239 mismatch
+
+Trying difference operations
+ reversed operands [39->93 82->28] and reversed result [expected (93,28)->56]
+ subtraction (a-b)
+ (93,28)->56: 93 - 28 = 65 rev-> 56 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (93,28)->56: |93 - 28| = 65 rev-> 56 match
+ correct, but skipping
+ max mod min
+ (93,28)->56: max(93,28) mod min(93,28) = 93 mod 28 = 9 rev-> 9 mismatch
+ negated absolute difference
+ (93,28)->56: -|93 - 28| = -65 rev-> -56 mismatch
+ reverse subtraction (b-a)
+ (93,28)->56: 28 - 93 = -65 rev-> -56 mismatch
+ modulo (a mod b)
+ (93,28)->56: 93 mod 28 = 9 rev-> 9 mismatch
+
+ identity [39 82] [expected (39,82)->56]
+ subtraction (a-b)
+ (39,82)->56: 39 - 82 = -43 mismatch
+ absolute difference
+ (39,82)->56: |39 - 82| = 43 mismatch
+ max mod min
+ (39,82)->56: max(39,82) mod min(39,82) = 82 mod 39 = 4 mismatch
+ negated absolute difference
+ (39,82)->56: -|39 - 82| = -43 mismatch
+ reverse subtraction (b-a)
+ (39,82)->56: 82 - 39 = 43 mismatch
+ modulo (a mod b)
+ (39,82)->56: 39 mod 82 = 39 mismatch
+
+Trying rare operations
+ reversed operands [39->93 82->28] and reversed result [expected (93,28)->56]
+ multiply+1
+ (93,28)->56: (90 + 3) * 28 + 1 = 90 * 28 + 3 * 28 + 1 = 2520 + 84 + 1 = 2604 + 1 = 2605 rev-> 5062 mismatch
+ multiply-1
+ (93,28)->56: (90 + 3) * 28 - 1 = 90 * 28 + 3 * 28 - 1 = 2520 + 84 - 1 = 2604 - 1 = 2603 rev-> 3062 mismatch
+ add+1
+ (93,28)->56: 93 + 28 + 1 = 122 rev-> 221 mismatch
+ add-1
+ (93,28)->56: 93 + 28 - 1 = 120 rev-> 021 mismatch
+ sub+1
+ (93,28)->56: 93 - 28 + 1 = 66 rev-> 66 mismatch
+ sub-1
+ (93,28)->56: 93 - 28 - 1 = 64 rev-> 46 mismatch
+ integer division (a/b)
+ (93,28)->56: 93 / 28 = 3 rev-> 3 mismatch
+ reverse division (b/a)
+ (93,28)->56: 28 / 93 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (93,28)->56: 28 mod 93 = 28 rev-> 82 mismatch
+ digit absolute diff
+ (93,28)->56: |9-2| || |3-8| = 75 rev-> 57 mismatch
+ digit add mod10
+ (93,28)->56: (9+2)%10 || (3+8)%10 = 11 rev-> 11 mismatch
+ digit sub mod10
+ (93,28)->56: (9-2)%10 || (3-8)%10 = 75 rev-> 57 mismatch
+ cross multiply
+ (93,28)->56: 9*2 + 3*8 = 18 + 24 = 42 rev-> 24 mismatch
+ cross multiply rev
+ (93,28)->56: 9*8 + 3*2 = 72 + 6 = 78 rev-> 87 mismatch
+ digit multiply
+ (93,28)->56: 9*2 || 3*8 = 18 || 24 = 1824 rev-> 4281 mismatch
+ digit multiply rev
+ (93,28)->56: 9*8 || 3*2 = 72 || 6 = 726 rev-> 627 mismatch
+ digit sum diff
+ (93,28)->56: (9+3) - (2+8) = 2 rev-> 2 mismatch
+ digit sum sum
+ (93,28)->56: (9+3) + (2+8) = 22 rev-> 22 mismatch
+ digit product diff
+ (93,28)->56: 9*3 - 2*8 = 27 - 16 = 11 rev-> 11 mismatch
+ digit product sum
+ (93,28)->56: 9*3 + 2*8 = 27 + 16 = 43 rev-> 34 mismatch
+ determinant
+ (93,28)->56: 9*8 - 3*2 = 72 - 6 = 66 rev-> 66 mismatch
+ abs determinant
+ (93,28)->56: |9*8 - 3*2| = |72 - 6| = 66 rev-> 66 mismatch
+
+ identity [39 82] [expected (39,82)->56]
+ multiply+1
+ (39,82)->56: (30 + 9) * 82 + 1 = 30 * 82 + 9 * 82 + 1 = 2460 + 738 + 1 = 3198 + 1 = 3199 mismatch
+ multiply-1
+ (39,82)->56: (30 + 9) * 82 - 1 = 30 * 82 + 9 * 82 - 1 = 2460 + 738 - 1 = 3198 - 1 = 3197 mismatch
+ add+1
+ (39,82)->56: 39 + 82 + 1 = 122 mismatch
+ add-1
+ (39,82)->56: 39 + 82 - 1 = 120 mismatch
+ sub+1
+ (39,82)->56: 39 - 82 + 1 = -42 mismatch
+ sub-1
+ (39,82)->56: 39 - 82 - 1 = -44 mismatch
+ integer division (a/b)
+ (39,82)->56: 39 / 82 = 0 mismatch
+ reverse division (b/a)
+ (39,82)->56: 82 / 39 = 2 mismatch
+ reverse modulo (b mod a)
+ (39,82)->56: 82 mod 39 = 4 mismatch
+ digit absolute diff
+ (39,82)->56: |3-8| || |9-2| = 57 mismatch
+ digit add mod10
+ (39,82)->56: (3+8)%10 || (9+2)%10 = 11 mismatch
+ digit sub mod10
+ (39,82)->56: (3-8)%10 || (9-2)%10 = 57 mismatch
+ cross multiply
+ (39,82)->56: 3*8 + 9*2 = 24 + 18 = 42 mismatch
+ cross multiply rev
+ (39,82)->56: 3*2 + 9*8 = 6 + 72 = 78 mismatch
+ digit multiply
+ (39,82)->56: 3*8 || 9*2 = 24 || 18 = 2418 mismatch
+ digit multiply rev
+ (39,82)->56: 3*2 || 9*8 = 6 || 72 = 672 mismatch
+ digit sum diff
+ (39,82)->56: (3+9) - (8+2) = 2 mismatch
+ digit sum sum
+ (39,82)->56: (3+9) + (8+2) = 22 mismatch
+ digit product diff
+ (39,82)->56: 3*9 - 8*2 = 27 - 16 = 11 mismatch
+ digit product sum
+ (39,82)->56: 3*9 + 8*2 = 27 + 16 = 43 mismatch
+ determinant
+ (39,82)->56: 3*2 - 9*8 = 6 - 72 = -66 mismatch
+ abs determinant
+ (39,82)->56: |3*2 - 9*8| = |6 - 72| = 66 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 97-57:
+ We recall that the question operator is found in the examples.
+ reversed operands [97->79, 57->75] and reversed result
+ subtraction (a-b)
+ (79,75): 79 - 75 = 4 rev-> 4
+ Result is non-negative
+ \boxed{4}
