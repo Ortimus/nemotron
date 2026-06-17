@@ -1,0 +1,66 @@
+//?|[ = ?:/
+)\?`| = ?':
+[)$|: = !:'
+:)$!: = )!'
+The question is :!?'/
+
+Operator symbols ?$
+Question operator symbol ?
+Question operator in examples
+
+Digit symbols /|[:)\`'!
+
+Checking concatenation
+left // op ? right |[ expected //|[ versus ?:/ mismatch
+left )\ op ? right `| expected )\`| versus ?': mismatch
+left [) op $ right |: expected [)|: versus !:' mismatch
+left :) op $ right !: expected :)!: versus )!' mismatch
+
+Question operator ? is not concatenation
+
+Checking reverse concatenation
+left // op ? right |[ expected |[// versus ?:/ mismatch
+left )\ op ? right `| expected `|)\ versus ?': mismatch
+left [) op $ right |: expected |:[) versus !:' mismatch
+left :) op $ right !: expected !::) versus )!' mismatch
+
+Question operator ? is not reverse concatenation
+
+Filtering out the concatenation operations
+//?|[ = ?:/
+)\?`| = ?':
+[)$|: = !:'
+:)$!: = )!'
+
+Assigning mul
+ left // op ? right |[ = ?:/ length 3
+ left )\ op ? right `| = ?': length 3
+ left [) op $ right |: = !:' length 3
+ left :) op $ right !: = )!' length 3
+
+Assigning sub
+ left // op ? right |[ = ?:/ op in output assume sub
+ left )\ op ? right `| = ?': assumed sub
+ left [) op $ right |: = !:' length 3
+ left :) op $ right !: = )!' length 3
+
+Assigning add
+ left // op ? right |[ = ?:/ assumed sub
+ left )\ op ? right `| = ?': assumed sub
+ left [) op $ right |: = !:' length 3 assume add
+ left :) op $ right !: = )!' assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left // op ? right |[ = ?:/ assumed sub
+ left )\ op ? right `| = ?': assumed sub
+ left [) op $ right |: = !:' assumed add
+ left :) op $ right !: = )!' assumed add
+ left :! op ? right '/ the question, assumed sub
+
+Trying /=3 |=8 [=6 :=5 )=9 \=2 `=0 '=1 !=4 A=7
+//?|[ = 33 sub 86 = 53 vs ?:/ -53 diff 0 sub ok; 33 sub 68 = 35 vs rev ?/: -35 diff 0 sub ok
+)\?`| = 92 sub 08 = 84 vs ?': -15 diff 69 sub no; 29 sub 80 = 51 vs rev ?:' -51 diff 0 sub ok
+[)$|: = 69 add 85 = 154 vs !:' 451 diff 297 add no; 96 add 58 = 154 vs rev ':! 154 diff 0 add ok
+:)$!: = 59 add 45 = 104 vs )!' 941 diff 837 add no; 95 add 54 = 149 vs rev '!) 149 diff 0 add ok
+ accepted rev :!?'/ = 54 sub 13 rev 45 sub 31 = 14 rev 41 = \boxed{!'}

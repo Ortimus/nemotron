@@ -1,0 +1,75 @@
+#>*%< = /(``
+/?-`< = -<
+|`->( = -/?
+##*|# = ((#
+>`*|> = /<|
+The question is ?<-'#
+
+Operator symbols *-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols #>%</(`?|'
+
+Checking concatenation
+left #> op * right %< expected #>%< versus /(`` mismatch
+left /? op - right `< expected /?`< versus -< mismatch
+left |` op - right >( expected |`>( versus -/? mismatch
+left ## op * right |# expected ##|# versus ((# mismatch
+left >` op * right |> expected >`|> versus /<| mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left #> op * right %< expected %<#> versus /(`` mismatch
+left /? op - right `< expected `</? versus -< mismatch
+left |` op - right >( expected >(|` versus -/? mismatch
+left ## op * right |# expected |### versus ((# mismatch
+left >` op * right |> expected |>>` versus /<| mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+#>*%< = /(``
+/?-`< = -<
+|`->( = -/?
+##*|# = ((#
+>`*|> = /<|
+
+Assigning mul
+ left #> op * right %< = /(`` length 4 assume mul
+ left /? op - right `< = -< length 2
+ left |` op - right >( = -/? length 3
+ left ## op * right |# = ((# assumed mul
+ left >` op * right |> = /<| assumed mul
+
+Assigning sub
+ left #> op * right %< = /(`` assumed mul
+ left /? op - right `< = -< op in output assume sub
+ left |` op - right >( = -/? assumed sub
+ left ## op * right |# = ((# assumed mul
+ left >` op * right |> = /<| assumed mul
+
+Assigning add
+ left #> op * right %< = /(`` assumed mul
+ left /? op - right `< = -< assumed sub
+ left |` op - right >( = -/? assumed sub
+ left ## op * right |# = ((# assumed mul
+ left >` op * right |> = /<| assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left #> op * right %< = /(`` assumed mul
+ left /? op - right `< = -< assumed sub
+ left |` op - right >( = -/? assumed sub
+ left ## op * right |# = ((# assumed mul
+ left >` op * right |> = /<| assumed mul
+ left ?< op - right '# the question, assumed sub
+
+Trying #=1 >=3 %=4 <=7 /=5 (=9 `=2 ?=6 |=8 '=0
+#>*%< = 13 mul 47 = 611 vs /(`` 5922 diff 5311 mul no; 31 mul 74 = 2294 vs rev ``(/ 2295 diff 1 mul ok + 1
+/?-`< = 56 sub 27 = 29 vs -< -7 diff 22 sub no; 65 sub 72 = 7 vs rev -< -7 diff 0 sub ok
+|`->( = 82 sub 39 = 43 vs -/? -56 diff 13 sub no; 28 sub 93 = 65 vs rev -?/ -65 diff 0 sub ok
+##*|# = 11 mul 81 = 891 vs ((# 991 diff 100 mul no; 11 mul 18 = 198 vs rev #(( 199 diff 1 mul ok + 1
+>`*|> = 32 mul 83 = 2656 vs /<| 578 diff 2078 mul no; 23 mul 38 = 874 vs rev |</ 875 diff 1 mul ok + 1
+ accepted rev ?<-'# = 67 sub 01 rev 76 sub 10 = 66 rev 66 = \boxed{??}
