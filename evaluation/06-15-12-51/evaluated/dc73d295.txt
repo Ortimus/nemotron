@@ -1,0 +1,184 @@
+45%82 = %37
+15*11 = 25
+75*60 = 134
+22%27 = %5
+12%83 = %71
+
+The inputs are 45, 82, 15, 11, 75, 60, 22, 27, 12, 83
+
+The outputs are %37, 25, 134, %5, %71
+Some example outputs have the operator symbol as prefix %.
+We now consider the outputs to be -37, 25, 134, -5, -71
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+45%82 -> %
+15*11 -> *
+75*60 -> *
+22%27 -> %
+12%83 -> %
+
+The operators
+%
+*
+
+Looking at the question
+22*65 -> *
+The question operator is found in the examples.
+
+Looking at operator * [15*11 = 25, 75*60 = 134]:
+
+Trying common operations
+ reversed operands [15->51 11->11, 75->57 60->06] and reversed result [expected (51,11)->25, (57,06)->134]
+ addition
+ (51,11)->25: 51 + 11 = 62 rev-> 26 mismatch
+ multiplication
+ (57,06)->134: (50 + 7) * 06 = 50 * 06 + 7 * 06 = 300 + 42 = 342 rev-> 243 mismatch
+ concatenation
+ (51,11)->25: 51 || 11 = 5111 rev-> 1115 mismatch
+ reverse concatenation
+ (57,06)->134: 06 || 57 = 0657 rev-> 7560 mismatch
+
+ identity [15 11, 75 60] [expected (15,11)->25, (75,60)->134]
+ addition
+ (15,11)->25: 15 + 11 = 26 mismatch
+ multiplication
+ (75,60)->134: (70 + 5) * 60 = 70 * 60 + 5 * 60 = 4200 + 300 = 4500 mismatch
+ concatenation
+ (15,11)->25: 15 || 11 = 1511 mismatch
+ reverse concatenation
+ (75,60)->134: 60 || 75 = 6075 mismatch
+
+Trying difference operations
+ reversed operands [15->51 11->11, 75->57 60->06] and reversed result [expected (51,11)->25, (57,06)->134]
+ subtraction (a-b)
+ (51,11)->25: 51 - 11 = 40 rev-> 04 mismatch
+ absolute difference
+ (57,06)->134: |57 - 06| = 51 rev-> 15 mismatch
+ max mod min
+ (51,11)->25: max(51,11) mod min(51,11) = 51 mod 11 = 7 rev-> 7 mismatch
+ negated absolute difference
+ (57,06)->134: -|57 - 06| = -51 rev-> -15 mismatch
+ reverse subtraction (b-a)
+ (51,11)->25: 11 - 51 = -40 rev-> -04 mismatch
+ modulo (a mod b)
+ (57,06)->134: 57 mod 06 = 3 rev-> 3 mismatch
+
+ identity [15 11, 75 60] [expected (15,11)->25, (75,60)->134]
+ subtraction (a-b)
+ (15,11)->25: 15 - 11 = 4 mismatch
+ absolute difference
+ (75,60)->134: |75 - 60| = 15 mismatch
+ max mod min
+ (15,11)->25: max(15,11) mod min(15,11) = 15 mod 11 = 4 mismatch
+ negated absolute difference
+ (75,60)->134: -|75 - 60| = -15 mismatch
+ reverse subtraction (b-a)
+ (15,11)->25: 11 - 15 = -4 mismatch
+ modulo (a mod b)
+ (75,60)->134: 75 mod 60 = 15 mismatch
+
+Trying rare operations
+ reversed operands [15->51 11->11, 75->57 60->06] and reversed result [expected (51,11)->25, (57,06)->134]
+ multiply+1
+ (51,11)->25: (50 + 1) * 11 + 1 = 50 * 11 + 1 * 11 + 1 = 550 + 11 + 1 = 561 + 1 = 562 rev-> 265 mismatch
+ multiply-1
+ (57,06)->134: (50 + 7) * 06 - 1 = 50 * 06 + 7 * 06 - 1 = 300 + 42 - 1 = 342 - 1 = 341 rev-> 143 mismatch
+ add+1
+ (51,11)->25: 51 + 11 + 1 = 63 rev-> 36 mismatch
+ add-1
+ (57,06)->134: 57 + 06 - 1 = 62 rev-> 26 mismatch
+ sub+1
+ (51,11)->25: 51 - 11 + 1 = 41 rev-> 14 mismatch
+ sub-1
+ (57,06)->134: 57 - 06 - 1 = 50 rev-> 05 mismatch
+ integer division (a/b)
+ (51,11)->25: 51 / 11 = 4 rev-> 4 mismatch
+ reverse division (b/a)
+ (57,06)->134: 06 / 57 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (51,11)->25: 11 mod 51 = 11 rev-> 11 mismatch
+ digit absolute diff
+ (57,06)->134: |5-0| || |7-6| = 51 rev-> 15 mismatch
+ digit add mod10
+ (51,11)->25: (5+1)%10 || (1+1)%10 = 62 rev-> 26 mismatch
+ digit sub mod10
+ (57,06)->134: (5-0)%10 || (7-6)%10 = 51 rev-> 15 mismatch
+ cross multiply
+ (51,11)->25: 5*1 + 1*1 = 5 + 1 = 6 rev-> 6 mismatch
+ cross multiply rev
+ (57,06)->134: 5*6 + 7*0 = 30 + 0 = 30 rev-> 03 mismatch
+ digit multiply
+ (51,11)->25: 5*1 || 1*1 = 5 || 1 = 51 rev-> 15 mismatch
+ digit multiply rev
+ (57,06)->134: 5*6 || 7*0 = 30 || 0 = 300 rev-> 003 mismatch
+ digit sum diff
+ (51,11)->25: (5+1) - (1+1) = 4 rev-> 4 mismatch
+ digit sum sum
+ (57,06)->134: (5+7) + (0+6) = 18 rev-> 81 mismatch
+ digit product diff
+ (51,11)->25: 5*1 - 1*1 = 5 - 1 = 4 rev-> 4 mismatch
+ digit product sum
+ (57,06)->134: 5*7 + 0*6 = 35 + 0 = 35 rev-> 53 mismatch
+ determinant
+ (51,11)->25: 5*1 - 1*1 = 5 - 1 = 4 rev-> 4 mismatch
+ abs determinant
+ (57,06)->134: |5*6 - 7*0| = |30 - 0| = 30 rev-> 03 mismatch
+
+ identity [15 11, 75 60] [expected (15,11)->25, (75,60)->134]
+ multiply+1
+ (15,11)->25: (10 + 5) * 11 + 1 = 10 * 11 + 5 * 11 + 1 = 110 + 55 + 1 = 165 + 1 = 166 mismatch
+ multiply-1
+ (75,60)->134: (70 + 5) * 60 - 1 = 70 * 60 + 5 * 60 - 1 = 4200 + 300 - 1 = 4500 - 1 = 4499 mismatch
+ add+1
+ (15,11)->25: 15 + 11 + 1 = 27 mismatch
+ add-1
+ (75,60)->134: 75 + 60 - 1 = 134 match
+ (15,11)->25: 15 + 11 - 1 = 25 match
+ correct, actions: add-1
+ sub+1
+ (15,11)->25: 15 - 11 + 1 = 5 mismatch
+ sub-1
+ (75,60)->134: 75 - 60 - 1 = 14 mismatch
+ integer division (a/b)
+ (15,11)->25: 15 / 11 = 1 mismatch
+ reverse division (b/a)
+ (75,60)->134: 60 / 75 = 0 mismatch
+ reverse modulo (b mod a)
+ (15,11)->25: 11 mod 15 = 11 mismatch
+ digit absolute diff
+ (75,60)->134: |7-6| || |5-0| = 15 mismatch
+ digit add mod10
+ (15,11)->25: (1+1)%10 || (5+1)%10 = 26 mismatch
+ digit sub mod10
+ (75,60)->134: (7-6)%10 || (5-0)%10 = 15 mismatch
+ cross multiply
+ (15,11)->25: 1*1 + 5*1 = 1 + 5 = 6 mismatch
+ cross multiply rev
+ (75,60)->134: 7*0 + 5*6 = 0 + 30 = 30 mismatch
+ digit multiply
+ (15,11)->25: 1*1 || 5*1 = 1 || 5 = 15 mismatch
+ digit multiply rev
+ (75,60)->134: 7*0 || 5*6 = 0 || 30 = 030 mismatch
+ digit sum diff
+ (15,11)->25: (1+5) - (1+1) = 4 mismatch
+ digit sum sum
+ (75,60)->134: (7+5) + (6+0) = 18 mismatch
+ digit product diff
+ (15,11)->25: 1*5 - 1*1 = 5 - 1 = 4 mismatch
+ digit product sum
+ (75,60)->134: 7*5 + 6*0 = 35 + 0 = 35 mismatch
+ determinant
+ (15,11)->25: 1*1 - 5*1 = 1 - 5 = -4 mismatch
+ abs determinant
+ (75,60)->134: |7*0 - 5*6| = |0 - 30| = 30 mismatch
+
+correct, actions: add-1
+
+Applying to 22*65:
+ We recall that the question operator is found in the examples.
+ identity [22 65]
+ add-1
+ (22,65): 22 + 65 - 1 = 86
+ Result is non-negative
+ \boxed{86}

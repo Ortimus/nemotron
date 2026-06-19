@@ -1,0 +1,66 @@
+>>+>' = '?(
+>'-|' = /(
+/<*<! = '$?<
+!>*'> = '?|$
+The question is >!-/'
+
+Operator symbols +-*
+Question operator symbol -
+Question operator in examples
+
+Digit symbols >'?(|/<!$
+
+Checking concatenation
+left >> op + right >' expected >>>' versus '?( mismatch
+left >' op - right |' expected >'|' versus /( mismatch
+left /< op * right <! expected /<<! versus '$?< mismatch
+left !> op * right '> expected !>'> versus '?|$ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left >> op + right >' expected >'>> versus '?( mismatch
+left >' op - right |' expected |'>' versus /( mismatch
+left /< op * right <! expected <!/< versus '$?< mismatch
+left !> op * right '> expected '>!> versus '?|$ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+>>+>' = '?(
+>'-|' = /(
+/<*<! = '$?<
+!>*'> = '?|$
+
+Assigning mul
+ left >> op + right >' = '?( length 3
+ left >' op - right |' = /( length 2
+ left /< op * right <! = '$?< length 4 assume mul
+ left !> op * right '> = '?|$ assumed mul
+
+Assigning sub
+ left >> op + right >' = '?( length 3
+ left >' op - right |' = /( length 2
+ left /< op * right <! = '$?< assumed mul
+ left !> op * right '> = '?|$ assumed mul
+
+Assigning add
+ left >> op + right >' = '?( length 3 assume add
+ left >' op - right |' = /( length 2
+ left /< op * right <! = '$?< assumed mul
+ left !> op * right '> = '?|$ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left >> op + right >' = '?( assumed add
+ left >' op - right |' = /( length 2 assume sub
+ left /< op * right <! = '$?< assumed mul
+ left !> op * right '> = '?|$ assumed mul
+ left >! op - right /' the question, assumed sub
+
+Trying >=8 '=1 ?=7 (=0 |=6 /=2 <=5 !=9 $=4 A=3
+>>+>' = 88 add 81 = 169 vs '?( 170 diff 1 add ok + 1; 88 add 18 = 106 vs rev (?' 071 diff 35 add no
+>'-|' = 81 sub 61 = 20 vs /( 20 diff 0 sub ok; 18 sub 16 = 2 vs rev (/ 02 diff 0 sub ok
+/<*<! = 25 mul 59 = 1475 vs '$?< 1475 diff 0 mul ok; 52 mul 95 = 4940 vs rev <?$' 5741 diff 801 mul no
+!>*'> = 98 mul 18 = 1764 vs '?|$ 1764 diff 0 mul ok; 89 mul 81 = 7209 vs rev $|?' 4671 diff 2538 mul no
+ accepted forward >!-/' = 89 sub 21 = 68 = \boxed{|>}

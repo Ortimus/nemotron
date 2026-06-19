@@ -1,0 +1,75 @@
+@|*|& = |{`%
+]>+>& = `>|
+&%+`> = `{{
+`/*|{ = |&{
+\/-\\ = -`
+The question is %/*@@
+
+Operator symbols *+-
+Question operator symbol *
+Question operator in examples
+
+Digit symbols @|&{`%]>/\
+
+Checking concatenation
+left @| op * right |& expected @||& versus |{`% mismatch
+left ]> op + right >& expected ]>>& versus `>| mismatch
+left &% op + right `> expected &%`> versus `{{ mismatch
+left `/ op * right |{ expected `/|{ versus |&{ mismatch
+left \/ op - right \\ expected \/\\ versus -` mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left @| op * right |& expected |&@| versus |{`% mismatch
+left ]> op + right >& expected >&]> versus `>| mismatch
+left &% op + right `> expected `>&% versus `{{ mismatch
+left `/ op * right |{ expected |{`/ versus |&{ mismatch
+left \/ op - right \\ expected \\\/ versus -` mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+@|*|& = |{`%
+]>+>& = `>|
+&%+`> = `{{
+`/*|{ = |&{
+\/-\\ = -`
+
+Assigning mul
+ left @| op * right |& = |{`% length 4 assume mul
+ left ]> op + right >& = `>| length 3
+ left &% op + right `> = `{{ length 3
+ left `/ op * right |{ = |&{ assumed mul
+ left \/ op - right \\ = -` length 2
+
+Assigning sub
+ left @| op * right |& = |{`% assumed mul
+ left ]> op + right >& = `>| length 3
+ left &% op + right `> = `{{ length 3
+ left `/ op * right |{ = |&{ assumed mul
+ left \/ op - right \\ = -` op in output assume sub
+
+Assigning add
+ left @| op * right |& = |{`% assumed mul
+ left ]> op + right >& = `>| length 3 assume add
+ left &% op + right `> = `{{ assumed add
+ left `/ op * right |{ = |&{ assumed mul
+ left \/ op - right \\ = -` assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left @| op * right |& = |{`% assumed mul
+ left ]> op + right >& = `>| assumed add
+ left &% op + right `> = `{{ assumed add
+ left `/ op * right |{ = |&{ assumed mul
+ left \/ op - right \\ = -` assumed sub
+ left %/ op * right @@ the question, assumed mul
+
+Trying @=7 |=2 &=8 {=0 `=1 %=6 ]=9 >=3 /=4 \=5
+@|*|& = 72 mul 28 = 2016 vs |{`% 2016 diff 0 mul ok; 27 mul 82 = 2214 vs rev %`{| 6102 diff 3888 mul no
+]>+>& = 93 add 38 = 131 vs `>| 132 diff 1 add ok + 1; 39 add 83 = 122 vs rev |>` 231 diff 109 add no
+&%+`> = 86 add 13 = 99 vs `{{ 100 diff 1 add ok + 1; 68 add 31 = 99 vs rev {{` 001 diff 98 add no
+`/*|{ = 14 mul 20 = 280 vs |&{ 280 diff 0 mul ok; 41 mul 02 = 82 vs rev {&| 082 diff 0 mul ok
+\/-\\ = 54 sub 55 = 1 vs -` -1 diff 0 sub ok; 45 sub 55 = 10 vs rev -` -1 diff 9 sub no
+ accepted forward %/*@@ = 64 mul 77 = 4928 = \boxed{/]|&}

@@ -1,0 +1,66 @@
+!!*!! = !'$@
+%>->[ = -']
+%'-'@ = -|
+%>+[! = $']
+The question is @\-|>
+
+Operator symbols *-+
+Question operator symbol -
+Question operator in examples
+
+Digit symbols !'$@%>[]|\
+
+Checking concatenation
+left !! op * right !! expected !!!! versus !'$@ mismatch
+left %> op - right >[ expected %>>[ versus -'] mismatch
+left %' op - right '@ expected %''@ versus -| mismatch
+left %> op + right [! expected %>[! versus $'] mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left !! op * right !! expected !!!! versus !'$@ mismatch
+left %> op - right >[ expected >[%> versus -'] mismatch
+left %' op - right '@ expected '@%' versus -| mismatch
+left %> op + right [! expected [!%> versus $'] mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+!!*!! = !'$@
+%>->[ = -']
+%'-'@ = -|
+%>+[! = $']
+
+Assigning mul
+ left !! op * right !! = !'$@ length 4 assume mul
+ left %> op - right >[ = -'] length 3
+ left %' op - right '@ = -| length 2
+ left %> op + right [! = $'] length 3
+
+Assigning sub
+ left !! op * right !! = !'$@ assumed mul
+ left %> op - right >[ = -'] op in output assume sub
+ left %' op - right '@ = -| assumed sub
+ left %> op + right [! = $'] length 3
+
+Assigning add
+ left !! op * right !! = !'$@ assumed mul
+ left %> op - right >[ = -'] assumed sub
+ left %' op - right '@ = -| assumed sub
+ left %> op + right [! = $'] length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left !! op * right !! = !'$@ assumed mul
+ left %> op - right >[ = -'] assumed sub
+ left %' op - right '@ = -| assumed sub
+ left %> op + right [! = $'] assumed add
+ left @\ op - right |> the question, assumed sub
+
+Trying !=5 '=2 $=0 @=3 %=4 >=6 [=7 ]=1 |=8 \=9
+!!*!! = 55 mul 55 = 3025 vs !'$@ 5203 diff 2178 mul no; 55 mul 55 = 3025 vs rev @$'! 3025 diff 0 mul ok
+%>->[ = 46 sub 67 = 21 vs -'] -21 diff 0 sub ok; 64 sub 76 = 12 vs rev -]' -12 diff 0 sub ok
+%'-'@ = 42 sub 23 = 19 vs -| -8 diff 11 sub no; 24 sub 32 = 8 vs rev -| -8 diff 0 sub ok
+%>+[! = 46 add 75 = 121 vs $'] 021 diff 100 add no; 64 add 57 = 121 vs rev ]'$ 120 diff 1 add ok - 1
+ accepted rev @\-|> = 39 sub 86 rev 93 sub 68 = 25 rev 52 = \boxed{!'}

@@ -1,0 +1,215 @@
+/\*>' = /\>'
+:)*:? = :):?
+:'->& = >/
+?`+\! = //`
+?`-?: = /
+The question is `:+`!
+
+Operator symbols *-+
+Question operator symbol +
+Question operator in examples
+
+Digit symbols /\>':)?&`!
+
+Checking concatenation
+left /\ op * right >' expected /\>' versus /\>' match *
+left :) op * right :? expected :):? versus :):? match *
+left :' op - right >& expected :'>& versus >/ mismatch
+left ?` op + right \! expected ?`\! versus //` mismatch
+left ?` op - right ?: expected ?`?: versus / mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left /\ op * right >' expected >'/\ versus /\>' mismatch
+left :) op * right :? expected :?:) versus :):? mismatch
+left :' op - right >& expected >&:' versus >/ mismatch
+left ?` op + right \! expected \!?` versus //` mismatch
+left ?` op - right ?: expected ?:?` versus / mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+:'->& = >/
+?`+\! = //`
+?`-?: = /
+
+Assigning mul
+ left :' op - right >& = >/ length 2
+ left ?` op + right \! = //` length 3
+ left ?` op - right ?: = / length 1
+
+Assigning sub
+ left :' op - right >& = >/ length 2
+ left ?` op + right \! = //` length 3
+ left ?` op - right ?: = / length 1 assume sub
+
+Assigning add
+ left :' op - right >& = >/ assumed sub
+ left ?` op + right \! = //` length 3 assume add
+ left ?` op - right ?: = / assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left :' op - right >& = >/ assumed sub
+ left ?` op + right \! = //` assumed add
+ left ?` op - right ?: = / assumed sub
+ left `: op + right `! the question, assumed add
+
+Trying /=1 \=2 >=3 '=4 :=5 )=6 ?=7 &=8 `=9 !=0
+:'->& = 54 sub 38 = 16 vs >/ 31 diff 15 sub no; 45 sub 83 = 38 vs rev /> 13 diff 25 sub no
+ rejected none `:+`! = 95 add 90 = 185 vs `:+`! 9590 diff 9405 add no; 59 add 09 = 68 vs rev !`+:` 0959 diff 991 add no
+
+Trying /=0 \=1 >=2 '=3 :=4 )=5 ?=7 &=8 `=9 !=6
+:'->& = 43 sub 28 = 15 vs >/ 20 diff 5 sub no; 34 sub 82 = 48 vs rev /> 02 diff 46 sub no
+ rejected none `:+`! = 94 add 96 = 190 vs `:+`! 9496 diff 9306 add no; 49 add 69 = 118 vs rev !`+:` 6949 diff 6831 add no
+
+Trying /=6 \=0 >=1 '=2 :=4 )=5 ?=7 &=8 `=9 !=3
+:'->& = 42 sub 18 = 24 vs >/ 16 diff 8 sub no; 24 sub 81 = 57 vs rev /> 61 diff 4 sub no
+ rejected none `:+`! = 94 add 93 = 187 vs `:+`! 9493 diff 9306 add no; 49 add 39 = 88 vs rev !`+:` 3949 diff 3861 add no
+
+Trying /=3 \=6 >=0 '=1 :=4 )=5 ?=7 &=8 `=9 !=2
+:'->& = 41 sub 08 = 33 vs >/ 03 diff 30 sub no; 14 sub 80 = 66 vs rev /> 30 diff 36 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=7 \=3 >=6 '=0 :=4 )=5 ?=1 &=8 `=9 !=2
+:'->& = 40 sub 68 = 28 vs >/ 67 diff 39 sub no; 04 sub 86 = 82 vs rev /> 76 diff 6 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=2 \=7 >=3 '=6 :=4 )=5 ?=1 &=8 `=9 !=0
+:'->& = 46 sub 38 = 8 vs >/ 32 diff 24 sub no; 64 sub 83 = 19 vs rev /> 23 diff 4 sub no
+ rejected none `:+`! = 94 add 90 = 184 vs `:+`! 9490 diff 9306 add no; 49 add 09 = 58 vs rev !`+:` 0949 diff 909 add no
+
+Trying /=1 \=2 >=3 '=4 :=5 )=6 ?=7 &=8 `=9 !=0
+:'->& = 54 sub 38 = 16 vs >/ 31 diff 15 sub no; 45 sub 83 = 38 vs rev /> 13 diff 25 sub no
+ rejected none `:+`! = 95 add 90 = 185 vs `:+`! 9590 diff 9405 add no; 59 add 09 = 68 vs rev !`+:` 0959 diff 991 add no
+
+Trying /=0 \=1 >=2 '=3 :=4 )=5 ?=7 &=8 `=9 !=6
+:'->& = 43 sub 28 = 15 vs >/ 20 diff 5 sub no; 34 sub 82 = 48 vs rev /> 02 diff 46 sub no
+ rejected none `:+`! = 94 add 96 = 190 vs `:+`! 9496 diff 9306 add no; 49 add 69 = 118 vs rev !`+:` 6949 diff 6831 add no
+
+Trying /=6 \=0 >=1 '=2 :=4 )=5 ?=7 &=8 `=9 !=3
+:'->& = 42 sub 18 = 24 vs >/ 16 diff 8 sub no; 24 sub 81 = 57 vs rev /> 61 diff 4 sub no
+ rejected none `:+`! = 94 add 93 = 187 vs `:+`! 9493 diff 9306 add no; 49 add 39 = 88 vs rev !`+:` 3949 diff 3861 add no
+
+Trying /=3 \=6 >=0 '=1 :=4 )=5 ?=7 &=8 `=9 !=2
+:'->& = 41 sub 08 = 33 vs >/ 03 diff 30 sub no; 14 sub 80 = 66 vs rev /> 30 diff 36 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=7 \=3 >=6 '=0 :=4 )=5 ?=1 &=8 `=9 !=2
+:'->& = 40 sub 68 = 28 vs >/ 67 diff 39 sub no; 04 sub 86 = 82 vs rev /> 76 diff 6 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=2 \=7 >=3 '=6 :=4 )=5 ?=1 &=8 `=9 !=0
+:'->& = 46 sub 38 = 8 vs >/ 32 diff 24 sub no; 64 sub 83 = 19 vs rev /> 23 diff 4 sub no
+ rejected none `:+`! = 94 add 90 = 184 vs `:+`! 9490 diff 9306 add no; 49 add 09 = 58 vs rev !`+:` 0949 diff 909 add no
+
+Trying /=1 \=2 >=3 '=4 :=5 )=6 ?=7 &=8 `=9 !=0
+:'->& = 54 sub 38 = 16 vs >/ 31 diff 15 sub no; 45 sub 83 = 38 vs rev /> 13 diff 25 sub no
+ rejected none `:+`! = 95 add 90 = 185 vs `:+`! 9590 diff 9405 add no; 59 add 09 = 68 vs rev !`+:` 0959 diff 991 add no
+
+Trying /=0 \=1 >=2 '=3 :=4 )=5 ?=7 &=8 `=9 !=6
+:'->& = 43 sub 28 = 15 vs >/ 20 diff 5 sub no; 34 sub 82 = 48 vs rev /> 02 diff 46 sub no
+ rejected none `:+`! = 94 add 96 = 190 vs `:+`! 9496 diff 9306 add no; 49 add 69 = 118 vs rev !`+:` 6949 diff 6831 add no
+
+Trying /=6 \=0 >=1 '=2 :=4 )=5 ?=7 &=8 `=9 !=3
+:'->& = 42 sub 18 = 24 vs >/ 16 diff 8 sub no; 24 sub 81 = 57 vs rev /> 61 diff 4 sub no
+ rejected none `:+`! = 94 add 93 = 187 vs `:+`! 9493 diff 9306 add no; 49 add 39 = 88 vs rev !`+:` 3949 diff 3861 add no
+
+Trying /=3 \=6 >=0 '=1 :=4 )=5 ?=7 &=8 `=9 !=2
+:'->& = 41 sub 08 = 33 vs >/ 03 diff 30 sub no; 14 sub 80 = 66 vs rev /> 30 diff 36 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=7 \=3 >=6 '=0 :=4 )=5 ?=1 &=8 `=9 !=2
+:'->& = 40 sub 68 = 28 vs >/ 67 diff 39 sub no; 04 sub 86 = 82 vs rev /> 76 diff 6 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=2 \=7 >=3 '=6 :=4 )=5 ?=1 &=8 `=9 !=0
+:'->& = 46 sub 38 = 8 vs >/ 32 diff 24 sub no; 64 sub 83 = 19 vs rev /> 23 diff 4 sub no
+ rejected none `:+`! = 94 add 90 = 184 vs `:+`! 9490 diff 9306 add no; 49 add 09 = 58 vs rev !`+:` 0949 diff 909 add no
+
+Trying /=1 \=2 >=3 '=4 :=5 )=6 ?=7 &=8 `=9 !=0
+:'->& = 54 sub 38 = 16 vs >/ 31 diff 15 sub no; 45 sub 83 = 38 vs rev /> 13 diff 25 sub no
+ rejected none `:+`! = 95 add 90 = 185 vs `:+`! 9590 diff 9405 add no; 59 add 09 = 68 vs rev !`+:` 0959 diff 991 add no
+
+Trying /=0 \=1 >=2 '=3 :=4 )=5 ?=7 &=8 `=9 !=6
+:'->& = 43 sub 28 = 15 vs >/ 20 diff 5 sub no; 34 sub 82 = 48 vs rev /> 02 diff 46 sub no
+ rejected none `:+`! = 94 add 96 = 190 vs `:+`! 9496 diff 9306 add no; 49 add 69 = 118 vs rev !`+:` 6949 diff 6831 add no
+
+Trying /=6 \=0 >=1 '=2 :=4 )=5 ?=7 &=8 `=9 !=3
+:'->& = 42 sub 18 = 24 vs >/ 16 diff 8 sub no; 24 sub 81 = 57 vs rev /> 61 diff 4 sub no
+ rejected none `:+`! = 94 add 93 = 187 vs `:+`! 9493 diff 9306 add no; 49 add 39 = 88 vs rev !`+:` 3949 diff 3861 add no
+
+Trying /=3 \=6 >=0 '=1 :=4 )=5 ?=7 &=8 `=9 !=2
+:'->& = 41 sub 08 = 33 vs >/ 03 diff 30 sub no; 14 sub 80 = 66 vs rev /> 30 diff 36 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=7 \=3 >=6 '=0 :=4 )=5 ?=1 &=8 `=9 !=2
+:'->& = 40 sub 68 = 28 vs >/ 67 diff 39 sub no; 04 sub 86 = 82 vs rev /> 76 diff 6 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=2 \=7 >=3 '=6 :=4 )=5 ?=1 &=8 `=9 !=0
+:'->& = 46 sub 38 = 8 vs >/ 32 diff 24 sub no; 64 sub 83 = 19 vs rev /> 23 diff 4 sub no
+ rejected none `:+`! = 94 add 90 = 184 vs `:+`! 9490 diff 9306 add no; 49 add 09 = 58 vs rev !`+:` 0949 diff 909 add no
+
+Trying /=1 \=2 >=3 '=4 :=5 )=6 ?=7 &=8 `=9 !=0
+:'->& = 54 sub 38 = 16 vs >/ 31 diff 15 sub no; 45 sub 83 = 38 vs rev /> 13 diff 25 sub no
+ rejected none `:+`! = 95 add 90 = 185 vs `:+`! 9590 diff 9405 add no; 59 add 09 = 68 vs rev !`+:` 0959 diff 991 add no
+
+Trying /=0 \=1 >=2 '=3 :=4 )=5 ?=7 &=8 `=9 !=6
+:'->& = 43 sub 28 = 15 vs >/ 20 diff 5 sub no; 34 sub 82 = 48 vs rev /> 02 diff 46 sub no
+ rejected none `:+`! = 94 add 96 = 190 vs `:+`! 9496 diff 9306 add no; 49 add 69 = 118 vs rev !`+:` 6949 diff 6831 add no
+
+Trying /=6 \=0 >=1 '=2 :=4 )=5 ?=7 &=8 `=9 !=3
+:'->& = 42 sub 18 = 24 vs >/ 16 diff 8 sub no; 24 sub 81 = 57 vs rev /> 61 diff 4 sub no
+ rejected none `:+`! = 94 add 93 = 187 vs `:+`! 9493 diff 9306 add no; 49 add 39 = 88 vs rev !`+:` 3949 diff 3861 add no
+
+Trying /=3 \=6 >=0 '=1 :=4 )=5 ?=7 &=8 `=9 !=2
+:'->& = 41 sub 08 = 33 vs >/ 03 diff 30 sub no; 14 sub 80 = 66 vs rev /> 30 diff 36 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=7 \=3 >=6 '=0 :=4 )=5 ?=1 &=8 `=9 !=2
+:'->& = 40 sub 68 = 28 vs >/ 67 diff 39 sub no; 04 sub 86 = 82 vs rev /> 76 diff 6 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=2 \=7 >=3 '=6 :=4 )=5 ?=1 &=8 `=9 !=0
+:'->& = 46 sub 38 = 8 vs >/ 32 diff 24 sub no; 64 sub 83 = 19 vs rev /> 23 diff 4 sub no
+ rejected none `:+`! = 94 add 90 = 184 vs `:+`! 9490 diff 9306 add no; 49 add 09 = 58 vs rev !`+:` 0949 diff 909 add no
+
+Trying /=1 \=2 >=3 '=4 :=5 )=6 ?=7 &=8 `=9 !=0
+:'->& = 54 sub 38 = 16 vs >/ 31 diff 15 sub no; 45 sub 83 = 38 vs rev /> 13 diff 25 sub no
+ rejected none `:+`! = 95 add 90 = 185 vs `:+`! 9590 diff 9405 add no; 59 add 09 = 68 vs rev !`+:` 0959 diff 991 add no
+
+Trying /=0 \=1 >=2 '=3 :=4 )=5 ?=7 &=8 `=9 !=6
+:'->& = 43 sub 28 = 15 vs >/ 20 diff 5 sub no; 34 sub 82 = 48 vs rev /> 02 diff 46 sub no
+ rejected none `:+`! = 94 add 96 = 190 vs `:+`! 9496 diff 9306 add no; 49 add 69 = 118 vs rev !`+:` 6949 diff 6831 add no
+
+Trying /=6 \=0 >=1 '=2 :=4 )=5 ?=7 &=8 `=9 !=3
+:'->& = 42 sub 18 = 24 vs >/ 16 diff 8 sub no; 24 sub 81 = 57 vs rev /> 61 diff 4 sub no
+ rejected none `:+`! = 94 add 93 = 187 vs `:+`! 9493 diff 9306 add no; 49 add 39 = 88 vs rev !`+:` 3949 diff 3861 add no
+
+Trying /=3 \=6 >=0 '=1 :=4 )=5 ?=7 &=8 `=9 !=2
+:'->& = 41 sub 08 = 33 vs >/ 03 diff 30 sub no; 14 sub 80 = 66 vs rev /> 30 diff 36 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=7 \=3 >=6 '=0 :=4 )=5 ?=1 &=8 `=9 !=2
+:'->& = 40 sub 68 = 28 vs >/ 67 diff 39 sub no; 04 sub 86 = 82 vs rev /> 76 diff 6 sub no
+ rejected none `:+`! = 94 add 92 = 186 vs `:+`! 9492 diff 9306 add no; 49 add 29 = 78 vs rev !`+:` 2949 diff 2871 add no
+
+Trying /=2 \=7 >=3 '=6 :=4 )=5 ?=1 &=8 `=9 !=0
+:'->& = 46 sub 38 = 8 vs >/ 32 diff 24 sub no; 64 sub 83 = 19 vs rev /> 23 diff 4 sub no
+ rejected none `:+`! = 94 add 90 = 184 vs `:+`! 9490 diff 9306 add no; 49 add 09 = 58 vs rev !`+:` 0949 diff 909 add no
+
+Trying /=1 \=2 >=3 '=4 :=5 )=6 ?=7 &=8 `=9 !=0
+:'->& = 54 sub 38 = 16 vs >/ 31 diff 15 sub no; 45 sub 83 = 38 vs rev /> 13 diff 25 sub no
+ rejected none `:+`! = 95 add 90 = 185 vs `:+`! 9590 diff 9405 add no; 59 add 09 = 68 vs rev !`+:` 0959 diff 991 add no
+
+Trying /=0 \=1 >=2 '=3 :=4 )=5 ?=7 &=8 `=9 !=6
+:'->& = 43 sub 28 = 15 vs >/ 20 diff 5 sub no; 34 sub 82 = 48 vs rev /> 02 diff 46 sub no
+ rejected none `:+`! = 94 add 96 = 190 vs `:+`! 9496 diff 9306 add no; 49 add 69 = 118 vs rev !`+:` 6949 diff 6831 add no
+
+Trying /=6 \=0 >=1 '=2 :=4 )=5 ?=7 &=8 `=9 !=3
+:'->& = 42 sub 18 = 24 vs >/ 16 diff 8 sub no; 24 sub 81 = 57 vs rev /> 61 diff 4 sub no
+ rejected none `:+`! = 94 add 93 = 187 vs `:+`! 9493 diff 9306 add no; 49 add 39 = 88 vs rev !`+:` 3949 diff 3861 add no
+
+Trying /=3 \=6 >=

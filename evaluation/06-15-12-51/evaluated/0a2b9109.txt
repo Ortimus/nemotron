@@ -1,0 +1,250 @@
+|:*%( = ^^
+#|-|# = -?$
+?%)|( = (^^
+|?*(| = ?:!
+The question is $[-^:
+
+Operator symbols *-)
+Question operator symbol -
+Question operator in examples
+
+Digit symbols |:%(^#?$![
+
+Checking concatenation
+left |: op * right %( expected |:%( versus ^^ mismatch
+left #| op - right |# expected #||# versus -?$ mismatch
+left ?% op ) right |( expected ?%|( versus (^^ mismatch
+left |? op * right (| expected |?(| versus ?:! mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left |: op * right %( expected %(|: versus ^^ mismatch
+left #| op - right |# expected |##| versus -?$ mismatch
+left ?% op ) right |( expected |(?% versus (^^ mismatch
+left |? op * right (| expected (||? versus ?:! mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+|:*%( = ^^
+#|-|# = -?$
+?%)|( = (^^
+|?*(| = ?:!
+
+Assigning mul
+ left |: op * right %( = ^^ length 2
+ left #| op - right |# = -?$ length 3
+ left ?% op ) right |( = (^^ length 3
+ left |? op * right (| = ?:! length 3
+
+Assigning sub
+ left |: op * right %( = ^^ length 2
+ left #| op - right |# = -?$ op in output assume sub
+ left ?% op ) right |( = (^^ length 3
+ left |? op * right (| = ?:! length 3
+
+Assigning add
+ left |: op * right %( = ^^ length 2
+ left #| op - right |# = -?$ assumed sub
+ left ?% op ) right |( = (^^ length 3 assume add
+ left |? op * right (| = ?:! length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left |: op * right %( = ^^ assumed add
+ left #| op - right |# = -?$ assumed sub
+ left ?% op ) right |( = (^^ assumed add
+ left |? op * right (| = ?:! assumed add
+ left $[ op - right ^: the question, assumed sub
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+#|-|# = 41 sub 14 = 27 vs -?$ -56 diff 29 sub no; 14 sub 41 = 27 vs rev -$? -65 diff 38 sub no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3 [=2
+|:*%( = 97 add 18 = 115 vs ^^ 00 diff 115 add no; 79 add 81 = 160 vs rev ^^ 00 diff 160 add no
+ rejected none $[-^: = 62 sub 07 rev 26 sub 70 = 44 rev 44 = final answer: ##
+
+Trying |=6 :=9 %=7 (=1 ^=0 #=4 ?=5 $=8 !=3 [=2
+|:*%( = 69 add 71 = 140 vs ^^ 00 diff 140 add no; 96 add 17 = 113 vs rev ^^ 00 diff 113 add no
+ rejected none $[-^: = 82 sub 09 rev 28 sub 90 = 62 rev 26 = final answer: [|
+
+Trying |=3 :=6 %=9 (=7 ^=0 #=4 ?=5 $=8 !=1 [=2
+|:*%( = 36 add 97 = 133 vs ^^ 00 diff 133 add no; 63 add 79 = 142 vs rev ^^ 00 diff 142 add no
+ rejected none $[-^: = 82 sub 06 rev 28 sub 60 = 32 rev 23 = final answer: [|
+
+Trying |=1 :=8 %=2 (=3 ^=0 #=4 ?=5 $=6 !=9 [=7
+|:*%( = 18 add 23 = 41 vs ^^ 00 diff 41 add no; 81 add 32 = 113 vs rev ^^ 00 diff 113 add no
+ rejected forward $[-^: = 67 sub 08 = 59 = final answer: ?!
+
+Trying |=7 :=1 %=8 (=2 ^=0 #=4 ?=5 $=6 !=9 [=3
+|:*%( = 71 add 82 = 153 vs ^^ 00 diff 153 add no; 17 add 28 = 45 vs rev ^^ 00 diff 45 add no
+ rejected none $[-^: = 63 sub 01 rev 36 sub 10 = 26 rev 62 = final answer: $(
+
+Trying |=9 :=7 %=1 (=8 ^=0 #=4 ?=5 $=6 !=3

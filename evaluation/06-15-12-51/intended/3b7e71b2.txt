@@ -1,0 +1,182 @@
+48|42 = 06|
+02$89 = 811
+54|77 = 23
+02!67 = 1251
+
+The inputs are 48, 42, 02, 89, 54, 77, 02, 67
+
+The outputs are 06|, 811, 23, 1251
+Some example outputs have the operator symbol as suffix |.
+We now consider the outputs to be -06, 811, 23, 1251
+We will add back the operator suffix if our answer is negative.
+
+Looking at the input of the examples
+48|42 -> |
+02$89 -> $
+54|77 -> |
+02!67 -> !
+
+The operators
+|
+$
+!
+
+Looking at the question
+17!28 -> !
+The question operator is found in the examples.
+
+Looking at operator ! [02!67 = 1251]:
+
+Trying common operations
+ reversed operands [02->20 67->76] and reversed result [expected (20,76)->1251]
+ addition
+ (20,76)->1251: 20 + 76 = 96 rev-> 69 mismatch
+ multiplication
+ (20,76)->1251: (20 + 0) * 76 = 20 * 76 + 0 * 76 = 1520 + 0 = 1520 rev-> 0251 mismatch
+ concatenation
+ (20,76)->1251: 20 || 76 = 2076 rev-> 6702 mismatch
+ reverse concatenation
+ (20,76)->1251: 76 || 20 = 7620 rev-> 0267 mismatch
+
+ identity [02 67] [expected (02,67)->1251]
+ addition
+ (02,67)->1251: 02 + 67 = 69 mismatch
+ multiplication
+ (02,67)->1251: (0 + 2) * 67 = 0 * 67 + 2 * 67 = 0 + 134 = 134 mismatch
+ concatenation
+ (02,67)->1251: 02 || 67 = 0267 mismatch
+ reverse concatenation
+ (02,67)->1251: 67 || 02 = 6702 mismatch
+
+Trying difference operations
+ reversed operands [02->20 67->76] and reversed result [expected (20,76)->1251]
+ subtraction (a-b)
+ (20,76)->1251: 20 - 76 = -56 rev-> -65 mismatch
+ absolute difference
+ (20,76)->1251: |20 - 76| = 56 rev-> 65 mismatch
+ max mod min
+ (20,76)->1251: max(20,76) mod min(20,76) = 76 mod 20 = 16 rev-> 61 mismatch
+ negated absolute difference
+ (20,76)->1251: -|20 - 76| = -56 rev-> -65 mismatch
+ reverse subtraction (b-a)
+ (20,76)->1251: 76 - 20 = 56 rev-> 65 mismatch
+ modulo (a mod b)
+ (20,76)->1251: 20 mod 76 = 20 rev-> 02 mismatch
+
+ identity [02 67] [expected (02,67)->1251]
+ subtraction (a-b)
+ (02,67)->1251: 02 - 67 = -65 mismatch
+ absolute difference
+ (02,67)->1251: |02 - 67| = 65 mismatch
+ max mod min
+ (02,67)->1251: max(02,67) mod min(02,67) = 67 mod 02 = 1 mismatch
+ negated absolute difference
+ (02,67)->1251: -|02 - 67| = -65 mismatch
+ reverse subtraction (b-a)
+ (02,67)->1251: 67 - 02 = 65 mismatch
+ modulo (a mod b)
+ (02,67)->1251: 02 mod 67 = 2 mismatch
+
+Trying rare operations
+ reversed operands [02->20 67->76] and reversed result [expected (20,76)->1251]
+ multiply+1
+ (20,76)->1251: (20 + 0) * 76 + 1 = 20 * 76 + 0 * 76 + 1 = 1520 + 0 + 1 = 1520 + 1 = 1521 rev-> 1251 match
+ correct, actions: reversed operands, reversed result, multiply+1
+ multiply-1
+ (20,76)->1251: (20 + 0) * 76 - 1 = 20 * 76 + 0 * 76 - 1 = 1520 + 0 - 1 = 1520 - 1 = 1519 rev-> 9151 mismatch
+ add+1
+ (20,76)->1251: 20 + 76 + 1 = 97 rev-> 79 mismatch
+ add-1
+ (20,76)->1251: 20 + 76 - 1 = 95 rev-> 59 mismatch
+ sub+1
+ (20,76)->1251: 20 - 76 + 1 = -55 rev-> -55 mismatch
+ sub-1
+ (20,76)->1251: 20 - 76 - 1 = -57 rev-> -75 mismatch
+ integer division (a/b)
+ (20,76)->1251: 20 / 76 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (20,76)->1251: 76 / 20 = 3 rev-> 3 mismatch
+ reverse modulo (b mod a)
+ (20,76)->1251: 76 mod 20 = 16 rev-> 61 mismatch
+ digit absolute diff
+ (20,76)->1251: |2-7| || |0-6| = 56 rev-> 65 mismatch
+ digit add mod10
+ (20,76)->1251: (2+7)%10 || (0+6)%10 = 96 rev-> 69 mismatch
+ digit sub mod10
+ (20,76)->1251: (2-7)%10 || (0-6)%10 = 54 rev-> 45 mismatch
+ cross multiply
+ (20,76)->1251: 2*7 + 0*6 = 14 + 0 = 14 rev-> 41 mismatch
+ cross multiply rev
+ (20,76)->1251: 2*6 + 0*7 = 12 + 0 = 12 rev-> 21 mismatch
+ digit multiply
+ (20,76)->1251: 2*7 || 0*6 = 14 || 0 = 140 rev-> 041 mismatch
+ digit multiply rev
+ (20,76)->1251: 2*6 || 0*7 = 12 || 0 = 120 rev-> 021 mismatch
+ digit sum diff
+ (20,76)->1251: (2+0) - (7+6) = -11 rev-> -11 mismatch
+ digit sum sum
+ (20,76)->1251: (2+0) + (7+6) = 15 rev-> 51 mismatch
+ digit product diff
+ (20,76)->1251: 2*0 - 7*6 = 0 - 42 = -42 rev-> -24 mismatch
+ digit product sum
+ (20,76)->1251: 2*0 + 7*6 = 0 + 42 = 42 rev-> 24 mismatch
+ determinant
+ (20,76)->1251: 2*6 - 0*7 = 12 - 0 = 12 rev-> 21 mismatch
+ abs determinant
+ (20,76)->1251: |2*6 - 0*7| = |12 - 0| = 12 rev-> 21 mismatch
+
+ identity [02 67] [expected (02,67)->1251]
+ multiply+1
+ (02,67)->1251: (0 + 2) * 67 + 1 = 0 * 67 + 2 * 67 + 1 = 0 + 134 + 1 = 134 + 1 = 135 mismatch
+ multiply-1
+ (02,67)->1251: (0 + 2) * 67 - 1 = 0 * 67 + 2 * 67 - 1 = 0 + 134 - 1 = 134 - 1 = 133 mismatch
+ add+1
+ (02,67)->1251: 02 + 67 + 1 = 70 mismatch
+ add-1
+ (02,67)->1251: 02 + 67 - 1 = 68 mismatch
+ sub+1
+ (02,67)->1251: 02 - 67 + 1 = -64 mismatch
+ sub-1
+ (02,67)->1251: 02 - 67 - 1 = -66 mismatch
+ integer division (a/b)
+ (02,67)->1251: 02 / 67 = 0 mismatch
+ reverse division (b/a)
+ (02,67)->1251: 67 / 02 = 33 mismatch
+ reverse modulo (b mod a)
+ (02,67)->1251: 67 mod 02 = 1 mismatch
+ digit absolute diff
+ (02,67)->1251: |0-6| || |2-7| = 65 mismatch
+ digit add mod10
+ (02,67)->1251: (0+6)%10 || (2+7)%10 = 69 mismatch
+ digit sub mod10
+ (02,67)->1251: (0-6)%10 || (2-7)%10 = 45 mismatch
+ cross multiply
+ (02,67)->1251: 0*6 + 2*7 = 0 + 14 = 14 mismatch
+ cross multiply rev
+ (02,67)->1251: 0*7 + 2*6 = 0 + 12 = 12 mismatch
+ digit multiply
+ (02,67)->1251: 0*6 || 2*7 = 0 || 14 = 014 mismatch
+ digit multiply rev
+ (02,67)->1251: 0*7 || 2*6 = 0 || 12 = 012 mismatch
+ digit sum diff
+ (02,67)->1251: (0+2) - (6+7) = -11 mismatch
+ digit sum sum
+ (02,67)->1251: (0+2) + (6+7) = 15 mismatch
+ digit product diff
+ (02,67)->1251: 0*2 - 6*7 = 0 - 42 = -42 mismatch
+ digit product sum
+ (02,67)->1251: 0*2 + 6*7 = 0 + 42 = 42 mismatch
+ determinant
+ (02,67)->1251: 0*7 - 2*6 = 0 - 12 = -12 mismatch
+ abs determinant
+ (02,67)->1251: |0*7 - 2*6| = |0 - 12| = 12 mismatch
+
+correct, actions: reversed operands, reversed result, multiply+1
+
+Applying to 17!28:
+ We recall that the question operator is found in the examples.
+ reversed operands [17->71, 28->82] and reversed result
+ multiply+1
+ (71,82): (70 + 1) * 82 + 1 = 70 * 82 + 1 * 82 + 1 = 5740 + 82 + 1 = 5822 + 1 = 5823 rev-> 3285
+ Result is non-negative
+ \boxed{3285}

@@ -1,0 +1,182 @@
+93+97 = 811
+73-66 = -92
+41*27 = 9001
+01+34 = 35
+
+The inputs are 93, 97, 73, 66, 41, 27, 01, 34
+
+The outputs are 811, -92, 9001, 35
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 811, -92, 9001, 35
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+93+97 -> +
+73-66 -> -
+41*27 -> *
+01+34 -> +
+
+The operators
++
+-
+*
+
+Looking at the question
+92*09 -> *
+The question operator is found in the examples.
+
+Looking at operator * [41*27 = 9001]:
+
+Trying common operations
+ reversed operands [41->14 27->72] and reversed result [expected (14,72)->9001]
+ addition
+ (14,72)->9001: 14 + 72 = 86 rev-> 68 mismatch
+ multiplication
+ (14,72)->9001: (10 + 4) * 72 = 10 * 72 + 4 * 72 = 720 + 288 = 1008 rev-> 8001 mismatch
+ concatenation
+ (14,72)->9001: 14 || 72 = 1472 rev-> 2741 mismatch
+ reverse concatenation
+ (14,72)->9001: 72 || 14 = 7214 rev-> 4127 mismatch
+
+ identity [41 27] [expected (41,27)->9001]
+ addition
+ (41,27)->9001: 41 + 27 = 68 mismatch
+ multiplication
+ (41,27)->9001: (40 + 1) * 27 = 40 * 27 + 1 * 27 = 1080 + 27 = 1107 mismatch
+ concatenation
+ (41,27)->9001: 41 || 27 = 4127 mismatch
+ reverse concatenation
+ (41,27)->9001: 27 || 41 = 2741 mismatch
+
+Trying difference operations
+ reversed operands [41->14 27->72] and reversed result [expected (14,72)->9001]
+ subtraction (a-b)
+ (14,72)->9001: 14 - 72 = -58 rev-> -85 mismatch
+ absolute difference
+ (14,72)->9001: |14 - 72| = 58 rev-> 85 mismatch
+ max mod min
+ (14,72)->9001: max(14,72) mod min(14,72) = 72 mod 14 = 2 rev-> 2 mismatch
+ negated absolute difference
+ (14,72)->9001: -|14 - 72| = -58 rev-> -85 mismatch
+ reverse subtraction (b-a)
+ (14,72)->9001: 72 - 14 = 58 rev-> 85 mismatch
+ modulo (a mod b)
+ (14,72)->9001: 14 mod 72 = 14 rev-> 41 mismatch
+
+ identity [41 27] [expected (41,27)->9001]
+ subtraction (a-b)
+ (41,27)->9001: 41 - 27 = 14 mismatch
+ absolute difference
+ (41,27)->9001: |41 - 27| = 14 mismatch
+ max mod min
+ (41,27)->9001: max(41,27) mod min(41,27) = 41 mod 27 = 14 mismatch
+ negated absolute difference
+ (41,27)->9001: -|41 - 27| = -14 mismatch
+ reverse subtraction (b-a)
+ (41,27)->9001: 27 - 41 = -14 mismatch
+ modulo (a mod b)
+ (41,27)->9001: 41 mod 27 = 14 mismatch
+
+Trying rare operations
+ reversed operands [41->14 27->72] and reversed result [expected (14,72)->9001]
+ multiply+1
+ (14,72)->9001: (10 + 4) * 72 + 1 = 10 * 72 + 4 * 72 + 1 = 720 + 288 + 1 = 1008 + 1 = 1009 rev-> 9001 match
+ correct, actions: reversed operands, reversed result, multiply+1
+ multiply-1
+ (14,72)->9001: (10 + 4) * 72 - 1 = 10 * 72 + 4 * 72 - 1 = 720 + 288 - 1 = 1008 - 1 = 1007 rev-> 7001 mismatch
+ add+1
+ (14,72)->9001: 14 + 72 + 1 = 87 rev-> 78 mismatch
+ add-1
+ (14,72)->9001: 14 + 72 - 1 = 85 rev-> 58 mismatch
+ sub+1
+ (14,72)->9001: 14 - 72 + 1 = -57 rev-> -75 mismatch
+ sub-1
+ (14,72)->9001: 14 - 72 - 1 = -59 rev-> -95 mismatch
+ integer division (a/b)
+ (14,72)->9001: 14 / 72 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (14,72)->9001: 72 / 14 = 5 rev-> 5 mismatch
+ reverse modulo (b mod a)
+ (14,72)->9001: 72 mod 14 = 2 rev-> 2 mismatch
+ digit absolute diff
+ (14,72)->9001: |1-7| || |4-2| = 62 rev-> 26 mismatch
+ digit add mod10
+ (14,72)->9001: (1+7)%10 || (4+2)%10 = 86 rev-> 68 mismatch
+ digit sub mod10
+ (14,72)->9001: (1-7)%10 || (4-2)%10 = 42 rev-> 24 mismatch
+ cross multiply
+ (14,72)->9001: 1*7 + 4*2 = 7 + 8 = 15 rev-> 51 mismatch
+ cross multiply rev
+ (14,72)->9001: 1*2 + 4*7 = 2 + 28 = 30 rev-> 03 mismatch
+ digit multiply
+ (14,72)->9001: 1*7 || 4*2 = 7 || 8 = 78 rev-> 87 mismatch
+ digit multiply rev
+ (14,72)->9001: 1*2 || 4*7 = 2 || 28 = 228 rev-> 822 mismatch
+ digit sum diff
+ (14,72)->9001: (1+4) - (7+2) = -4 rev-> -4 mismatch
+ digit sum sum
+ (14,72)->9001: (1+4) + (7+2) = 14 rev-> 41 mismatch
+ digit product diff
+ (14,72)->9001: 1*4 - 7*2 = 4 - 14 = -10 rev-> -01 mismatch
+ digit product sum
+ (14,72)->9001: 1*4 + 7*2 = 4 + 14 = 18 rev-> 81 mismatch
+ determinant
+ (14,72)->9001: 1*2 - 4*7 = 2 - 28 = -26 rev-> -62 mismatch
+ abs determinant
+ (14,72)->9001: |1*2 - 4*7| = |2 - 28| = 26 rev-> 62 mismatch
+
+ identity [41 27] [expected (41,27)->9001]
+ multiply+1
+ (41,27)->9001: (40 + 1) * 27 + 1 = 40 * 27 + 1 * 27 + 1 = 1080 + 27 + 1 = 1107 + 1 = 1108 mismatch
+ multiply-1
+ (41,27)->9001: (40 + 1) * 27 - 1 = 40 * 27 + 1 * 27 - 1 = 1080 + 27 - 1 = 1107 - 1 = 1106 mismatch
+ add+1
+ (41,27)->9001: 41 + 27 + 1 = 69 mismatch
+ add-1
+ (41,27)->9001: 41 + 27 - 1 = 67 mismatch
+ sub+1
+ (41,27)->9001: 41 - 27 + 1 = 15 mismatch
+ sub-1
+ (41,27)->9001: 41 - 27 - 1 = 13 mismatch
+ integer division (a/b)
+ (41,27)->9001: 41 / 27 = 1 mismatch
+ reverse division (b/a)
+ (41,27)->9001: 27 / 41 = 0 mismatch
+ reverse modulo (b mod a)
+ (41,27)->9001: 27 mod 41 = 27 mismatch
+ digit absolute diff
+ (41,27)->9001: |4-2| || |1-7| = 26 mismatch
+ digit add mod10
+ (41,27)->9001: (4+2)%10 || (1+7)%10 = 68 mismatch
+ digit sub mod10
+ (41,27)->9001: (4-2)%10 || (1-7)%10 = 24 mismatch
+ cross multiply
+ (41,27)->9001: 4*2 + 1*7 = 8 + 7 = 15 mismatch
+ cross multiply rev
+ (41,27)->9001: 4*7 + 1*2 = 28 + 2 = 30 mismatch
+ digit multiply
+ (41,27)->9001: 4*2 || 1*7 = 8 || 7 = 87 mismatch
+ digit multiply rev
+ (41,27)->9001: 4*7 || 1*2 = 28 || 2 = 282 mismatch
+ digit sum diff
+ (41,27)->9001: (4+1) - (2+7) = -4 mismatch
+ digit sum sum
+ (41,27)->9001: (4+1) + (2+7) = 14 mismatch
+ digit product diff
+ (41,27)->9001: 4*1 - 2*7 = 4 - 14 = -10 mismatch
+ digit product sum
+ (41,27)->9001: 4*1 + 2*7 = 4 + 14 = 18 mismatch
+ determinant
+ (41,27)->9001: 4*7 - 1*2 = 28 - 2 = 26 mismatch
+ abs determinant
+ (41,27)->9001: |4*7 - 1*2| = |28 - 2| = 26 mismatch
+
+correct, actions: reversed operands, reversed result, multiply+1
+
+Applying to 92*09:
+ We recall that the question operator is found in the examples.
+ reversed operands [92->29, 09->90] and reversed result
+ multiply+1
+ (29,90): (20 + 9) * 90 + 1 = 20 * 90 + 9 * 90 + 1 = 1800 + 810 + 1 = 2610 + 1 = 2611 rev-> 1162
+ Result is non-negative
+ \boxed{1162}

@@ -1,0 +1,250 @@
+"{+:$ = $$\
+!^+{: = \?\
+"$+^{ = \$\
+$$+'\ = \"
+"$*\" = "^|^
+The question is !'-${
+
+Operator symbols +*
+Question operator symbol -
+Question operator not in examples
+
+Digit symbols "{:$\!^?'|
+
+Checking concatenation
+left "{ op + right :$ expected "{:$ versus $$\ mismatch
+left !^ op + right {: expected !^{: versus \?\ mismatch
+left "$ op + right ^{ expected "$^{ versus \$\ mismatch
+left $$ op + right '\ expected $$'\ versus \" mismatch
+left "$ op * right \" expected "$\" versus "^|^ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left "{ op + right :$ expected :$"{ versus $$\ mismatch
+left !^ op + right {: expected {:!^ versus \?\ mismatch
+left "$ op + right ^{ expected ^{"$ versus \$\ mismatch
+left $$ op + right '\ expected '\$$ versus \" mismatch
+left "$ op * right \" expected \""$ versus "^|^ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+"{+:$ = $$\
+!^+{: = \?\
+"$+^{ = \$\
+$$+'\ = \"
+"$*\" = "^|^
+
+Assigning mul
+ left "{ op + right :$ = $$\ length 3
+ left !^ op + right {: = \?\ length 3
+ left "$ op + right ^{ = \$\ length 3
+ left $$ op + right '\ = \" length 2
+ left "$ op * right \" = "^|^ length 4 assume mul
+
+Assigning sub
+ left "{ op + right :$ = $$\ length 3
+ left !^ op + right {: = \?\ length 3
+ left "$ op + right ^{ = \$\ length 3
+ left $$ op + right '\ = \" length 2
+ left "$ op * right \" = "^|^ assumed mul
+
+Assigning add
+ left "{ op + right :$ = $$\ length 3 assume add
+ left !^ op + right {: = \?\ assumed add
+ left "$ op + right ^{ = \$\ assumed add
+ left $$ op + right '\ = \" assumed add
+ left "$ op * right \" = "^|^ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left "{ op + right :$ = $$\ assumed add
+ left !^ op + right {: = \?\ assumed add
+ left "$ op + right ^{ = \$\ assumed add
+ left $$ op + right '\ = \" assumed add
+ left "$ op * right \" = "^|^ assumed mul
+ left !' op - right ${ the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+!^+{: = 67 add 23 = 90 vs \?\ 585 diff 495 add no; 76 add 32 = 108 vs rev \?\ 585 diff 477 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=5 !=6 ^=7 ?=8 '=9 |=0
+"{+:$ = 12 add 34 = 46 vs $$\ 445 diff 399 add no; 21 add 43 = 64 vs rev \$$ 544 diff 480 add no
+ rejected forward !'-${ = 69 sub 42 = 27 = final answer: {^
+
+Trying "=0 {=1 :=2 $=3 \=4 !=5 ^=7 ?=8 '=9 |=6
+"{+:$ = 01 add 23 = 24 vs $$\ 334 diff 310 add no; 10 add 32 = 42 vs rev \$$ 433 diff 391 add no
+ rejected none !'-${ = 59 sub 31 rev 95 sub 13 = 82 rev 28 = final answer: :?
+
+Trying "=8 {=0 :=1 $=2 \=3 !=4 ^=7 ?=5 '=9 |=6
+"{+:$ = 80 add 12 = 92 vs $$\ 223 diff 131 add no; 08 add 21 = 29 vs rev \$$ 322 diff 293 add no
+ rejected none !'-${ = 49 sub 20 rev 94 sub 02 = 92 rev 29 = final answer: $'
+
+Trying "=5 {=8 :=0 $=1 \=2 !=4 ^=7 ?=3 '=9 |=6
+"{+:$ = 58 add 01 = 59 vs $$\ 112 diff 53 add no; 85 add 10 = 95 vs rev \$$ 211 diff 116 add no
+ rejected none !'-${ = 49 sub 18 rev 94 sub 81 = 13 rev 31 = final answer: ?$
+
+Trying "=6 {=5 :=8 $=0 \=3 !=4 ^=7 ?=2 '=9 |=1
+"{+:$ = 65 add 80 = 145 vs $$\ 003 diff 142 add no; 56 add 08 = 64 vs rev \$$ 300 diff 236 add no
+ rejected none !'-${ = 49 sub 05 rev 94 sub 50 = 44 rev 44 = final answer: !!
+
+Trying "=1 {=2 :=3 $=4 \=

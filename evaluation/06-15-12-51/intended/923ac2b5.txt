@@ -1,0 +1,75 @@
+')-]# = -#]
+')*': = @\]:
+)<+][ = [)\
+]:+#[ = [[|
+:]+|' = [)'
+The question is '[*@@
+
+Operator symbols -*+
+Question operator symbol *
+Question operator in examples
+
+Digit symbols ')]#:@\<[|
+
+Checking concatenation
+left ') op - right ]# expected ')]# versus -#] mismatch
+left ') op * right ': expected ')': versus @\]: mismatch
+left )< op + right ][ expected )<][ versus [)\ mismatch
+left ]: op + right #[ expected ]:#[ versus [[| mismatch
+left :] op + right |' expected :]|' versus [)' mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left ') op - right ]# expected ]#') versus -#] mismatch
+left ') op * right ': expected ':') versus @\]: mismatch
+left )< op + right ][ expected ][)< versus [)\ mismatch
+left ]: op + right #[ expected #[]: versus [[| mismatch
+left :] op + right |' expected |':] versus [)' mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+')-]# = -#]
+')*': = @\]:
+)<+][ = [)\
+]:+#[ = [[|
+:]+|' = [)'
+
+Assigning mul
+ left ') op - right ]# = -#] length 3
+ left ') op * right ': = @\]: length 4 assume mul
+ left )< op + right ][ = [)\ length 3
+ left ]: op + right #[ = [[| length 3
+ left :] op + right |' = [)' length 3
+
+Assigning sub
+ left ') op - right ]# = -#] op in output assume sub
+ left ') op * right ': = @\]: assumed mul
+ left )< op + right ][ = [)\ length 3
+ left ]: op + right #[ = [[| length 3
+ left :] op + right |' = [)' length 3
+
+Assigning add
+ left ') op - right ]# = -#] assumed sub
+ left ') op * right ': = @\]: assumed mul
+ left )< op + right ][ = [)\ length 3 assume add
+ left ]: op + right #[ = [[| assumed add
+ left :] op + right |' = [)' assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ') op - right ]# = -#] assumed sub
+ left ') op * right ': = @\]: assumed mul
+ left )< op + right ][ = [)\ assumed add
+ left ]: op + right #[ = [[| assumed add
+ left :] op + right |' = [)' assumed add
+ left '[ op * right @@ the question, assumed mul
+
+Trying '=6 )=3 ]=9 #=2 :=5 @=4 \=0 <=8 [=1 |=7
+')-]# = 63 sub 92 = 29 vs -#] -29 diff 0 sub ok; 36 sub 29 = 7 vs rev -]# -92 diff 85 sub no
+')*': = 63 mul 65 = 4095 vs @\]: 4095 diff 0 mul ok; 36 mul 56 = 2016 vs rev :]\@ 5904 diff 3888 mul no
+)<+][ = 38 add 91 = 129 vs [)\ 130 diff 1 add ok + 1; 83 add 19 = 102 vs rev \)[ 031 diff 71 add no
+]:+#[ = 95 add 21 = 116 vs [[| 117 diff 1 add ok + 1; 59 add 12 = 71 vs rev |[[ 711 diff 640 add no
+:]+|' = 59 add 76 = 135 vs [)' 136 diff 1 add ok + 1; 95 add 67 = 162 vs rev ')[ 631 diff 469 add no
+ accepted forward '[*@@ = 61 mul 44 = 2684 = \boxed{#'<@}

@@ -1,0 +1,75 @@
+/%<@{ = %(
+$@&^) = /$
+{@&|/ = @$
+$:<:@ = ()
+%:&@@ = /|&
+The question is |@<:(
+
+Operator symbols <&
+Question operator symbol <
+Question operator in examples
+
+Digit symbols /%@{($^)|:
+
+Checking concatenation
+left /% op < right @{ expected /%@{ versus %( mismatch
+left $@ op & right ^) expected $@^) versus /$ mismatch
+left {@ op & right |/ expected {@|/ versus @$ mismatch
+left $: op < right :@ expected $::@ versus () mismatch
+left %: op & right @@ expected %:@@ versus /|& mismatch
+
+Question operator < is not concatenation
+
+Checking reverse concatenation
+left /% op < right @{ expected @{/% versus %( mismatch
+left $@ op & right ^) expected ^)$@ versus /$ mismatch
+left {@ op & right |/ expected |/{@ versus @$ mismatch
+left $: op < right :@ expected :@$: versus () mismatch
+left %: op & right @@ expected @@%: versus /|& mismatch
+
+Question operator < is not reverse concatenation
+
+Filtering out the concatenation operations
+/%<@{ = %(
+$@&^) = /$
+{@&|/ = @$
+$:<:@ = ()
+%:&@@ = /|&
+
+Assigning mul
+ left /% op < right @{ = %( length 2
+ left $@ op & right ^) = /$ length 2
+ left {@ op & right |/ = @$ length 2
+ left $: op < right :@ = () length 2
+ left %: op & right @@ = /|& length 3
+
+Assigning sub
+ left /% op < right @{ = %( length 2
+ left $@ op & right ^) = /$ length 2
+ left {@ op & right |/ = @$ length 2
+ left $: op < right :@ = () length 2
+ left %: op & right @@ = /|& op in output assume sub
+
+Assigning add
+ left /% op < right @{ = %( length 2
+ left $@ op & right ^) = /$ assumed sub
+ left {@ op & right |/ = @$ assumed sub
+ left $: op < right :@ = () length 2
+ left %: op & right @@ = /|& assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left /% op < right @{ = %( length 2 assume add
+ left $@ op & right ^) = /$ assumed sub
+ left {@ op & right |/ = @$ assumed sub
+ left $: op < right :@ = () assumed add
+ left %: op & right @@ = /|& assumed sub
+ left |@ op < right :( the question, assumed add
+
+Trying /=6 %=8 @=2 {=1 (=9 $=4 ^=0 )=7 |=3 :=5
+/%<@{ = 68 add 21 = 89 vs %( 89 diff 0 add ok; 86 add 12 = 98 vs rev (% 98 diff 0 add ok
+$@&^) = 42 sub 07 = 35 vs /$ 64 diff 29 sub no; 24 sub 70 = 46 vs rev $/ 46 diff 0 sub ok
+{@&|/ = 12 sub 36 = 24 vs @$ 24 diff 0 sub ok; 21 sub 63 = 42 vs rev $@ 42 diff 0 sub ok
+$:<:@ = 45 add 52 = 97 vs () 97 diff 0 add ok; 54 add 25 = 79 vs rev )( 79 diff 0 add ok
+%:&@@ = 85 sub 22 = 63 vs /|& -63 diff 0 sub ok; 58 sub 22 = 36 vs rev /|/ -36 diff 0 sub ok
+ accepted rev |@<:( = 32 add 59 rev 23 add 95 = 118 rev 811 = \boxed{%{{}

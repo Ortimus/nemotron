@@ -1,0 +1,520 @@
+#[!}} = >#
+]]-?< = >"]
+]](>> = <<
+>#-<} = <#>}
+The question is >}-<"
+
+Operator symbols !-(
+Question operator symbol -
+Question operator in examples
+
+Digit symbols #[}>]?<"
+
+Checking concatenation
+left #[ op ! right }} expected #[}} versus ># mismatch
+left ]] op - right ?< expected ]]?< versus >"] mismatch
+left ]] op ( right >> expected ]]>> versus << mismatch
+left ># op - right <} expected >#<} versus <#>} mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left #[ op ! right }} expected }}#[ versus ># mismatch
+left ]] op - right ?< expected ?<]] versus >"] mismatch
+left ]] op ( right >> expected >>]] versus << mismatch
+left ># op - right <} expected <}># versus <#>} mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+#[!}} = >#
+]]-?< = >"]
+]](>> = <<
+>#-<} = <#>}
+
+Assigning mul
+ left #[ op ! right }} = ># length 2
+ left ]] op - right ?< = >"] length 3
+ left ]] op ( right >> = << length 2
+ left ># op - right <} = <#>} length 4 assume mul
+
+Assigning sub
+ left #[ op ! right }} = ># length 2
+ left ]] op - right ?< = >"] assumed mul
+ left ]] op ( right >> = << length 2
+ left ># op - right <} = <#>} assumed mul
+
+Assigning add
+ left #[ op ! right }} = ># length 2
+ left ]] op - right ?< = >"] assumed mul
+ left ]] op ( right >> = << length 2
+ left ># op - right <} = <#>} assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left #[ op ! right }} = ># length 2 assume add
+ left ]] op - right ?< = >"] assumed mul
+ left ]] op ( right >> = << length 2 assume add
+ left ># op - right <} = <#>} assumed mul
+ left >} op - right <" the question, assumed mul
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=2 B=7
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=4 A=2 B=6
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 84 rev 75 mul 48 = 3600 rev 0063 = final answer: [[B]
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=6 A=7 B=4
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 86 rev 05 mul 68 = 340 rev 043 = final answer: }B]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=4 A=0 B=9
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 84 rev 65 mul 48 = 3120 rev 0213 = final answer: A[?]
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=6 A=9 B=4
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 86 rev 25 mul 68 = 1700 rev 0071 = final answer: ]][?
+
+Trying #=5 [=1 }=9 >=0 ]=3 ?=6 <=8 "=2 A=7 B=4
+#[!}} = 51 add 99 = 150 vs ># 05 diff 145 add no; 15 add 99 = 114 vs rev #> 50 diff 64 add no
+ rejected none >}-<" = 09 mul 82 rev 90 mul 28 = 2520 rev 0252 = final answer: >"#"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=2 B=7
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=6 A=2 B=4
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 86 rev 75 mul 68 = 5100 rev 0015 = final answer: [[?>
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=4 A=7 B=6
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 84 rev 05 mul 48 = 240 rev 042 = final answer: }"#
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=9 A=4 B=0
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 89 rev 65 mul 98 = 6370 rev 0736 = final answer: B#]}
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=4 A=6 B=9
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 84 rev 25 mul 48 = 1200 rev 0021 = final answer: ]]}?
+
+Trying #=5 [=3 }=9 >=0 ]=6 ?=1 <=8 "=4 A=7 B=2
+#[!}} = 53 add 99 = 152 vs ># 05 diff 147 add no; 35 add 99 = 134 vs rev #> 50 diff 84 add no
+ rejected none >}-<" = 09 mul 84 rev 90 mul 48 = 4320 rev 0234 = final answer: >B["
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=4 A=6 B=2
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 84 rev 75 mul 48 = 3600 rev 0063 = final answer: [[A]
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=7 A=6 B=4
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 87 rev 05 mul 78 = 390 rev 093 = final answer: }[]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=4 A=9 B=0
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 84 rev 65 mul 48 = 3120 rev 0213 = final answer: B[?]
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=6 A=4 B=9
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 86 rev 25 mul 68 = 1700 rev 0071 = final answer: ]][?
+
+Trying #=8 [=3 }=9 >=5 ]=6 ?=1 <=0 "=7 A=4 B=2
+#[!}} = 83 add 99 = 182 vs ># 58 diff 124 add no; 38 add 99 = 137 vs rev #> 85 diff 52 add no
+ rejected none >}-<" = 59 mul 07 rev 95 mul 70 = 6650 rev 0566 = final answer: <>]]
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=2 B=7
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=2 A=6 B=4
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 82 rev 75 mul 28 = 2100 rev 0012 = final answer: [[?"
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=7 A=4 B=6
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 87 rev 05 mul 78 = 390 rev 093 = final answer: }[]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=9 A=4 B=0
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 89 rev 65 mul 98 = 6370 rev 0736 = final answer: B#]}
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=6 A=9 B=4
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 86 rev 25 mul 68 = 1700 rev 0071 = final answer: ]][?
+
+Trying #=1 [=5 }=9 >=6 ]=3 ?=0 <=8 "=7 A=2 B=4
+#[!}} = 15 add 99 = 114 vs ># 61 diff 53 add no; 51 add 99 = 150 vs rev #> 16 diff 134 add no
+ rejected none >}-<" = 69 mul 87 rev 96 mul 78 = 7488 rev 8847 = final answer: <<B"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=2 B=7
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=4 A=6 B=2
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 84 rev 75 mul 48 = 3600 rev 0063 = final answer: [[A]
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=7 A=4 B=6
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 87 rev 05 mul 78 = 390 rev 093 = final answer: }[]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=4 A=0 B=9
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 84 rev 65 mul 48 = 3120 rev 0213 = final answer: A[?]
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=6 A=9 B=4
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 86 rev 25 mul 68 = 1700 rev 0071 = final answer: ]][?
+
+Trying #=6 [=5 }=9 >=0 ]=3 ?=1 <=8 "=4 A=7 B=2
+#[!}} = 65 add 99 = 164 vs ># 06 diff 158 add no; 56 add 99 = 155 vs rev #> 60 diff 95 add no
+ rejected none >}-<" = 09 mul 84 rev 90 mul 48 = 4320 rev 0234 = final answer: >B]"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=2 B=7
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=4 A=6 B=2
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 84 rev 75 mul 48 = 3600 rev 0063 = final answer: [[A]
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=7 A=4 B=6
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 87 rev 05 mul 78 = 390 rev 093 = final answer: }[]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=4 A=0 B=9
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 84 rev 65 mul 48 = 3120 rev 0213 = final answer: A[?]
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=4 A=9 B=6
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 84 rev 25 mul 48 = 1200 rev 0021 = final answer: ]]}?
+
+Trying #=6 [=1 }=9 >=5 ]=3 ?=0 <=8 "=2 A=4 B=7
+#[!}} = 61 add 99 = 160 vs ># 56 diff 104 add no; 16 add 99 = 115 vs rev #> 65 diff 50 add no
+ rejected none >}-<" = 59 mul 82 rev 95 mul 28 = 2660 rev 0662 = final answer: ?##"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=2 A=6 B=4
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 82 rev 75 mul 28 = 2100 rev 0012 = final answer: [[?"
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=6 A=7 B=4
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 86 rev 05 mul 68 = 340 rev 043 = final answer: }B]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=4 A=9 B=0
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 84 rev 65 mul 48 = 3120 rev 0213 = final answer: B[?]
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=6 A=9 B=4
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 86 rev 25 mul 68 = 1700 rev 0071 = final answer: ]][?
+
+Trying #=6 [=1 }=9 >=5 ]=3 ?=0 <=8 "=7 A=4 B=2
+#[!}} = 61 add 99 = 160 vs ># 56 diff 104 add no; 16 add 99 = 115 vs rev #> 65 diff 50 add no
+ rejected none >}-<" = 59 mul 87 rev 95 mul 78 = 7410 rev 0147 = final answer: ?[A"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=2 B=7
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=4 A=2 B=6
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 84 rev 75 mul 48 = 3600 rev 0063 = final answer: [[B]
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=4 A=6 B=7
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 84 rev 05 mul 48 = 240 rev 042 = final answer: }"#
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=9 A=4 B=0
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 89 rev 65 mul 98 = 6370 rev 0736 = final answer: B#]}
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=4 A=9 B=6
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 84 rev 25 mul 48 = 1200 rev 0021 = final answer: ]]}?
+
+Trying #=8 [=5 }=9 >=6 ]=3 ?=1 <=0 "=2 A=7 B=4
+#[!}} = 85 add 99 = 184 vs ># 68 diff 116 add no; 58 add 99 = 157 vs rev #> 86 diff 71 add no
+ rejected none >}-<" = 69 mul 02 rev 96 mul 20 = 1920 rev 0291 = final answer: <"}?
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=6 A=4 B=2
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 86 rev 75 mul 68 = 5100 rev 0015 = final answer: [[?>
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=4 A=6 B=7
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 84 rev 05 mul 48 = 240 rev 042 = final answer: }"#
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=9 A=0 B=4
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 89 rev 65 mul 98 = 6370 rev 0736 = final answer: A#]}
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=4 A=6 B=9
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 84 rev 25 mul 48 = 1200 rev 0021 = final answer: ]]}?
+
+Trying #=1 [=5 }=9 >=6 ]=3 ?=0 <=8 "=2 A=7 B=4
+#[!}} = 15 add 99 = 114 vs ># 61 diff 53 add no; 51 add 99 = 150 vs rev #> 16 diff 134 add no
+ rejected none >}-<" = 69 mul 82 rev 96 mul 28 = 2688 rev 8862 = final answer: <<>"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=4 A=2 B=6
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 84 rev 75 mul 48 = 3600 rev 0063 = final answer: [[B]
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=4 A=6 B=7
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 84 rev 05 mul 48 = 240 rev 042 = final answer: }"#
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=4 A=0 B=9
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 84 rev 65 mul 48 = 3120 rev 0213 = final answer: A[?]
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=9 A=4 B=6
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 89 rev 25 mul 98 = 2450 rev 0542 = final answer: ]>A}
+
+Trying #=5 [=1 }=9 >=0 ]=3 ?=6 <=8 "=4 A=7 B=2
+#[!}} = 51 add 99 = 150 vs ># 05 diff 145 add no; 15 add 99 = 114 vs rev #> 50 diff 64 add no
+ rejected none >}-<" = 09 mul 84 rev 90 mul 48 = 4320 rev 0234 = final answer: >B]"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=2 A=4 B=6
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 82 rev 75 mul 28 = 2100 rev 0012 = final answer: [[?"
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=7 A=4 B=6
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 87 rev 05 mul 78 = 390 rev 093 = final answer: }[]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=4 A=9 B=0
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 84 rev 65 mul 48 = 3120 rev 0213 = final answer: B[?]
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=9 A=4 B=6
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 89 rev 25 mul 98 = 2450 rev 0542 = final answer: ]>A}
+
+Trying #=8 [=3 }=9 >=5 ]=6 ?=1 <=0 "=4 A=2 B=7
+#[!}} = 83 add 99 = 182 vs ># 58 diff 124 add no; 38 add 99 = 137 vs rev #> 85 diff 52 add no
+ rejected none >}-<" = 59 mul 04 rev 95 mul 40 = 3800 rev 0083 = final answer: <<#[
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=2 B=7
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=6 A=4 B=2
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 86 rev 75 mul 68 = 5100 rev 0015 = final answer: [[?>
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=7 A=6 B=4
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 87 rev 05 mul 78 = 390 rev 093 = final answer: }[]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=4 A=0 B=9
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 84 rev 65 mul 48 = 3120 rev 0213 = final answer: A[?]
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=4 A=6 B=9
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 84 rev 25 mul 48 = 1200 rev 0021 = final answer: ]]}?
+
+Trying #=6 [=8 }=9 >=5 ]=3 ?=1 <=0 "=4 A=7 B=2
+#[!}} = 68 add 99 = 167 vs ># 56 diff 111 add no; 86 add 99 = 185 vs rev #> 65 diff 120 add no
+ rejected none >}-<" = 59 mul 04 rev 95 mul 40 = 3800 rev 0083 = final answer: <<[]
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=2 B=7
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=6 A=2 B=4
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 86 rev 75 mul 68 = 5100 rev 0015 = final answer: [[?>
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=6 A=7 B=4
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 86 rev 05 mul 68 = 340 rev 043 = final answer: }B]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=0 A=4 B=9
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 80 rev 65 mul 08 = 520 rev 025 = final answer: "[>
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=9 A=4 B=6
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 89 rev 25 mul 98 = 2450 rev 0542 = final answer: ]>A}
+
+Trying #=5 [=3 }=9 >=0 ]=6 ?=1 <=8 "=4 A=7 B=2
+#[!}} = 53 add 99 = 152 vs ># 05 diff 147 add no; 35 add 99 = 134 vs rev #> 50 diff 84 add no
+ rejected none >}-<" = 09 mul 84 rev 90 mul 48 = 4320 rev 0234 = final answer: >B["
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=2 A=4 B=6
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 82 rev 75 mul 28 = 2100 rev 0012 = final answer: [[?"
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=7 A=4 B=6
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 87 rev 05 mul 78 = 390 rev 093 = final answer: }[]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=0 A=4 B=9
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 80 rev 65 mul 08 = 520 rev 025 = final answer: "[>
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=6 A=4 B=9
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 86 rev 25 mul 68 = 1700 rev 0071 = final answer: ]][?
+
+Trying #=1 [=8 }=9 >=5 ]=3 ?=0 <=6 "=7 A=2 B=4
+#[!}} = 18 add 99 = 117 vs ># 51 diff 66 add no; 81 add 99 = 180 vs rev #> 15 diff 165 add no
+ rejected none >}-<" = 59 mul 67 rev 95 mul 76 = 7220 rev 0227 = final answer: ?AA"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=2 A=6 B=4
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 82 rev 75 mul 28 = 2100 rev 0012 = final answer: [[?"
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=6 A=4 B=7
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 86 rev 05 mul 68 = 340 rev 043 = final answer: }A]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=9 A=0 B=4
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 89 rev 65 mul 98 = 6370 rev 0736 = final answer: A#]}
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=9 A=6 B=4
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 89 rev 25 mul 98 = 2450 rev 0542 = final answer: ]>B}
+
+Trying #=8 [=3 }=9 >=5 ]=6 ?=1 <=0 "=7 A=2 B=4
+#[!}} = 83 add 99 = 182 vs ># 58 diff 124 add no; 38 add 99 = 137 vs rev #> 85 diff 52 add no
+ rejected none >}-<" = 59 mul 07 rev 95 mul 70 = 6650 rev 0566 = final answer: <>]]
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=6 A=2 B=4
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 86 rev 75 mul 68 = 5100 rev 0015 = final answer: [[?>
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=6 A=7 B=4
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 86 rev 05 mul 68 = 340 rev 043 = final answer: }B]
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=9 A=0 B=4
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 89 rev 65 mul 98 = 6370 rev 0736 = final answer: A#]}
+
+Trying #=3 [=7 }=2 >=5 ]=0 ?=1 <=8 "=9 A=6 B=4
+#[!}} = 37 add 22 = 59 vs ># 53 diff 6 add no; 73 add 22 = 95 vs rev #> 35 diff 60 add no
+ rejected none >}-<" = 52 mul 89 rev 25 mul 98 = 2450 rev 0542 = final answer: ]>B}
+
+Trying #=1 [=5 }=9 >=6 ]=3 ?=0 <=8 "=7 A=4 B=2
+#[!}} = 15 add 99 = 114 vs ># 61 diff 53 add no; 51 add 99 = 150 vs rev #> 16 diff 134 add no
+ rejected none >}-<" = 69 mul 87 rev 96 mul 78 = 7488 rev 8847 = final answer: <<A"
+
+Trying #=0 [=6 }=4 >=5 ]=3 ?=1 <=8 "=9 A=7 B=2
+#[!}} = 06 add 44 = 50 vs ># 50 diff 0 add ok; 60 add 44 = 104 vs rev #> 05 diff 99 add no
+]]-?< = 33 mul 18 = 594 vs >"] 593 diff 1 mul ok - 1; 33 mul 81 = 2673 vs rev ]"> 395 diff 2278 mul no
+]](>> = 33 add 55 = 88 vs << 88 diff 0 add ok; 33 add 55 = 88 vs rev << 88 diff 0 add ok
+>#-<} = 50 mul 84 = 4200 vs <#>} 8054 diff 3854 mul no; 05 mul 48 = 240 vs rev }>#< 4508 diff 4268 mul no
+ rejected forward >}-<" = 54 mul 89 = 4806 = final answer: }<#[
+
+Trying #=9 [=0 }=7 >=5 ]=3 ?=1 <=8 "=6 A=2 B=4
+#[!}} = 90 add 77 = 167 vs ># 59 diff 108 add no; 09 add 77 = 86 vs rev #> 95 diff 9 add no
+ rejected none >}-<" = 57 mul 86 rev 75 mul 68 = 5100 rev 0015 = final answer: [[?>
+
+Trying #=2 [=9 }=0 >=5 ]=3 ?=1 <=8 "=4 A=6 B=7
+#[!}} = 29 add 00 = 29 vs ># 52 diff 23 add no; 92 add 00 = 92 vs rev #> 25 diff 67 add no
+ rejected none >}-<" = 50 mul 84 rev 05 mul 48 = 240 rev 042 = final answer: }"#
+
+Trying #=7 [=2 }=6 >=5 ]=3 ?=1 <=8 "=9 A=0 B=4
+#[!}} = 72 add 66 = 138 vs ># 57 diff 81 add no; 27 add 66 = 93 vs rev #> 75 diff 18 add no
+ rejected none >}-<" = 56 mul 89 rev 65 mul 98 = 6370 rev 0736 = final answer: A#]}
+
+Trying #=3 [=1 }=2 >=6 ]=5 ?=8 <=7 "=0 A=9 B=4
+#[!}} = 31 add 22 = 53 vs ># 63 diff 10 add no; 13 add 22 = 35 vs rev #> 36 diff 1 add ok + 1
+]]-?< = 55 mul 87 = 4785 vs >"] 605 diff 4180 mul no; 55 mul 78 = 4290 vs rev ]"> 506 diff 3784 mul no
+ rejected rev >}-<" = 62 mul 70 rev 26 mul 07 = 182 rev 281 = final answer: }?[
+
+Trying #=8 [=7 }=1 >=9 ]=3 ?=5 <=4 "=0 A=2 B=6
+#[!}} = 87 add 11 = 98 vs ># 98 diff 0 add ok; 78 add 11 = 89 vs rev #> 89 diff 0 add ok
+]]-?< = 33 mul 54 = 1782 vs >"] 903 diff 879 mul no; 33 mul 45 = 1485 vs rev ]"> 309 diff 1176 mul no
+ rejected forward >}-<" = 91 mul 40 = 3640 = final answer: ]B<"

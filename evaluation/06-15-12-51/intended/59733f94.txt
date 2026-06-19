@@ -1,0 +1,75 @@
+>#*{^ = {?#$
+[?-^# = -#[
+:>-/$ = -}>
+[>*#[ = #$/
+$[-#^ = ->#
+The question is $/->/
+
+Operator symbols *-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols >#{^?$[:/}
+
+Checking concatenation
+left ># op * right {^ expected >#{^ versus {?#$ mismatch
+left [? op - right ^# expected [?^# versus -#[ mismatch
+left :> op - right /$ expected :>/$ versus -}> mismatch
+left [> op * right #[ expected [>#[ versus #$/ mismatch
+left $[ op - right #^ expected $[#^ versus -># mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left ># op * right {^ expected {^># versus {?#$ mismatch
+left [? op - right ^# expected ^#[? versus -#[ mismatch
+left :> op - right /$ expected /$:> versus -}> mismatch
+left [> op * right #[ expected #[[> versus #$/ mismatch
+left $[ op - right #^ expected #^$[ versus -># mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+>#*{^ = {?#$
+[?-^# = -#[
+:>-/$ = -}>
+[>*#[ = #$/
+$[-#^ = ->#
+
+Assigning mul
+ left ># op * right {^ = {?#$ length 4 assume mul
+ left [? op - right ^# = -#[ length 3
+ left :> op - right /$ = -}> length 3
+ left [> op * right #[ = #$/ assumed mul
+ left $[ op - right #^ = -># length 3
+
+Assigning sub
+ left ># op * right {^ = {?#$ assumed mul
+ left [? op - right ^# = -#[ op in output assume sub
+ left :> op - right /$ = -}> assumed sub
+ left [> op * right #[ = #$/ assumed mul
+ left $[ op - right #^ = -># assumed sub
+
+Assigning add
+ left ># op * right {^ = {?#$ assumed mul
+ left [? op - right ^# = -#[ assumed sub
+ left :> op - right /$ = -}> assumed sub
+ left [> op * right #[ = #$/ assumed mul
+ left $[ op - right #^ = -># assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ># op * right {^ = {?#$ assumed mul
+ left [? op - right ^# = -#[ assumed sub
+ left :> op - right /$ = -}> assumed sub
+ left [> op * right #[ = #$/ assumed mul
+ left $[ op - right #^ = -># assumed sub
+ left $/ op - right >/ the question, assumed sub
+
+Trying >=2 #=7 {=0 ^=8 ?=6 $=5 [=1 :=4 /=3 }=9
+>#*{^ = 27 mul 08 = 216 vs {?#$ 0675 diff 459 mul no; 72 mul 80 = 5760 vs rev $#?{ 5760 diff 0 mul ok
+[?-^# = 16 sub 87 = 71 vs -#[ -71 diff 0 sub ok; 61 sub 78 = 17 vs rev -[# -17 diff 0 sub ok
+:>-/$ = 42 sub 35 = 7 vs -}> -92 diff 85 sub no; 24 sub 53 = 29 vs rev ->} -29 diff 0 sub ok
+[>*#[ = 12 mul 71 = 852 vs #$/ 753 diff 99 mul no; 21 mul 17 = 357 vs rev /$# 357 diff 0 mul ok
+$[-#^ = 51 sub 78 = 27 vs -># -27 diff 0 sub ok; 15 sub 87 = 72 vs rev -#> -72 diff 0 sub ok
+ accepted rev $/->/ = 53 sub 23 rev 35 sub 32 = 3 rev 3 = \boxed{/}

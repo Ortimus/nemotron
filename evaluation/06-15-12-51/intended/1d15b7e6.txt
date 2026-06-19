@@ -1,0 +1,66 @@
+^$)[^ = [^^{
+^^?[" = {^(
+![@({ = $$@
+[}@{( = $^@
+The question is |[)$[
+
+Operator symbols )?@
+Question operator symbol )
+Question operator in examples
+
+Digit symbols ^$[{"(!}|
+
+Checking concatenation
+left ^$ op ) right [^ expected ^$[^ versus [^^{ mismatch
+left ^^ op ? right [" expected ^^[" versus {^( mismatch
+left ![ op @ right ({ expected ![({ versus $$@ mismatch
+left [} op @ right {( expected [}{( versus $^@ mismatch
+
+Question operator ) is not concatenation
+
+Checking reverse concatenation
+left ^$ op ) right [^ expected [^^$ versus [^^{ mismatch
+left ^^ op ? right [" expected ["^^ versus {^( mismatch
+left ![ op @ right ({ expected ({![ versus $$@ mismatch
+left [} op @ right {( expected {([} versus $^@ mismatch
+
+Question operator ) is not reverse concatenation
+
+Filtering out the concatenation operations
+^$)[^ = [^^{
+^^?[" = {^(
+![@({ = $$@
+[}@{( = $^@
+
+Assigning mul
+ left ^$ op ) right [^ = [^^{ length 4 assume mul
+ left ^^ op ? right [" = {^( length 3
+ left ![ op @ right ({ = $$@ length 3
+ left [} op @ right {( = $^@ length 3
+
+Assigning sub
+ left ^$ op ) right [^ = [^^{ assumed mul
+ left ^^ op ? right [" = {^( length 3
+ left ![ op @ right ({ = $$@ op in output assume sub
+ left [} op @ right {( = $^@ assumed sub
+
+Assigning add
+ left ^$ op ) right [^ = [^^{ assumed mul
+ left ^^ op ? right [" = {^( length 3 assume add
+ left ![ op @ right ({ = $$@ assumed sub
+ left [} op @ right {( = $^@ assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ^$ op ) right [^ = [^^{ assumed mul
+ left ^^ op ? right [" = {^( assumed add
+ left ![ op @ right ({ = $$@ assumed sub
+ left [} op @ right {( = $^@ assumed sub
+ left |[ op ) right $[ the question, assumed mul
+
+Trying ^=7 $=3 [=5 {=2 "=9 (=1 !=4 }=8 |=6 A=0
+^$)[^ = 73 mul 57 = 4161 vs [^^{ 5772 diff 1611 mul no; 37 mul 75 = 2775 vs rev {^^[ 2775 diff 0 mul ok
+^^?[" = 77 add 59 = 136 vs {^( 271 diff 135 add no; 77 add 95 = 172 vs rev (^{ 172 diff 0 add ok
+![@({ = 45 sub 12 = 33 vs $$@ -33 diff 0 sub ok; 54 sub 21 = 33 vs rev $$$ -33 diff 0 sub ok
+[}@{( = 58 sub 21 = 37 vs $^@ -37 diff 0 sub ok; 85 sub 12 = 73 vs rev $^$ -73 diff 0 sub ok
+ accepted rev |[)$[ = 65 mul 35 rev 56 mul 53 = 2968 rev 8692 = \boxed{}|"{}

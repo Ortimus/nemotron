@@ -1,0 +1,188 @@
+66*66 = 6666
+24*32 = 3224
+91*47 = 4791
+62+96 = 59
+29*55 = 5529
+
+The inputs are 66, 66, 24, 32, 91, 47, 62, 96, 29, 55
+
+The outputs are 6666, 3224, 4791, 59, 5529
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+66*66 -> *
+24*32 -> *
+91*47 -> *
+62+96 -> +
+29*55 -> *
+
+The operators
+*
++
+
+Looking at the question
+97-12 -> -
+The question operator is not found in the examples. Investigating the most common example operator * instead. We will use addition for the question operator.
+
+Looking at operator * [66*66 = 6666, 24*32 = 3224, 91*47 = 4791, 29*55 = 5529]:
+
+Trying common operations
+ reversed operands [66->66 66->66, 24->42 32->23, 91->19 47->74, 29->92 55->55] and reversed result [expected (66,66)->6666, (42,23)->3224, (19,74)->4791, (92,55)->5529]
+ addition
+ (66,66)->6666: 66 + 66 = 132 rev-> 231 mismatch
+ multiplication
+ (42,23)->3224: (40 + 2) * 23 = 40 * 23 + 2 * 23 = 920 + 46 = 966 rev-> 669 mismatch
+ concatenation
+ (19,74)->4791: 19 || 74 = 1974 rev-> 4791 match
+ (92,55)->5529: 92 || 55 = 9255 rev-> 5529 match
+ (66,66)->6666: 66 || 66 = 6666 rev-> 6666 match
+ (42,23)->3224: 42 || 23 = 4223 rev-> 3224 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (92,55)->5529: 55 || 92 = 5592 rev-> 2955 mismatch
+
+ identity [66 66, 24 32, 91 47, 29 55] [expected (66,66)->6666, (24,32)->3224, (91,47)->4791, (29,55)->5529]
+ addition
+ (66,66)->6666: 66 + 66 = 132 mismatch
+ multiplication
+ (24,32)->3224: (20 + 4) * 32 = 20 * 32 + 4 * 32 = 640 + 128 = 768 mismatch
+ concatenation
+ (91,47)->4791: 91 || 47 = 9147 mismatch
+ reverse concatenation
+ (29,55)->5529: 55 || 29 = 5529 match
+ (66,66)->6666: 66 || 66 = 6666 match
+ (24,32)->3224: 32 || 24 = 3224 match
+ (91,47)->4791: 47 || 91 = 4791 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [66->66 66->66, 24->42 32->23, 91->19 47->74, 29->92 55->55] and reversed result [expected (66,66)->6666, (42,23)->3224, (19,74)->4791, (92,55)->5529]
+ subtraction (a-b)
+ (66,66)->6666: 66 - 66 = 0 rev-> 0 mismatch
+ absolute difference
+ (42,23)->3224: |42 - 23| = 19 rev-> 91 mismatch
+ max mod min
+ (19,74)->4791: max(19,74) mod min(19,74) = 74 mod 19 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (92,55)->5529: -|92 - 55| = -37 rev-> -73 mismatch
+ reverse subtraction (b-a)
+ (66,66)->6666: 66 - 66 = 0 rev-> 0 mismatch
+ modulo (a mod b)
+ (42,23)->3224: 42 mod 23 = 19 rev-> 91 mismatch
+
+ identity [66 66, 24 32, 91 47, 29 55] [expected (66,66)->6666, (24,32)->3224, (91,47)->4791, (29,55)->5529]
+ subtraction (a-b)
+ (66,66)->6666: 66 - 66 = 0 mismatch
+ absolute difference
+ (24,32)->3224: |24 - 32| = 8 mismatch
+ max mod min
+ (91,47)->4791: max(91,47) mod min(91,47) = 91 mod 47 = 45 mismatch
+ negated absolute difference
+ (29,55)->5529: -|29 - 55| = -26 mismatch
+ reverse subtraction (b-a)
+ (66,66)->6666: 66 - 66 = 0 mismatch
+ modulo (a mod b)
+ (24,32)->3224: 24 mod 32 = 24 mismatch
+
+Trying rare operations
+ reversed operands [66->66 66->66, 24->42 32->23, 91->19 47->74, 29->92 55->55] and reversed result [expected (66,66)->6666, (42,23)->3224, (19,74)->4791, (92,55)->5529]
+ multiply+1
+ (66,66)->6666: (60 + 6) * 66 + 1 = 60 * 66 + 6 * 66 + 1 = 3960 + 396 + 1 = 4356 + 1 = 4357 rev-> 7534 mismatch
+ multiply-1
+ (42,23)->3224: (40 + 2) * 23 - 1 = 40 * 23 + 2 * 23 - 1 = 920 + 46 - 1 = 966 - 1 = 965 rev-> 569 mismatch
+ add+1
+ (19,74)->4791: 19 + 74 + 1 = 94 rev-> 49 mismatch
+ add-1
+ (92,55)->5529: 92 + 55 - 1 = 146 rev-> 641 mismatch
+ sub+1
+ (66,66)->6666: 66 - 66 + 1 = 1 rev-> 1 mismatch
+ sub-1
+ (42,23)->3224: 42 - 23 - 1 = 18 rev-> 81 mismatch
+ integer division (a/b)
+ (19,74)->4791: 19 / 74 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (92,55)->5529: 55 / 92 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (66,66)->6666: 66 mod 66 = 0 rev-> 0 mismatch
+ digit absolute diff
+ (42,23)->3224: |4-2| || |2-3| = 21 rev-> 12 mismatch
+ digit add mod10
+ (19,74)->4791: (1+7)%10 || (9+4)%10 = 83 rev-> 38 mismatch
+ digit sub mod10
+ (92,55)->5529: (9-5)%10 || (2-5)%10 = 47 rev-> 74 mismatch
+ cross multiply
+ (66,66)->6666: 6*6 + 6*6 = 36 + 36 = 72 rev-> 27 mismatch
+ cross multiply rev
+ (42,23)->3224: 4*3 + 2*2 = 12 + 4 = 16 rev-> 61 mismatch
+ digit multiply
+ (19,74)->4791: 1*7 || 9*4 = 7 || 36 = 736 rev-> 637 mismatch
+ digit multiply rev
+ (92,55)->5529: 9*5 || 2*5 = 45 || 10 = 4510 rev-> 0154 mismatch
+ digit sum diff
+ (66,66)->6666: (6+6) - (6+6) = 0 rev-> 0 mismatch
+ digit sum sum
+ (42,23)->3224: (4+2) + (2+3) = 11 rev-> 11 mismatch
+ digit product diff
+ (19,74)->4791: 1*9 - 7*4 = 9 - 28 = -19 rev-> -91 mismatch
+ digit product sum
+ (92,55)->5529: 9*2 + 5*5 = 18 + 25 = 43 rev-> 34 mismatch
+ determinant
+ (66,66)->6666: 6*6 - 6*6 = 36 - 36 = 0 rev-> 0 mismatch
+ abs determinant
+ (42,23)->3224: |4*3 - 2*2| = |12 - 4| = 8 rev-> 8 mismatch
+
+ identity [66 66, 24 32, 91 47, 29 55] [expected (66,66)->6666, (24,32)->3224, (91,47)->4791, (29,55)->5529]
+ multiply+1
+ (66,66)->6666: (60 + 6) * 66 + 1 = 60 * 66 + 6 * 66 + 1 = 3960 + 396 + 1 = 4356 + 1 = 4357 mismatch
+ multiply-1
+ (24,32)->3224: (20 + 4) * 32 - 1 = 20 * 32 + 4 * 32 - 1 = 640 + 128 - 1 = 768 - 1 = 767 mismatch
+ add+1
+ (91,47)->4791: 91 + 47 + 1 = 139 mismatch
+ add-1
+ (29,55)->5529: 29 + 55 - 1 = 83 mismatch
+ sub+1
+ (66,66)->6666: 66 - 66 + 1 = 1 mismatch
+ sub-1
+ (24,32)->3224: 24 - 32 - 1 = -9 mismatch
+ integer division (a/b)
+ (91,47)->4791: 91 / 47 = 1 mismatch
+ reverse division (b/a)
+ (29,55)->5529: 55 / 29 = 1 mismatch
+ reverse modulo (b mod a)
+ (66,66)->6666: 66 mod 66 = 0 mismatch
+ digit absolute diff
+ (24,32)->3224: |2-3| || |4-2| = 12 mismatch
+ digit add mod10
+ (91,47)->4791: (9+4)%10 || (1+7)%10 = 38 mismatch
+ digit sub mod10
+ (29,55)->5529: (2-5)%10 || (9-5)%10 = 74 mismatch
+ cross multiply
+ (66,66)->6666: 6*6 + 6*6 = 36 + 36 = 72 mismatch
+ cross multiply rev
+ (24,32)->3224: 2*2 + 4*3 = 4 + 12 = 16 mismatch
+ digit multiply
+ (91,47)->4791: 9*4 || 1*7 = 36 || 7 = 367 mismatch
+ digit multiply rev
+ (29,55)->5529: 2*5 || 9*5 = 10 || 45 = 1045 mismatch
+ digit sum diff
+ (66,66)->6666: (6+6) - (6+6) = 0 mismatch
+ digit sum sum
+ (24,32)->3224: (2+4) + (3+2) = 11 mismatch
+ digit product diff
+ (91,47)->4791: 9*1 - 4*7 = 9 - 28 = -19 mismatch
+ digit product sum
+ (29,55)->5529: 2*9 + 5*5 = 18 + 25 = 43 mismatch
+ determinant
+ (66,66)->6666: 6*6 - 6*6 = 36 - 36 = 0 mismatch
+ abs determinant
+ (24,32)->3224: |2*2 - 4*3| = |4 - 12| = 8 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 97-12:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [97->79, 12->21] and reversed result
+ addition
+ (79,21): 79 + 21 = 100 rev-> 001
+ Result is non-negative
+ \boxed{001}

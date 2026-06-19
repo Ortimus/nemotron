@@ -1,0 +1,75 @@
+<`$<@ = !%
+`($<} = %%`
+!\|@@ = !##
+[(|\} = %`(%
+\`:#} = %#
+The question is %%:#<
+
+Operator symbols $|:
+Question operator symbol :
+Question operator in examples
+
+Digit symbols <`@!%(}\#[
+
+Checking concatenation
+left <` op $ right <@ expected <`<@ versus !% mismatch
+left `( op $ right <} expected `(<} versus %%` mismatch
+left !\ op | right @@ expected !\@@ versus !## mismatch
+left [( op | right \} expected [(\} versus %`(% mismatch
+left \` op : right #} expected \`#} versus %# mismatch
+
+Question operator : is not concatenation
+
+Checking reverse concatenation
+left <` op $ right <@ expected <@<` versus !% mismatch
+left `( op $ right <} expected <}`( versus %%` mismatch
+left !\ op | right @@ expected @@!\ versus !## mismatch
+left [( op | right \} expected \}[( versus %`(% mismatch
+left \` op : right #} expected #}\` versus %# mismatch
+
+Question operator : is not reverse concatenation
+
+Filtering out the concatenation operations
+<`$<@ = !%
+`($<} = %%`
+!\|@@ = !##
+[(|\} = %`(%
+\`:#} = %#
+
+Assigning mul
+ left <` op $ right <@ = !% length 2
+ left `( op $ right <} = %%` length 3
+ left !\ op | right @@ = !## length 3
+ left [( op | right \} = %`(% length 4 assume mul
+ left \` op : right #} = %# length 2
+
+Assigning sub
+ left <` op $ right <@ = !% length 2
+ left `( op $ right <} = %%` length 3
+ left !\ op | right @@ = !## assumed mul
+ left [( op | right \} = %`(% assumed mul
+ left \` op : right #} = %# length 2
+
+Assigning add
+ left <` op $ right <@ = !% length 2
+ left `( op $ right <} = %%` length 3 assume add
+ left !\ op | right @@ = !## assumed mul
+ left [( op | right \} = %`(% assumed mul
+ left \` op : right #} = %# length 2
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left <` op $ right <@ = !% assumed add
+ left `( op $ right <} = %%` assumed add
+ left !\ op | right @@ = !## assumed mul
+ left [( op | right \} = %`(% assumed mul
+ left \` op : right #} = %# length 2 assume sub
+ left %% op : right #< the question, assumed sub
+
+Trying <=5 `=1 @=4 !=0 %=6 (=7 }=9 \=2 #=8 [=3
+<`$<@ = 51 add 54 = 105 vs !% 06 diff 99 add no; 15 add 45 = 60 vs rev %! 60 diff 0 add ok
+`($<} = 17 add 59 = 76 vs %%` 661 diff 585 add no; 71 add 95 = 166 vs rev `%% 166 diff 0 add ok
+!\|@@ = 02 mul 44 = 88 vs !## 088 diff 0 mul ok; 20 mul 44 = 880 vs rev ##! 880 diff 0 mul ok
+[(|\} = 37 mul 29 = 1073 vs %`(% 6176 diff 5103 mul no; 73 mul 92 = 6716 vs rev %(`% 6716 diff 0 mul ok
+\`:#} = 21 sub 89 = 68 vs %# 68 diff 0 sub ok; 12 sub 98 = 86 vs rev #% 86 diff 0 sub ok
+ accepted rev %%:#< = 66 sub 85 rev 66 sub 58 = 8 rev 8 = \boxed{#}

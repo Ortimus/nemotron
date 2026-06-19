@@ -1,0 +1,69 @@
+/{-/< = -)}
+@}+@} = @}@}
+&|*#/ = @)?|
+/&-}? = #}
+||*&? = /@){
+The question is |/*||
+
+Operator symbols -+*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols /{<)}@&|#?
+
+Checking concatenation
+left /{ op - right /< expected /{/< versus -)} mismatch
+left @} op + right @} expected @}@} versus @}@} match +
+left &| op * right #/ expected &|#/ versus @)?| mismatch
+left /& op - right }? expected /&}? versus #} mismatch
+left || op * right &? expected ||&? versus /@){ mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left /{ op - right /< expected /</{ versus -)} mismatch
+left @} op + right @} expected @}@} versus @}@} match +
+left &| op * right #/ expected #/&| versus @)?| mismatch
+left /& op - right }? expected }?/& versus #} mismatch
+left || op * right &? expected &?|| versus /@){ mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+/{-/< = -)}
+&|*#/ = @)?|
+/&-}? = #}
+||*&? = /@){
+
+Assigning mul
+ left /{ op - right /< = -)} length 3
+ left &| op * right #/ = @)?| length 4 assume mul
+ left /& op - right }? = #} length 2
+ left || op * right &? = /@){ assumed mul
+
+Assigning sub
+ left /{ op - right /< = -)} op in output assume sub
+ left &| op * right #/ = @)?| assumed mul
+ left /& op - right }? = #} assumed sub
+ left || op * right &? = /@){ assumed mul
+
+Assigning add
+ left /{ op - right /< = -)} assumed sub
+ left &| op * right #/ = @)?| assumed mul
+ left /& op - right }? = #} assumed sub
+ left || op * right &? = /@){ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left /{ op - right /< = -)} assumed sub
+ left &| op * right #/ = @)?| assumed mul
+ left /& op - right }? = #} assumed sub
+ left || op * right &? = /@){ assumed mul
+ left |/ op * right || the question, assumed mul
+
+Trying /=8 {=1 <=6 )=0 }=5 @=7 &=9 |=2 #=3 ?=4
+/{-/< = 81 sub 86 = 5 vs -)} -05 diff 0 sub ok; 18 sub 68 = 50 vs rev -}) -50 diff 0 sub ok
+&|*#/ = 92 mul 38 = 3496 vs @)?| 7042 diff 3546 mul no; 29 mul 83 = 2407 vs rev |?)@ 2407 diff 0 mul ok
+/&-}? = 89 sub 54 = 35 vs #} 35 diff 0 sub ok; 98 sub 45 = 53 vs rev }# 53 diff 0 sub ok
+||*&? = 22 mul 94 = 2068 vs /@){ 8701 diff 6633 mul no; 22 mul 49 = 1078 vs rev {)@/ 1078 diff 0 mul ok
+ accepted rev |/*|| = 28 mul 22 rev 82 mul 22 = 1804 rev 4081 = \boxed{?)/{}

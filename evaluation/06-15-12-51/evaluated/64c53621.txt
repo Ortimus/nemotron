@@ -1,0 +1,244 @@
+[[-&` = -<>
+>#+`| = `$>
+|#*|` = |<&#
+<#+<' = `>>
+The question is `$*##
+
+Operator symbols -+*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols [&`<>#|$'
+
+Checking concatenation
+left [[ op - right &` expected [[&` versus -<> mismatch
+left ># op + right `| expected >#`| versus `$> mismatch
+left |# op * right |` expected |#|` versus |<&# mismatch
+left <# op + right <' expected <#<' versus `>> mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left [[ op - right &` expected &`[[ versus -<> mismatch
+left ># op + right `| expected `|># versus `$> mismatch
+left |# op * right |` expected |`|# versus |<&# mismatch
+left <# op + right <' expected <'<# versus `>> mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+[[-&` = -<>
+>#+`| = `$>
+|#*|` = |<&#
+<#+<' = `>>
+
+Assigning mul
+ left [[ op - right &` = -<> length 3
+ left ># op + right `| = `$> length 3
+ left |# op * right |` = |<&# length 4 assume mul
+ left <# op + right <' = `>> length 3
+
+Assigning sub
+ left [[ op - right &` = -<> op in output assume sub
+ left ># op + right `| = `$> length 3
+ left |# op * right |` = |<&# assumed mul
+ left <# op + right <' = `>> length 3
+
+Assigning add
+ left [[ op - right &` = -<> assumed sub
+ left ># op + right `| = `$> length 3 assume add
+ left |# op * right |` = |<&# assumed mul
+ left <# op + right <' = `>> assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left [[ op - right &` = -<> assumed sub
+ left ># op + right `| = `$> assumed add
+ left |# op * right |` = |<&# assumed mul
+ left <# op + right <' = `>> assumed add
+ left `$ op * right ## the question, assumed mul
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+>#+`| = 04 add 96 = 100 vs `$> 950 diff 850 add no; 40 add 69 = 109 vs rev >$` 059 diff 50 add no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 = 4180 = final answer: #&A>
+
+Trying [=8 &=3 `=1 <=2 >=0 #=4 |=6 $=5 '=7 A=9
+[[-&` = 88 sub 31 = 57 vs -<> -20 diff 37 sub no; 88 sub 13 = 75 vs rev ->< -02 diff 73 sub no
+ rejected none `$*## = 15 mul 44 rev 51 mul 44 = 2244 rev 4422 = final answer: ##<<
+
+Trying [=7 &=8 `=3 <=2 >=0 #=4 |=6 $=5 '=9 A=1
+[[-&` = 77 sub 83 = 6 vs -<> -20 diff 14 sub no; 77 sub 38 = 39 vs rev ->< -02 diff 37 sub no
+ rejected none `$*## = 35 mul 44 rev 53 mul 44 = 2332 rev 2332 = final answer: <``<
+
+Trying [=1 &=7 `=8 <=2 >=0 #=4 |=6 $=5 '=9 A=3
+[[-&` = 11 sub 78 = 67 vs -<> -20 diff 47 sub no; 11 sub 87 = 76 vs rev ->< -02 diff 74 sub no
+ rejected none `$*## = 85 mul 44 rev 58 mul 44 = 2552 rev 2552 = final answer: <$$<
+
+Trying [=9 &=6 `=7 <=2 >=0 #=4 |=3 $=5 '=1 A=8
+[[-&` = 99 sub 67 = 32 vs -<> -20 diff 12 sub no; 99 sub 76 = 23 vs rev ->< -02 diff 21 sub no
+ rejected none `$*## = 75 mul 44 rev 57 mul 44 = 2508 rev 8052 = final answer: A>$<
+
+Trying [=3 &=1 `=9 <=2 >=0 #=4 |=6 $=5 '=7 A=8
+[[-&` = 33 sub 19 = 14 vs -<> -20 diff 6 sub no; 33 sub 91 = 58 vs rev ->< -02 diff 56 sub no
+ rejected forward `$*## = 95 mul 44 =

@@ -1,0 +1,75 @@
+[}+[! = !^
+{{<%{ = <!^
+{>+&% = [[&
+`[+{} = ??
+>{<[} = <!%
+The question is ?{*{}
+
+Operator symbols +<
+Question operator symbol *
+Question operator not in examples
+
+Digit symbols [}!^{%>&`?
+
+Checking concatenation
+left [} op + right [! expected [}[! versus !^ mismatch
+left {{ op < right %{ expected {{%{ versus <!^ mismatch
+left {> op + right &% expected {>&% versus [[& mismatch
+left `[ op + right {} expected `[{} versus ?? mismatch
+left >{ op < right [} expected >{[} versus <!% mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left [} op + right [! expected [![} versus !^ mismatch
+left {{ op < right %{ expected %{{{ versus <!^ mismatch
+left {> op + right &% expected &%{> versus [[& mismatch
+left `[ op + right {} expected {}`[ versus ?? mismatch
+left >{ op < right [} expected [}>{ versus <!% mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+[}+[! = !^
+{{<%{ = <!^
+{>+&% = [[&
+`[+{} = ??
+>{<[} = <!%
+
+Assigning mul
+ left [} op + right [! = !^ length 2
+ left {{ op < right %{ = <!^ length 3
+ left {> op + right &% = [[& length 3
+ left `[ op + right {} = ?? length 2
+ left >{ op < right [} = <!% length 3
+
+Assigning sub
+ left [} op + right [! = !^ length 2
+ left {{ op < right %{ = <!^ op in output assume sub
+ left {> op + right &% = [[& length 3
+ left `[ op + right {} = ?? length 2
+ left >{ op < right [} = <!% assumed sub
+
+Assigning add
+ left [} op + right [! = !^ length 2
+ left {{ op < right %{ = <!^ assumed sub
+ left {> op + right &% = [[& length 3 assume add
+ left `[ op + right {} = ?? assumed add
+ left >{ op < right [} = <!% assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left [} op + right [! = !^ assumed add
+ left {{ op < right %{ = <!^ assumed sub
+ left {> op + right &% = [[& assumed add
+ left `[ op + right {} = ?? assumed add
+ left >{ op < right [} = <!% assumed sub
+ left ?{ op * right {} the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying [=1 }=7 !=3 ^=0 {=6 %=9 >=5 &=4 `=2 ?=8
+[}+[! = 17 add 13 = 30 vs !^ 30 diff 0 add ok; 71 add 31 = 102 vs rev ^! 03 diff 99 add no
+{{<%{ = 66 sub 96 = 30 vs <!^ -30 diff 0 sub ok; 66 sub 69 = 3 vs rev <^! -03 diff 0 sub ok
+{>+&% = 65 add 49 = 114 vs [[& 114 diff 0 add ok; 56 add 94 = 150 vs rev &[[ 411 diff 261 add no
+`[+{} = 21 add 67 = 88 vs ?? 88 diff 0 add ok; 12 add 76 = 88 vs rev ?? 88 diff 0 add ok
+>{<[} = 56 sub 17 = 39 vs <!% -39 diff 0 sub ok; 65 sub 71 = 6 vs rev <%! -93 diff 87 sub no
+ accepted forward ?{*{} = 86 mul 67 = 5762 = \boxed{>}{`}

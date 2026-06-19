@@ -1,0 +1,63 @@
+[&*[$ = [|!|
+\@+"\ = "\\@
+|@*!! = !@${
+@{-:! = -$
+"@+&\ = &\"@
+The question is "[*@|
+
+Operator symbols *+-
+Question operator symbol *
+Question operator in examples
+
+Digit symbols [&$|!\@"{:
+
+Checking concatenation
+left [& op * right [$ expected [&[$ versus [|!| mismatch
+left \@ op + right "\ expected \@"\ versus "\\@ mismatch
+left |@ op * right !! expected |@!! versus !@${ mismatch
+left @{ op - right :! expected @{:! versus -$ mismatch
+left "@ op + right &\ expected "@&\ versus &\"@ mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left [& op * right [$ expected [$[& versus [|!| mismatch
+left \@ op + right "\ expected "\\@ versus "\\@ match +
+left |@ op * right !! expected !!|@ versus !@${ mismatch
+left @{ op - right :! expected :!@{ versus -$ mismatch
+left "@ op + right &\ expected &\"@ versus &\"@ match +
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+[&*[$ = [|!|
+|@*!! = !@${
+@{-:! = -$
+
+Assigning mul
+ left [& op * right [$ = [|!| length 4 assume mul
+ left |@ op * right !! = !@${ assumed mul
+ left @{ op - right :! = -$ length 2
+
+Assigning sub
+ left [& op * right [$ = [|!| assumed mul
+ left |@ op * right !! = !@${ assumed mul
+ left @{ op - right :! = -$ op in output assume sub
+
+Assigning add
+ left [& op * right [$ = [|!| assumed mul
+ left |@ op * right !! = !@${ assumed mul
+ left @{ op - right :! = -$ assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left [& op * right [$ = [|!| assumed mul
+ left |@ op * right !! = !@${ assumed mul
+ left @{ op - right :! = -$ assumed sub
+ left "[ op * right @| the question, assumed mul
+
+Trying [=1 &=9 $=7 |=6 !=4 \=0 @=8 "=2 {=3 :=5
+[&*[$ = 19 mul 17 = 323 vs [|!| 1646 diff 1323 mul no; 91 mul 71 = 6461 vs rev |!|[ 6461 diff 0 mul ok
+|@*!! = 68 mul 44 = 2992 vs !@${ 4873 diff 1881 mul no; 86 mul 44 = 3784 vs rev {$@! 3784 diff 0 mul ok
+@{-:! = 83 sub 54 = 29 vs -$ -7 diff 22 sub no; 38 sub 45 = 7 vs rev -$ -7 diff 0 sub ok
+ accepted rev "[*@| = 21 mul 86 rev 12 mul 68 = 816 rev 618 = \boxed{|[@}

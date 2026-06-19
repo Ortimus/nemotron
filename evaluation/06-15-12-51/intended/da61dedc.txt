@@ -1,0 +1,66 @@
+&@]}$ = ]@?
+@@`|{ = |${
+/?]}} = ]?/
+%|`$? = /|/$
+The question is }}`|#
+
+Operator symbols ]`
+Question operator symbol `
+Question operator in examples
+
+Digit symbols &@}$?|{/%#
+
+Checking concatenation
+left &@ op ] right }$ expected &@}$ versus ]@? mismatch
+left @@ op ` right |{ expected @@|{ versus |${ mismatch
+left /? op ] right }} expected /?}} versus ]?/ mismatch
+left %| op ` right $? expected %|$? versus /|/$ mismatch
+
+Question operator ` is not concatenation
+
+Checking reverse concatenation
+left &@ op ] right }$ expected }$&@ versus ]@? mismatch
+left @@ op ` right |{ expected |{@@ versus |${ mismatch
+left /? op ] right }} expected }}/? versus ]?/ mismatch
+left %| op ` right $? expected $?%| versus /|/$ mismatch
+
+Question operator ` is not reverse concatenation
+
+Filtering out the concatenation operations
+&@]}$ = ]@?
+@@`|{ = |${
+/?]}} = ]?/
+%|`$? = /|/$
+
+Assigning mul
+ left &@ op ] right }$ = ]@? length 3
+ left @@ op ` right |{ = |${ length 3
+ left /? op ] right }} = ]?/ length 3
+ left %| op ` right $? = /|/$ length 4 assume mul
+
+Assigning sub
+ left &@ op ] right }$ = ]@? op in output assume sub
+ left @@ op ` right |{ = |${ assumed mul
+ left /? op ] right }} = ]?/ assumed sub
+ left %| op ` right $? = /|/$ assumed mul
+
+Assigning add
+ left &@ op ] right }$ = ]@? assumed sub
+ left @@ op ` right |{ = |${ assumed mul
+ left /? op ] right }} = ]?/ assumed sub
+ left %| op ` right $? = /|/$ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left &@ op ] right }$ = ]@? assumed sub
+ left @@ op ` right |{ = |${ assumed mul
+ left /? op ] right }} = ]?/ assumed sub
+ left %| op ` right $? = /|/$ assumed mul
+ left }} op ` right |# the question, assumed mul
+
+Trying &=9 @=1 }=7 $=8 ?=3 |=6 {=2 /=4 %=5 #=0
+&@]}$ = 91 sub 78 = 13 vs ]@? -13 diff 0 sub ok; 19 sub 87 = 68 vs rev ]?@ -31 diff 37 sub no
+@@`|{ = 11 mul 62 = 682 vs |${ 682 diff 0 mul ok; 11 mul 26 = 286 vs rev {$| 286 diff 0 mul ok
+/?]}} = 43 sub 77 = 34 vs ]?/ -34 diff 0 sub ok; 34 sub 77 = 43 vs rev ]/? -43 diff 0 sub ok
+%|`$? = 56 mul 83 = 4648 vs /|/$ 4648 diff 0 mul ok; 65 mul 38 = 2470 vs rev $/|/ 8464 diff 5994 mul no
+ accepted forward }}`|# = 77 mul 60 = 4620 = \boxed{/|{#}

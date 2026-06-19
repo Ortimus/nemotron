@@ -1,0 +1,191 @@
+12#37 = 443
+30(57 = (27
+66(34 = 32
+43#33 = 1418
+26(43 = (17
+
+The inputs are 12, 37, 30, 57, 66, 34, 43, 33, 26, 43
+
+The outputs are 443, (27, 32, 1418, (17
+Some example outputs have the operator symbol as prefix (.
+We now consider the outputs to be 443, -27, 32, 1418, -17
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+12#37 -> #
+30(57 -> (
+66(34 -> (
+43#33 -> #
+26(43 -> (
+
+The operators
+#
+(
+
+Looking at the question
+56(91 -> (
+The question operator is found in the examples.
+
+Looking at operator ( [30(57 = -27, 66(34 = 32, 26(43 = -17]:
+
+Trying common operations
+ reversed operands [30->03 57->75, 66->66 34->43, 26->62 43->34] and reversed result [expected (03,75)->-27, (66,43)->32, (62,34)->-17]
+ addition
+ (03,75)->-27: 03 + 75 = 78 rev-> 87 mismatch
+ multiplication
+ (66,43)->32: (60 + 6) * 43 = 60 * 43 + 6 * 43 = 2580 + 258 = 2838 rev-> 8382 mismatch
+ concatenation
+ (62,34)->-17: 62 || 34 = 6234 rev-> 4326 mismatch
+ reverse concatenation
+ (03,75)->-27: 75 || 03 = 7503 rev-> 3057 mismatch
+
+ identity [30 57, 66 34, 26 43] [expected (30,57)->-27, (66,34)->32, (26,43)->-17]
+ addition
+ (30,57)->-27: 30 + 57 = 87 mismatch
+ multiplication
+ (66,34)->32: (60 + 6) * 34 = 60 * 34 + 6 * 34 = 2040 + 204 = 2244 mismatch
+ concatenation
+ (26,43)->-17: 26 || 43 = 2643 mismatch
+ reverse concatenation
+ (30,57)->-27: 57 || 30 = 5730 mismatch
+
+Trying difference operations
+ reversed operands [30->03 57->75, 66->66 34->43, 26->62 43->34] and reversed result [expected (03,75)->-27, (66,43)->32, (62,34)->-17]
+ subtraction (a-b)
+ (03,75)->-27: 03 - 75 = -72 rev-> -27 match
+ (66,43)->32: 66 - 43 = 23 rev-> 32 match
+ (62,34)->-17: 62 - 34 = 28 rev-> 82 mismatch
+ absolute difference
+ (66,43)->32: |66 - 43| = 23 rev-> 32 match
+ (62,34)->-17: |62 - 34| = 28 rev-> 82 mismatch
+ max mod min
+ (62,34)->-17: max(62,34) mod min(62,34) = 62 mod 34 = 28 rev-> 82 mismatch
+ negated absolute difference
+ (03,75)->-27: -|03 - 75| = -72 rev-> -27 match
+ (66,43)->32: -|66 - 43| = -23 rev-> -32 mismatch
+ reverse subtraction (b-a)
+ (66,43)->32: 43 - 66 = -23 rev-> -32 mismatch
+ modulo (a mod b)
+ (62,34)->-17: 62 mod 34 = 28 rev-> 82 mismatch
+
+ identity [30 57, 66 34, 26 43] [expected (30,57)->-27, (66,34)->32, (26,43)->-17]
+ subtraction (a-b)
+ (30,57)->-27: 30 - 57 = -27 match
+ (66,34)->32: 66 - 34 = 32 match
+ (26,43)->-17: 26 - 43 = -17 match
+ correct, actions: subtraction (a-b)
+ absolute difference
+ (66,34)->32: |66 - 34| = 32 match
+ (26,43)->-17: |26 - 43| = 17 mismatch
+ max mod min
+ (26,43)->-17: max(26,43) mod min(26,43) = 43 mod 26 = 17 mismatch
+ negated absolute difference
+ (30,57)->-27: -|30 - 57| = -27 match
+ (66,34)->32: -|66 - 34| = -32 mismatch
+ reverse subtraction (b-a)
+ (66,34)->32: 34 - 66 = -32 mismatch
+ modulo (a mod b)
+ (26,43)->-17: 26 mod 43 = 26 mismatch
+
+Trying rare operations
+ reversed operands [30->03 57->75, 66->66 34->43, 26->62 43->34] and reversed result [expected (03,75)->-27, (66,43)->32, (62,34)->-17]
+ multiply+1
+ (03,75)->-27: (0 + 3) * 75 + 1 = 0 * 75 + 3 * 75 + 1 = 0 + 225 + 1 = 225 + 1 = 226 rev-> 622 mismatch
+ multiply-1
+ (66,43)->32: (60 + 6) * 43 - 1 = 60 * 43 + 6 * 43 - 1 = 2580 + 258 - 1 = 2838 - 1 = 2837 rev-> 7382 mismatch
+ add+1
+ (62,34)->-17: 62 + 34 + 1 = 97 rev-> 79 mismatch
+ add-1
+ (03,75)->-27: 03 + 75 - 1 = 77 rev-> 77 mismatch
+ sub+1
+ (66,43)->32: 66 - 43 + 1 = 24 rev-> 42 mismatch
+ sub-1
+ (62,34)->-17: 62 - 34 - 1 = 27 rev-> 72 mismatch
+ integer division (a/b)
+ (03,75)->-27: 03 / 75 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (66,43)->32: 43 / 66 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (62,34)->-17: 34 mod 62 = 34 rev-> 43 mismatch
+ digit absolute diff
+ (03,75)->-27: |0-7| || |3-5| = 72 rev-> 27 mismatch
+ digit add mod10
+ (66,43)->32: (6+4)%10 || (6+3)%10 = 09 rev-> 90 mismatch
+ digit sub mod10
+ (62,34)->-17: (6-3)%10 || (2-4)%10 = 38 rev-> 83 mismatch
+ cross multiply
+ (03,75)->-27: 0*7 + 3*5 = 0 + 15 = 15 rev-> 51 mismatch
+ cross multiply rev
+ (66,43)->32: 6*3 + 6*4 = 18 + 24 = 42 rev-> 24 mismatch
+ digit multiply
+ (62,34)->-17: 6*3 || 2*4 = 18 || 8 = 188 rev-> 881 mismatch
+ digit multiply rev
+ (03,75)->-27: 0*5 || 3*7 = 0 || 21 = 021 rev-> 120 mismatch
+ digit sum diff
+ (66,43)->32: (6+6) - (4+3) = 5 rev-> 5 mismatch
+ digit sum sum
+ (62,34)->-17: (6+2) + (3+4) = 15 rev-> 51 mismatch
+ digit product diff
+ (03,75)->-27: 0*3 - 7*5 = 0 - 35 = -35 rev-> -53 mismatch
+ digit product sum
+ (66,43)->32: 6*6 + 4*3 = 36 + 12 = 48 rev-> 84 mismatch
+ determinant
+ (62,34)->-17: 6*4 - 2*3 = 24 - 6 = 18 rev-> 81 mismatch
+ abs determinant
+ (03,75)->-27: |0*5 - 3*7| = |0 - 21| = 21 rev-> 12 mismatch
+
+ identity [30 57, 66 34, 26 43] [expected (30,57)->-27, (66,34)->32, (26,43)->-17]
+ multiply+1
+ (30,57)->-27: (30 + 0) * 57 + 1 = 30 * 57 + 0 * 57 + 1 = 1710 + 0 + 1 = 1710 + 1 = 1711 mismatch
+ multiply-1
+ (66,34)->32: (60 + 6) * 34 - 1 = 60 * 34 + 6 * 34 - 1 = 2040 + 204 - 1 = 2244 - 1 = 2243 mismatch
+ add+1
+ (26,43)->-17: 26 + 43 + 1 = 70 mismatch
+ add-1
+ (30,57)->-27: 30 + 57 - 1 = 86 mismatch
+ sub+1
+ (66,34)->32: 66 - 34 + 1 = 33 mismatch
+ sub-1
+ (26,43)->-17: 26 - 43 - 1 = -18 mismatch
+ integer division (a/b)
+ (30,57)->-27: 30 / 57 = 0 mismatch
+ reverse division (b/a)
+ (66,34)->32: 34 / 66 = 0 mismatch
+ reverse modulo (b mod a)
+ (26,43)->-17: 43 mod 26 = 17 mismatch
+ digit absolute diff
+ (30,57)->-27: |3-5| || |0-7| = 27 mismatch
+ digit add mod10
+ (66,34)->32: (6+3)%10 || (6+4)%10 = 90 mismatch
+ digit sub mod10
+ (26,43)->-17: (2-4)%10 || (6-3)%10 = 83 mismatch
+ cross multiply
+ (30,57)->-27: 3*5 + 0*7 = 15 + 0 = 15 mismatch
+ cross multiply rev
+ (66,34)->32: 6*4 + 6*3 = 24 + 18 = 42 mismatch
+ digit multiply
+ (26,43)->-17: 2*4 || 6*3 = 8 || 18 = 818 mismatch
+ digit multiply rev
+ (30,57)->-27: 3*7 || 0*5 = 21 || 0 = 210 mismatch
+ digit sum diff
+ (66,34)->32: (6+6) - (3+4) = 5 mismatch
+ digit sum sum
+ (26,43)->-17: (2+6) + (4+3) = 15 mismatch
+ digit product diff
+ (30,57)->-27: 3*0 - 5*7 = 0 - 35 = -35 mismatch
+ digit product sum
+ (66,34)->32: 6*6 + 3*4 = 36 + 12 = 48 mismatch
+ determinant
+ (26,43)->-17: 2*3 - 6*4 = 6 - 24 = -18 mismatch
+ abs determinant
+ (30,57)->-27: |3*7 - 0*5| = |21 - 0| = 21 mismatch
+
+correct, actions: subtraction (a-b)
+
+Applying to 56(91:
+ We recall that the question operator is found in the examples.
+ identity [56 91]
+ subtraction (a-b)
+ (56,91): 56 - 91 = -35
+ Result is negative - we add back the operator prefix (
+ -35 -> \boxed{(35}

@@ -1,0 +1,75 @@
+|?$`( = `/[
+[<$([ = `&?`
+`(}/( = `
+/(}`: = }`?
+{<$[{ = (::?
+The question is |($:{
+
+Operator symbols $}
+Question operator symbol $
+Question operator in examples
+
+Digit symbols |?`(/[<&:{
+
+Checking concatenation
+left |? op $ right `( expected |?`( versus `/[ mismatch
+left [< op $ right ([ expected [<([ versus `&?` mismatch
+left `( op } right /( expected `(/( versus ` mismatch
+left /( op } right `: expected /(`: versus }`? mismatch
+left {< op $ right [{ expected {<[{ versus (::? mismatch
+
+Question operator $ is not concatenation
+
+Checking reverse concatenation
+left |? op $ right `( expected `(|? versus `/[ mismatch
+left [< op $ right ([ expected ([[< versus `&?` mismatch
+left `( op } right /( expected /(`( versus ` mismatch
+left /( op } right `: expected `:/( versus }`? mismatch
+left {< op $ right [{ expected [{{< versus (::? mismatch
+
+Question operator $ is not reverse concatenation
+
+Filtering out the concatenation operations
+|?$`( = `/[
+[<$([ = `&?`
+`(}/( = `
+/(}`: = }`?
+{<$[{ = (::?
+
+Assigning mul
+ left |? op $ right `( = `/[ length 3
+ left [< op $ right ([ = `&?` length 4 assume mul
+ left `( op } right /( = ` length 1
+ left /( op } right `: = }`? length 3
+ left {< op $ right [{ = (::? assumed mul
+
+Assigning sub
+ left |? op $ right `( = `/[ assumed mul
+ left [< op $ right ([ = `&?` assumed mul
+ left `( op } right /( = ` length 1
+ left /( op } right `: = }`? op in output assume sub
+ left {< op $ right [{ = (::? assumed mul
+
+Assigning add
+ left |? op $ right `( = `/[ assumed mul
+ left [< op $ right ([ = `&?` assumed mul
+ left `( op } right /( = ` assumed sub
+ left /( op } right `: = }`? assumed sub
+ left {< op $ right [{ = (::? assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left |? op $ right `( = `/[ assumed mul
+ left [< op $ right ([ = `&?` assumed mul
+ left `( op } right /( = ` assumed sub
+ left /( op } right `: = }`? assumed sub
+ left {< op $ right [{ = (::? assumed mul
+ left |( op $ right :{ the question, assumed mul
+
+Trying |=1 ?=3 `=6 (=2 /=0 [=8 <=7 &=9 :=5 {=4
+|?$`( = 13 mul 62 = 806 vs `/[ 608 diff 198 mul no; 31 mul 26 = 806 vs rev [/` 806 diff 0 mul ok
+[<$([ = 87 mul 28 = 2436 vs `&?` 6936 diff 4500 mul no; 78 mul 82 = 6396 vs rev `?&` 6396 diff 0 mul ok
+`(}/( = 62 sub 02 = 60 vs ` 6 diff 54 sub no; 26 sub 20 = 6 vs rev ` 6 diff 0 sub ok
+/(}`: = 02 sub 65 = 63 vs }`? -63 diff 0 sub ok; 20 sub 56 = 36 vs rev }?` -36 diff 0 sub ok
+{<$[{ = 47 mul 84 = 3948 vs (::? 2553 diff 1395 mul no; 74 mul 48 = 3552 vs rev ?::( 3552 diff 0 mul ok
+ accepted rev |($:{ = 12 mul 54 rev 21 mul 45 = 945 rev 549 = \boxed{:{&}

@@ -1,0 +1,66 @@
+$[*?/ = $?\^
+\'-[' = -/
+$>-!! = ']
+?]+>! = ^>
+The question is '!->?
+
+Operator symbols *-+
+Question operator symbol -
+Question operator in examples
+
+Digit symbols $[?/\^'>!]
+
+Checking concatenation
+left $[ op * right ?/ expected $[?/ versus $?\^ mismatch
+left \' op - right [' expected \'[' versus -/ mismatch
+left $> op - right !! expected $>!! versus '] mismatch
+left ?] op + right >! expected ?]>! versus ^> mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left $[ op * right ?/ expected ?/$[ versus $?\^ mismatch
+left \' op - right [' expected ['\' versus -/ mismatch
+left $> op - right !! expected !!$> versus '] mismatch
+left ?] op + right >! expected >!?] versus ^> mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+$[*?/ = $?\^
+\'-[' = -/
+$>-!! = ']
+?]+>! = ^>
+
+Assigning mul
+ left $[ op * right ?/ = $?\^ length 4 assume mul
+ left \' op - right [' = -/ length 2
+ left $> op - right !! = '] length 2
+ left ?] op + right >! = ^> length 2
+
+Assigning sub
+ left $[ op * right ?/ = $?\^ assumed mul
+ left \' op - right [' = -/ op in output assume sub
+ left $> op - right !! = '] assumed sub
+ left ?] op + right >! = ^> length 2
+
+Assigning add
+ left $[ op * right ?/ = $?\^ assumed mul
+ left \' op - right [' = -/ assumed sub
+ left $> op - right !! = '] assumed sub
+ left ?] op + right >! = ^> length 2
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left $[ op * right ?/ = $?\^ assumed mul
+ left \' op - right [' = -/ assumed sub
+ left $> op - right !! = '] assumed sub
+ left ?] op + right >! = ^> length 2 assume add
+ left '! op - right >? the question, assumed sub
+
+Trying $=0 [=7 ?=5 /=3 \=4 ^=2 '=9 >=8 !=1 ]=6
+$[*?/ = 07 mul 53 = 371 vs $?\^ 0542 diff 171 mul no; 70 mul 35 = 2450 vs rev ^\?$ 2450 diff 0 mul ok
+\'-[' = 49 sub 79 = 30 vs -/ -3 diff 27 sub no; 94 sub 97 = 3 vs rev -/ -3 diff 0 sub ok
+$>-!! = 08 sub 11 = 3 vs '] 96 diff 93 sub no; 80 sub 11 = 69 vs rev ]' 69 diff 0 sub ok
+?]+>! = 56 add 81 = 137 vs ^> 28 diff 109 add no; 65 add 18 = 83 vs rev >^ 82 diff 1 add ok - 1
+ accepted rev '!->? = 91 sub 85 rev 19 sub 58 = 39 rev 93 = \boxed{'/}

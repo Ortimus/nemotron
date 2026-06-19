@@ -1,0 +1,66 @@
+>[{#^ = ><[}
+}@{&@ = !}&&
+&@|>^ = !<!
+@#|?! = #^
+The question is &@{><
+
+Operator symbols {|
+Question operator symbol {
+Question operator in examples
+
+Digit symbols >[#^<}@&!?
+
+Checking concatenation
+left >[ op { right #^ expected >[#^ versus ><[} mismatch
+left }@ op { right &@ expected }@&@ versus !}&& mismatch
+left &@ op | right >^ expected &@>^ versus !<! mismatch
+left @# op | right ?! expected @#?! versus #^ mismatch
+
+Question operator { is not concatenation
+
+Checking reverse concatenation
+left >[ op { right #^ expected #^>[ versus ><[} mismatch
+left }@ op { right &@ expected &@}@ versus !}&& mismatch
+left &@ op | right >^ expected >^&@ versus !<! mismatch
+left @# op | right ?! expected ?!@# versus #^ mismatch
+
+Question operator { is not reverse concatenation
+
+Filtering out the concatenation operations
+>[{#^ = ><[}
+}@{&@ = !}&&
+&@|>^ = !<!
+@#|?! = #^
+
+Assigning mul
+ left >[ op { right #^ = ><[} length 4 assume mul
+ left }@ op { right &@ = !}&& assumed mul
+ left &@ op | right >^ = !<! length 3
+ left @# op | right ?! = #^ length 2
+
+Assigning sub
+ left >[ op { right #^ = ><[} assumed mul
+ left }@ op { right &@ = !}&& assumed mul
+ left &@ op | right >^ = !<! length 3
+ left @# op | right ?! = #^ length 2
+
+Assigning add
+ left >[ op { right #^ = ><[} assumed mul
+ left }@ op { right &@ = !}&& assumed mul
+ left &@ op | right >^ = !<! length 3 assume add
+ left @# op | right ?! = #^ assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left >[ op { right #^ = ><[} assumed mul
+ left }@ op { right &@ = !}&& assumed mul
+ left &@ op | right >^ = !<! assumed add
+ left @# op | right ?! = #^ assumed add
+ left &@ op { right >< the question, assumed mul
+
+Trying >=5 [=7 #=8 ^=9 <=0 }=3 @=2 &=4 !=1 ?=6
+>[{#^ = 57 mul 89 = 5073 vs ><[} 5073 diff 0 mul ok; 75 mul 98 = 7350 vs rev }[<> 3705 diff 3645 mul no
+}@{&@ = 32 mul 42 = 1344 vs !}&& 1344 diff 0 mul ok; 23 mul 24 = 552 vs rev &&}! 4431 diff 3879 mul no
+&@|>^ = 42 add 59 = 101 vs !<! 101 diff 0 add ok; 24 add 95 = 119 vs rev !<! 101 diff 18 add no
+@#|?! = 28 add 61 = 89 vs #^ 89 diff 0 add ok; 82 add 16 = 98 vs rev ^# 98 diff 0 add ok
+ accepted forward &@{>< = 42 mul 50 = 2100 = \boxed{@!<<}

@@ -1,0 +1,75 @@
+]]-|' = "%
+]"-%] = "
+$"*?$ = "|@`
+'|*#` = ##$
+'?+]% = |||
+The question is ?`*]%
+
+Operator symbols -*+
+Question operator symbol *
+Question operator in examples
+
+Digit symbols ]|'"%$?@`#
+
+Checking concatenation
+left ]] op - right |' expected ]]|' versus "% mismatch
+left ]" op - right %] expected ]"%] versus " mismatch
+left $" op * right ?$ expected $"?$ versus "|@` mismatch
+left '| op * right #` expected '|#` versus ##$ mismatch
+left '? op + right ]% expected '?]% versus ||| mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left ]] op - right |' expected |']] versus "% mismatch
+left ]" op - right %] expected %]]" versus " mismatch
+left $" op * right ?$ expected ?$$" versus "|@` mismatch
+left '| op * right #` expected #`'| versus ##$ mismatch
+left '? op + right ]% expected ]%'? versus ||| mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+]]-|' = "%
+]"-%] = "
+$"*?$ = "|@`
+'|*#` = ##$
+'?+]% = |||
+
+Assigning mul
+ left ]] op - right |' = "% length 2
+ left ]" op - right %] = " length 1
+ left $" op * right ?$ = "|@` length 4 assume mul
+ left '| op * right #` = ##$ assumed mul
+ left '? op + right ]% = ||| length 3
+
+Assigning sub
+ left ]] op - right |' = "% length 2
+ left ]" op - right %] = " length 1 assume sub
+ left $" op * right ?$ = "|@` assumed mul
+ left '| op * right #` = ##$ assumed mul
+ left '? op + right ]% = ||| length 3
+
+Assigning add
+ left ]] op - right |' = "% assumed sub
+ left ]" op - right %] = " assumed sub
+ left $" op * right ?$ = "|@` assumed mul
+ left '| op * right #` = ##$ assumed mul
+ left '? op + right ]% = ||| length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ]] op - right |' = "% assumed sub
+ left ]" op - right %] = " assumed sub
+ left $" op * right ?$ = "|@` assumed mul
+ left '| op * right #` = ##$ assumed mul
+ left '? op + right ]% = ||| assumed add
+ left ?` op * right ]% the question, assumed mul
+
+Trying ]=9 |=1 '=2 "=8 %=7 $=6 ?=3 @=4 `=5 #=0
+]]-|' = 99 sub 12 = 87 vs "% 87 diff 0 sub ok; 99 sub 21 = 78 vs rev %" 78 diff 0 sub ok
+]"-%] = 98 sub 79 = 19 vs " 8 diff 11 sub no; 89 sub 97 = 8 vs rev " 8 diff 0 sub ok
+$"*?$ = 68 mul 36 = 2448 vs "|@` 8145 diff 5697 mul no; 86 mul 63 = 5418 vs rev `@|" 5418 diff 0 mul ok
+'|*#` = 21 mul 05 = 105 vs ##$ 006 diff 99 mul no; 12 mul 50 = 600 vs rev $## 600 diff 0 mul ok
+'?+]% = 23 add 97 = 120 vs ||| 111 diff 9 add no; 32 add 79 = 111 vs rev ||| 111 diff 0 add ok
+ accepted rev ?`*]% = 35 mul 97 rev 53 mul 79 = 4187 rev 7814 = \boxed{%"|@}

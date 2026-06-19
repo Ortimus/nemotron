@@ -1,0 +1,187 @@
+78?29 = 106
+18}50 = }32
+65}48 = 17
+79?53 = 131
+41-14 = 573
+
+The inputs are 78, 29, 18, 50, 65, 48, 79, 53, 41, 14
+
+The outputs are 106, }32, 17, 131, 573
+Some example outputs have the operator symbol as prefix }.
+We now consider the outputs to be 106, -32, 17, 131, 573
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+78?29 -> ?
+18}50 -> }
+65}48 -> }
+79?53 -> ?
+41-14 -> -
+
+The operators
+?
+}
+-
+
+Looking at the question
+50}49 -> }
+The question operator is found in the examples.
+
+Looking at operator } [18}50 = -32, 65}48 = 17]:
+
+Trying common operations
+ reversed operands [18->81 50->05, 65->56 48->84] and reversed result [expected (81,05)->-32, (56,84)->17]
+ addition
+ (81,05)->-32: 81 + 05 = 86 rev-> 68 mismatch
+ multiplication
+ (56,84)->17: (50 + 6) * 84 = 50 * 84 + 6 * 84 = 4200 + 504 = 4704 rev-> 4074 mismatch
+ concatenation
+ (81,05)->-32: 81 || 05 = 8105 rev-> 5018 mismatch
+ reverse concatenation
+ (56,84)->17: 84 || 56 = 8456 rev-> 6548 mismatch
+
+ identity [18 50, 65 48] [expected (18,50)->-32, (65,48)->17]
+ addition
+ (18,50)->-32: 18 + 50 = 68 mismatch
+ multiplication
+ (65,48)->17: (60 + 5) * 48 = 60 * 48 + 5 * 48 = 2880 + 240 = 3120 mismatch
+ concatenation
+ (18,50)->-32: 18 || 50 = 1850 mismatch
+ reverse concatenation
+ (65,48)->17: 48 || 65 = 4865 mismatch
+
+Trying difference operations
+ reversed operands [18->81 50->05, 65->56 48->84] and reversed result [expected (81,05)->-32, (56,84)->17]
+ subtraction (a-b)
+ (81,05)->-32: 81 - 05 = 76 rev-> 67 mismatch
+ absolute difference
+ (56,84)->17: |56 - 84| = 28 rev-> 82 mismatch
+ max mod min
+ (81,05)->-32: max(81,05) mod min(81,05) = 81 mod 05 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (56,84)->17: -|56 - 84| = -28 rev-> -82 mismatch
+ reverse subtraction (b-a)
+ (81,05)->-32: 05 - 81 = -76 rev-> -67 mismatch
+ modulo (a mod b)
+ (56,84)->17: 56 mod 84 = 56 rev-> 65 mismatch
+
+ identity [18 50, 65 48] [expected (18,50)->-32, (65,48)->17]
+ subtraction (a-b)
+ (18,50)->-32: 18 - 50 = -32 match
+ (65,48)->17: 65 - 48 = 17 match
+ correct, actions: subtraction (a-b)
+ absolute difference
+ (65,48)->17: |65 - 48| = 17 match
+ (18,50)->-32: |18 - 50| = 32 mismatch
+ max mod min
+ (18,50)->-32: max(18,50) mod min(18,50) = 50 mod 18 = 14 mismatch
+ negated absolute difference
+ (65,48)->17: -|65 - 48| = -17 mismatch
+ reverse subtraction (b-a)
+ (18,50)->-32: 50 - 18 = 32 mismatch
+ modulo (a mod b)
+ (65,48)->17: 65 mod 48 = 17 match
+ (18,50)->-32: 18 mod 50 = 18 mismatch
+
+Trying rare operations
+ reversed operands [18->81 50->05, 65->56 48->84] and reversed result [expected (81,05)->-32, (56,84)->17]
+ multiply+1
+ (81,05)->-32: (80 + 1) * 05 + 1 = 80 * 05 + 1 * 05 + 1 = 400 + 5 + 1 = 405 + 1 = 406 rev-> 604 mismatch
+ multiply-1
+ (56,84)->17: (50 + 6) * 84 - 1 = 50 * 84 + 6 * 84 - 1 = 4200 + 504 - 1 = 4704 - 1 = 4703 rev-> 3074 mismatch
+ add+1
+ (81,05)->-32: 81 + 05 + 1 = 87 rev-> 78 mismatch
+ add-1
+ (56,84)->17: 56 + 84 - 1 = 139 rev-> 931 mismatch
+ sub+1
+ (81,05)->-32: 81 - 05 + 1 = 77 rev-> 77 mismatch
+ sub-1
+ (56,84)->17: 56 - 84 - 1 = -29 rev-> -92 mismatch
+ integer division (a/b)
+ (81,05)->-32: 81 / 05 = 16 rev-> 61 mismatch
+ reverse division (b/a)
+ (56,84)->17: 84 / 56 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (81,05)->-32: 05 mod 81 = 5 rev-> 5 mismatch
+ digit absolute diff
+ (56,84)->17: |5-8| || |6-4| = 32 rev-> 23 mismatch
+ digit add mod10
+ (81,05)->-32: (8+0)%10 || (1+5)%10 = 86 rev-> 68 mismatch
+ digit sub mod10
+ (56,84)->17: (5-8)%10 || (6-4)%10 = 72 rev-> 27 mismatch
+ cross multiply
+ (81,05)->-32: 8*0 + 1*5 = 0 + 5 = 5 rev-> 5 mismatch
+ cross multiply rev
+ (56,84)->17: 5*4 + 6*8 = 20 + 48 = 68 rev-> 86 mismatch
+ digit multiply
+ (81,05)->-32: 8*0 || 1*5 = 0 || 5 = 05 rev-> 50 mismatch
+ digit multiply rev
+ (56,84)->17: 5*4 || 6*8 = 20 || 48 = 2048 rev-> 8402 mismatch
+ digit sum diff
+ (81,05)->-32: (8+1) - (0+5) = 4 rev-> 4 mismatch
+ digit sum sum
+ (56,84)->17: (5+6) + (8+4) = 23 rev-> 32 mismatch
+ digit product diff
+ (81,05)->-32: 8*1 - 0*5 = 8 - 0 = 8 rev-> 8 mismatch
+ digit product sum
+ (56,84)->17: 5*6 + 8*4 = 30 + 32 = 62 rev-> 26 mismatch
+ determinant
+ (81,05)->-32: 8*5 - 1*0 = 40 - 0 = 40 rev-> 04 mismatch
+ abs determinant
+ (56,84)->17: |5*4 - 6*8| = |20 - 48| = 28 rev-> 82 mismatch
+
+ identity [18 50, 65 48] [expected (18,50)->-32, (65,48)->17]
+ multiply+1
+ (18,50)->-32: (10 + 8) * 50 + 1 = 10 * 50 + 8 * 50 + 1 = 500 + 400 + 1 = 900 + 1 = 901 mismatch
+ multiply-1
+ (65,48)->17: (60 + 5) * 48 - 1 = 60 * 48 + 5 * 48 - 1 = 2880 + 240 - 1 = 3120 - 1 = 3119 mismatch
+ add+1
+ (18,50)->-32: 18 + 50 + 1 = 69 mismatch
+ add-1
+ (65,48)->17: 65 + 48 - 1 = 112 mismatch
+ sub+1
+ (18,50)->-32: 18 - 50 + 1 = -31 mismatch
+ sub-1
+ (65,48)->17: 65 - 48 - 1 = 16 mismatch
+ integer division (a/b)
+ (18,50)->-32: 18 / 50 = 0 mismatch
+ reverse division (b/a)
+ (65,48)->17: 48 / 65 = 0 mismatch
+ reverse modulo (b mod a)
+ (18,50)->-32: 50 mod 18 = 14 mismatch
+ digit absolute diff
+ (65,48)->17: |6-4| || |5-8| = 23 mismatch
+ digit add mod10
+ (18,50)->-32: (1+5)%10 || (8+0)%10 = 68 mismatch
+ digit sub mod10
+ (65,48)->17: (6-4)%10 || (5-8)%10 = 27 mismatch
+ cross multiply
+ (18,50)->-32: 1*5 + 8*0 = 5 + 0 = 5 mismatch
+ cross multiply rev
+ (65,48)->17: 6*8 + 5*4 = 48 + 20 = 68 mismatch
+ digit multiply
+ (18,50)->-32: 1*5 || 8*0 = 5 || 0 = 50 mismatch
+ digit multiply rev
+ (65,48)->17: 6*8 || 5*4 = 48 || 20 = 4820 mismatch
+ digit sum diff
+ (18,50)->-32: (1+8) - (5+0) = 4 mismatch
+ digit sum sum
+ (65,48)->17: (6+5) + (4+8) = 23 mismatch
+ digit product diff
+ (18,50)->-32: 1*8 - 5*0 = 8 - 0 = 8 mismatch
+ digit product sum
+ (65,48)->17: 6*5 + 4*8 = 30 + 32 = 62 mismatch
+ determinant
+ (18,50)->-32: 1*0 - 8*5 = 0 - 40 = -40 mismatch
+ abs determinant
+ (65,48)->17: |6*8 - 5*4| = |48 - 20| = 28 mismatch
+
+correct, actions: subtraction (a-b)
+
+Applying to 50}49:
+ We recall that the question operator is found in the examples.
+ identity [50 49]
+ subtraction (a-b)
+ (50,49): 50 - 49 = 1
+ Result is non-negative
+ \boxed{1}

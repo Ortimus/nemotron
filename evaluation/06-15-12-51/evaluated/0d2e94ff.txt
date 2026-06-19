@@ -1,0 +1,252 @@
+"}]}% = `^
+<|]^< = }::
+&&-&% = -}
+%%?"} = &&%%
+&`]}^ = ^%
+The question is ^&]%@
+
+Operator symbols ]-?
+Question operator symbol ]
+Question operator in examples
+
+Digit symbols "}%`^<|:&@
+
+Checking concatenation
+left "} op ] right }% expected "}}% versus `^ mismatch
+left <| op ] right ^< expected <|^< versus }:: mismatch
+left && op - right &% expected &&&% versus -} mismatch
+left %% op ? right "} expected %%"} versus &&%% mismatch
+left &` op ] right }^ expected &`}^ versus ^% mismatch
+
+Question operator ] is not concatenation
+
+Checking reverse concatenation
+left "} op ] right }% expected }%"} versus `^ mismatch
+left <| op ] right ^< expected ^<<| versus }:: mismatch
+left && op - right &% expected &%&& versus -} mismatch
+left %% op ? right "} expected "}%% versus &&%% mismatch
+left &` op ] right }^ expected }^&` versus ^% mismatch
+
+Question operator ] is not reverse concatenation
+
+Filtering out the concatenation operations
+"}]}% = `^
+<|]^< = }::
+&&-&% = -}
+%%?"} = &&%%
+&`]}^ = ^%
+
+Assigning mul
+ left "} op ] right }% = `^ length 2
+ left <| op ] right ^< = }:: length 3
+ left && op - right &% = -} length 2
+ left %% op ? right "} = &&%% length 4 assume mul
+ left &` op ] right }^ = ^% length 2
+
+Assigning sub
+ left "} op ] right }% = `^ length 2
+ left <| op ] right ^< = }:: length 3
+ left && op - right &% = -} op in output assume sub
+ left %% op ? right "} = &&%% assumed mul
+ left &` op ] right }^ = ^% length 2
+
+Assigning add
+ left "} op ] right }% = `^ length 2
+ left <| op ] right ^< = }:: length 3 assume add
+ left && op - right &% = -} assumed sub
+ left %% op ? right "} = &&%% assumed mul
+ left &` op ] right }^ = ^% assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left "} op ] right }% = `^ assumed add
+ left <| op ] right ^< = }:: assumed add
+ left && op - right &% = -} assumed sub
+ left %% op ? right "} = &&%% assumed mul
+ left &` op ] right }^ = ^% assumed add
+ left ^& op ] right %@ the question, assumed add
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+<|]^< = 34 add 03 = 37 vs }:: 866 diff 829 add no; 43 add 30 = 73 vs rev ::} 668 diff 595 add no
+&&-&% = 99 sub 95 = 4 vs -} -8 diff 4 sub no; 99 sub 59 = 40 vs rev -} -8 diff 32 sub no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=9 }=5 %=6 `=2 ^=0 <=3 |=4 :=8 &=1 @=7
+"}]}% = 95 add 56 = 151 vs `^ 20 diff 131 add no; 59 add 65 = 124 vs rev ^` 02 diff 122 add no
+ rejected none ^&]%@ = 01 add 67 rev 10 add 76 = 86 rev 68 = final answer: %:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=8 }=9 %=6 `=2 ^=0 <=3 |=4 :=1 &=7 @=5
+"}]}% = 89 add 96 = 185 vs `^ 20 diff 165 add no; 98 add 69 = 167 vs rev ^` 02 diff 165 add no
+ rejected none ^&]%@ = 07 add 65 rev 70 add 56 = 126 rev 621 = final answer: %`:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=9 }=5 %=6 `=2 ^=0 <=3 |=4 :=8 &=1 @=7
+"}]}% = 95 add 56 = 151 vs `^ 20 diff 131 add no; 59 add 65 = 124 vs rev ^` 02 diff 122 add no
+ rejected none ^&]%@ = 01 add 67 rev 10 add 76 = 86 rev 68 = final answer: %:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=8 }=9 %=6 `=2 ^=0 <=3 |=4 :=1 &=7 @=5
+"}]}% = 89 add 96 = 185 vs `^ 20 diff 165 add no; 98 add 69 = 167 vs rev ^` 02 diff 165 add no
+ rejected none ^&]%@ = 07 add 65 rev 70 add 56 = 126 rev 621 = final answer: %`:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=9 }=5 %=6 `=2 ^=0 <=3 |=4 :=8 &=1 @=7
+"}]}% = 95 add 56 = 151 vs `^ 20 diff 131 add no; 59 add 65 = 124 vs rev ^` 02 diff 122 add no
+ rejected none ^&]%@ = 01 add 67 rev 10 add 76 = 86 rev 68 = final answer: %:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=8 }=9 %=6 `=2 ^=0 <=3 |=4 :=1 &=7 @=5
+"}]}% = 89 add 96 = 185 vs `^ 20 diff 165 add no; 98 add 69 = 167 vs rev ^` 02 diff 165 add no
+ rejected none ^&]%@ = 07 add 65 rev 70 add 56 = 126 rev 621 = final answer: %`:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=9 }=5 %=6 `=2 ^=0 <=3 |=4 :=8 &=1 @=7
+"}]}% = 95 add 56 = 151 vs `^ 20 diff 131 add no; 59 add 65 = 124 vs rev ^` 02 diff 122 add no
+ rejected none ^&]%@ = 01 add 67 rev 10 add 76 = 86 rev 68 = final answer: %:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=8 }=9 %=6 `=2 ^=0 <=3 |=4 :=1 &=7 @=5
+"}]}% = 89 add 96 = 185 vs `^ 20 diff 165 add no; 98 add 69 = 167 vs rev ^` 02 diff 165 add no
+ rejected none ^&]%@ = 07 add 65 rev 70 add 56 = 126 rev 621 = final answer: %`:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% = 18 add 85 = 103 vs `^ 20 diff 83 add no; 81 add 58 = 139 vs rev ^` 02 diff 137 add no
+ rejected forward ^&]%@ = 09 add 57 = 66 = final answer: ::
+
+Trying "=7 }=1 %=8 `=2 ^=0 <=3 |=4 :=6 &=9 @=5
+"}]}% = 71 add 18 = 89 vs `^ 20 diff 69 add no; 17 add 81 = 98 vs rev ^` 02 diff 96 add no
+ rejected none ^&]%@ = 09 add 85 rev 90 add 58 = 148 rev 841 = final answer: %|}
+
+Trying "=6 }=7 %=1 `=2 ^=0 <=3 |=4 :=8 &=9 @=5
+"}]}% = 67 add 71 = 138 vs `^ 20 diff 118 add no; 76 add 17 = 93 vs rev ^` 02 diff 91 add no
+ rejected none ^&]%@ = 09 add 15 rev 90 add 51 = 141 rev 141 = final answer: %|%
+
+Trying "=5 }=6 %=7 `=2 ^=0 <=3 |=4 :=8 &=9 @=1
+"}]}% = 56 add 67 = 123 vs `^ 20 diff 103 add no; 65 add 76 = 141 vs rev ^` 02 diff 139 add no
+ rejected none ^&]%@ = 09 add 71 rev 90 add 17 = 107 rev 701 = final answer: %^@
+
+Trying "=9 }=5 %=6 `=2 ^=0 <=3 |=4 :=8 &=1 @=7
+"}]}% = 95 add 56 = 151 vs `^ 20 diff 131 add no; 59 add 65 = 124 vs rev ^` 02 diff 122 add no
+ rejected none ^&]%@ = 01 add 67 rev 10 add 76 = 86 rev 68 = final answer: %:
+
+Trying "=1 }=8 %=5 `=2 ^=0 <=3 |=4 :=6 &=9 @=7
+"}]}% =

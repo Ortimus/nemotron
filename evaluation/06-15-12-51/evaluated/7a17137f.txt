@@ -1,0 +1,238 @@
+##+#@ = `%\
+?{-\` = @>
+%`*'? = {\>\
+%`->` = ->
+The question is %>*`\
+
+Operator symbols +-*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols #@`%\?{>'
+
+Checking concatenation
+left ## op + right #@ expected ###@ versus `%\ mismatch
+left ?{ op - right \` expected ?{\` versus @> mismatch
+left %` op * right '? expected %`'? versus {\>\ mismatch
+left %` op - right >` expected %`>` versus -> mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left ## op + right #@ expected #@## versus `%\ mismatch
+left ?{ op - right \` expected \`?{ versus @> mismatch
+left %` op * right '? expected '?%` versus {\>\ mismatch
+left %` op - right >` expected >`%` versus -> mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+##+#@ = `%\
+?{-\` = @>
+%`*'? = {\>\
+%`->` = ->
+
+Assigning mul
+ left ## op + right #@ = `%\ length 3
+ left ?{ op - right \` = @> length 2
+ left %` op * right '? = {\>\ length 4 assume mul
+ left %` op - right >` = -> length 2
+
+Assigning sub
+ left ## op + right #@ = `%\ length 3
+ left ?{ op - right \` = @> length 2
+ left %` op * right '? = {\>\ assumed mul
+ left %` op - right >` = -> op in output assume sub
+
+Assigning add
+ left ## op + right #@ = `%\ length 3 assume add
+ left ?{ op - right \` = @> assumed sub
+ left %` op * right '? = {\>\ assumed mul
+ left %` op - right >` = -> assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ## op + right #@ = `%\ assumed add
+ left ?{ op - right \` = @> assumed sub
+ left %` op * right '? = {\>\ assumed mul
+ left %` op - right >` = -> assumed sub
+ left %> op * right `\ the question, assumed mul
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 188 vs rev \%` 106 diff 82 add no
+ rejected none %>*`\ = 03 mul 61 rev 30 mul 16 = 480 rev 084 = final answer: %@A
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 188 vs rev \%` 106 diff 82 add no
+ rejected none %>*`\ = 03 mul 61 rev 30 mul 16 = 480 rev 084 = final answer: %@A
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 188 vs rev \%` 106 diff 82 add no
+ rejected none %>*`\ = 03 mul 61 rev 30 mul 16 = 480 rev 084 = final answer: %@A
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 188 vs rev \%` 106 diff 82 add no
+ rejected none %>*`\ = 03 mul 61 rev 30 mul 16 = 480 rev 084 = final answer: %@A
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 188 vs rev \%` 106 diff 82 add no
+ rejected none %>*`\ = 03 mul 61 rev 30 mul 16 = 480 rev 084 = final answer: %@A
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 188 vs rev \%` 106 diff 82 add no
+ rejected none %>*`\ = 03 mul 61 rev 30 mul 16 = 480 rev 084 = final answer: %@A
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 188 vs rev \%` 106 diff 82 add no
+ rejected none %>*`\ = 03 mul 61 rev 30 mul 16 = 480 rev 084 = final answer: %@A
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 188 vs rev \%` 106 diff 82 add no
+ rejected none %>*`\ = 03 mul 61 rev 30 mul 16 = 480 rev 084 = final answer: %@A
+
+Trying #=1 @=2 `=3 %=4 \=5 ?=6 {=7 >=8 '=9 A=0
+##+#@ = 11 add 12 = 23 vs `%\ 345 diff 322 add no; 11 add 21 = 32 vs rev \%` 543 diff 511 add no
+ rejected none %>*`\ = 48 mul 35 rev 84 mul 53 = 4452 rev 2544 = final answer: @\%%
+
+Trying #=0 @=1 `=2 %=3 \=4 ?=5 {=7 >=8 '=9 A=6
+##+#@ = 00 add 01 = 1 vs `%\ 234 diff 233 add no; 00 add 10 = 10 vs rev \%` 432 diff 422 add no
+ rejected none %>*`\ = 38 mul 24 rev 83 mul 42 = 3486 rev 6843 = final answer: A>\%
+
+Trying #=6 @=0 `=1 %=2 \=3 ?=5 {=7 >=8 '=9 A=4
+##+#@ = 66 add 60 = 126 vs `%\ 123 diff 3 add no; 66 add 06 = 72 vs rev \%` 321 diff 249 add no
+ rejected none %>*`\ = 28 mul 13 rev 82 mul 31 = 2542 rev 2452 = final answer: %A?%
+
+Trying #=8 @=6 `=0 %=1 \=2 ?=5 {=7 >=3 '=9 A=4
+##+#@ = 88 add 86 = 174 vs `%\ 012 diff 162 add no; 88 add 68 = 156 vs rev \%` 210 diff 54 add no
+ rejected none %>*`\ = 13 mul 02 rev 31 mul 20 = 620 rev 026 = final answer: `\@
+
+Trying #=9 @=8 `=6 %=0 \=1 ?=5 {=7 >=3 '=2 A=4
+##+#@ = 99 add 98 = 197 vs `%\ 601 diff 404 add no; 99 add 89 = 18

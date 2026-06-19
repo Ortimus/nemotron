@@ -1,0 +1,180 @@
+76*62 = 2471
+68-47 = 21
+04-49 = 41
+44*51 = 066
+
+The inputs are 76, 62, 68, 47, 04, 49, 44, 51
+
+The outputs are 2471, 21, 41, 066
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+76*62 -> *
+68-47 -> -
+04-49 -> -
+44*51 -> *
+
+The operators
+*
+-
+
+Looking at the question
+43*37 -> *
+The question operator is found in the examples.
+
+Looking at operator * [76*62 = 2471, 44*51 = 066]:
+
+Trying common operations
+ reversed operands [76->67 62->26, 44->44 51->15] and reversed result [expected (67,26)->2471, (44,15)->066]
+ addition
+ (67,26)->2471: 67 + 26 = 93 rev-> 39 mismatch
+ multiplication
+ (44,15)->066: (40 + 4) * 15 = 40 * 15 + 4 * 15 = 600 + 60 = 660 rev-> 066 match
+ (67,26)->2471: (60 + 7) * 26 = 60 * 26 + 7 * 26 = 1560 + 182 = 1742 rev-> 2471 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (67,26)->2471: 67 || 26 = 6726 rev-> 6276 mismatch
+ reverse concatenation
+ (44,15)->066: 15 || 44 = 1544 rev-> 4451 mismatch
+
+ identity [76 62, 44 51] [expected (76,62)->2471, (44,51)->066]
+ addition
+ (76,62)->2471: 76 + 62 = 138 mismatch
+ multiplication
+ (44,51)->066: (40 + 4) * 51 = 40 * 51 + 4 * 51 = 2040 + 204 = 2244 mismatch
+ concatenation
+ (76,62)->2471: 76 || 62 = 7662 mismatch
+ reverse concatenation
+ (44,51)->066: 51 || 44 = 5144 mismatch
+
+Trying difference operations
+ reversed operands [76->67 62->26, 44->44 51->15] and reversed result [expected (67,26)->2471, (44,15)->066]
+ subtraction (a-b)
+ (67,26)->2471: 67 - 26 = 41 rev-> 14 mismatch
+ absolute difference
+ (44,15)->066: |44 - 15| = 29 rev-> 92 mismatch
+ max mod min
+ (67,26)->2471: max(67,26) mod min(67,26) = 67 mod 26 = 15 rev-> 51 mismatch
+ negated absolute difference
+ (44,15)->066: -|44 - 15| = -29 rev-> -92 mismatch
+ reverse subtraction (b-a)
+ (67,26)->2471: 26 - 67 = -41 rev-> -14 mismatch
+ modulo (a mod b)
+ (44,15)->066: 44 mod 15 = 14 rev-> 41 mismatch
+
+ identity [76 62, 44 51] [expected (76,62)->2471, (44,51)->066]
+ subtraction (a-b)
+ (76,62)->2471: 76 - 62 = 14 mismatch
+ absolute difference
+ (44,51)->066: |44 - 51| = 7 mismatch
+ max mod min
+ (76,62)->2471: max(76,62) mod min(76,62) = 76 mod 62 = 14 mismatch
+ negated absolute difference
+ (44,51)->066: -|44 - 51| = -7 mismatch
+ reverse subtraction (b-a)
+ (76,62)->2471: 62 - 76 = -14 mismatch
+ modulo (a mod b)
+ (44,51)->066: 44 mod 51 = 44 mismatch
+
+Trying rare operations
+ reversed operands [76->67 62->26, 44->44 51->15] and reversed result [expected (67,26)->2471, (44,15)->066]
+ multiply+1
+ (67,26)->2471: (60 + 7) * 26 + 1 = 60 * 26 + 7 * 26 + 1 = 1560 + 182 + 1 = 1742 + 1 = 1743 rev-> 3471 mismatch
+ multiply-1
+ (44,15)->066: (40 + 4) * 15 - 1 = 40 * 15 + 4 * 15 - 1 = 600 + 60 - 1 = 660 - 1 = 659 rev-> 956 mismatch
+ add+1
+ (67,26)->2471: 67 + 26 + 1 = 94 rev-> 49 mismatch
+ add-1
+ (44,15)->066: 44 + 15 - 1 = 58 rev-> 85 mismatch
+ sub+1
+ (67,26)->2471: 67 - 26 + 1 = 42 rev-> 24 mismatch
+ sub-1
+ (44,15)->066: 44 - 15 - 1 = 28 rev-> 82 mismatch
+ integer division (a/b)
+ (67,26)->2471: 67 / 26 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (44,15)->066: 15 / 44 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (67,26)->2471: 26 mod 67 = 26 rev-> 62 mismatch
+ digit absolute diff
+ (44,15)->066: |4-1| || |4-5| = 31 rev-> 13 mismatch
+ digit add mod10
+ (67,26)->2471: (6+2)%10 || (7+6)%10 = 83 rev-> 38 mismatch
+ digit sub mod10
+ (44,15)->066: (4-1)%10 || (4-5)%10 = 39 rev-> 93 mismatch
+ cross multiply
+ (67,26)->2471: 6*2 + 7*6 = 12 + 42 = 54 rev-> 45 mismatch
+ cross multiply rev
+ (44,15)->066: 4*5 + 4*1 = 20 + 4 = 24 rev-> 42 mismatch
+ digit multiply
+ (67,26)->2471: 6*2 || 7*6 = 12 || 42 = 1242 rev-> 2421 mismatch
+ digit multiply rev
+ (44,15)->066: 4*5 || 4*1 = 20 || 4 = 204 rev-> 402 mismatch
+ digit sum diff
+ (67,26)->2471: (6+7) - (2+6) = 5 rev-> 5 mismatch
+ digit sum sum
+ (44,15)->066: (4+4) + (1+5) = 14 rev-> 41 mismatch
+ digit product diff
+ (67,26)->2471: 6*7 - 2*6 = 42 - 12 = 30 rev-> 03 mismatch
+ digit product sum
+ (44,15)->066: 4*4 + 1*5 = 16 + 5 = 21 rev-> 12 mismatch
+ determinant
+ (67,26)->2471: 6*6 - 7*2 = 36 - 14 = 22 rev-> 22 mismatch
+ abs determinant
+ (44,15)->066: |4*5 - 4*1| = |20 - 4| = 16 rev-> 61 mismatch
+
+ identity [76 62, 44 51] [expected (76,62)->2471, (44,51)->066]
+ multiply+1
+ (76,62)->2471: (70 + 6) * 62 + 1 = 70 * 62 + 6 * 62 + 1 = 4340 + 372 + 1 = 4712 + 1 = 4713 mismatch
+ multiply-1
+ (44,51)->066: (40 + 4) * 51 - 1 = 40 * 51 + 4 * 51 - 1 = 2040 + 204 - 1 = 2244 - 1 = 2243 mismatch
+ add+1
+ (76,62)->2471: 76 + 62 + 1 = 139 mismatch
+ add-1
+ (44,51)->066: 44 + 51 - 1 = 94 mismatch
+ sub+1
+ (76,62)->2471: 76 - 62 + 1 = 15 mismatch
+ sub-1
+ (44,51)->066: 44 - 51 - 1 = -8 mismatch
+ integer division (a/b)
+ (76,62)->2471: 76 / 62 = 1 mismatch
+ reverse division (b/a)
+ (44,51)->066: 51 / 44 = 1 mismatch
+ reverse modulo (b mod a)
+ (76,62)->2471: 62 mod 76 = 62 mismatch
+ digit absolute diff
+ (44,51)->066: |4-5| || |4-1| = 13 mismatch
+ digit add mod10
+ (76,62)->2471: (7+6)%10 || (6+2)%10 = 38 mismatch
+ digit sub mod10
+ (44,51)->066: (4-5)%10 || (4-1)%10 = 93 mismatch
+ cross multiply
+ (76,62)->2471: 7*6 + 6*2 = 42 + 12 = 54 mismatch
+ cross multiply rev
+ (44,51)->066: 4*1 + 4*5 = 4 + 20 = 24 mismatch
+ digit multiply
+ (76,62)->2471: 7*6 || 6*2 = 42 || 12 = 4212 mismatch
+ digit multiply rev
+ (44,51)->066: 4*1 || 4*5 = 4 || 20 = 420 mismatch
+ digit sum diff
+ (76,62)->2471: (7+6) - (6+2) = 5 mismatch
+ digit sum sum
+ (44,51)->066: (4+4) + (5+1) = 14 mismatch
+ digit product diff
+ (76,62)->2471: 7*6 - 6*2 = 42 - 12 = 30 mismatch
+ digit product sum
+ (44,51)->066: 4*4 + 5*1 = 16 + 5 = 21 mismatch
+ determinant
+ (76,62)->2471: 7*2 - 6*6 = 14 - 36 = -22 mismatch
+ abs determinant
+ (44,51)->066: |4*1 - 4*5| = |4 - 20| = 16 mismatch
+
+correct, actions: reversed operands, reversed result, multiplication
+
+Applying to 43*37:
+ We recall that the question operator is found in the examples.
+ reversed operands [43->34, 37->73] and reversed result
+ multiplication
+ (34,73): (30 + 4) * 73 = 30 * 73 + 4 * 73 = 2190 + 292 = 2482 rev-> 2842
+ Result is non-negative
+ \boxed{2842}

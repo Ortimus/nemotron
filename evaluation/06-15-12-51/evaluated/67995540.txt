@@ -1,0 +1,243 @@
+/"^/% = "'
+(/|]@ = |"'
+(/:@" = ))]/
+The question is "&|@'
+
+Operator symbols ^|:
+Question operator symbol |
+Question operator in examples
+
+Digit symbols /"%'(]@)&
+
+Checking concatenation
+left /" op ^ right /% expected /"/% versus "' mismatch
+left (/ op | right ]@ expected (/]@ versus |"' mismatch
+left (/ op : right @" expected (/@" versus ))]/ mismatch
+
+Question operator | is not concatenation
+
+Checking reverse concatenation
+left /" op ^ right /% expected /%/" versus "' mismatch
+left (/ op | right ]@ expected ]@(/ versus |"' mismatch
+left (/ op : right @" expected @"(/ versus ))]/ mismatch
+
+Question operator | is not reverse concatenation
+
+Filtering out the concatenation operations
+/"^/% = "'
+(/|]@ = |"'
+(/:@" = ))]/
+
+Assigning mul
+ left /" op ^ right /% = "' length 2
+ left (/ op | right ]@ = |"' length 3
+ left (/ op : right @" = ))]/ length 4 assume mul
+
+Assigning sub
+ left /" op ^ right /% = "' length 2
+ left (/ op | right ]@ = |"' op in output assume sub
+ left (/ op : right @" = ))]/ assumed mul
+
+Assigning add
+ left /" op ^ right /% = "' length 2
+ left (/ op | right ]@ = |"' assumed sub
+ left (/ op : right @" = ))]/ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left /" op ^ right /% = "' length 2 assume add
+ left (/ op | right ]@ = |"' assumed sub
+ left (/ op : right @" = ))]/ assumed mul
+ left "& op | right @' the question, assumed sub
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21 add 31 = 52 vs rev '" 42 diff 10 add no
+(/|]@ = 51 sub 67 = 16 vs |"' -24 diff 8 sub no; 15 sub 76 = 61 vs rev |'" -42 diff 19 sub no
+ rejected forward "&|@' = 29 sub 74 = 45 = final answer: '(
+
+Trying /=9 "=1 %=2 '=3 (=5 ]=6 @=7 )=8 &=4 A=0
+/"^/% = 91 add 92 = 183 vs "' 13 diff 170 add no; 19 add 29 = 48 vs rev '" 31 diff 17 add no
+ rejected none "&|@' = 14 sub 73 rev 41 sub 37 = 4 rev 4 = final answer: &
+
+Trying /=0 "=9 %=1 '=2 (=5 ]=6 @=7 )=8 &=3 A=4
+/"^/% = 09 add 01 = 10 vs "' 92 diff 82 add no; 90 add 10 = 100 vs rev '" 29 diff 71 add no
+ rejected none "&|@' = 93 sub 72 rev 39 sub 27 = 12 rev 21 = final answer: '%
+
+Trying /=8 "=0 %=9 '=1 (=5 ]=6 @=7 )=2 &=3 A=4
+/"^/% = 80 add 89 = 169 vs "' 01 diff 168 add no; 08 add 98 = 106 vs rev '" 10 diff 96 add no
+ rejected none "&|@' = 03 sub 71 rev 30 sub 17 = 13 rev 31 = final answer: &'
+
+Trying /=3 "=8 %=0 '=9 (=5 ]=6 @=7 )=2 &=4 A=1
+/"^/% = 38 add 30 = 68 vs "' 89 diff 21 add no; 83 add 03 = 86 vs rev '" 98 diff 12 add no
+ rejected none "&|@' = 84 sub 79 rev 48 sub 97 = 49 rev 94 = final answer: '&
+
+Trying /=1 "=2 %=3 '=4 (=5 ]=6 @=7 )=8 &=9 A=0
+/"^/% = 12 add 13 = 25 vs "' 24 diff 1 add ok - 1; 21

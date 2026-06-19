@@ -1,0 +1,75 @@
+|"'"" = |##}
+^^'?? = "|:
+"@'|" = }"}{
+#}-#^ = -|
+#|'#} = &&?
+The question is |:-}@
+
+Operator symbols '-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols |"#}^?:@{&
+
+Checking concatenation
+left |" op ' right "" expected |""" versus |##} mismatch
+left ^^ op ' right ?? expected ^^?? versus "|: mismatch
+left "@ op ' right |" expected "@|" versus }"}{ mismatch
+left #} op - right #^ expected #}#^ versus -| mismatch
+left #| op ' right #} expected #|#} versus &&? mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left |" op ' right "" expected ""|" versus |##} mismatch
+left ^^ op ' right ?? expected ??^^ versus "|: mismatch
+left "@ op ' right |" expected |""@ versus }"}{ mismatch
+left #} op - right #^ expected #^#} versus -| mismatch
+left #| op ' right #} expected #}#| versus &&? mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+|"'"" = |##}
+^^'?? = "|:
+"@'|" = }"}{
+#}-#^ = -|
+#|'#} = &&?
+
+Assigning mul
+ left |" op ' right "" = |##} length 4 assume mul
+ left ^^ op ' right ?? = "|: assumed mul
+ left "@ op ' right |" = }"}{ assumed mul
+ left #} op - right #^ = -| length 2
+ left #| op ' right #} = &&? assumed mul
+
+Assigning sub
+ left |" op ' right "" = |##} assumed mul
+ left ^^ op ' right ?? = "|: assumed mul
+ left "@ op ' right |" = }"}{ assumed mul
+ left #} op - right #^ = -| op in output assume sub
+ left #| op ' right #} = &&? assumed mul
+
+Assigning add
+ left |" op ' right "" = |##} assumed mul
+ left ^^ op ' right ?? = "|: assumed mul
+ left "@ op ' right |" = }"}{ assumed mul
+ left #} op - right #^ = -| assumed sub
+ left #| op ' right #} = &&? assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left |" op ' right "" = |##} assumed mul
+ left ^^ op ' right ?? = "|: assumed mul
+ left "@ op ' right |" = }"}{ assumed mul
+ left #} op - right #^ = -| assumed sub
+ left #| op ' right #} = &&? assumed mul
+ left |: op - right }@ the question, assumed sub
+
+Trying |=4 "=8 #=2 }=3 ^=7 ?=1 :=6 @=0 {=9 &=5
+|"'"" = 48 mul 88 = 4224 vs |##} 4223 diff 1 mul ok - 1; 84 mul 88 = 7392 vs rev }##| 3224 diff 4168 mul no
+^^'?? = 77 mul 11 = 847 vs "|: 846 diff 1 mul ok - 1; 77 mul 11 = 847 vs rev :|" 648 diff 199 mul no
+"@'|" = 80 mul 48 = 3840 vs }"}{ 3839 diff 1 mul ok - 1; 08 mul 84 = 672 vs rev {}"} 9383 diff 8711 mul no
+#}-#^ = 23 sub 27 = 4 vs -| -4 diff 0 sub ok; 32 sub 72 = 40 vs rev -| -4 diff 36 sub no
+#|'#} = 24 mul 23 = 552 vs &&? 551 diff 1 mul ok - 1; 42 mul 32 = 1344 vs rev ?&& 155 diff 1189 mul no
+ accepted forward |:-}@ = 46 sub 30 = 16 = \boxed{?:}

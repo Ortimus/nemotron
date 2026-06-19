@@ -1,0 +1,57 @@
+[`+?^ = ""[
+|"+// = ?^
+/|*^) = "))"
+The question is &/*[/
+
+Operator symbols +*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols [`?^"|/)&
+
+Checking concatenation
+left [` op + right ?^ expected [`?^ versus ""[ mismatch
+left |" op + right // expected |"// versus ?^ mismatch
+left /| op * right ^) expected /|^) versus "))" mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left [` op + right ?^ expected ?^[` versus ""[ mismatch
+left |" op + right // expected //|" versus ?^ mismatch
+left /| op * right ^) expected ^)/| versus "))" mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+[`+?^ = ""[
+|"+// = ?^
+/|*^) = "))"
+
+Assigning mul
+ left [` op + right ?^ = ""[ length 3
+ left |" op + right // = ?^ length 2
+ left /| op * right ^) = "))" length 4 assume mul
+
+Assigning sub
+ left [` op + right ?^ = ""[ length 3
+ left |" op + right // = ?^ length 2
+ left /| op * right ^) = "))" assumed mul
+
+Assigning add
+ left [` op + right ?^ = ""[ length 3 assume add
+ left |" op + right // = ?^ assumed add
+ left /| op * right ^) = "))" assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left [` op + right ?^ = ""[ assumed add
+ left |" op + right // = ?^ assumed add
+ left /| op * right ^) = "))" assumed mul
+ left &/ op * right [/ the question, assumed mul
+
+Trying [=3 `=8 ?=7 ^=4 "=1 |=5 /=2 )=0 &=6 A=9
+[`+?^ = 38 add 74 = 112 vs ""[ 113 diff 1 add ok + 1; 83 add 47 = 130 vs rev ["" 311 diff 181 add no
+|"+// = 51 add 22 = 73 vs ?^ 74 diff 1 add ok + 1; 15 add 22 = 37 vs rev ^? 47 diff 10 add no
+/|*^) = 25 mul 40 = 1000 vs "))" 1001 diff 1 mul ok + 1; 52 mul 04 = 208 vs rev "))" 1001 diff 793 mul no
+ accepted forward &/*[/ = 62 mul+1 32 = 1984 + 1 = 1985 = \boxed{"A`|}

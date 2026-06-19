@@ -1,0 +1,57 @@
+^^+\# = ^^\#
+%@+$% = %@$%
+^?+?\ = ^??\
+"#-\% = -!!
+$@*@$ = $!&@
+The question is @"-!?
+
+Operator symbols +-*
+Question operator symbol -
+Question operator in examples
+
+Digit symbols ^\#%@$?"!&
+
+Checking concatenation
+left ^^ op + right \# expected ^^\# versus ^^\# match +
+left %@ op + right $% expected %@$% versus %@$% match +
+left ^? op + right ?\ expected ^??\ versus ^??\ match +
+left "# op - right \% expected "#\% versus -!! mismatch
+left $@ op * right @$ expected $@@$ versus $!&@ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left ^^ op + right \# expected \#^^ versus ^^\# mismatch
+left %@ op + right $% expected $%%@ versus %@$% mismatch
+left ^? op + right ?\ expected ?\^? versus ^??\ mismatch
+left "# op - right \% expected \%"# versus -!! mismatch
+left $@ op * right @$ expected @$$@ versus $!&@ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+"#-\% = -!!
+$@*@$ = $!&@
+
+Assigning mul
+ left "# op - right \% = -!! length 3
+ left $@ op * right @$ = $!&@ length 4 assume mul
+
+Assigning sub
+ left "# op - right \% = -!! op in output assume sub
+ left $@ op * right @$ = $!&@ assumed mul
+
+Assigning add
+ left "# op - right \% = -!! assumed sub
+ left $@ op * right @$ = $!&@ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left "# op - right \% = -!! assumed sub
+ left $@ op * right @$ = $!&@ assumed mul
+ left @" op - right !? the question, assumed sub
+
+Trying ^=9 \=5 #=4 %=6 @=7 $=1 ?=8 "=3 !=2 &=0
+"#-\% = 34 sub 56 = 22 vs -!! -22 diff 0 sub ok; 43 sub 65 = 22 vs rev -!! -22 diff 0 sub ok
+$@*@$ = 17 mul 71 = 1207 vs $!&@ 1207 diff 0 mul ok; 71 mul 17 = 1207 vs rev @&!$ 7021 diff 5814 mul no
+ accepted forward @"-!? = 73 sub 28 = 45 = \boxed{#\}

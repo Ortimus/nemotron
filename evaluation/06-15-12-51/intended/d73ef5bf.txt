@@ -1,0 +1,75 @@
+](%?\ = \|$
+)?%|/ = \$/
+'':'/ = ]/(^
+^|:'^ = /'|^
+'^*\\ = ]/
+The question is /$%]/
+
+Operator symbols %:*
+Question operator symbol %
+Question operator in examples
+
+Digit symbols ](?\|$)/'^
+
+Checking concatenation
+left ]( op % right ?\ expected ](?\ versus \|$ mismatch
+left )? op % right |/ expected )?|/ versus \$/ mismatch
+left '' op : right '/ expected '''/ versus ]/(^ mismatch
+left ^| op : right '^ expected ^|'^ versus /'|^ mismatch
+left '^ op * right \\ expected '^\\ versus ]/ mismatch
+
+Question operator % is not concatenation
+
+Checking reverse concatenation
+left ]( op % right ?\ expected ?\]( versus \|$ mismatch
+left )? op % right |/ expected |/)? versus \$/ mismatch
+left '' op : right '/ expected '/'' versus ]/(^ mismatch
+left ^| op : right '^ expected '^^| versus /'|^ mismatch
+left '^ op * right \\ expected \\'^ versus ]/ mismatch
+
+Question operator % is not reverse concatenation
+
+Filtering out the concatenation operations
+](%?\ = \|$
+)?%|/ = \$/
+'':'/ = ]/(^
+^|:'^ = /'|^
+'^*\\ = ]/
+
+Assigning mul
+ left ]( op % right ?\ = \|$ length 3
+ left )? op % right |/ = \$/ length 3
+ left '' op : right '/ = ]/(^ length 4 assume mul
+ left ^| op : right '^ = /'|^ assumed mul
+ left '^ op * right \\ = ]/ length 2
+
+Assigning sub
+ left ]( op % right ?\ = \|$ length 3
+ left )? op % right |/ = \$/ length 3
+ left '' op : right '/ = ]/(^ assumed mul
+ left ^| op : right '^ = /'|^ assumed mul
+ left '^ op * right \\ = ]/ length 2
+
+Assigning add
+ left ]( op % right ?\ = \|$ length 3 assume add
+ left )? op % right |/ = \$/ assumed add
+ left '' op : right '/ = ]/(^ assumed mul
+ left ^| op : right '^ = /'|^ assumed mul
+ left '^ op * right \\ = ]/ length 2
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ]( op % right ?\ = \|$ assumed add
+ left )? op % right |/ = \$/ assumed add
+ left '' op : right '/ = ]/(^ assumed mul
+ left ^| op : right '^ = /'|^ assumed mul
+ left '^ op * right \\ = ]/ length 2 assume sub
+ left /$ op % right ]/ the question, assumed add
+
+Trying ]=7 (=0 ?=9 \=1 |=6 $=2 )=5 /=3 '=8 ^=4
+](%?\ = 70 add 91 = 161 vs \|$ 162 diff 1 add ok + 1; 07 add 19 = 26 vs rev $|\ 261 diff 235 add no
+)?%|/ = 59 add 63 = 122 vs \$/ 123 diff 1 add ok + 1; 95 add 36 = 131 vs rev /$\ 321 diff 190 add no
+'':'/ = 88 mul 83 = 7304 vs ]/(^ 7304 diff 0 mul ok; 88 mul 38 = 3344 vs rev ^(/] 4037 diff 693 mul no
+^|:'^ = 46 mul 84 = 3864 vs /'|^ 3864 diff 0 mul ok; 64 mul 48 = 3072 vs rev ^|'/ 4683 diff 1611 mul no
+'^*\\ = 84 sub 11 = 73 vs ]/ 73 diff 0 sub ok; 48 sub 11 = 37 vs rev /] 37 diff 0 sub ok
+ accepted forward /$%]/ = 32 add+1 73 = 105 + 1 = 106 = \boxed{\(|}

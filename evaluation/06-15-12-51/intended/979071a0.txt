@@ -1,0 +1,75 @@
+((&@( = '|{
+#>!|@ = #|<
+(>&\' = )'\#
+'@&@< = )'#
+#'"|' = #"
+The question is {\!@\
+
+Operator symbols &!"
+Question operator symbol !
+Question operator in examples
+
+Digit symbols (@'|{#><\)
+
+Checking concatenation
+left (( op & right @( expected ((@( versus '|{ mismatch
+left #> op ! right |@ expected #>|@ versus #|< mismatch
+left (> op & right \' expected (>\' versus )'\# mismatch
+left '@ op & right @< expected '@@< versus )'# mismatch
+left #' op " right |' expected #'|' versus #" mismatch
+
+Question operator ! is not concatenation
+
+Checking reverse concatenation
+left (( op & right @( expected @((( versus '|{ mismatch
+left #> op ! right |@ expected |@#> versus #|< mismatch
+left (> op & right \' expected \'(> versus )'\# mismatch
+left '@ op & right @< expected @<'@ versus )'# mismatch
+left #' op " right |' expected |'#' versus #" mismatch
+
+Question operator ! is not reverse concatenation
+
+Filtering out the concatenation operations
+((&@( = '|{
+#>!|@ = #|<
+(>&\' = )'\#
+'@&@< = )'#
+#'"|' = #"
+
+Assigning mul
+ left (( op & right @( = '|{ length 3
+ left #> op ! right |@ = #|< length 3
+ left (> op & right \' = )'\# length 4 assume mul
+ left '@ op & right @< = )'# assumed mul
+ left #' op " right |' = #" length 2
+
+Assigning sub
+ left (( op & right @( = '|{ assumed mul
+ left #> op ! right |@ = #|< length 3
+ left (> op & right \' = )'\# assumed mul
+ left '@ op & right @< = )'# assumed mul
+ left #' op " right |' = #" op in output assume sub
+
+Assigning add
+ left (( op & right @( = '|{ assumed mul
+ left #> op ! right |@ = #|< length 3 assume add
+ left (> op & right \' = )'\# assumed mul
+ left '@ op & right @< = )'# assumed mul
+ left #' op " right |' = #" assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left (( op & right @( = '|{ assumed mul
+ left #> op ! right |@ = #|< assumed add
+ left (> op & right \' = )'\# assumed mul
+ left '@ op & right @< = )'# assumed mul
+ left #' op " right |' = #" assumed sub
+ left {\ op ! right @\ the question, assumed add
+
+Trying (=2 @=3 '=6 |=0 {=5 #=4 >=7 <=1 \=9 )=8
+((&@( = 22 mul 32 = 704 vs '|{ 605 diff 99 mul no; 22 mul 23 = 506 vs rev {|' 506 diff 0 mul ok
+#>!|@ = 47 add 03 = 50 vs #|< 401 diff 351 add no; 74 add 30 = 104 vs rev <|# 104 diff 0 add ok
+(>&\' = 27 mul 96 = 2592 vs )'\# 8694 diff 6102 mul no; 72 mul 69 = 4968 vs rev #\') 4968 diff 0 mul ok
+'@&@< = 63 mul 31 = 1953 vs )'# 864 diff 1089 mul no; 36 mul 13 = 468 vs rev #') 468 diff 0 mul ok
+#'"|' = 46 sub 06 = 40 vs #" -4 diff 36 sub no; 64 sub 60 = 4 vs rev ## -4 diff 0 sub ok
+ accepted rev {\!@\ = 59 add 39 rev 95 add 93 = 188 rev 881 = \boxed{))<}

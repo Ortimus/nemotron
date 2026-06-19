@@ -1,0 +1,66 @@
+^^*"# = "@['
+%"-@@ = -"%
+['*%" = "#'"
+?%*^" = %^['
+The question is ?"*"(
+
+Operator symbols *-
+Question operator symbol *
+Question operator in examples
+
+Digit symbols ^"#@['%?(
+
+Checking concatenation
+left ^^ op * right "# expected ^^"# versus "@[' mismatch
+left %" op - right @@ expected %"@@ versus -"% mismatch
+left [' op * right %" expected ['%" versus "#'" mismatch
+left ?% op * right ^" expected ?%^" versus %^[' mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left ^^ op * right "# expected "#^^ versus "@[' mismatch
+left %" op - right @@ expected @@%" versus -"% mismatch
+left [' op * right %" expected %"[' versus "#'" mismatch
+left ?% op * right ^" expected ^"?% versus %^[' mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+^^*"# = "@['
+%"-@@ = -"%
+['*%" = "#'"
+?%*^" = %^['
+
+Assigning mul
+ left ^^ op * right "# = "@[' length 4 assume mul
+ left %" op - right @@ = -"% length 3
+ left [' op * right %" = "#'" assumed mul
+ left ?% op * right ^" = %^[' assumed mul
+
+Assigning sub
+ left ^^ op * right "# = "@[' assumed mul
+ left %" op - right @@ = -"% op in output assume sub
+ left [' op * right %" = "#'" assumed mul
+ left ?% op * right ^" = %^[' assumed mul
+
+Assigning add
+ left ^^ op * right "# = "@[' assumed mul
+ left %" op - right @@ = -"% assumed sub
+ left [' op * right %" = "#'" assumed mul
+ left ?% op * right ^" = %^[' assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ^^ op * right "# = "@[' assumed mul
+ left %" op - right @@ = -"% assumed sub
+ left [' op * right %" = "#'" assumed mul
+ left ?% op * right ^" = %^[' assumed mul
+ left ?" op * right "( the question, assumed mul
+
+Trying ^=7 "=1 #=9 @=4 [=6 '=2 %=3 ?=5 (=0 A=8
+^^*"# = 77 mul 19 = 1463 vs "@[' 1462 diff 1 mul ok - 1; 77 mul 91 = 7007 vs rev '[@" 2641 diff 4366 mul no
+%"-@@ = 31 sub 44 = 13 vs -"% -13 diff 0 sub ok; 13 sub 44 = 31 vs rev -%" -31 diff 0 sub ok
+['*%" = 62 mul 31 = 1922 vs "#'" 1921 diff 1 mul ok - 1; 26 mul 13 = 338 vs rev "'#" 1291 diff 953 mul no
+?%*^" = 53 mul 71 = 3763 vs %^[' 3762 diff 1 mul ok - 1; 35 mul 17 = 595 vs rev '[^% 2673 diff 2078 mul no
+ accepted forward ?"*"( = 51 mul-1 10 = 510 - 1 = 509 = \boxed{?(#}

@@ -1,0 +1,66 @@
+|(+|[ = `|`
+`[-)$ = [`
+`"-\" = -/
+/"-/` = &(
+The question is )|-[\
+
+Operator symbols +-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols |([`)$"\/&
+
+Checking concatenation
+left |( op + right |[ expected |(|[ versus `|` mismatch
+left `[ op - right )$ expected `[)$ versus [` mismatch
+left `" op - right \" expected `"\" versus -/ mismatch
+left /" op - right /` expected /"/` versus &( mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left |( op + right |[ expected |[|( versus `|` mismatch
+left `[ op - right )$ expected )$`[ versus [` mismatch
+left `" op - right \" expected \"`" versus -/ mismatch
+left /" op - right /` expected /`/" versus &( mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+|(+|[ = `|`
+`[-)$ = [`
+`"-\" = -/
+/"-/` = &(
+
+Assigning mul
+ left |( op + right |[ = `|` length 3
+ left `[ op - right )$ = [` length 2
+ left `" op - right \" = -/ length 2
+ left /" op - right /` = &( length 2
+
+Assigning sub
+ left |( op + right |[ = `|` length 3
+ left `[ op - right )$ = [` length 2
+ left `" op - right \" = -/ op in output assume sub
+ left /" op - right /` = &( assumed sub
+
+Assigning add
+ left |( op + right |[ = `|` length 3 assume add
+ left `[ op - right )$ = [` assumed sub
+ left `" op - right \" = -/ assumed sub
+ left /" op - right /` = &( assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left |( op + right |[ = `|` assumed add
+ left `[ op - right )$ = [` assumed sub
+ left `" op - right \" = -/ assumed sub
+ left /" op - right /` = &( assumed sub
+ left )| op - right [\ the question, assumed sub
+
+Trying |=6 (=8 [=7 `=1 )=4 $=5 "=9 \=3 /=2 &=0
+|(+|[ = 68 add 67 = 135 vs `|` 161 diff 26 add no; 86 add 76 = 162 vs rev `|` 161 diff 1 add ok - 1
+`[-)$ = 17 sub 45 = 28 vs [` 71 diff 43 sub no; 71 sub 54 = 17 vs rev `[ 17 diff 0 sub ok
+`"-\" = 19 sub 39 = 20 vs -/ -2 diff 18 sub no; 91 sub 93 = 2 vs rev -/ -2 diff 0 sub ok
+/"-/` = 29 sub 21 = 8 vs &( 08 diff 0 sub ok; 92 sub 12 = 80 vs rev (& 80 diff 0 sub ok
+ accepted rev )|-[\ = 46 sub 73 rev 64 sub 37 = 27 rev 72 = \boxed{[/}

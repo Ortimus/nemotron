@@ -1,0 +1,66 @@
+?:+[} = >}$
+?$+&[ = $?
+?>*:< = <[($
+&>+?[ = $^
+The question is <[-}[
+
+Operator symbols +*
+Question operator symbol -
+Question operator not in examples
+
+Digit symbols ?:[}>$&<(^
+
+Checking concatenation
+left ?: op + right [} expected ?:[} versus >}$ mismatch
+left ?$ op + right &[ expected ?$&[ versus $? mismatch
+left ?> op * right :< expected ?>:< versus <[($ mismatch
+left &> op + right ?[ expected &>?[ versus $^ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left ?: op + right [} expected [}?: versus >}$ mismatch
+left ?$ op + right &[ expected &[?$ versus $? mismatch
+left ?> op * right :< expected :<?> versus <[($ mismatch
+left &> op + right ?[ expected ?[&> versus $^ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+?:+[} = >}$
+?$+&[ = $?
+?>*:< = <[($
+&>+?[ = $^
+
+Assigning mul
+ left ?: op + right [} = >}$ length 3
+ left ?$ op + right &[ = $? length 2
+ left ?> op * right :< = <[($ length 4 assume mul
+ left &> op + right ?[ = $^ length 2
+
+Assigning sub
+ left ?: op + right [} = >}$ length 3
+ left ?$ op + right &[ = $? length 2
+ left ?> op * right :< = <[($ assumed mul
+ left &> op + right ?[ = $^ length 2
+
+Assigning add
+ left ?: op + right [} = >}$ length 3 assume add
+ left ?$ op + right &[ = $? assumed add
+ left ?> op * right :< = <[($ assumed mul
+ left &> op + right ?[ = $^ assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ?: op + right [} = >}$ assumed add
+ left ?$ op + right &[ = $? assumed add
+ left ?> op * right :< = <[($ assumed mul
+ left &> op + right ?[ = $^ assumed add
+ left <[ op - right }[ the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying ?=7 :=9 [=5 }=6 >=2 $=1 &=4 <=3 (=0 ^=8
+?:+[} = 79 add 56 = 135 vs >}$ 261 diff 126 add no; 97 add 65 = 162 vs rev $}> 162 diff 0 add ok
+?$+&[ = 71 add 45 = 116 vs $? 17 diff 99 add no; 17 add 54 = 71 vs rev ?$ 71 diff 0 add ok
+?>*:< = 72 mul 93 = 6696 vs <[($ 3501 diff 3195 mul no; 27 mul 39 = 1053 vs rev $([< 1053 diff 0 mul ok
+&>+?[ = 42 add 75 = 117 vs $^ 18 diff 99 add no; 24 add 57 = 81 vs rev ^$ 81 diff 0 add ok
+ accepted rev <[-}[ = 35 sub 65 rev 53 sub 56 = 3 rev 3 = \boxed{<}

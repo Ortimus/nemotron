@@ -1,0 +1,75 @@
+/<+/\ = "^
+"\}// = )#
+<\'## = ^)#[
+[)+)` = ^)#
+\"}[\ = }/`
+The question is ^<'#`
+
+Operator symbols +}'
+Question operator symbol '
+Question operator in examples
+
+Digit symbols /<\"^)#[`
+
+Checking concatenation
+left /< op + right /\ expected /</\ versus "^ mismatch
+left "\ op } right // expected "\// versus )# mismatch
+left <\ op ' right ## expected <\## versus ^)#[ mismatch
+left [) op + right )` expected [))` versus ^)# mismatch
+left \" op } right [\ expected \"[\ versus }/` mismatch
+
+Question operator ' is not concatenation
+
+Checking reverse concatenation
+left /< op + right /\ expected /\/< versus "^ mismatch
+left "\ op } right // expected //"\ versus )# mismatch
+left <\ op ' right ## expected ##<\ versus ^)#[ mismatch
+left [) op + right )` expected )`[) versus ^)# mismatch
+left \" op } right [\ expected [\\" versus }/` mismatch
+
+Question operator ' is not reverse concatenation
+
+Filtering out the concatenation operations
+/<+/\ = "^
+"\}// = )#
+<\'## = ^)#[
+[)+)` = ^)#
+\"}[\ = }/`
+
+Assigning mul
+ left /< op + right /\ = "^ length 2
+ left "\ op } right // = )# length 2
+ left <\ op ' right ## = ^)#[ length 4 assume mul
+ left [) op + right )` = ^)# length 3
+ left \" op } right [\ = }/` length 3
+
+Assigning sub
+ left /< op + right /\ = "^ length 2
+ left "\ op } right // = )# length 2
+ left <\ op ' right ## = ^)#[ assumed mul
+ left [) op + right )` = ^)# length 3
+ left \" op } right [\ = }/` op in output assume sub
+
+Assigning add
+ left /< op + right /\ = "^ length 2
+ left "\ op } right // = )# assumed sub
+ left <\ op ' right ## = ^)#[ assumed mul
+ left [) op + right )` = ^)# length 3 assume add
+ left \" op } right [\ = }/` assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left /< op + right /\ = "^ assumed add
+ left "\ op } right // = )# assumed sub
+ left <\ op ' right ## = ^)#[ assumed mul
+ left [) op + right )` = ^)# assumed add
+ left \" op } right [\ = }/` assumed sub
+ left ^< op ' right #` the question, assumed mul
+
+Trying /=3 <=6 \=5 "=7 ^=1 )=4 #=2 [=9 `=8 A=0
+/<+/\ = 36 add 35 = 71 vs "^ 71 diff 0 add ok; 63 add 53 = 116 vs rev ^" 17 diff 99 add no
+"\}// = 75 sub 33 = 42 vs )# 42 diff 0 sub ok; 57 sub 33 = 24 vs rev #) 24 diff 0 sub ok
+<\'## = 65 mul 22 = 1430 vs ^)#[ 1429 diff 1 mul ok - 1; 56 mul 22 = 1232 vs rev [#)^ 9241 diff 8009 mul no
+[)+)` = 94 add 48 = 142 vs ^)# 142 diff 0 add ok; 49 add 84 = 133 vs rev #)^ 241 diff 108 add no
+\"}[\ = 57 sub 95 = 38 vs }/` -38 diff 0 sub ok; 75 sub 59 = 16 vs rev }`/ -83 diff 67 sub no
+ accepted forward ^<'#` = 16 mul-1 28 = 448 - 1 = 447 = \boxed{))"}

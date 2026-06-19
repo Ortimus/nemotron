@@ -1,0 +1,248 @@
+((*%" = {@
+!(|@> = |(&
+"]|]/ = |@(
+(/->] = "%!/
+{!-&> = &"]>
+The question is !&*>!
+
+Operator symbols *|-
+Question operator symbol *
+Question operator in examples
+
+Digit symbols (%"{@!>&]/
+
+Checking concatenation
+left (( op * right %" expected ((%" versus {@ mismatch
+left !( op | right @> expected !(@> versus |(& mismatch
+left "] op | right ]/ expected "]]/ versus |@( mismatch
+left (/ op - right >] expected (/>] versus "%!/ mismatch
+left {! op - right &> expected {!&> versus &"]> mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left (( op * right %" expected %"(( versus {@ mismatch
+left !( op | right @> expected @>!( versus |(& mismatch
+left "] op | right ]/ expected ]/"] versus |@( mismatch
+left (/ op - right >] expected >](/ versus "%!/ mismatch
+left {! op - right &> expected &>{! versus &"]> mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+((*%" = {@
+!(|@> = |(&
+"]|]/ = |@(
+(/->] = "%!/
+{!-&> = &"]>
+
+Assigning mul
+ left (( op * right %" = {@ length 2
+ left !( op | right @> = |(& length 3
+ left "] op | right ]/ = |@( length 3
+ left (/ op - right >] = "%!/ length 4
+ left {! op - right &> = &"]> length 4
+
+Assigning sub
+ left (( op * right %" = {@ length 2
+ left !( op | right @> = |(& op in output assume sub
+ left "] op | right ]/ = |@( assumed sub
+ left (/ op - right >] = "%!/ length 4
+ left {! op - right &> = &"]> length 4
+
+Assigning add
+ left (( op * right %" = {@ length 2
+ left !( op | right @> = |(& assumed sub
+ left "] op | right ]/ = |@( assumed sub
+ left (/ op - right >] = "%!/ length 4 assume add
+ left {! op - right &> = &"]> assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left (( op * right %" = {@ length 2 assume sub
+ left !( op | right @> = |(& assumed sub
+ left "] op | right ]/ = |@( assumed sub
+ left (/ op - right >] = "%!/ assumed add
+ left {! op - right &> = &"]> assumed add
+ left !& op * right >! the question, assumed sub
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+!(|@> = 61 sub 57 = 4 vs |(& -18 diff 14 sub no; 16 sub 75 = 59 vs rev |&( -81 diff 22 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=1 %=2 "=3 {=4 @=5 !=6 >=7 &=8 ]=9 /=0
+((*%" = 11 sub 23 = 12 vs {@ 45 diff 33 sub no; 11 sub 32 = 21 vs rev @{ 54 diff 33 sub no
+ rejected forward !&*>! = 68 sub 76 = 8 vs !&*! -68 diff 60 sub no; 86 sub 67 = 19 vs rev !&*! -86 diff 67 sub no
+
+Trying (=0 %=1 "=2 {=4 @=5 !=6 >=7 &=8 ]=9 /=3
+((*%" = 00 sub 12 = 12 vs {@ 45 diff 33 sub no; 00 sub 21 = 21 vs rev @{ 54 diff 33 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ]%
+
+Trying (=9 %=0 "=1 {=4 @=5 !=6 >=7 &=8 ]=2 /=3
+((*%" = 99 sub 01 = 98 vs {@ 45 diff 53 sub no; 99 sub 10 = 89 vs rev @{ 54 diff 35 sub no
+ rejected none !&*>! = 68 sub 76 rev 86 sub 67 = 19 rev 91 = final answer: ("
+
+Trying (=8 %=9 "=0 {=4 @=5 !=6 >=7 &=1 ]=2 /=3
+((*%" = 88 sub 90 = 2 vs {@ 45 diff 43 sub no; 88 sub 09 = 79 vs rev @{ 54 diff 25 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 15 = final answer: &@
+
+Trying (=3 %=8 "=9 {=4 @=5 !=6 >=7 &=1 ]=2 /=0
+((*%" = 33 sub 89 = 56 vs {@ 45 diff 11 sub no; 33 sub 98 = 65 vs rev @{ 54 diff 11 sub no
+ rejected none !&*>! = 61 sub 76 rev 16 sub 67 = 51 rev 1

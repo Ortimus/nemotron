@@ -1,0 +1,255 @@
+%[-]% = }\
+\}-%` = -\
+/[+}[ = [`@
+``*$] = /$\]
+$}*}\ = $[/@
+The question is [}-}\
+
+Operator symbols -+*
+Question operator symbol -
+Question operator in examples
+
+Digit symbols %[]}\`/@$
+
+Checking concatenation
+left %[ op - right ]% expected %[]% versus }\ mismatch
+left \} op - right %` expected \}%` versus -\ mismatch
+left /[ op + right }[ expected /[}[ versus [`@ mismatch
+left `` op * right $] expected ``$] versus /$\] mismatch
+left $} op * right }\ expected $}}\ versus $[/@ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left %[ op - right ]% expected ]%%[ versus }\ mismatch
+left \} op - right %` expected %`\} versus -\ mismatch
+left /[ op + right }[ expected }[/[ versus [`@ mismatch
+left `` op * right $] expected $]`` versus /$\] mismatch
+left $} op * right }\ expected }\$} versus $[/@ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+%[-]% = }\
+\}-%` = -\
+/[+}[ = [`@
+``*$] = /$\]
+$}*}\ = $[/@
+
+Assigning mul
+ left %[ op - right ]% = }\ length 2
+ left \} op - right %` = -\ length 2
+ left /[ op + right }[ = [`@ length 3
+ left `` op * right $] = /$\] length 4 assume mul
+ left $} op * right }\ = $[/@ assumed mul
+
+Assigning sub
+ left %[ op - right ]% = }\ length 2
+ left \} op - right %` = -\ op in output assume sub
+ left /[ op + right }[ = [`@ length 3
+ left `` op * right $] = /$\] assumed mul
+ left $} op * right }\ = $[/@ assumed mul
+
+Assigning add
+ left %[ op - right ]% = }\ assumed sub
+ left \} op - right %` = -\ assumed sub
+ left /[ op + right }[ = [`@ length 3 assume add
+ left `` op * right $] = /$\] assumed mul
+ left $} op * right }\ = $[/@ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left %[ op - right ]% = }\ assumed sub
+ left \} op - right %` = -\ assumed sub
+ left /[ op + right }[ = [`@ assumed add
+ left `` op * right $] = /$\] assumed mul
+ left $} op * right }\ = $[/@ assumed mul
+ left [} op - right }\ the question, assumed sub
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03 = 28 rev 82 = final answer: ]A
+
+Trying %=6 [=7 ]=1 }=3 \=0 `=4 /=5 @=9 $=8 A=2
+%[-]% = 67 sub 16 = 51 vs }\ 30 diff 21 sub no; 76 sub 61 = 15 vs rev \} 03 diff 12 sub no
+ rejected none [}-}\ = 73 sub 30 rev 37 sub 03 = 34 rev 43 = final answer: `}
+
+Trying %=2 [=6 ]=7 }=3 \=0 `=4 /=5 @=9 $=8 A=1
+%[-]% = 26 sub 72 = 46 vs }\ 30 diff 16 sub no; 62 sub 27 = 35 vs rev \} 03 diff 32 sub no
+ rejected none [}-}\ = 63 sub 30 rev 36 sub 03 = 33 rev 33 = final answer: }}
+
+Trying %=3 [=2 ]=6 }=1 \=0 `=4 /=5 @=9 $=8 A=7
+%[-]% = 32 sub 63 = 31 vs }\ 10 diff 21 sub no; 23 sub 36 = 13 vs rev \} 01 diff 12 sub no
+ rejected none [}-}\ = 21 sub 10 rev 12 sub 01 = 11 rev 11 = final answer: }}
+
+Trying %=1 [=8 ]=2 }=3 \=0 `=4 /=5 @=9 $=6 A=7
+%[-]% = 18 sub 21 = 3 vs }\ 30 diff 27 sub no; 81 sub 12 = 69 vs rev \} 03 diff 66 sub no
+ rejected none [}-}\ = 83 sub 30 rev 38 sub 03 = 35 rev 53 = final answer: /}
+
+Trying %=7 [=1 ]=8 }=3 \=0 `=4 /=5 @=9 $=6 A=2
+%[-]% = 71 sub 87 = 16 vs }\ 30 diff 14 sub no; 17 sub 78 = 61 vs rev \} 03 diff 58 sub no
+ rejected none [}-}\ = 13 sub 30 rev 31 sub 03

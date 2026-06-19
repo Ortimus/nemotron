@@ -1,0 +1,233 @@
+/{-/< = -)}
+@}+@} = @}@}
+&|*#/ = @)?|
+/&-}? = #}
+||*&? = /@){
+The question is |/*||
+
+Operator symbols -+*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols /{<)}@&|#?
+
+Checking concatenation
+left /{ op - right /< expected /{/< versus -)} mismatch
+left @} op + right @} expected @}@} versus @}@} match +
+left &| op * right #/ expected &|#/ versus @)?| mismatch
+left /& op - right }? expected /&}? versus #} mismatch
+left || op * right &? expected ||&? versus /@){ mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left /{ op - right /< expected /</{ versus -)} mismatch
+left @} op + right @} expected @}@} versus @}@} match +
+left &| op * right #/ expected #/&| versus @)?| mismatch
+left /& op - right }? expected }?/& versus #} mismatch
+left || op * right &? expected &?|| versus /@){ mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+/{-/< = -)}
+&|*#/ = @)?|
+/&-}? = #}
+||*&? = /@){
+
+Assigning mul
+ left /{ op - right /< = -)} length 3
+ left &| op * right #/ = @)?| length 4 assume mul
+ left /& op - right }? = #} length 2
+ left || op * right &? = /@){ assumed mul
+
+Assigning sub
+ left /{ op - right /< = -)} op in output assume sub
+ left &| op * right #/ = @)?| assumed mul
+ left /& op - right }? = #} assumed sub
+ left || op * right &? = /@){ assumed mul
+
+Assigning add
+ left /{ op - right /< = -)} assumed sub
+ left &| op * right #/ = @)?| assumed mul
+ left /& op - right }? = #} assumed sub
+ left || op * right &? = /@){ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left /{ op - right /< = -)} assumed sub
+ left &| op * right #/ = @)?| assumed mul
+ left /& op - right }? = #} assumed sub
+ left || op * right &? = /@){ assumed mul
+ left |/ op * right || the question, assumed mul
+
+Trying /=1 {=2 <=3 )=4 }=5 @=6 &=7 |=8 #=9 ?=0
+/{-/< = 12 sub 13 = 1 vs -)} -45 diff 44 sub no; 21 sub 31 = 10 vs rev -}) -54 diff 44 sub no
+ rejected none |/*|| = 81 mul 88 = 7128 vs |/*|| 8188 diff 1060 mul no
+
+Trying /=0 {=1 <=2 )=3 }=4 @=5 &=6 |=7 #=8 ?=9
+/{-/< = 01 sub 02 = 1 vs -)} -34 diff 33 sub no; 10 sub 20 = 10 vs rev -}) -43 diff 33 sub no
+ rejected none |/*|| = 70 mul 77 = 5390 vs |/*|| 7077 diff 1687 mul no
+
+Trying /=9 {=0 <=1 )=2 }=3 @=4 &=5 |=6 #=7 ?=8
+/{-/< = 90 sub 91 = 1 vs -)} -23 diff 22 sub no; 09 sub 19 = 10 vs rev -}) -32 diff 22 sub no
+ rejected none |/*|| = 69 mul 66 = 4554 vs |/*|| 6966 diff 2412 mul no
+
+Trying /=8 {=9 <=0 )=1 }=2 @=3 &=4 |=5 #=6 ?=7
+/{-/< = 89 sub 80 = 9 vs -)} -12 diff 3 sub no; 98 sub 08 = 90 vs rev -}) -21 diff 69 sub no
+ rejected none |/*|| = 58 mul 55 = 3190 vs |/*|| 5855 diff 2665 mul no
+
+Trying /=5 {=8 <=9 )=0 }=1 @=2 &=3 |=4 #=6 ?=7
+/{-/< = 58 sub 59 = 1 vs -)} -01 diff 0 sub ok; 85 sub 95 = 10 vs rev -}) -10 diff 0 sub ok
+&|*#/ = 34 mul 65 = 2210 vs @)?| 2074 diff 136 mul no; 43 mul 56 = 2408 vs rev |?)@ 4702 diff 2294 mul no
+ rejected forward |/*|| = 45 mul 44 = 1980 vs |/*|| 4584 diff 2604 mul no; rev ||*/| = 44 mul 54 = 2376 vs rev ||*/| 4854 diff 2478 mul no
+
+Trying /=6 {=5 <=8 )=7 }=0 @=1 &=2 |=3 #=9 ?=4
+/{-/< = 65 sub 68 = 3 vs -)} -70 diff 67 sub no; 56 sub 86 = 30 vs rev -}) -07 diff 23 sub no
+ rejected none |/*|| = 36 mul 33 = 1188 vs |/*|| 3633 diff 2445 mul no
+
+Trying /=1 {=2 <=3 )=4 }=5 @=6 &=7 |=8 #=9 ?=0
+/{-/< = 12 sub 13 = 1 vs -)} -45 diff 44 sub no; 21 sub 31 = 10 vs rev -}) -54 diff 44 sub no
+ rejected none |/*|| = 81 mul 88 = 7128 vs |/*|| 8188 diff 1060 mul no
+
+Trying /=0 {=1 <=2 )=3 }=4 @=5 &=6 |=7 #=8 ?=9
+/{-/< = 01 sub 02 = 1 vs -)} -34 diff 33 sub no; 10 sub 20 = 10 vs rev -}) -43 diff 33 sub no
+ rejected none |/*|| = 70 mul 77 = 5390 vs |/*|| 7077 diff 1687 mul no
+
+Trying /=9 {=0 <=1 )=2 }=3 @=4 &=5 |=6 #=7 ?=8
+/{-/< = 90 sub 91 = 1 vs -)} -23 diff 22 sub no; 09 sub 19 = 10 vs rev -}) -32 diff 22 sub no
+ rejected none |/*|| = 69 mul 66 = 4554 vs |/*|| 6966 diff 2412 mul no
+
+Trying /=8 {=9 <=0 )=1 }=2 @=3 &=4 |=5 #=6 ?=7
+/{-/< = 89 sub 80 = 9 vs -)} -12 diff 3 sub no; 98 sub 08 = 90 vs rev -}) -21 diff 69 sub no
+ rejected none |/*|| = 58 mul 55 = 3190 vs |/*|| 5855 diff 2665 mul no
+
+Trying /=5 {=8 <=9 )=0 }=1 @=2 &=3 |=4 #=6 ?=7
+/{-/< = 58 sub 59 = 1 vs -)} -01 diff 0 sub ok; 85 sub 95 = 10 vs rev -}) -10 diff 0 sub ok
+&|*#/ = 34 mul 65 = 2210 vs @)?| 2074 diff 136 mul no; 43 mul 56 = 2408 vs rev |?)@ 4702 diff 2294 mul no
+ rejected forward |/*|| = 45 mul 44 = 1980 vs |/*|| 4584 diff 2604 mul no; rev ||*/| = 44 mul 54 = 2376 vs rev ||*/| 4854 diff 2478 mul no
+
+Trying /=6 {=5 <=8 )=7 }=0 @=1 &=2 |=3 #=9 ?=4
+/{-/< = 65 sub 68 = 3 vs -)} -70 diff 67 sub no; 56 sub 86 = 30 vs rev -}) -07 diff 23 sub no
+ rejected none |/*|| = 36 mul 33 = 1188 vs |/*|| 3633 diff 2445 mul no
+
+Trying /=1 {=2 <=3 )=4 }=5 @=6 &=7 |=8 #=9 ?=0
+/{-/< = 12 sub 13 = 1 vs -)} -45 diff 44 sub no; 21 sub 31 = 10 vs rev -}) -54 diff 44 sub no
+ rejected none |/*|| = 81 mul 88 = 7128 vs |/*|| 8188 diff 1060 mul no
+
+Trying /=0 {=1 <=2 )=3 }=4 @=5 &=6 |=7 #=8 ?=9
+/{-/< = 01 sub 02 = 1 vs -)} -34 diff 33 sub no; 10 sub 20 = 10 vs rev -}) -43 diff 33 sub no
+ rejected none |/*|| = 70 mul 77 = 5390 vs |/*|| 7077 diff 1687 mul no
+
+Trying /=9 {=0 <=1 )=2 }=3 @=4 &=5 |=6 #=7 ?=8
+/{-/< = 90 sub 91 = 1 vs -)} -23 diff 22 sub no; 09 sub 19 = 10 vs rev -}) -32 diff 22 sub no
+ rejected none |/*|| = 69 mul 66 = 4554 vs |/*|| 6966 diff 2412 mul no
+
+Trying /=8 {=9 <=0 )=1 }=2 @=3 &=4 |=5 #=6 ?=7
+/{-/< = 89 sub 80 = 9 vs -)} -12 diff 3 sub no; 98 sub 08 = 90 vs rev -}) -21 diff 69 sub no
+ rejected none |/*|| = 58 mul 55 = 3190 vs |/*|| 5855 diff 2665 mul no
+
+Trying /=5 {=8 <=9 )=0 }=1 @=2 &=3 |=4 #=6 ?=7
+/{-/< = 58 sub 59 = 1 vs -)} -01 diff 0 sub ok; 85 sub 95 = 10 vs rev -}) -10 diff 0 sub ok
+&|*#/ = 34 mul 65 = 2210 vs @)?| 2074 diff 136 mul no; 43 mul 56 = 2408 vs rev |?)@ 4702 diff 2294 mul no
+ rejected forward |/*|| = 45 mul 44 = 1980 vs |/*|| 4584 diff 2604 mul no; rev ||*/| = 44 mul 54 = 2376 vs rev ||*/| 4854 diff 2478 mul no
+
+Trying /=6 {=5 <=8 )=7 }=0 @=1 &=2 |=3 #=9 ?=4
+/{-/< = 65 sub 68 = 3 vs -)} -70 diff 67 sub no; 56 sub 86 = 30 vs rev -}) -07 diff 23 sub no
+ rejected none |/*|| = 36 mul 33 = 1188 vs |/*|| 3633 diff 2445 mul no
+
+Trying /=1 {=2 <=3 )=4 }=5 @=6 &=7 |=8 #=9 ?=0
+/{-/< = 12 sub 13 = 1 vs -)} -45 diff 44 sub no; 21 sub 31 = 10 vs rev -}) -54 diff 44 sub no
+ rejected none |/*|| = 81 mul 88 = 7128 vs |/*|| 8188 diff 1060 mul no
+
+Trying /=0 {=1 <=2 )=3 }=4 @=5 &=6 |=7 #=8 ?=9
+/{-/< = 01 sub 02 = 1 vs -)} -34 diff 33 sub no; 10 sub 20 = 10 vs rev -}) -43 diff 33 sub no
+ rejected none |/*|| = 70 mul 77 = 5390 vs |/*|| 7077 diff 1687 mul no
+
+Trying /=9 {=0 <=1 )=2 }=3 @=4 &=5 |=6 #=7 ?=8
+/{-/< = 90 sub 91 = 1 vs -)} -23 diff 22 sub no; 09 sub 19 = 10 vs rev -}) -32 diff 22 sub no
+ rejected none |/*|| = 69 mul 66 = 4554 vs |/*|| 6966 diff 2412 mul no
+
+Trying /=8 {=9 <=0 )=1 }=2 @=3 &=4 |=5 #=6 ?=7
+/{-/< = 89 sub 80 = 9 vs -)} -12 diff 3 sub no; 98 sub 08 = 90 vs rev -}) -21 diff 69 sub no
+ rejected none |/*|| = 58 mul 55 = 3190 vs |/*|| 5855 diff 2665 mul no
+
+Trying /=5 {=8 <=9 )=0 }=1 @=2 &=3 |=4 #=6 ?=7
+/{-/< = 58 sub 59 = 1 vs -)} -01 diff 0 sub ok; 85 sub 95 = 10 vs rev -}) -10 diff 0 sub ok
+&|*#/ = 34 mul 65 = 2210 vs @)?| 2074 diff 136 mul no; 43 mul 56 = 2408 vs rev |?)@ 4702 diff 2294 mul no
+ rejected forward |/*|| = 45 mul 44 = 1980 vs |/*|| 4584 diff 2604 mul no; rev ||*/| = 44 mul 54 = 2376 vs rev ||*/| 4854 diff 2478 mul no
+
+Trying /=6 {=5 <=8 )=7 }=0 @=1 &=2 |=3 #=9 ?=4
+/{-/< = 65 sub 68 = 3 vs -)} -70 diff 67 sub no; 56 sub 86 = 30 vs rev -}) -07 diff 23 sub no
+ rejected none |/*|| = 36 mul 33 = 1188 vs |/*|| 3633 diff 2445 mul no
+
+Trying /=1 {=2 <=3 )=4 }=5 @=6 &=7 |=8 #=9 ?=0
+/{-/< = 12 sub 13 = 1 vs -)} -45 diff 44 sub no; 21 sub 31 = 10 vs rev -}) -54 diff 44 sub no
+ rejected none |/*|| = 81 mul 88 = 7128 vs |/*|| 8188 diff 1060 mul no
+
+Trying /=0 {=1 <=2 )=3 }=4 @=5 &=6 |=7 #=8 ?=9
+/{-/< = 01 sub 02 = 1 vs -)} -34 diff 33 sub no; 10 sub 20 = 10 vs rev -}) -43 diff 33 sub no
+ rejected none |/*|| = 70 mul 77 = 5390 vs |/*|| 7077 diff 1687 mul no
+
+Trying /=9 {=0 <=1 )=2 }=3 @=4 &=5 |=6 #=7 ?=8
+/{-/< = 90 sub 91 = 1 vs -)} -23 diff 22 sub no; 09 sub 19 = 10 vs rev -}) -32 diff 22 sub no
+ rejected none |/*|| = 69 mul 66 = 4554 vs |/*|| 6966 diff 2412 mul no
+
+Trying /=8 {=9 <=0 )=1 }=2 @=3 &=4 |=5 #=6 ?=7
+/{-/< = 89 sub 80 = 9 vs -)} -12 diff 3 sub no; 98 sub 08 = 90 vs rev -}) -21 diff 69 sub no
+ rejected none |/*|| = 58 mul 55 = 3190 vs |/*|| 5855 diff 2665 mul no
+
+Trying /=5 {=8 <=9 )=0 }=1 @=2 &=3 |=4 #=6 ?=7
+/{-/< = 58 sub 59 = 1 vs -)} -01 diff 0 sub ok; 85 sub 95 = 10 vs rev -}) -10 diff 0 sub ok
+&|*#/ = 34 mul 65 = 2210 vs @)?| 2074 diff 136 mul no; 43 mul 56 = 2408 vs rev |?)@ 4702 diff 2294 mul no
+ rejected forward |/*|| = 45 mul 44 = 1980 vs |/*|| 4584 diff 2604 mul no; rev ||*/| = 44 mul 54 = 2376 vs rev ||*/| 4854 diff 2478 mul no
+
+Trying /=6 {=5 <=8 )=7 }=0 @=1 &=2 |=3 #=9 ?=4
+/{-/< = 65 sub 68 = 3 vs -)} -70 diff 67 sub no; 56 sub 86 = 30 vs rev -}) -07 diff 23 sub no
+ rejected none |/*|| = 36 mul 33 = 1188 vs |/*|| 3633 diff 2445 mul no
+
+Trying /=1 {=2 <=3 )=4 }=5 @=6 &=7 |=8 #=9 ?=0
+/{-/< = 12 sub 13 = 1 vs -)} -45 diff 44 sub no; 21 sub 31 = 10 vs rev -}) -54 diff 44 sub no
+ rejected none |/*|| = 81 mul 88 = 7128 vs |/*|| 8188 diff 1060 mul no
+
+Trying /=0 {=1 <=2 )=3 }=4 @=5 &=6 |=7 #=8 ?=9
+/{-/< = 01 sub 02 = 1 vs -)} -34 diff 33 sub no; 10 sub 20 = 10 vs rev -}) -43 diff 33 sub no
+ rejected none |/*|| = 70 mul 77 = 5390 vs |/*|| 7077 diff 1687 mul no
+
+Trying /=9 {=0 <=1 )=2 }=3 @=4 &=5 |=6 #=7 ?=8
+/{-/< = 90 sub 91 = 1 vs -)} -23 diff 22 sub no; 09 sub 19 = 10 vs rev -}) -32 diff 22 sub no
+ rejected none |/*|| = 69 mul 66 = 4554 vs |/*|| 6966 diff 2412 mul no
+
+Trying /=8 {=9 <=0 )=1 }=2 @=3 &=4 |=5 #=6 ?=7
+/{-/< = 89 sub 80 = 9 vs -)} -12 diff 3 sub no; 98 sub 08 = 90 vs rev -}) -21 diff 69 sub no
+ rejected none |/*|| = 58 mul 55 = 3190 vs |/*|| 5855 diff 2665 mul no
+
+Trying /=5 {=8 <=9 )=0 }=1 @=2 &=3 |=4 #=6 ?=7
+/{-/< = 58 sub 59 = 1 vs -)} -01 diff 0 sub ok; 85 sub 95 = 10 vs rev -}) -10 diff 0 sub ok
+&|*#/ = 34 mul 65 = 2210 vs @)?| 2074 diff 136 mul no; 43 mul 56 = 2408 vs rev |?)@ 4702 diff 2294 mul no
+ rejected forward |/*|| = 45 mul 44 = 1980 vs |/*|| 4584 diff 2604 mul no; rev ||*/| = 44 mul 54 = 2376 vs rev ||*/| 4854 diff 2478 mul no
+
+Trying /=6 {=5 <=8 )=7 }=0 @=1 &=2 |=3 #=9 ?=4
+/{-/< = 65 sub 68 = 3 vs -)} -70 diff 67 sub no; 56 sub 86 = 30 vs rev -}) -07 diff 23 sub no
+ rejected none |/*|| = 36 mul 33 = 1188 vs |/*|| 3633 diff 2445 mul no
+
+Trying /=1 {=2 <=3 )=4 }=5 @=6 &=7 |=8 #=9 ?=0
+/{-/< = 12 sub 13 = 1 vs -)} -45 diff 44 sub no; 21 sub 31 = 10 vs rev -}) -54 diff 44 sub no
+ rejected none |/*|| = 81 mul 88 = 7128 vs |/*|| 8188 diff 1060 mul no
+
+Trying /=0 {=1 <=2 )=3 }=4 @=5 &=6 |=7 #=8 ?=9
+/{-/< = 01 sub 02 = 1 vs -)} -34 diff 33 sub no; 10 sub 20 = 10 vs rev -}) -43 diff 33 sub no
+ rejected none |/*|| = 70 mul 77 = 5390 vs |/*|| 7077 diff 1687 mul no
+
+Trying /=9 {=0 <=1 )=2 }=3 @=4 &=5 |=6 #=7 ?=8
+/{-/< = 90 sub 91 = 1 vs -)} -23 diff 22 sub no; 09 sub 19 = 10 vs rev -}) -32 diff 22 sub no
+ rejected none |/*|| = 69 mul 66 = 4554 vs |/*|| 6966 diff 2412 mul no
+
+Trying /=8 {=9 <=0 )=1 }=2 @=3 &=4 |=5 #=6 ?=7
+/{-/< = 89 sub 80 = 9 vs -)} -12 diff 3 sub no; 98 sub 08 = 90 vs rev -}) -21 diff 69 sub no
+ rejected none |/*|| = 58 mul 55 = 3190 vs |/*|| 5855 diff 2665 mul no
+
+Trying /=5 {=8 <=9 )=0 }=1 @=2 &=3 |=4 #=6 ?=7
+/{-/< = 58 sub 59 = 1 vs -)} -01 diff 0 sub ok; 85 sub 95 = 10 vs rev -}) -10 diff 0 sub ok
+&|*#/ = 34 mul 65 = 2210 vs @)?| 2074 diff 136 mul no; 43 mul 56 = 2408 vs rev |?)@ 4702 diff 2294 mul no
+ rejected forward |/*|| = 45 mul 44 = 1980 vs |/*|| 4584 diff 2604 mul no; rev ||*/| = 44 mul 54 = 2376 vs rev

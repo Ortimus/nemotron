@@ -1,0 +1,244 @@
+//-:( = -\
+':-'% = -'|
+||*|/ = |/||
+(/-'| = (%
+({*'# = '#({
+The question is (|-\|
+
+Operator symbols -*
+Question operator symbol -
+Question operator in examples
+
+Digit symbols /:(\'%|{#
+
+Checking concatenation
+left // op - right :( expected //:( versus -\ mismatch
+left ': op - right '% expected ':'% versus -'| mismatch
+left || op * right |/ expected |||/ versus |/|| mismatch
+left (/ op - right '| expected (/'| versus (% mismatch
+left ({ op * right '# expected ({'# versus '#({ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left // op - right :( expected :(// versus -\ mismatch
+left ': op - right '% expected '%': versus -'| mismatch
+left || op * right |/ expected |/|| versus |/|| match *
+left (/ op - right '| expected '|(/ versus (% mismatch
+left ({ op * right '# expected '#({ versus '#({ match *
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+//-:( = -\
+':-'% = -'|
+(/-'| = (%
+
+Assigning mul
+ left // op - right :( = -\ length 2
+ left ': op - right '% = -'| length 3
+ left (/ op - right '| = (% length 2
+
+Assigning sub
+ left // op - right :( = -\ op in output assume sub
+ left ': op - right '% = -'| assumed sub
+ left (/ op - right '| = (% assumed sub
+
+Assigning add
+ left // op - right :( = -\ assumed sub
+ left ': op - right '% = -'| assumed sub
+ left (/ op - right '| = (% assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left // op - right :( = -\ assumed sub
+ left ': op - right '% = -'| assumed sub
+ left (/ op - right '| = (% assumed sub
+ left (| op - right \| the question, assumed sub
+
+Trying /=1 :=2 (=3 \=4 '=5 %=6 |=7 {=8 #=9 A=0
+//-:( = 11 sub 23 = 12 vs -\ -4 diff 8 sub no; 11 sub 32 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 37 sub 47 rev 73 sub 74 = 1 rev 1 vs \| 47 diff 46 sub no
+
+Trying /=9 :=1 (=2 \=3 '=4 %=5 |=6 {=7 #=8 A=0
+//-:( = 99 sub 12 = 87 vs -\ -3 diff 84 sub no; 99 sub 21 = 78 vs rev -\ -3 diff 75 sub no
+ rejected none (|-\| = 26 sub 36 rev 62 sub 63 = 1 rev 1 vs \| 36 diff 35 sub no
+
+Trying /=0 :=9 (=1 \=4 '=5 %=6 |=7 {=8 #=3 A=2
+//-:( = 00 sub 91 = 91 vs -\ -4 diff 87 sub no; 00 sub 19 = 19 vs rev -\ -4 diff 15 sub no
+ rejected none (|-\| = 17 sub 47 rev 71 sub 74 = 3 rev 3 vs \| 47 diff 44 sub no
+
+Trying /=8 :=0 (=9 \=4 '=5 %=6 |=7 {=1 #=3 A=2
+//-:( = 88 sub 09 = 79 vs -\ -4 diff 75 sub no; 88 sub 90 = 2 vs rev -\ -4 diff 2 sub no
+ rejected none (|-\| = 97 sub 47 rev 79 sub 74 = 5 rev 5 vs \| 47 diff 42 sub no
+
+Trying /=7 :=8 (=0 \=4 '=5 %=6 |=1 {=2 #=3 A=9
+//-:( = 77 sub 80 = 3 vs -\ -4 diff 1 sub ok + 1; 77 sub 08 = 69 vs rev -\ -4 diff 65 sub no
+':-'% = 78 sub 56 = 22 vs -'| -51 diff 29 sub no; 87 sub 65 = 22 vs rev -'| -51 diff 29 sub no
+ rejected forward (|-\| = 01 sub 41 = 40 rev 10 sub 14 = 4 rev 4 vs \| 41 diff 37 sub no
+
+Trying /=6 :=7 (=8 \=4 '=5 %=1 |=0 {=2 #=3 A=9
+//-:( = 66 sub 78 = 12 vs -\ -4 diff 8 sub no; 66 sub 87 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 80 sub 40 rev 08 sub 04 = 4 rev 4 vs \| 40 diff 36 sub no
+
+Trying /=1 :=2 (=3 \=4 '=5 %=6 |=7 {=8 #=9 A=0
+//-:( = 11 sub 23 = 12 vs -\ -4 diff 8 sub no; 11 sub 32 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 37 sub 47 rev 73 sub 74 = 1 rev 1 vs \| 47 diff 46 sub no
+
+Trying /=9 :=1 (=2 \=4 '=5 %=6 |=7 {=8 #=3 A=0
+//-:( = 99 sub 12 = 87 vs -\ -4 diff 83 sub no; 99 sub 21 = 78 vs rev -\ -4 diff 74 sub no
+ rejected none (|-\| = 27 sub 47 rev 72 sub 74 = 2 rev 2 vs \| 47 diff 45 sub no
+
+Trying /=0 :=9 (=1 \=4 '=5 %=6 |=7 {=8 #=3 A=2
+//-:( = 00 sub 91 = 91 vs -\ -4 diff 87 sub no; 00 sub 19 = 19 vs rev -\ -4 diff 15 sub no
+ rejected none (|-\| = 17 sub 47 rev 71 sub 74 = 3 rev 3 vs \| 47 diff 44 sub no
+
+Trying /=8 :=0 (=9 \=4 '=5 %=6 |=7 {=1 #=3 A=2
+//-:( = 88 sub 09 = 79 vs -\ -4 diff 75 sub no; 88 sub 90 = 2 vs rev -\ -4 diff 2 sub no
+ rejected none (|-\| = 97 sub 47 rev 79 sub 74 = 5 rev 5 vs \| 47 diff 42 sub no
+
+Trying /=7 :=8 (=0 \=4 '=5 %=6 |=1 {=2 #=3 A=9
+//-:( = 77 sub 80 = 3 vs -\ -4 diff 1 sub ok + 1; 77 sub 08 = 69 vs rev -\ -4 diff 65 sub no
+':-'% = 78 sub 56 = 22 vs -'| -51 diff 29 sub no; 87 sub 65 = 22 vs rev -'| -51 diff 29 sub no
+ rejected forward (|-\| = 01 sub 41 = 40 rev 10 sub 14 = 4 rev 4 vs \| 41 diff 37 sub no
+
+Trying /=6 :=7 (=8 \=4 '=5 %=1 |=0 {=2 #=3 A=9
+//-:( = 66 sub 78 = 12 vs -\ -4 diff 8 sub no; 66 sub 87 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 80 sub 40 rev 08 sub 04 = 4 rev 4 vs \| 40 diff 36 sub no
+
+Trying /=1 :=2 (=3 \=4 '=5 %=6 |=7 {=8 #=9 A=0
+//-:( = 11 sub 23 = 12 vs -\ -4 diff 8 sub no; 11 sub 32 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 37 sub 47 rev 73 sub 74 = 1 rev 1 vs \| 47 diff 46 sub no
+
+Trying /=9 :=1 (=2 \=4 '=5 %=6 |=7 {=8 #=3 A=0
+//-:( = 99 sub 12 = 87 vs -\ -4 diff 83 sub no; 99 sub 21 = 78 vs rev -\ -4 diff 74 sub no
+ rejected none (|-\| = 27 sub 47 rev 72 sub 74 = 2 rev 2 vs \| 47 diff 45 sub no
+
+Trying /=0 :=9 (=1 \=4 '=5 %=6 |=7 {=8 #=3 A=2
+//-:( = 00 sub 91 = 91 vs -\ -4 diff 87 sub no; 00 sub 19 = 19 vs rev -\ -4 diff 15 sub no
+ rejected none (|-\| = 17 sub 47 rev 71 sub 74 = 3 rev 3 vs \| 47 diff 44 sub no
+
+Trying /=8 :=0 (=9 \=4 '=5 %=6 |=7 {=1 #=3 A=2
+//-:( = 88 sub 09 = 79 vs -\ -4 diff 75 sub no; 88 sub 90 = 2 vs rev -\ -4 diff 2 sub no
+ rejected none (|-\| = 97 sub 47 rev 79 sub 74 = 5 rev 5 vs \| 47 diff 42 sub no
+
+Trying /=7 :=8 (=0 \=4 '=5 %=6 |=1 {=2 #=3 A=9
+//-:( = 77 sub 80 = 3 vs -\ -4 diff 1 sub ok + 1; 77 sub 08 = 69 vs rev -\ -4 diff 65 sub no
+':-'% = 78 sub 56 = 22 vs -'| -51 diff 29 sub no; 87 sub 65 = 22 vs rev -'| -51 diff 29 sub no
+ rejected forward (|-\| = 01 sub 41 = 40 rev 10 sub 14 = 4 rev 4 vs \| 41 diff 37 sub no
+
+Trying /=6 :=7 (=8 \=4 '=5 %=1 |=0 {=2 #=3 A=9
+//-:( = 66 sub 78 = 12 vs -\ -4 diff 8 sub no; 66 sub 87 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 80 sub 40 rev 08 sub 04 = 4 rev 4 vs \| 40 diff 36 sub no
+
+Trying /=1 :=2 (=3 \=4 '=5 %=6 |=7 {=8 #=9 A=0
+//-:( = 11 sub 23 = 12 vs -\ -4 diff 8 sub no; 11 sub 32 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 37 sub 47 rev 73 sub 74 = 1 rev 1 vs \| 47 diff 46 sub no
+
+Trying /=9 :=1 (=2 \=4 '=5 %=6 |=7 {=8 #=3 A=0
+//-:( = 99 sub 12 = 87 vs -\ -4 diff 83 sub no; 99 sub 21 = 78 vs rev -\ -4 diff 74 sub no
+ rejected none (|-\| = 27 sub 47 rev 72 sub 74 = 2 rev 2 vs \| 47 diff 45 sub no
+
+Trying /=0 :=9 (=1 \=4 '=5 %=6 |=7 {=8 #=3 A=2
+//-:( = 00 sub 91 = 91 vs -\ -4 diff 87 sub no; 00 sub 19 = 19 vs rev -\ -4 diff 15 sub no
+ rejected none (|-\| = 17 sub 47 rev 71 sub 74 = 3 rev 3 vs \| 47 diff 44 sub no
+
+Trying /=8 :=0 (=9 \=4 '=5 %=6 |=7 {=1 #=3 A=2
+//-:( = 88 sub 09 = 79 vs -\ -4 diff 75 sub no; 88 sub 90 = 2 vs rev -\ -4 diff 2 sub no
+ rejected none (|-\| = 97 sub 47 rev 79 sub 74 = 5 rev 5 vs \| 47 diff 42 sub no
+
+Trying /=7 :=8 (=0 \=4 '=5 %=6 |=1 {=2 #=3 A=9
+//-:( = 77 sub 80 = 3 vs -\ -4 diff 1 sub ok + 1; 77 sub 08 = 69 vs rev -\ -4 diff 65 sub no
+':-'% = 78 sub 56 = 22 vs -'| -51 diff 29 sub no; 87 sub 65 = 22 vs rev -'| -51 diff 29 sub no
+ rejected forward (|-\| = 01 sub 41 = 40 rev 10 sub 14 = 4 rev 4 vs \| 41 diff 37 sub no
+
+Trying /=6 :=7 (=8 \=4 '=5 %=1 |=0 {=2 #=3 A=9
+//-:( = 66 sub 78 = 12 vs -\ -4 diff 8 sub no; 66 sub 87 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 80 sub 40 rev 08 sub 04 = 4 rev 4 vs \| 40 diff 36 sub no
+
+Trying /=1 :=2 (=3 \=4 '=5 %=6 |=7 {=8 #=9 A=0
+//-:( = 11 sub 23 = 12 vs -\ -4 diff 8 sub no; 11 sub 32 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 37 sub 47 rev 73 sub 74 = 1 rev 1 vs \| 47 diff 46 sub no
+
+Trying /=9 :=1 (=2 \=4 '=5 %=6 |=7 {=8 #=3 A=0
+//-:( = 99 sub 12 = 87 vs -\ -4 diff 83 sub no; 99 sub 21 = 78 vs rev -\ -4 diff 74 sub no
+ rejected none (|-\| = 27 sub 47 rev 72 sub 74 = 2 rev 2 vs \| 47 diff 45 sub no
+
+Trying /=0 :=9 (=1 \=4 '=5 %=6 |=7 {=8 #=3 A=2
+//-:( = 00 sub 91 = 91 vs -\ -4 diff 87 sub no; 00 sub 19 = 19 vs rev -\ -4 diff 15 sub no
+ rejected none (|-\| = 17 sub 47 rev 71 sub 74 = 3 rev 3 vs \| 47 diff 44 sub no
+
+Trying /=8 :=0 (=9 \=4 '=5 %=6 |=7 {=1 #=3 A=2
+//-:( = 88 sub 09 = 79 vs -\ -4 diff 75 sub no; 88 sub 90 = 2 vs rev -\ -4 diff 2 sub no
+ rejected none (|-\| = 97 sub 47 rev 79 sub 74 = 5 rev 5 vs \| 47 diff 42 sub no
+
+Trying /=7 :=8 (=0 \=4 '=5 %=6 |=1 {=2 #=3 A=9
+//-:( = 77 sub 80 = 3 vs -\ -4 diff 1 sub ok + 1; 77 sub 08 = 69 vs rev -\ -4 diff 65 sub no
+':-'% = 78 sub 56 = 22 vs -'| -51 diff 29 sub no; 87 sub 65 = 22 vs rev -'| -51 diff 29 sub no
+ rejected forward (|-\| = 01 sub 41 = 40 rev 10 sub 14 = 4 rev 4 vs \| 41 diff 37 sub no
+
+Trying /=6 :=7 (=8 \=4 '=5 %=1 |=0 {=2 #=3 A=9
+//-:( = 66 sub 78 = 12 vs -\ -4 diff 8 sub no; 66 sub 87 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 80 sub 40 rev 08 sub 04 = 4 rev 4 vs \| 40 diff 36 sub no
+
+Trying /=1 :=2 (=3 \=4 '=5 %=6 |=7 {=8 #=9 A=0
+//-:( = 11 sub 23 = 12 vs -\ -4 diff 8 sub no; 11 sub 32 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 37 sub 47 rev 73 sub 74 = 1 rev 1 vs \| 47 diff 46 sub no
+
+Trying /=9 :=1 (=2 \=4 '=5 %=6 |=7 {=8 #=3 A=0
+//-:( = 99 sub 12 = 87 vs -\ -4 diff 83 sub no; 99 sub 21 = 78 vs rev -\ -4 diff 74 sub no
+ rejected none (|-\| = 27 sub 47 rev 72 sub 74 = 2 rev 2 vs \| 47 diff 45 sub no
+
+Trying /=0 :=9 (=1 \=4 '=5 %=6 |=7 {=8 #=3 A=2
+//-:( = 00 sub 91 = 91 vs -\ -4 diff 87 sub no; 00 sub 19 = 19 vs rev -\ -4 diff 15 sub no
+ rejected none (|-\| = 17 sub 47 rev 71 sub 74 = 3 rev 3 vs \| 47 diff 44 sub no
+
+Trying /=8 :=0 (=9 \=4 '=5 %=6 |=7 {=1 #=3 A=2
+//-:( = 88 sub 09 = 79 vs -\ -4 diff 75 sub no; 88 sub 90 = 2 vs rev -\ -4 diff 2 sub no
+ rejected none (|-\| = 97 sub 47 rev 79 sub 74 = 5 rev 5 vs \| 47 diff 42 sub no
+
+Trying /=7 :=8 (=0 \=4 '=5 %=6 |=1 {=2 #=3 A=9
+//-:( = 77 sub 80 = 3 vs -\ -4 diff 1 sub ok + 1; 77 sub 08 = 69 vs rev -\ -4 diff 65 sub no
+':-'% = 78 sub 56 = 22 vs -'| -51 diff 29 sub no; 87 sub 65 = 22 vs rev -'| -51 diff 29 sub no
+ rejected forward (|-\| = 01 sub 41 = 40 rev 10 sub 14 = 4 rev 4 vs \| 41 diff 37 sub no
+
+Trying /=6 :=7 (=8 \=4 '=5 %=1 |=0 {=2 #=3 A=9
+//-:( = 66 sub 78 = 12 vs -\ -4 diff 8 sub no; 66 sub 87 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 80 sub 40 rev 08 sub 04 = 4 rev 4 vs \| 40 diff 36 sub no
+
+Trying /=1 :=2 (=3 \=4 '=5 %=6 |=7 {=8 #=9 A=0
+//-:( = 11 sub 23 = 12 vs -\ -4 diff 8 sub no; 11 sub 32 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 37 sub 47 rev 73 sub 74 = 1 rev 1 vs \| 47 diff 46 sub no
+
+Trying /=9 :=1 (=2 \=4 '=5 %=6 |=7 {=8 #=3 A=0
+//-:( = 99 sub 12 = 87 vs -\ -4 diff 83 sub no; 99 sub 21 = 78 vs rev -\ -4 diff 74 sub no
+ rejected none (|-\| = 27 sub 47 rev 72 sub 74 = 2 rev 2 vs \| 47 diff 45 sub no
+
+Trying /=0 :=9 (=1 \=4 '=5 %=6 |=7 {=8 #=3 A=2
+//-:( = 00 sub 91 = 91 vs -\ -4 diff 87 sub no; 00 sub 19 = 19 vs rev -\ -4 diff 15 sub no
+ rejected none (|-\| = 17 sub 47 rev 71 sub 74 = 3 rev 3 vs \| 47 diff 44 sub no
+
+Trying /=8 :=0 (=9 \=4 '=5 %=6 |=7 {=1 #=3 A=2
+//-:( = 88 sub 09 = 79 vs -\ -4 diff 75 sub no; 88 sub 90 = 2 vs rev -\ -4 diff 2 sub no
+ rejected none (|-\| = 97 sub 47 rev 79 sub 74 = 5 rev 5 vs \| 47 diff 42 sub no
+
+Trying /=7 :=8 (=0 \=4 '=5 %=6 |=1 {=2 #=3 A=9
+//-:( = 77 sub 80 = 3 vs -\ -4 diff 1 sub ok + 1; 77 sub 08 = 69 vs rev -\ -4 diff 65 sub no
+':-'% = 78 sub 56 = 22 vs -'| -51 diff 29 sub no; 87 sub 65 = 22 vs rev -'| -51 diff 29 sub no
+ rejected forward (|-\| = 01 sub 41 = 40 rev 10 sub 14 = 4 rev 4 vs \| 41 diff 37 sub no
+
+Trying /=6 :=7 (=8 \=4 '=5 %=1 |=0 {=2 #=3 A=9
+//-:( = 66 sub 78 = 12 vs -\ -4 diff 8 sub no; 66 sub 87 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 80 sub 40 rev 08 sub 04 = 4 rev 4 vs \| 40 diff 36 sub no
+
+Trying /=1 :=2 (=3 \=4 '=5 %=6 |=7 {=8 #=9 A=0
+//-:( = 11 sub 23 = 12 vs -\ -4 diff 8 sub no; 11 sub 32 = 21 vs rev -\ -4 diff 17 sub no
+ rejected none (|-\| = 37 sub 47 rev 73 sub 74 = 1 rev 1 vs \| 47 diff 46 sub no
+
+Trying /=9 :=1 (=2 \=4 '=5 %=6 |=7 {=8 #=3 A=0
+//-:( = 99 sub 12 = 87 vs -\ -4 diff 83 sub no; 99 sub 21 = 78 vs rev -\ -4 diff 74 sub no
+ rejected none (|-\| = 27 sub 47 rev 72 sub 74 = 2 rev 2 vs \| 47 diff 45 sub no
+
+Trying /=0 :=9 (=1 \=4 '=5 %=6 |=7 {=8 #=3 A=2
+//-:( = 00 sub 91 = 91 vs -\ -4 diff 87 sub no; 00 sub 19 = 19 vs rev -\ -4 diff 15 sub no
+ rejected none (|-\| = 17 sub

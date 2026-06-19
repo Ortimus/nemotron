@@ -1,0 +1,75 @@
+[(#]( = '"&
+($^"} = >}$
+}}^&| = (>|}
+'|#[' = &$
+>(#([ = '$>
+The question is >|#>}
+
+Operator symbols #^
+Question operator symbol #
+Question operator in examples
+
+Digit symbols [(]'"&$}>|
+
+Checking concatenation
+left [( op # right ]( expected [(]( versus '"& mismatch
+left ($ op ^ right "} expected ($"} versus >}$ mismatch
+left }} op ^ right &| expected }}&| versus (>|} mismatch
+left '| op # right [' expected '|[' versus &$ mismatch
+left >( op # right ([ expected >(([ versus '$> mismatch
+
+Question operator # is not concatenation
+
+Checking reverse concatenation
+left [( op # right ]( expected ]([( versus '"& mismatch
+left ($ op ^ right "} expected "}($ versus >}$ mismatch
+left }} op ^ right &| expected &|}} versus (>|} mismatch
+left '| op # right [' expected [''| versus &$ mismatch
+left >( op # right ([ expected ([>( versus '$> mismatch
+
+Question operator # is not reverse concatenation
+
+Filtering out the concatenation operations
+[(#]( = '"&
+($^"} = >}$
+}}^&| = (>|}
+'|#[' = &$
+>(#([ = '$>
+
+Assigning mul
+ left [( op # right ]( = '"& length 3
+ left ($ op ^ right "} = >}$ length 3
+ left }} op ^ right &| = (>|} length 4 assume mul
+ left '| op # right [' = &$ length 2
+ left >( op # right ([ = '$> length 3
+
+Assigning sub
+ left [( op # right ]( = '"& length 3
+ left ($ op ^ right "} = >}$ assumed mul
+ left }} op ^ right &| = (>|} assumed mul
+ left '| op # right [' = &$ length 2
+ left >( op # right ([ = '$> length 3
+
+Assigning add
+ left [( op # right ]( = '"& length 3 assume add
+ left ($ op ^ right "} = >}$ assumed mul
+ left }} op ^ right &| = (>|} assumed mul
+ left '| op # right [' = &$ assumed add
+ left >( op # right ([ = '$> assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left [( op # right ]( = '"& assumed add
+ left ($ op ^ right "} = >}$ assumed mul
+ left }} op ^ right &| = (>|} assumed mul
+ left '| op # right [' = &$ assumed add
+ left >( op # right ([ = '$> assumed add
+ left >| op # right >} the question, assumed add
+
+Trying [=4 (=3 ]=8 '=1 "=2 &=6 $=0 }=5 >=7 |=9
+[(#]( = 43 add 83 = 126 vs '"& 126 diff 0 add ok; 34 add 38 = 72 vs rev &"' 621 diff 549 add no
+($^"} = 30 mul 25 = 750 vs >}$ 750 diff 0 mul ok; 03 mul 52 = 156 vs rev $}> 057 diff 99 mul no
+}}^&| = 55 mul 69 = 3795 vs (>|} 3795 diff 0 mul ok; 55 mul 96 = 5280 vs rev }|>( 5973 diff 693 mul no
+'|#[' = 19 add 41 = 60 vs &$ 60 diff 0 add ok; 91 add 14 = 105 vs rev $& 06 diff 99 add no
+>(#([ = 73 add 34 = 107 vs '$> 107 diff 0 add ok; 37 add 43 = 80 vs rev >$' 701 diff 621 add no
+ accepted forward >|#>} = 79 add 75 = 154 = \boxed{'}[}

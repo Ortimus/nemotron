@@ -1,0 +1,185 @@
+12[66 = [54
+65\53 = 119
+28}28 = 2828
+49[49 = 0
+68\48 = 117
+
+The inputs are 12, 66, 65, 53, 28, 28, 49, 49, 68, 48
+
+The outputs are [54, 119, 2828, 0, 117
+Some example outputs have the operator symbol as prefix [.
+We now consider the outputs to be -54, 119, 2828, 0, 117
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+12[66 -> [
+65\53 -> \
+28}28 -> }
+49[49 -> [
+68\48 -> \
+
+The operators
+[
+\
+}
+
+Looking at the question
+33\34 -> \
+The question operator is found in the examples.
+
+Looking at operator \ [65\53 = 119, 68\48 = 117]:
+
+Trying common operations
+ reversed operands [65->56 53->35, 68->86 48->84] and reversed result [expected (56,35)->119, (86,84)->117]
+ addition
+ (56,35)->119: 56 + 35 = 91 rev-> 19 mismatch
+ multiplication
+ (86,84)->117: (80 + 6) * 84 = 80 * 84 + 6 * 84 = 6720 + 504 = 7224 rev-> 4227 mismatch
+ concatenation
+ (56,35)->119: 56 || 35 = 5635 rev-> 5365 mismatch
+ reverse concatenation
+ (86,84)->117: 84 || 86 = 8486 rev-> 6848 mismatch
+
+ identity [65 53, 68 48] [expected (65,53)->119, (68,48)->117]
+ addition
+ (65,53)->119: 65 + 53 = 118 mismatch
+ multiplication
+ (68,48)->117: (60 + 8) * 48 = 60 * 48 + 8 * 48 = 2880 + 384 = 3264 mismatch
+ concatenation
+ (65,53)->119: 65 || 53 = 6553 mismatch
+ reverse concatenation
+ (68,48)->117: 48 || 68 = 4868 mismatch
+
+Trying difference operations
+ reversed operands [65->56 53->35, 68->86 48->84] and reversed result [expected (56,35)->119, (86,84)->117]
+ subtraction (a-b)
+ (56,35)->119: 56 - 35 = 21 rev-> 12 mismatch
+ absolute difference
+ (86,84)->117: |86 - 84| = 2 rev-> 2 mismatch
+ max mod min
+ (56,35)->119: max(56,35) mod min(56,35) = 56 mod 35 = 21 rev-> 12 mismatch
+ negated absolute difference
+ (86,84)->117: -|86 - 84| = -2 rev-> -2 mismatch
+ reverse subtraction (b-a)
+ (56,35)->119: 35 - 56 = -21 rev-> -12 mismatch
+ modulo (a mod b)
+ (86,84)->117: 86 mod 84 = 2 rev-> 2 mismatch
+
+ identity [65 53, 68 48] [expected (65,53)->119, (68,48)->117]
+ subtraction (a-b)
+ (65,53)->119: 65 - 53 = 12 mismatch
+ absolute difference
+ (68,48)->117: |68 - 48| = 20 mismatch
+ max mod min
+ (65,53)->119: max(65,53) mod min(65,53) = 65 mod 53 = 12 mismatch
+ negated absolute difference
+ (68,48)->117: -|68 - 48| = -20 mismatch
+ reverse subtraction (b-a)
+ (65,53)->119: 53 - 65 = -12 mismatch
+ modulo (a mod b)
+ (68,48)->117: 68 mod 48 = 20 mismatch
+
+Trying rare operations
+ reversed operands [65->56 53->35, 68->86 48->84] and reversed result [expected (56,35)->119, (86,84)->117]
+ multiply+1
+ (56,35)->119: (50 + 6) * 35 + 1 = 50 * 35 + 6 * 35 + 1 = 1750 + 210 + 1 = 1960 + 1 = 1961 rev-> 1691 mismatch
+ multiply-1
+ (86,84)->117: (80 + 6) * 84 - 1 = 80 * 84 + 6 * 84 - 1 = 6720 + 504 - 1 = 7224 - 1 = 7223 rev-> 3227 mismatch
+ add+1
+ (56,35)->119: 56 + 35 + 1 = 92 rev-> 29 mismatch
+ add-1
+ (86,84)->117: 86 + 84 - 1 = 169 rev-> 961 mismatch
+ sub+1
+ (56,35)->119: 56 - 35 + 1 = 22 rev-> 22 mismatch
+ sub-1
+ (86,84)->117: 86 - 84 - 1 = 1 rev-> 1 mismatch
+ integer division (a/b)
+ (56,35)->119: 56 / 35 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (86,84)->117: 84 / 86 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (56,35)->119: 35 mod 56 = 35 rev-> 53 mismatch
+ digit absolute diff
+ (86,84)->117: |8-8| || |6-4| = 02 rev-> 20 mismatch
+ digit add mod10
+ (56,35)->119: (5+3)%10 || (6+5)%10 = 81 rev-> 18 mismatch
+ digit sub mod10
+ (86,84)->117: (8-8)%10 || (6-4)%10 = 02 rev-> 20 mismatch
+ cross multiply
+ (56,35)->119: 5*3 + 6*5 = 15 + 30 = 45 rev-> 54 mismatch
+ cross multiply rev
+ (86,84)->117: 8*4 + 6*8 = 32 + 48 = 80 rev-> 08 mismatch
+ digit multiply
+ (56,35)->119: 5*3 || 6*5 = 15 || 30 = 1530 rev-> 0351 mismatch
+ digit multiply rev
+ (86,84)->117: 8*4 || 6*8 = 32 || 48 = 3248 rev-> 8423 mismatch
+ digit sum diff
+ (56,35)->119: (5+6) - (3+5) = 3 rev-> 3 mismatch
+ digit sum sum
+ (86,84)->117: (8+6) + (8+4) = 26 rev-> 62 mismatch
+ digit product diff
+ (56,35)->119: 5*6 - 3*5 = 30 - 15 = 15 rev-> 51 mismatch
+ digit product sum
+ (86,84)->117: 8*6 + 8*4 = 48 + 32 = 80 rev-> 08 mismatch
+ determinant
+ (56,35)->119: 5*5 - 6*3 = 25 - 18 = 7 rev-> 7 mismatch
+ abs determinant
+ (86,84)->117: |8*4 - 6*8| = |32 - 48| = 16 rev-> 61 mismatch
+
+ identity [65 53, 68 48] [expected (65,53)->119, (68,48)->117]
+ multiply+1
+ (65,53)->119: (60 + 5) * 53 + 1 = 60 * 53 + 5 * 53 + 1 = 3180 + 265 + 1 = 3445 + 1 = 3446 mismatch
+ multiply-1
+ (68,48)->117: (60 + 8) * 48 - 1 = 60 * 48 + 8 * 48 - 1 = 2880 + 384 - 1 = 3264 - 1 = 3263 mismatch
+ add+1
+ (65,53)->119: 65 + 53 + 1 = 119 match
+ (68,48)->117: 68 + 48 + 1 = 117 match
+ correct, actions: add+1
+ add-1
+ (68,48)->117: 68 + 48 - 1 = 115 mismatch
+ sub+1
+ (65,53)->119: 65 - 53 + 1 = 13 mismatch
+ sub-1
+ (68,48)->117: 68 - 48 - 1 = 19 mismatch
+ integer division (a/b)
+ (65,53)->119: 65 / 53 = 1 mismatch
+ reverse division (b/a)
+ (68,48)->117: 48 / 68 = 0 mismatch
+ reverse modulo (b mod a)
+ (65,53)->119: 53 mod 65 = 53 mismatch
+ digit absolute diff
+ (68,48)->117: |6-4| || |8-8| = 20 mismatch
+ digit add mod10
+ (65,53)->119: (6+5)%10 || (5+3)%10 = 18 mismatch
+ digit sub mod10
+ (68,48)->117: (6-4)%10 || (8-8)%10 = 20 mismatch
+ cross multiply
+ (65,53)->119: 6*5 + 5*3 = 30 + 15 = 45 mismatch
+ cross multiply rev
+ (68,48)->117: 6*8 + 8*4 = 48 + 32 = 80 mismatch
+ digit multiply
+ (65,53)->119: 6*5 || 5*3 = 30 || 15 = 3015 mismatch
+ digit multiply rev
+ (68,48)->117: 6*8 || 8*4 = 48 || 32 = 4832 mismatch
+ digit sum diff
+ (65,53)->119: (6+5) - (5+3) = 3 mismatch
+ digit sum sum
+ (68,48)->117: (6+8) + (4+8) = 26 mismatch
+ digit product diff
+ (65,53)->119: 6*5 - 5*3 = 30 - 15 = 15 mismatch
+ digit product sum
+ (68,48)->117: 6*8 + 4*8 = 48 + 32 = 80 mismatch
+ determinant
+ (65,53)->119: 6*3 - 5*5 = 18 - 25 = -7 mismatch
+ abs determinant
+ (68,48)->117: |6*8 - 8*4| = |48 - 32| = 16 mismatch
+
+correct, actions: add+1
+
+Applying to 33\34:
+ We recall that the question operator is found in the examples.
+ identity [33 34]
+ add+1
+ (33,34): 33 + 34 + 1 = 68
+ Result is non-negative
+ \boxed{68}

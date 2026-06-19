@@ -1,0 +1,533 @@
+?$+(( = [@
+@{+@[ = ?[
+[?*$@ = }]$?
+?(-`{ = (}
+The question is @@-$]
+
+Operator symbols +*-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols ?$([@{}]`
+
+Checking concatenation
+left ?$ op + right (( expected ?$(( versus [@ mismatch
+left @{ op + right @[ expected @{@[ versus ?[ mismatch
+left [? op * right $@ expected [?$@ versus }]$? mismatch
+left ?( op - right `{ expected ?(`{ versus (} mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left ?$ op + right (( expected ((?$ versus [@ mismatch
+left @{ op + right @[ expected @[@{ versus ?[ mismatch
+left [? op * right $@ expected $@[? versus }]$? mismatch
+left ?( op - right `{ expected `{?( versus (} mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+?$+(( = [@
+@{+@[ = ?[
+[?*$@ = }]$?
+?(-`{ = (}
+
+Assigning mul
+ left ?$ op + right (( = [@ length 2
+ left @{ op + right @[ = ?[ length 2
+ left [? op * right $@ = }]$? length 4 assume mul
+ left ?( op - right `{ = (} length 2
+
+Assigning sub
+ left ?$ op + right (( = [@ length 2
+ left @{ op + right @[ = ?[ length 2
+ left [? op * right $@ = }]$? assumed mul
+ left ?( op - right `{ = (} length 2
+
+Assigning add
+ left ?$ op + right (( = [@ length 2
+ left @{ op + right @[ = ?[ length 2
+ left [? op * right $@ = }]$? assumed mul
+ left ?( op - right `{ = (} length 2
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ?$ op + right (( = [@ length 2 assume add
+ left @{ op + right @[ = ?[ assumed add
+ left [? op * right $@ = }]$? assumed mul
+ left ?( op - right `{ = (} length 2 assume add
+ left @@ op - right $] the question, assumed add
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=6 `=8 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2641 diff 199 mul no; 17 mul 04 = 68 vs rev ?$]} 1462 diff 1394 mul no
+ rejected forward @@-$] = 00 add 46 = 46 = final answer: $]
+
+Trying ?=3 $=2 (=4 [=7 @=0 {=9 }=6 ]=5 `=8 A=1
+?$+(( = 32 add 44 = 76 vs [@ 70 diff 6 add no; 23 add 44 = 67 vs rev @[ 07 diff 60 add no
+ rejected none @@-$] = 00 add 25 rev 00 add 52 = 52 rev 25 = final answer: $]
+
+Trying ?=2 $=1 (=6 [=7 @=0 {=9 }=3 ]=5 `=8 A=4
+?$+(( = 21 add 66 = 87 vs [@ 70 diff 17 add no; 12 add 66 = 78 vs rev @[ 07 diff 71 add no
+ rejected none @@-$] = 00 add 15 rev 00 add 51 = 51 rev 15 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=5 ]=4 `=8 A=1
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 34 rev 00 add 43 = 43 rev 34 = final answer: $]
+
+Trying ?=8 $=6 (=1 [=7 @=0 {=9 }=4 ]=2 `=3 A=5
+?$+(( = 86 add 11 = 97 vs [@ 70 diff 27 add no; 68 add 11 = 79 vs rev @[ 07 diff 72 add no
+ rejected none @@-$] = 00 add 62 rev 00 add 26 = 26 rev 62 = final answer: $]
+
+Trying ?=7 $=0 (=3 [=1 @=4 {=9 }=2 ]=6 `=8 A=5
+?$+(( = 70 add 33 = 103 vs [@ 14 diff 89 add no; 07 add 33 = 40 vs rev @[ 41 diff 1 add ok + 1
+@{+@[ = 49 add 41 = 90 vs ?[ 71 diff 19 add no; 94 add 14 = 108 vs rev [? 17 diff 91 add no
+ rejected rev @@-$] = 44 add 06 rev 44 add 60 = 104 rev 401 = final answer: @$[
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=8 `=6 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2841 diff 1 mul ok + 1; 17 mul 04 = 68 vs rev ?$]} 1482 diff 1414 mul no
+?(-`{ = 15 add 69 = 84 vs (} 52 diff 32 add no; 51 add 96 = 147 vs rev }( 25 diff 122 add no
+ rejected forward @@-$] = 00 add 48 = 48 = final answer: $]
+
+Trying ?=3 $=2 (=4 [=7 @=0 {=9 }=1 ]=6 `=8 A=5
+?$+(( = 32 add 44 = 76 vs [@ 70 diff 6 add no; 23 add 44 = 67 vs rev @[ 07 diff 60 add no
+ rejected none @@-$] = 00 add 26 rev 00 add 62 = 62 rev 26 = final answer: $]
+
+Trying ?=2 $=1 (=6 [=7 @=0 {=9 }=5 ]=4 `=8 A=3
+?$+(( = 21 add 66 = 87 vs [@ 70 diff 17 add no; 12 add 66 = 78 vs rev @[ 07 diff 71 add no
+ rejected none @@-$] = 00 add 14 rev 00 add 41 = 41 rev 14 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=4 ]=1 `=8 A=5
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 31 rev 00 add 13 = 13 rev 31 = final answer: $]
+
+Trying ?=5 $=6 (=1 [=7 @=0 {=9 }=4 ]=2 `=8 A=3
+?$+(( = 56 add 11 = 67 vs [@ 70 diff 3 add no; 65 add 11 = 76 vs rev @[ 07 diff 69 add no
+ rejected none @@-$] = 00 add 62 rev 00 add 26 = 26 rev 62 = final answer: $]
+
+Trying ?=8 $=0 (=7 [=5 @=4 {=9 }=6 ]=1 `=3 A=2
+?$+(( = 80 add 77 = 157 vs [@ 54 diff 103 add no; 08 add 77 = 85 vs rev @[ 45 diff 40 add no
+ rejected none @@-$] = 44 add 01 rev 44 add 10 = 54 rev 45 = final answer: @[
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=6 `=8 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2641 diff 199 mul no; 17 mul 04 = 68 vs rev ?$]} 1462 diff 1394 mul no
+ rejected forward @@-$] = 00 add 46 = 46 = final answer: $]
+
+Trying ?=3 $=2 (=4 [=7 @=0 {=9 }=1 ]=6 `=8 A=5
+?$+(( = 32 add 44 = 76 vs [@ 70 diff 6 add no; 23 add 44 = 67 vs rev @[ 07 diff 60 add no
+ rejected none @@-$] = 00 add 26 rev 00 add 62 = 62 rev 26 = final answer: $]
+
+Trying ?=2 $=1 (=6 [=7 @=0 {=9 }=3 ]=5 `=8 A=4
+?$+(( = 21 add 66 = 87 vs [@ 70 diff 17 add no; 12 add 66 = 78 vs rev @[ 07 diff 71 add no
+ rejected none @@-$] = 00 add 15 rev 00 add 51 = 51 rev 15 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=5 ]=1 `=8 A=4
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 31 rev 00 add 13 = 13 rev 31 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=2 ]=4 `=3 A=6
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 84 = 84 = final answer: $]
+
+Trying ?=8 $=6 (=0 [=7 @=5 {=9 }=1 ]=4 `=3 A=2
+?$+(( = 86 add 00 = 86 vs [@ 75 diff 11 add no; 68 add 00 = 68 vs rev @[ 57 diff 11 add no
+ rejected none @@-$] = 55 add 64 rev 55 add 46 = 101 rev 101 = final answer: }(}
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=8 `=3 A=6
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2841 diff 1 mul ok + 1; 17 mul 04 = 68 vs rev ?$]} 1482 diff 1414 mul no
+?(-`{ = 15 add 39 = 54 vs (} 52 diff 2 add no; 51 add 93 = 144 vs rev }( 25 diff 119 add no
+ rejected forward @@-$] = 00 add 48 = 48 = final answer: $]
+
+Trying ?=3 $=2 (=4 [=7 @=0 {=9 }=5 ]=1 `=6 A=8
+?$+(( = 32 add 44 = 76 vs [@ 70 diff 6 add no; 23 add 44 = 67 vs rev @[ 07 diff 60 add no
+ rejected none @@-$] = 00 add 21 rev 00 add 12 = 12 rev 21 = final answer: $]
+
+Trying ?=2 $=1 (=6 [=7 @=0 {=9 }=5 ]=4 `=8 A=3
+?$+(( = 21 add 66 = 87 vs [@ 70 diff 17 add no; 12 add 66 = 78 vs rev @[ 07 diff 71 add no
+ rejected none @@-$] = 00 add 14 rev 00 add 41 = 41 rev 14 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=5 ]=4 `=1 A=8
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 34 rev 00 add 43 = 43 rev 34 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=6 ]=4 `=3 A=2
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 84 = 84 = final answer: $]
+
+Trying ?=8 $=7 (=3 [=4 @=0 {=9 }=1 ]=2 `=6 A=5
+?$+(( = 87 add 33 = 120 vs [@ 40 diff 80 add no; 78 add 33 = 111 vs rev @[ 04 diff 107 add no
+ rejected none @@-$] = 00 add 72 rev 00 add 27 = 27 rev 72 = final answer: $]
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=3 `=8 A=6
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2341 diff 499 mul no; 17 mul 04 = 68 vs rev ?$]} 1432 diff 1364 mul no
+ rejected forward @@-$] = 00 add 43 = 43 = final answer: $]
+
+Trying ?=3 $=6 (=4 [=7 @=0 {=9 }=8 ]=5 `=2 A=1
+?$+(( = 36 add 44 = 80 vs [@ 70 diff 10 add no; 63 add 44 = 107 vs rev @[ 07 diff 100 add no
+ rejected none @@-$] = 00 add 65 rev 00 add 56 = 56 rev 65 = final answer: $]
+
+Trying ?=2 $=1 (=6 [=7 @=0 {=9 }=4 ]=5 `=8 A=3
+?$+(( = 21 add 66 = 87 vs [@ 70 diff 17 add no; 12 add 66 = 78 vs rev @[ 07 diff 71 add no
+ rejected none @@-$] = 00 add 15 rev 00 add 51 = 51 rev 15 = final answer: $]
+
+Trying ?=6 $=5 (=2 [=7 @=0 {=9 }=1 ]=4 `=8 A=3
+?$+(( = 65 add 22 = 87 vs [@ 70 diff 17 add no; 56 add 22 = 78 vs rev @[ 07 diff 71 add no
+ rejected none @@-$] = 00 add 54 rev 00 add 45 = 45 rev 54 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=4 ]=6 `=3 A=2
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 86 = 86 = final answer: $]
+
+Trying ?=8 $=2 (=0 [=7 @=5 {=9 }=6 ]=4 `=3 A=1
+?$+(( = 82 add 00 = 82 vs [@ 75 diff 7 add no; 28 add 00 = 28 vs rev @[ 57 diff 29 add no
+ rejected none @@-$] = 55 add 24 rev 55 add 42 = 97 rev 79 = final answer: [{
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=8 `=6 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2841 diff 1 mul ok + 1; 17 mul 04 = 68 vs rev ?$]} 1482 diff 1414 mul no
+?(-`{ = 15 add 69 = 84 vs (} 52 diff 32 add no; 51 add 96 = 147 vs rev }( 25 diff 122 add no
+ rejected forward @@-$] = 00 add 48 = 48 = final answer: $]
+
+Trying ?=3 $=6 (=4 [=7 @=0 {=9 }=1 ]=5 `=8 A=2
+?$+(( = 36 add 44 = 80 vs [@ 70 diff 10 add no; 63 add 44 = 107 vs rev @[ 07 diff 100 add no
+ rejected none @@-$] = 00 add 65 rev 00 add 56 = 56 rev 65 = final answer: $]
+
+Trying ?=2 $=3 (=6 [=7 @=0 {=9 }=1 ]=5 `=8 A=4
+?$+(( = 23 add 66 = 89 vs [@ 70 diff 19 add no; 32 add 66 = 98 vs rev @[ 07 diff 91 add no
+ rejected none @@-$] = 00 add 35 rev 00 add 53 = 53 rev 35 = final answer: $]
+
+Trying ?=4 $=1 (=3 [=7 @=0 {=9 }=8 ]=5 `=6 A=2
+?$+(( = 41 add 33 = 74 vs [@ 70 diff 4 add no; 14 add 33 = 47 vs rev @[ 07 diff 40 add no
+ rejected none @@-$] = 00 add 15 rev 00 add 51 = 51 rev 15 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=3 ]=2 `=6 A=4
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 82 = 82 = final answer: $]
+
+Trying ?=8 $=2 (=0 [=7 @=5 {=9 }=3 ]=4 `=6 A=1
+?$+(( = 82 add 00 = 82 vs [@ 75 diff 7 add no; 28 add 00 = 28 vs rev @[ 57 diff 29 add no
+ rejected none @@-$] = 55 add 24 rev 55 add 42 = 97 rev 79 = final answer: [{
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=8 `=6 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2841 diff 1 mul ok + 1; 17 mul 04 = 68 vs rev ?$]} 1482 diff 1414 mul no
+?(-`{ = 15 add 69 = 84 vs (} 52 diff 32 add no; 51 add 96 = 147 vs rev }( 25 diff 122 add no
+ rejected forward @@-$] = 00 add 48 = 48 = final answer: $]
+
+Trying ?=3 $=6 (=4 [=7 @=0 {=9 }=2 ]=1 `=8 A=5
+?$+(( = 36 add 44 = 80 vs [@ 70 diff 10 add no; 63 add 44 = 107 vs rev @[ 07 diff 100 add no
+ rejected none @@-$] = 00 add 61 rev 00 add 16 = 16 rev 61 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=5 ]=1 `=8 A=4
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 31 rev 00 add 13 = 13 rev 31 = final answer: $]
+
+Trying ?=0 $=1 (=8 [=7 @=4 {=9 }=3 ]=6 `=2 A=5
+?$+(( = 01 add 88 = 89 vs [@ 74 diff 15 add no; 10 add 88 = 98 vs rev @[ 47 diff 51 add no
+ rejected none @@-$] = 44 add 16 rev 44 add 61 = 105 rev 501 = final answer: A?$
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=6 ]=3 `=2 A=4
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 83 = 83 = final answer: $]
+
+Trying ?=4 $=2 (=3 [=7 @=0 {=9 }=6 ]=5 `=8 A=1
+?$+(( = 42 add 33 = 75 vs [@ 70 diff 5 add no; 24 add 33 = 57 vs rev @[ 07 diff 50 add no
+ rejected none @@-$] = 00 add 25 rev 00 add 52 = 52 rev 25 = final answer: $]
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=8 `=6 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2841 diff 1 mul ok + 1; 17 mul 04 = 68 vs rev ?$]} 1482 diff 1414 mul no
+?(-`{ = 15 add 69 = 84 vs (} 52 diff 32 add no; 51 add 96 = 147 vs rev }( 25 diff 122 add no
+ rejected forward @@-$] = 00 add 48 = 48 = final answer: $]
+
+Trying ?=2 $=6 (=4 [=7 @=0 {=9 }=1 ]=8 `=3 A=5
+?$+(( = 26 add 44 = 70 vs [@ 70 diff 0 add ok; 62 add 44 = 106 vs rev @[ 07 diff 99 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 68 = 68 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=8 ]=1 `=4 A=5
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 31 rev 00 add 13 = 13 rev 31 = final answer: $]
+
+Trying ?=8 $=1 (=0 [=7 @=5 {=9 }=2 ]=4 `=6 A=3
+?$+(( = 81 add 00 = 81 vs [@ 75 diff 6 add no; 18 add 00 = 18 vs rev @[ 57 diff 39 add no
+ rejected none @@-$] = 55 add 14 rev 55 add 41 = 96 rev 69 = final answer: `{
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=4 ]=2 `=3 A=6
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 82 = 82 = final answer: $]
+
+Trying ?=3 $=2 (=6 [=7 @=0 {=9 }=1 ]=4 `=8 A=5
+?$+(( = 32 add 66 = 98 vs [@ 70 diff 28 add no; 23 add 66 = 89 vs rev @[ 07 diff 82 add no
+ rejected none @@-$] = 00 add 24 rev 00 add 42 = 42 rev 24 = final answer: $]
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=6 ]=3 `=2 A=8
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 6341 diff 3501 mul no; 17 mul 04 = 68 vs rev ?$]} 1436 diff 1368 mul no
+ rejected forward @@-$] = 00 add 43 = 43 = final answer: $]
+
+Trying ?=2 $=6 (=4 [=7 @=0 {=9 }=8 ]=5 `=3 A=1
+?$+(( = 26 add 44 = 70 vs [@ 70 diff 0 add ok; 62 add 44 = 106 vs rev @[ 07 diff 99 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 65 = 65 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=4 ]=1 `=8 A=5
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 31 rev 00 add 13 = 13 rev 31 = final answer: $]
+
+Trying ?=4 $=1 (=3 [=7 @=0 {=9 }=2 ]=5 `=8 A=6
+?$+(( = 41 add 33 = 74 vs [@ 70 diff 4 add no; 14 add 33 = 47 vs rev @[ 07 diff 40 add no
+ rejected none @@-$] = 00 add 15 rev 00 add 51 = 51 rev 15 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=2 ]=6 `=4 A=3
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 86 = 86 = final answer: $]
+
+Trying ?=8 $=2 (=7 [=5 @=0 {=9 }=4 ]=1 `=6 A=3
+?$+(( = 82 add 77 = 159 vs [@ 50 diff 109 add no; 28 add 77 = 105 vs rev @[ 05 diff 100 add no
+ rejected none @@-$] = 00 add 21 rev 00 add 12 = 12 rev 21 = final answer: $]
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=8 `=3 A=6
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2841 diff 1 mul ok + 1; 17 mul 04 = 68 vs rev ?$]} 1482 diff 1414 mul no
+?(-`{ = 15 add 39 = 54 vs (} 52 diff 2 add no; 51 add 93 = 144 vs rev }( 25 diff 119 add no
+ rejected forward @@-$] = 00 add 48 = 48 = final answer: $]
+
+Trying ?=2 $=6 (=4 [=7 @=0 {=9 }=1 ]=5 `=8 A=3
+?$+(( = 26 add 44 = 70 vs [@ 70 diff 0 add ok; 62 add 44 = 106 vs rev @[ 07 diff 99 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 65 = 65 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=4 ]=5 `=8 A=1
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 35 rev 00 add 53 = 53 rev 35 = final answer: $]
+
+Trying ?=3 $=1 (=8 [=7 @=0 {=9 }=2 ]=4 `=6 A=5
+?$+(( = 31 add 88 = 119 vs [@ 70 diff 49 add no; 13 add 88 = 101 vs rev @[ 07 diff 94 add no
+ rejected none @@-$] = 00 add 14 rev 00 add 41 = 41 rev 14 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=6 ]=3 `=4 A=2
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 83 = 83 = final answer: $]
+
+Trying ?=0 $=2 (=6 [=7 @=1 {=9 }=4 ]=3 `=8 A=5
+?$+(( = 02 add 66 = 68 vs [@ 71 diff 3 add no; 20 add 66 = 86 vs rev @[ 17 diff 69 add no
+ rejected none @@-$] = 11 add 23 rev 11 add 32 = 43 rev 34 = final answer: ]}
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=6 ]=3 `=2 A=8
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 6341 diff 3501 mul no; 17 mul 04 = 68 vs rev ?$]} 1436 diff 1368 mul no
+ rejected forward @@-$] = 00 add 43 = 43 = final answer: $]
+
+Trying ?=2 $=6 (=4 [=7 @=0 {=9 }=3 ]=5 `=8 A=1
+?$+(( = 26 add 44 = 70 vs [@ 70 diff 0 add ok; 62 add 44 = 106 vs rev @[ 07 diff 99 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 65 = 65 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=8 ]=4 `=5 A=1
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 34 rev 00 add 43 = 43 rev 34 = final answer: $]
+
+Trying ?=8 $=1 (=7 [=5 @=0 {=9 }=4 ]=2 `=3 A=6
+?$+(( = 81 add 77 = 158 vs [@ 50 diff 108 add no; 18 add 77 = 95 vs rev @[ 05 diff 90 add no
+ rejected none @@-$] = 00 add 12 rev 00 add 21 = 21 rev 12 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=4 ]=2 `=3 A=6
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 82 = 82 = final answer: $]
+
+Trying ?=0 $=2 (=6 [=7 @=1 {=9 }=8 ]=5 `=3 A=4
+?$+(( = 02 add 66 = 68 vs [@ 71 diff 3 add no; 20 add 66 = 86 vs rev @[ 17 diff 69 add no
+ rejected none @@-$] = 11 add 25 rev 11 add 52 = 63 rev 36 = final answer: `(
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=6 `=8 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2641 diff 199 mul no; 17 mul 04 = 68 vs rev ?$]} 1462 diff 1394 mul no
+ rejected forward @@-$] = 00 add 46 = 46 = final answer: $]
+
+Trying ?=2 $=6 (=4 [=7 @=0 {=9 }=8 ]=5 `=3 A=1
+?$+(( = 26 add 44 = 70 vs [@ 70 diff 0 add ok; 62 add 44 = 106 vs rev @[ 07 diff 99 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 65 = 65 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=4 ]=5 `=8 A=1
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 35 rev 00 add 53 = 53 rev 35 = final answer: $]
+
+Trying ?=8 $=1 (=0 [=7 @=5 {=9 }=6 ]=2 `=3 A=4
+?$+(( = 81 add 00 = 81 vs [@ 75 diff 6 add no; 18 add 00 = 18 vs rev @[ 57 diff 39 add no
+ rejected none @@-$] = 55 add 12 rev 55 add 21 = 76 rev 67 = final answer: }[
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=2 ]=4 `=3 A=6
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 84 = 84 = final answer: $]
+
+Trying ?=3 $=2 (=6 [=7 @=0 {=9 }=5 ]=4 `=8 A=1
+?$+(( = 32 add 66 = 98 vs [@ 70 diff 28 add no; 23 add 66 = 89 vs rev @[ 07 diff 82 add no
+ rejected none @@-$] = 00 add 24 rev 00 add 42 = 42 rev 24 = final answer: $]
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=6 `=8 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2641 diff 199 mul no; 17 mul 04 = 68 vs rev ?$]} 1462 diff 1394 mul no
+ rejected forward @@-$] = 00 add 46 = 46 = final answer: $]
+
+Trying ?=2 $=6 (=4 [=7 @=0 {=9 }=3 ]=5 `=1 A=8
+?$+(( = 26 add 44 = 70 vs [@ 70 diff 0 add ok; 62 add 44 = 106 vs rev @[ 07 diff 99 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 65 = 65 = final answer: $]
+
+Trying ?=6 $=3 (=2 [=7 @=0 {=9 }=4 ]=5 `=8 A=1
+?$+(( = 63 add 22 = 85 vs [@ 70 diff 15 add no; 36 add 22 = 58 vs rev @[ 07 diff 51 add no
+ rejected none @@-$] = 00 add 35 rev 00 add 53 = 53 rev 35 = final answer: $]
+
+Trying ?=0 $=7 (=3 [=4 @=1 {=9 }=6 ]=5 `=8 A=2
+?$+(( = 07 add 33 = 40 vs [@ 41 diff 1 add ok + 1; 70 add 33 = 103 vs rev @[ 14 diff 89 add no
+@{+@[ = 19 add 14 = 33 vs ?[ 04 diff 29 add no; 91 add 41 = 132 vs rev [? 40 diff 92 add no
+ rejected forward @@-$] = 11 add 75 = 86 = final answer: `}
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=6 ]=2 `=4 A=3
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 82 = 82 = final answer: $]
+
+Trying ?=8 $=2 (=0 [=7 @=5 {=9 }=1 ]=4 `=6 A=3
+?$+(( = 82 add 00 = 82 vs [@ 75 diff 7 add no; 28 add 00 = 28 vs rev @[ 57 diff 29 add no
+ rejected none @@-$] = 55 add 24 rev 55 add 42 = 97 rev 79 = final answer: [{
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=8 `=6 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2841 diff 1 mul ok + 1; 17 mul 04 = 68 vs rev ?$]} 1482 diff 1414 mul no
+?(-`{ = 15 add 69 = 84 vs (} 52 diff 32 add no; 51 add 96 = 147 vs rev }( 25 diff 122 add no
+ rejected forward @@-$] = 00 add 48 = 48 = final answer: $]
+
+Trying ?=2 $=6 (=4 [=7 @=0 {=9 }=3 ]=1 `=8 A=5
+?$+(( = 26 add 44 = 70 vs [@ 70 diff 0 add ok; 62 add 44 = 106 vs rev @[ 07 diff 99 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 61 = 61 = final answer: $]
+
+Trying ?=6 $=1 (=2 [=7 @=0 {=9 }=8 ]=4 `=3 A=5
+?$+(( = 61 add 22 = 83 vs [@ 70 diff 13 add no; 16 add 22 = 38 vs rev @[ 07 diff 31 add no
+ rejected none @@-$] = 00 add 14 rev 00 add 41 = 41 rev 14 = final answer: $]
+
+Trying ?=4 $=3 (=8 [=7 @=0 {=9 }=2 ]=5 `=1 A=6
+?$+(( = 43 add 88 = 131 vs [@ 70 diff 61 add no; 34 add 88 = 122 vs rev @[ 07 diff 115 add no
+ rejected none @@-$] = 00 add 35 rev 00 add 53 = 53 rev 35 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=2 ]=4 `=3 A=6
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 84 = 84 = final answer: $]
+
+Trying ?=8 $=2 (=6 [=7 @=0 {=9 }=5 ]=4 `=3 A=1
+?$+(( = 82 add 66 = 148 vs [@ 70 diff 78 add no; 28 add 66 = 94 vs rev @[ 07 diff 87 add no
+ rejected none @@-$] = 00 add 24 rev 00 add 42 = 42 rev 24 = final answer: $]
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=6 `=8 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2641 diff 199 mul no; 17 mul 04 = 68 vs rev ?$]} 1462 diff 1394 mul no
+ rejected forward @@-$] = 00 add 46 = 46 = final answer: $]
+
+Trying ?=2 $=5 (=4 [=7 @=0 {=9 }=1 ]=8 `=6 A=3
+?$+(( = 25 add 44 = 69 vs [@ 70 diff 1 add ok + 1; 52 add 44 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 58 = 58 = final answer: $]
+
+Trying ?=6 $=1 (=2 [=7 @=0 {=9 }=4 ]=8 `=3 A=5
+?$+(( = 61 add 22 = 83 vs [@ 70 diff 13 add no; 16 add 22 = 38 vs rev @[ 07 diff 31 add no
+ rejected none @@-$] = 00 add 18 rev 00 add 81 = 81 rev 18 = final answer: $]
+
+Trying ?=0 $=6 (=8 [=7 @=1 {=9 }=5 ]=4 `=3 A=2
+?$+(( = 06 add 88 = 94 vs [@ 71 diff 23 add no; 60 add 88 = 148 vs rev @[ 17 diff 131 add no
+ rejected none @@-$] = 11 add 64 rev 11 add 46 = 57 rev 75 = final answer: [}
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=6 ]=4 `=3 A=2
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 84 = 84 = final answer: $]
+
+Trying ?=3 $=2 (=6 [=7 @=0 {=9 }=4 ]=5 `=8 A=1
+?$+(( = 32 add 66 = 98 vs [@ 70 diff 28 add no; 23 add 66 = 89 vs rev @[ 07 diff 82 add no
+ rejected none @@-$] = 00 add 25 rev 00 add 52 = 52 rev 25 = final answer: $]
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=2 ]=3 `=8 A=6
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 2341 diff 499 mul no; 17 mul 04 = 68 vs rev ?$]} 1432 diff 1364 mul no
+ rejected forward @@-$] = 00 add 43 = 43 = final answer: $]
+
+Trying ?=2 $=3 (=4 [=7 @=0 {=9 }=1 ]=5 `=8 A=6
+?$+(( = 23 add 44 = 67 vs [@ 70 diff 3 add no; 32 add 44 = 76 vs rev @[ 07 diff 69 add no
+ rejected none @@-$] = 00 add 35 rev 00 add 53 = 53 rev 35 = final answer: $]
+
+Trying ?=6 $=1 (=2 [=7 @=0 {=9 }=4 ]=5 `=8 A=3
+?$+(( = 61 add 22 = 83 vs [@ 70 diff 13 add no; 16 add 22 = 38 vs rev @[ 07 diff 31 add no
+ rejected none @@-$] = 00 add 15 rev 00 add 51 = 51 rev 15 = final answer: $]
+
+Trying ?=8 $=9 (=3 [=7 @=0 {=4 }=1 ]=5 `=6 A=2
+?$+(( = 89 add 33 = 122 vs [@ 70 diff 52 add no; 98 add 33 = 131 vs rev @[ 07 diff 124 add no
+ rejected none @@-$] = 00 add 95 rev 00 add 59 = 59 rev 95 = final answer: $]
+
+Trying ?=5 $=8 (=1 [=7 @=0 {=9 }=4 ]=3 `=6 A=2
+?$+(( = 58 add 11 = 69 vs [@ 70 diff 1 add ok + 1; 85 add 11 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 57 diff 41 add no; 90 add 70 = 160 vs rev [? 75 diff 85 add no
+ rejected forward @@-$] = 00 add 83 = 83 = final answer: $]
+
+Trying ?=0 $=2 (=6 [=7 @=1 {=9 }=8 ]=4 `=3 A=5
+?$+(( = 02 add 66 = 68 vs [@ 71 diff 3 add no; 20 add 66 = 86 vs rev @[ 17 diff 69 add no
+ rejected none @@-$] = 11 add 24 rev 11 add 42 = 53 rev 35 = final answer: `A
+
+Trying ?=1 $=4 (=5 [=7 @=0 {=9 }=6 ]=8 `=2 A=3
+?$+(( = 14 add 55 = 69 vs [@ 70 diff 1 add ok + 1; 41 add 55 = 96 vs rev @[ 07 diff 89 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 17 diff 1 add ok + 1; 90 add 70 = 160 vs rev [? 71 diff 89 add no
+[?*$@ = 71 mul 40 = 2840 vs }]$? 6841 diff 4001 mul no; 17 mul 04 = 68 vs rev ?$]} 1486 diff 1418 mul no
+ rejected forward @@-$] = 00 add 48 = 48 = final answer: $]
+
+Trying ?=2 $=6 (=4 [=7 @=0 {=9 }=8 ]=5 `=3 A=1
+?$+(( = 26 add 44 = 70 vs [@ 70 diff 0 add ok; 62 add 44 = 106 vs rev @[ 07 diff 99 add no
+@{+@[ = 09 add 07 = 16 vs ?[ 27 diff 11 add no; 90 add 70 = 160 vs rev [? 72 diff 88 add no
+ rejected forward @@-$] = 00 add 65 = 65 = final answer: $]
+
+Trying ?=6 $=1 (=2 [=7 @=0 {=9 }=4 ]=8 `=3 A=5
+?$+(( = 61 add 22 = 83 vs [@ 70 diff 13 add no; 16 add 22 = 38 vs rev @[ 07 diff 31 add no
+ rejected none @@-$] = 00 add 18 rev 00 add 81 = 81 rev 18 = final answer: $]
+
+Trying ?=8 $=3 (=0 [=7 @=5 {=9 }=4 ]=2 `=6 A=1
+?$+(( = 83 add 00 = 83 vs [@ 75 diff 8 add no; 38 add 00 = 38 vs rev @[ 57 diff 19 add no
+ rejected none @@-$] = 55 add 32 rev 55 add 23 = 78 rev 87 = final answer: ?[
+
+Trying ?=4 $=0 (=1 [=5 @=9 {=3 }=8 ]=6 `=7 A=2
+?$+(( = 40 add 11 = 51 vs [@ 59 diff 8 add no; 04 add 11 = 15 vs rev @[ 95 diff 80 add no
+ rejected none @@-$] = 99 add 06 rev 99 add 60 = 159 rev 951 = final answer: @[(
+
+Trying ?=7 $=8 (=3 [=9 @=2 {=5 }=0 ]=4 `=6 A=1
+?$+(( = 78 add 33 = 111 vs [@ 92 diff 19 add no; 87 add 33 = 120 vs rev @[ 29 diff 91 add no
+ rejected none @@-$] = 22 add 84 rev 22 add 48 = 70 rev 07 = final answer: }?

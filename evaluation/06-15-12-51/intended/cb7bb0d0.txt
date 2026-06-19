@@ -1,0 +1,75 @@
+?:-:@ = -@
+''-## = -[[
+!'-'@ = -@
+!$*[$ = @:[:
+>$-:[ = -'?
+The question is @>+[@
+
+Operator symbols -*
+Question operator symbol +
+Question operator not in examples
+
+Digit symbols ?:@'#[!$>
+
+Checking concatenation
+left ?: op - right :@ expected ?::@ versus -@ mismatch
+left '' op - right ## expected ''## versus -[[ mismatch
+left !' op - right '@ expected !''@ versus -@ mismatch
+left !$ op * right [$ expected !$[$ versus @:[: mismatch
+left >$ op - right :[ expected >$:[ versus -'? mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left ?: op - right :@ expected :@?: versus -@ mismatch
+left '' op - right ## expected ##'' versus -[[ mismatch
+left !' op - right '@ expected '@!' versus -@ mismatch
+left !$ op * right [$ expected [$!$ versus @:[: mismatch
+left >$ op - right :[ expected :[>$ versus -'? mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+?:-:@ = -@
+''-## = -[[
+!'-'@ = -@
+!$*[$ = @:[:
+>$-:[ = -'?
+
+Assigning mul
+ left ?: op - right :@ = -@ length 2
+ left '' op - right ## = -[[ length 3
+ left !' op - right '@ = -@ length 2
+ left !$ op * right [$ = @:[: length 4 assume mul
+ left >$ op - right :[ = -'? length 3
+
+Assigning sub
+ left ?: op - right :@ = -@ op in output assume sub
+ left '' op - right ## = -[[ assumed sub
+ left !' op - right '@ = -@ assumed sub
+ left !$ op * right [$ = @:[: assumed mul
+ left >$ op - right :[ = -'? assumed sub
+
+Assigning add
+ left ?: op - right :@ = -@ assumed sub
+ left '' op - right ## = -[[ assumed sub
+ left !' op - right '@ = -@ assumed sub
+ left !$ op * right [$ = @:[: assumed mul
+ left >$ op - right :[ = -'? assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ?: op - right :@ = -@ assumed sub
+ left '' op - right ## = -[[ assumed sub
+ left !' op - right '@ = -@ assumed sub
+ left !$ op * right [$ = @:[: assumed mul
+ left >$ op - right :[ = -'? assumed sub
+ left @> op + right [@ the question, operator not in the examples, the unused family is add, assume add
+
+Trying ?=3 :=7 @=6 '=5 #=1 [=4 !=9 $=8 >=2 A=0
+?:-:@ = 37 sub 76 = 39 vs -@ -6 diff 33 sub no; 73 sub 67 = 6 vs rev -@ -6 diff 0 sub ok
+''-## = 55 sub 11 = 44 vs -[[ -44 diff 0 sub ok; 55 sub 11 = 44 vs rev -[[ -44 diff 0 sub ok
+!'-'@ = 95 sub 56 = 39 vs -@ -6 diff 33 sub no; 59 sub 65 = 6 vs rev -@ -6 diff 0 sub ok
+!$*[$ = 98 mul 48 = 4704 vs @:[: 6747 diff 2043 mul no; 89 mul 84 = 7476 vs rev :[:@ 7476 diff 0 mul ok
+>$-:[ = 28 sub 74 = 46 vs -'? -53 diff 7 sub no; 82 sub 47 = 35 vs rev -?' -35 diff 0 sub ok
+ accepted rev @>+[@ = 62 add 46 rev 26 add 64 = 90 rev 09 = \boxed{A!}

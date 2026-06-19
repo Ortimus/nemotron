@@ -1,0 +1,66 @@
+@&'>[ = //>
+]^'/[ = /]>
+[|-`^ = `>
+|@'&` = `]>
+The question is />{[<
+
+Operator symbols '-
+Question operator symbol {
+Question operator not in examples
+
+Digit symbols @&>[/]^|`<
+
+Checking concatenation
+left @& op ' right >[ expected @&>[ versus //> mismatch
+left ]^ op ' right /[ expected ]^/[ versus /]> mismatch
+left [| op - right `^ expected [|`^ versus `> mismatch
+left |@ op ' right &` expected |@&` versus `]> mismatch
+
+Question operator { is not concatenation
+
+Checking reverse concatenation
+left @& op ' right >[ expected >[@& versus //> mismatch
+left ]^ op ' right /[ expected /[]^ versus /]> mismatch
+left [| op - right `^ expected `^[| versus `> mismatch
+left |@ op ' right &` expected &`|@ versus `]> mismatch
+
+Question operator { is not reverse concatenation
+
+Filtering out the concatenation operations
+@&'>[ = //>
+]^'/[ = /]>
+[|-`^ = `>
+|@'&` = `]>
+
+Assigning mul
+ left @& op ' right >[ = //> length 3
+ left ]^ op ' right /[ = /]> length 3
+ left [| op - right `^ = `> length 2
+ left |@ op ' right &` = `]> length 3
+
+Assigning sub
+ left @& op ' right >[ = //> length 3
+ left ]^ op ' right /[ = /]> length 3
+ left [| op - right `^ = `> length 2
+ left |@ op ' right &` = `]> length 3
+
+Assigning add
+ left @& op ' right >[ = //> length 3 assume add
+ left ]^ op ' right /[ = /]> assumed add
+ left [| op - right `^ = `> length 2
+ left |@ op ' right &` = `]> assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left @& op ' right >[ = //> assumed add
+ left ]^ op ' right /[ = /]> assumed add
+ left [| op - right `^ = `> length 2 assume sub
+ left |@ op ' right &` = `]> assumed add
+ left /> op { right [< the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying @=2 &=9 >=1 [=4 /=3 ]=0 ^=6 |=8 `=7 <=5
+@&'>[ = 29 add 14 = 43 vs //> 331 diff 288 add no; 92 add 41 = 133 vs rev >// 133 diff 0 add ok
+]^'/[ = 06 add 34 = 40 vs /]> 301 diff 261 add no; 60 add 43 = 103 vs rev >]/ 103 diff 0 add ok
+[|-`^ = 48 sub 76 = 28 vs `> 71 diff 43 sub no; 84 sub 67 = 17 vs rev >` 17 diff 0 sub ok
+|@'&` = 82 add 97 = 179 vs `]> 701 diff 522 add no; 28 add 79 = 107 vs rev >]` 107 diff 0 add ok
+ accepted rev />{[< = 31 mul 45 rev 13 mul 54 = 702 rev 207 = \boxed{@]`}

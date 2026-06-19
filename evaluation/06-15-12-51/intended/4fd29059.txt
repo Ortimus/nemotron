@@ -1,0 +1,66 @@
+[[+'% = [{
+%%-'% = -%
+}:-!{ = -(%
+{(-:] = -%(
+The question is :[*':
+
+Operator symbols +-
+Question operator symbol *
+Question operator not in examples
+
+Digit symbols ['%{}:!(]
+
+Checking concatenation
+left [[ op + right '% expected [['% versus [{ mismatch
+left %% op - right '% expected %%'% versus -% mismatch
+left }: op - right !{ expected }:!{ versus -(% mismatch
+left {( op - right :] expected {(:] versus -%( mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left [[ op + right '% expected '%[[ versus [{ mismatch
+left %% op - right '% expected '%%% versus -% mismatch
+left }: op - right !{ expected !{}: versus -(% mismatch
+left {( op - right :] expected :]{( versus -%( mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+[[+'% = [{
+%%-'% = -%
+}:-!{ = -(%
+{(-:] = -%(
+
+Assigning mul
+ left [[ op + right '% = [{ length 2
+ left %% op - right '% = -% length 2
+ left }: op - right !{ = -(% length 3
+ left {( op - right :] = -%( length 3
+
+Assigning sub
+ left [[ op + right '% = [{ length 2
+ left %% op - right '% = -% op in output assume sub
+ left }: op - right !{ = -(% assumed sub
+ left {( op - right :] = -%( assumed sub
+
+Assigning add
+ left [[ op + right '% = [{ length 2
+ left %% op - right '% = -% assumed sub
+ left }: op - right !{ = -(% assumed sub
+ left {( op - right :] = -%( assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left [[ op + right '% = [{ length 2 assume add
+ left %% op - right '% = -% assumed sub
+ left }: op - right !{ = -(% assumed sub
+ left {( op - right :] = -%( assumed sub
+ left :[ op * right ': the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying [=6 '=0 %=1 {=7 }=5 :=8 !=3 (=2 ]=4 A=9
+[[+'% = 66 add 01 = 67 vs [{ 67 diff 0 add ok; 66 add 10 = 76 vs rev {[ 76 diff 0 add ok
+%%-'% = 11 sub 01 = 10 vs -% -1 diff 9 sub no; 11 sub 10 = 1 vs rev -% -1 diff 0 sub ok
+}:-!{ = 58 sub 37 = 21 vs -(% -21 diff 0 sub ok; 85 sub 73 = 12 vs rev -%( -12 diff 0 sub ok
+{(-:] = 72 sub 84 = 12 vs -%( -12 diff 0 sub ok; 27 sub 48 = 21 vs rev -(% -21 diff 0 sub ok
+ accepted rev :[*': = 86 mul 08 rev 68 mul 80 = 5440 rev 0445 = \boxed{']]}}

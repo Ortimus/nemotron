@@ -1,0 +1,75 @@
+/&*$( = /$&:
+:|-(' = -|&
+"|*:" = $&(
+](-|' = -$`
+&&-]" = `:
+The question is (&*&&
+
+Operator symbols *-
+Question operator symbol *
+Question operator in examples
+
+Digit symbols /&$(:|'"]`
+
+Checking concatenation
+left /& op * right $( expected /&$( versus /$&: mismatch
+left :| op - right (' expected :|(' versus -|& mismatch
+left "| op * right :" expected "|:" versus $&( mismatch
+left ]( op - right |' expected ](|' versus -$` mismatch
+left && op - right ]" expected &&]" versus `: mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left /& op * right $( expected $(/& versus /$&: mismatch
+left :| op - right (' expected (':| versus -|& mismatch
+left "| op * right :" expected :""| versus $&( mismatch
+left ]( op - right |' expected |']( versus -$` mismatch
+left && op - right ]" expected ]"&& versus `: mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+/&*$( = /$&:
+:|-(' = -|&
+"|*:" = $&(
+](-|' = -$`
+&&-]" = `:
+
+Assigning mul
+ left /& op * right $( = /$&: length 4 assume mul
+ left :| op - right (' = -|& length 3
+ left "| op * right :" = $&( assumed mul
+ left ]( op - right |' = -$` length 3
+ left && op - right ]" = `: length 2
+
+Assigning sub
+ left /& op * right $( = /$&: assumed mul
+ left :| op - right (' = -|& op in output assume sub
+ left "| op * right :" = $&( assumed mul
+ left ]( op - right |' = -$` assumed sub
+ left && op - right ]" = `: assumed sub
+
+Assigning add
+ left /& op * right $( = /$&: assumed mul
+ left :| op - right (' = -|& assumed sub
+ left "| op * right :" = $&( assumed mul
+ left ]( op - right |' = -$` assumed sub
+ left && op - right ]" = `: assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left /& op * right $( = /$&: assumed mul
+ left :| op - right (' = -|& assumed sub
+ left "| op * right :" = $&( assumed mul
+ left ]( op - right |' = -$` assumed sub
+ left && op - right ]" = `: assumed sub
+ left (& op * right && the question, assumed mul
+
+Trying /=0 &=6 $=8 (=7 :=4 |=3 '=9 "=2 ]=5 `=1
+/&*$( = 06 mul 87 = 522 vs /$&: 0864 diff 342 mul no; 60 mul 78 = 4680 vs rev :&$/ 4680 diff 0 mul ok
+:|-(' = 43 sub 79 = 36 vs -|& -36 diff 0 sub ok; 34 sub 97 = 63 vs rev -&| -63 diff 0 sub ok
+"|*:" = 23 mul 42 = 966 vs $&( 867 diff 99 mul no; 32 mul 24 = 768 vs rev (&$ 768 diff 0 mul ok
+](-|' = 57 sub 39 = 18 vs -$` -81 diff 63 sub no; 75 sub 93 = 18 vs rev -`$ -18 diff 0 sub ok
+&&-]" = 66 sub 52 = 14 vs `: 14 diff 0 sub ok; 66 sub 25 = 41 vs rev :` 41 diff 0 sub ok
+ accepted rev (&*&& = 76 mul 66 rev 67 mul 66 = 4422 rev 2244 = \boxed{""::}

@@ -1,0 +1,66 @@
+{{+{" = ?!/
+|!+|{ = #<
+|{*]{ = |!""
+?|*!{ = ]/<
+The question is /<*?{
+
+Operator symbols +*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols {"?!/|#<]
+
+Checking concatenation
+left {{ op + right {" expected {{{" versus ?!/ mismatch
+left |! op + right |{ expected |!|{ versus #< mismatch
+left |{ op * right ]{ expected |{]{ versus |!"" mismatch
+left ?| op * right !{ expected ?|!{ versus ]/< mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left {{ op + right {" expected {"{{ versus ?!/ mismatch
+left |! op + right |{ expected |{|! versus #< mismatch
+left |{ op * right ]{ expected ]{|{ versus |!"" mismatch
+left ?| op * right !{ expected !{?| versus ]/< mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+{{+{" = ?!/
+|!+|{ = #<
+|{*]{ = |!""
+?|*!{ = ]/<
+
+Assigning mul
+ left {{ op + right {" = ?!/ length 3
+ left |! op + right |{ = #< length 2
+ left |{ op * right ]{ = |!"" length 4 assume mul
+ left ?| op * right !{ = ]/< assumed mul
+
+Assigning sub
+ left {{ op + right {" = ?!/ length 3
+ left |! op + right |{ = #< length 2
+ left |{ op * right ]{ = |!"" assumed mul
+ left ?| op * right !{ = ]/< assumed mul
+
+Assigning add
+ left {{ op + right {" = ?!/ length 3 assume add
+ left |! op + right |{ = #< assumed add
+ left |{ op * right ]{ = |!"" assumed mul
+ left ?| op * right !{ = ]/< assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left {{ op + right {" = ?!/ assumed add
+ left |! op + right |{ = #< assumed add
+ left |{ op * right ]{ = |!"" assumed mul
+ left ?| op * right !{ = ]/< assumed mul
+ left /< op * right ?{ the question, assumed mul
+
+Trying {=8 "=4 ?=1 !=7 /=3 |=2 #=5 <=6 ]=9 A=0
+{{+{" = 88 add 84 = 172 vs ?!/ 173 diff 1 add ok + 1; 88 add 48 = 136 vs rev /!? 371 diff 235 add no
+|!+|{ = 27 add 28 = 55 vs #< 56 diff 1 add ok + 1; 72 add 82 = 154 vs rev <# 65 diff 89 add no
+|{*]{ = 28 mul 98 = 2744 vs |!"" 2744 diff 0 mul ok; 82 mul 89 = 7298 vs rev ""!| 4472 diff 2826 mul no
+?|*!{ = 12 mul 78 = 936 vs ]/< 936 diff 0 mul ok; 21 mul 87 = 1827 vs rev </] 639 diff 1188 mul no
+ accepted forward /<*?{ = 36 mul 18 = 648 = \boxed{<"{}

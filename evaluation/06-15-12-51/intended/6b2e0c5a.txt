@@ -1,0 +1,75 @@
+/:[$@ = :^
+(]*/$ = !^:
+:@*:] = @}
+!![/} = [^$
+!:*/$ = (@
+The question is ':"/$
+
+Operator symbols [*
+Question operator symbol "
+Question operator not in examples
+
+Digit symbols /:$@^(]!}'
+
+Checking concatenation
+left /: op [ right $@ expected /:$@ versus :^ mismatch
+left (] op * right /$ expected (]/$ versus !^: mismatch
+left :@ op * right :] expected :@:] versus @} mismatch
+left !! op [ right /} expected !!/} versus [^$ mismatch
+left !: op * right /$ expected !:/$ versus (@ mismatch
+
+Question operator " is not concatenation
+
+Checking reverse concatenation
+left /: op [ right $@ expected $@/: versus :^ mismatch
+left (] op * right /$ expected /$(] versus !^: mismatch
+left :@ op * right :] expected :]:@ versus @} mismatch
+left !! op [ right /} expected /}!! versus [^$ mismatch
+left !: op * right /$ expected /$!: versus (@ mismatch
+
+Question operator " is not reverse concatenation
+
+Filtering out the concatenation operations
+/:[$@ = :^
+(]*/$ = !^:
+:@*:] = @}
+!![/} = [^$
+!:*/$ = (@
+
+Assigning mul
+ left /: op [ right $@ = :^ length 2
+ left (] op * right /$ = !^: length 3
+ left :@ op * right :] = @} length 2
+ left !! op [ right /} = [^$ length 3
+ left !: op * right /$ = (@ length 2
+
+Assigning sub
+ left /: op [ right $@ = :^ length 2
+ left (] op * right /$ = !^: length 3
+ left :@ op * right :] = @} length 2
+ left !! op [ right /} = [^$ op in output assume sub
+ left !: op * right /$ = (@ length 2
+
+Assigning add
+ left /: op [ right $@ = :^ assumed sub
+ left (] op * right /$ = !^: length 3 assume add
+ left :@ op * right :] = @} assumed add
+ left !! op [ right /} = [^$ assumed sub
+ left !: op * right /$ = (@ assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left /: op [ right $@ = :^ assumed sub
+ left (] op * right /$ = !^: assumed add
+ left :@ op * right :] = @} assumed add
+ left !! op [ right /} = [^$ assumed sub
+ left !: op * right /$ = (@ assumed add
+ left ': op " right /$ the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying /=8 :=3 $=4 @=6 ^=7 (=9 ]=0 !=1 }=5 '=2
+/:[$@ = 83 sub 46 = 37 vs :^ 37 diff 0 sub ok; 38 sub 64 = 26 vs rev ^: 73 diff 47 sub no
+(]*/$ = 90 add 84 = 174 vs !^: 173 diff 1 add ok - 1; 09 add 48 = 57 vs rev :^! 371 diff 314 add no
+:@*:] = 36 add 30 = 66 vs @} 65 diff 1 add ok - 1; 63 add 03 = 66 vs rev }@ 56 diff 10 add no
+!![/} = 11 sub 85 = 74 vs [^$ -74 diff 0 sub ok; 11 sub 58 = 47 vs rev [$^ -47 diff 0 sub ok
+!:*/$ = 13 add 84 = 97 vs (@ 96 diff 1 add ok - 1; 31 add 48 = 79 vs rev @( 69 diff 10 add no
+ accepted forward ':"/$ = 23 mul 84 = 1932 = \boxed{!(:'}

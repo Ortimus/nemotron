@@ -1,0 +1,187 @@
+23+52 = 75
+84-64 = -2
+33+82 = 16
+01*95 = 985
+
+The inputs are 23, 52, 84, 64, 33, 82, 01, 95
+
+The outputs are 75, -2, 16, 985
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 75, -2, 16, 985
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+23+52 -> +
+84-64 -> -
+33+82 -> +
+01*95 -> *
+
+The operators
++
+-
+*
+
+Looking at the question
+84+61 -> +
+The question operator is found in the examples.
+
+Looking at operator + [23+52 = 75, 33+82 = 16]:
+
+Trying common operations
+ reversed operands [23->32 52->25, 33->33 82->28] and reversed result [expected (32,25)->75, (33,28)->16]
+ addition
+ (32,25)->75: 32 + 25 = 57 rev-> 75 match
+ (33,28)->16: 33 + 28 = 61 rev-> 16 match
+ correct, actions: reversed operands, reversed result, addition
+ multiplication
+ (33,28)->16: (30 + 3) * 28 = 30 * 28 + 3 * 28 = 840 + 84 = 924 rev-> 429 mismatch
+ concatenation
+ (32,25)->75: 32 || 25 = 3225 rev-> 5223 mismatch
+ reverse concatenation
+ (33,28)->16: 28 || 33 = 2833 rev-> 3382 mismatch
+
+ identity [23 52, 33 82] [expected (23,52)->75, (33,82)->16]
+ addition
+ (23,52)->75: 23 + 52 = 75 match
+ (33,82)->16: 33 + 82 = 115 mismatch
+ multiplication
+ (33,82)->16: (30 + 3) * 82 = 30 * 82 + 3 * 82 = 2460 + 246 = 2706 mismatch
+ concatenation
+ (23,52)->75: 23 || 52 = 2352 mismatch
+ reverse concatenation
+ (33,82)->16: 82 || 33 = 8233 mismatch
+
+Trying difference operations
+ reversed operands [23->32 52->25, 33->33 82->28] and reversed result [expected (32,25)->75, (33,28)->16]
+ subtraction (a-b)
+ (32,25)->75: 32 - 25 = 7 rev-> 7 mismatch
+ absolute difference
+ (33,28)->16: |33 - 28| = 5 rev-> 5 mismatch
+ max mod min
+ (32,25)->75: max(32,25) mod min(32,25) = 32 mod 25 = 7 rev-> 7 mismatch
+ negated absolute difference
+ (33,28)->16: -|33 - 28| = -5 rev-> -5 mismatch
+ reverse subtraction (b-a)
+ (32,25)->75: 25 - 32 = -7 rev-> -7 mismatch
+ modulo (a mod b)
+ (33,28)->16: 33 mod 28 = 5 rev-> 5 mismatch
+
+ identity [23 52, 33 82] [expected (23,52)->75, (33,82)->16]
+ subtraction (a-b)
+ (23,52)->75: 23 - 52 = -29 mismatch
+ absolute difference
+ (33,82)->16: |33 - 82| = 49 mismatch
+ max mod min
+ (23,52)->75: max(23,52) mod min(23,52) = 52 mod 23 = 6 mismatch
+ negated absolute difference
+ (33,82)->16: -|33 - 82| = -49 mismatch
+ reverse subtraction (b-a)
+ (23,52)->75: 52 - 23 = 29 mismatch
+ modulo (a mod b)
+ (33,82)->16: 33 mod 82 = 33 mismatch
+
+Trying rare operations
+ reversed operands [23->32 52->25, 33->33 82->28] and reversed result [expected (32,25)->75, (33,28)->16]
+ multiply+1
+ (32,25)->75: (30 + 2) * 25 + 1 = 30 * 25 + 2 * 25 + 1 = 750 + 50 + 1 = 800 + 1 = 801 rev-> 108 mismatch
+ multiply-1
+ (33,28)->16: (30 + 3) * 28 - 1 = 30 * 28 + 3 * 28 - 1 = 840 + 84 - 1 = 924 - 1 = 923 rev-> 329 mismatch
+ add+1
+ (32,25)->75: 32 + 25 + 1 = 58 rev-> 85 mismatch
+ add-1
+ (33,28)->16: 33 + 28 - 1 = 60 rev-> 06 mismatch
+ sub+1
+ (32,25)->75: 32 - 25 + 1 = 8 rev-> 8 mismatch
+ sub-1
+ (33,28)->16: 33 - 28 - 1 = 4 rev-> 4 mismatch
+ integer division (a/b)
+ (32,25)->75: 32 / 25 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (33,28)->16: 28 / 33 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (32,25)->75: 25 mod 32 = 25 rev-> 52 mismatch
+ digit absolute diff
+ (33,28)->16: |3-2| || |3-8| = 15 rev-> 51 mismatch
+ digit add mod10
+ (32,25)->75: (3+2)%10 || (2+5)%10 = 57 rev-> 75 match
+ (33,28)->16: (3+2)%10 || (3+8)%10 = 51 rev-> 15 mismatch
+ digit sub mod10
+ (33,28)->16: (3-2)%10 || (3-8)%10 = 15 rev-> 51 mismatch
+ cross multiply
+ (32,25)->75: 3*2 + 2*5 = 6 + 10 = 16 rev-> 61 mismatch
+ cross multiply rev
+ (33,28)->16: 3*8 + 3*2 = 24 + 6 = 30 rev-> 03 mismatch
+ digit multiply
+ (32,25)->75: 3*2 || 2*5 = 6 || 10 = 610 rev-> 016 mismatch
+ digit multiply rev
+ (33,28)->16: 3*8 || 3*2 = 24 || 6 = 246 rev-> 642 mismatch
+ digit sum diff
+ (32,25)->75: (3+2) - (2+5) = -2 rev-> -2 mismatch
+ digit sum sum
+ (33,28)->16: (3+3) + (2+8) = 16 rev-> 61 mismatch
+ digit product diff
+ (32,25)->75: 3*2 - 2*5 = 6 - 10 = -4 rev-> -4 mismatch
+ digit product sum
+ (33,28)->16: 3*3 + 2*8 = 9 + 16 = 25 rev-> 52 mismatch
+ determinant
+ (32,25)->75: 3*5 - 2*2 = 15 - 4 = 11 rev-> 11 mismatch
+ abs determinant
+ (33,28)->16: |3*8 - 3*2| = |24 - 6| = 18 rev-> 81 mismatch
+
+ identity [23 52, 33 82] [expected (23,52)->75, (33,82)->16]
+ multiply+1
+ (23,52)->75: (20 + 3) * 52 + 1 = 20 * 52 + 3 * 52 + 1 = 1040 + 156 + 1 = 1196 + 1 = 1197 mismatch
+ multiply-1
+ (33,82)->16: (30 + 3) * 82 - 1 = 30 * 82 + 3 * 82 - 1 = 2460 + 246 - 1 = 2706 - 1 = 2705 mismatch
+ add+1
+ (23,52)->75: 23 + 52 + 1 = 76 mismatch
+ add-1
+ (33,82)->16: 33 + 82 - 1 = 114 mismatch
+ sub+1
+ (23,52)->75: 23 - 52 + 1 = -28 mismatch
+ sub-1
+ (33,82)->16: 33 - 82 - 1 = -50 mismatch
+ integer division (a/b)
+ (23,52)->75: 23 / 52 = 0 mismatch
+ reverse division (b/a)
+ (33,82)->16: 82 / 33 = 2 mismatch
+ reverse modulo (b mod a)
+ (23,52)->75: 52 mod 23 = 6 mismatch
+ digit absolute diff
+ (33,82)->16: |3-8| || |3-2| = 51 mismatch
+ digit add mod10
+ (23,52)->75: (2+5)%10 || (3+2)%10 = 75 match
+ (33,82)->16: (3+8)%10 || (3+2)%10 = 15 mismatch
+ digit sub mod10
+ (33,82)->16: (3-8)%10 || (3-2)%10 = 51 mismatch
+ cross multiply
+ (23,52)->75: 2*5 + 3*2 = 10 + 6 = 16 mismatch
+ cross multiply rev
+ (33,82)->16: 3*2 + 3*8 = 6 + 24 = 30 mismatch
+ digit multiply
+ (23,52)->75: 2*5 || 3*2 = 10 || 6 = 106 mismatch
+ digit multiply rev
+ (33,82)->16: 3*2 || 3*8 = 6 || 24 = 624 mismatch
+ digit sum diff
+ (23,52)->75: (2+3) - (5+2) = -2 mismatch
+ digit sum sum
+ (33,82)->16: (3+3) + (8+2) = 16 match
+ (23,52)->75: (2+3) + (5+2) = 12 mismatch
+ digit product diff
+ (23,52)->75: 2*3 - 5*2 = 6 - 10 = -4 mismatch
+ digit product sum
+ (33,82)->16: 3*3 + 8*2 = 9 + 16 = 25 mismatch
+ determinant
+ (23,52)->75: 2*2 - 3*5 = 4 - 15 = -11 mismatch
+ abs determinant
+ (33,82)->16: |3*2 - 3*8| = |6 - 24| = 18 mismatch
+
+correct, actions: reversed operands, reversed result, addition
+
+Applying to 84+61:
+ We recall that the question operator is found in the examples.
+ reversed operands [84->48, 61->16] and reversed result
+ addition
+ (48,16): 48 + 16 = 64 rev-> 46
+ Result is non-negative
+ \boxed{46}

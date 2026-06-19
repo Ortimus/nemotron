@@ -1,0 +1,178 @@
+07+04 = 0407
+62-71 = 9
+44-43 = 01
+
+The inputs are 07, 04, 62, 71, 44, 43
+
+The outputs are 0407, 9, 01
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+07+04 -> +
+62-71 -> -
+44-43 -> -
+
+The operators
++
+-
+
+Looking at the question
+35+19 -> +
+The question operator is found in the examples.
+
+Looking at operator + [07+04 = 0407]:
+
+Trying common operations
+ reversed operands [07->70 04->40] and reversed result [expected (70,40)->0407]
+ addition
+ (70,40)->0407: 70 + 40 = 110 rev-> 011 mismatch
+ multiplication
+ (70,40)->0407: (70 + 0) * 40 = 70 * 40 + 0 * 40 = 2800 + 0 = 2800 rev-> 0082 mismatch
+ concatenation
+ (70,40)->0407: 70 || 40 = 7040 rev-> 0407 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (70,40)->0407: 40 || 70 = 4070 rev-> 0704 mismatch
+
+ identity [07 04] [expected (07,04)->0407]
+ addition
+ (07,04)->0407: 07 + 04 = 11 mismatch
+ multiplication
+ (07,04)->0407: (0 + 7) * 04 = 0 * 04 + 7 * 04 = 0 + 28 = 28 mismatch
+ concatenation
+ (07,04)->0407: 07 || 04 = 0704 mismatch
+ reverse concatenation
+ (07,04)->0407: 04 || 07 = 0407 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [07->70 04->40] and reversed result [expected (70,40)->0407]
+ subtraction (a-b)
+ (70,40)->0407: 70 - 40 = 30 rev-> 03 mismatch
+ absolute difference
+ (70,40)->0407: |70 - 40| = 30 rev-> 03 mismatch
+ max mod min
+ (70,40)->0407: max(70,40) mod min(70,40) = 70 mod 40 = 30 rev-> 03 mismatch
+ negated absolute difference
+ (70,40)->0407: -|70 - 40| = -30 rev-> -03 mismatch
+ reverse subtraction (b-a)
+ (70,40)->0407: 40 - 70 = -30 rev-> -03 mismatch
+ modulo (a mod b)
+ (70,40)->0407: 70 mod 40 = 30 rev-> 03 mismatch
+
+ identity [07 04] [expected (07,04)->0407]
+ subtraction (a-b)
+ (07,04)->0407: 07 - 04 = 3 mismatch
+ absolute difference
+ (07,04)->0407: |07 - 04| = 3 mismatch
+ max mod min
+ (07,04)->0407: max(07,04) mod min(07,04) = 07 mod 04 = 3 mismatch
+ negated absolute difference
+ (07,04)->0407: -|07 - 04| = -3 mismatch
+ reverse subtraction (b-a)
+ (07,04)->0407: 04 - 07 = -3 mismatch
+ modulo (a mod b)
+ (07,04)->0407: 07 mod 04 = 3 mismatch
+
+Trying rare operations
+ reversed operands [07->70 04->40] and reversed result [expected (70,40)->0407]
+ multiply+1
+ (70,40)->0407: (70 + 0) * 40 + 1 = 70 * 40 + 0 * 40 + 1 = 2800 + 0 + 1 = 2800 + 1 = 2801 rev-> 1082 mismatch
+ multiply-1
+ (70,40)->0407: (70 + 0) * 40 - 1 = 70 * 40 + 0 * 40 - 1 = 2800 + 0 - 1 = 2800 - 1 = 2799 rev-> 9972 mismatch
+ add+1
+ (70,40)->0407: 70 + 40 + 1 = 111 rev-> 111 mismatch
+ add-1
+ (70,40)->0407: 70 + 40 - 1 = 109 rev-> 901 mismatch
+ sub+1
+ (70,40)->0407: 70 - 40 + 1 = 31 rev-> 13 mismatch
+ sub-1
+ (70,40)->0407: 70 - 40 - 1 = 29 rev-> 92 mismatch
+ integer division (a/b)
+ (70,40)->0407: 70 / 40 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (70,40)->0407: 40 / 70 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (70,40)->0407: 40 mod 70 = 40 rev-> 04 mismatch
+ digit absolute diff
+ (70,40)->0407: |7-4| || |0-0| = 30 rev-> 03 mismatch
+ digit add mod10
+ (70,40)->0407: (7+4)%10 || (0+0)%10 = 10 rev-> 01 mismatch
+ digit sub mod10
+ (70,40)->0407: (7-4)%10 || (0-0)%10 = 30 rev-> 03 mismatch
+ cross multiply
+ (70,40)->0407: 7*4 + 0*0 = 28 + 0 = 28 rev-> 82 mismatch
+ cross multiply rev
+ (70,40)->0407: 7*0 + 0*4 = 0 + 0 = 0 rev-> 0 mismatch
+ digit multiply
+ (70,40)->0407: 7*4 || 0*0 = 28 || 0 = 280 rev-> 082 mismatch
+ digit multiply rev
+ (70,40)->0407: 7*0 || 0*4 = 0 || 0 = 00 rev-> 00 mismatch
+ digit sum diff
+ (70,40)->0407: (7+0) - (4+0) = 3 rev-> 3 mismatch
+ digit sum sum
+ (70,40)->0407: (7+0) + (4+0) = 11 rev-> 11 mismatch
+ digit product diff
+ (70,40)->0407: 7*0 - 4*0 = 0 - 0 = 0 rev-> 0 mismatch
+ digit product sum
+ (70,40)->0407: 7*0 + 4*0 = 0 + 0 = 0 rev-> 0 mismatch
+ determinant
+ (70,40)->0407: 7*0 - 0*4 = 0 - 0 = 0 rev-> 0 mismatch
+ abs determinant
+ (70,40)->0407: |7*0 - 0*4| = |0 - 0| = 0 rev-> 0 mismatch
+
+ identity [07 04] [expected (07,04)->0407]
+ multiply+1
+ (07,04)->0407: (0 + 7) * 04 + 1 = 0 * 04 + 7 * 04 + 1 = 0 + 28 + 1 = 28 + 1 = 29 mismatch
+ multiply-1
+ (07,04)->0407: (0 + 7) * 04 - 1 = 0 * 04 + 7 * 04 - 1 = 0 + 28 - 1 = 28 - 1 = 27 mismatch
+ add+1
+ (07,04)->0407: 07 + 04 + 1 = 12 mismatch
+ add-1
+ (07,04)->0407: 07 + 04 - 1 = 10 mismatch
+ sub+1
+ (07,04)->0407: 07 - 04 + 1 = 4 mismatch
+ sub-1
+ (07,04)->0407: 07 - 04 - 1 = 2 mismatch
+ integer division (a/b)
+ (07,04)->0407: 07 / 04 = 1 mismatch
+ reverse division (b/a)
+ (07,04)->0407: 04 / 07 = 0 mismatch
+ reverse modulo (b mod a)
+ (07,04)->0407: 04 mod 07 = 4 mismatch
+ digit absolute diff
+ (07,04)->0407: |0-0| || |7-4| = 03 mismatch
+ digit add mod10
+ (07,04)->0407: (0+0)%10 || (7+4)%10 = 01 mismatch
+ digit sub mod10
+ (07,04)->0407: (0-0)%10 || (7-4)%10 = 03 mismatch
+ cross multiply
+ (07,04)->0407: 0*0 + 7*4 = 0 + 28 = 28 mismatch
+ cross multiply rev
+ (07,04)->0407: 0*4 + 7*0 = 0 + 0 = 0 mismatch
+ digit multiply
+ (07,04)->0407: 0*0 || 7*4 = 0 || 28 = 028 mismatch
+ digit multiply rev
+ (07,04)->0407: 0*4 || 7*0 = 0 || 0 = 00 mismatch
+ digit sum diff
+ (07,04)->0407: (0+7) - (0+4) = 3 mismatch
+ digit sum sum
+ (07,04)->0407: (0+7) + (0+4) = 11 mismatch
+ digit product diff
+ (07,04)->0407: 0*7 - 0*4 = 0 - 0 = 0 mismatch
+ digit product sum
+ (07,04)->0407: 0*7 + 0*4 = 0 + 0 = 0 mismatch
+ determinant
+ (07,04)->0407: 0*4 - 7*0 = 0 - 0 = 0 mismatch
+ abs determinant
+ (07,04)->0407: |0*4 - 7*0| = |0 - 0| = 0 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 35+19:
+ We recall that the question operator is found in the examples.
+ reversed operands [35->53, 19->91] and reversed result
+ concatenation
+ (53,91): 53 || 91 = 5391 rev-> 1935
+ Result is non-negative
+ \boxed{1935}

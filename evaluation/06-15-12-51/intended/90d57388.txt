@@ -1,0 +1,183 @@
+26-88 = 62
+15*16 = 1113
+09-54 = 0
+61+78 = 7861
+02-98 = 9
+
+The inputs are 26, 88, 15, 16, 09, 54, 61, 78, 02, 98
+
+The outputs are 62, 1113, 0, 7861, 9
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+26-88 -> -
+15*16 -> *
+09-54 -> -
+61+78 -> +
+02-98 -> -
+
+The operators
+-
+*
++
+
+Looking at the question
+15+26 -> +
+The question operator is found in the examples.
+
+Looking at operator + [61+78 = 7861]:
+
+Trying common operations
+ reversed operands [61->16 78->87] and reversed result [expected (16,87)->7861]
+ addition
+ (16,87)->7861: 16 + 87 = 103 rev-> 301 mismatch
+ multiplication
+ (16,87)->7861: (10 + 6) * 87 = 10 * 87 + 6 * 87 = 870 + 522 = 1392 rev-> 2931 mismatch
+ concatenation
+ (16,87)->7861: 16 || 87 = 1687 rev-> 7861 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (16,87)->7861: 87 || 16 = 8716 rev-> 6178 mismatch
+
+ identity [61 78] [expected (61,78)->7861]
+ addition
+ (61,78)->7861: 61 + 78 = 139 mismatch
+ multiplication
+ (61,78)->7861: (60 + 1) * 78 = 60 * 78 + 1 * 78 = 4680 + 78 = 4758 mismatch
+ concatenation
+ (61,78)->7861: 61 || 78 = 6178 mismatch
+ reverse concatenation
+ (61,78)->7861: 78 || 61 = 7861 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [61->16 78->87] and reversed result [expected (16,87)->7861]
+ subtraction (a-b)
+ (16,87)->7861: 16 - 87 = -71 rev-> -17 mismatch
+ absolute difference
+ (16,87)->7861: |16 - 87| = 71 rev-> 17 mismatch
+ max mod min
+ (16,87)->7861: max(16,87) mod min(16,87) = 87 mod 16 = 7 rev-> 7 mismatch
+ negated absolute difference
+ (16,87)->7861: -|16 - 87| = -71 rev-> -17 mismatch
+ reverse subtraction (b-a)
+ (16,87)->7861: 87 - 16 = 71 rev-> 17 mismatch
+ modulo (a mod b)
+ (16,87)->7861: 16 mod 87 = 16 rev-> 61 mismatch
+
+ identity [61 78] [expected (61,78)->7861]
+ subtraction (a-b)
+ (61,78)->7861: 61 - 78 = -17 mismatch
+ absolute difference
+ (61,78)->7861: |61 - 78| = 17 mismatch
+ max mod min
+ (61,78)->7861: max(61,78) mod min(61,78) = 78 mod 61 = 17 mismatch
+ negated absolute difference
+ (61,78)->7861: -|61 - 78| = -17 mismatch
+ reverse subtraction (b-a)
+ (61,78)->7861: 78 - 61 = 17 mismatch
+ modulo (a mod b)
+ (61,78)->7861: 61 mod 78 = 61 mismatch
+
+Trying rare operations
+ reversed operands [61->16 78->87] and reversed result [expected (16,87)->7861]
+ multiply+1
+ (16,87)->7861: (10 + 6) * 87 + 1 = 10 * 87 + 6 * 87 + 1 = 870 + 522 + 1 = 1392 + 1 = 1393 rev-> 3931 mismatch
+ multiply-1
+ (16,87)->7861: (10 + 6) * 87 - 1 = 10 * 87 + 6 * 87 - 1 = 870 + 522 - 1 = 1392 - 1 = 1391 rev-> 1931 mismatch
+ add+1
+ (16,87)->7861: 16 + 87 + 1 = 104 rev-> 401 mismatch
+ add-1
+ (16,87)->7861: 16 + 87 - 1 = 102 rev-> 201 mismatch
+ sub+1
+ (16,87)->7861: 16 - 87 + 1 = -70 rev-> -07 mismatch
+ sub-1
+ (16,87)->7861: 16 - 87 - 1 = -72 rev-> -27 mismatch
+ integer division (a/b)
+ (16,87)->7861: 16 / 87 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (16,87)->7861: 87 / 16 = 5 rev-> 5 mismatch
+ reverse modulo (b mod a)
+ (16,87)->7861: 87 mod 16 = 7 rev-> 7 mismatch
+ digit absolute diff
+ (16,87)->7861: |1-8| || |6-7| = 71 rev-> 17 mismatch
+ digit add mod10
+ (16,87)->7861: (1+8)%10 || (6+7)%10 = 93 rev-> 39 mismatch
+ digit sub mod10
+ (16,87)->7861: (1-8)%10 || (6-7)%10 = 39 rev-> 93 mismatch
+ cross multiply
+ (16,87)->7861: 1*8 + 6*7 = 8 + 42 = 50 rev-> 05 mismatch
+ cross multiply rev
+ (16,87)->7861: 1*7 + 6*8 = 7 + 48 = 55 rev-> 55 mismatch
+ digit multiply
+ (16,87)->7861: 1*8 || 6*7 = 8 || 42 = 842 rev-> 248 mismatch
+ digit multiply rev
+ (16,87)->7861: 1*7 || 6*8 = 7 || 48 = 748 rev-> 847 mismatch
+ digit sum diff
+ (16,87)->7861: (1+6) - (8+7) = -8 rev-> -8 mismatch
+ digit sum sum
+ (16,87)->7861: (1+6) + (8+7) = 22 rev-> 22 mismatch
+ digit product diff
+ (16,87)->7861: 1*6 - 8*7 = 6 - 56 = -50 rev-> -05 mismatch
+ digit product sum
+ (16,87)->7861: 1*6 + 8*7 = 6 + 56 = 62 rev-> 26 mismatch
+ determinant
+ (16,87)->7861: 1*7 - 6*8 = 7 - 48 = -41 rev-> -14 mismatch
+ abs determinant
+ (16,87)->7861: |1*7 - 6*8| = |7 - 48| = 41 rev-> 14 mismatch
+
+ identity [61 78] [expected (61,78)->7861]
+ multiply+1
+ (61,78)->7861: (60 + 1) * 78 + 1 = 60 * 78 + 1 * 78 + 1 = 4680 + 78 + 1 = 4758 + 1 = 4759 mismatch
+ multiply-1
+ (61,78)->7861: (60 + 1) * 78 - 1 = 60 * 78 + 1 * 78 - 1 = 4680 + 78 - 1 = 4758 - 1 = 4757 mismatch
+ add+1
+ (61,78)->7861: 61 + 78 + 1 = 140 mismatch
+ add-1
+ (61,78)->7861: 61 + 78 - 1 = 138 mismatch
+ sub+1
+ (61,78)->7861: 61 - 78 + 1 = -16 mismatch
+ sub-1
+ (61,78)->7861: 61 - 78 - 1 = -18 mismatch
+ integer division (a/b)
+ (61,78)->7861: 61 / 78 = 0 mismatch
+ reverse division (b/a)
+ (61,78)->7861: 78 / 61 = 1 mismatch
+ reverse modulo (b mod a)
+ (61,78)->7861: 78 mod 61 = 17 mismatch
+ digit absolute diff
+ (61,78)->7861: |6-7| || |1-8| = 17 mismatch
+ digit add mod10
+ (61,78)->7861: (6+7)%10 || (1+8)%10 = 39 mismatch
+ digit sub mod10
+ (61,78)->7861: (6-7)%10 || (1-8)%10 = 93 mismatch
+ cross multiply
+ (61,78)->7861: 6*7 + 1*8 = 42 + 8 = 50 mismatch
+ cross multiply rev
+ (61,78)->7861: 6*8 + 1*7 = 48 + 7 = 55 mismatch
+ digit multiply
+ (61,78)->7861: 6*7 || 1*8 = 42 || 8 = 428 mismatch
+ digit multiply rev
+ (61,78)->7861: 6*8 || 1*7 = 48 || 7 = 487 mismatch
+ digit sum diff
+ (61,78)->7861: (6+1) - (7+8) = -8 mismatch
+ digit sum sum
+ (61,78)->7861: (6+1) + (7+8) = 22 mismatch
+ digit product diff
+ (61,78)->7861: 6*1 - 7*8 = 6 - 56 = -50 mismatch
+ digit product sum
+ (61,78)->7861: 6*1 + 7*8 = 6 + 56 = 62 mismatch
+ determinant
+ (61,78)->7861: 6*8 - 1*7 = 48 - 7 = 41 mismatch
+ abs determinant
+ (61,78)->7861: |6*8 - 1*7| = |48 - 7| = 41 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 15+26:
+ We recall that the question operator is found in the examples.
+ reversed operands [15->51, 26->62] and reversed result
+ concatenation
+ (51,62): 51 || 62 = 5162 rev-> 2615
+ Result is non-negative
+ \boxed{2615}

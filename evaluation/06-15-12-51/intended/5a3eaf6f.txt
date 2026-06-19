@@ -1,0 +1,75 @@
+\^)^^ = )${
+\^)\' = )$
+(?<}? = }"(?
+#}%\( = $"?
+^")\? = )?
+The question is (?<\"
+
+Operator symbols )<%
+Question operator symbol <
+Question operator in examples
+
+Digit symbols \^${'(?}"#
+
+Checking concatenation
+left \^ op ) right ^^ expected \^^^ versus )${ mismatch
+left \^ op ) right \' expected \^\' versus )$ mismatch
+left (? op < right }? expected (?}? versus }"(? mismatch
+left #} op % right \( expected #}\( versus $"? mismatch
+left ^" op ) right \? expected ^"\? versus )? mismatch
+
+Question operator < is not concatenation
+
+Checking reverse concatenation
+left \^ op ) right ^^ expected ^^\^ versus )${ mismatch
+left \^ op ) right \' expected \'\^ versus )$ mismatch
+left (? op < right }? expected }?(? versus }"(? mismatch
+left #} op % right \( expected \(#} versus $"? mismatch
+left ^" op ) right \? expected \?^" versus )? mismatch
+
+Question operator < is not reverse concatenation
+
+Filtering out the concatenation operations
+\^)^^ = )${
+\^)\' = )$
+(?<}? = }"(?
+#}%\( = $"?
+^")\? = )?
+
+Assigning mul
+ left \^ op ) right ^^ = )${ length 3
+ left \^ op ) right \' = )$ length 2
+ left (? op < right }? = }"(? length 4 assume mul
+ left #} op % right \( = $"? length 3
+ left ^" op ) right \? = )? length 2
+
+Assigning sub
+ left \^ op ) right ^^ = )${ op in output assume sub
+ left \^ op ) right \' = )$ assumed sub
+ left (? op < right }? = }"(? assumed mul
+ left #} op % right \( = $"? length 3
+ left ^" op ) right \? = )? assumed sub
+
+Assigning add
+ left \^ op ) right ^^ = )${ assumed sub
+ left \^ op ) right \' = )$ assumed sub
+ left (? op < right }? = }"(? assumed mul
+ left #} op % right \( = $"? length 3 assume add
+ left ^" op ) right \? = )? assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left \^ op ) right ^^ = )${ assumed sub
+ left \^ op ) right \' = )$ assumed sub
+ left (? op < right }? = }"(? assumed mul
+ left #} op % right \( = $"? assumed add
+ left ^" op ) right \? = )? assumed sub
+ left (? op < right \" the question, assumed mul
+
+Trying \=3 ^=4 $=1 {=0 '=5 (=9 ?=6 }=7 "=2 #=8
+\^)^^ = 34 sub 44 = 10 vs )${ -10 diff 0 sub ok; 43 sub 44 = 1 vs rev ){$ -01 diff 0 sub ok
+\^)\' = 34 sub 35 = 1 vs )$ -1 diff 0 sub ok; 43 sub 53 = 10 vs rev )$ -1 diff 9 sub no
+(?<}? = 96 mul 76 = 7296 vs }"(? 7296 diff 0 mul ok; 69 mul 67 = 4623 vs rev ?("} 6927 diff 2304 mul no
+#}%\( = 87 add 39 = 126 vs $"? 126 diff 0 add ok; 78 add 93 = 171 vs rev ?"$ 621 diff 450 add no
+^")\? = 42 sub 36 = 6 vs )? -6 diff 0 sub ok; 24 sub 63 = 39 vs rev )? -6 diff 33 sub no
+ accepted forward (?<\" = 96 mul 32 = 3072 = \boxed{\{}"}

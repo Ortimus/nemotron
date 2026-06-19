@@ -1,0 +1,66 @@
+#@+{$ = )"[
+#$+<" = {#[
+#)-<} = -@[
+#)*<" = <"[{
+The question is #}-"#
+
+Operator symbols +-*
+Question operator symbol -
+Question operator in examples
+
+Digit symbols #@{$)"[<}
+
+Checking concatenation
+left #@ op + right {$ expected #@{$ versus )"[ mismatch
+left #$ op + right <" expected #$<" versus {#[ mismatch
+left #) op - right <} expected #)<} versus -@[ mismatch
+left #) op * right <" expected #)<" versus <"[{ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left #@ op + right {$ expected {$#@ versus )"[ mismatch
+left #$ op + right <" expected <"#$ versus {#[ mismatch
+left #) op - right <} expected <}#) versus -@[ mismatch
+left #) op * right <" expected <"#) versus <"[{ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+#@+{$ = )"[
+#$+<" = {#[
+#)-<} = -@[
+#)*<" = <"[{
+
+Assigning mul
+ left #@ op + right {$ = )"[ length 3
+ left #$ op + right <" = {#[ length 3
+ left #) op - right <} = -@[ length 3
+ left #) op * right <" = <"[{ length 4 assume mul
+
+Assigning sub
+ left #@ op + right {$ = )"[ length 3
+ left #$ op + right <" = {#[ length 3
+ left #) op - right <} = -@[ op in output assume sub
+ left #) op * right <" = <"[{ assumed mul
+
+Assigning add
+ left #@ op + right {$ = )"[ length 3 assume add
+ left #$ op + right <" = {#[ assumed add
+ left #) op - right <} = -@[ assumed sub
+ left #) op * right <" = <"[{ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left #@ op + right {$ = )"[ assumed add
+ left #$ op + right <" = {#[ assumed add
+ left #) op - right <} = -@[ assumed sub
+ left #) op * right <" = <"[{ assumed mul
+ left #} op - right "# the question, assumed sub
+
+Trying #=3 @=7 {=2 $=8 )=4 "=5 [=1 <=0 }=6 A=9
+#@+{$ = 37 add 28 = 65 vs )"[ 451 diff 386 add no; 73 add 82 = 155 vs rev [") 154 diff 1 add ok - 1
+#$+<" = 38 add 05 = 43 vs {#[ 231 diff 188 add no; 83 add 50 = 133 vs rev [#{ 132 diff 1 add ok - 1
+#)-<} = 34 sub 06 = 28 vs -@[ -71 diff 43 sub no; 43 sub 60 = 17 vs rev -[@ -17 diff 0 sub ok
+#)*<" = 34 mul 05 = 170 vs <"[{ 0512 diff 342 mul no; 43 mul 50 = 2150 vs rev {["< 2150 diff 0 mul ok
+ accepted rev #}-"# = 36 sub 53 rev 63 sub 35 = 28 rev 82 = \boxed{${}

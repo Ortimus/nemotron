@@ -1,0 +1,248 @@
+">-"? = ?
+%'+'^ = ?\
+'?+{^ = !>
+'{*?> = %\`?
+!>+{{ = ^>{
+The question is {!+!`
+
+Operator symbols -+*
+Question operator symbol +
+Question operator in examples
+
+Digit symbols ">?%'^\{!`
+
+Checking concatenation
+left "> op - right "? expected ">"? versus ? mismatch
+left %' op + right '^ expected %''^ versus ?\ mismatch
+left '? op + right {^ expected '?{^ versus !> mismatch
+left '{ op * right ?> expected '{?> versus %\`? mismatch
+left !> op + right {{ expected !>{{ versus ^>{ mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left "> op - right "? expected "?"> versus ? mismatch
+left %' op + right '^ expected '^%' versus ?\ mismatch
+left '? op + right {^ expected {^'? versus !> mismatch
+left '{ op * right ?> expected ?>'{ versus %\`? mismatch
+left !> op + right {{ expected {{!> versus ^>{ mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+">-"? = ?
+%'+'^ = ?\
+'?+{^ = !>
+'{*?> = %\`?
+!>+{{ = ^>{
+
+Assigning mul
+ left "> op - right "? = ? length 1
+ left %' op + right '^ = ?\ length 2
+ left '? op + right {^ = !> length 2
+ left '{ op * right ?> = %\`? length 4 assume mul
+ left !> op + right {{ = ^>{ length 3
+
+Assigning sub
+ left "> op - right "? = ? length 1 assume sub
+ left %' op + right '^ = ?\ length 2
+ left '? op + right {^ = !> length 2
+ left '{ op * right ?> = %\`? assumed mul
+ left !> op + right {{ = ^>{ length 3
+
+Assigning add
+ left "> op - right "? = ? assumed sub
+ left %' op + right '^ = ?\ length 2
+ left '? op + right {^ = !> length 2
+ left '{ op * right ?> = %\`? assumed mul
+ left !> op + right {{ = ^>{ length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left "> op - right "? = ? assumed sub
+ left %' op + right '^ = ?\ assumed add
+ left '? op + right {^ = !> assumed add
+ left '{ op * right ?> = %\`? assumed mul
+ left !> op + right {{ = ^>{ assumed add
+ left {! op + right !` the question, assumed add
+
+Trying "=1 >=2 ?=0 %=3 '=4 ^=5 \=6 {=7 !=8 `=9
+">-"? = 12 sub 10 = 2 vs ? 0 diff 2 sub no; 21 sub 01 = 20 vs rev ? 0 diff 20 sub no
+%'+'^ = 34 add 45 = 79 vs ?\ 06 diff 73 add no; 43 add 54 = 97 vs rev \? 60 diff 37 add no
+ rejected forward {!+!` = 78 add 89 = 167 = final answer: "\{
+
+Trying "=9 >=1 ?=2 %=3 '=4 ^=5 \=6 {=7 !=8 `=0
+">-"? = 91 sub 92 = 1 vs ? 2 diff 1 sub ok + 1; 19 sub 29 = 10 vs rev ? 2 diff 8 sub no
+%'+'^ = 34 add 45 = 79 vs ?\ 26 diff 53 add no; 43 add 54 = 97 vs rev \? 62 diff 35 add no
+ rejected forward {!+!` = 78 add 80 = 158 = final answer: >^!
+
+Trying "=8 >=9 ?=1 %=3 '=4 ^=5 \=6 {=7 !=2 `=0
+">-"? = 89 sub 81 = 8 vs ? 1 diff 7 sub no; 98 sub 18 = 80 vs rev ? 1 diff 79 sub no
+ rejected none {!+!` = 72 add 20 rev 27 add 02 = 29 rev 92 = final answer: >!
+
+Trying "=0 >=8 ?=9 %=3 '=4 ^=5 \=6 {=7 !=2 `=1
+">-"? = 08 sub 09 = 1 vs ? 9 diff 8 sub no; 80 sub 90 = 10 vs rev ? 9 diff 1 sub ok + 1
+%'+'^ = 34 add 45 = 79 vs ?\ 96 diff 17 add no; 43 add 54 = 97 vs rev \? 69 diff 28 add no
+ rejected rev {!+!` = 72 add 21 rev 27 add 12 = 39 rev 93 = final answer: ?%
+
+Trying "=5 >=0 ?=8 %=3 '=4 ^=1 \=6 {=7 !=2 `=9
+">-"? = 50 sub 58 = 8 vs ? 8 diff 0 sub ok; 05 sub 85 = 80 vs rev ? 8 diff 72 sub no
+%'+'^ = 34 add 41 = 75 vs ?\ 86 diff 11 add no; 43 add 14 = 57 vs rev \? 68 diff 11 add no
+ rejected forward {!+!` = 72 add 29 = 101 = final answer: ^>^
+
+Trying "=6 >=5 ?=3 %=1 '=4 ^=9 \=0 {=7 !=2 `=8
+">-"? = 65 sub 63 = 2 vs ? 3 diff 1 sub ok + 1; 56 sub 36 = 20 vs rev ? 3 diff 17 sub no
+%'+'^ = 14 add 49 = 63 vs ?\ 30 diff 33 add no; 41 add 94 = 135 vs rev \? 03 diff 132 add no
+ rejected forward {!+!` = 72 add 28 = 100 = final answer: %\\
+
+Trying "=1 >=2 ?=0 %=3 '=4 ^=5 \=6 {=7 !=8 `=9
+">-"? = 12 sub 10 = 2 vs ? 0 diff 2 sub no; 21 sub 01 = 20 vs rev ? 0 diff 20 sub no
+ rejected none {!+!` = 78 add 89 rev 87 add 98 = 185 rev 581 = final answer: ^!"
+
+Trying "=9 >=1 ?=2 %=3 '=4 ^=5 \=6 {=7 !=8 `=0
+">-"? = 91 sub 92 = 1 vs ? 2 diff 1 sub ok + 1; 19 sub 29 = 10 vs rev ? 2 diff 8 sub no
+%'+'^ = 34 add 45 = 79 vs ?\ 26 diff 53 add no; 43 add 54 = 97 vs rev \? 62 diff 35 add no
+ rejected forward {!+!` = 78 add 80 = 158 = final answer: >^!
+
+Trying "=8 >=9 ?=1 %=3 '=4 ^=5 \=6 {=7 !=2 `=0
+">-"? = 89 sub 81 = 8 vs ? 1 diff 7 sub no; 98 sub 18 = 80 vs rev ? 1 diff 79 sub no
+ rejected none {!+!` = 72 add 20 rev 27 add 02 = 29 rev 92 = final answer: >!
+
+Trying "=0 >=8 ?=9 %=3 '=4 ^=5 \=6 {=7 !=2 `=1
+">-"? = 08 sub 09 = 1 vs ? 9 diff 8 sub no; 80 sub 90 = 10 vs rev ? 9 diff 1 sub ok + 1
+%'+'^ = 34 add 45 = 79 vs ?\ 96 diff 17 add no; 43 add 54 = 97 vs rev \? 69 diff 28 add no
+ rejected rev {!+!` = 72 add 21 rev 27 add 12 = 39 rev 93 = final answer: ?%
+
+Trying "=5 >=0 ?=8 %=3 '=4 ^=1 \=6 {=7 !=2 `=9
+">-"? = 50 sub 58 = 8 vs ? 8 diff 0 sub ok; 05 sub 85 = 80 vs rev ? 8 diff 72 sub no
+%'+'^ = 34 add 41 = 75 vs ?\ 86 diff 11 add no; 43 add 14 = 57 vs rev \? 68 diff 11 add no
+ rejected forward {!+!` = 72 add 29 = 101 = final answer: ^>^
+
+Trying "=6 >=5 ?=3 %=1 '=4 ^=9 \=0 {=7 !=2 `=8
+">-"? = 65 sub 63 = 2 vs ? 3 diff 1 sub ok + 1; 56 sub 36 = 20 vs rev ? 3 diff 17 sub no
+%'+'^ = 14 add 49 = 63 vs ?\ 30 diff 33 add no; 41 add 94 = 135 vs rev \? 03 diff 132 add no
+ rejected forward {!+!` = 72 add 28 = 100 = final answer: %\\
+
+Trying "=1 >=2 ?=0 %=3 '=4 ^=5 \=6 {=7 !=8 `=9
+">-"? = 12 sub 10 = 2 vs ? 0 diff 2 sub no; 21 sub 01 = 20 vs rev ? 0 diff 20 sub no
+ rejected none {!+!` = 78 add 89 rev 87 add 98 = 185 rev 581 = final answer: ^!"
+
+Trying "=9 >=1 ?=2 %=3 '=4 ^=5 \=6 {=7 !=8 `=0
+">-"? = 91 sub 92 = 1 vs ? 2 diff 1 sub ok + 1; 19 sub 29 = 10 vs rev ? 2 diff 8 sub no
+%'+'^ = 34 add 45 = 79 vs ?\ 26 diff 53 add no; 43 add 54 = 97 vs rev \? 62 diff 35 add no
+ rejected forward {!+!` = 78 add 80 = 158 = final answer: >^!
+
+Trying "=8 >=9 ?=1 %=3 '=4 ^=5 \=6 {=7 !=2 `=0
+">-"? = 89 sub 81 = 8 vs ? 1 diff 7 sub no; 98 sub 18 = 80 vs rev ? 1 diff 79 sub no
+ rejected none {!+!` = 72 add 20 rev 27 add 02 = 29 rev 92 = final answer: >!
+
+Trying "=0 >=8 ?=9 %=3 '=4 ^=5 \=6 {=7 !=2 `=1
+">-"? = 08 sub 09 = 1 vs ? 9 diff 8 sub no; 80 sub 90 = 10 vs rev ? 9 diff 1 sub ok + 1
+%'+'^ = 34 add 45 = 79 vs ?\ 96 diff 17 add no; 43 add 54 = 97 vs rev \? 69 diff 28 add no
+ rejected rev {!+!` = 72 add 21 rev 27 add 12 = 39 rev 93 = final answer: ?%
+
+Trying "=5 >=0 ?=8 %=3 '=4 ^=1 \=6 {=7 !=2 `=9
+">-"? = 50 sub 58 = 8 vs ? 8 diff 0 sub ok; 05 sub 85 = 80 vs rev ? 8 diff 72 sub no
+%'+'^ = 34 add 41 = 75 vs ?\ 86 diff 11 add no; 43 add 14 = 57 vs rev \? 68 diff 11 add no
+ rejected forward {!+!` = 72 add 29 = 101 = final answer: ^>^
+
+Trying "=6 >=5 ?=3 %=1 '=4 ^=9 \=0 {=7 !=2 `=8
+">-"? = 65 sub 63 = 2 vs ? 3 diff 1 sub ok + 1; 56 sub 36 = 20 vs rev ? 3 diff 17 sub no
+%'+'^ = 14 add 49 = 63 vs ?\ 30 diff 33 add no; 41 add 94 = 135 vs rev \? 03 diff 132 add no
+ rejected forward {!+!` = 72 add 28 = 100 = final answer: ^\\
+
+Trying "=1 >=2 ?=0 %=3 '=4 ^=5 \=6 {=7 !=8 `=9
+">-"? = 12 sub 10 = 2 vs ? 0 diff 2 sub no; 21 sub 01 = 20 vs rev ? 0 diff 20 sub no
+ rejected none {!+!` = 78 add 89 rev 87 add 98 = 185 rev 581 = final answer: ^!"
+
+Trying "=9 >=1 ?=2 %=3 '=4 ^=5 \=6 {=7 !=8 `=0
+">-"? = 91 sub 92 = 1 vs ? 2 diff 1 sub ok + 1; 19 sub 29 = 10 vs rev ? 2 diff 8 sub no
+%'+'^ = 34 add 45 = 79 vs ?\ 26 diff 53 add no; 43 add 54 = 97 vs rev \? 62 diff 35 add no
+ rejected forward {!+!` = 78 add 80 = 158 = final answer: >^!
+
+Trying "=8 >=9 ?=1 %=3 '=4 ^=5 \=6 {=7 !=2 `=0
+">-"? = 89 sub 81 = 8 vs ? 1 diff 7 sub no; 98 sub 18 = 80 vs rev ? 1 diff 79 sub no
+ rejected none {!+!` = 72 add 20 rev 27 add 02 = 29 rev 92 = final answer: >!
+
+Trying "=0 >=8 ?=9 %=3 '=4 ^=5 \=6 {=7 !=2 `=1
+">-"? = 08 sub 09 = 1 vs ? 9 diff 8 sub no; 80 sub 90 = 10 vs rev ? 9 diff 1 sub ok + 1
+%'+'^ = 34 add 45 = 79 vs ?\ 96 diff 17 add no; 43 add 54 = 97 vs rev \? 69 diff 28 add no
+ rejected rev {!+!` = 72 add 21 rev 27 add 12 = 39 rev 93 = final answer: ?%
+
+Trying "=5 >=0 ?=8 %=3 '=4 ^=1 \=6 {=7 !=2 `=9
+">-"? = 50 sub 58 = 8 vs ? 8 diff 0 sub ok; 05 sub 85 = 80 vs rev ? 8 diff 72 sub no
+%'+'^ = 34 add 41 = 75 vs ?\ 86 diff 11 add no; 43 add 14 = 57 vs rev \? 68 diff 11 add no
+ rejected forward {!+!` = 72 add 29 = 101 = final answer: ^>^
+
+Trying "=6 >=5 ?=3 %=1 '=4 ^=9 \=0 {=7 !=2 `=8
+">-"? = 65 sub 63 = 2 vs ? 3 diff 1 sub ok + 1; 56 sub 36 = 20 vs rev ? 3 diff 17 sub no
+%'+'^ = 14 add 49 = 63 vs ?\ 30 diff 33 add no; 41 add 94 = 135 vs rev \? 03 diff 132 add no
+ rejected forward {!+!` = 72 add 28 = 100 = final answer: ^\\
+
+Trying "=1 >=2 ?=0 %=3 '=4 ^=5 \=6 {=7 !=8 `=9
+">-"? = 12 sub 10 = 2 vs ? 0 diff 2 sub no; 21 sub 01 = 20 vs rev ? 0 diff 20 sub no
+ rejected none {!+!` = 78 add 89 rev 87 add 98 = 185 rev 581 = final answer: ^!"
+
+Trying "=9 >=1 ?=2 %=3 '=4 ^=5 \=6 {=7 !=8 `=0
+">-"? = 91 sub 92 = 1 vs ? 2 diff 1 sub ok + 1; 19 sub 29 = 10 vs rev ? 2 diff 8 sub no
+%'+'^ = 34 add 45 = 79 vs ?\ 26 diff 53 add no; 43 add 54 = 97 vs rev \? 62 diff 35 add no
+ rejected forward {!+!` = 78 add 80 = 158 = final answer: >^!
+
+Trying "=8 >=9 ?=1 %=3 '=4 ^=5 \=6 {=7 !=2 `=0
+">-"? = 89 sub 81 = 8 vs ? 1 diff 7 sub no; 98 sub 18 = 80 vs rev ? 1 diff 79 sub no
+ rejected none {!+!` = 72 add 20 rev 27 add 02 = 29 rev 92 = final answer: >!
+
+Trying "=0 >=8 ?=9 %=3 '=4 ^=5 \=6 {=7 !=2 `=1
+">-"? = 08 sub 09 = 1 vs ? 9 diff 8 sub no; 80 sub 90 = 10 vs rev ? 9 diff 1 sub ok + 1
+%'+'^ = 34 add 45 = 79 vs ?\ 96 diff 17 add no; 43 add 54 = 97 vs rev \? 69 diff 28 add no
+ rejected rev {!+!` = 72 add 21 rev 27 add 12 = 39 rev 93 = final answer: ?%
+
+Trying "=5 >=0 ?=8 %=3 '=4 ^=1 \=6 {=7 !=2 `=9
+">-"? = 50 sub 58 = 8 vs ? 8 diff 0 sub ok; 05 sub 85 = 80 vs rev ? 8 diff 72 sub no
+%'+'^ = 34 add 41 = 75 vs ?\ 86 diff 11 add no; 43 add 14 = 57 vs rev \? 68 diff 11 add no
+ rejected forward {!+!` = 72 add 29 = 101 = final answer: ^>^
+
+Trying "=6 >=5 ?=3 %=1 '=4 ^=9 \=0 {=7 !=2 `=8
+">-"? = 65 sub 63 = 2 vs ? 3 diff 1 sub ok + 1; 56 sub 36 = 20 vs rev ? 3 diff 17 sub no
+%'+'^ = 14 add 49 = 63 vs ?\ 30 diff 33 add no; 41 add 94 = 135 vs rev \? 03 diff 132 add no
+ rejected forward {!+!` = 72 add 28 = 100 = final answer: ^\\
+
+Trying "=1 >=2 ?=0 %=3 '=4 ^=5 \=6 {=7 !=8 `=9
+">-"? = 12 sub 10 = 2 vs ? 0 diff 2 sub no; 21 sub 01 = 20 vs rev ? 0 diff 20 sub no
+ rejected none {!+!` = 78 add 89 rev 87 add 98 = 185 rev 581 = final answer: ^!"
+
+Trying "=9 >=1 ?=2 %=3 '=4 ^=5 \=6 {=7 !=8 `=0
+">-"? = 91 sub 92 = 1 vs ? 2 diff 1 sub ok + 1; 19 sub 29 = 10 vs rev ? 2 diff 8 sub no
+%'+'^ = 34 add 45 = 79 vs ?\ 26 diff 53 add no; 43 add 54 = 97 vs rev \? 62 diff 35 add no
+ rejected forward {!+!` = 78 add 80 = 158 = final answer: >^!
+
+Trying "=8 >=9 ?=1 %=3 '=4 ^=5 \=6 {=7 !=2 `=0
+">-"? = 89 sub 81 = 8 vs ? 1 diff 7 sub no; 98 sub 18 = 80 vs rev ? 1 diff 79 sub no
+ rejected none {!+!` = 72 add 20 rev 27 add 02 = 29 rev 92 = final answer: >!
+
+Trying "=0 >=8 ?=9 %=3 '=4 ^=5 \=6 {=7 !=2 `=1
+">-"? = 08 sub 09 = 1 vs ? 9 diff 8 sub no; 80 sub 90 = 10 vs rev ? 9 diff 1 sub ok + 1
+%'+'^ = 34 add 45 = 79 vs ?\ 96 diff 17 add no; 43 add 54 = 97 vs rev \? 69 diff 28 add no
+ rejected rev {!+!` = 72 add 21 rev 27 add 12 = 39 rev 93 = final answer: ?%
+
+Trying "=5 >=0 ?=8 %=3 '=4 ^=1 \=6 {=7 !=2 `=9
+">-"? = 50 sub 58 = 8 vs ? 8 diff 0 sub ok; 05 sub 85 = 80 vs rev ? 8 diff 72 sub no
+%'+'^ = 34 add 41 = 75 vs ?\ 86 diff 11 add no; 43 add 14 = 57 vs rev \? 68 diff 11 add no
+ rejected forward {!+!` = 72 add 29 = 101 = final answer: ^>^
+
+Trying "=6 >=5 ?=3 %=1 '=4 ^=9 \=0 {=7 !=2 `=8
+">-"? = 65 sub 63 = 2 vs ? 3 diff 1 sub ok + 1; 56 sub 36 = 20 vs rev ? 3 diff 17 sub no
+%'+'^ = 14 add 49 = 63 vs ?\ 30 diff 33 add no; 41 add 94 = 135 vs rev \? 03 diff 132 add no
+ rejected forward {!+!` = 72 add 28 = 100 = final answer: ^\\
+
+Trying "=1 >=2 ?=0 %=3 '=4 ^=5 \=6 {=7 !=8 `=9
+">-"? = 12 sub 10 = 2 vs ? 0 diff 2 sub no; 21 sub 01 = 20 vs rev ? 0 diff 20 sub no
+ rejected none {!+!` = 78 add 89 rev 87 add 98 = 185 rev 581 = final answer: ^!"
+
+Trying "=9 >=1 ?=2 %=3 '=4 ^=5 \=6 {=7 !=8 `=0
+">-"? = 91 sub 92 = 1 vs ? 2 diff 1 sub ok + 1; 19 sub 29 = 10 vs rev ? 2 diff 8 sub no
+%'+'^ = 34 add 45 = 79 vs ?\ 26 diff 53 add no; 43 add 54 = 97 vs rev \? 62 diff 35 add no
+ rejected forward {!+!` = 78 add 80 = 158 = final answer: >^!
+
+Trying "=8 >=9 ?=1 %=3 '=4 ^=5 \=6 {=7 !=2 `=0
+">-"? = 89 sub 81 = 8 vs ? 1 diff 7 sub no; 98 sub 18 = 80 vs rev ? 1 diff

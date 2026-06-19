@@ -1,0 +1,66 @@
+/[*{} = '}`{
+<{+// = }})
+</-)[ = -'!
+{/+{[ = !!
+The question is ')-<$
+
+Operator symbols *+-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols /[{}'`<)!$
+
+Checking concatenation
+left /[ op * right {} expected /[{} versus '}`{ mismatch
+left <{ op + right // expected <{// versus }}) mismatch
+left </ op - right )[ expected </)[ versus -'! mismatch
+left {/ op + right {[ expected {/{[ versus !! mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left /[ op * right {} expected {}/[ versus '}`{ mismatch
+left <{ op + right // expected //<{ versus }}) mismatch
+left </ op - right )[ expected )[</ versus -'! mismatch
+left {/ op + right {[ expected {[{/ versus !! mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+/[*{} = '}`{
+<{+// = }})
+</-)[ = -'!
+{/+{[ = !!
+
+Assigning mul
+ left /[ op * right {} = '}`{ length 4 assume mul
+ left <{ op + right // = }}) length 3
+ left </ op - right )[ = -'! length 3
+ left {/ op + right {[ = !! length 2
+
+Assigning sub
+ left /[ op * right {} = '}`{ assumed mul
+ left <{ op + right // = }}) length 3
+ left </ op - right )[ = -'! op in output assume sub
+ left {/ op + right {[ = !! length 2
+
+Assigning add
+ left /[ op * right {} = '}`{ assumed mul
+ left <{ op + right // = }}) length 3 assume add
+ left </ op - right )[ = -'! assumed sub
+ left {/ op + right {[ = !! assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left /[ op * right {} = '}`{ assumed mul
+ left <{ op + right // = }}) assumed add
+ left </ op - right )[ = -'! assumed sub
+ left {/ op + right {[ = !! assumed add
+ left ') op - right <$ the question, assumed sub
+
+Trying /=5 [=3 {=4 }=1 '=2 `=7 <=6 )=9 !=8 $=0
+/[*{} = 53 mul 41 = 2173 vs '}`{ 2174 diff 1 mul ok + 1; 35 mul 14 = 490 vs rev {`}' 4712 diff 4222 mul no
+<{+// = 64 add 55 = 119 vs }}) 119 diff 0 add ok; 46 add 55 = 101 vs rev )}} 911 diff 810 add no
+</-)[ = 65 sub 93 = 28 vs -'! -28 diff 0 sub ok; 56 sub 39 = 17 vs rev -!' -82 diff 65 sub no
+{/+{[ = 45 add 43 = 88 vs !! 88 diff 0 add ok; 54 add 34 = 88 vs rev !! 88 diff 0 add ok
+ accepted forward ')-<$ = 29 sub 60 = 31 = \boxed{[}}

@@ -1,0 +1,66 @@
+>&]?\ = ]&:
+?}$|? = #}:
+&}$>} = ?\
+|\+?| = |^#|
+The question is |'$>'
+
+Operator symbols ]$+
+Question operator symbol $
+Question operator in examples
+
+Digit symbols >&?\:}|#^'
+
+Checking concatenation
+left >& op ] right ?\ expected >&?\ versus ]&: mismatch
+left ?} op $ right |? expected ?}|? versus #}: mismatch
+left &} op $ right >} expected &}>} versus ?\ mismatch
+left |\ op + right ?| expected |\?| versus |^#| mismatch
+
+Question operator $ is not concatenation
+
+Checking reverse concatenation
+left >& op ] right ?\ expected ?\>& versus ]&: mismatch
+left ?} op $ right |? expected |??} versus #}: mismatch
+left &} op $ right >} expected >}&} versus ?\ mismatch
+left |\ op + right ?| expected ?||\ versus |^#| mismatch
+
+Question operator $ is not reverse concatenation
+
+Filtering out the concatenation operations
+>&]?\ = ]&:
+?}$|? = #}:
+&}$>} = ?\
+|\+?| = |^#|
+
+Assigning mul
+ left >& op ] right ?\ = ]&: length 3
+ left ?} op $ right |? = #}: length 3
+ left &} op $ right >} = ?\ length 2
+ left |\ op + right ?| = |^#| length 4 assume mul
+
+Assigning sub
+ left >& op ] right ?\ = ]&: op in output assume sub
+ left ?} op $ right |? = #}: length 3
+ left &} op $ right >} = ?\ length 2
+ left |\ op + right ?| = |^#| assumed mul
+
+Assigning add
+ left >& op ] right ?\ = ]&: assumed sub
+ left ?} op $ right |? = #}: length 3 assume add
+ left &} op $ right >} = ?\ assumed add
+ left |\ op + right ?| = |^#| assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left >& op ] right ?\ = ]&: assumed sub
+ left ?} op $ right |? = #}: assumed add
+ left &} op $ right >} = ?\ assumed add
+ left |\ op + right ?| = |^#| assumed mul
+ left |' op $ right >' the question, assumed add
+
+Trying >=2 &=6 ?=8 \=9 :=3 }=4 |=5 #=1 ^=0 '=7
+>&]?\ = 26 sub 89 = 63 vs ]&: -63 diff 0 sub ok; 62 sub 98 = 36 vs rev ]:& -36 diff 0 sub ok
+?}$|? = 84 add 58 = 142 vs #}: 143 diff 1 add ok + 1; 48 add 85 = 133 vs rev :}# 341 diff 208 add no
+&}$>} = 64 add 24 = 88 vs ?\ 89 diff 1 add ok + 1; 46 add 42 = 88 vs rev \? 98 diff 10 add no
+|\+?| = 59 mul 85 = 5015 vs |^#| 5015 diff 0 mul ok; 95 mul 58 = 5510 vs rev |#^| 5105 diff 405 mul no
+ accepted forward |'$>' = 57 add+1 27 = 84 + 1 = 85 = \boxed{?|}

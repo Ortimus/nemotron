@@ -1,0 +1,554 @@
+)'-\^ = ^$
+:$+// = @^
+()+$\ = ^'
+\!+/( = /'
+The question is ))*!(
+
+Operator symbols -+
+Question operator symbol *
+Question operator not in examples
+
+Digit symbols )'\^$:/@(!
+
+Checking concatenation
+left )' op - right \^ expected )'\^ versus ^$ mismatch
+left :$ op + right // expected :$// versus @^ mismatch
+left () op + right $\ expected ()$\ versus ^' mismatch
+left \! op + right /( expected \!/( versus /' mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left )' op - right \^ expected \^)' versus ^$ mismatch
+left :$ op + right // expected //:$ versus @^ mismatch
+left () op + right $\ expected $\() versus ^' mismatch
+left \! op + right /( expected /(\! versus /' mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+)'-\^ = ^$
+:$+// = @^
+()+$\ = ^'
+\!+/( = /'
+
+Assigning mul
+ left )' op - right \^ = ^$ length 2
+ left :$ op + right // = @^ length 2
+ left () op + right $\ = ^' length 2
+ left \! op + right /( = /' length 2
+
+Assigning sub
+ left )' op - right \^ = ^$ length 2
+ left :$ op + right // = @^ length 2
+ left () op + right $\ = ^' length 2
+ left \! op + right /( = /' length 2
+
+Assigning add
+ left )' op - right \^ = ^$ length 2
+ left :$ op + right // = @^ length 2
+ left () op + right $\ = ^' length 2
+ left \! op + right /( = /' length 2
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left )' op - right \^ = ^$ length 2 assume add
+ left :$ op + right // = @^ length 2 assume add
+ left () op + right $\ = ^' assumed add
+ left \! op + right /( = /' assumed add
+ left )) op * right !( the question, operator not in the examples
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=5 (=3 !=2
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 59 diff 1 add ok - 1; 61 add 44 = 105 vs rev ^@ 95 diff 10 add no
+()+$\ = 30 add 68 = 98 vs ^' 97 diff 1 add ok - 1; 03 add 86 = 89 vs rev '^ 79 diff 10 add no
+\!+/( = 82 add 43 = 125 vs /' 47 diff 78 add no; 28 add 34 = 62 vs rev '/ 74 diff 12 add no
+ rejected forward ))*!( = 00 add 23 = 23 = final answer: !(
+
+Trying )=2 '=0 \=7 ^=8 $=6 :=1 /=4 @=9 (=3 !=5
+)'-\^ = 20 add 78 = 98 vs ^$ 86 diff 12 add no; 02 add 87 = 89 vs rev $^ 68 diff 21 add no
+ rejected none ))*!( = 22 add 53 rev 22 add 35 = 57 rev 75 = final answer: \!
+
+Trying )=1 '=2 \=6 ^=7 $=8 :=0 /=4 @=9 (=3 !=5
+)'-\^ = 12 add 67 = 79 vs ^$ 78 diff 1 add ok - 1; 21 add 76 = 97 vs rev $^ 87 diff 10 add no
+:$+// = 08 add 44 = 52 vs @^ 97 diff 45 add no; 80 add 44 = 124 vs rev ^@ 79 diff 45 add no
+ rejected forward ))*!( = 11 add 53 = 64 = final answer: \/
+
+Trying )=5 '=3 \=0 ^=6 $=9 :=1 /=4 @=8 (=7 !=2
+)'-\^ = 53 add 06 = 59 vs ^$ 69 diff 10 add no; 35 add 60 = 95 vs rev $^ 96 diff 1 add ok + 1
+:$+// = 19 add 44 = 63 vs @^ 86 diff 23 add no; 91 add 44 = 135 vs rev ^@ 68 diff 67 add no
+ rejected rev ))*!( = 55 add 27 rev 55 add 72 = 127 rev 721 = final answer: (!:
+
+Trying )=9 '=6 \=2 ^=0 $=7 :=1 /=4 @=8 (=3 !=5
+)'-\^ = 96 add 20 = 116 vs ^$ 07 diff 109 add no; 69 add 02 = 71 vs rev $^ 70 diff 1 add ok - 1
+:$+// = 17 add 44 = 61 vs @^ 80 diff 19 add no; 71 add 44 = 115 vs rev ^@ 08 diff 107 add no
+ rejected rev ))*!( = 99 add 53 rev 99 add 35 = 134 rev 431 = final answer: /(:
+
+Trying )=8 '=5 \=3 ^=2 $=6 :=1 /=4 @=9 (=0 !=7
+)'-\^ = 85 add 32 = 117 vs ^$ 26 diff 91 add no; 58 add 23 = 81 vs rev $^ 62 diff 19 add no
+ rejected none ))*!( = 88 add 70 rev 88 add 07 = 95 rev 59 = final answer: '@
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=2 '=0 \=7 ^=8 $=6 :=1 /=4 @=9 (=3 !=5
+)'-\^ = 20 add 78 = 98 vs ^$ 86 diff 12 add no; 02 add 87 = 89 vs rev $^ 68 diff 21 add no
+ rejected none ))*!( = 22 add 53 rev 22 add 35 = 57 rev 75 = final answer: \!
+
+Trying )=1 '=2 \=6 ^=7 $=8 :=0 /=4 @=9 (=3 !=5
+)'-\^ = 12 add 67 = 79 vs ^$ 78 diff 1 add ok - 1; 21 add 76 = 97 vs rev $^ 87 diff 10 add no
+:$+// = 08 add 44 = 52 vs @^ 97 diff 45 add no; 80 add 44 = 124 vs rev ^@ 79 diff 45 add no
+ rejected forward ))*!( = 11 add 53 = 64 = final answer: \/
+
+Trying )=5 '=3 \=0 ^=6 $=9 :=1 /=4 @=8 (=7 !=2
+)'-\^ = 53 add 06 = 59 vs ^$ 69 diff 10 add no; 35 add 60 = 95 vs rev $^ 96 diff 1 add ok + 1
+:$+// = 19 add 44 = 63 vs @^ 86 diff 23 add no; 91 add 44 = 135 vs rev ^@ 68 diff 67 add no
+ rejected rev ))*!( = 55 add 27 rev 55 add 72 = 127 rev 721 = final answer: (!:
+
+Trying )=7 '=4 \=5 ^=1 $=6 :=9 /=0 @=8 (=3 !=2
+)'-\^ = 74 add 51 = 125 vs ^$ 16 diff 109 add no; 47 add 15 = 62 vs rev $^ 61 diff 1 add ok - 1
+:$+// = 96 add 00 = 96 vs @^ 81 diff 15 add no; 69 add 00 = 69 vs rev ^@ 18 diff 51 add no
+ rejected rev ))*!( = 77 add 23 rev 77 add 32 = 109 rev 901 = final answer: :/^
+
+Trying )=8 '=5 \=3 ^=0 $=6 :=1 /=4 @=7 (=9 !=2
+)'-\^ = 85 add 30 = 115 vs ^$ 06 diff 109 add no; 58 add 03 = 61 vs rev $^ 60 diff 1 add ok - 1
+:$+// = 16 add 44 = 60 vs @^ 70 diff 10 add no; 61 add 44 = 105 vs rev ^@ 07 diff 98 add no
+ rejected rev ))*!( = 88 add 29 rev 88 add 92 = 180 rev 081 = final answer: ^):
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=5 (=3 !=2
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 59 diff 1 add ok - 1; 61 add 44 = 105 vs rev ^@ 95 diff 10 add no
+()+$\ = 30 add 68 = 98 vs ^' 97 diff 1 add ok - 1; 03 add 86 = 89 vs rev '^ 79 diff 10 add no
+\!+/( = 82 add 43 = 125 vs /' 47 diff 78 add no; 28 add 34 = 62 vs rev '/ 74 diff 12 add no
+ rejected forward ))*!( = 00 add 23 = 23 = final answer: !(
+
+Trying )=3 '=0 \=2 ^=5 $=6 :=1 /=4 @=9 (=7 !=8
+)'-\^ = 30 add 25 = 55 vs ^$ 56 diff 1 add ok + 1; 03 add 52 = 55 vs rev $^ 65 diff 10 add no
+:$+// = 16 add 44 = 60 vs @^ 95 diff 35 add no; 61 add 44 = 105 vs rev ^@ 59 diff 46 add no
+ rejected forward ))*!( = 33 add 87 = 120 = final answer: :\'
+
+Trying )=2 '=9 \=4 ^=7 $=6 :=1 /=8 @=0 (=3 !=5
+)'-\^ = 29 add 47 = 76 vs ^$ 76 diff 0 add ok; 92 add 74 = 166 vs rev $^ 67 diff 99 add no
+:$+// = 16 add 88 = 104 vs @^ 07 diff 97 add no; 61 add 88 = 149 vs rev ^@ 70 diff 79 add no
+ rejected forward ))*!( = 22 add 53 = 75 = final answer: ^!
+
+Trying )=1 '=2 \=7 ^=8 $=6 :=0 /=4 @=9 (=3 !=5
+)'-\^ = 12 add 78 = 90 vs ^$ 86 diff 4 add no; 21 add 87 = 108 vs rev $^ 68 diff 40 add no
+ rejected none ))*!( = 11 add 53 rev 11 add 35 = 46 rev 64 = final answer: $/
+
+Trying )=5 '=3 \=0 ^=6 $=9 :=1 /=4 @=8 (=7 !=2
+)'-\^ = 53 add 06 = 59 vs ^$ 69 diff 10 add no; 35 add 60 = 95 vs rev $^ 96 diff 1 add ok + 1
+:$+// = 19 add 44 = 63 vs @^ 86 diff 23 add no; 91 add 44 = 135 vs rev ^@ 68 diff 67 add no
+ rejected rev ))*!( = 55 add 27 rev 55 add 72 = 127 rev 721 = final answer: (!:
+
+Trying )=9 '=5 \=1 ^=0 $=6 :=8 /=4 @=7 (=3 !=2
+)'-\^ = 95 add 10 = 105 vs ^$ 06 diff 99 add no; 59 add 01 = 60 vs rev $^ 60 diff 0 add ok
+:$+// = 86 add 44 = 130 vs @^ 70 diff 60 add no; 68 add 44 = 112 vs rev ^@ 07 diff 105 add no
+ rejected rev ))*!( = 99 add 23 rev 99 add 32 = 131 rev 131 = final answer: \(\
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=7 '=0 \=9 ^=5 $=6 :=1 /=4 @=8 (=3 !=2
+)'-\^ = 70 add 95 = 165 vs ^$ 56 diff 109 add no; 07 add 59 = 66 vs rev $^ 65 diff 1 add ok - 1
+:$+// = 16 add 44 = 60 vs @^ 85 diff 25 add no; 61 add 44 = 105 vs rev ^@ 58 diff 47 add no
+ rejected rev ))*!( = 77 add 23 rev 77 add 32 = 109 rev 901 = final answer: \':
+
+Trying )=2 '=1 \=3 ^=4 $=6 :=7 /=9 @=0 (=8 !=5
+)'-\^ = 21 add 34 = 55 vs ^$ 46 diff 9 add no; 12 add 43 = 55 vs rev $^ 64 diff 9 add no
+ rejected none ))*!( = 22 add 58 rev 22 add 85 = 107 rev 701 = final answer: :@'
+
+Trying )=3 '=2 \=5 ^=8 $=6 :=1 /=4 @=9 (=0 !=7
+)'-\^ = 32 add 58 = 90 vs ^$ 86 diff 4 add no; 23 add 85 = 108 vs rev $^ 68 diff 40 add no
+ rejected none ))*!( = 33 add 70 rev 33 add 07 = 40 rev 04 = final answer: (/
+
+Trying )=4 '=9 \=2 ^=7 $=6 :=1 /=0 @=8 (=3 !=5
+)'-\^ = 49 add 27 = 76 vs ^$ 76 diff 0 add ok; 94 add 72 = 166 vs rev $^ 67 diff 99 add no
+:$+// = 16 add 00 = 16 vs @^ 87 diff 71 add no; 61 add 00 = 61 vs rev ^@ 78 diff 17 add no
+ rejected forward ))*!( = 44 add 53 = 97 = final answer: '^
+
+Trying )=5 '=3 \=0 ^=6 $=9 :=1 /=4 @=8 (=7 !=2
+)'-\^ = 53 add 06 = 59 vs ^$ 69 diff 10 add no; 35 add 60 = 95 vs rev $^ 96 diff 1 add ok + 1
+:$+// = 19 add 44 = 63 vs @^ 86 diff 23 add no; 91 add 44 = 135 vs rev ^@ 68 diff 67 add no
+ rejected rev ))*!( = 55 add 27 rev 55 add 72 = 127 rev 721 = final answer: (!:
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=6 '=5 \=7 ^=3 $=0 :=1 /=4 @=8 (=9 !=2
+)'-\^ = 65 add 73 = 138 vs ^$ 30 diff 108 add no; 56 add 37 = 93 vs rev $^ 03 diff 90 add no
+ rejected none ))*!( = 66 add 29 rev 66 add 92 = 158 rev 851 = final answer: @':
+
+Trying )=2 '=0 \=3 ^=5 $=6 :=1 /=4 @=7 (=8 !=9
+)'-\^ = 20 add 35 = 55 vs ^$ 56 diff 1 add ok + 1; 02 add 53 = 55 vs rev $^ 65 diff 10 add no
+:$+// = 16 add 44 = 60 vs @^ 75 diff 15 add no; 61 add 44 = 105 vs rev ^@ 57 diff 48 add no
+ rejected forward ))*!( = 22 add 98 = 120 = final answer: :)'
+
+Trying )=8 '=2 \=1 ^=0 $=6 :=9 /=4 @=7 (=3 !=5
+)'-\^ = 82 add 10 = 92 vs ^$ 06 diff 86 add no; 28 add 01 = 29 vs rev $^ 60 diff 31 add no
+ rejected none ))*!( = 88 add 53 rev 88 add 35 = 123 rev 321 = final answer: ('\
+
+Trying )=1 '=9 \=5 ^=7 $=6 :=0 /=4 @=8 (=3 !=2
+)'-\^ = 19 add 57 = 76 vs ^$ 76 diff 0 add ok; 91 add 75 = 166 vs rev $^ 67 diff 99 add no
+:$+// = 06 add 44 = 50 vs @^ 87 diff 37 add no; 60 add 44 = 104 vs rev ^@ 78 diff 26 add no
+ rejected forward ))*!( = 11 add 23 = 34 = final answer: (/
+
+Trying )=5 '=6 \=2 ^=8 $=7 :=1 /=4 @=9 (=3 !=0
+)'-\^ = 56 add 28 = 84 vs ^$ 87 diff 3 add no; 65 add 82 = 147 vs rev $^ 78 diff 69 add no
+ rejected none ))*!( = 55 add 03 rev 55 add 30 = 85 rev 58 = final answer: )^
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=5 (=3 !=2
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 59 diff 1 add ok - 1; 61 add 44 = 105 vs rev ^@ 95 diff 10 add no
+()+$\ = 30 add 68 = 98 vs ^' 97 diff 1 add ok - 1; 03 add 86 = 89 vs rev '^ 79 diff 10 add no
+\!+/( = 82 add 43 = 125 vs /' 47 diff 78 add no; 28 add 34 = 62 vs rev '/ 74 diff 12 add no
+ rejected forward ))*!( = 00 add 23 = 23 = final answer: !(
+
+Trying )=4 '=5 \=7 ^=2 $=6 :=1 /=0 @=9 (=3 !=8
+)'-\^ = 45 add 72 = 117 vs ^$ 26 diff 91 add no; 54 add 27 = 81 vs rev $^ 62 diff 19 add no
+ rejected none ))*!( = 44 add 83 rev 44 add 38 = 82 rev 28 = final answer: ^!
+
+Trying )=2 '=1 \=3 ^=5 $=6 :=7 /=4 @=9 (=8 !=0
+)'-\^ = 21 add 35 = 56 vs ^$ 56 diff 0 add ok; 12 add 53 = 65 vs rev $^ 65 diff 0 add ok
+:$+// = 76 add 44 = 120 vs @^ 95 diff 25 add no; 67 add 44 = 111 vs rev ^@ 59 diff 52 add no
+ rejected forward ))*!( = 22 add 08 = 30 = final answer: \!
+
+Trying )=8 '=0 \=9 ^=6 $=7 :=1 /=4 @=5 (=3 !=2
+)'-\^ = 80 add 96 = 176 vs ^$ 67 diff 109 add no; 08 add 69 = 77 vs rev $^ 76 diff 1 add ok - 1
+:$+// = 17 add 44 = 61 vs @^ 56 diff 5 add no; 71 add 44 = 115 vs rev ^@ 65 diff 50 add no
+ rejected rev ))*!( = 88 add 23 rev 88 add 32 = 120 rev 021 = final answer: '!:
+
+Trying )=1 '=2 \=6 ^=7 $=8 :=0 /=4 @=9 (=3 !=5
+)'-\^ = 12 add 67 = 79 vs ^$ 78 diff 1 add ok - 1; 21 add 76 = 97 vs rev $^ 87 diff 10 add no
+:$+// = 08 add 44 = 52 vs @^ 97 diff 45 add no; 80 add 44 = 124 vs rev ^@ 79 diff 45 add no
+ rejected forward ))*!( = 11 add 53 = 64 = final answer: \/
+
+Trying )=5 '=3 \=2 ^=8 $=6 :=1 /=4 @=9 (=7 !=0
+)'-\^ = 53 add 28 = 81 vs ^$ 86 diff 5 add no; 35 add 82 = 117 vs rev $^ 68 diff 49 add no
+ rejected none ))*!( = 55 add 07 rev 55 add 70 = 125 rev 521 = final answer: )\:
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=3 '=5 \=7 ^=0 $=6 :=1 /=4 @=8 (=9 !=2
+)'-\^ = 35 add 70 = 105 vs ^$ 06 diff 99 add no; 53 add 07 = 60 vs rev $^ 60 diff 0 add ok
+:$+// = 16 add 44 = 60 vs @^ 80 diff 20 add no; 61 add 44 = 105 vs rev ^@ 08 diff 97 add no
+ rejected rev ))*!( = 33 add 29 rev 33 add 92 = 125 rev 521 = final answer: '!:
+
+Trying )=9 '=1 \=5 ^=4 $=6 :=7 /=0 @=8 (=3 !=2
+)'-\^ = 91 add 54 = 145 vs ^$ 46 diff 99 add no; 19 add 45 = 64 vs rev $^ 64 diff 0 add ok
+:$+// = 76 add 00 = 76 vs @^ 84 diff 8 add no; 67 add 00 = 67 vs rev ^@ 48 diff 19 add no
+ rejected rev ))*!( = 99 add 23 rev 99 add 32 = 131 rev 131 = final answer: '('
+
+Trying )=2 '=0 \=3 ^=5 $=6 :=1 /=4 @=7 (=8 !=9
+)'-\^ = 20 add 35 = 55 vs ^$ 56 diff 1 add ok + 1; 02 add 53 = 55 vs rev $^ 65 diff 10 add no
+:$+// = 16 add 44 = 60 vs @^ 75 diff 15 add no; 61 add 44 = 105 vs rev ^@ 57 diff 48 add no
+ rejected forward ))*!( = 22 add 98 = 120 = final answer: :)'
+
+Trying )=1 '=4 \=0 ^=2 $=6 :=8 /=7 @=5 (=3 !=9
+)'-\^ = 14 add 02 = 16 vs ^$ 26 diff 10 add no; 41 add 20 = 61 vs rev $^ 62 diff 1 add ok + 1
+:$+// = 86 add 77 = 163 vs @^ 52 diff 111 add no; 68 add 77 = 145 vs rev ^@ 25 diff 120 add no
+ rejected rev ))*!( = 11 add 93 rev 11 add 39 = 50 rev 05 = final answer: \@
+
+Trying )=5 '=9 \=1 ^=7 $=6 :=8 /=4 @=0 (=3 !=2
+)'-\^ = 59 add 17 = 76 vs ^$ 76 diff 0 add ok; 95 add 71 = 166 vs rev $^ 67 diff 99 add no
+:$+// = 86 add 44 = 130 vs @^ 07 diff 123 add no; 68 add 44 = 112 vs rev ^@ 70 diff 42 add no
+ rejected forward ))*!( = 55 add 23 = 78 = final answer: ^:
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=4 '=2 \=7 ^=8 $=6 :=1 /=0 @=9 (=3 !=5
+)'-\^ = 42 add 78 = 120 vs ^$ 86 diff 34 add no; 24 add 87 = 111 vs rev $^ 68 diff 43 add no
+ rejected none ))*!( = 44 add 53 rev 44 add 35 = 79 rev 97 = final answer: @\
+
+Trying )=9 '=5 \=2 ^=0 $=6 :=1 /=4 @=7 (=3 !=8
+)'-\^ = 95 add 20 = 115 vs ^$ 06 diff 109 add no; 59 add 02 = 61 vs rev $^ 60 diff 1 add ok - 1
+:$+// = 16 add 44 = 60 vs @^ 70 diff 10 add no; 61 add 44 = 105 vs rev ^@ 07 diff 98 add no
+ rejected rev ))*!( = 99 add 83 rev 99 add 38 = 137 rev 731 = final answer: @(:
+
+Trying )=2 '=0 \=3 ^=5 $=6 :=1 /=4 @=7 (=8 !=9
+)'-\^ = 20 add 35 = 55 vs ^$ 56 diff 1 add ok + 1; 02 add 53 = 55 vs rev $^ 65 diff 10 add no
+:$+// = 16 add 44 = 60 vs @^ 75 diff 15 add no; 61 add 44 = 105 vs rev ^@ 57 diff 48 add no
+ rejected forward ))*!( = 22 add 98 = 120 = final answer: :)'
+
+Trying )=7 '=3 \=5 ^=2 $=6 :=1 /=4 @=9 (=0 !=8
+)'-\^ = 73 add 52 = 125 vs ^$ 26 diff 99 add no; 37 add 25 = 62 vs rev $^ 62 diff 0 add ok
+:$+// = 16 add 44 = 60 vs @^ 92 diff 32 add no; 61 add 44 = 105 vs rev ^@ 29 diff 76 add no
+ rejected rev ))*!( = 77 add 80 rev 77 add 08 = 85 rev 58 = final answer: \!
+
+Trying )=5 '=4 \=0 ^=6 $=9 :=1 /=7 @=8 (=3 !=2
+)'-\^ = 54 add 06 = 60 vs ^$ 69 diff 9 add no; 45 add 60 = 105 vs rev $^ 96 diff 9 add no
+ rejected none ))*!( = 55 add 23 rev 55 add 32 = 87 rev 78 = final answer: /@
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=5 (=3 !=2
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 59 diff 1 add ok - 1; 61 add 44 = 105 vs rev ^@ 95 diff 10 add no
+()+$\ = 30 add 68 = 98 vs ^' 97 diff 1 add ok - 1; 03 add 86 = 89 vs rev '^ 79 diff 10 add no
+\!+/( = 82 add 43 = 125 vs /' 47 diff 78 add no; 28 add 34 = 62 vs rev '/ 74 diff 12 add no
+ rejected forward ))*!( = 00 add 23 = 23 = final answer: !(
+
+Trying )=1 '=2 \=6 ^=7 $=8 :=0 /=4 @=5 (=3 !=9
+)'-\^ = 12 add 67 = 79 vs ^$ 78 diff 1 add ok - 1; 21 add 76 = 97 vs rev $^ 87 diff 10 add no
+:$+// = 08 add 44 = 52 vs @^ 57 diff 5 add no; 80 add 44 = 124 vs rev ^@ 75 diff 49 add no
+ rejected forward ))*!( = 11 add 93 = 104 = final answer: ):/
+
+Trying )=9 '=6 \=2 ^=0 $=7 :=1 /=4 @=8 (=3 !=5
+)'-\^ = 96 add 20 = 116 vs ^$ 07 diff 109 add no; 69 add 02 = 71 vs rev $^ 70 diff 1 add ok - 1
+:$+// = 17 add 44 = 61 vs @^ 80 diff 19 add no; 71 add 44 = 115 vs rev ^@ 08 diff 107 add no
+ rejected rev ))*!( = 99 add 53 rev 99 add 35 = 134 rev 431 = final answer: /(:
+
+Trying )=2 '=0 \=7 ^=8 $=6 :=1 /=4 @=9 (=3 !=5
+)'-\^ = 20 add 78 = 98 vs ^$ 86 diff 12 add no; 02 add 87 = 89 vs rev $^ 68 diff 21 add no
+ rejected none ))*!( = 22 add 53 rev 22 add 35 = 57 rev 75 = final answer: \!
+
+Trying )=7 '=3 \=4 ^=2 $=6 :=1 /=8 @=9 (=0 !=5
+)'-\^ = 73 add 42 = 115 vs ^$ 26 diff 89 add no; 37 add 24 = 61 vs rev $^ 62 diff 1 add ok + 1
+:$+// = 16 add 88 = 104 vs @^ 92 diff 12 add no; 61 add 88 = 149 vs rev ^@ 29 diff 120 add no
+ rejected rev ))*!( = 77 add 50 rev 77 add 05 = 82 rev 28 = final answer: ^/
+
+Trying )=5 '=1 \=9 ^=3 $=6 :=7 /=4 @=2 (=8 !=0
+)'-\^ = 51 add 93 = 144 vs ^$ 36 diff 108 add no; 15 add 39 = 54 vs rev $^ 63 diff 9 add no
+ rejected none ))*!( = 55 add 08 rev 55 add 80 = 135 rev 531 = final answer: )^'
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=5 (=3 !=2
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 59 diff 1 add ok - 1; 61 add 44 = 105 vs rev ^@ 95 diff 10 add no
+()+$\ = 30 add 68 = 98 vs ^' 97 diff 1 add ok - 1; 03 add 86 = 89 vs rev '^ 79 diff 10 add no
+\!+/( = 82 add 43 = 125 vs /' 47 diff 78 add no; 28 add 34 = 62 vs rev '/ 74 diff 12 add no
+ rejected forward ))*!( = 00 add 23 = 23 = final answer: !(
+
+Trying )=1 '=8 \=5 ^=7 $=6 :=0 /=4 @=9 (=3 !=2
+)'-\^ = 18 add 57 = 75 vs ^$ 76 diff 1 add ok + 1; 81 add 75 = 156 vs rev $^ 67 diff 89 add no
+:$+// = 06 add 44 = 50 vs @^ 97 diff 47 add no; 60 add 44 = 104 vs rev ^@ 79 diff 25 add no
+ rejected forward ))*!( = 11 add 23 = 34 = final answer: (/
+
+Trying )=4 '=2 \=1 ^=5 $=6 :=8 /=0 @=7 (=3 !=9
+)'-\^ = 42 add 15 = 57 vs ^$ 56 diff 1 add ok - 1; 24 add 51 = 75 vs rev $^ 65 diff 10 add no
+:$+// = 86 add 00 = 86 vs @^ 75 diff 11 add no; 68 add 00 = 68 vs rev ^@ 57 diff 11 add no
+ rejected forward ))*!( = 44 add 93 = 137 = final answer: \(@
+
+Trying )=2 '=0 \=7 ^=8 $=6 :=1 /=4 @=9 (=3 !=5
+)'-\^ = 20 add 78 = 98 vs ^$ 86 diff 12 add no; 02 add 87 = 89 vs rev $^ 68 diff 21 add no
+ rejected none ))*!( = 22 add 53 rev 22 add 35 = 57 rev 75 = final answer: \!
+
+Trying )=9 '=5 \=2 ^=0 $=6 :=1 /=4 @=7 (=3 !=8
+)'-\^ = 95 add 20 = 115 vs ^$ 06 diff 109 add no; 59 add 02 = 61 vs rev $^ 60 diff 1 add ok - 1
+:$+// = 16 add 44 = 60 vs @^ 70 diff 10 add no; 61 add 44 = 105 vs rev ^@ 07 diff 98 add no
+ rejected rev ))*!( = 99 add 83 rev 99 add 38 = 137 rev 731 = final answer: @(:
+
+Trying )=7 '=3 \=4 ^=2 $=6 :=1 /=8 @=9 (=0 !=5
+)'-\^ = 73 add 42 = 115 vs ^$ 26 diff 89 add no; 37 add 24 = 61 vs rev $^ 62 diff 1 add ok + 1
+:$+// = 16 add 88 = 104 vs @^ 92 diff 12 add no; 61 add 88 = 149 vs rev ^@ 29 diff 120 add no
+ rejected rev ))*!( = 77 add 50 rev 77 add 05 = 82 rev 28 = final answer: ^/
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=5 (=3 !=2
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 59 diff 1 add ok - 1; 61 add 44 = 105 vs rev ^@ 95 diff 10 add no
+()+$\ = 30 add 68 = 98 vs ^' 97 diff 1 add ok - 1; 03 add 86 = 89 vs rev '^ 79 diff 10 add no
+\!+/( = 82 add 43 = 125 vs /' 47 diff 78 add no; 28 add 34 = 62 vs rev '/ 74 diff 12 add no
+ rejected forward ))*!( = 00 add 23 = 23 = final answer: !(
+
+Trying )=5 '=1 \=0 ^=4 $=6 :=7 /=9 @=8 (=3 !=2
+)'-\^ = 51 add 04 = 55 vs ^$ 46 diff 9 add no; 15 add 40 = 55 vs rev $^ 64 diff 9 add no
+ rejected none ))*!( = 55 add 23 rev 55 add 32 = 87 rev 78 = final answer: :@
+
+Trying )=1 '=2 \=6 ^=7 $=8 :=0 /=4 @=9 (=3 !=5
+)'-\^ = 12 add 67 = 79 vs ^$ 78 diff 1 add ok - 1; 21 add 76 = 97 vs rev $^ 87 diff 10 add no
+:$+// = 08 add 44 = 52 vs @^ 97 diff 45 add no; 80 add 44 = 124 vs rev ^@ 79 diff 45 add no
+ rejected forward ))*!( = 11 add 53 = 64 = final answer: \/
+
+Trying )=2 '=0 \=7 ^=8 $=6 :=1 /=4 @=9 (=3 !=5
+)'-\^ = 20 add 78 = 98 vs ^$ 86 diff 12 add no; 02 add 87 = 89 vs rev $^ 68 diff 21 add no
+ rejected none ))*!( = 22 add 53 rev 22 add 35 = 57 rev 75 = final answer: \!
+
+Trying )=9 '=5 \=2 ^=0 $=6 :=1 /=4 @=8 (=3 !=7
+)'-\^ = 95 add 20 = 115 vs ^$ 06 diff 109 add no; 59 add 02 = 61 vs rev $^ 60 diff 1 add ok - 1
+:$+// = 16 add 44 = 60 vs @^ 80 diff 20 add no; 61 add 44 = 105 vs rev ^@ 08 diff 97 add no
+ rejected rev ))*!( = 99 add 73 rev 99 add 37 = 136 rev 631 = final answer: $(:
+
+Trying )=7 '=4 \=5 ^=1 $=6 :=9 /=0 @=8 (=3 !=2
+)'-\^ = 74 add 51 = 125 vs ^$ 16 diff 109 add no; 47 add 15 = 62 vs rev $^ 61 diff 1 add ok - 1
+:$+// = 96 add 00 = 96 vs @^ 81 diff 15 add no; 69 add 00 = 69 vs rev ^@ 18 diff 51 add no
+ rejected rev ))*!( = 77 add 23 rev 77 add 32 = 109 rev 901 = final answer: :/^
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=5 '=3 \=0 ^=6 $=9 :=1 /=4 @=8 (=7 !=2
+)'-\^ = 53 add 06 = 59 vs ^$ 69 diff 10 add no; 35 add 60 = 95 vs rev $^ 96 diff 1 add ok + 1
+:$+// = 19 add 44 = 63 vs @^ 86 diff 23 add no; 91 add 44 = 135 vs rev ^@ 68 diff 67 add no
+ rejected rev ))*!( = 55 add 27 rev 55 add 72 = 127 rev 721 = final answer: (!:
+
+Trying )=4 '=2 \=1 ^=5 $=6 :=8 /=0 @=9 (=3 !=7
+)'-\^ = 42 add 15 = 57 vs ^$ 56 diff 1 add ok - 1; 24 add 51 = 75 vs rev $^ 65 diff 10 add no
+:$+// = 86 add 00 = 86 vs @^ 95 diff 9 add no; 68 add 00 = 68 vs rev ^@ 59 diff 9 add no
+ rejected forward ))*!( = 44 add 73 = 117 = final answer: \\!
+
+Trying )=2 '=0 \=7 ^=8 $=6 :=1 /=4 @=9 (=3 !=5
+)'-\^ = 20 add 78 = 98 vs ^$ 86 diff 12 add no; 02 add 87 = 89 vs rev $^ 68 diff 21 add no
+ rejected none ))*!( = 22 add 53 rev 22 add 35 = 57 rev 75 = final answer: \!
+
+Trying )=9 '=6 \=2 ^=0 $=7 :=1 /=4 @=8 (=3 !=5
+)'-\^ = 96 add 20 = 116 vs ^$ 07 diff 109 add no; 69 add 02 = 71 vs rev $^ 70 diff 1 add ok - 1
+:$+// = 17 add 44 = 61 vs @^ 80 diff 19 add no; 71 add 44 = 115 vs rev ^@ 08 diff 107 add no
+ rejected rev ))*!( = 99 add 53 rev 99 add 35 = 134 rev 431 = final answer: /(:
+
+Trying )=7 '=1 \=4 ^=2 $=6 :=0 /=8 @=9 (=3 !=5
+)'-\^ = 71 add 42 = 113 vs ^$ 26 diff 87 add no; 17 add 24 = 41 vs rev $^ 62 diff 21 add no
+ rejected none ))*!( = 77 add 53 rev 77 add 35 = 112 rev 211 = final answer: ^''
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=5 '=3 \=0 ^=4 $=6 :=1 /=9 @=8 (=7 !=2
+)'-\^ = 53 add 04 = 57 vs ^$ 46 diff 11 add no; 35 add 40 = 75 vs rev $^ 64 diff 11 add no
+ rejected none ))*!( = 55 add 27 rev 55 add 72 = 127 rev 721 = final answer: (!:
+
+Trying )=1 '=8 \=5 ^=7 $=6 :=0 /=4 @=9 (=3 !=2
+)'-\^ = 18 add 57 = 75 vs ^$ 76 diff 1 add ok + 1; 81 add 75 = 156 vs rev $^ 67 diff 89 add no
+:$+// = 06 add 44 = 50 vs @^ 97 diff 47 add no; 60 add 44 = 104 vs rev ^@ 79 diff 25 add no
+ rejected forward ))*!( = 11 add 23 = 34 = final answer: (/
+
+Trying )=2 '=0 \=7 ^=8 $=6 :=1 /=4 @=9 (=3 !=5
+)'-\^ = 20 add 78 = 98 vs ^$ 86 diff 12 add no; 02 add 87 = 89 vs rev $^ 68 diff 21 add no
+ rejected none ))*!( = 22 add 53 rev 22 add 35 = 57 rev 75 = final answer: \!
+
+Trying )=8 '=5 \=3 ^=0 $=6 :=1 /=4 @=7 (=9 !=2
+)'-\^ = 85 add 30 = 115 vs ^$ 06 diff 109 add no; 58 add 03 = 61 vs rev $^ 60 diff 1 add ok - 1
+:$+// = 16 add 44 = 60 vs @^ 70 diff 10 add no; 61 add 44 = 105 vs rev ^@ 07 diff 98 add no
+ rejected rev ))*!( = 88 add 29 rev 88 add 92 = 180 rev 081 = final answer: ^):
+
+Trying )=4 '=1 \=2 ^=5 $=6 :=7 /=0 @=9 (=3 !=8
+)'-\^ = 41 add 25 = 66 vs ^$ 56 diff 10 add no; 14 add 52 = 66 vs rev $^ 65 diff 1 add ok - 1
+:$+// = 76 add 00 = 76 vs @^ 95 diff 19 add no; 67 add 00 = 67 vs rev ^@ 59 diff 8 add no
+ rejected rev ))*!( = 44 add 83 rev 44 add 38 = 82 rev 28 = final answer: \!
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=5 '=2 \=9 ^=4 $=6 :=1 /=8 @=7 (=3 !=0
+)'-\^ = 52 add 94 = 146 vs ^$ 46 diff 100 add no; 25 add 49 = 74 vs rev $^ 64 diff 10 add no
+ rejected none ))*!( = 55 add 03 rev 55 add 30 = 85 rev 58 = final answer: )/
+
+Trying )=1 '=9 \=5 ^=7 $=6 :=0 /=4 @=2 (=3 !=8
+)'-\^ = 19 add 57 = 76 vs ^$ 76 diff 0 add ok; 91 add 75 = 166 vs rev $^ 67 diff 99 add no
+:$+// = 06 add 44 = 50 vs @^ 27 diff 23 add no; 60 add 44 = 104 vs rev ^@ 72 diff 32 add no
+ rejected forward ))*!( = 11 add 83 = 94 = final answer: '/
+
+Trying )=2 '=3 \=4 ^=6 $=9 :=1 /=8 @=5 (=7 !=0
+)'-\^ = 23 add 46 = 69 vs ^$ 69 diff 0 add ok; 32 add 64 = 96 vs rev $^ 96 diff 0 add ok
+:$+// = 19 add 88 = 107 vs @^ 56 diff 51 add no; 91 add 88 = 179 vs rev ^@ 65 diff 114 add no
+ rejected forward ))*!( = 22 add 07 = 29 = final answer: )$
+
+Trying )=7 '=0 \=6 ^=2 $=8 :=1 /=4 @=5 (=3 !=9
+)'-\^ = 70 add 62 = 132 vs ^$ 28 diff 104 add no; 07 add 26 = 33 vs rev $^ 82 diff 49 add no
+ rejected none ))*!( = 77 add 93 rev 77 add 39 = 116 rev 611 = final answer: \::
+
+Trying )=9 '=5 \=2 ^=0 $=6 :=1 /=4 @=8 (=3 !=7
+)'-\^ = 95 add 20 = 115 vs ^$ 06 diff 109 add no; 59 add 02 = 61 vs rev $^ 60 diff 1 add ok - 1
+:$+// = 16 add 44 = 60 vs @^ 80 diff 20 add no; 61 add 44 = 105 vs rev ^@ 08 diff 97 add no
+ rejected rev ))*!( = 99 add 73 rev 99 add 37 = 136 rev 631 = final answer: $(:
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=5 '=2 \=0 ^=8 $=6 :=1 /=4 @=9 (=3 !=7
+)'-\^ = 52 add 08 = 60 vs ^$ 86 diff 26 add no; 25 add 80 = 105 vs rev $^ 68 diff 37 add no
+ rejected none ))*!( = 55 add 73 rev 55 add 37 = 92 rev 29 = final answer: '@
+
+Trying )=1 '=4 \=5 ^=7 $=6 :=0 /=9 @=8 (=3 !=2
+)'-\^ = 14 add 57 = 71 vs ^$ 76 diff 5 add no; 41 add 75 = 116 vs rev $^ 67 diff 49 add no
+ rejected none ))*!( = 11 add 23 rev 11 add 32 = 43 rev 34 = final answer: ('
+
+Trying )=2 '=3 \=4 ^=6 $=9 :=1 /=8 @=0 (=7 !=5
+)'-\^ = 23 add 46 = 69 vs ^$ 69 diff 0 add ok; 32 add 64 = 96 vs rev $^ 96 diff 0 add ok
+:$+// = 19 add 88 = 107 vs @^ 06 diff 101 add no; 91 add 88 = 179 vs rev ^@ 60 diff 119 add no
+ rejected forward ))*!( = 22 add 57 = 79 = final answer: ($
+
+Trying )=8 '=1 \=3 ^=2 $=6 :=7 /=4 @=9 (=0 !=5
+)'-\^ = 81 add 32 = 113 vs ^$ 26 diff 87 add no; 18 add 23 = 41 vs rev $^ 62 diff 21 add no
+ rejected none ))*!( = 88 add 50 rev 88 add 05 = 93 rev 39 = final answer: \@
+
+Trying )=3 '=5 \=7 ^=0 $=6 :=1 /=4 @=8 (=9 !=2
+)'-\^ = 35 add 70 = 105 vs ^$ 06 diff 99 add no; 53 add 07 = 60 vs rev $^ 60 diff 0 add ok
+:$+// = 16 add 44 = 60 vs @^ 80 diff 20 add no; 61 add 44 = 105 vs rev ^@ 08 diff 97 add no
+ rejected rev ))*!( = 33 add 29 rev 33 add 92 = 125 rev 521 = final answer: '!:
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=5 (=3 !=2
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 59 diff 1 add ok - 1; 61 add 44 = 105 vs rev ^@ 95 diff 10 add no
+()+$\ = 30 add 68 = 98 vs ^' 97 diff 1 add ok - 1; 03 add 86 = 89 vs rev '^ 79 diff 10 add no
+\!+/( = 82 add 43 = 125 vs /' 47 diff 78 add no; 28 add 34 = 62 vs rev '/ 74 diff 12 add no
+ rejected forward ))*!( = 00 add 23 = 23 = final answer: !(
+
+Trying )=5 '=0 \=2 ^=8 $=6 :=1 /=4 @=7 (=3 !=9
+)'-\^ = 50 add 28 = 78 vs ^$ 86 diff 8 add no; 05 add 82 = 87 vs rev $^ 68 diff 19 add no
+ rejected none ))*!( = 55 add 93 rev 55 add 39 = 94 rev 49 = final answer: /!
+
+Trying )=1 '=9 \=5 ^=7 $=6 :=0 /=4 @=8 (=3 !=2
+)'-\^ = 19 add 57 = 76 vs ^$ 76 diff 0 add ok; 91 add 75 = 166 vs rev $^ 67 diff 99 add no
+:$+// = 06 add 44 = 50 vs @^ 87 diff 37 add no; 60 add 44 = 104 vs rev ^@ 78 diff 26 add no
+ rejected forward ))*!( = 11 add 23 = 34 = final answer: (/
+
+Trying )=4 '=2 \=1 ^=5 $=6 :=8 /=0 @=9 (=3 !=7
+)'-\^ = 42 add 15 = 57 vs ^$ 56 diff 1 add ok - 1; 24 add 51 = 75 vs rev $^ 65 diff 10 add no
+:$+// = 86 add 00 = 86 vs @^ 95 diff 9 add no; 68 add 00 = 68 vs rev ^@ 59 diff 9 add no
+ rejected forward ))*!( = 44 add 73 = 117 = final answer: \\!
+
+Trying )=2 '=6 \=0 ^=1 $=7 :=9 /=4 @=8 (=3 !=5
+)'-\^ = 26 add 01 = 27 vs ^$ 17 diff 10 add no; 62 add 10 = 72 vs rev $^ 71 diff 1 add ok - 1
+:$+// = 97 add 44 = 141 vs @^ 81 diff 60 add no; 79 add 44 = 123 vs rev ^@ 18 diff 105 add no
+ rejected rev ))*!( = 22 add 53 rev 22 add 35 = 57 rev 75 = final answer: $!
+
+Trying )=3 '=5 \=7 ^=0 $=6 :=1 /=4 @=8 (=9 !=2
+)'-\^ = 35 add 70 = 105 vs ^$ 06 diff 99 add no; 53 add 07 = 60 vs rev $^ 60 diff 0 add ok
+:$+// = 16 add 44 = 60 vs @^ 80 diff 20 add no; 61 add 44 = 105 vs rev ^@ 08 diff 97 add no
+ rejected rev ))*!( = 33 add 29 rev 33 add 92 = 125 rev 521 = final answer: '!:
+
+Trying )=0 '=7 \=8 ^=9 $=6 :=1 /=4 @=2 (=3 !=5
+)'-\^ = 07 add 89 = 96 vs ^$ 96 diff 0 add ok; 70 add 98 = 168 vs rev $^ 69 diff 99 add no
+:$+// = 16 add 44 = 60 vs @^ 29 diff 31 add no; 61 add 44 = 105 vs rev ^@ 92 diff 13 add no
+ rejected forward ))*!( = 00 add 53 = 53 = final answer: !(
+
+Trying )=6 '=0 \=2 ^=8 $=7 :=1 /=4 @=9 (=3 !=5
+)'-\^ = 60 add 28 = 88 vs ^$ 87 diff 1 add ok - 1; 06 add 82 = 88 vs rev $^ 78 diff 10 add no
+:$+// = 17 add 44 = 61 vs @^ 98 diff 37 add no; 71 add 44 = 115 vs rev ^@ 89 diff 26 add no
+ rejected forward ))*!( = 66 add 53 = 119 = final answer: ::@
+
+Trying )=8 '=3 \=5 ^=2 $=6 :=1 /=4 @=9 (=7 !=0
+)'-\^ = 83 add 52 = 135 vs ^$ 26 diff 109 add no; 38 add 25 = 63 vs rev $^ 62 diff 1 add ok - 1
+:$+// = 16 add 44 = 60 vs @^ 92 diff 32 add no; 61 add 44 = 105 vs rev ^@ 29 diff 76 add no
+ rejected rev ))*!( = 88 add 07 rev 88 add 70 = 158 rev 851 = final answer: )\:
+
+Trying )=5 '=8 \=1 ^=7 $=6 :=9 /=4 @=0 (=3 !=2
+)'-\^ = 58 add 17 = 75 vs ^$ 76 diff 1 add ok + 1; 85 add 71 = 156 vs rev $^ 67 diff 89 add no
+:$+// = 96 add 44 = 140 vs @^ 07 diff 133 add no; 69 add 44 = 113 vs rev ^@ 70 diff 43 add no
+ rejected forward ))*!( = 55 add 23 = 78 = final answer: ^'
+
+Trying )=7 '=4 \=6 ^=3 $=8 :=9 /=0 @=5 (=2 !=1
+)'-\^ = 74 add 63 = 137 vs ^$ 38 diff 99 add no; 47 add 36 = 83 vs rev $^ 83 diff 0 add ok
+:$+// = 98 add 00 = 98 vs @^ 53 diff 45 add no; 89 add 00 = 89 vs rev ^@ 35 diff 54 add no
+ rejected rev ))*!( = 77 add 12 rev 77 add 21 = 98 rev 89 = final answer: $:
+
+Trying )=2 '=1 \=3 ^=5 $=4 :=6 /=0 @=7 (=9 !=8
+)'-\^ = 21 add 35 = 56 vs ^$ 54 diff 2 add no; 12 add 53 = 65 vs rev $^ 45 diff 20 add no
+ rejected none ))*!( = 22 add 89 rev 22 add 98 = 120 rev 021 = final answer: /)'

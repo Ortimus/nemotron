@@ -1,0 +1,181 @@
+29-11 = 4
+85+29 = 151
+42+12 = 64
+81*08 = 0441
+
+The inputs are 29, 11, 85, 29, 42, 12, 81, 08
+
+The outputs are 4, 151, 64, 0441
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+29-11 -> -
+85+29 -> +
+42+12 -> +
+81*08 -> *
+
+The operators
+-
++
+*
+
+Looking at the question
+97+67 -> +
+The question operator is found in the examples.
+
+Looking at operator + [85+29 = 151, 42+12 = 64]:
+
+Trying common operations
+ reversed operands [85->58 29->92, 42->24 12->21] and reversed result [expected (58,92)->151, (24,21)->64]
+ addition
+ (58,92)->151: 58 + 92 = 150 rev-> 051 mismatch
+ multiplication
+ (24,21)->64: (20 + 4) * 21 = 20 * 21 + 4 * 21 = 420 + 84 = 504 rev-> 405 mismatch
+ concatenation
+ (58,92)->151: 58 || 92 = 5892 rev-> 2985 mismatch
+ reverse concatenation
+ (24,21)->64: 21 || 24 = 2124 rev-> 4212 mismatch
+
+ identity [85 29, 42 12] [expected (85,29)->151, (42,12)->64]
+ addition
+ (85,29)->151: 85 + 29 = 114 mismatch
+ multiplication
+ (42,12)->64: (40 + 2) * 12 = 40 * 12 + 2 * 12 = 480 + 24 = 504 mismatch
+ concatenation
+ (85,29)->151: 85 || 29 = 8529 mismatch
+ reverse concatenation
+ (42,12)->64: 12 || 42 = 1242 mismatch
+
+Trying difference operations
+ reversed operands [85->58 29->92, 42->24 12->21] and reversed result [expected (58,92)->151, (24,21)->64]
+ subtraction (a-b)
+ (58,92)->151: 58 - 92 = -34 rev-> -43 mismatch
+ absolute difference
+ (24,21)->64: |24 - 21| = 3 rev-> 3 mismatch
+ max mod min
+ (58,92)->151: max(58,92) mod min(58,92) = 92 mod 58 = 34 rev-> 43 mismatch
+ negated absolute difference
+ (24,21)->64: -|24 - 21| = -3 rev-> -3 mismatch
+ reverse subtraction (b-a)
+ (58,92)->151: 92 - 58 = 34 rev-> 43 mismatch
+ modulo (a mod b)
+ (24,21)->64: 24 mod 21 = 3 rev-> 3 mismatch
+
+ identity [85 29, 42 12] [expected (85,29)->151, (42,12)->64]
+ subtraction (a-b)
+ (85,29)->151: 85 - 29 = 56 mismatch
+ absolute difference
+ (42,12)->64: |42 - 12| = 30 mismatch
+ max mod min
+ (85,29)->151: max(85,29) mod min(85,29) = 85 mod 29 = 27 mismatch
+ negated absolute difference
+ (42,12)->64: -|42 - 12| = -30 mismatch
+ reverse subtraction (b-a)
+ (85,29)->151: 29 - 85 = -56 mismatch
+ modulo (a mod b)
+ (42,12)->64: 42 mod 12 = 6 mismatch
+
+Trying rare operations
+ reversed operands [85->58 29->92, 42->24 12->21] and reversed result [expected (58,92)->151, (24,21)->64]
+ multiply+1
+ (58,92)->151: (50 + 8) * 92 + 1 = 50 * 92 + 8 * 92 + 1 = 4600 + 736 + 1 = 5336 + 1 = 5337 rev-> 7335 mismatch
+ multiply-1
+ (24,21)->64: (20 + 4) * 21 - 1 = 20 * 21 + 4 * 21 - 1 = 420 + 84 - 1 = 504 - 1 = 503 rev-> 305 mismatch
+ add+1
+ (58,92)->151: 58 + 92 + 1 = 151 rev-> 151 match
+ (24,21)->64: 24 + 21 + 1 = 46 rev-> 64 match
+ correct, actions: reversed operands, reversed result, add+1
+ add-1
+ (24,21)->64: 24 + 21 - 1 = 44 rev-> 44 mismatch
+ sub+1
+ (58,92)->151: 58 - 92 + 1 = -33 rev-> -33 mismatch
+ sub-1
+ (24,21)->64: 24 - 21 - 1 = 2 rev-> 2 mismatch
+ integer division (a/b)
+ (58,92)->151: 58 / 92 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (24,21)->64: 21 / 24 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (58,92)->151: 92 mod 58 = 34 rev-> 43 mismatch
+ digit absolute diff
+ (24,21)->64: |2-2| || |4-1| = 03 rev-> 30 mismatch
+ digit add mod10
+ (58,92)->151: (5+9)%10 || (8+2)%10 = 40 rev-> 04 mismatch
+ digit sub mod10
+ (24,21)->64: (2-2)%10 || (4-1)%10 = 03 rev-> 30 mismatch
+ cross multiply
+ (58,92)->151: 5*9 + 8*2 = 45 + 16 = 61 rev-> 16 mismatch
+ cross multiply rev
+ (24,21)->64: 2*1 + 4*2 = 2 + 8 = 10 rev-> 01 mismatch
+ digit multiply
+ (58,92)->151: 5*9 || 8*2 = 45 || 16 = 4516 rev-> 6154 mismatch
+ digit multiply rev
+ (24,21)->64: 2*1 || 4*2 = 2 || 8 = 28 rev-> 82 mismatch
+ digit sum diff
+ (58,92)->151: (5+8) - (9+2) = 2 rev-> 2 mismatch
+ digit sum sum
+ (24,21)->64: (2+4) + (2+1) = 9 rev-> 9 mismatch
+ digit product diff
+ (58,92)->151: 5*8 - 9*2 = 40 - 18 = 22 rev-> 22 mismatch
+ digit product sum
+ (24,21)->64: 2*4 + 2*1 = 8 + 2 = 10 rev-> 01 mismatch
+ determinant
+ (58,92)->151: 5*2 - 8*9 = 10 - 72 = -62 rev-> -26 mismatch
+ abs determinant
+ (24,21)->64: |2*1 - 4*2| = |2 - 8| = 6 rev-> 6 mismatch
+
+ identity [85 29, 42 12] [expected (85,29)->151, (42,12)->64]
+ multiply+1
+ (85,29)->151: (80 + 5) * 29 + 1 = 80 * 29 + 5 * 29 + 1 = 2320 + 145 + 1 = 2465 + 1 = 2466 mismatch
+ multiply-1
+ (42,12)->64: (40 + 2) * 12 - 1 = 40 * 12 + 2 * 12 - 1 = 480 + 24 - 1 = 504 - 1 = 503 mismatch
+ add+1
+ (85,29)->151: 85 + 29 + 1 = 115 mismatch
+ add-1
+ (42,12)->64: 42 + 12 - 1 = 53 mismatch
+ sub+1
+ (85,29)->151: 85 - 29 + 1 = 57 mismatch
+ sub-1
+ (42,12)->64: 42 - 12 - 1 = 29 mismatch
+ integer division (a/b)
+ (85,29)->151: 85 / 29 = 2 mismatch
+ reverse division (b/a)
+ (42,12)->64: 12 / 42 = 0 mismatch
+ reverse modulo (b mod a)
+ (85,29)->151: 29 mod 85 = 29 mismatch
+ digit absolute diff
+ (42,12)->64: |4-1| || |2-2| = 30 mismatch
+ digit add mod10
+ (85,29)->151: (8+2)%10 || (5+9)%10 = 04 mismatch
+ digit sub mod10
+ (42,12)->64: (4-1)%10 || (2-2)%10 = 30 mismatch
+ cross multiply
+ (85,29)->151: 8*2 + 5*9 = 16 + 45 = 61 mismatch
+ cross multiply rev
+ (42,12)->64: 4*2 + 2*1 = 8 + 2 = 10 mismatch
+ digit multiply
+ (85,29)->151: 8*2 || 5*9 = 16 || 45 = 1645 mismatch
+ digit multiply rev
+ (42,12)->64: 4*2 || 2*1 = 8 || 2 = 82 mismatch
+ digit sum diff
+ (85,29)->151: (8+5) - (2+9) = 2 mismatch
+ digit sum sum
+ (42,12)->64: (4+2) + (1+2) = 9 mismatch
+ digit product diff
+ (85,29)->151: 8*5 - 2*9 = 40 - 18 = 22 mismatch
+ digit product sum
+ (42,12)->64: 4*2 + 1*2 = 8 + 2 = 10 mismatch
+ determinant
+ (85,29)->151: 8*9 - 5*2 = 72 - 10 = 62 mismatch
+ abs determinant
+ (42,12)->64: |4*2 - 2*1| = |8 - 2| = 6 mismatch
+
+correct, actions: reversed operands, reversed result, add+1
+
+Applying to 97+67:
+ We recall that the question operator is found in the examples.
+ reversed operands [97->79, 67->76] and reversed result
+ add+1
+ (79,76): 79 + 76 + 1 = 156 rev-> 651
+ Result is non-negative
+ \boxed{651}

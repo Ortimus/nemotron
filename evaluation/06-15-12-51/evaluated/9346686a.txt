@@ -1,0 +1,260 @@
+@(+:< = "<
+/<*|( = /[:|
+/!*:" = %|/
+/%-[! = :
+"[-|| = /!
+The question is %(-[(
+
+Operator symbols +*-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols @(:<"/|[!%
+
+Checking concatenation
+left @( op + right :< expected @(:< versus "< mismatch
+left /< op * right |( expected /<|( versus /[:| mismatch
+left /! op * right :" expected /!:" versus %|/ mismatch
+left /% op - right [! expected /%[! versus : mismatch
+left "[ op - right || expected "[|| versus /! mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left @( op + right :< expected :<@( versus "< mismatch
+left /< op * right |( expected |(/< versus /[:| mismatch
+left /! op * right :" expected :"/! versus %|/ mismatch
+left /% op - right [! expected [!/% versus : mismatch
+left "[ op - right || expected ||"[ versus /! mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+@(+:< = "<
+/<*|( = /[:|
+/!*:" = %|/
+/%-[! = :
+"[-|| = /!
+
+Assigning mul
+ left @( op + right :< = "< length 2
+ left /< op * right |( = /[:| length 4 assume mul
+ left /! op * right :" = %|/ assumed mul
+ left /% op - right [! = : length 1
+ left "[ op - right || = /! length 2
+
+Assigning sub
+ left @( op + right :< = "< length 2
+ left /< op * right |( = /[:| assumed mul
+ left /! op * right :" = %|/ assumed mul
+ left /% op - right [! = : length 1 assume sub
+ left "[ op - right || = /! assumed sub
+
+Assigning add
+ left @( op + right :< = "< length 2
+ left /< op * right |( = /[:| assumed mul
+ left /! op * right :" = %|/ assumed mul
+ left /% op - right [! = : assumed sub
+ left "[ op - right || = /! assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left @( op + right :< = "< length 2 assume add
+ left /< op * right |( = /[:| assumed mul
+ left /! op * right :" = %|/ assumed mul
+ left /% op - right [! = : assumed sub
+ left "[ op - right || = /! assumed sub
+ left %( op - right [( the question, assumed sub
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+/<*|( = 49 mul 62 = 3038 vs /[:| 4716 diff 1678 mul no; 94 mul 26 = 2444 vs rev |:[/ 6174 diff 3730 mul no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 37 sub 37 = 0 rev 0 = final answer: "
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected none %(-[( = 95 sub 75 rev 59 sub 57 = 2 rev 2 = final answer: <
+
+Trying @=9 (=6 :=5 <=3 "=0 /=4 |=1 [=7 !=8 %=2
+@(+:< = 96 add 53 = 149 vs "< 03 diff 146 add no; 69 add 35 = 104 vs rev <" 30 diff 74 add no
+ rejected none %(-[( = 26 sub 76 rev 62 sub 67 = 5 rev 5 = final answer: :
+
+Trying @=1 (=9 :=6 <=5 "=0 /=4 |=2 [=7 !=8 %=3
+@(+:< = 19 add 65 = 84 vs "< 05 diff 79 add no; 91 add 56 = 147 vs rev <" 50 diff 97 add no
+ rejected none %(-[( = 39 sub 79 rev 93 sub 97 = 4 rev 4 = final answer: /
+
+Trying @=3 (=2 :=1 <=9 "=0 /=4 |=6 [=7 !=8 %=5
+@(+:< = 32 add 19 = 51 vs "< 09 diff 42 add no; 23 add 91 = 114 vs rev <" 90 diff 24 add no
+ rejected forward %(-[( = 52 sub 72 = 20 = final answer: ("
+
+Trying @=5 (=3 :=2 <=1 "=0 /=4 |=6 [=7 !=8 %=9
+@(+:< = 53 add 21 = 74 vs "< 01 diff 73 add no; 35 add 12 = 47 vs rev <" 10 diff 37 add no
+ rejected none %(-[( = 93 sub 73 rev 39 sub 37 = 2 rev 2 = final answer: :
+
+Trying @=6 (=5 :=3 <=2 "=0 /=4 |=1 [=7 !=8 %=9
+@(+:< = 65 add 32 = 97 vs "< 02 diff 95 add no; 56 add 23 = 79 vs rev <" 20 diff 59 add no
+ rejected

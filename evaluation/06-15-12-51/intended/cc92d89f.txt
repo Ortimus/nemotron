@@ -1,0 +1,60 @@
+^(-^( = >
+^[+`[ = ^[`[
+[[-(} = -|)
+?"*([ = "^)|
+The question is ?|-""
+
+Operator symbols -+*
+Question operator symbol -
+Question operator in examples
+
+Digit symbols ^(>[`}|)?"
+
+Checking concatenation
+left ^( op - right ^( expected ^(^( versus > mismatch
+left ^[ op + right `[ expected ^[`[ versus ^[`[ match +
+left [[ op - right (} expected [[(} versus -|) mismatch
+left ?" op * right ([ expected ?"([ versus "^)| mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left ^( op - right ^( expected ^(^( versus > mismatch
+left ^[ op + right `[ expected `[^[ versus ^[`[ mismatch
+left [[ op - right (} expected (}[[ versus -|) mismatch
+left ?" op * right ([ expected ([?" versus "^)| mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+^(-^( = >
+[[-(} = -|)
+?"*([ = "^)|
+
+Assigning mul
+ left ^( op - right ^( = > length 1
+ left [[ op - right (} = -|) length 3
+ left ?" op * right ([ = "^)| length 4 assume mul
+
+Assigning sub
+ left ^( op - right ^( = > length 1
+ left [[ op - right (} = -|) op in output assume sub
+ left ?" op * right ([ = "^)| assumed mul
+
+Assigning add
+ left ^( op - right ^( = > assumed sub
+ left [[ op - right (} = -|) assumed sub
+ left ?" op * right ([ = "^)| assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ^( op - right ^( = > assumed sub
+ left [[ op - right (} = -|) assumed sub
+ left ?" op * right ([ = "^)| assumed mul
+ left ?| op - right "" the question, assumed sub
+
+Trying ^=9 (=4 >=0 [=1 `=8 }=6 |=3 )=5 ?=7 "=2
+^(-^( = 94 sub 94 = 0 vs > 0 diff 0 sub ok; 49 sub 49 = 0 vs rev > 0 diff 0 sub ok
+[[-(} = 11 sub 46 = 35 vs -|) -35 diff 0 sub ok; 11 sub 64 = 53 vs rev -)| -53 diff 0 sub ok
+?"*([ = 72 mul 41 = 2952 vs "^)| 2953 diff 1 mul ok + 1; 27 mul 14 = 378 vs rev |)^" 3592 diff 3214 mul no
+ accepted forward ?|-"" = 73 sub 22 = 51 = \boxed{)[}

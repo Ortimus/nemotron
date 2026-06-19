@@ -1,0 +1,66 @@
+?%*!% = %?!\
+]!|?\ = ??
+\>{^! = &<
+>%|?! = [&&
+The question is ?>{]<
+
+Operator symbols *|{
+Question operator symbol {
+Question operator in examples
+
+Digit symbols ?%!\]>^&<[
+
+Checking concatenation
+left ?% op * right !% expected ?%!% versus %?!\ mismatch
+left ]! op | right ?\ expected ]!?\ versus ?? mismatch
+left \> op { right ^! expected \>^! versus &< mismatch
+left >% op | right ?! expected >%?! versus [&& mismatch
+
+Question operator { is not concatenation
+
+Checking reverse concatenation
+left ?% op * right !% expected !%?% versus %?!\ mismatch
+left ]! op | right ?\ expected ?\]! versus ?? mismatch
+left \> op { right ^! expected ^!\> versus &< mismatch
+left >% op | right ?! expected ?!>% versus [&& mismatch
+
+Question operator { is not reverse concatenation
+
+Filtering out the concatenation operations
+?%*!% = %?!\
+]!|?\ = ??
+\>{^! = &<
+>%|?! = [&&
+
+Assigning mul
+ left ?% op * right !% = %?!\ length 4 assume mul
+ left ]! op | right ?\ = ?? length 2
+ left \> op { right ^! = &< length 2
+ left >% op | right ?! = [&& length 3
+
+Assigning sub
+ left ?% op * right !% = %?!\ assumed mul
+ left ]! op | right ?\ = ?? length 2
+ left \> op { right ^! = &< length 2
+ left >% op | right ?! = [&& length 3
+
+Assigning add
+ left ?% op * right !% = %?!\ assumed mul
+ left ]! op | right ?\ = ?? length 2
+ left \> op { right ^! = &< length 2
+ left >% op | right ?! = [&& length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ?% op * right !% = %?!\ assumed mul
+ left ]! op | right ?\ = ?? assumed add
+ left \> op { right ^! = &< length 2 assume sub
+ left >% op | right ?! = [&& assumed add
+ left ?> op { right ]< the question, assumed sub
+
+Trying ?=9 %=8 !=2 \=7 ]=0 >=5 ^=6 &=1 <=3 [=4
+?%*!% = 98 mul 28 = 2744 vs %?!\ 8927 diff 6183 mul no; 89 mul 82 = 7298 vs rev \!?% 7298 diff 0 mul ok
+]!|?\ = 02 add 97 = 99 vs ?? 99 diff 0 add ok; 20 add 79 = 99 vs rev ?? 99 diff 0 add ok
+\>{^! = 75 sub 62 = 13 vs &< 13 diff 0 sub ok; 57 sub 26 = 31 vs rev <& 31 diff 0 sub ok
+>%|?! = 58 add 92 = 150 vs [&& 411 diff 261 add no; 85 add 29 = 114 vs rev &&[ 114 diff 0 add ok
+ accepted rev ?>{]< = 95 sub 03 rev 59 sub 30 = 29 rev 92 = \boxed{?!}

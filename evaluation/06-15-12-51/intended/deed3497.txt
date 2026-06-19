@@ -1,0 +1,75 @@
+(|&"" = /"#
+"`!"] = !`
+#"&## = //^
+^#&^} = \#
+^|!]^ = !\
+The question is \^?]]
+
+Operator symbols &!
+Question operator symbol ?
+Question operator not in examples
+
+Digit symbols (|"/#`]^}\
+
+Checking concatenation
+left (| op & right "" expected (|"" versus /"# mismatch
+left "` op ! right "] expected "`"] versus !` mismatch
+left #" op & right ## expected #"## versus //^ mismatch
+left ^# op & right ^} expected ^#^} versus \# mismatch
+left ^| op ! right ]^ expected ^|]^ versus !\ mismatch
+
+Question operator ? is not concatenation
+
+Checking reverse concatenation
+left (| op & right "" expected ""(| versus /"# mismatch
+left "` op ! right "] expected "]"` versus !` mismatch
+left #" op & right ## expected ###" versus //^ mismatch
+left ^# op & right ^} expected ^}^# versus \# mismatch
+left ^| op ! right ]^ expected ]^^| versus !\ mismatch
+
+Question operator ? is not reverse concatenation
+
+Filtering out the concatenation operations
+(|&"" = /"#
+"`!"] = !`
+#"&## = //^
+^#&^} = \#
+^|!]^ = !\
+
+Assigning mul
+ left (| op & right "" = /"# length 3
+ left "` op ! right "] = !` length 2
+ left #" op & right ## = //^ length 3
+ left ^# op & right ^} = \# length 2
+ left ^| op ! right ]^ = !\ length 2
+
+Assigning sub
+ left (| op & right "" = /"# length 3
+ left "` op ! right "] = !` op in output assume sub
+ left #" op & right ## = //^ length 3
+ left ^# op & right ^} = \# length 2
+ left ^| op ! right ]^ = !\ assumed sub
+
+Assigning add
+ left (| op & right "" = /"# length 3 assume add
+ left "` op ! right "] = !` assumed sub
+ left #" op & right ## = //^ assumed add
+ left ^# op & right ^} = \# assumed add
+ left ^| op ! right ]^ = !\ assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left (| op & right "" = /"# assumed add
+ left "` op ! right "] = !` assumed sub
+ left #" op & right ## = //^ assumed add
+ left ^# op & right ^} = \# assumed add
+ left ^| op ! right ]^ = !\ assumed sub
+ left \^ op ? right ]] the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying (=9 |=7 "=8 /=1 #=5 `=2 ]=4 ^=3 }=0 \=6
+(|&"" = 97 add 88 = 185 vs /"# 185 diff 0 add ok; 79 add 88 = 167 vs rev #"/ 581 diff 414 add no
+"`!"] = 82 sub 84 = 2 vs !` -2 diff 0 sub ok; 28 sub 48 = 20 vs rev !` -2 diff 18 sub no
+#"&## = 58 add 55 = 113 vs //^ 113 diff 0 add ok; 85 add 55 = 140 vs rev ^// 311 diff 171 add no
+^#&^} = 35 add 30 = 65 vs \# 65 diff 0 add ok; 53 add 03 = 56 vs rev #\ 56 diff 0 add ok
+^|!]^ = 37 sub 43 = 6 vs !\ -6 diff 0 sub ok; 73 sub 34 = 39 vs rev !\ -6 diff 33 sub no
+ accepted forward \^?]] = 63 mul 44 = 2772 = \boxed{`||`}

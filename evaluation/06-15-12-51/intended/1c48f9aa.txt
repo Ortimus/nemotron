@@ -1,0 +1,182 @@
+22{52 = 2252
+74*60 = 14
+31*65 = 34
+39{12 = 3912
+
+The inputs are 22, 52, 74, 60, 31, 65, 39, 12
+
+The outputs are 2252, 14, 34, 3912
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+22{52 -> {
+74*60 -> *
+31*65 -> *
+39{12 -> {
+
+The operators
+{
+*
+
+Looking at the question
+86{10 -> {
+The question operator is found in the examples.
+
+Looking at operator { [22{52 = 2252, 39{12 = 3912]:
+
+Trying common operations
+ reversed operands [22->22 52->25, 39->93 12->21] and reversed result [expected (22,25)->2252, (93,21)->3912]
+ addition
+ (22,25)->2252: 22 + 25 = 47 rev-> 74 mismatch
+ multiplication
+ (93,21)->3912: (90 + 3) * 21 = 90 * 21 + 3 * 21 = 1890 + 63 = 1953 rev-> 3591 mismatch
+ concatenation
+ (22,25)->2252: 22 || 25 = 2225 rev-> 5222 mismatch
+ reverse concatenation
+ (93,21)->3912: 21 || 93 = 2193 rev-> 3912 match
+ (22,25)->2252: 25 || 22 = 2522 rev-> 2252 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+ identity [22 52, 39 12] [expected (22,52)->2252, (39,12)->3912]
+ addition
+ (22,52)->2252: 22 + 52 = 74 mismatch
+ multiplication
+ (39,12)->3912: (30 + 9) * 12 = 30 * 12 + 9 * 12 = 360 + 108 = 468 mismatch
+ concatenation
+ (22,52)->2252: 22 || 52 = 2252 match
+ (39,12)->3912: 39 || 12 = 3912 match
+ correct, but skipping
+ reverse concatenation
+ (39,12)->3912: 12 || 39 = 1239 mismatch
+
+Trying difference operations
+ reversed operands [22->22 52->25, 39->93 12->21] and reversed result [expected (22,25)->2252, (93,21)->3912]
+ subtraction (a-b)
+ (22,25)->2252: 22 - 25 = -3 rev-> -3 mismatch
+ absolute difference
+ (93,21)->3912: |93 - 21| = 72 rev-> 27 mismatch
+ max mod min
+ (22,25)->2252: max(22,25) mod min(22,25) = 25 mod 22 = 3 rev-> 3 mismatch
+ negated absolute difference
+ (93,21)->3912: -|93 - 21| = -72 rev-> -27 mismatch
+ reverse subtraction (b-a)
+ (22,25)->2252: 25 - 22 = 3 rev-> 3 mismatch
+ modulo (a mod b)
+ (93,21)->3912: 93 mod 21 = 9 rev-> 9 mismatch
+
+ identity [22 52, 39 12] [expected (22,52)->2252, (39,12)->3912]
+ subtraction (a-b)
+ (22,52)->2252: 22 - 52 = -30 mismatch
+ absolute difference
+ (39,12)->3912: |39 - 12| = 27 mismatch
+ max mod min
+ (22,52)->2252: max(22,52) mod min(22,52) = 52 mod 22 = 8 mismatch
+ negated absolute difference
+ (39,12)->3912: -|39 - 12| = -27 mismatch
+ reverse subtraction (b-a)
+ (22,52)->2252: 52 - 22 = 30 mismatch
+ modulo (a mod b)
+ (39,12)->3912: 39 mod 12 = 3 mismatch
+
+Trying rare operations
+ reversed operands [22->22 52->25, 39->93 12->21] and reversed result [expected (22,25)->2252, (93,21)->3912]
+ multiply+1
+ (22,25)->2252: (20 + 2) * 25 + 1 = 20 * 25 + 2 * 25 + 1 = 500 + 50 + 1 = 550 + 1 = 551 rev-> 155 mismatch
+ multiply-1
+ (93,21)->3912: (90 + 3) * 21 - 1 = 90 * 21 + 3 * 21 - 1 = 1890 + 63 - 1 = 1953 - 1 = 1952 rev-> 2591 mismatch
+ add+1
+ (22,25)->2252: 22 + 25 + 1 = 48 rev-> 84 mismatch
+ add-1
+ (93,21)->3912: 93 + 21 - 1 = 113 rev-> 311 mismatch
+ sub+1
+ (22,25)->2252: 22 - 25 + 1 = -2 rev-> -2 mismatch
+ sub-1
+ (93,21)->3912: 93 - 21 - 1 = 71 rev-> 17 mismatch
+ integer division (a/b)
+ (22,25)->2252: 22 / 25 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (93,21)->3912: 21 / 93 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (22,25)->2252: 25 mod 22 = 3 rev-> 3 mismatch
+ digit absolute diff
+ (93,21)->3912: |9-2| || |3-1| = 72 rev-> 27 mismatch
+ digit add mod10
+ (22,25)->2252: (2+2)%10 || (2+5)%10 = 47 rev-> 74 mismatch
+ digit sub mod10
+ (93,21)->3912: (9-2)%10 || (3-1)%10 = 72 rev-> 27 mismatch
+ cross multiply
+ (22,25)->2252: 2*2 + 2*5 = 4 + 10 = 14 rev-> 41 mismatch
+ cross multiply rev
+ (93,21)->3912: 9*1 + 3*2 = 9 + 6 = 15 rev-> 51 mismatch
+ digit multiply
+ (22,25)->2252: 2*2 || 2*5 = 4 || 10 = 410 rev-> 014 mismatch
+ digit multiply rev
+ (93,21)->3912: 9*1 || 3*2 = 9 || 6 = 96 rev-> 69 mismatch
+ digit sum diff
+ (22,25)->2252: (2+2) - (2+5) = -3 rev-> -3 mismatch
+ digit sum sum
+ (93,21)->3912: (9+3) + (2+1) = 15 rev-> 51 mismatch
+ digit product diff
+ (22,25)->2252: 2*2 - 2*5 = 4 - 10 = -6 rev-> -6 mismatch
+ digit product sum
+ (93,21)->3912: 9*3 + 2*1 = 27 + 2 = 29 rev-> 92 mismatch
+ determinant
+ (22,25)->2252: 2*5 - 2*2 = 10 - 4 = 6 rev-> 6 mismatch
+ abs determinant
+ (93,21)->3912: |9*1 - 3*2| = |9 - 6| = 3 rev-> 3 mismatch
+
+ identity [22 52, 39 12] [expected (22,52)->2252, (39,12)->3912]
+ multiply+1
+ (22,52)->2252: (20 + 2) * 52 + 1 = 20 * 52 + 2 * 52 + 1 = 1040 + 104 + 1 = 1144 + 1 = 1145 mismatch
+ multiply-1
+ (39,12)->3912: (30 + 9) * 12 - 1 = 30 * 12 + 9 * 12 - 1 = 360 + 108 - 1 = 468 - 1 = 467 mismatch
+ add+1
+ (22,52)->2252: 22 + 52 + 1 = 75 mismatch
+ add-1
+ (39,12)->3912: 39 + 12 - 1 = 50 mismatch
+ sub+1
+ (22,52)->2252: 22 - 52 + 1 = -29 mismatch
+ sub-1
+ (39,12)->3912: 39 - 12 - 1 = 26 mismatch
+ integer division (a/b)
+ (22,52)->2252: 22 / 52 = 0 mismatch
+ reverse division (b/a)
+ (39,12)->3912: 12 / 39 = 0 mismatch
+ reverse modulo (b mod a)
+ (22,52)->2252: 52 mod 22 = 8 mismatch
+ digit absolute diff
+ (39,12)->3912: |3-1| || |9-2| = 27 mismatch
+ digit add mod10
+ (22,52)->2252: (2+5)%10 || (2+2)%10 = 74 mismatch
+ digit sub mod10
+ (39,12)->3912: (3-1)%10 || (9-2)%10 = 27 mismatch
+ cross multiply
+ (22,52)->2252: 2*5 + 2*2 = 10 + 4 = 14 mismatch
+ cross multiply rev
+ (39,12)->3912: 3*2 + 9*1 = 6 + 9 = 15 mismatch
+ digit multiply
+ (22,52)->2252: 2*5 || 2*2 = 10 || 4 = 104 mismatch
+ digit multiply rev
+ (39,12)->3912: 3*2 || 9*1 = 6 || 9 = 69 mismatch
+ digit sum diff
+ (22,52)->2252: (2+2) - (5+2) = -3 mismatch
+ digit sum sum
+ (39,12)->3912: (3+9) + (1+2) = 15 mismatch
+ digit product diff
+ (22,52)->2252: 2*2 - 5*2 = 4 - 10 = -6 mismatch
+ digit product sum
+ (39,12)->3912: 3*9 + 1*2 = 27 + 2 = 29 mismatch
+ determinant
+ (22,52)->2252: 2*2 - 2*5 = 4 - 10 = -6 mismatch
+ abs determinant
+ (39,12)->3912: |3*2 - 9*1| = |6 - 9| = 3 mismatch
+
+correct, actions: reversed operands, reversed result, reverse concatenation
+
+Applying to 86{10:
+ We recall that the question operator is found in the examples.
+ reversed operands [86->68, 10->01] and reversed result
+ reverse concatenation
+ (68,01): 01 || 68 = 0168 rev-> 8610
+ Result is non-negative
+ \boxed{8610}

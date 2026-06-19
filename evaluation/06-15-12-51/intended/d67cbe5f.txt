@@ -1,0 +1,75 @@
+>^*(' = >(?@
+(^+/? = ^}
+@}*'} = ''>)
+^'-}{ = -?(
+)(*?? = (@>/
+The question is ?)-)@
+
+Operator symbols *+-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols >^('?@/}){
+
+Checking concatenation
+left >^ op * right (' expected >^(' versus >(?@ mismatch
+left (^ op + right /? expected (^/? versus ^} mismatch
+left @} op * right '} expected @}'} versus ''>) mismatch
+left ^' op - right }{ expected ^'}{ versus -?( mismatch
+left )( op * right ?? expected )(?? versus (@>/ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left >^ op * right (' expected ('>^ versus >(?@ mismatch
+left (^ op + right /? expected /?(^ versus ^} mismatch
+left @} op * right '} expected '}@} versus ''>) mismatch
+left ^' op - right }{ expected }{^' versus -?( mismatch
+left )( op * right ?? expected ??)( versus (@>/ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+>^*(' = >(?@
+(^+/? = ^}
+@}*'} = ''>)
+^'-}{ = -?(
+)(*?? = (@>/
+
+Assigning mul
+ left >^ op * right (' = >(?@ length 4 assume mul
+ left (^ op + right /? = ^} length 2
+ left @} op * right '} = ''>) assumed mul
+ left ^' op - right }{ = -?( length 3
+ left )( op * right ?? = (@>/ assumed mul
+
+Assigning sub
+ left >^ op * right (' = >(?@ assumed mul
+ left (^ op + right /? = ^} length 2
+ left @} op * right '} = ''>) assumed mul
+ left ^' op - right }{ = -?( op in output assume sub
+ left )( op * right ?? = (@>/ assumed mul
+
+Assigning add
+ left >^ op * right (' = >(?@ assumed mul
+ left (^ op + right /? = ^} length 2
+ left @} op * right '} = ''>) assumed mul
+ left ^' op - right }{ = -?( assumed sub
+ left )( op * right ?? = (@>/ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left >^ op * right (' = >(?@ assumed mul
+ left (^ op + right /? = ^} length 2 assume add
+ left @} op * right '} = ''>) assumed mul
+ left ^' op - right }{ = -?( assumed sub
+ left )( op * right ?? = (@>/ assumed mul
+ left ?) op - right )@ the question, assumed sub
+
+Trying >=0 ^=6 (=4 '=5 ?=2 @=3 /=1 }=8 )=7 {=9
+>^*(' = 06 mul 45 = 270 vs >(?@ 0423 diff 153 mul no; 60 mul 54 = 3240 vs rev @?(> 3240 diff 0 mul ok
+(^+/? = 46 add 12 = 58 vs ^} 68 diff 10 add no; 64 add 21 = 85 vs rev }^ 86 diff 1 add ok + 1
+@}*'} = 38 mul 58 = 2204 vs ''>) 5507 diff 3303 mul no; 83 mul 85 = 7055 vs rev )>'' 7055 diff 0 mul ok
+^'-}{ = 65 sub 89 = 24 vs -?( -24 diff 0 sub ok; 56 sub 98 = 42 vs rev -(? -42 diff 0 sub ok
+)(*?? = 74 mul 22 = 1628 vs (@>/ 4301 diff 2673 mul no; 47 mul 22 = 1034 vs rev />@( 1034 diff 0 mul ok
+ accepted rev ?)-)@ = 27 sub 73 rev 72 sub 37 = 35 rev 53 = \boxed{'@}

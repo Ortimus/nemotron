@@ -1,0 +1,75 @@
+^:+#[ = "#
+#:-(\ = -[:
+"/+)> = ""
+:\-^\ = ->
+\"+:: = "[>
+The question is ["*#\
+
+Operator symbols +-
+Question operator symbol *
+Question operator not in examples
+
+Digit symbols ^:#["(\/)>
+
+Checking concatenation
+left ^: op + right #[ expected ^:#[ versus "# mismatch
+left #: op - right (\ expected #:(\ versus -[: mismatch
+left "/ op + right )> expected "/)> versus "" mismatch
+left :\ op - right ^\ expected :\^\ versus -> mismatch
+left \" op + right :: expected \":: versus "[> mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left ^: op + right #[ expected #[^: versus "# mismatch
+left #: op - right (\ expected (\#: versus -[: mismatch
+left "/ op + right )> expected )>"/ versus "" mismatch
+left :\ op - right ^\ expected ^\:\ versus -> mismatch
+left \" op + right :: expected ::\" versus "[> mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+^:+#[ = "#
+#:-(\ = -[:
+"/+)> = ""
+:\-^\ = ->
+\"+:: = "[>
+
+Assigning mul
+ left ^: op + right #[ = "# length 2
+ left #: op - right (\ = -[: length 3
+ left "/ op + right )> = "" length 2
+ left :\ op - right ^\ = -> length 2
+ left \" op + right :: = "[> length 3
+
+Assigning sub
+ left ^: op + right #[ = "# length 2
+ left #: op - right (\ = -[: op in output assume sub
+ left "/ op + right )> = "" length 2
+ left :\ op - right ^\ = -> assumed sub
+ left \" op + right :: = "[> length 3
+
+Assigning add
+ left ^: op + right #[ = "# length 2
+ left #: op - right (\ = -[: assumed sub
+ left "/ op + right )> = "" length 2
+ left :\ op - right ^\ = -> assumed sub
+ left \" op + right :: = "[> length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ^: op + right #[ = "# assumed add
+ left #: op - right (\ = -[: assumed sub
+ left "/ op + right )> = "" assumed add
+ left :\ op - right ^\ = -> assumed sub
+ left \" op + right :: = "[> assumed add
+ left [" op * right #\ the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying ^=4 :=3 #=5 [=2 "=9 (=7 \=6 /=8 )=0 >=1
+^:+#[ = 43 add 52 = 95 vs "# 95 diff 0 add ok; 34 add 25 = 59 vs rev #" 59 diff 0 add ok
+#:-(\ = 53 sub 76 = 23 vs -[: -23 diff 0 sub ok; 35 sub 67 = 32 vs rev -:[ -32 diff 0 sub ok
+"/+)> = 98 add 01 = 99 vs "" 99 diff 0 add ok; 89 add 10 = 99 vs rev "" 99 diff 0 add ok
+:\-^\ = 36 sub 46 = 10 vs -> -1 diff 9 sub no; 63 sub 64 = 1 vs rev -> -1 diff 0 sub ok
+\"+:: = 69 add 33 = 102 vs "[> 921 diff 819 add no; 96 add 33 = 129 vs rev >[" 129 diff 0 add ok
+ accepted rev ["*#\ = 29 mul 56 rev 92 mul 65 = 5980 rev 0895 = \boxed{)/"#}

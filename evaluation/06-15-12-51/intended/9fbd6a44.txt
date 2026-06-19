@@ -1,0 +1,69 @@
+[[+>( = >([[
+@'-'[ = -@$
+>#->@ = /:
+\[*'( = '[$'
+\#-'[ = ($
+The question is $$*>\
+
+Operator symbols +-*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols [>(@'$#/:\
+
+Checking concatenation
+left [[ op + right >( expected [[>( versus >([[ mismatch
+left @' op - right '[ expected @''[ versus -@$ mismatch
+left ># op - right >@ expected >#>@ versus /: mismatch
+left \[ op * right '( expected \['( versus '[$' mismatch
+left \# op - right '[ expected \#'[ versus ($ mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left [[ op + right >( expected >([[ versus >([[ match +
+left @' op - right '[ expected '[@' versus -@$ mismatch
+left ># op - right >@ expected >@># versus /: mismatch
+left \[ op * right '( expected '(\[ versus '[$' mismatch
+left \# op - right '[ expected '[\# versus ($ mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+@'-'[ = -@$
+>#->@ = /:
+\[*'( = '[$'
+\#-'[ = ($
+
+Assigning mul
+ left @' op - right '[ = -@$ length 3
+ left ># op - right >@ = /: length 2
+ left \[ op * right '( = '[$' length 4 assume mul
+ left \# op - right '[ = ($ length 2
+
+Assigning sub
+ left @' op - right '[ = -@$ op in output assume sub
+ left ># op - right >@ = /: assumed sub
+ left \[ op * right '( = '[$' assumed mul
+ left \# op - right '[ = ($ assumed sub
+
+Assigning add
+ left @' op - right '[ = -@$ assumed sub
+ left ># op - right >@ = /: assumed sub
+ left \[ op * right '( = '[$' assumed mul
+ left \# op - right '[ = ($ assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left @' op - right '[ = -@$ assumed sub
+ left ># op - right >@ = /: assumed sub
+ left \[ op * right '( = '[$' assumed mul
+ left \# op - right '[ = ($ assumed sub
+ left $$ op * right >\ the question, assumed mul
+
+Trying [=5 >=9 (=4 @=1 '=2 $=3 #=8 /=0 :=7 \=6
+@'-'[ = 12 sub 25 = 13 vs -@$ -13 diff 0 sub ok; 21 sub 52 = 31 vs rev -$@ -31 diff 0 sub ok
+>#->@ = 98 sub 91 = 7 vs /: 07 diff 0 sub ok; 89 sub 19 = 70 vs rev :/ 70 diff 0 sub ok
+\[*'( = 65 mul 24 = 1560 vs '[$' 2532 diff 972 mul no; 56 mul 42 = 2352 vs rev '$[' 2352 diff 0 mul ok
+\#-'[ = 68 sub 25 = 43 vs ($ 43 diff 0 sub ok; 86 sub 52 = 34 vs rev $( 34 diff 0 sub ok
+ accepted rev $$*>\ = 33 mul 96 rev 33 mul 69 = 2277 rev 7722 = \boxed{::''}

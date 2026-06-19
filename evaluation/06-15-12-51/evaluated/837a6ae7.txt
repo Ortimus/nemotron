@@ -1,0 +1,249 @@
+:@-&# = <:
+&>-:< = -<:
+&#+{{ = @<"
+%>+&& = @@:
+"#-<> = %"
+The question is <{*:"
+
+Operator symbols -+
+Question operator symbol *
+Question operator not in examples
+
+Digit symbols :@&#<>{"%
+
+Checking concatenation
+left :@ op - right &# expected :@&# versus <: mismatch
+left &> op - right :< expected &>:< versus -<: mismatch
+left &# op + right {{ expected &#{{ versus @<" mismatch
+left %> op + right && expected %>&& versus @@: mismatch
+left "# op - right <> expected "#<> versus %" mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left :@ op - right &# expected &#:@ versus <: mismatch
+left &> op - right :< expected :<&> versus -<: mismatch
+left &# op + right {{ expected {{&# versus @<" mismatch
+left %> op + right && expected &&%> versus @@: mismatch
+left "# op - right <> expected <>"# versus %" mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+:@-&# = <:
+&>-:< = -<:
+&#+{{ = @<"
+%>+&& = @@:
+"#-<> = %"
+
+Assigning mul
+ left :@ op - right &# = <: length 2
+ left &> op - right :< = -<: length 3
+ left &# op + right {{ = @<" length 3
+ left %> op + right && = @@: length 3
+ left "# op - right <> = %" length 2
+
+Assigning sub
+ left :@ op - right &# = <: length 2
+ left &> op - right :< = -<: op in output assume sub
+ left &# op + right {{ = @<" length 3
+ left %> op + right && = @@: length 3
+ left "# op - right <> = %" assumed sub
+
+Assigning add
+ left :@ op - right &# = <: assumed sub
+ left &> op - right :< = -<: assumed sub
+ left &# op + right {{ = @<" length 3 assume add
+ left %> op + right && = @@: assumed add
+ left "# op - right <> = %" assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left :@ op - right &# = <: assumed sub
+ left &> op - right :< = -<: assumed sub
+ left &# op + right {{ = @<" assumed add
+ left %> op + right && = @@: assumed add
+ left "# op - right <> = %" assumed sub
+ left <{ op * right :" the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9
+:@-&# = 13 sub 20 = 7 vs <: 41 diff 34 sub no; 31 sub 02 = 29 vs rev :< 14 diff 15 sub no
+ rejected none <{*:" = 46 mul 17 rev 64 mul 71 = 4544 rev 4454 = final answer: <<><
+
+Trying :=9 @=1 &=3 #=2 <=4 >=5 {=6 "=7 %=8 A=0
+:@-&# = 91 sub 32 = 59 vs <: 49 diff 10 sub no; 19 sub 23 = 4 vs rev :< 94 diff 90 sub no
+ rejected none <{*:" = 46 mul 97 rev 64 mul 79 = 5056 rev 6505 = final answer: {>A>
+
+Trying :=0 @=9 &=1 #=3 <=4 >=5 {=6 "=7 %=8 A=2
+:@-&# = 09 sub 13 = 4 vs <: 40 diff 36 sub no; 90 sub 31 = 59 vs rev :< 04 diff 55 sub no
+ rejected none <{*:" = 46 mul 07 rev 64 mul 70 = 4480 rev 0844 = final answer: :%<<
+
+Trying :=8 @=0 &=9 #=1 <=4 >=5 {=6 "=7 %=3 A=2
+:@-&# = 80 sub 91 = 11 vs <: 48 diff 37 sub no; 08 sub 19 = 11 vs rev :< 84 diff 73 sub no
+ rejected none <{*:" = 46 mul 87 rev 64 mul 78 = 4992 rev 2994 = final answer: A&&<
+
+Trying :=5 @=8 &=0 #=9 <=4 >=1 {=6 "=7 %=3 A=2
+:@-&# = 58 sub 09 = 49 vs <: 45 diff 4 sub no; 85 sub 90 = 5 vs rev :< 54 diff 49 sub no
+ rejected none <{*:" = 46 mul 57 rev 64 mul 75 = 4800 rev 0084 = final answer: &&@<
+
+Trying :=1 @=3 &=2 #=0 <=4 >=5 {=6 "=7 %=8 A=9

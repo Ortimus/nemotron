@@ -1,0 +1,75 @@
+#>+(} = ^[>
+#'+#& = }[>
+&/+[> = &$
+[&-[} = -[&
+[$*^( = [}//
+The question is &>-$$
+
+Operator symbols +-*
+Question operator symbol -
+Question operator in examples
+
+Digit symbols #>(}^['&/$
+
+Checking concatenation
+left #> op + right (} expected #>(} versus ^[> mismatch
+left #' op + right #& expected #'#& versus }[> mismatch
+left &/ op + right [> expected &/[> versus &$ mismatch
+left [& op - right [} expected [&[} versus -[& mismatch
+left [$ op * right ^( expected [$^( versus [}// mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left #> op + right (} expected (}#> versus ^[> mismatch
+left #' op + right #& expected #&#' versus }[> mismatch
+left &/ op + right [> expected [>&/ versus &$ mismatch
+left [& op - right [} expected [}[& versus -[& mismatch
+left [$ op * right ^( expected ^([$ versus [}// mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+#>+(} = ^[>
+#'+#& = }[>
+&/+[> = &$
+[&-[} = -[&
+[$*^( = [}//
+
+Assigning mul
+ left #> op + right (} = ^[> length 3
+ left #' op + right #& = }[> length 3
+ left &/ op + right [> = &$ length 2
+ left [& op - right [} = -[& length 3
+ left [$ op * right ^( = [}// length 4 assume mul
+
+Assigning sub
+ left #> op + right (} = ^[> length 3
+ left #' op + right #& = }[> length 3
+ left &/ op + right [> = &$ length 2
+ left [& op - right [} = -[& op in output assume sub
+ left [$ op * right ^( = [}// assumed mul
+
+Assigning add
+ left #> op + right (} = ^[> length 3 assume add
+ left #' op + right #& = }[> assumed add
+ left &/ op + right [> = &$ assumed add
+ left [& op - right [} = -[& assumed sub
+ left [$ op * right ^( = [}// assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left #> op + right (} = ^[> assumed add
+ left #' op + right #& = }[> assumed add
+ left &/ op + right [> = &$ assumed add
+ left [& op - right [} = -[& assumed sub
+ left [$ op * right ^( = [}// assumed mul
+ left &> op - right $$ the question, assumed sub
+
+Trying #=9 >=1 (=7 }=8 ^=6 [=0 '=5 &=4 /=2 $=3
+#>+(} = 91 add 78 = 169 vs ^[> 601 diff 432 add no; 19 add 87 = 106 vs rev >[^ 106 diff 0 add ok
+#'+#& = 95 add 94 = 189 vs }[> 801 diff 612 add no; 59 add 49 = 108 vs rev >[} 108 diff 0 add ok
+&/+[> = 42 add 01 = 43 vs &$ 43 diff 0 add ok; 24 add 10 = 34 vs rev $& 34 diff 0 add ok
+[&-[} = 04 sub 08 = 4 vs -[& -04 diff 0 sub ok; 40 sub 80 = 40 vs rev -&[ -40 diff 0 sub ok
+[$*^( = 03 mul 67 = 201 vs [}// 0822 diff 621 mul no; 30 mul 76 = 2280 vs rev //}[ 2280 diff 0 mul ok
+ accepted rev &>-$$ = 41 sub 33 rev 14 sub 33 = 19 rev 91 = \boxed{#>}

@@ -1,0 +1,181 @@
+95+77 = 18
+19#54 = 1954
+31+13 = 18
+49`31 = 4931
+
+The inputs are 95, 77, 19, 54, 31, 13, 49, 31
+
+The outputs are 18, 1954, 18, 4931
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+95+77 -> +
+19#54 -> #
+31+13 -> +
+49`31 -> `
+
+The operators
++
+#
+`
+
+Looking at the question
+58#99 -> #
+The question operator is found in the examples.
+
+Looking at operator # [19#54 = 1954]:
+
+Trying common operations
+ reversed operands [19->91 54->45] and reversed result [expected (91,45)->1954]
+ addition
+ (91,45)->1954: 91 + 45 = 136 rev-> 631 mismatch
+ multiplication
+ (91,45)->1954: (90 + 1) * 45 = 90 * 45 + 1 * 45 = 4050 + 45 = 4095 rev-> 5904 mismatch
+ concatenation
+ (91,45)->1954: 91 || 45 = 9145 rev-> 5419 mismatch
+ reverse concatenation
+ (91,45)->1954: 45 || 91 = 4591 rev-> 1954 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+ identity [19 54] [expected (19,54)->1954]
+ addition
+ (19,54)->1954: 19 + 54 = 73 mismatch
+ multiplication
+ (19,54)->1954: (10 + 9) * 54 = 10 * 54 + 9 * 54 = 540 + 486 = 1026 mismatch
+ concatenation
+ (19,54)->1954: 19 || 54 = 1954 match
+ correct, but skipping
+ reverse concatenation
+ (19,54)->1954: 54 || 19 = 5419 mismatch
+
+Trying difference operations
+ reversed operands [19->91 54->45] and reversed result [expected (91,45)->1954]
+ subtraction (a-b)
+ (91,45)->1954: 91 - 45 = 46 rev-> 64 mismatch
+ absolute difference
+ (91,45)->1954: |91 - 45| = 46 rev-> 64 mismatch
+ max mod min
+ (91,45)->1954: max(91,45) mod min(91,45) = 91 mod 45 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (91,45)->1954: -|91 - 45| = -46 rev-> -64 mismatch
+ reverse subtraction (b-a)
+ (91,45)->1954: 45 - 91 = -46 rev-> -64 mismatch
+ modulo (a mod b)
+ (91,45)->1954: 91 mod 45 = 1 rev-> 1 mismatch
+
+ identity [19 54] [expected (19,54)->1954]
+ subtraction (a-b)
+ (19,54)->1954: 19 - 54 = -35 mismatch
+ absolute difference
+ (19,54)->1954: |19 - 54| = 35 mismatch
+ max mod min
+ (19,54)->1954: max(19,54) mod min(19,54) = 54 mod 19 = 16 mismatch
+ negated absolute difference
+ (19,54)->1954: -|19 - 54| = -35 mismatch
+ reverse subtraction (b-a)
+ (19,54)->1954: 54 - 19 = 35 mismatch
+ modulo (a mod b)
+ (19,54)->1954: 19 mod 54 = 19 mismatch
+
+Trying rare operations
+ reversed operands [19->91 54->45] and reversed result [expected (91,45)->1954]
+ multiply+1
+ (91,45)->1954: (90 + 1) * 45 + 1 = 90 * 45 + 1 * 45 + 1 = 4050 + 45 + 1 = 4095 + 1 = 4096 rev-> 6904 mismatch
+ multiply-1
+ (91,45)->1954: (90 + 1) * 45 - 1 = 90 * 45 + 1 * 45 - 1 = 4050 + 45 - 1 = 4095 - 1 = 4094 rev-> 4904 mismatch
+ add+1
+ (91,45)->1954: 91 + 45 + 1 = 137 rev-> 731 mismatch
+ add-1
+ (91,45)->1954: 91 + 45 - 1 = 135 rev-> 531 mismatch
+ sub+1
+ (91,45)->1954: 91 - 45 + 1 = 47 rev-> 74 mismatch
+ sub-1
+ (91,45)->1954: 91 - 45 - 1 = 45 rev-> 54 mismatch
+ integer division (a/b)
+ (91,45)->1954: 91 / 45 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (91,45)->1954: 45 / 91 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (91,45)->1954: 45 mod 91 = 45 rev-> 54 mismatch
+ digit absolute diff
+ (91,45)->1954: |9-4| || |1-5| = 54 rev-> 45 mismatch
+ digit add mod10
+ (91,45)->1954: (9+4)%10 || (1+5)%10 = 36 rev-> 63 mismatch
+ digit sub mod10
+ (91,45)->1954: (9-4)%10 || (1-5)%10 = 56 rev-> 65 mismatch
+ cross multiply
+ (91,45)->1954: 9*4 + 1*5 = 36 + 5 = 41 rev-> 14 mismatch
+ cross multiply rev
+ (91,45)->1954: 9*5 + 1*4 = 45 + 4 = 49 rev-> 94 mismatch
+ digit multiply
+ (91,45)->1954: 9*4 || 1*5 = 36 || 5 = 365 rev-> 563 mismatch
+ digit multiply rev
+ (91,45)->1954: 9*5 || 1*4 = 45 || 4 = 454 rev-> 454 mismatch
+ digit sum diff
+ (91,45)->1954: (9+1) - (4+5) = 1 rev-> 1 mismatch
+ digit sum sum
+ (91,45)->1954: (9+1) + (4+5) = 19 rev-> 91 mismatch
+ digit product diff
+ (91,45)->1954: 9*1 - 4*5 = 9 - 20 = -11 rev-> -11 mismatch
+ digit product sum
+ (91,45)->1954: 9*1 + 4*5 = 9 + 20 = 29 rev-> 92 mismatch
+ determinant
+ (91,45)->1954: 9*5 - 1*4 = 45 - 4 = 41 rev-> 14 mismatch
+ abs determinant
+ (91,45)->1954: |9*5 - 1*4| = |45 - 4| = 41 rev-> 14 mismatch
+
+ identity [19 54] [expected (19,54)->1954]
+ multiply+1
+ (19,54)->1954: (10 + 9) * 54 + 1 = 10 * 54 + 9 * 54 + 1 = 540 + 486 + 1 = 1026 + 1 = 1027 mismatch
+ multiply-1
+ (19,54)->1954: (10 + 9) * 54 - 1 = 10 * 54 + 9 * 54 - 1 = 540 + 486 - 1 = 1026 - 1 = 1025 mismatch
+ add+1
+ (19,54)->1954: 19 + 54 + 1 = 74 mismatch
+ add-1
+ (19,54)->1954: 19 + 54 - 1 = 72 mismatch
+ sub+1
+ (19,54)->1954: 19 - 54 + 1 = -34 mismatch
+ sub-1
+ (19,54)->1954: 19 - 54 - 1 = -36 mismatch
+ integer division (a/b)
+ (19,54)->1954: 19 / 54 = 0 mismatch
+ reverse division (b/a)
+ (19,54)->1954: 54 / 19 = 2 mismatch
+ reverse modulo (b mod a)
+ (19,54)->1954: 54 mod 19 = 16 mismatch
+ digit absolute diff
+ (19,54)->1954: |1-5| || |9-4| = 45 mismatch
+ digit add mod10
+ (19,54)->1954: (1+5)%10 || (9+4)%10 = 63 mismatch
+ digit sub mod10
+ (19,54)->1954: (1-5)%10 || (9-4)%10 = 65 mismatch
+ cross multiply
+ (19,54)->1954: 1*5 + 9*4 = 5 + 36 = 41 mismatch
+ cross multiply rev
+ (19,54)->1954: 1*4 + 9*5 = 4 + 45 = 49 mismatch
+ digit multiply
+ (19,54)->1954: 1*5 || 9*4 = 5 || 36 = 536 mismatch
+ digit multiply rev
+ (19,54)->1954: 1*4 || 9*5 = 4 || 45 = 445 mismatch
+ digit sum diff
+ (19,54)->1954: (1+9) - (5+4) = 1 mismatch
+ digit sum sum
+ (19,54)->1954: (1+9) + (5+4) = 19 mismatch
+ digit product diff
+ (19,54)->1954: 1*9 - 5*4 = 9 - 20 = -11 mismatch
+ digit product sum
+ (19,54)->1954: 1*9 + 5*4 = 9 + 20 = 29 mismatch
+ determinant
+ (19,54)->1954: 1*4 - 9*5 = 4 - 45 = -41 mismatch
+ abs determinant
+ (19,54)->1954: |1*4 - 9*5| = |4 - 45| = 41 mismatch
+
+correct, actions: reversed operands, reversed result, reverse concatenation
+
+Applying to 58#99:
+ We recall that the question operator is found in the examples.
+ reversed operands [58->85, 99->99] and reversed result
+ reverse concatenation
+ (85,99): 99 || 85 = 9985 rev-> 5899
+ Result is non-negative
+ \boxed{5899}

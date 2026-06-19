@@ -1,0 +1,75 @@
+[[+]$ = +<@
+^)>@{ = ]^^?
+{^+^{ = ?
+)$'{? = ??
+@$>/) = ^@]<
+The question is {^>[$
+
+Operator symbols +>'
+Question operator symbol >
+Question operator in examples
+
+Digit symbols []$<@^){?/
+
+Checking concatenation
+left [[ op + right ]$ expected [[]$ versus +<@ mismatch
+left ^) op > right @{ expected ^)@{ versus ]^^? mismatch
+left {^ op + right ^{ expected {^^{ versus ? mismatch
+left )$ op ' right {? expected )${? versus ?? mismatch
+left @$ op > right /) expected @$/) versus ^@]< mismatch
+
+Question operator > is not concatenation
+
+Checking reverse concatenation
+left [[ op + right ]$ expected ]$[[ versus +<@ mismatch
+left ^) op > right @{ expected @{^) versus ]^^? mismatch
+left {^ op + right ^{ expected ^{{^ versus ? mismatch
+left )$ op ' right {? expected {?)$ versus ?? mismatch
+left @$ op > right /) expected /)@$ versus ^@]< mismatch
+
+Question operator > is not reverse concatenation
+
+Filtering out the concatenation operations
+[[+]$ = +<@
+^)>@{ = ]^^?
+{^+^{ = ?
+)$'{? = ??
+@$>/) = ^@]<
+
+Assigning mul
+ left [[ op + right ]$ = +<@ length 3
+ left ^) op > right @{ = ]^^? length 4 assume mul
+ left {^ op + right ^{ = ? length 1
+ left )$ op ' right {? = ?? length 2
+ left @$ op > right /) = ^@]< assumed mul
+
+Assigning sub
+ left [[ op + right ]$ = +<@ op in output assume sub
+ left ^) op > right @{ = ]^^? assumed mul
+ left {^ op + right ^{ = ? assumed sub
+ left )$ op ' right {? = ?? length 2
+ left @$ op > right /) = ^@]< assumed mul
+
+Assigning add
+ left [[ op + right ]$ = +<@ assumed sub
+ left ^) op > right @{ = ]^^? assumed mul
+ left {^ op + right ^{ = ? assumed sub
+ left )$ op ' right {? = ?? length 2
+ left @$ op > right /) = ^@]< assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left [[ op + right ]$ = +<@ assumed sub
+ left ^) op > right @{ = ]^^? assumed mul
+ left {^ op + right ^{ = ? assumed sub
+ left )$ op ' right {? = ?? length 2 assume add
+ left @$ op > right /) = ^@]< assumed mul
+ left {^ op > right [$ the question, assumed mul
+
+Trying [=2 ]=4 $=0 <=1 @=8 ^=5 )=3 {=6 ?=9 /=7
+[[+]$ = 22 sub 40 = 18 vs +<@ -18 diff 0 sub ok; 22 sub 04 = 18 vs rev +@< -81 diff 63 sub no
+^)>@{ = 53 mul 86 = 4558 vs ]^^? 4559 diff 1 mul ok + 1; 35 mul 68 = 2380 vs rev ?^^] 9554 diff 7174 mul no
+{^+^{ = 65 sub 56 = 9 vs ? 9 diff 0 sub ok; 56 sub 65 = 9 vs rev ? 9 diff 0 sub ok
+)$'{? = 30 add 69 = 99 vs ?? 99 diff 0 add ok; 03 add 96 = 99 vs rev ?? 99 diff 0 add ok
+@$>/) = 80 mul 73 = 5840 vs ^@]< 5841 diff 1 mul ok + 1; 08 mul 37 = 296 vs rev <]@^ 1485 diff 1189 mul no
+ accepted forward {^>[$ = 65 mul+1 20 = 1300 + 1 = 1301 = \boxed{<)$<}

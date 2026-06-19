@@ -1,0 +1,66 @@
+]{+[> = ||
+^[?>` = '`|`
+<(?'] = '^^`
+^^$>< = |`(
+The question is <{$>^
+
+Operator symbols +?$
+Question operator symbol $
+Question operator in examples
+
+Digit symbols ]{[>|^`'<(
+
+Checking concatenation
+left ]{ op + right [> expected ]{[> versus || mismatch
+left ^[ op ? right >` expected ^[>` versus '`|` mismatch
+left <( op ? right '] expected <('] versus '^^` mismatch
+left ^^ op $ right >< expected ^^>< versus |`( mismatch
+
+Question operator $ is not concatenation
+
+Checking reverse concatenation
+left ]{ op + right [> expected [>]{ versus || mismatch
+left ^[ op ? right >` expected >`^[ versus '`|` mismatch
+left <( op ? right '] expected ']<( versus '^^` mismatch
+left ^^ op $ right >< expected ><^^ versus |`( mismatch
+
+Question operator $ is not reverse concatenation
+
+Filtering out the concatenation operations
+]{+[> = ||
+^[?>` = '`|`
+<(?'] = '^^`
+^^$>< = |`(
+
+Assigning mul
+ left ]{ op + right [> = || length 2
+ left ^[ op ? right >` = '`|` length 4 assume mul
+ left <( op ? right '] = '^^` assumed mul
+ left ^^ op $ right >< = |`( length 3
+
+Assigning sub
+ left ]{ op + right [> = || length 2
+ left ^[ op ? right >` = '`|` assumed mul
+ left <( op ? right '] = '^^` assumed mul
+ left ^^ op $ right >< = |`( length 3
+
+Assigning add
+ left ]{ op + right [> = || length 2
+ left ^[ op ? right >` = '`|` assumed mul
+ left <( op ? right '] = '^^` assumed mul
+ left ^^ op $ right >< = |`( length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ]{ op + right [> = || length 2 assume sub
+ left ^[ op ? right >` = '`|` assumed mul
+ left <( op ? right '] = '^^` assumed mul
+ left ^^ op $ right >< = |`( assumed add
+ left <{ op $ right >^ the question, assumed add
+
+Trying ]=8 {=4 [=7 >=3 |=1 ^=6 `=0 '=2 <=9 (=5
+]{+[> = 84 sub 73 = 11 vs || 11 diff 0 sub ok; 48 sub 37 = 11 vs rev || 11 diff 0 sub ok
+^[?>` = 67 mul 30 = 2010 vs '`|` 2010 diff 0 mul ok; 76 mul 03 = 228 vs rev `|`' 0102 diff 126 mul no
+<(?'] = 95 mul 28 = 2660 vs '^^` 2660 diff 0 mul ok; 59 mul 82 = 4838 vs rev `^^' 0662 diff 4176 mul no
+^^$>< = 66 add 39 = 105 vs |`( 105 diff 0 add ok; 66 add 93 = 159 vs rev (`| 501 diff 342 add no
+ accepted forward <{$>^ = 94 add 36 = 130 = \boxed{|>`}

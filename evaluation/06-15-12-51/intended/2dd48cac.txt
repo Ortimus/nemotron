@@ -1,0 +1,185 @@
+04*31 = 125
+53-01 = -52
+43*91 = 746
+66+11 = 77
+
+The inputs are 04, 31, 53, 01, 43, 91, 66, 11
+
+The outputs are 125, -52, 746, 77
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 125, -52, 746, 77
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+04*31 -> *
+53-01 -> -
+43*91 -> *
+66+11 -> +
+
+The operators
+*
+-
++
+
+Looking at the question
+22-27 -> -
+The question operator is found in the examples.
+
+Looking at operator - [53-01 = -52]:
+
+Trying common operations
+ reversed operands [53->35 01->10] and reversed result [expected (35,10)->-52]
+ addition
+ (35,10)->-52: 35 + 10 = 45 rev-> 54 mismatch
+ multiplication
+ (35,10)->-52: (30 + 5) * 10 = 30 * 10 + 5 * 10 = 300 + 50 = 350 rev-> 053 mismatch
+ concatenation
+ (35,10)->-52: 35 || 10 = 3510 rev-> 0153 mismatch
+ reverse concatenation
+ (35,10)->-52: 10 || 35 = 1035 rev-> 5301 mismatch
+
+ identity [53 01] [expected (53,01)->-52]
+ addition
+ (53,01)->-52: 53 + 01 = 54 mismatch
+ multiplication
+ (53,01)->-52: (50 + 3) * 01 = 50 * 01 + 3 * 01 = 50 + 3 = 53 mismatch
+ concatenation
+ (53,01)->-52: 53 || 01 = 5301 mismatch
+ reverse concatenation
+ (53,01)->-52: 01 || 53 = 0153 mismatch
+
+Trying difference operations
+ reversed operands [53->35 01->10] and reversed result [expected (35,10)->-52]
+ subtraction (a-b)
+ (35,10)->-52: 35 - 10 = 25 rev-> 52 mismatch
+ absolute difference
+ (35,10)->-52: |35 - 10| = 25 rev-> 52 mismatch
+ max mod min
+ (35,10)->-52: max(35,10) mod min(35,10) = 35 mod 10 = 5 rev-> 5 mismatch
+ negated absolute difference
+ (35,10)->-52: -|35 - 10| = -25 rev-> -52 match
+ correct, actions: reversed operands, reversed result, negated absolute difference
+ reverse subtraction (b-a)
+ (35,10)->-52: 10 - 35 = -25 rev-> -52 match
+ correct, but skipping
+ modulo (a mod b)
+ (35,10)->-52: 35 mod 10 = 5 rev-> 5 mismatch
+
+ identity [53 01] [expected (53,01)->-52]
+ subtraction (a-b)
+ (53,01)->-52: 53 - 01 = 52 mismatch
+ absolute difference
+ (53,01)->-52: |53 - 01| = 52 mismatch
+ max mod min
+ (53,01)->-52: max(53,01) mod min(53,01) = 53 mod 01 = 0 mismatch
+ negated absolute difference
+ (53,01)->-52: -|53 - 01| = -52 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (53,01)->-52: 01 - 53 = -52 match
+ correct, but skipping
+ modulo (a mod b)
+ (53,01)->-52: 53 mod 01 = 0 mismatch
+
+Trying rare operations
+ reversed operands [53->35 01->10] and reversed result [expected (35,10)->-52]
+ multiply+1
+ (35,10)->-52: (30 + 5) * 10 + 1 = 30 * 10 + 5 * 10 + 1 = 300 + 50 + 1 = 350 + 1 = 351 rev-> 153 mismatch
+ multiply-1
+ (35,10)->-52: (30 + 5) * 10 - 1 = 30 * 10 + 5 * 10 - 1 = 300 + 50 - 1 = 350 - 1 = 349 rev-> 943 mismatch
+ add+1
+ (35,10)->-52: 35 + 10 + 1 = 46 rev-> 64 mismatch
+ add-1
+ (35,10)->-52: 35 + 10 - 1 = 44 rev-> 44 mismatch
+ sub+1
+ (35,10)->-52: 35 - 10 + 1 = 26 rev-> 62 mismatch
+ sub-1
+ (35,10)->-52: 35 - 10 - 1 = 24 rev-> 42 mismatch
+ integer division (a/b)
+ (35,10)->-52: 35 / 10 = 3 rev-> 3 mismatch
+ reverse division (b/a)
+ (35,10)->-52: 10 / 35 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (35,10)->-52: 10 mod 35 = 10 rev-> 01 mismatch
+ digit absolute diff
+ (35,10)->-52: |3-1| || |5-0| = 25 rev-> 52 mismatch
+ digit add mod10
+ (35,10)->-52: (3+1)%10 || (5+0)%10 = 45 rev-> 54 mismatch
+ digit sub mod10
+ (35,10)->-52: (3-1)%10 || (5-0)%10 = 25 rev-> 52 mismatch
+ cross multiply
+ (35,10)->-52: 3*1 + 5*0 = 3 + 0 = 3 rev-> 3 mismatch
+ cross multiply rev
+ (35,10)->-52: 3*0 + 5*1 = 0 + 5 = 5 rev-> 5 mismatch
+ digit multiply
+ (35,10)->-52: 3*1 || 5*0 = 3 || 0 = 30 rev-> 03 mismatch
+ digit multiply rev
+ (35,10)->-52: 3*0 || 5*1 = 0 || 5 = 05 rev-> 50 mismatch
+ digit sum diff
+ (35,10)->-52: (3+5) - (1+0) = 7 rev-> 7 mismatch
+ digit sum sum
+ (35,10)->-52: (3+5) + (1+0) = 9 rev-> 9 mismatch
+ digit product diff
+ (35,10)->-52: 3*5 - 1*0 = 15 - 0 = 15 rev-> 51 mismatch
+ digit product sum
+ (35,10)->-52: 3*5 + 1*0 = 15 + 0 = 15 rev-> 51 mismatch
+ determinant
+ (35,10)->-52: 3*0 - 5*1 = 0 - 5 = -5 rev-> -5 mismatch
+ abs determinant
+ (35,10)->-52: |3*0 - 5*1| = |0 - 5| = 5 rev-> 5 mismatch
+
+ identity [53 01] [expected (53,01)->-52]
+ multiply+1
+ (53,01)->-52: (50 + 3) * 01 + 1 = 50 * 01 + 3 * 01 + 1 = 50 + 3 + 1 = 53 + 1 = 54 mismatch
+ multiply-1
+ (53,01)->-52: (50 + 3) * 01 - 1 = 50 * 01 + 3 * 01 - 1 = 50 + 3 - 1 = 53 - 1 = 52 mismatch
+ add+1
+ (53,01)->-52: 53 + 01 + 1 = 55 mismatch
+ add-1
+ (53,01)->-52: 53 + 01 - 1 = 53 mismatch
+ sub+1
+ (53,01)->-52: 53 - 01 + 1 = 53 mismatch
+ sub-1
+ (53,01)->-52: 53 - 01 - 1 = 51 mismatch
+ integer division (a/b)
+ (53,01)->-52: 53 / 01 = 53 mismatch
+ reverse division (b/a)
+ (53,01)->-52: 01 / 53 = 0 mismatch
+ reverse modulo (b mod a)
+ (53,01)->-52: 01 mod 53 = 1 mismatch
+ digit absolute diff
+ (53,01)->-52: |5-0| || |3-1| = 52 mismatch
+ digit add mod10
+ (53,01)->-52: (5+0)%10 || (3+1)%10 = 54 mismatch
+ digit sub mod10
+ (53,01)->-52: (5-0)%10 || (3-1)%10 = 52 mismatch
+ cross multiply
+ (53,01)->-52: 5*0 + 3*1 = 0 + 3 = 3 mismatch
+ cross multiply rev
+ (53,01)->-52: 5*1 + 3*0 = 5 + 0 = 5 mismatch
+ digit multiply
+ (53,01)->-52: 5*0 || 3*1 = 0 || 3 = 03 mismatch
+ digit multiply rev
+ (53,01)->-52: 5*1 || 3*0 = 5 || 0 = 50 mismatch
+ digit sum diff
+ (53,01)->-52: (5+3) - (0+1) = 7 mismatch
+ digit sum sum
+ (53,01)->-52: (5+3) + (0+1) = 9 mismatch
+ digit product diff
+ (53,01)->-52: 5*3 - 0*1 = 15 - 0 = 15 mismatch
+ digit product sum
+ (53,01)->-52: 5*3 + 0*1 = 15 + 0 = 15 mismatch
+ determinant
+ (53,01)->-52: 5*1 - 3*0 = 5 - 0 = 5 mismatch
+ abs determinant
+ (53,01)->-52: |5*1 - 3*0| = |5 - 0| = 5 mismatch
+
+correct, actions: reversed operands, reversed result, negated absolute difference
+
+Applying to 22-27:
+ We recall that the question operator is found in the examples.
+ reversed operands [22->22, 27->72] and reversed result
+ negated absolute difference
+ (22,72): -|22 - 72| = -50 rev-> -05
+ Result is negative - we add back the operator prefix -
+ -05 -> \boxed{-05}

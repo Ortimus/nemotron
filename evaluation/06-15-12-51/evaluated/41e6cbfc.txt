@@ -1,0 +1,184 @@
+05+12 = 1205
+02*63 = 6302
+69+97 = 9769
+61+47 = 4761
+
+The inputs are 05, 12, 02, 63, 69, 97, 61, 47
+
+The outputs are 1205, 6302, 9769, 4761
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+05+12 -> +
+02*63 -> *
+69+97 -> +
+61+47 -> +
+
+The operators
++
+*
+
+Looking at the question
+18+93 -> +
+The question operator is found in the examples.
+
+Looking at operator + [05+12 = 1205, 69+97 = 9769, 61+47 = 4761]:
+
+Trying common operations
+ reversed operands [05->50 12->21, 69->96 97->79, 61->16 47->74] and reversed result [expected (50,21)->1205, (96,79)->9769, (16,74)->4761]
+ addition
+ (50,21)->1205: 50 + 21 = 71 rev-> 17 mismatch
+ multiplication
+ (96,79)->9769: (90 + 6) * 79 = 90 * 79 + 6 * 79 = 7110 + 474 = 7584 rev-> 4857 mismatch
+ concatenation
+ (16,74)->4761: 16 || 74 = 1674 rev-> 4761 match
+ (50,21)->1205: 50 || 21 = 5021 rev-> 1205 match
+ (96,79)->9769: 96 || 79 = 9679 rev-> 9769 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (50,21)->1205: 21 || 50 = 2150 rev-> 0512 mismatch
+
+ identity [05 12, 69 97, 61 47] [expected (05,12)->1205, (69,97)->9769, (61,47)->4761]
+ addition
+ (05,12)->1205: 05 + 12 = 17 mismatch
+ multiplication
+ (69,97)->9769: (60 + 9) * 97 = 60 * 97 + 9 * 97 = 5820 + 873 = 6693 mismatch
+ concatenation
+ (61,47)->4761: 61 || 47 = 6147 mismatch
+ reverse concatenation
+ (05,12)->1205: 12 || 05 = 1205 match
+ (69,97)->9769: 97 || 69 = 9769 match
+ (61,47)->4761: 47 || 61 = 4761 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [05->50 12->21, 69->96 97->79, 61->16 47->74] and reversed result [expected (50,21)->1205, (96,79)->9769, (16,74)->4761]
+ subtraction (a-b)
+ (50,21)->1205: 50 - 21 = 29 rev-> 92 mismatch
+ absolute difference
+ (96,79)->9769: |96 - 79| = 17 rev-> 71 mismatch
+ max mod min
+ (16,74)->4761: max(16,74) mod min(16,74) = 74 mod 16 = 10 rev-> 01 mismatch
+ negated absolute difference
+ (50,21)->1205: -|50 - 21| = -29 rev-> -92 mismatch
+ reverse subtraction (b-a)
+ (96,79)->9769: 79 - 96 = -17 rev-> -71 mismatch
+ modulo (a mod b)
+ (16,74)->4761: 16 mod 74 = 16 rev-> 61 mismatch
+
+ identity [05 12, 69 97, 61 47] [expected (05,12)->1205, (69,97)->9769, (61,47)->4761]
+ subtraction (a-b)
+ (05,12)->1205: 05 - 12 = -7 mismatch
+ absolute difference
+ (69,97)->9769: |69 - 97| = 28 mismatch
+ max mod min
+ (61,47)->4761: max(61,47) mod min(61,47) = 61 mod 47 = 14 mismatch
+ negated absolute difference
+ (05,12)->1205: -|05 - 12| = -7 mismatch
+ reverse subtraction (b-a)
+ (69,97)->9769: 97 - 69 = 28 mismatch
+ modulo (a mod b)
+ (61,47)->4761: 61 mod 47 = 14 mismatch
+
+Trying rare operations
+ reversed operands [05->50 12->21, 69->96 97->79, 61->16 47->74] and reversed result [expected (50,21)->1205, (96,79)->9769, (16,74)->4761]
+ multiply+1
+ (50,21)->1205: (50 + 0) * 21 + 1 = 50 * 21 + 0 * 21 + 1 = 1050 + 0 + 1 = 1050 + 1 = 1051 rev-> 1501 mismatch
+ multiply-1
+ (96,79)->9769: (90 + 6) * 79 - 1 = 90 * 79 + 6 * 79 - 1 = 7110 + 474 - 1 = 7584 - 1 = 7583 rev-> 3857 mismatch
+ add+1
+ (16,74)->4761: 16 + 74 + 1 = 91 rev-> 19 mismatch
+ add-1
+ (50,21)->1205: 50 + 21 - 1 = 70 rev-> 07 mismatch
+ sub+1
+ (96,79)->9769: 96 - 79 + 1 = 18 rev-> 81 mismatch
+ sub-1
+ (16,74)->4761: 16 - 74 - 1 = -59 rev-> -95 mismatch
+ integer division (a/b)
+ (50,21)->1205: 50 / 21 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (96,79)->9769: 79 / 96 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (16,74)->4761: 74 mod 16 = 10 rev-> 01 mismatch
+ digit absolute diff
+ (50,21)->1205: |5-2| || |0-1| = 31 rev-> 13 mismatch
+ digit add mod10
+ (96,79)->9769: (9+7)%10 || (6+9)%10 = 65 rev-> 56 mismatch
+ digit sub mod10
+ (16,74)->4761: (1-7)%10 || (6-4)%10 = 42 rev-> 24 mismatch
+ cross multiply
+ (50,21)->1205: 5*2 + 0*1 = 10 + 0 = 10 rev-> 01 mismatch
+ cross multiply rev
+ (96,79)->9769: 9*9 + 6*7 = 81 + 42 = 123 rev-> 321 mismatch
+ digit multiply
+ (16,74)->4761: 1*7 || 6*4 = 7 || 24 = 724 rev-> 427 mismatch
+ digit multiply rev
+ (50,21)->1205: 5*1 || 0*2 = 5 || 0 = 50 rev-> 05 mismatch
+ digit sum diff
+ (96,79)->9769: (9+6) - (7+9) = -1 rev-> -1 mismatch
+ digit sum sum
+ (16,74)->4761: (1+6) + (7+4) = 18 rev-> 81 mismatch
+ digit product diff
+ (50,21)->1205: 5*0 - 2*1 = 0 - 2 = -2 rev-> -2 mismatch
+ digit product sum
+ (96,79)->9769: 9*6 + 7*9 = 54 + 63 = 117 rev-> 711 mismatch
+ determinant
+ (16,74)->4761: 1*4 - 6*7 = 4 - 42 = -38 rev-> -83 mismatch
+ abs determinant
+ (50,21)->1205: |5*1 - 0*2| = |5 - 0| = 5 rev-> 5 mismatch
+
+ identity [05 12, 69 97, 61 47] [expected (05,12)->1205, (69,97)->9769, (61,47)->4761]
+ multiply+1
+ (05,12)->1205: (0 + 5) * 12 + 1 = 0 * 12 + 5 * 12 + 1 = 0 + 60 + 1 = 60 + 1 = 61 mismatch
+ multiply-1
+ (69,97)->9769: (60 + 9) * 97 - 1 = 60 * 97 + 9 * 97 - 1 = 5820 + 873 - 1 = 6693 - 1 = 6692 mismatch
+ add+1
+ (61,47)->4761: 61 + 47 + 1 = 109 mismatch
+ add-1
+ (05,12)->1205: 05 + 12 - 1 = 16 mismatch
+ sub+1
+ (69,97)->9769: 69 - 97 + 1 = -27 mismatch
+ sub-1
+ (61,47)->4761: 61 - 47 - 1 = 13 mismatch
+ integer division (a/b)
+ (05,12)->1205: 05 / 12 = 0 mismatch
+ reverse division (b/a)
+ (69,97)->9769: 97 / 69 = 1 mismatch
+ reverse modulo (b mod a)
+ (61,47)->4761: 47 mod 61 = 47 mismatch
+ digit absolute diff
+ (05,12)->1205: |0-1| || |5-2| = 13 mismatch
+ digit add mod10
+ (69,97)->9769: (6+9)%10 || (9+7)%10 = 56 mismatch
+ digit sub mod10
+ (61,47)->4761: (6-4)%10 || (1-7)%10 = 24 mismatch
+ cross multiply
+ (05,12)->1205: 0*1 + 5*2 = 0 + 10 = 10 mismatch
+ cross multiply rev
+ (69,97)->9769: 6*7 + 9*9 = 42 + 81 = 123 mismatch
+ digit multiply
+ (61,47)->4761: 6*4 || 1*7 = 24 || 7 = 247 mismatch
+ digit multiply rev
+ (05,12)->1205: 0*2 || 5*1 = 0 || 5 = 05 mismatch
+ digit sum diff
+ (69,97)->9769: (6+9) - (9+7) = -1 mismatch
+ digit sum sum
+ (61,47)->4761: (6+1) + (4+7) = 18 mismatch
+ digit product diff
+ (05,12)->1205: 0*5 - 1*2 = 0 - 2 = -2 mismatch
+ digit product sum
+ (69,97)->9769: 6*9 + 9*7 = 54 + 63 = 117 mismatch
+ determinant
+ (61,47)->4761: 6*7 - 1*4 = 42 - 4 = 38 mismatch
+ abs determinant
+ (05,12)->1205: |0*2 - 5*1| = |0 - 5| = 5 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 18+93:
+ We recall that the question operator is found in the examples.
+ reversed operands [18->81, 93->39] and reversed result
+ concatenation
+ (81,39): 81 || 39 = 8139 rev-> 9318
+ Result is non-negative
+ \boxed{9318}

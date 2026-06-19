@@ -1,0 +1,75 @@
+">-"? = ?
+%'+'^ = ?\
+'?+{^ = !>
+'{*?> = %\`?
+!>+{{ = ^>{
+The question is {!+!`
+
+Operator symbols -+*
+Question operator symbol +
+Question operator in examples
+
+Digit symbols ">?%'^\{!`
+
+Checking concatenation
+left "> op - right "? expected ">"? versus ? mismatch
+left %' op + right '^ expected %''^ versus ?\ mismatch
+left '? op + right {^ expected '?{^ versus !> mismatch
+left '{ op * right ?> expected '{?> versus %\`? mismatch
+left !> op + right {{ expected !>{{ versus ^>{ mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left "> op - right "? expected "?"> versus ? mismatch
+left %' op + right '^ expected '^%' versus ?\ mismatch
+left '? op + right {^ expected {^'? versus !> mismatch
+left '{ op * right ?> expected ?>'{ versus %\`? mismatch
+left !> op + right {{ expected {{!> versus ^>{ mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+">-"? = ?
+%'+'^ = ?\
+'?+{^ = !>
+'{*?> = %\`?
+!>+{{ = ^>{
+
+Assigning mul
+ left "> op - right "? = ? length 1
+ left %' op + right '^ = ?\ length 2
+ left '? op + right {^ = !> length 2
+ left '{ op * right ?> = %\`? length 4 assume mul
+ left !> op + right {{ = ^>{ length 3
+
+Assigning sub
+ left "> op - right "? = ? length 1 assume sub
+ left %' op + right '^ = ?\ length 2
+ left '? op + right {^ = !> length 2
+ left '{ op * right ?> = %\`? assumed mul
+ left !> op + right {{ = ^>{ length 3
+
+Assigning add
+ left "> op - right "? = ? assumed sub
+ left %' op + right '^ = ?\ length 2
+ left '? op + right {^ = !> length 2
+ left '{ op * right ?> = %\`? assumed mul
+ left !> op + right {{ = ^>{ length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left "> op - right "? = ? assumed sub
+ left %' op + right '^ = ?\ assumed add
+ left '? op + right {^ = !> assumed add
+ left '{ op * right ?> = %\`? assumed mul
+ left !> op + right {{ = ^>{ assumed add
+ left {! op + right !` the question, assumed add
+
+Trying "=3 >=0 ?=9 %=4 '=5 ^=1 \=6 {=2 !=8 `=7
+">-"? = 30 sub 39 = 9 vs ? 9 diff 0 sub ok; 03 sub 93 = 90 vs rev ? 9 diff 81 sub no
+%'+'^ = 45 add 51 = 96 vs ?\ 96 diff 0 add ok; 54 add 15 = 69 vs rev \? 69 diff 0 add ok
+'?+{^ = 59 add 21 = 80 vs !> 80 diff 0 add ok; 95 add 12 = 107 vs rev >! 08 diff 99 add no
+'{*?> = 52 mul 90 = 4680 vs %\`? 4679 diff 1 mul ok - 1; 25 mul 09 = 225 vs rev ?`\% 9764 diff 9539 mul no
+!>+{{ = 80 add 22 = 102 vs ^>{ 102 diff 0 add ok; 08 add 22 = 30 vs rev {>^ 201 diff 171 add no
+ accepted forward {!+!` = 28 add 87 = 115 = \boxed{^^'}

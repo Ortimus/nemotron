@@ -1,0 +1,255 @@
+?>#"> = {|
+/|#(| = "|
+<"[}! = ((>
+}":>/ = !//|
+!>["| = >>
+The question is /{:"|
+
+Operator symbols #[:
+Question operator symbol :
+Question operator in examples
+
+Digit symbols ?>"{|/(<}!
+
+Checking concatenation
+left ?> op # right "> expected ?>"> versus {| mismatch
+left /| op # right (| expected /|(| versus "| mismatch
+left <" op [ right }! expected <"}! versus ((> mismatch
+left }" op : right >/ expected }">/ versus !//| mismatch
+left !> op [ right "| expected !>"| versus >> mismatch
+
+Question operator : is not concatenation
+
+Checking reverse concatenation
+left ?> op # right "> expected ">?> versus {| mismatch
+left /| op # right (| expected (|/| versus "| mismatch
+left <" op [ right }! expected }!<" versus ((> mismatch
+left }" op : right >/ expected >/}" versus !//| mismatch
+left !> op [ right "| expected "|!> versus >> mismatch
+
+Question operator : is not reverse concatenation
+
+Filtering out the concatenation operations
+?>#"> = {|
+/|#(| = "|
+<"[}! = ((>
+}":>/ = !//|
+!>["| = >>
+
+Assigning mul
+ left ?> op # right "> = {| length 2
+ left /| op # right (| = "| length 2
+ left <" op [ right }! = ((> length 3
+ left }" op : right >/ = !//| length 4 assume mul
+ left !> op [ right "| = >> length 2
+
+Assigning sub
+ left ?> op # right "> = {| length 2
+ left /| op # right (| = "| length 2
+ left <" op [ right }! = ((> length 3
+ left }" op : right >/ = !//| assumed mul
+ left !> op [ right "| = >> length 2
+
+Assigning add
+ left ?> op # right "> = {| length 2
+ left /| op # right (| = "| length 2
+ left <" op [ right }! = ((> length 3 assume add
+ left }" op : right >/ = !//| assumed mul
+ left !> op [ right "| = >> assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ?> op # right "> = {| length 2 assume sub
+ left /| op # right (| = "| assumed sub
+ left <" op [ right }! = ((> assumed add
+ left }" op : right >/ = !//| assumed mul
+ left !> op [ right "| = >> assumed add
+ left /{ op : right "| the question, assumed mul
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+/|#(| = 64 sub 74 = 10 vs "| 34 diff 24 sub no; 46 sub 47 = 1 vs rev |" 43 diff 42 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 14 rev 06 mul 41 = 246 rev 642 = final answer: /|>
+
+Trying ?=5 >=9 "=2 {=0 |=4 /=6 (=7 <=8 }=1 !=3
+?>#"> = 59 sub 29 = 30 vs {| 04 diff 26 sub no; 95 sub 92 = 3 vs rev |{ 40 diff 37 sub no
+ rejected none /{:"| = 60 mul 24 rev 06 mul 42 = 252 rev 252 = final answer: "?"
+
+Trying ?=1 >=5 "=9 {=0 |=4 /=6 (=7 <=8 }=2 !=3
+?>#"> = 15 sub 95 = 80 vs {| 04 diff 76 sub no; 51 sub 59 = 8 vs rev |{ 40 diff 32 sub no
+ rejected none /{:"| = 60 mul 94 rev 06 mul 49 = 294 rev 492 = final answer: |"}
+
+Trying ?=3 >=8 "=5 {=0 |=4 /=6 (=7 <=2 }=1 !=9
+?>#"> = 38 sub 58 = 20 vs {| 04 diff 16 sub no; 83 sub 85 = 2 vs rev |{ 40 diff 38 sub no
+ rejected none /{:"| = 60 mul 54 rev 06 mul 45 = 270 rev 072 = final answer: {(<
+
+Trying ?=2 >=1 "=3 {=0 |=4 /=6 (=7 <=8 }=5 !=9
+?>#"> = 21 sub 31 = 10 vs {| 04 diff 6 sub no; 12 sub 13 = 1 vs rev |{ 40 diff 39 sub no
+ rejected forward /{:"| = 60 mul 34 = 2040 = final answer: ?{"{
+
+Trying ?=9 >=2 "=1 {=0 |=4 /=6 (=7 <=8 }=5 !=3
+?>#"> = 92 sub 12 = 80 vs {| 04 diff 76 sub no; 29 sub 21 = 8 vs rev |{ 40 diff

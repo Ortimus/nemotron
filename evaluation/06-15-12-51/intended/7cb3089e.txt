@@ -1,0 +1,66 @@
+!$*?^ = %?!%
+(?*$% = "||%
+?|+"( = ^^
+"$+^| = %?"
+The question is ^^-!$
+
+Operator symbols *+
+Question operator symbol -
+Question operator not in examples
+
+Digit symbols !$?^%("|
+
+Checking concatenation
+left !$ op * right ?^ expected !$?^ versus %?!% mismatch
+left (? op * right $% expected (?$% versus "||% mismatch
+left ?| op + right "( expected ?|"( versus ^^ mismatch
+left "$ op + right ^| expected "$^| versus %?" mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left !$ op * right ?^ expected ?^!$ versus %?!% mismatch
+left (? op * right $% expected $%(? versus "||% mismatch
+left ?| op + right "( expected "(?| versus ^^ mismatch
+left "$ op + right ^| expected ^|"$ versus %?" mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+!$*?^ = %?!%
+(?*$% = "||%
+?|+"( = ^^
+"$+^| = %?"
+
+Assigning mul
+ left !$ op * right ?^ = %?!% length 4 assume mul
+ left (? op * right $% = "||% assumed mul
+ left ?| op + right "( = ^^ length 2
+ left "$ op + right ^| = %?" length 3
+
+Assigning sub
+ left !$ op * right ?^ = %?!% assumed mul
+ left (? op * right $% = "||% assumed mul
+ left ?| op + right "( = ^^ length 2
+ left "$ op + right ^| = %?" length 3
+
+Assigning add
+ left !$ op * right ?^ = %?!% assumed mul
+ left (? op * right $% = "||% assumed mul
+ left ?| op + right "( = ^^ length 2
+ left "$ op + right ^| = %?" length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left !$ op * right ?^ = %?!% assumed mul
+ left (? op * right $% = "||% assumed mul
+ left ?| op + right "( = ^^ assumed add
+ left "$ op + right ^| = %?" assumed add
+ left ^^ op - right !$ the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying !=4 $=6 ?=2 ^=7 %=1 (=8 "=5 |=0 A=3 B=9
+!$*?^ = 46 mul 27 = 1242 vs %?!% 1241 diff 1 mul ok - 1; 64 mul 72 = 4608 vs rev %!?% 1421 diff 3187 mul no
+(?*$% = 82 mul 61 = 5002 vs "||% 5001 diff 1 mul ok - 1; 28 mul 16 = 448 vs rev %||" 1005 diff 557 mul no
+?|+"( = 20 add 58 = 78 vs ^^ 77 diff 1 add ok - 1; 02 add 85 = 87 vs rev ^^ 77 diff 10 add no
+"$+^| = 56 add 70 = 126 vs %?" 125 diff 1 add ok - 1; 65 add 07 = 72 vs rev "?% 521 diff 449 add no
+ accepted forward ^^-!$ = 77 sub 46 = 31 = \boxed{A%}

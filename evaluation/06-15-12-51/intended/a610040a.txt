@@ -1,0 +1,526 @@
+@&-&? = ?:
+<&*>| = >&|:
+<"+<@ = <@<"
+("-|| = "
+@{+@| = @|@{
+The question is &@*@{
+
+Operator symbols -*+
+Question operator symbol *
+Question operator in examples
+
+Digit symbols @&?:<>|"({
+
+Checking concatenation
+left @& op - right &? expected @&&? versus ?: mismatch
+left <& op * right >| expected <&>| versus >&|: mismatch
+left <" op + right <@ expected <"<@ versus <@<" mismatch
+left (" op - right || expected ("|| versus " mismatch
+left @{ op + right @| expected @{@| versus @|@{ mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left @& op - right &? expected &?@& versus ?: mismatch
+left <& op * right >| expected >|<& versus >&|: mismatch
+left <" op + right <@ expected <@<" versus <@<" match +
+left (" op - right || expected ||(" versus " mismatch
+left @{ op + right @| expected @|@{ versus @|@{ match +
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+@&-&? = ?:
+<&*>| = >&|:
+("-|| = "
+
+Assigning mul
+ left @& op - right &? = ?: length 2
+ left <& op * right >| = >&|: length 4 assume mul
+ left (" op - right || = " length 1
+
+Assigning sub
+ left @& op - right &? = ?: length 2
+ left <& op * right >| = >&|: assumed mul
+ left (" op - right || = " length 1 assume sub
+
+Assigning add
+ left @& op - right &? = ?: assumed sub
+ left <& op * right >| = >&|: assumed mul
+ left (" op - right || = " assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left @& op - right &? = ?: assumed sub
+ left <& op * right >| = >&|: assumed mul
+ left (" op - right || = " assumed sub
+ left &@ op * right @{ the question, assumed mul
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=2 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 15 sub 53 = 38 vs ?: 32 diff 6 sub no; 51 sub 35 = 16 vs rev :? 23 diff 7 sub no
+ rejected none &@*@{ = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: &@
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=4 &=0 ?=1 :=3 <=9 >=5 |=7 "=8 (=6 {=2
+@&-&? = 40 sub 01 = 39 vs ?: 13 diff 26 sub no; 04 sub 10 = 6 vs rev :? 31 diff 25 sub no
+ rejected none &@*@{ = 04 mul 42 rev 40 mul 24 = 960 rev 069 = final answer: &(<
+
+Trying @=8 &=9 ?=0 :=1 <=3 >=4 |=7 "=5 (=6 {=2
+@&-&? = 89 sub 90 = 1 vs ?: 01 diff 0 sub ok; 98 sub 09 = 89 vs rev :? 10 diff 79 sub no
+<&*>| = 39 mul 47 = 1833 vs >&|: 4971 diff 3138 mul no; 93 mul 74 = 6882 vs rev :|&> 1794 diff 5088 mul no
+ rejected forward &@*@{ = 98 mul 82 = 8036 = final answer: @?<(
+
+Trying @=9 &=6 ?=8 :=1 <=5 >=4 |=7 "=2 (=3 {=0
+@&-&? = 96 sub 68 = 28 vs ?: 81 diff 53 sub no; 69 sub 86 = 17 vs rev :? 18 diff 1 sub ok + 1
+<&*>| = 56 mul 47 = 2632 vs >&|: 4671 diff 2039 mul no; 65 mul 74 = 4810 vs rev :|&> 1764 diff 3046 mul no
+ rejected rev &@*@{ = 69 mul 90 rev 96 mul 09 = 864 rev 468 = final answer: >&?
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=7 &=0 ?=1 :=3 <=9 >=4 |=5 "=8 (=6 {=2
+@&-&? = 70 sub 01 = 69 vs ?: 13 diff 56 sub no; 07 sub 10 = 3 vs rev :? 31 diff 28 sub no
+ rejected none &@*@{ = 07 mul 72 rev 70 mul 27 = 1890 rev 0981 = final answer: &<"?
+
+Trying @=3 &=4 ?=0 :=2 <=9 >=5 |=7 "=8 (=6 {=1
+@&-&? = 34 sub 40 = 6 vs ?: 02 diff 4 sub no; 43 sub 04 = 39 vs rev :? 20 diff 19 sub no
+ rejected none &@*@{ = 43 mul 31 rev 34 mul 13 = 442 rev 244 = final answer: :&&
+
+Trying @=6 &=9 ?=7 :=1 <=3 >=4 |=2 "=8 (=5 {=0
+@&-&? = 69 sub 97 = 28 vs ?: 71 diff 43 sub no; 96 sub 79 = 17 vs rev :? 17 diff 0 sub ok
+<&*>| = 39 mul 42 = 1638 vs >&|: 4921 diff 3283 mul no; 93 mul 24 = 2232 vs rev :|&> 1294 diff 938 mul no
+ rejected rev &@*@{ = 96 mul 60 rev 69 mul 06 = 414 rev 414 = final answer: >:>
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=2 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 15 sub 53 = 38 vs ?: 32 diff 6 sub no; 51 sub 35 = 16 vs rev :? 23 diff 7 sub no
+ rejected none &@*@{ = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: &@
+
+Trying @=0 &=1 ?=5 :=3 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 01 sub 15 = 14 vs ?: 53 diff 39 sub no; 10 sub 51 = 41 vs rev :? 35 diff 6 sub no
+ rejected none &@*@{ = 10 mul 02 rev 01 mul 20 = 20 rev 02 = final answer: @{
+
+Trying @=7 &=0 ?=1 :=2 <=9 >=4 |=5 "=8 (=6 {=3
+@&-&? = 70 sub 01 = 69 vs ?: 12 diff 57 sub no; 07 sub 10 = 3 vs rev :? 21 diff 18 sub no
+ rejected none &@*@{ = 07 mul 73 rev 70 mul 37 = 2590 rev 0952 = final answer: &<|:
+
+Trying @=3 &=4 ?=0 :=1 <=9 >=5 |=7 "=8 (=6 {=2
+@&-&? = 34 sub 40 = 6 vs ?: 01 diff 5 sub no; 43 sub 04 = 39 vs rev :? 10 diff 29 sub no
+ rejected none &@*@{ = 43 mul 32 rev 34 mul 23 = 782 rev 287 = final answer: {"|
+
+Trying @=9 &=6 ?=8 :=1 <=5 >=4 |=7 "=2 (=3 {=0
+@&-&? = 96 sub 68 = 28 vs ?: 81 diff 53 sub no; 69 sub 86 = 17 vs rev :? 18 diff 1 sub ok + 1
+<&*>| = 56 mul 47 = 2632 vs >&|: 4671 diff 2039 mul no; 65 mul 74 = 4810 vs rev :|&> 1764 diff 3046 mul no
+ rejected rev &@*@{ = 69 mul 90 rev 96 mul 09 = 864 rev 468 = final answer: >&?
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=6 &=0 ?=1 :=3 <=9 >=4 |=7 "=8 (=5 {=2
+@&-&? = 60 sub 01 = 59 vs ?: 13 diff 46 sub no; 06 sub 10 = 4 vs rev :? 31 diff 27 sub no
+ rejected none &@*@{ = 06 mul 62 rev 60 mul 26 = 1560 rev 0651 = final answer: &@(?
+
+Trying @=8 &=9 ?=0 :=2 <=3 >=4 |=7 "=5 (=6 {=1
+@&-&? = 89 sub 90 = 1 vs ?: 02 diff 1 sub ok + 1; 98 sub 09 = 89 vs rev :? 20 diff 69 sub no
+<&*>| = 39 mul 47 = 1833 vs >&|: 4972 diff 3139 mul no; 93 mul 74 = 6882 vs rev :|&> 2794 diff 4088 mul no
+ rejected forward &@*@{ = 98 mul 81 = 7938 = final answer: |&<@
+
+Trying @=4 &=8 ?=6 :=1 <=9 >=5 |=7 "=3 (=2 {=0
+@&-&? = 48 sub 86 = 38 vs ?: 61 diff 23 sub no; 84 sub 68 = 16 vs rev :? 16 diff 0 sub ok
+<&*>| = 98 mul 57 = 5586 vs >&|: 5871 diff 285 mul no; 89 mul 75 = 6675 vs rev :|&> 1785 diff 4890 mul no
+ rejected rev &@*@{ = 84 mul 40 rev 48 mul 04 = 192 rev 291 = final answer: (<:
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=6 &=0 ?=1 :=2 <=9 >=4 |=7 "=8 (=5 {=3
+@&-&? = 60 sub 01 = 59 vs ?: 12 diff 47 sub no; 06 sub 10 = 4 vs rev :? 21 diff 17 sub no
+ rejected none &@*@{ = 06 mul 63 rev 60 mul 36 = 2160 rev 0612 = final answer: &@?:
+
+Trying @=8 &=9 ?=0 :=1 <=3 >=4 |=7 "=5 (=6 {=2
+@&-&? = 89 sub 90 = 1 vs ?: 01 diff 0 sub ok; 98 sub 09 = 89 vs rev :? 10 diff 79 sub no
+<&*>| = 39 mul 47 = 1833 vs >&|: 4971 diff 3138 mul no; 93 mul 74 = 6882 vs rev :|&> 1794 diff 5088 mul no
+ rejected forward &@*@{ = 98 mul 82 = 8036 = final answer: @?<(
+
+Trying @=7 &=6 ?=8 :=1 <=9 >=4 |=5 "=2 (=3 {=0
+@&-&? = 76 sub 68 = 8 vs ?: 81 diff 73 sub no; 67 sub 86 = 19 vs rev :? 18 diff 1 sub ok - 1
+<&*>| = 96 mul 45 = 4320 vs >&|: 4651 diff 331 mul no; 69 mul 54 = 3726 vs rev :|&> 1564 diff 2162 mul no
+ rejected rev &@*@{ = 67 mul 70 rev 76 mul 07 = 532 rev 235 = final answer: "(|
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=3 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 01 sub 15 = 14 vs ?: 53 diff 39 sub no; 10 sub 51 = 41 vs rev :? 35 diff 6 sub no
+ rejected none &@*@{ = 10 mul 02 rev 01 mul 20 = 20 rev 02 = final answer: @{
+
+Trying @=4 &=0 ?=1 :=2 <=9 >=5 |=7 "=8 (=6 {=3
+@&-&? = 40 sub 01 = 39 vs ?: 12 diff 27 sub no; 04 sub 10 = 6 vs rev :? 21 diff 15 sub no
+ rejected none &@*@{ = 04 mul 43 rev 40 mul 34 = 1360 rev 0631 = final answer: &({?
+
+Trying @=8 &=7 ?=0 :=2 <=9 >=4 |=3 "=5 (=6 {=1
+@&-&? = 87 sub 70 = 17 vs ?: 02 diff 15 sub no; 78 sub 07 = 71 vs rev :? 20 diff 51 sub no
+ rejected none &@*@{ = 78 mul 81 rev 87 mul 18 = 1566 rev 6651 = final answer: (("{
+
+Trying @=9 &=2 ?=4 :=1 <=5 >=3 |=7 "=8 (=6 {=0
+@&-&? = 92 sub 24 = 68 vs ?: 41 diff 27 sub no; 29 sub 42 = 13 vs rev :? 14 diff 1 sub ok + 1
+<&*>| = 52 mul 37 = 1924 vs >&|: 3271 diff 1347 mul no; 25 mul 73 = 1825 vs rev :|&> 1723 diff 102 mul no
+ rejected rev &@*@{ = 29 mul 90 rev 92 mul 09 = 828 rev 828 = final answer: "&"
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=7 &=0 ?=1 :=3 <=9 >=4 |=5 "=8 (=6 {=2
+@&-&? = 70 sub 01 = 69 vs ?: 13 diff 56 sub no; 07 sub 10 = 3 vs rev :? 31 diff 28 sub no
+ rejected none &@*@{ = 07 mul 72 rev 70 mul 27 = 1890 rev 0981 = final answer: &<"?
+
+Trying @=3 &=4 ?=0 :=2 <=9 >=5 |=7 "=8 (=6 {=1
+@&-&? = 34 sub 40 = 6 vs ?: 02 diff 4 sub no; 43 sub 04 = 39 vs rev :? 20 diff 19 sub no
+ rejected none &@*@{ = 43 mul 31 rev 34 mul 13 = 442 rev 244 = final answer: :&&
+
+Trying @=8 &=7 ?=9 :=1 <=2 >=4 |=3 "=5 (=6 {=0
+@&-&? = 87 sub 79 = 8 vs ?: 91 diff 83 sub no; 78 sub 97 = 19 vs rev :? 19 diff 0 sub ok
+<&*>| = 27 mul 43 = 1161 vs >&|: 4731 diff 3570 mul no; 72 mul 34 = 2448 vs rev :|&> 1374 diff 1074 mul no
+ rejected rev &@*@{ = 78 mul 80 rev 87 mul 08 = 696 rev 696 = final answer: (?(
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=2 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 15 sub 53 = 38 vs ?: 32 diff 6 sub no; 51 sub 35 = 16 vs rev :? 23 diff 7 sub no
+ rejected none &@*@{ = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: &@
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=6 &=0 ?=1 :=3 <=9 >=4 |=7 "=8 (=5 {=2
+@&-&? = 60 sub 01 = 59 vs ?: 13 diff 46 sub no; 06 sub 10 = 4 vs rev :? 31 diff 27 sub no
+ rejected none &@*@{ = 06 mul 62 rev 60 mul 26 = 1560 rev 0651 = final answer: &@(?
+
+Trying @=9 &=8 ?=0 :=2 <=5 >=4 |=7 "=3 (=6 {=1
+@&-&? = 98 sub 80 = 18 vs ?: 02 diff 16 sub no; 89 sub 08 = 81 vs rev :? 20 diff 61 sub no
+ rejected none &@*@{ = 89 mul 91 rev 98 mul 19 = 1862 rev 2681 = final answer: :(&{
+
+Trying @=7 &=6 ?=9 :=0 <=2 >=4 |=5 "=8 (=3 {=1
+@&-&? = 76 sub 69 = 7 vs ?: 90 diff 83 sub no; 67 sub 96 = 29 vs rev :? 09 diff 20 sub no
+ rejected none &@*@{ = 67 mul 71 rev 76 mul 17 = 1292 rev 2921 = final answer: <?<{
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=3 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 01 sub 15 = 14 vs ?: 53 diff 39 sub no; 10 sub 51 = 41 vs rev :? 35 diff 6 sub no
+ rejected none &@*@{ = 10 mul 02 rev 01 mul 20 = 20 rev 02 = final answer: @{
+
+Trying @=6 &=0 ?=1 :=3 <=9 >=4 |=7 "=8 (=5 {=2
+@&-&? = 60 sub 01 = 59 vs ?: 13 diff 46 sub no; 06 sub 10 = 4 vs rev :? 31 diff 27 sub no
+ rejected none &@*@{ = 06 mul 62 rev 60 mul 26 = 1560 rev 0651 = final answer: &@(?
+
+Trying @=8 &=7 ?=0 :=1 <=9 >=4 |=3 "=5 (=6 {=2
+@&-&? = 87 sub 70 = 17 vs ?: 01 diff 16 sub no; 78 sub 07 = 71 vs rev :? 10 diff 61 sub no
+ rejected none &@*@{ = 78 mul 82 rev 87 mul 28 = 2436 rev 6342 = final answer: (|>{
+
+Trying @=9 &=6 ?=8 :=1 <=5 >=4 |=7 "=2 (=3 {=0
+@&-&? = 96 sub 68 = 28 vs ?: 81 diff 53 sub no; 69 sub 86 = 17 vs rev :? 18 diff 1 sub ok + 1
+<&*>| = 56 mul 47 = 2632 vs >&|: 4671 diff 2039 mul no; 65 mul 74 = 4810 vs rev :|&> 1764 diff 3046 mul no
+ rejected rev &@*@{ = 69 mul 90 rev 96 mul 09 = 864 rev 468 = final answer: >&?
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=7 &=0 ?=1 :=2 <=9 >=4 |=5 "=8 (=6 {=3
+@&-&? = 70 sub 01 = 69 vs ?: 12 diff 57 sub no; 07 sub 10 = 3 vs rev :? 21 diff 18 sub no
+ rejected none &@*@{ = 07 mul 73 rev 70 mul 37 = 2590 rev 0952 = final answer: &<|:
+
+Trying @=8 &=7 ?=0 :=2 <=9 >=4 |=3 "=5 (=6 {=1
+@&-&? = 87 sub 70 = 17 vs ?: 02 diff 15 sub no; 78 sub 07 = 71 vs rev :? 20 diff 51 sub no
+ rejected none &@*@{ = 78 mul 81 rev 87 mul 18 = 1566 rev 6651 = final answer: (("{
+
+Trying @=9 &=6 ?=8 :=1 <=5 >=4 |=7 "=2 (=3 {=0
+@&-&? = 96 sub 68 = 28 vs ?: 81 diff 53 sub no; 69 sub 86 = 17 vs rev :? 18 diff 1 sub ok + 1
+<&*>| = 56 mul 47 = 2632 vs >&|: 4671 diff 2039 mul no; 65 mul 74 = 4810 vs rev :|&> 1764 diff 3046 mul no
+ rejected rev &@*@{ = 69 mul 90 rev 96 mul 09 = 864 rev 468 = final answer: >&?
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=2 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 15 sub 53 = 38 vs ?: 32 diff 6 sub no; 51 sub 35 = 16 vs rev :? 23 diff 7 sub no
+ rejected none &@*@{ = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: &@
+
+Trying @=0 &=1 ?=5 :=3 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 01 sub 15 = 14 vs ?: 53 diff 39 sub no; 10 sub 51 = 41 vs rev :? 35 diff 6 sub no
+ rejected none &@*@{ = 10 mul 02 rev 01 mul 20 = 20 rev 02 = final answer: @{
+
+Trying @=6 &=0 ?=1 :=2 <=9 >=4 |=7 "=8 (=5 {=3
+@&-&? = 60 sub 01 = 59 vs ?: 12 diff 47 sub no; 06 sub 10 = 4 vs rev :? 21 diff 17 sub no
+ rejected none &@*@{ = 06 mul 63 rev 60 mul 36 = 2160 rev 0612 = final answer: &@?:
+
+Trying @=8 &=9 ?=0 :=1 <=3 >=4 |=7 "=5 (=6 {=2
+@&-&? = 89 sub 90 = 1 vs ?: 01 diff 0 sub ok; 98 sub 09 = 89 vs rev :? 10 diff 79 sub no
+<&*>| = 39 mul 47 = 1833 vs >&|: 4971 diff 3138 mul no; 93 mul 74 = 6882 vs rev :|&> 1794 diff 5088 mul no
+ rejected forward &@*@{ = 98 mul 82 = 8036 = final answer: @?<(
+
+Trying @=7 &=2 ?=4 :=1 <=9 >=3 |=5 "=8 (=6 {=0
+@&-&? = 72 sub 24 = 48 vs ?: 41 diff 7 sub no; 27 sub 42 = 15 vs rev :? 14 diff 1 sub ok - 1
+<&*>| = 92 mul 35 = 3220 vs >&|: 3251 diff 31 mul no; 29 mul 53 = 1537 vs rev :|&> 1523 diff 14 mul no
+ rejected rev &@*@{ = 27 mul 70 rev 72 mul 07 = 504 rev 405 = final answer: ?{|
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=2 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 15 sub 53 = 38 vs ?: 32 diff 6 sub no; 51 sub 35 = 16 vs rev :? 23 diff 7 sub no
+ rejected none &@*@{ = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: &@
+
+Trying @=0 &=1 ?=5 :=3 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 01 sub 15 = 14 vs ?: 53 diff 39 sub no; 10 sub 51 = 41 vs rev :? 35 diff 6 sub no
+ rejected none &@*@{ = 10 mul 02 rev 01 mul 20 = 20 rev 02 = final answer: @{
+
+Trying @=4 &=0 ?=1 :=2 <=9 >=5 |=7 "=8 (=6 {=3
+@&-&? = 40 sub 01 = 39 vs ?: 12 diff 27 sub no; 04 sub 10 = 6 vs rev :? 21 diff 15 sub no
+ rejected none &@*@{ = 04 mul 43 rev 40 mul 34 = 1360 rev 0631 = final answer: &({?
+
+Trying @=6 &=7 ?=0 :=1 <=9 >=4 |=3 "=8 (=5 {=2
+@&-&? = 67 sub 70 = 3 vs ?: 01 diff 2 sub no; 76 sub 07 = 69 vs rev :? 10 diff 59 sub no
+ rejected none &@*@{ = 76 mul 62 rev 67 mul 26 = 1742 rev 2471 = final answer: {>&:
+
+Trying @=9 &=4 ?=6 :=1 <=5 >=3 |=7 "=8 (=2 {=0
+@&-&? = 94 sub 46 = 48 vs ?: 61 diff 13 sub no; 49 sub 64 = 15 vs rev :? 16 diff 1 sub ok + 1
+<&*>| = 54 mul 37 = 1998 vs >&|: 3471 diff 1473 mul no; 45 mul 73 = 3285 vs rev :|&> 1743 diff 1542 mul no
+ rejected rev &@*@{ = 49 mul 90 rev 94 mul 09 = 846 rev 648 = final answer: ?&"
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=2 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 15 sub 53 = 38 vs ?: 32 diff 6 sub no; 51 sub 35 = 16 vs rev :? 23 diff 7 sub no
+ rejected none &@*@{ = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: &@
+
+Trying @=0 &=1 ?=5 :=3 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 01 sub 15 = 14 vs ?: 53 diff 39 sub no; 10 sub 51 = 41 vs rev :? 35 diff 6 sub no
+ rejected none &@*@{ = 10 mul 02 rev 01 mul 20 = 20 rev 02 = final answer: @{
+
+Trying @=4 &=0 ?=1 :=3 <=9 >=5 |=7 "=8 (=6 {=2
+@&-&? = 40 sub 01 = 39 vs ?: 13 diff 26 sub no; 04 sub 10 = 6 vs rev :? 31 diff 25 sub no
+ rejected none &@*@{ = 04 mul 42 rev 40 mul 24 = 960 rev 069 = final answer: &(<
+
+Trying @=8 &=9 ?=0 :=2 <=3 >=4 |=7 "=5 (=6 {=1
+@&-&? = 89 sub 90 = 1 vs ?: 02 diff 1 sub ok + 1; 98 sub 09 = 89 vs rev :? 20 diff 69 sub no
+<&*>| = 39 mul 47 = 1833 vs >&|: 4972 diff 3139 mul no; 93 mul 74 = 6882 vs rev :|&> 2794 diff 4088 mul no
+ rejected forward &@*@{ = 98 mul 81 = 7938 = final answer: |&<@
+
+Trying @=9 &=2 ?=4 :=1 <=5 >=3 |=7 "=8 (=6 {=0
+@&-&? = 92 sub 24 = 68 vs ?: 41 diff 27 sub no; 29 sub 42 = 13 vs rev :? 14 diff 1 sub ok + 1
+<&*>| = 52 mul 37 = 1924 vs >&|: 3271 diff 1347 mul no; 25 mul 73 = 1825 vs rev :|&> 1723 diff 102 mul no
+ rejected rev &@*@{ = 29 mul 90 rev 92 mul 09 = 828 rev 828 = final answer: "&"
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=3 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 01 sub 15 = 14 vs ?: 53 diff 39 sub no; 10 sub 51 = 41 vs rev :? 35 diff 6 sub no
+ rejected none &@*@{ = 10 mul 02 rev 01 mul 20 = 20 rev 02 = final answer: @{
+
+Trying @=4 &=0 ?=1 :=3 <=9 >=5 |=7 "=8 (=6 {=2
+@&-&? = 40 sub 01 = 39 vs ?: 13 diff 26 sub no; 04 sub 10 = 6 vs rev :? 31 diff 25 sub no
+ rejected none &@*@{ = 04 mul 42 rev 40 mul 24 = 960 rev 069 = final answer: &(<
+
+Trying @=8 &=7 ?=0 :=1 <=9 >=4 |=3 "=5 (=6 {=2
+@&-&? = 87 sub 70 = 17 vs ?: 01 diff 16 sub no; 78 sub 07 = 71 vs rev :? 10 diff 61 sub no
+ rejected none &@*@{ = 78 mul 82 rev 87 mul 28 = 2436 rev 6342 = final answer: (|>{
+
+Trying @=7 &=6 ?=8 :=1 <=9 >=4 |=5 "=2 (=3 {=0
+@&-&? = 76 sub 68 = 8 vs ?: 81 diff 73 sub no; 67 sub 86 = 19 vs rev :? 18 diff 1 sub ok - 1
+<&*>| = 96 mul 45 = 4320 vs >&|: 4651 diff 331 mul no; 69 mul 54 = 3726 vs rev :|&> 1564 diff 2162 mul no
+ rejected rev &@*@{ = 67 mul 70 rev 76 mul 07 = 532 rev 235 = final answer: "(|
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=0 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 15 sub 53 = 38 vs ?: 30 diff 8 sub no; 51 sub 35 = 16 vs rev :? 03 diff 13 sub no
+ rejected none &@*@{ = 51 mul 12 rev 15 mul 21 = 315 rev 513 = final answer: &@?
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=9 &=0 ?=1 :=2 <=5 >=4 |=7 "=8 (=6 {=3
+@&-&? = 90 sub 01 = 89 vs ?: 12 diff 77 sub no; 09 sub 10 = 1 vs rev :? 21 diff 20 sub no
+ rejected none &@*@{ = 09 mul 93 rev 90 mul 39 = 3510 rev 0153 = final answer: &?<{
+
+Trying @=6 &=7 ?=0 :=1 <=9 >=4 |=3 "=8 (=5 {=2
+@&-&? = 67 sub 70 = 3 vs ?: 01 diff 2 sub no; 76 sub 07 = 69 vs rev :? 10 diff 59 sub no
+ rejected none &@*@{ = 76 mul 62 rev 67 mul 26 = 1742 rev 2471 = final answer: {>&:
+
+Trying @=3 &=8 ?=6 :=1 <=9 >=4 |=7 "=5 (=2 {=0
+@&-&? = 38 sub 86 = 48 vs ?: 61 diff 13 sub no; 83 sub 68 = 15 vs rev :? 16 diff 1 sub ok + 1
+<&*>| = 98 mul 47 = 4606 vs >&|: 4871 diff 265 mul no; 89 mul 74 = 6586 vs rev :|&> 1784 diff 4802 mul no
+ rejected rev &@*@{ = 83 mul 30 rev 38 mul 03 = 114 rev 411 = final answer: >::
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=2 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 15 sub 53 = 38 vs ?: 32 diff 6 sub no; 51 sub 35 = 16 vs rev :? 23 diff 7 sub no
+ rejected none &@*@{ = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: &@
+
+Trying @=0 &=1 ?=5 :=2 <=9 >=4 |=7 "=8 (=6 {=3
+@&-&? = 01 sub 15 = 14 vs ?: 52 diff 38 sub no; 10 sub 51 = 41 vs rev :? 25 diff 16 sub no
+ rejected none &@*@{ = 10 mul 03 rev 01 mul 30 = 30 rev 03 = final answer: @{
+
+Trying @=9 &=0 ?=1 :=3 <=5 >=4 |=7 "=8 (=6 {=2
+@&-&? = 90 sub 01 = 89 vs ?: 13 diff 76 sub no; 09 sub 10 = 1 vs rev :? 31 diff 30 sub no
+ rejected none &@*@{ = 09 mul 92 rev 90 mul 29 = 2610 rev 0162 = final answer: &?({
+
+Trying @=7 &=6 ?=0 :=2 <=9 >=4 |=5 "=8 (=3 {=1
+@&-&? = 76 sub 60 = 16 vs ?: 02 diff 14 sub no; 67 sub 06 = 61 vs rev :? 20 diff 41 sub no
+ rejected none &@*@{ = 67 mul 71 rev 76 mul 17 = 1292 rev 2921 = final answer: :<:{
+
+Trying @=8 &=4 ?=6 :=1 <=9 >=3 |=7 "=5 (=2 {=0
+@&-&? = 84 sub 46 = 38 vs ?: 61 diff 23 sub no; 48 sub 64 = 16 vs rev :? 16 diff 0 sub ok
+<&*>| = 94 mul 37 = 3478 vs >&|: 3471 diff 7 mul no; 49 mul 73 = 3577 vs rev :|&> 1743 diff 1834 mul no
+ rejected rev &@*@{ = 48 mul 80 rev 84 mul 08 = 672 rev 276 = final answer: (|?
+
+Trying @=5 &=3 ?=2 :=1 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 53 sub 32 = 21 vs ?: 21 diff 0 sub ok; 35 sub 23 = 12 vs rev :? 12 diff 0 sub ok
+<&*>| = 93 mul 47 = 4371 vs >&|: 4371 diff 0 mul ok; 39 mul 74 = 2886 vs rev :|&> 1734 diff 1152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub different - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub different - 1
+ rejected forward &@*@{ = 35 mul 50 = 1750 = final answer: :|@{
+
+Trying @=1 &=5 ?=3 :=2 <=9 >=4 |=7 "=8 (=6 {=0
+@&-&? = 15 sub 53 = 38 vs ?: 32 diff 6 sub no; 51 sub 35 = 16 vs rev :? 23 diff 7 sub no
+ rejected none &@*@{ = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: &@
+
+Trying @=0 &=1 ?=5 :=3 <=9 >=4 |=7 "=8 (=6 {=2
+@&-&? = 01 sub 15 = 14 vs ?: 53 diff 39 sub no; 10 sub 51 = 41 vs rev :? 35 diff 6 sub no
+ rejected none &@*@{ = 10 mul 02 rev 01 mul 20 = 20 rev 02 = final answer: @{
+
+Trying @=9 &=0 ?=1 :=3 <=5 >=4 |=7 "=8 (=6 {=2
+@&-&? = 90 sub 01 = 89 vs ?: 13 diff 76 sub no; 09 sub 10 = 1 vs rev :? 31 diff 30 sub no
+ rejected none &@*@{ = 09 mul 92 rev 90 mul 29 = 2610 rev 0162 = final answer: &?({
+
+Trying @=7 &=2 ?=4 :=9 <=5 >=1 |=3 "=6 (=8 {=0
+@&-&? = 72 sub 24 = 48 vs ?: 49 diff 1 sub ok + 1; 27 sub 42 = 15 vs rev :? 94 diff 79 sub no
+<&*>| = 52 mul 13 = 676 vs >&|: 1239 diff 563 mul no; 25 mul 31 = 775 vs rev :|&> 9321 diff 8546 mul no
+ rejected forward &@*@{ = 27 mul 70 = 1890 = final answer: >(:{
+
+Trying @=8 &=9 ?=0 :=4 <=3 >=2 |=6 "=1 (=7 {=5
+@&-&? = 89 sub 90 = 1 vs ?: 04 diff 3 sub no; 98 sub 09 = 89 vs rev :? 40 diff 49 sub no
+ rejected none &@*@{ = 98 mul 85 rev 89 mul 58 = 5162 rev 2615 = final answer: >|"{
+
+Trying @=5 &=3 ?=2 :=0 <=9 >=4 |=7 "=8 (=6 {=1
+@&-&? = 53 sub 32 = 21 vs ?: 20 diff 1 sub ok - 1; 35 sub 23 = 12 vs rev :? 02 diff 10 sub no
+<&*>| = 93 mul 47 = 4371 vs >&|: 4370 diff 1 mul ok - 1; 39 mul 74 = 2886 vs rev :|&> 0734 diff 2152 mul no
+("-|| = 68 sub 77 = 9 vs " 8 diff 1 sub ok - 1; 86 sub 77 = 9 vs rev " 8 diff 1 sub ok - 1
+ accepted forward &@*@{ = 35 mul-1 51 = 1785 - 1 = 1784 = \boxed{{|">}

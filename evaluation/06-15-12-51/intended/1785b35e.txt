@@ -1,0 +1,75 @@
+!^*?] = !>"?
+!>-!: = -!
+(!+/> = ?(
+:&*?? = ]>/!
+"]+": = !:"
+The question is (!*?!
+
+Operator symbols *-+
+Question operator symbol *
+Question operator in examples
+
+Digit symbols !^?]>":(/&
+
+Checking concatenation
+left !^ op * right ?] expected !^?] versus !>"? mismatch
+left !> op - right !: expected !>!: versus -! mismatch
+left (! op + right /> expected (!/> versus ?( mismatch
+left :& op * right ?? expected :&?? versus ]>/! mismatch
+left "] op + right ": expected "]": versus !:" mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left !^ op * right ?] expected ?]!^ versus !>"? mismatch
+left !> op - right !: expected !:!> versus -! mismatch
+left (! op + right /> expected />(! versus ?( mismatch
+left :& op * right ?? expected ??:& versus ]>/! mismatch
+left "] op + right ": expected ":"] versus !:" mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+!^*?] = !>"?
+!>-!: = -!
+(!+/> = ?(
+:&*?? = ]>/!
+"]+": = !:"
+
+Assigning mul
+ left !^ op * right ?] = !>"? length 4 assume mul
+ left !> op - right !: = -! length 2
+ left (! op + right /> = ?( length 2
+ left :& op * right ?? = ]>/! assumed mul
+ left "] op + right ": = !:" length 3
+
+Assigning sub
+ left !^ op * right ?] = !>"? assumed mul
+ left !> op - right !: = -! op in output assume sub
+ left (! op + right /> = ?( length 2
+ left :& op * right ?? = ]>/! assumed mul
+ left "] op + right ": = !:" length 3
+
+Assigning add
+ left !^ op * right ?] = !>"? assumed mul
+ left !> op - right !: = -! assumed sub
+ left (! op + right /> = ?( length 2
+ left :& op * right ?? = ]>/! assumed mul
+ left "] op + right ": = !:" length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left !^ op * right ?] = !>"? assumed mul
+ left !> op - right !: = -! assumed sub
+ left (! op + right /> = ?( assumed add
+ left :& op * right ?? = ]>/! assumed mul
+ left "] op + right ": = !:" assumed add
+ left (! op * right ?! the question, assumed mul
+
+Trying !=1 ^=9 ?=8 ]=3 >=5 "=7 :=4 (=6 /=2 &=0
+!^*?] = 19 mul 83 = 1577 vs !>"? 1578 diff 1 mul ok + 1; 91 mul 38 = 3458 vs rev ?">! 8751 diff 5293 mul no
+!>-!: = 15 sub 14 = 1 vs -! -1 diff 0 sub ok; 51 sub 41 = 10 vs rev -! -1 diff 9 sub no
+(!+/> = 61 add 25 = 86 vs ?( 86 diff 0 add ok; 16 add 52 = 68 vs rev (? 68 diff 0 add ok
+:&*?? = 40 mul 88 = 3520 vs ]>/! 3521 diff 1 mul ok + 1; 04 mul 88 = 352 vs rev !/>] 1253 diff 901 mul no
+"]+": = 73 add 74 = 147 vs !:" 147 diff 0 add ok; 37 add 47 = 84 vs rev ":! 741 diff 657 add no
+ accepted forward (!*?! = 61 mul+1 81 = 4941 + 1 = 4942 = \boxed{:^:/}

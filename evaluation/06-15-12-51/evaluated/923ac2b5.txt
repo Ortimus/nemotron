@@ -1,0 +1,232 @@
+')-]# = -#]
+')*': = @\]:
+)<+][ = [)\
+]:+#[ = [[|
+:]+|' = [)'
+The question is '[*@@
+
+Operator symbols -*+
+Question operator symbol *
+Question operator in examples
+
+Digit symbols ')]#:@\<[|
+
+Checking concatenation
+left ') op - right ]# expected ')]# versus -#] mismatch
+left ') op * right ': expected ')': versus @\]: mismatch
+left )< op + right ][ expected )<][ versus [)\ mismatch
+left ]: op + right #[ expected ]:#[ versus [[| mismatch
+left :] op + right |' expected :]|' versus [)' mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left ') op - right ]# expected ]#') versus -#] mismatch
+left ') op * right ': expected ':') versus @\]: mismatch
+left )< op + right ][ expected ][)< versus [)\ mismatch
+left ]: op + right #[ expected #[]: versus [[| mismatch
+left :] op + right |' expected |':] versus [)' mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+')-]# = -#]
+')*': = @\]:
+)<+][ = [)\
+]:+#[ = [[|
+:]+|' = [)'
+
+Assigning mul
+ left ') op - right ]# = -#] length 3
+ left ') op * right ': = @\]: length 4 assume mul
+ left )< op + right ][ = [)\ length 3
+ left ]: op + right #[ = [[| length 3
+ left :] op + right |' = [)' length 3
+
+Assigning sub
+ left ') op - right ]# = -#] op in output assume sub
+ left ') op * right ': = @\]: assumed mul
+ left )< op + right ][ = [)\ length 3
+ left ]: op + right #[ = [[| length 3
+ left :] op + right |' = [)' length 3
+
+Assigning add
+ left ') op - right ]# = -#] assumed sub
+ left ') op * right ': = @\]: assumed mul
+ left )< op + right ][ = [)\ length 3 assume add
+ left ]: op + right #[ = [[| assumed add
+ left :] op + right |' = [)' assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ') op - right ]# = -#] assumed sub
+ left ') op * right ': = @\]: assumed mul
+ left )< op + right ][ = [)\ assumed add
+ left ]: op + right #[ = [[| assumed add
+ left :] op + right |' = [)' assumed add
+ left '[ op * right @@ the question, assumed mul
+
+Trying '=1 )=2 ]=3 #=4 :=5 @=6 \=7 <=8 [=9 |=0
+')-]# = 12 sub 34 = 22 vs -#] -43 diff 21 sub no; 21 sub 43 = 22 vs rev -#] -34 diff 12 sub no
+ rejected none '[*@@ = 19 mul 66 rev 91 mul 66 = 6006 rev 6006 = final answer: @||@
+
+Trying '=0 )=1 ]=2 #=3 :=4 @=5 \=6 <=7 [=8 |=9
+')-]# = 01 sub 23 = 22 vs -#] -32 diff 10 sub no; 10 sub 32 = 22 vs rev -#] -23 diff 1 sub ok - 1
+')*': = 01 mul 04 = 4 vs @\]: 5624 diff 5620 mul no; 10 mul 40 = 400 vs rev :]\@ 4265 diff 3865 mul no
+ rejected rev '[*@@ = 08 mul 55 rev 80 mul 55 = 4400 rev 0044 = final answer: ''#:
+
+Trying '=9 )=0 ]=1 #=2 :=3 @=4 \=5 <=6 [=7 |=8
+')-]# = 90 sub 12 = 78 vs -#] -21 diff 57 sub no; 09 sub 21 = 12 vs rev -#] -12 diff 0 sub ok
+')*': = 90 mul 93 = 8370 vs @\]: 4513 diff 3857 mul no; 09 mul 39 = 351 vs rev :]\@ 3154 diff 2803 mul no
+ rejected rev '[*@@ = 97 mul 44 rev 79 mul 44 = 3476 rev 6743 = final answer: <[@:
+
+Trying '=8 )=9 ]=0 #=1 :=2 @=3 \=4 <=5 [=6 |=7
+')-]# = 89 sub 01 = 88 vs -#] -10 diff 78 sub no; 98 sub 10 = 88 vs rev -#] -10 diff 78 sub no
+ rejected none '[*@@ = 86 mul 33 rev 68 mul 33 = 2244 rev 4422 = final answer: \\::
+
+Trying '=7 )=8 ]=9 #=0 :=1 @=2 \=3 <=4 [=5 |=6
+')-]# = 78 sub 90 = 12 vs -#] -09 diff 3 sub no; 87 sub 09 = 78 vs rev -#] -09 diff 69 sub no
+ rejected none '[*@@ = 75 mul 22 rev 57 mul 22 = 1254 rev 4521 = final answer: <[@:
+
+Trying '=1 )=2 ]=3 #=4 :=5 @=6 \=7 <=8 [=9 |=0
+')-]# = 12 sub 34 = 22 vs -#] -43 diff 21 sub no; 21 sub 43 = 22 vs rev -#] -34 diff 12 sub no
+ rejected none '[*@@ = 19 mul 66 rev 91 mul 66 = 6006 rev 6006 = final answer: @||@
+
+Trying '=0 )=1 ]=2 #=3 :=4 @=5 \=6 <=7 [=8 |=9
+')-]# = 01 sub 23 = 22 vs -#] -32 diff 10 sub no; 10 sub 32 = 22 vs rev -#] -23 diff 1 sub ok - 1
+')*': = 01 mul 04 = 4 vs @\]: 5624 diff 5620 mul no; 10 mul 40 = 400 vs rev :]\@ 4265 diff 3865 mul no
+ rejected rev '[*@@ = 08 mul 55 rev 80 mul 55 = 4400 rev 0044 = final answer: ''#:
+
+Trying '=9 )=0 ]=1 #=2 :=3 @=4 \=5 <=6 [=7 |=8
+')-]# = 90 sub 12 = 78 vs -#] -21 diff 57 sub no; 09 sub 21 = 12 vs rev -#] -12 diff 0 sub ok
+')*': = 90 mul 93 = 8370 vs @\]: 4513 diff 3857 mul no; 09 mul 39 = 351 vs rev :]\@ 3154 diff 2803 mul no
+ rejected rev '[*@@ = 97 mul 44 rev 79 mul 44 = 3476 rev 6743 = final answer: <[@:
+
+Trying '=8 )=9 ]=0 #=1 :=2 @=3 \=4 <=5 [=6 |=7
+')-]# = 89 sub 01 = 88 vs -#] -10 diff 78 sub no; 98 sub 10 = 88 vs rev -#] -10 diff 78 sub no
+ rejected none '[*@@ = 86 mul 33 rev 68 mul 33 = 2244 rev 4422 = final answer: \\::
+
+Trying '=7 )=8 ]=9 #=0 :=1 @=2 \=3 <=4 [=5 |=6
+')-]# = 78 sub 90 = 12 vs -#] -09 diff 3 sub no; 87 sub 09 = 78 vs rev -#] -09 diff 69 sub no
+ rejected none '[*@@ = 75 mul 22 rev 57 mul 22 = 1254 rev 4521 = final answer: <[@:
+
+Trying '=1 )=2 ]=3 #=4 :=5 @=6 \=7 <=8 [=9 |=0
+')-]# = 12 sub 34 = 22 vs -#] -43 diff 21 sub no; 21 sub 43 = 22 vs rev -#] -34 diff 12 sub no
+ rejected none '[*@@ = 19 mul 66 rev 91 mul 66 = 6006 rev 6006 = final answer: @||@
+
+Trying '=0 )=1 ]=2 #=3 :=4 @=5 \=6 <=7 [=8 |=9
+')-]# = 01 sub 23 = 22 vs -#] -32 diff 10 sub no; 10 sub 32 = 22 vs rev -#] -23 diff 1 sub ok - 1
+')*': = 01 mul 04 = 4 vs @\]: 5624 diff 5620 mul no; 10 mul 40 = 400 vs rev :]\@ 4265 diff 3865 mul no
+ rejected rev '[*@@ = 08 mul 55 rev 80 mul 55 = 4400 rev 0044 = final answer: ''#:
+
+Trying '=9 )=0 ]=1 #=2 :=3 @=4 \=5 <=6 [=7 |=8
+')-]# = 90 sub 12 = 78 vs -#] -21 diff 57 sub no; 09 sub 21 = 12 vs rev -#] -12 diff 0 sub ok
+')*': = 90 mul 93 = 8370 vs @\]: 4513 diff 3857 mul no; 09 mul 39 = 351 vs rev :]\@ 3154 diff 2803 mul no
+ rejected rev '[*@@ = 97 mul 44 rev 79 mul 44 = 3476 rev 6743 = final answer: <[@:
+
+Trying '=8 )=9 ]=0 #=1 :=2 @=3 \=4 <=5 [=6 |=7
+')-]# = 89 sub 01 = 88 vs -#] -10 diff 78 sub no; 98 sub 10 = 88 vs rev -#] -10 diff 78 sub no
+ rejected none '[*@@ = 86 mul 33 rev 68 mul 33 = 2244 rev 4422 = final answer: \\::
+
+Trying '=7 )=8 ]=9 #=0 :=1 @=2 \=3 <=4 [=5 |=6
+')-]# = 78 sub 90 = 12 vs -#] -09 diff 3 sub no; 87 sub 09 = 78 vs rev -#] -09 diff 69 sub no
+ rejected none '[*@@ = 75 mul 22 rev 57 mul 22 = 1254 rev 4521 = final answer: <[@:
+
+Trying '=1 )=2 ]=3 #=4 :=5 @=6 \=7 <=8 [=9 |=0
+')-]# = 12 sub 34 = 22 vs -#] -43 diff 21 sub no; 21 sub 43 = 22 vs rev -#] -34 diff 12 sub no
+ rejected none '[*@@ = 19 mul 66 rev 91 mul 66 = 6006 rev 6006 = final answer: @||@
+
+Trying '=0 )=1 ]=2 #=3 :=4 @=5 \=6 <=7 [=8 |=9
+')-]# = 01 sub 23 = 22 vs -#] -32 diff 10 sub no; 10 sub 32 = 22 vs rev -#] -23 diff 1 sub ok - 1
+')*': = 01 mul 04 = 4 vs @\]: 5624 diff 5620 mul no; 10 mul 40 = 400 vs rev :]\@ 4265 diff 3865 mul no
+ rejected rev '[*@@ = 08 mul 55 rev 80 mul 55 = 4400 rev 0044 = final answer: ''#:
+
+Trying '=9 )=0 ]=1 #=2 :=3 @=4 \=5 <=6 [=7 |=8
+')-]# = 90 sub 12 = 78 vs -#] -21 diff 57 sub no; 09 sub 21 = 12 vs rev -#] -12 diff 0 sub ok
+')*': = 90 mul 93 = 8370 vs @\]: 4513 diff 3857 mul no; 09 mul 39 = 351 vs rev :]\@ 3154 diff 2803 mul no
+ rejected rev '[*@@ = 97 mul 44 rev 79 mul 44 = 3476 rev 6743 = final answer: <[@:
+
+Trying '=8 )=9 ]=0 #=1 :=2 @=3 \=4 <=5 [=6 |=7
+')-]# = 89 sub 01 = 88 vs -#] -10 diff 78 sub no; 98 sub 10 = 88 vs rev -#] -10 diff 78 sub no
+ rejected none '[*@@ = 86 mul 33 rev 68 mul 33 = 2244 rev 4422 = final answer: \\::
+
+Trying '=7 )=8 ]=9 #=0 :=1 @=2 \=3 <=4 [=5 |=6
+')-]# = 78 sub 90 = 12 vs -#] -09 diff 3 sub no; 87 sub 09 = 78 vs rev -#] -09 diff 69 sub no
+ rejected none '[*@@ = 75 mul 22 rev 57 mul 22 = 1254 rev 4521 = final answer: <[@:
+
+Trying '=1 )=2 ]=3 #=4 :=5 @=6 \=7 <=8 [=9 |=0
+')-]# = 12 sub 34 = 22 vs -#] -43 diff 21 sub no; 21 sub 43 = 22 vs rev -#] -34 diff 12 sub no
+ rejected none '[*@@ = 19 mul 66 rev 91 mul 66 = 6006 rev 6006 = final answer: @||@
+
+Trying '=0 )=1 ]=2 #=3 :=4 @=5 \=6 <=7 [=8 |=9
+')-]# = 01 sub 23 = 22 vs -#] -32 diff 10 sub no; 10 sub 32 = 22 vs rev -#] -23 diff 1 sub ok - 1
+')*': = 01 mul 04 = 4 vs @\]: 5624 diff 5620 mul no; 10 mul 40 = 400 vs rev :]\@ 4265 diff 3865 mul no
+ rejected rev '[*@@ = 08 mul 55 rev 80 mul 55 = 4400 rev 0044 = final answer: ''#:
+
+Trying '=9 )=0 ]=1 #=2 :=3 @=4 \=5 <=6 [=7 |=8
+')-]# = 90 sub 12 = 78 vs -#] -21 diff 57 sub no; 09 sub 21 = 12 vs rev -#] -12 diff 0 sub ok
+')*': = 90 mul 93 = 8370 vs @\]: 4513 diff 3857 mul no; 09 mul 39 = 351 vs rev :]\@ 3154 diff 2803 mul no
+ rejected rev '[*@@ = 97 mul 44 rev 79 mul 44 = 3476 rev 6743 = final answer: <[@:
+
+Trying '=8 )=9 ]=0 #=1 :=2 @=3 \=4 <=5 [=6 |=7
+')-]# = 89 sub 01 = 88 vs -#] -10 diff 78 sub no; 98 sub 10 = 88 vs rev -#] -10 diff 78 sub no
+ rejected none '[*@@ = 86 mul 33 rev 68 mul 33 = 2244 rev 4422 = final answer: \\::
+
+Trying '=7 )=8 ]=9 #=0 :=1 @=2 \=3 <=4 [=5 |=6
+')-]# = 78 sub 90 = 12 vs -#] -09 diff 3 sub no; 87 sub 09 = 78 vs rev -#] -09 diff 69 sub no
+ rejected none '[*@@ = 75 mul 22 rev 57 mul 22 = 1254 rev 4521 = final answer: <[@:
+
+Trying '=1 )=2 ]=3 #=4 :=5 @=6 \=7 <=8 [=9 |=0
+')-]# = 12 sub 34 = 22 vs -#] -43 diff 21 sub no; 21 sub 43 = 22 vs rev -#] -34 diff 12 sub no
+ rejected none '[*@@ = 19 mul 66 rev 91 mul 66 = 6006 rev 6006 = final answer: @||@
+
+Trying '=0 )=1 ]=2 #=3 :=4 @=5 \=6 <=7 [=8 |=9
+')-]# = 01 sub 23 = 22 vs -#] -32 diff 10 sub no; 10 sub 32 = 22 vs rev -#] -23 diff 1 sub ok - 1
+')*': = 01 mul 04 = 4 vs @\]: 5624 diff 5620 mul no; 10 mul 40 = 400 vs rev :]\@ 4265 diff 3865 mul no
+ rejected rev '[*@@ = 08 mul 55 rev 80 mul 55 = 4400 rev 0044 = final answer: ''#:
+
+Trying '=9 )=0 ]=1 #=2 :=3 @=4 \=5 <=6 [=7 |=8
+')-]# = 90 sub 12 = 78 vs -#] -21 diff 57 sub no; 09 sub 21 = 12 vs rev -#] -12 diff 0 sub ok
+')*': = 90 mul 93 = 8370 vs @\]: 4513 diff 3857 mul no; 09 mul 39 = 351 vs rev :]\@ 3154 diff 2803 mul no
+ rejected rev '[*@@ = 97 mul 44 rev 79 mul 44 = 3476 rev 6743 = final answer: <[@:
+
+Trying '=8 )=9 ]=0 #=1 :=2 @=3 \=4 <=5 [=6 |=7
+')-]# = 89 sub 01 = 88 vs -#] -10 diff 78 sub no; 98 sub 10 = 88 vs rev -#] -10 diff 78 sub no
+ rejected none '[*@@ = 86 mul 33 rev 68 mul 33 = 2244 rev 4422 = final answer: \\::
+
+Trying '=7 )=8 ]=9 #=0 :=1 @=2 \=3 <=4 [=5 |=6
+')-]# = 78 sub 90 = 12 vs -#] -09 diff 3 sub no; 87 sub 09 = 78 vs rev -#] -09 diff 69 sub no
+ rejected none '[*@@ = 75 mul 22 rev 57 mul 22 = 1254 rev 4521 = final answer: <[@:
+
+Trying '=1 )=2 ]=3 #=4 :=5 @=6 \=7 <=8 [=9 |=0
+')-]# = 12 sub 34 = 22 vs -#] -43 diff 21 sub no; 21 sub 43 = 22 vs rev -#] -34 diff 12 sub no
+ rejected none '[*@@ = 19 mul 66 rev 91 mul 66 = 6006 rev 6006 = final answer: @||@
+
+Trying '=0 )=1 ]=2 #=3 :=4 @=5 \=6 <=7 [=8 |=9
+')-]# = 01 sub 23 = 22 vs -#] -32 diff 10 sub no; 10 sub 32 = 22 vs rev -#] -23 diff 1 sub ok - 1
+')*': = 01 mul 04 = 4 vs @\]: 5624 diff 5620 mul no; 10 mul 40 = 400 vs rev :]\@ 4265 diff 3865 mul no
+ rejected rev '[*@@ = 08 mul 55 rev 80 mul 55 = 4400 rev 0044 = final answer: ''#:
+
+Trying '=9 )=0 ]=1 #=2 :=3 @=4 \=5 <=6 [=7 |=8
+')-]# = 90 sub 12 = 78 vs -#] -21 diff 57 sub no; 09 sub 21 = 12 vs rev -#] -12 diff 0 sub ok
+')*': = 90 mul 93 = 8370 vs @\]: 4513 diff 3857 mul no; 09 mul 39 = 351 vs rev :]\@ 3154 diff 2803 mul no
+ rejected rev '[*@@ = 97 mul 44 rev 79 mul 44 = 3476 rev 6743 = final answer: <[@:
+
+Trying '=8 )=9 ]=0 #=1 :=2 @=3 \=4 <=5 [=6 |=7
+')-]# = 89 sub 01 = 88 vs -#] -10 diff 78 sub no; 98 sub 10 = 88 vs rev -#] -10 diff 78 sub no
+ rejected none '[*@@ = 86 mul 33 rev 68 mul 33 = 2244 rev 4422 = final answer: \\::
+
+Trying '=7 )=8 ]=9 #=0 :=1 @=2 \=3 <=4 [=5 |=6
+')-]# = 78 sub 90 = 12 vs -#] -09 diff 3 sub no; 87 sub 09 = 78 vs rev -#] -09 diff 69 sub no
+ rejected none '[*@@ = 75 mul 22 rev 57 mul 22 = 1254 rev 4521 = final answer: <[@:
+
+Trying '=1 )=2 ]=3 #=4 :=5 @=6 \=7 <=8 [=9 |=0
+')-]# = 12 sub 34 = 22 vs -#] -43 diff 21 sub no; 21 sub 43 = 22 vs rev -#] -34 diff 12 sub no
+ rejected none '[*@@ = 19 mul 66 rev 91 mul 66 = 6006 rev 6006 = final answer: @||@
+
+Trying '=0 )=1 ]=2 #=3 :=4 @=5 \=6 <=7 [=8 |=9
+')-]# = 01 sub 23 = 22 vs -#] -32 diff 10 sub no; 10 sub 32 = 22 vs rev -#] -23 diff 1 sub ok - 1
+')*': = 01 mul 04 = 4 vs @\]: 5624 diff 5620 mul no; 10 mul 40 = 400 vs rev :]\@ 4265 diff 3865 mul no
+ rejected rev '[*@@ = 08 mul 55 rev 80 mul 55 = 4400 rev 0044 = final answer: ''#:
+
+Trying '=9 )=0 ]=

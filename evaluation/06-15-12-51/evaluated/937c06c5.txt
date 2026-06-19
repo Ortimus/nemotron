@@ -1,0 +1,191 @@
+85:17 = 102
+47]72 = 25
+62'71 = 6271
+10]99 = 9
+94:71 = 165
+
+The inputs are 85, 17, 47, 72, 62, 71, 10, 99, 94, 71
+
+The outputs are 102, 25, 6271, 9, 165
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+85:17 -> :
+47]72 -> ]
+62'71 -> '
+10]99 -> ]
+94:71 -> :
+
+The operators
+:
+]
+'
+
+Looking at the question
+18]17 -> ]
+The question operator is found in the examples.
+
+Looking at operator ] [47]72 = 25, 10]99 = 9]:
+
+Trying common operations
+ reversed operands [47->74 72->27, 10->01 99->99] and reversed result [expected (74,27)->25, (01,99)->9]
+ addition
+ (74,27)->25: 74 + 27 = 101 rev-> 101 mismatch
+ multiplication
+ (01,99)->9: (0 + 1) * 99 = 0 * 99 + 1 * 99 = 0 + 99 = 99 rev-> 99 mismatch
+ concatenation
+ (74,27)->25: 74 || 27 = 7427 rev-> 7247 mismatch
+ reverse concatenation
+ (01,99)->9: 99 || 01 = 9901 rev-> 1099 mismatch
+
+ identity [47 72, 10 99] [expected (47,72)->25, (10,99)->9]
+ addition
+ (47,72)->25: 47 + 72 = 119 mismatch
+ multiplication
+ (10,99)->9: (10 + 0) * 99 = 10 * 99 + 0 * 99 = 990 + 0 = 990 mismatch
+ concatenation
+ (47,72)->25: 47 || 72 = 4772 mismatch
+ reverse concatenation
+ (10,99)->9: 99 || 10 = 9910 mismatch
+
+Trying difference operations
+ reversed operands [47->74 72->27, 10->01 99->99] and reversed result [expected (74,27)->25, (01,99)->9]
+ subtraction (a-b)
+ (74,27)->25: 74 - 27 = 47 rev-> 74 mismatch
+ absolute difference
+ (01,99)->9: |01 - 99| = 98 rev-> 89 mismatch
+ max mod min
+ (74,27)->25: max(74,27) mod min(74,27) = 74 mod 27 = 20 rev-> 02 mismatch
+ negated absolute difference
+ (01,99)->9: -|01 - 99| = -98 rev-> -89 mismatch
+ reverse subtraction (b-a)
+ (74,27)->25: 27 - 74 = -47 rev-> -74 mismatch
+ modulo (a mod b)
+ (01,99)->9: 01 mod 99 = 1 rev-> 1 mismatch
+
+ identity [47 72, 10 99] [expected (47,72)->25, (10,99)->9]
+ subtraction (a-b)
+ (47,72)->25: 47 - 72 = -25 mismatch
+ absolute difference
+ (10,99)->9: |10 - 99| = 89 mismatch
+ max mod min
+ (47,72)->25: max(47,72) mod min(47,72) = 72 mod 47 = 25 match
+ (10,99)->9: max(10,99) mod min(10,99) = 99 mod 10 = 9 match
+ correct, actions: max mod min
+ negated absolute difference
+ (10,99)->9: -|10 - 99| = -89 mismatch
+ reverse subtraction (b-a)
+ (47,72)->25: 72 - 47 = 25 match
+ (10,99)->9: 99 - 10 = 89 mismatch
+ modulo (a mod b)
+ (10,99)->9: 10 mod 99 = 10 mismatch
+
+Trying rare operations
+ reversed operands [47->74 72->27, 10->01 99->99] and reversed result [expected (74,27)->25, (01,99)->9]
+ multiply+1
+ (74,27)->25: (70 + 4) * 27 + 1 = 70 * 27 + 4 * 27 + 1 = 1890 + 108 + 1 = 1998 + 1 = 1999 rev-> 9991 mismatch
+ multiply-1
+ (01,99)->9: (0 + 1) * 99 - 1 = 0 * 99 + 1 * 99 - 1 = 0 + 99 - 1 = 99 - 1 = 98 rev-> 89 mismatch
+ add+1
+ (74,27)->25: 74 + 27 + 1 = 102 rev-> 201 mismatch
+ add-1
+ (01,99)->9: 01 + 99 - 1 = 99 rev-> 99 mismatch
+ sub+1
+ (74,27)->25: 74 - 27 + 1 = 48 rev-> 84 mismatch
+ sub-1
+ (01,99)->9: 01 - 99 - 1 = -99 rev-> -99 mismatch
+ integer division (a/b)
+ (74,27)->25: 74 / 27 = 2 rev-> 2 mismatch
+ reverse division (b/a)
+ (01,99)->9: 99 / 01 = 99 rev-> 99 mismatch
+ reverse modulo (b mod a)
+ (74,27)->25: 27 mod 74 = 27 rev-> 72 mismatch
+ digit absolute diff
+ (01,99)->9: |0-9| || |1-9| = 98 rev-> 89 mismatch
+ digit add mod10
+ (74,27)->25: (7+2)%10 || (4+7)%10 = 91 rev-> 19 mismatch
+ digit sub mod10
+ (01,99)->9: (0-9)%10 || (1-9)%10 = 12 rev-> 21 mismatch
+ cross multiply
+ (74,27)->25: 7*2 + 4*7 = 14 + 28 = 42 rev-> 24 mismatch
+ cross multiply rev
+ (01,99)->9: 0*9 + 1*9 = 0 + 9 = 9 rev-> 9 match
+ (74,27)->25: 7*7 + 4*2 = 49 + 8 = 57 rev-> 75 mismatch
+ digit multiply
+ (74,27)->25: 7*2 || 4*7 = 14 || 28 = 1428 rev-> 8241 mismatch
+ digit multiply rev
+ (01,99)->9: 0*9 || 1*9 = 0 || 9 = 09 rev-> 90 mismatch
+ digit sum diff
+ (74,27)->25: (7+4) - (2+7) = 2 rev-> 2 mismatch
+ digit sum sum
+ (01,99)->9: (0+1) + (9+9) = 19 rev-> 91 mismatch
+ digit product diff
+ (74,27)->25: 7*4 - 2*7 = 28 - 14 = 14 rev-> 41 mismatch
+ digit product sum
+ (01,99)->9: 0*1 + 9*9 = 0 + 81 = 81 rev-> 18 mismatch
+ determinant
+ (74,27)->25: 7*7 - 4*2 = 49 - 8 = 41 rev-> 14 mismatch
+ abs determinant
+ (01,99)->9: |0*9 - 1*9| = |0 - 9| = 9 rev-> 9 match
+ (74,27)->25: |7*7 - 4*2| = |49 - 8| = 41 rev-> 14 mismatch
+
+ identity [47 72, 10 99] [expected (47,72)->25, (10,99)->9]
+ multiply+1
+ (47,72)->25: (40 + 7) * 72 + 1 = 40 * 72 + 7 * 72 + 1 = 2880 + 504 + 1 = 3384 + 1 = 3385 mismatch
+ multiply-1
+ (10,99)->9: (10 + 0) * 99 - 1 = 10 * 99 + 0 * 99 - 1 = 990 + 0 - 1 = 990 - 1 = 989 mismatch
+ add+1
+ (47,72)->25: 47 + 72 + 1 = 120 mismatch
+ add-1
+ (10,99)->9: 10 + 99 - 1 = 108 mismatch
+ sub+1
+ (47,72)->25: 47 - 72 + 1 = -24 mismatch
+ sub-1
+ (10,99)->9: 10 - 99 - 1 = -90 mismatch
+ integer division (a/b)
+ (47,72)->25: 47 / 72 = 0 mismatch
+ reverse division (b/a)
+ (10,99)->9: 99 / 10 = 9 match
+ (47,72)->25: 72 / 47 = 1 mismatch
+ reverse modulo (b mod a)
+ (47,72)->25: 72 mod 47 = 25 match
+ (10,99)->9: 99 mod 10 = 9 match
+ correct, but skipping
+ digit absolute diff
+ (10,99)->9: |1-9| || |0-9| = 89 mismatch
+ digit add mod10
+ (47,72)->25: (4+7)%10 || (7+2)%10 = 19 mismatch
+ digit sub mod10
+ (10,99)->9: (1-9)%10 || (0-9)%10 = 21 mismatch
+ cross multiply
+ (47,72)->25: 4*7 + 7*2 = 28 + 14 = 42 mismatch
+ cross multiply rev
+ (10,99)->9: 1*9 + 0*9 = 9 + 0 = 9 match
+ (47,72)->25: 4*2 + 7*7 = 8 + 49 = 57 mismatch
+ digit multiply
+ (47,72)->25: 4*7 || 7*2 = 28 || 14 = 2814 mismatch
+ digit multiply rev
+ (10,99)->9: 1*9 || 0*9 = 9 || 0 = 90 mismatch
+ digit sum diff
+ (47,72)->25: (4+7) - (7+2) = 2 mismatch
+ digit sum sum
+ (10,99)->9: (1+0) + (9+9) = 19 mismatch
+ digit product diff
+ (47,72)->25: 4*7 - 7*2 = 28 - 14 = 14 mismatch
+ digit product sum
+ (10,99)->9: 1*0 + 9*9 = 0 + 81 = 81 mismatch
+ determinant
+ (47,72)->25: 4*2 - 7*7 = 8 - 49 = -41 mismatch
+ abs determinant
+ (10,99)->9: |1*9 - 0*9| = |9 - 0| = 9 match
+ (47,72)->25: |4*2 - 7*7| = |8 - 49| = 41 mismatch
+
+correct, actions: max mod min
+
+Applying to 18]17:
+ We recall that the question operator is found in the examples.
+ identity [18 17]
+ max mod min
+ (18,17): max(18,17) mod min(18,17) = 18 mod 17 = 1
+ Result is non-negative
+ \boxed{1}

@@ -1,0 +1,181 @@
+40-82 = 2
+23-28 = 5
+31%94 = 125
+
+The inputs are 40, 82, 23, 28, 31, 94
+
+The outputs are 2, 5, 125
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+40-82 -> -
+23-28 -> -
+31%94 -> %
+
+The operators
+-
+%
+
+Looking at the question
+18-86 -> -
+The question operator is found in the examples.
+
+Looking at operator - [40-82 = 2, 23-28 = 5]:
+
+Trying common operations
+ reversed operands [40->04 82->28, 23->32 28->82] and reversed result [expected (04,28)->2, (32,82)->5]
+ addition
+ (04,28)->2: 04 + 28 = 32 rev-> 23 mismatch
+ multiplication
+ (32,82)->5: (30 + 2) * 82 = 30 * 82 + 2 * 82 = 2460 + 164 = 2624 rev-> 4262 mismatch
+ concatenation
+ (04,28)->2: 04 || 28 = 0428 rev-> 8240 mismatch
+ reverse concatenation
+ (32,82)->5: 82 || 32 = 8232 rev-> 2328 mismatch
+
+ identity [40 82, 23 28] [expected (40,82)->2, (23,28)->5]
+ addition
+ (40,82)->2: 40 + 82 = 122 mismatch
+ multiplication
+ (23,28)->5: (20 + 3) * 28 = 20 * 28 + 3 * 28 = 560 + 84 = 644 mismatch
+ concatenation
+ (40,82)->2: 40 || 82 = 4082 mismatch
+ reverse concatenation
+ (23,28)->5: 28 || 23 = 2823 mismatch
+
+Trying difference operations
+ reversed operands [40->04 82->28, 23->32 28->82] and reversed result [expected (04,28)->2, (32,82)->5]
+ subtraction (a-b)
+ (04,28)->2: 04 - 28 = -24 rev-> -42 mismatch
+ absolute difference
+ (32,82)->5: |32 - 82| = 50 rev-> 05 mismatch
+ max mod min
+ (04,28)->2: max(04,28) mod min(04,28) = 28 mod 04 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (32,82)->5: -|32 - 82| = -50 rev-> -05 mismatch
+ reverse subtraction (b-a)
+ (04,28)->2: 28 - 04 = 24 rev-> 42 mismatch
+ modulo (a mod b)
+ (32,82)->5: 32 mod 82 = 32 rev-> 23 mismatch
+
+ identity [40 82, 23 28] [expected (40,82)->2, (23,28)->5]
+ subtraction (a-b)
+ (40,82)->2: 40 - 82 = -42 mismatch
+ absolute difference
+ (23,28)->5: |23 - 28| = 5 match
+ (40,82)->2: |40 - 82| = 42 mismatch
+ max mod min
+ (40,82)->2: max(40,82) mod min(40,82) = 82 mod 40 = 2 match
+ (23,28)->5: max(23,28) mod min(23,28) = 28 mod 23 = 5 match
+ correct, actions: max mod min
+ negated absolute difference
+ (23,28)->5: -|23 - 28| = -5 mismatch
+ reverse subtraction (b-a)
+ (40,82)->2: 82 - 40 = 42 mismatch
+ modulo (a mod b)
+ (23,28)->5: 23 mod 28 = 23 mismatch
+
+Trying rare operations
+ reversed operands [40->04 82->28, 23->32 28->82] and reversed result [expected (04,28)->2, (32,82)->5]
+ multiply+1
+ (04,28)->2: (0 + 4) * 28 + 1 = 0 * 28 + 4 * 28 + 1 = 0 + 112 + 1 = 112 + 1 = 113 rev-> 311 mismatch
+ multiply-1
+ (32,82)->5: (30 + 2) * 82 - 1 = 30 * 82 + 2 * 82 - 1 = 2460 + 164 - 1 = 2624 - 1 = 2623 rev-> 3262 mismatch
+ add+1
+ (04,28)->2: 04 + 28 + 1 = 33 rev-> 33 mismatch
+ add-1
+ (32,82)->5: 32 + 82 - 1 = 113 rev-> 311 mismatch
+ sub+1
+ (04,28)->2: 04 - 28 + 1 = -23 rev-> -32 mismatch
+ sub-1
+ (32,82)->5: 32 - 82 - 1 = -51 rev-> -15 mismatch
+ integer division (a/b)
+ (04,28)->2: 04 / 28 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (32,82)->5: 82 / 32 = 2 rev-> 2 mismatch
+ reverse modulo (b mod a)
+ (04,28)->2: 28 mod 04 = 0 rev-> 0 mismatch
+ digit absolute diff
+ (32,82)->5: |3-8| || |2-2| = 50 rev-> 05 mismatch
+ digit add mod10
+ (04,28)->2: (0+2)%10 || (4+8)%10 = 22 rev-> 22 mismatch
+ digit sub mod10
+ (32,82)->5: (3-8)%10 || (2-2)%10 = 50 rev-> 05 mismatch
+ cross multiply
+ (04,28)->2: 0*2 + 4*8 = 0 + 32 = 32 rev-> 23 mismatch
+ cross multiply rev
+ (32,82)->5: 3*2 + 2*8 = 6 + 16 = 22 rev-> 22 mismatch
+ digit multiply
+ (04,28)->2: 0*2 || 4*8 = 0 || 32 = 032 rev-> 230 mismatch
+ digit multiply rev
+ (32,82)->5: 3*2 || 2*2 = 6 || 4 = 64 rev-> 46 mismatch
+ digit sum diff
+ (04,28)->2: (0+4) - (2+8) = -6 rev-> -6 mismatch
+ digit sum sum
+ (32,82)->5: (3+2) + (8+2) = 15 rev-> 51 mismatch
+ digit product diff
+ (04,28)->2: 0*4 - 2*8 = 0 - 16 = -16 rev-> -61 mismatch
+ digit product sum
+ (32,82)->5: 3*2 + 8*2 = 6 + 16 = 22 rev-> 22 mismatch
+ determinant
+ (04,28)->2: 0*8 - 4*2 = 0 - 8 = -8 rev-> -8 mismatch
+ abs determinant
+ (32,82)->5: |3*2 - 2*8| = |6 - 16| = 10 rev-> 01 mismatch
+
+ identity [40 82, 23 28] [expected (40,82)->2, (23,28)->5]
+ multiply+1
+ (40,82)->2: (40 + 0) * 82 + 1 = 40 * 82 + 0 * 82 + 1 = 3280 + 0 + 1 = 3280 + 1 = 3281 mismatch
+ multiply-1
+ (23,28)->5: (20 + 3) * 28 - 1 = 20 * 28 + 3 * 28 - 1 = 560 + 84 - 1 = 644 - 1 = 643 mismatch
+ add+1
+ (40,82)->2: 40 + 82 + 1 = 123 mismatch
+ add-1
+ (23,28)->5: 23 + 28 - 1 = 50 mismatch
+ sub+1
+ (40,82)->2: 40 - 82 + 1 = -41 mismatch
+ sub-1
+ (23,28)->5: 23 - 28 - 1 = -6 mismatch
+ integer division (a/b)
+ (40,82)->2: 40 / 82 = 0 mismatch
+ reverse division (b/a)
+ (23,28)->5: 28 / 23 = 1 mismatch
+ reverse modulo (b mod a)
+ (40,82)->2: 82 mod 40 = 2 match
+ (23,28)->5: 28 mod 23 = 5 match
+ correct, but skipping
+ digit absolute diff
+ (23,28)->5: |2-2| || |3-8| = 05 mismatch
+ digit add mod10
+ (40,82)->2: (4+8)%10 || (0+2)%10 = 22 mismatch
+ digit sub mod10
+ (23,28)->5: (2-2)%10 || (3-8)%10 = 05 mismatch
+ cross multiply
+ (40,82)->2: 4*8 + 0*2 = 32 + 0 = 32 mismatch
+ cross multiply rev
+ (23,28)->5: 2*8 + 3*2 = 16 + 6 = 22 mismatch
+ digit multiply
+ (40,82)->2: 4*8 || 0*2 = 32 || 0 = 320 mismatch
+ digit multiply rev
+ (23,28)->5: 2*8 || 3*2 = 16 || 6 = 166 mismatch
+ digit sum diff
+ (40,82)->2: (4+0) - (8+2) = -6 mismatch
+ digit sum sum
+ (23,28)->5: (2+3) + (2+8) = 15 mismatch
+ digit product diff
+ (40,82)->2: 4*0 - 8*2 = 0 - 16 = -16 mismatch
+ digit product sum
+ (23,28)->5: 2*3 + 2*8 = 6 + 16 = 22 mismatch
+ determinant
+ (40,82)->2: 4*2 - 0*8 = 8 - 0 = 8 mismatch
+ abs determinant
+ (23,28)->5: |2*8 - 3*2| = |16 - 6| = 10 mismatch
+
+correct, actions: max mod min
+
+Applying to 18-86:
+ We recall that the question operator is found in the examples.
+ identity [18 86]
+ max mod min
+ (18,86): max(18,86) mod min(18,86) = 86 mod 18 = 14
+ Result is non-negative
+ \boxed{14}

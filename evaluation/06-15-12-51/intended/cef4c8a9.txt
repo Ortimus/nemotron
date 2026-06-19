@@ -1,0 +1,66 @@
+`]*{[ = [[{
+`[*"" = )\`]
+]`+[{ = )>]
+((*]# = ("{>
+The question is [{-##
+
+Operator symbols *+
+Question operator symbol -
+Question operator not in examples
+
+Digit symbols `]{[")\>(#
+
+Checking concatenation
+left `] op * right {[ expected `]{[ versus [[{ mismatch
+left `[ op * right "" expected `["" versus )\`] mismatch
+left ]` op + right [{ expected ]`[{ versus )>] mismatch
+left (( op * right ]# expected ((]# versus ("{> mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left `] op * right {[ expected {[`] versus [[{ mismatch
+left `[ op * right "" expected ""`[ versus )\`] mismatch
+left ]` op + right [{ expected [{]` versus )>] mismatch
+left (( op * right ]# expected ]#(( versus ("{> mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+`]*{[ = [[{
+`[*"" = )\`]
+]`+[{ = )>]
+((*]# = ("{>
+
+Assigning mul
+ left `] op * right {[ = [[{ length 3
+ left `[ op * right "" = )\`] length 4 assume mul
+ left ]` op + right [{ = )>] length 3
+ left (( op * right ]# = ("{> assumed mul
+
+Assigning sub
+ left `] op * right {[ = [[{ assumed mul
+ left `[ op * right "" = )\`] assumed mul
+ left ]` op + right [{ = )>] length 3
+ left (( op * right ]# = ("{> assumed mul
+
+Assigning add
+ left `] op * right {[ = [[{ assumed mul
+ left `[ op * right "" = )\`] assumed mul
+ left ]` op + right [{ = )>] length 3 assume add
+ left (( op * right ]# = ("{> assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left `] op * right {[ = [[{ assumed mul
+ left `[ op * right "" = )\`] assumed mul
+ left ]` op + right [{ = )>] assumed add
+ left (( op * right ]# = ("{> assumed mul
+ left [{ op - right ## the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying `=4 ]=1 {=9 [=6 "=2 )=8 \=0 >=3 (=7 #=5
+`]*{[ = 41 mul 96 = 3936 vs [[{ 669 diff 3267 mul no; 14 mul 69 = 966 vs rev {[[ 966 diff 0 mul ok
+`[*"" = 46 mul 22 = 1012 vs )\`] 8041 diff 7029 mul no; 64 mul 22 = 1408 vs rev ]`\) 1408 diff 0 mul ok
+]`+[{ = 14 add 69 = 83 vs )>] 831 diff 748 add no; 41 add 96 = 137 vs rev ]>) 138 diff 1 add ok + 1
+((*]# = 77 mul 15 = 1155 vs ("{> 7293 diff 6138 mul no; 77 mul 51 = 3927 vs rev >{"( 3927 diff 0 mul ok
+ accepted rev [{-## = 69 sub 55 rev 96 sub 55 = 41 rev 14 = \boxed{]`}

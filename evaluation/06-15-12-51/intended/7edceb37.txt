@@ -1,0 +1,534 @@
+$$|'' = |<<
+\$+\@ = $^\
+$}+&' = @]
+\\|<$ = |&]
+$%/\< = }\%
+The question is \\+&]
+
+Operator symbols |+/
+Question operator symbol +
+Question operator in examples
+
+Digit symbols $'<\@^}&]%
+
+Checking concatenation
+left $$ op | right '' expected $$'' versus |<< mismatch
+left \$ op + right \@ expected \$\@ versus $^\ mismatch
+left $} op + right &' expected $}&' versus @] mismatch
+left \\ op | right <$ expected \\<$ versus |&] mismatch
+left $% op / right \< expected $%\< versus }\% mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left $$ op | right '' expected ''$$ versus |<< mismatch
+left \$ op + right \@ expected \@\$ versus $^\ mismatch
+left $} op + right &' expected &'$} versus @] mismatch
+left \\ op | right <$ expected <$\\ versus |&] mismatch
+left $% op / right \< expected \<$% versus }\% mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+$$|'' = |<<
+\$+\@ = $^\
+$}+&' = @]
+\\|<$ = |&]
+$%/\< = }\%
+
+Assigning mul
+ left $$ op | right '' = |<< length 3
+ left \$ op + right \@ = $^\ length 3
+ left $} op + right &' = @] length 2
+ left \\ op | right <$ = |&] length 3
+ left $% op / right \< = }\% length 3
+
+Assigning sub
+ left $$ op | right '' = |<< op in output assume sub
+ left \$ op + right \@ = $^\ length 3
+ left $} op + right &' = @] length 2
+ left \\ op | right <$ = |&] assumed sub
+ left $% op / right \< = }\% length 3
+
+Assigning add
+ left $$ op | right '' = |<< assumed sub
+ left \$ op + right \@ = $^\ length 3 assume add
+ left $} op + right &' = @] assumed add
+ left \\ op | right <$ = |&] assumed sub
+ left $% op / right \< = }\% length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left $$ op | right '' = |<< assumed sub
+ left \$ op + right \@ = $^\ assumed add
+ left $} op + right &' = @] assumed add
+ left \\ op | right <$ = |&] assumed sub
+ left $% op / right \< = }\% assumed add
+ left \\ op + right &] the question, assumed add
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=3 %=6
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 43 diff 3 add no; 71 add 92 = 163 vs rev ]@ 34 diff 129 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=3 '=6 <=8 \=5 @=4 ^=1 }=7 &=2 ]=9 %=0
+$$|'' = 33 sub 66 = 33 vs |<< -88 diff 55 sub no; 33 sub 66 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@^
+
+Trying $=6 '=3 <=8 \=5 @=4 ^=1 }=7 &=2 ]=9 %=0
+$$|'' = 66 sub 33 = 33 vs |<< -88 diff 55 sub no; 66 sub 33 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@^
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=6 %=0
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <'
+
+Trying $=0 '=8 <=9 \=5 @=4 ^=3 }=7 &=2 ]=1 %=6
+$$|'' = 00 sub 88 = 88 vs |<< -99 diff 11 sub no; 00 sub 88 = 88 vs rev |<< -99 diff 11 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }%
+
+Trying $=8 '=7 <=1 \=5 @=4 ^=6 }=9 &=2 ]=3 %=0
+$$|'' = 88 sub 77 = 11 vs |<< -11 diff 0 sub ok; 88 sub 77 = 11 vs rev |<< -11 diff 0 sub ok
+\$+\@ = 58 add 54 = 112 vs $^\ 865 diff 753 add no; 85 add 45 = 130 vs rev \^$ 568 diff 438 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: '$
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=3 %=6
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 43 diff 3 add no; 71 add 92 = 163 vs rev ]@ 34 diff 129 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=6 }=1 &=2 ]=9 %=3
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: $@}
+
+Trying $=6 '=4 <=8 \=5 @=9 ^=0 }=7 &=2 ]=1 %=3
+$$|'' = 66 sub 44 = 22 vs |<< -88 diff 66 sub no; 66 sub 44 = 22 vs rev |<< -88 diff 66 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }$
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=6 }=7 &=2 ]=0 %=3
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 965 diff 852 add no; 95 add 45 = 140 vs rev \^$ 569 diff 429 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=0 '=6 <=8 \=5 @=4 ^=9 }=7 &=2 ]=1 %=3
+$$|'' = 00 sub 66 = 66 vs |<< -88 diff 22 sub no; 00 sub 66 = 66 vs rev |<< -88 diff 22 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }'
+
+Trying $=3 '=7 <=8 \=5 @=4 ^=6 }=9 &=2 ]=1 %=0
+$$|'' = 33 sub 77 = 44 vs |<< -88 diff 44 sub no; 33 sub 77 = 44 vs rev |<< -88 diff 44 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: '^
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=3 %=6
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 43 diff 3 add no; 71 add 92 = 163 vs rev ]@ 34 diff 129 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=6 }=1 &=2 ]=9 %=3
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: $@}
+
+Trying $=6 '=2 <=8 \=5 @=4 ^=1 }=7 &=9 ]=0 %=3
+$$|'' = 66 sub 22 = 44 vs |<< -88 diff 44 sub no; 66 sub 22 = 44 vs rev |<< -88 diff 44 sub no
+ rejected none \\+&] = 55 add 90 rev 55 add 09 = 64 rev 46 = final answer: @$
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=0 %=6
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=3 }=7 &=2 ]=9 %=0
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@<
+
+Trying $=0 '=8 <=9 \=5 @=4 ^=1 }=7 &=2 ]=6 %=3
+$$|'' = 00 sub 88 = 88 vs |<< -99 diff 11 sub no; 00 sub 88 = 88 vs rev |<< -99 diff 11 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: }^^
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=3 %=6
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 43 diff 3 add no; 71 add 92 = 163 vs rev ]@ 34 diff 129 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=9 }=1 &=2 ]=6 %=3
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: $}}
+
+Trying $=3 '=5 <=8 \=9 @=4 ^=0 }=7 &=2 ]=1 %=6
+$$|'' = 33 sub 55 = 22 vs |<< -88 diff 66 sub no; 33 sub 55 = 22 vs rev |<< -88 diff 66 sub no
+ rejected none \\+&] = 99 add 21 rev 99 add 12 = 111 rev 111 = final answer: ]]]
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=0 %=6
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=6 '=3 <=8 \=5 @=4 ^=9 }=7 &=2 ]=1 %=0
+$$|'' = 66 sub 33 = 33 vs |<< -88 diff 55 sub no; 66 sub 33 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }$
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=3 }=7 &=2 ]=9 %=0
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@<
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=6 %=3
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 46 diff 0 add ok; 71 add 92 = 163 vs rev ]@ 64 diff 99 add no
+\\|<$ = 55 sub 81 = 26 vs |&] -26 diff 0 sub ok; 55 sub 18 = 37 vs rev |]& -62 diff 25 sub no
+$%/\< = 13 add 58 = 71 vs }\% 753 diff 682 add no; 31 add 85 = 116 vs rev %\} 357 diff 241 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <$
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=6 }=1 &=2 ]=3 %=9
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 23 rev 55 add 32 = 87 rev 78 = final answer: $<
+
+Trying $=0 '=7 <=8 \=5 @=4 ^=6 }=9 &=2 ]=1 %=3
+$$|'' = 00 sub 77 = 77 vs |<< -88 diff 11 sub no; 00 sub 77 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: '^
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=6 }=7 &=2 ]=0 %=3
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 965 diff 852 add no; 95 add 45 = 140 vs rev \^$ 569 diff 429 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=3 '=4 <=8 \=5 @=9 ^=0 }=7 &=2 ]=1 %=6
+$$|'' = 33 sub 44 = 11 vs |<< -88 diff 77 sub no; 33 sub 44 = 11 vs rev |<< -88 diff 77 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }%
+
+Trying $=6 '=8 <=9 \=5 @=4 ^=1 }=7 &=2 ]=0 %=3
+$$|'' = 66 sub 88 = 22 vs |<< -99 diff 77 sub no; 66 sub 88 = 22 vs rev |<< -99 diff 77 sub no
+ rejected none \\+&] = 55 add 20 rev 55 add 02 = 57 rev 75 = final answer: }\
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=3 }=7 &=2 ]=6 %=0
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 135 diff 30 add no; 15 add 45 = 60 vs rev \^$ 531 diff 471 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <$
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=9 }=7 &=2 ]=0 %=3
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 20 rev 55 add 02 = 57 rev 75 = final answer: }\
+
+Trying $=0 '=7 <=8 \=5 @=4 ^=1 }=9 &=2 ]=6 %=3
+$$|'' = 00 sub 77 = 77 vs |<< -88 diff 11 sub no; 00 sub 77 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: '^^
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=0 %=6
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=9 }=1 &=2 ]=6 %=3
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: $}}
+
+Trying $=3 '=8 <=9 \=5 @=4 ^=6 }=7 &=2 ]=1 %=0
+$$|'' = 33 sub 88 = 55 vs |<< -99 diff 44 sub no; 33 sub 88 = 55 vs rev |<< -99 diff 44 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }^
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=6 }=7 &=2 ]=3 %=0
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 165 diff 60 add no; 15 add 45 = 60 vs rev \^$ 561 diff 501 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=6 '=4 <=8 \=5 @=9 ^=0 }=7 &=2 ]=1 %=3
+$$|'' = 66 sub 44 = 22 vs |<< -88 diff 66 sub no; 66 sub 44 = 22 vs rev |<< -88 diff 66 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }$
+
+Trying $=0 '=3 <=8 \=5 @=4 ^=1 }=7 &=2 ]=9 %=6
+$$|'' = 00 sub 33 = 33 vs |<< -88 diff 55 sub no; 00 sub 33 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@^
+
+Trying $=8 '=7 <=1 \=5 @=4 ^=3 }=9 &=2 ]=0 %=6
+$$|'' = 88 sub 77 = 11 vs |<< -11 diff 0 sub ok; 88 sub 77 = 11 vs rev |<< -11 diff 0 sub ok
+\$+\@ = 58 add 54 = 112 vs $^\ 835 diff 723 add no; 85 add 45 = 130 vs rev \^$ 538 diff 408 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: '\
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=6 %=0
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <'
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=9 }=1 &=2 ]=6 %=3
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: $}}
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=6 %=3
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 46 diff 0 add ok; 71 add 92 = 163 vs rev ]@ 64 diff 99 add no
+\\|<$ = 55 sub 81 = 26 vs |&] -26 diff 0 sub ok; 55 sub 18 = 37 vs rev |]& -62 diff 25 sub no
+$%/\< = 13 add 58 = 71 vs }\% 753 diff 682 add no; 31 add 85 = 116 vs rev %\} 357 diff 241 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <$
+
+Trying $=3 '=8 <=9 \=5 @=4 ^=1 }=7 &=2 ]=0 %=6
+$$|'' = 33 sub 88 = 55 vs |<< -99 diff 44 sub no; 33 sub 88 = 55 vs rev |<< -99 diff 44 sub no
+ rejected none \\+&] = 55 add 20 rev 55 add 02 = 57 rev 75 = final answer: }\
+
+Trying $=6 '=3 <=8 \=5 @=4 ^=1 }=7 &=2 ]=9 %=0
+$$|'' = 66 sub 33 = 33 vs |<< -88 diff 55 sub no; 66 sub 33 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@^
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=3 }=7 &=2 ]=9 %=0
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@<
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=6 %=0
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <'
+
+Trying $=0 '=7 <=8 \=5 @=4 ^=1 }=9 &=2 ]=3 %=6
+$$|'' = 00 sub 77 = 77 vs |<< -88 diff 11 sub no; 00 sub 77 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 23 rev 55 add 32 = 87 rev 78 = final answer: '<
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=3 }=7 &=2 ]=6 %=0
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 135 diff 30 add no; 15 add 45 = 60 vs rev \^$ 531 diff 471 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <$
+
+Trying $=3 '=0 <=8 \=5 @=4 ^=1 }=7 &=2 ]=6 %=9
+$$|'' = 33 sub 00 = 33 vs |<< -88 diff 55 sub no; 33 sub 00 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: }^^
+
+Trying $=6 '=5 <=8 \=9 @=4 ^=0 }=7 &=2 ]=1 %=3
+$$|'' = 66 sub 55 = 11 vs |<< -88 diff 77 sub no; 66 sub 55 = 11 vs rev |<< -88 diff 77 sub no
+ rejected none \\+&] = 99 add 21 rev 99 add 12 = 111 rev 111 = final answer: ]]]
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=0 }=7 &=2 ]=9 %=3
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@<
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=6 }=7 &=2 ]=0 %=3
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 965 diff 852 add no; 95 add 45 = 140 vs rev \^$ 569 diff 429 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=0 '=8 <=9 \=5 @=4 ^=6 }=7 &=2 ]=1 %=3
+$$|'' = 00 sub 88 = 88 vs |<< -99 diff 11 sub no; 00 sub 88 = 88 vs rev |<< -99 diff 11 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }^
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=3 %=6
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 43 diff 3 add no; 71 add 92 = 163 vs rev ]@ 34 diff 129 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=9 }=1 &=2 ]=6 %=3
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: $}}
+
+Trying $=6 '=3 <=8 \=5 @=4 ^=1 }=7 &=2 ]=9 %=0
+$$|'' = 66 sub 33 = 33 vs |<< -88 diff 55 sub no; 66 sub 33 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@^
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=9 }=7 &=2 ]=0 %=3
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 20 rev 55 add 02 = 57 rev 75 = final answer: }\
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=6 }=7 &=2 ]=0 %=3
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 965 diff 852 add no; 95 add 45 = 140 vs rev \^$ 569 diff 429 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=0 '=8 <=9 \=5 @=4 ^=6 }=7 &=2 ]=1 %=3
+$$|'' = 00 sub 88 = 88 vs |<< -99 diff 11 sub no; 00 sub 88 = 88 vs rev |<< -99 diff 11 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }^
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=6 }=7 &=2 ]=3 %=0
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 165 diff 60 add no; 15 add 45 = 60 vs rev \^$ 561 diff 501 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=9 }=1 &=2 ]=6 %=3
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: $}}
+
+Trying $=3 '=5 <=8 \=9 @=4 ^=1 }=7 &=2 ]=0 %=6
+$$|'' = 33 sub 55 = 22 vs |<< -88 diff 66 sub no; 33 sub 55 = 22 vs rev |<< -88 diff 66 sub no
+ rejected none \\+&] = 99 add 20 rev 99 add 02 = 101 rev 101 = final answer: ^]^
+
+Trying $=6 '=3 <=8 \=5 @=4 ^=1 }=7 &=2 ]=9 %=0
+$$|'' = 66 sub 33 = 33 vs |<< -88 diff 55 sub no; 66 sub 33 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@^
+
+Trying $=8 '=7 <=1 \=5 @=4 ^=3 }=9 &=2 ]=0 %=6
+$$|'' = 88 sub 77 = 11 vs |<< -11 diff 0 sub ok; 88 sub 77 = 11 vs rev |<< -11 diff 0 sub ok
+\$+\@ = 58 add 54 = 112 vs $^\ 835 diff 723 add no; 85 add 45 = 130 vs rev \^$ 538 diff 408 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: '\
+
+Trying $=0 '=6 <=8 \=5 @=4 ^=9 }=7 &=2 ]=1 %=3
+$$|'' = 00 sub 66 = 66 vs |<< -88 diff 22 sub no; 00 sub 66 = 66 vs rev |<< -88 diff 22 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }'
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=6 %=3
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 46 diff 0 add ok; 71 add 92 = 163 vs rev ]@ 64 diff 99 add no
+\\|<$ = 55 sub 81 = 26 vs |&] -26 diff 0 sub ok; 55 sub 18 = 37 vs rev |]& -62 diff 25 sub no
+$%/\< = 13 add 58 = 71 vs }\% 753 diff 682 add no; 31 add 85 = 116 vs rev %\} 357 diff 241 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <$
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=0 %=6
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=3 '=5 <=8 \=9 @=4 ^=6 }=7 &=2 ]=1 %=0
+$$|'' = 33 sub 55 = 22 vs |<< -88 diff 66 sub no; 33 sub 55 = 22 vs rev |<< -88 diff 66 sub no
+ rejected none \\+&] = 99 add 21 rev 99 add 12 = 111 rev 111 = final answer: ]]]
+
+Trying $=7 '=3 <=8 \=5 @=4 ^=0 }=1 &=2 ]=9 %=6
+$$|'' = 77 sub 33 = 44 vs |<< -88 diff 44 sub no; 77 sub 33 = 44 vs rev |<< -88 diff 44 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: $@}
+
+Trying $=6 '=0 <=8 \=5 @=4 ^=9 }=7 &=2 ]=1 %=3
+$$|'' = 66 sub 00 = 66 vs |<< -88 diff 22 sub no; 66 sub 00 = 66 vs rev |<< -88 diff 22 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }$
+
+Trying $=0 '=8 <=9 \=5 @=4 ^=1 }=7 &=2 ]=3 %=6
+$$|'' = 00 sub 88 = 88 vs |<< -99 diff 11 sub no; 00 sub 88 = 88 vs rev |<< -99 diff 11 sub no
+ rejected none \\+&] = 55 add 23 rev 55 add 32 = 87 rev 78 = final answer: }'
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=6 %=3
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 46 diff 0 add ok; 71 add 92 = 163 vs rev ]@ 64 diff 99 add no
+\\|<$ = 55 sub 81 = 26 vs |&] -26 diff 0 sub ok; 55 sub 18 = 37 vs rev |]& -62 diff 25 sub no
+$%/\< = 13 add 58 = 71 vs }\% 753 diff 682 add no; 31 add 85 = 116 vs rev %\} 357 diff 241 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <$
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=0 %=6
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=9 }=7 &=2 ]=0 %=3
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 20 rev 55 add 02 = 57 rev 75 = final answer: }\
+
+Trying $=3 '=2 <=8 \=5 @=4 ^=6 }=7 &=9 ]=0 %=1
+$$|'' = 33 sub 22 = 11 vs |<< -88 diff 77 sub no; 33 sub 22 = 11 vs rev |<< -88 diff 77 sub no
+ rejected none \\+&] = 55 add 90 rev 55 add 09 = 64 rev 46 = final answer: @^
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=3 }=1 &=2 ]=9 %=6
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: $@}
+
+Trying $=0 '=8 <=9 \=5 @=4 ^=6 }=7 &=2 ]=1 %=3
+$$|'' = 00 sub 88 = 88 vs |<< -99 diff 11 sub no; 00 sub 88 = 88 vs rev |<< -99 diff 11 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }^
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=6 }=7 &=2 ]=3 %=0
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 165 diff 60 add no; 15 add 45 = 60 vs rev \^$ 561 diff 501 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=0 %=6
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=5 '=3 <=8 \=1 @=4 ^=9 }=7 &=2 ]=0 %=6
+$$|'' = 55 sub 33 = 22 vs |<< -88 diff 66 sub no; 55 sub 33 = 22 vs rev |<< -88 diff 66 sub no
+ rejected none \\+&] = 11 add 20 rev 11 add 02 = 13 rev 31 = final answer: '\
+
+Trying $=3 '=6 <=8 \=5 @=4 ^=9 }=7 &=2 ]=1 %=0
+$$|'' = 33 sub 66 = 33 vs |<< -88 diff 55 sub no; 33 sub 66 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: }'
+
+Trying $=7 '=0 <=8 \=5 @=4 ^=9 }=1 &=2 ]=3 %=6
+$$|'' = 77 sub 00 = 77 vs |<< -88 diff 11 sub no; 77 sub 00 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 23 rev 55 add 32 = 87 rev 78 = final answer: $<
+
+Trying $=0 '=8 <=9 \=5 @=4 ^=1 }=7 &=2 ]=6 %=3
+$$|'' = 00 sub 88 = 88 vs |<< -99 diff 11 sub no; 00 sub 88 = 88 vs rev |<< -99 diff 11 sub no
+ rejected none \\+&] = 55 add 26 rev 55 add 62 = 117 rev 711 = final answer: }^^
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=6 %=3
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 46 diff 0 add ok; 71 add 92 = 163 vs rev ]@ 64 diff 99 add no
+\\|<$ = 55 sub 81 = 26 vs |&] -26 diff 0 sub ok; 55 sub 18 = 37 vs rev |]& -62 diff 25 sub no
+$%/\< = 13 add 58 = 71 vs }\% 753 diff 682 add no; 31 add 85 = 116 vs rev %\} 357 diff 241 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <$
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=0 %=6
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=2 '=3 <=8 \=5 @=4 ^=0 }=7 &=1 ]=9 %=6
+$$|'' = 22 sub 33 = 11 vs |<< -88 diff 77 sub no; 22 sub 33 = 11 vs rev |<< -88 diff 77 sub no
+ rejected none \\+&] = 55 add 19 rev 55 add 91 = 146 rev 641 = final answer: %@&
+
+Trying $=6 '=5 <=8 \=9 @=4 ^=1 }=7 &=2 ]=3 %=0
+$$|'' = 66 sub 55 = 11 vs |<< -88 diff 77 sub no; 66 sub 55 = 11 vs rev |<< -88 diff 77 sub no
+ rejected none \\+&] = 99 add 23 rev 99 add 32 = 131 rev 131 = final answer: ^]^
+
+Trying $=3 '=0 <=8 \=5 @=4 ^=6 }=7 &=2 ]=9 %=1
+$$|'' = 33 sub 00 = 33 vs |<< -88 diff 55 sub no; 33 sub 00 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@%
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=9 }=7 &=2 ]=3 %=0
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 23 rev 55 add 32 = 87 rev 78 = final answer: }$
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=3 }=7 &=2 ]=6 %=0
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 135 diff 30 add no; 15 add 45 = 60 vs rev \^$ 531 diff 471 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <$
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=3 }=7 &=2 ]=6 %=0
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 935 diff 822 add no; 95 add 45 = 140 vs rev \^$ 539 diff 399 add no
+ rejected forward \\+&] = 55 add 26 = 81 = final answer: <'
+
+Trying $=0 '=7 <=8 \=5 @=4 ^=6 }=9 &=2 ]=1 %=3
+$$|'' = 00 sub 77 = 77 vs |<< -88 diff 11 sub no; 00 sub 77 = 77 vs rev |<< -88 diff 11 sub no
+ rejected none \\+&] = 55 add 21 rev 55 add 12 = 67 rev 76 = final answer: '^
+
+Trying $=2 '=3 <=8 \=5 @=4 ^=9 }=7 &=1 ]=0 %=6
+$$|'' = 22 sub 33 = 11 vs |<< -88 diff 77 sub no; 22 sub 33 = 11 vs rev |<< -88 diff 77 sub no
+ rejected none \\+&] = 55 add 10 rev 55 add 01 = 56 rev 65 = final answer: %\
+
+Trying $=6 '=0 <=8 \=5 @=4 ^=1 }=7 &=2 ]=9 %=3
+$$|'' = 66 sub 00 = 66 vs |<< -88 diff 22 sub no; 66 sub 00 = 66 vs rev |<< -88 diff 22 sub no
+ rejected none \\+&] = 55 add 29 rev 55 add 92 = 147 rev 741 = final answer: }@^
+
+Trying $=8 '=6 <=1 \=5 @=4 ^=9 }=7 &=2 ]=0 %=3
+$$|'' = 88 sub 66 = 22 vs |<< -11 diff 11 sub no; 88 sub 66 = 22 vs rev |<< -11 diff 11 sub no
+ rejected none \\+&] = 55 add 20 rev 55 add 02 = 57 rev 75 = final answer: }\
+
+Trying $=1 '=9 <=8 \=5 @=4 ^=0 }=7 &=2 ]=3 %=6
+$$|'' = 11 sub 99 = 88 vs |<< -88 diff 0 sub ok; 11 sub 99 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 51 add 54 = 105 vs $^\ 105 diff 0 add ok; 15 add 45 = 60 vs rev \^$ 501 diff 441 add no
+$}+&' = 17 add 29 = 46 vs @] 43 diff 3 add no; 71 add 92 = 163 vs rev ]@ 34 diff 129 add no
+ rejected forward \\+&] = 55 add 23 = 78 = final answer: }<
+
+Trying $=9 '=1 <=8 \=5 @=4 ^=6 }=7 &=2 ]=0 %=3
+$$|'' = 99 sub 11 = 88 vs |<< -88 diff 0 sub ok; 99 sub 11 = 88 vs rev |<< -88 diff 0 sub ok
+\$+\@ = 59 add 54 = 113 vs $^\ 965 diff 852 add no; 95 add 45 = 140 vs rev \^$ 569 diff 429 add no
+ rejected forward \\+&] = 55 add 20 = 75 = final answer: }\
+
+Trying $=0 '=8 <=9 \=5 @=4 ^=1 }=7 &=2 ]=3 %=6
+$$|'' = 00 sub 88 = 88 vs |<< -99 diff 11 sub no; 00 sub 88 = 88 vs rev |<< -99 diff 11 sub no
+ rejected none \\+&] = 55 add 23 rev 55 add 32 = 87 rev 78 = final answer: }'
+
+Trying $=2 '=5 <=8 \=9 @=4 ^=0 }=7 &=1 ]=6 %=3
+$$|'' = 22 sub 55 = 33 vs |<< -88 diff 55 sub no; 22 sub 55 = 33 vs rev |<< -88 diff 55 sub no
+ rejected none \\+&] = 99 add 16 rev 99 add 61 = 160 rev 061 = final answer: ^]&
+
+Trying $=5 '=7 <=2 \=8 @=3 ^=9 }=1 &=4 ]=6 %=0
+$$|'' = 55 sub 77 = 22 vs |<< -22 diff 0 sub ok; 55 sub 77 = 22 vs rev |<< -22 diff 0 sub ok
+\$+\@ = 85 add 83 = 168 vs $^\ 598 diff 430 add no; 58 add 38 = 96 vs rev \^$ 895 diff 799 add no
+ rejected forward \\+&] = 88 add 46 = 134 = final answer: }@&
+
+Trying $=6 '=2 <=4 \=5 @=7 ^=1 }=8 &=3 ]=9 %=0
+$$|'' = 66 sub 22 = 44 vs |<< -44 diff 0 sub ok; 66 sub 22 = 44 vs rev |<< -44 diff 0 sub ok
+\$+\@ = 56 add 57 = 113 vs $^\ 615 diff 502 add no; 65 add 75 = 140 vs rev \^$ 516 diff 376 add no
+ rejected forward \\+&] = 55 add 39 = 94 = final answer: ]<

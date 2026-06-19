@@ -1,0 +1,66 @@
+\#]\\ = :[
+@[]#& = !#
+@%-%} = }\
+&}]\[ = %[]
+The question is }[?!"
+
+Operator symbols ]-
+Question operator symbol ?
+Question operator not in examples
+
+Digit symbols \#:[@&!%}"
+
+Checking concatenation
+left \# op ] right \\ expected \#\\ versus :[ mismatch
+left @[ op ] right #& expected @[#& versus !# mismatch
+left @% op - right %} expected @%%} versus }\ mismatch
+left &} op ] right \[ expected &}\[ versus %[] mismatch
+
+Question operator ? is not concatenation
+
+Checking reverse concatenation
+left \# op ] right \\ expected \\\# versus :[ mismatch
+left @[ op ] right #& expected #&@[ versus !# mismatch
+left @% op - right %} expected %}@% versus }\ mismatch
+left &} op ] right \[ expected \[&} versus %[] mismatch
+
+Question operator ? is not reverse concatenation
+
+Filtering out the concatenation operations
+\#]\\ = :[
+@[]#& = !#
+@%-%} = }\
+&}]\[ = %[]
+
+Assigning mul
+ left \# op ] right \\ = :[ length 2
+ left @[ op ] right #& = !# length 2
+ left @% op - right %} = }\ length 2
+ left &} op ] right \[ = %[] length 3
+
+Assigning sub
+ left \# op ] right \\ = :[ length 2
+ left @[ op ] right #& = !# length 2
+ left @% op - right %} = }\ length 2
+ left &} op ] right \[ = %[] op in output assume sub
+
+Assigning add
+ left \# op ] right \\ = :[ assumed sub
+ left @[ op ] right #& = !# assumed sub
+ left @% op - right %} = }\ length 2
+ left &} op ] right \[ = %[] assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left \# op ] right \\ = :[ assumed sub
+ left @[ op ] right #& = !# assumed sub
+ left @% op - right %} = }\ length 2 assume add
+ left &} op ] right \[ = %[] assumed sub
+ left }[ op ? right !" the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying \=7 #=4 :=0 [=3 @=5 &=8 !=9 %=1 }=6 "=2
+\#]\\ = 74 sub 77 = 3 vs :[ 03 diff 0 sub ok; 47 sub 77 = 30 vs rev [: 30 diff 0 sub ok
+@[]#& = 53 sub 48 = 5 vs !# 94 diff 89 sub no; 35 sub 84 = 49 vs rev #! 49 diff 0 sub ok
+@%-%} = 51 add 16 = 67 vs }\ 67 diff 0 add ok; 15 add 61 = 76 vs rev \} 76 diff 0 add ok
+&}]\[ = 86 sub 73 = 13 vs %[] -13 diff 0 sub ok; 68 sub 37 = 31 vs rev %[% -31 diff 0 sub ok
+ accepted rev }[?!" = 63 mul 92 rev 36 mul 29 = 1044 rev 4401 = \boxed{##:%}

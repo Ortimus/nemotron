@@ -1,0 +1,57 @@
+:{>?? = (`:
+#{>#& = (&:
+$$^?? = ^&&
+The question is (:*`'
+
+Operator symbols >^
+Question operator symbol *
+Question operator not in examples
+
+Digit symbols :{?(`#&$'
+
+Checking concatenation
+left :{ op > right ?? expected :{?? versus (`: mismatch
+left #{ op > right #& expected #{#& versus (&: mismatch
+left $$ op ^ right ?? expected $$?? versus ^&& mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left :{ op > right ?? expected ??:{ versus (`: mismatch
+left #{ op > right #& expected #&#{ versus (&: mismatch
+left $$ op ^ right ?? expected ??$$ versus ^&& mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+:{>?? = (`:
+#{>#& = (&:
+$$^?? = ^&&
+
+Assigning mul
+ left :{ op > right ?? = (`: length 3
+ left #{ op > right #& = (&: length 3
+ left $$ op ^ right ?? = ^&& length 3
+
+Assigning sub
+ left :{ op > right ?? = (`: length 3
+ left #{ op > right #& = (&: length 3
+ left $$ op ^ right ?? = ^&& op in output assume sub
+
+Assigning add
+ left :{ op > right ?? = (`: length 3 assume add
+ left #{ op > right #& = (&: assumed add
+ left $$ op ^ right ?? = ^&& assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left :{ op > right ?? = (`: assumed add
+ left #{ op > right #& = (&: assumed add
+ left $$ op ^ right ?? = ^&& assumed sub
+ left (: op * right `' the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying :=1 {=9 ?=5 (=6 `=4 #=8 &=2 $=3 '=7 A=0
+:{>?? = 19 add 55 = 74 vs (`: 641 diff 567 add no; 91 add 55 = 146 vs rev :`( 146 diff 0 add ok
+#{>#& = 89 add 82 = 171 vs (&: 621 diff 450 add no; 98 add 28 = 126 vs rev :&( 126 diff 0 add ok
+$$^?? = 33 sub 55 = 22 vs ^&& -22 diff 0 sub ok; 33 sub 55 = 22 vs rev ^&& -22 diff 0 sub ok
+ accepted rev (:*`' = 61 mul 47 rev 16 mul 74 = 1184 rev 4811 = \boxed{`#::}

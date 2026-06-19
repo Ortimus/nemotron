@@ -1,0 +1,235 @@
+$[*?/ = $?\^
+\'-[' = -/
+$>-!! = ']
+?]+>! = ^>
+The question is '!->?
+
+Operator symbols *-+
+Question operator symbol -
+Question operator in examples
+
+Digit symbols $[?/\^'>!]
+
+Checking concatenation
+left $[ op * right ?/ expected $[?/ versus $?\^ mismatch
+left \' op - right [' expected \'[' versus -/ mismatch
+left $> op - right !! expected $>!! versus '] mismatch
+left ?] op + right >! expected ?]>! versus ^> mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left $[ op * right ?/ expected ?/$[ versus $?\^ mismatch
+left \' op - right [' expected ['\' versus -/ mismatch
+left $> op - right !! expected !!$> versus '] mismatch
+left ?] op + right >! expected >!?] versus ^> mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+$[*?/ = $?\^
+\'-[' = -/
+$>-!! = ']
+?]+>! = ^>
+
+Assigning mul
+ left $[ op * right ?/ = $?\^ length 4 assume mul
+ left \' op - right [' = -/ length 2
+ left $> op - right !! = '] length 2
+ left ?] op + right >! = ^> length 2
+
+Assigning sub
+ left $[ op * right ?/ = $?\^ assumed mul
+ left \' op - right [' = -/ op in output assume sub
+ left $> op - right !! = '] assumed sub
+ left ?] op + right >! = ^> length 2
+
+Assigning add
+ left $[ op * right ?/ = $?\^ assumed mul
+ left \' op - right [' = -/ assumed sub
+ left $> op - right !! = '] assumed sub
+ left ?] op + right >! = ^> length 2
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left $[ op * right ?/ = $?\^ assumed mul
+ left \' op - right [' = -/ assumed sub
+ left $> op - right !! = '] assumed sub
+ left ?] op + right >! = ^> length 2 assume add
+ left '! op - right >? the question, assumed sub
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 = 89 rev 98 = final answer: ![
+
+Trying $=6 [=5 ?=8 /=0 \=1 ^=2 '=7 >=3 !=9 ]=4
+$[*?/ = 65 mul 80 = 5200 vs $?\^ 6812 diff 1612 mul no; 56 mul 08 = 448 vs rev ^\?$ 2186 diff 1738 mul no
+ rejected none '!->? = 79 sub 38 rev 97 sub 83 = 14 rev 41 = final answer: ]\
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 = 89 rev 98 = final answer: ![
+
+Trying $=6 [=5 ?=8 /=0 \=1 ^=2 '=7 >=3 !=9 ]=4
+$[*?/ = 65 mul 80 = 5200 vs $?\^ 6812 diff 1612 mul no; 56 mul 08 = 448 vs rev ^\?$ 2186 diff 1738 mul no
+ rejected none '!->? = 79 sub 38 rev 97 sub 83 = 14 rev 41 = final answer: ]\
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 = 89 rev 98 = final answer: ![
+
+Trying $=6 [=5 ?=8 /=0 \=1 ^=2 '=7 >=3 !=9 ]=4
+$[*?/ = 65 mul 80 = 5200 vs $?\^ 6812 diff 1612 mul no; 56 mul 08 = 448 vs rev ^\?$ 2186 diff 1738 mul no
+ rejected none '!->? = 79 sub 38 rev 97 sub 83 = 14 rev 41 = final answer: ]\
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 = 89 rev 98 = final answer: ![
+
+Trying $=6 [=5 ?=8 /=0 \=1 ^=2 '=7 >=3 !=9 ]=4
+$[*?/ = 65 mul 80 = 5200 vs $?\^ 6812 diff 1612 mul no; 56 mul 08 = 448 vs rev ^\?$ 2186 diff 1738 mul no
+ rejected none '!->? = 79 sub 38 rev 97 sub 83 = 14 rev 41 = final answer: ]\
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 = 89 rev 98 = final answer: ![
+
+Trying $=6 [=5 ?=8 /=0 \=1 ^=2 '=7 >=3 !=9 ]=4
+$[*?/ = 65 mul 80 = 5200 vs $?\^ 6812 diff 1612 mul no; 56 mul 08 = 448 vs rev ^\?$ 2186 diff 1738 mul no
+ rejected none '!->? = 79 sub 38 rev 97 sub 83 = 14 rev 41 = final answer: ]\
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 = 89 rev 98 = final answer: ![
+
+Trying $=6 [=5 ?=8 /=0 \=1 ^=2 '=7 >=3 !=9 ]=4
+$[*?/ = 65 mul 80 = 5200 vs $?\^ 6812 diff 1612 mul no; 56 mul 08 = 448 vs rev ^\?$ 2186 diff 1738 mul no
+ rejected none '!->? = 79 sub 38 rev 97 sub 83 = 14 rev 41 = final answer: ]\
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 = 89 rev 98 = final answer: ![
+
+Trying $=6 [=5 ?=8 /=0 \=1 ^=2 '=7 >=3 !=9 ]=4
+$[*?/ = 65 mul 80 = 5200 vs $?\^ 6812 diff 1612 mul no; 56 mul 08 = 448 vs rev ^\?$ 2186 diff 1738 mul no
+ rejected none '!->? = 79 sub 38 rev 97 sub 83 = 14 rev 41 = final answer: ]\
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 = 89 rev 98 = final answer: ![
+
+Trying $=6 [=5 ?=8 /=0 \=1 ^=2 '=7 >=3 !=9 ]=4
+$[*?/ = 65 mul 80 = 5200 vs $?\^ 6812 diff 1612 mul no; 56 mul 08 = 448 vs rev ^\?$ 2186 diff 1738 mul no
+ rejected none '!->? = 79 sub 38 rev 97 sub 83 = 14 rev 41 = final answer: ]\
+
+Trying $=1 [=2 ?=3 /=4 \=5 ^=6 '=7 >=8 !=9 ]=0
+$[*?/ = 12 mul 34 = 408 vs $?\^ 1356 diff 948 mul no; 21 mul 43 = 903 vs rev ^\?$ 6531 diff 5628 mul no
+ rejected none '!->? = 79 sub 83 rev 97 sub 38 = 59 rev 95 = final answer: !\
+
+Trying $=0 [=1 ?=2 /=3 \=4 ^=5 '=6 >=7 !=9 ]=8
+$[*?/ = 01 mul 23 = 23 vs $?\^ 0245 diff 222 mul no; 10 mul 32 = 320 vs rev ^\?$ 5420 diff 5100 mul no
+ rejected none '!->? = 69 sub 72 rev 96 sub 27 = 69 rev 96 = final answer: !'
+
+Trying $=8 [=0 ?=1 /=2 \=3 ^=4 '=6 >=7 !=9 ]=5
+$[*?/ = 80 mul 12 = 960 vs $?\^ 8134 diff 7174 mul no; 08 mul 21 = 168 vs rev ^\?$ 4318 diff 4150 mul no
+ rejected none '!->? = 69 sub 71 rev 96 sub 17 = 79 rev 97 = final answer: !>
+
+Trying $=5 [=8 ?=0 /=1 \=2 ^=3 '=6 >=7 !=9 ]=4
+$[*?/ = 58 mul 01 = 58 vs $?\^ 5023 diff 4965 mul no; 85 mul 10 = 850 vs rev ^\?$ 3205 diff 2355 mul no
+ rejected none '!->? = 69 sub 70 rev 96 sub 07 =

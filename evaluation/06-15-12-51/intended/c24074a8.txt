@@ -1,0 +1,75 @@
+??#(& = #]/
+]/#|/ = #}<
+?|>?] = /()}
+}}>?< = ?|%
+}/>?) = )&}
+The question is ]]`]%
+
+Operator symbols #>
+Question operator symbol `
+Question operator not in examples
+
+Digit symbols ?(&]/|}<)%
+
+Checking concatenation
+left ?? op # right (& expected ??(& versus #]/ mismatch
+left ]/ op # right |/ expected ]/|/ versus #}< mismatch
+left ?| op > right ?] expected ?|?] versus /()} mismatch
+left }} op > right ?< expected }}?< versus ?|% mismatch
+left }/ op > right ?) expected }/?) versus )&} mismatch
+
+Question operator ` is not concatenation
+
+Checking reverse concatenation
+left ?? op # right (& expected (&?? versus #]/ mismatch
+left ]/ op # right |/ expected |/]/ versus #}< mismatch
+left ?| op > right ?] expected ?]?| versus /()} mismatch
+left }} op > right ?< expected ?<}} versus ?|% mismatch
+left }/ op > right ?) expected ?)}/ versus )&} mismatch
+
+Question operator ` is not reverse concatenation
+
+Filtering out the concatenation operations
+??#(& = #]/
+]/#|/ = #}<
+?|>?] = /()}
+}}>?< = ?|%
+}/>?) = )&}
+
+Assigning mul
+ left ?? op # right (& = #]/ length 3
+ left ]/ op # right |/ = #}< length 3
+ left ?| op > right ?] = /()} length 4 assume mul
+ left }} op > right ?< = ?|% assumed mul
+ left }/ op > right ?) = )&} assumed mul
+
+Assigning sub
+ left ?? op # right (& = #]/ op in output assume sub
+ left ]/ op # right |/ = #}< assumed sub
+ left ?| op > right ?] = /()} assumed mul
+ left }} op > right ?< = ?|% assumed mul
+ left }/ op > right ?) = )&} assumed mul
+
+Assigning add
+ left ?? op # right (& = #]/ assumed sub
+ left ]/ op # right |/ = #}< assumed sub
+ left ?| op > right ?] = /()} assumed mul
+ left }} op > right ?< = ?|% assumed mul
+ left }/ op > right ?) = )&} assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ?? op # right (& = #]/ assumed sub
+ left ]/ op # right |/ = #}< assumed sub
+ left ?| op > right ?] = /()} assumed mul
+ left }} op > right ?< = ?|% assumed mul
+ left }/ op > right ?) = )&} assumed mul
+ left ]] op ` right ]% the question, operator not in the examples, the unused family is add, assume add
+
+Trying ?=5 (=8 &=7 ]=3 /=2 |=4 }=1 <=0 )=6 %=9
+??#(& = 55 sub 87 = 32 vs #]/ -32 diff 0 sub ok; 55 sub 78 = 23 vs rev #/] -23 diff 0 sub ok
+]/#|/ = 32 sub 42 = 10 vs #}< -10 diff 0 sub ok; 23 sub 24 = 1 vs rev #<} -01 diff 0 sub ok
+?|>?] = 54 mul 53 = 2862 vs /()} 2861 diff 1 mul ok - 1; 45 mul 35 = 1575 vs rev })(/ 1682 diff 107 mul no
+}}>?< = 11 mul 50 = 550 vs ?|% 549 diff 1 mul ok - 1; 11 mul 05 = 55 vs rev %|? 945 diff 890 mul no
+}/>?) = 12 mul 56 = 672 vs )&} 671 diff 1 mul ok - 1; 21 mul 65 = 1365 vs rev }&) 176 diff 1189 mul no
+ accepted forward ]]`]% = 33 add 39 = 72 = \boxed{&/}

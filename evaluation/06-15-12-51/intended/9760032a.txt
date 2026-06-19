@@ -1,0 +1,182 @@
+32+98 = 9832
+51-63 = -12
+38+76 = 7638
+
+The inputs are 32, 98, 51, 63, 38, 76
+
+The outputs are 9832, -12, 7638
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 9832, -12, 7638
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+32+98 -> +
+51-63 -> -
+38+76 -> +
+
+The operators
++
+-
+
+Looking at the question
+72+93 -> +
+The question operator is found in the examples.
+
+Looking at operator + [32+98 = 9832, 38+76 = 7638]:
+
+Trying common operations
+ reversed operands [32->23 98->89, 38->83 76->67] and reversed result [expected (23,89)->9832, (83,67)->7638]
+ addition
+ (23,89)->9832: 23 + 89 = 112 rev-> 211 mismatch
+ multiplication
+ (83,67)->7638: (80 + 3) * 67 = 80 * 67 + 3 * 67 = 5360 + 201 = 5561 rev-> 1655 mismatch
+ concatenation
+ (23,89)->9832: 23 || 89 = 2389 rev-> 9832 match
+ (83,67)->7638: 83 || 67 = 8367 rev-> 7638 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (83,67)->7638: 67 || 83 = 6783 rev-> 3876 mismatch
+
+ identity [32 98, 38 76] [expected (32,98)->9832, (38,76)->7638]
+ addition
+ (32,98)->9832: 32 + 98 = 130 mismatch
+ multiplication
+ (38,76)->7638: (30 + 8) * 76 = 30 * 76 + 8 * 76 = 2280 + 608 = 2888 mismatch
+ concatenation
+ (32,98)->9832: 32 || 98 = 3298 mismatch
+ reverse concatenation
+ (38,76)->7638: 76 || 38 = 7638 match
+ (32,98)->9832: 98 || 32 = 9832 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [32->23 98->89, 38->83 76->67] and reversed result [expected (23,89)->9832, (83,67)->7638]
+ subtraction (a-b)
+ (23,89)->9832: 23 - 89 = -66 rev-> -66 mismatch
+ absolute difference
+ (83,67)->7638: |83 - 67| = 16 rev-> 61 mismatch
+ max mod min
+ (23,89)->9832: max(23,89) mod min(23,89) = 89 mod 23 = 20 rev-> 02 mismatch
+ negated absolute difference
+ (83,67)->7638: -|83 - 67| = -16 rev-> -61 mismatch
+ reverse subtraction (b-a)
+ (23,89)->9832: 89 - 23 = 66 rev-> 66 mismatch
+ modulo (a mod b)
+ (83,67)->7638: 83 mod 67 = 16 rev-> 61 mismatch
+
+ identity [32 98, 38 76] [expected (32,98)->9832, (38,76)->7638]
+ subtraction (a-b)
+ (32,98)->9832: 32 - 98 = -66 mismatch
+ absolute difference
+ (38,76)->7638: |38 - 76| = 38 mismatch
+ max mod min
+ (32,98)->9832: max(32,98) mod min(32,98) = 98 mod 32 = 2 mismatch
+ negated absolute difference
+ (38,76)->7638: -|38 - 76| = -38 mismatch
+ reverse subtraction (b-a)
+ (32,98)->9832: 98 - 32 = 66 mismatch
+ modulo (a mod b)
+ (38,76)->7638: 38 mod 76 = 38 mismatch
+
+Trying rare operations
+ reversed operands [32->23 98->89, 38->83 76->67] and reversed result [expected (23,89)->9832, (83,67)->7638]
+ multiply+1
+ (23,89)->9832: (20 + 3) * 89 + 1 = 20 * 89 + 3 * 89 + 1 = 1780 + 267 + 1 = 2047 + 1 = 2048 rev-> 8402 mismatch
+ multiply-1
+ (83,67)->7638: (80 + 3) * 67 - 1 = 80 * 67 + 3 * 67 - 1 = 5360 + 201 - 1 = 5561 - 1 = 5560 rev-> 0655 mismatch
+ add+1
+ (23,89)->9832: 23 + 89 + 1 = 113 rev-> 311 mismatch
+ add-1
+ (83,67)->7638: 83 + 67 - 1 = 149 rev-> 941 mismatch
+ sub+1
+ (23,89)->9832: 23 - 89 + 1 = -65 rev-> -56 mismatch
+ sub-1
+ (83,67)->7638: 83 - 67 - 1 = 15 rev-> 51 mismatch
+ integer division (a/b)
+ (23,89)->9832: 23 / 89 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (83,67)->7638: 67 / 83 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (23,89)->9832: 89 mod 23 = 20 rev-> 02 mismatch
+ digit absolute diff
+ (83,67)->7638: |8-6| || |3-7| = 24 rev-> 42 mismatch
+ digit add mod10
+ (23,89)->9832: (2+8)%10 || (3+9)%10 = 02 rev-> 20 mismatch
+ digit sub mod10
+ (83,67)->7638: (8-6)%10 || (3-7)%10 = 26 rev-> 62 mismatch
+ cross multiply
+ (23,89)->9832: 2*8 + 3*9 = 16 + 27 = 43 rev-> 34 mismatch
+ cross multiply rev
+ (83,67)->7638: 8*7 + 3*6 = 56 + 18 = 74 rev-> 47 mismatch
+ digit multiply
+ (23,89)->9832: 2*8 || 3*9 = 16 || 27 = 1627 rev-> 7261 mismatch
+ digit multiply rev
+ (83,67)->7638: 8*7 || 3*6 = 56 || 18 = 5618 rev-> 8165 mismatch
+ digit sum diff
+ (23,89)->9832: (2+3) - (8+9) = -12 rev-> -21 mismatch
+ digit sum sum
+ (83,67)->7638: (8+3) + (6+7) = 24 rev-> 42 mismatch
+ digit product diff
+ (23,89)->9832: 2*3 - 8*9 = 6 - 72 = -66 rev-> -66 mismatch
+ digit product sum
+ (83,67)->7638: 8*3 + 6*7 = 24 + 42 = 66 rev-> 66 mismatch
+ determinant
+ (23,89)->9832: 2*9 - 3*8 = 18 - 24 = -6 rev-> -6 mismatch
+ abs determinant
+ (83,67)->7638: |8*7 - 3*6| = |56 - 18| = 38 rev-> 83 mismatch
+
+ identity [32 98, 38 76] [expected (32,98)->9832, (38,76)->7638]
+ multiply+1
+ (32,98)->9832: (30 + 2) * 98 + 1 = 30 * 98 + 2 * 98 + 1 = 2940 + 196 + 1 = 3136 + 1 = 3137 mismatch
+ multiply-1
+ (38,76)->7638: (30 + 8) * 76 - 1 = 30 * 76 + 8 * 76 - 1 = 2280 + 608 - 1 = 2888 - 1 = 2887 mismatch
+ add+1
+ (32,98)->9832: 32 + 98 + 1 = 131 mismatch
+ add-1
+ (38,76)->7638: 38 + 76 - 1 = 113 mismatch
+ sub+1
+ (32,98)->9832: 32 - 98 + 1 = -65 mismatch
+ sub-1
+ (38,76)->7638: 38 - 76 - 1 = -39 mismatch
+ integer division (a/b)
+ (32,98)->9832: 32 / 98 = 0 mismatch
+ reverse division (b/a)
+ (38,76)->7638: 76 / 38 = 2 mismatch
+ reverse modulo (b mod a)
+ (32,98)->9832: 98 mod 32 = 2 mismatch
+ digit absolute diff
+ (38,76)->7638: |3-7| || |8-6| = 42 mismatch
+ digit add mod10
+ (32,98)->9832: (3+9)%10 || (2+8)%10 = 20 mismatch
+ digit sub mod10
+ (38,76)->7638: (3-7)%10 || (8-6)%10 = 62 mismatch
+ cross multiply
+ (32,98)->9832: 3*9 + 2*8 = 27 + 16 = 43 mismatch
+ cross multiply rev
+ (38,76)->7638: 3*6 + 8*7 = 18 + 56 = 74 mismatch
+ digit multiply
+ (32,98)->9832: 3*9 || 2*8 = 27 || 16 = 2716 mismatch
+ digit multiply rev
+ (38,76)->7638: 3*6 || 8*7 = 18 || 56 = 1856 mismatch
+ digit sum diff
+ (32,98)->9832: (3+2) - (9+8) = -12 mismatch
+ digit sum sum
+ (38,76)->7638: (3+8) + (7+6) = 24 mismatch
+ digit product diff
+ (32,98)->9832: 3*2 - 9*8 = 6 - 72 = -66 mismatch
+ digit product sum
+ (38,76)->7638: 3*8 + 7*6 = 24 + 42 = 66 mismatch
+ determinant
+ (32,98)->9832: 3*8 - 2*9 = 24 - 18 = 6 mismatch
+ abs determinant
+ (38,76)->7638: |3*6 - 8*7| = |18 - 56| = 38 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 72+93:
+ We recall that the question operator is found in the examples.
+ reversed operands [72->27, 93->39] and reversed result
+ concatenation
+ (27,39): 27 || 39 = 2739 rev-> 9372
+ Result is non-negative
+ \boxed{9372}

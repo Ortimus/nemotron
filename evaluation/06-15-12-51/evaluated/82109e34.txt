@@ -1,0 +1,249 @@
+''+:@ = @:>
+^\+?^ = @$#
+#?+$> = /?
+^\*?# = $#>/
+The question is '^-^^
+
+Operator symbols +*
+Question operator symbol -
+Question operator not in examples
+
+Digit symbols ':@>^\?$#/
+
+Checking concatenation
+left '' op + right :@ expected '':@ versus @:> mismatch
+left ^\ op + right ?^ expected ^\?^ versus @$# mismatch
+left #? op + right $> expected #?$> versus /? mismatch
+left ^\ op * right ?# expected ^\?# versus $#>/ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left '' op + right :@ expected :@'' versus @:> mismatch
+left ^\ op + right ?^ expected ?^^\ versus @$# mismatch
+left #? op + right $> expected $>#? versus /? mismatch
+left ^\ op * right ?# expected ?#^\ versus $#>/ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+''+:@ = @:>
+^\+?^ = @$#
+#?+$> = /?
+^\*?# = $#>/
+
+Assigning mul
+ left '' op + right :@ = @:> length 3
+ left ^\ op + right ?^ = @$# length 3
+ left #? op + right $> = /? length 2
+ left ^\ op * right ?# = $#>/ length 4 assume mul
+
+Assigning sub
+ left '' op + right :@ = @:> length 3
+ left ^\ op + right ?^ = @$# length 3
+ left #? op + right $> = /? length 2
+ left ^\ op * right ?# = $#>/ assumed mul
+
+Assigning add
+ left '' op + right :@ = @:> length 3 assume add
+ left ^\ op + right ?^ = @$# assumed add
+ left #? op + right $> = /? assumed add
+ left ^\ op * right ?# = $#>/ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left '' op + right :@ = @:> assumed add
+ left ^\ op + right ?^ = @$# assumed add
+ left #? op + right $> = /? assumed add
+ left ^\ op * right ?# = $#>/ assumed mul
+ left '^ op - right ^^ the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4 #=9 /=3
+''+:@ = 00 add 81 = 81 vs @:> 182 diff 101 add no; 00 add 18 = 18 vs rev >:@ 281 diff 263 add no
+ rejected none '^-^^ = 05 sub 55 rev 50 sub 55 = 5 rev 5 = final answer: ^
+
+Trying '=4 :=0 @=8 >=1 ^=5 \=6 ?=7 $=2 #=9 /=3
+''+:@ = 44 add 08 = 52 vs @:> 801 diff 749 add no; 44 add 80 = 124 vs rev >:@ 108 diff 16 add no
+ rejected none '^-^^ = 45 sub 55 rev 54 sub 55 = 1 rev 1 = final answer: >
+
+Trying '=9 :=4 @=0 >=8 ^=5 \=6 ?=7 $=2 #=1 /=3
+''+:@ = 99 add 40 = 139 vs @:> 048 diff 91 add no; 99 add 04 = 103 vs rev >:@ 840 diff 737 add no
+ rejected none '^-^^ = 95 sub 55 rev 59 sub 55 = 4 rev 4 = final answer: :
+
+Trying '=1 :=2 @=3 >=4 ^=5 \=6 ?=7 $=8 #=9 /=0
+''+:@ = 11 add 23 = 34 vs @:> 324 diff 290 add no; 11 add 32 = 43 vs rev >:@ 423 diff 380 add no
+ rejected forward '^-^^ = 15 sub 55 = 40 = final answer: >/
+
+Trying '=8 :=1 @=2 >=3 ^=5 \=6 ?=7 $=4 #=9 /=0
+''+:@ = 88 add 12 = 100 vs @:> 213 diff 113 add no; 88 add 21 = 109 vs rev >:@ 312 diff 203 add no
+ rejected none '^-^^ = 85 sub 55 rev 58 sub 55 = 3 rev 3 = final answer: >
+
+Trying '=0 :=8 @=1 >=2 ^=5 \=6 ?=7 $=4

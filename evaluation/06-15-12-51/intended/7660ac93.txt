@@ -1,0 +1,75 @@
+((*%" = {@
+!(|@> = |(&
+"]|]/ = |@(
+(/->] = "%!/
+{!-&> = &"]>
+The question is !&*>!
+
+Operator symbols *|-
+Question operator symbol *
+Question operator in examples
+
+Digit symbols (%"{@!>&]/
+
+Checking concatenation
+left (( op * right %" expected ((%" versus {@ mismatch
+left !( op | right @> expected !(@> versus |(& mismatch
+left "] op | right ]/ expected "]]/ versus |@( mismatch
+left (/ op - right >] expected (/>] versus "%!/ mismatch
+left {! op - right &> expected {!&> versus &"]> mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left (( op * right %" expected %"(( versus {@ mismatch
+left !( op | right @> expected @>!( versus |(& mismatch
+left "] op | right ]/ expected ]/"] versus |@( mismatch
+left (/ op - right >] expected >](/ versus "%!/ mismatch
+left {! op - right &> expected &>{! versus &"]> mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+((*%" = {@
+!(|@> = |(&
+"]|]/ = |@(
+(/->] = "%!/
+{!-&> = &"]>
+
+Assigning mul
+ left (( op * right %" = {@ length 2
+ left !( op | right @> = |(& length 3
+ left "] op | right ]/ = |@( length 3
+ left (/ op - right >] = "%!/ length 4 assume mul
+ left {! op - right &> = &"]> assumed mul
+
+Assigning sub
+ left (( op * right %" = {@ length 2
+ left !( op | right @> = |(& op in output assume sub
+ left "] op | right ]/ = |@( assumed sub
+ left (/ op - right >] = "%!/ assumed mul
+ left {! op - right &> = &"]> assumed mul
+
+Assigning add
+ left (( op * right %" = {@ length 2
+ left !( op | right @> = |(& assumed sub
+ left "] op | right ]/ = |@( assumed sub
+ left (/ op - right >] = "%!/ assumed mul
+ left {! op - right &> = &"]> assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left (( op * right %" = {@ length 2 assume add
+ left !( op | right @> = |(& assumed sub
+ left "] op | right ]/ = |@( assumed sub
+ left (/ op - right >] = "%!/ assumed mul
+ left {! op - right &> = &"]> assumed mul
+ left !& op * right >! the question, assumed add
+
+Trying (=3 %=6 "=2 {=9 @=4 !=1 >=8 &=5 ]=7 /=0
+((*%" = 33 add 62 = 95 vs {@ 94 diff 1 add ok - 1; 33 add 26 = 59 vs rev @{ 49 diff 10 add no
+!(|@> = 13 sub 48 = 35 vs |(& -35 diff 0 sub ok; 31 sub 84 = 53 vs rev |&( -53 diff 0 sub ok
+"]|]/ = 27 sub 70 = 43 vs |@( -43 diff 0 sub ok; 72 sub 07 = 65 vs rev |(@ -34 diff 31 sub no
+(/->] = 30 mul 87 = 2610 vs "%!/ 2610 diff 0 mul ok; 03 mul 78 = 234 vs rev /!%" 0162 diff 72 mul no
+{!-&> = 91 mul 58 = 5278 vs &"]> 5278 diff 0 mul ok; 19 mul 85 = 1615 vs rev >]"& 8725 diff 7110 mul no
+ accepted forward !&*>! = 15 add-1 81 = 96 - 1 = 95 = \boxed{{&}

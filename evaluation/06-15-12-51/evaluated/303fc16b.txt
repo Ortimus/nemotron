@@ -1,0 +1,250 @@
+`(|`! = }}`
+}\{`} = '}"
+"?{}" = "&}
+`(|`\ = }}?
+!"{[! = "["\
+The question is ("<\"
+
+Operator symbols |{
+Question operator symbol <
+Question operator not in examples
+
+Digit symbols `(!}\'"?&[
+
+Checking concatenation
+left `( op | right `! expected `(`! versus }}` mismatch
+left }\ op { right `} expected }\`} versus '}" mismatch
+left "? op { right }" expected "?}" versus "&} mismatch
+left `( op | right `\ expected `(`\ versus }}? mismatch
+left !" op { right [! expected !"[! versus "["\ mismatch
+
+Question operator < is not concatenation
+
+Checking reverse concatenation
+left `( op | right `! expected `!`( versus }}` mismatch
+left }\ op { right `} expected `}}\ versus '}" mismatch
+left "? op { right }" expected }""? versus "&} mismatch
+left `( op | right `\ expected `\`( versus }}? mismatch
+left !" op { right [! expected [!!" versus "["\ mismatch
+
+Question operator < is not reverse concatenation
+
+Filtering out the concatenation operations
+`(|`! = }}`
+}\{`} = '}"
+"?{}" = "&}
+`(|`\ = }}?
+!"{[! = "["\
+
+Assigning mul
+ left `( op | right `! = }}` length 3
+ left }\ op { right `} = '}" length 3
+ left "? op { right }" = "&} length 3
+ left `( op | right `\ = }}? length 3
+ left !" op { right [! = "["\ length 4 assume mul
+
+Assigning sub
+ left `( op | right `! = }}` length 3
+ left }\ op { right `} = '}" assumed mul
+ left "? op { right }" = "&} assumed mul
+ left `( op | right `\ = }}? length 3
+ left !" op { right [! = "["\ assumed mul
+
+Assigning add
+ left `( op | right `! = }}` length 3 assume add
+ left }\ op { right `} = '}" assumed mul
+ left "? op { right }" = "&} assumed mul
+ left `( op | right `\ = }}? assumed add
+ left !" op { right [! = "["\ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left `( op | right `! = }}` assumed add
+ left }\ op { right `} = '}" assumed mul
+ left "? op { right }" = "&} assumed mul
+ left `( op | right `\ = }}? assumed add
+ left !" op { right [! = "["\ assumed mul
+ left (" op < right \" the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=8 (=0 !=9 }=4 \=5 '=6 "=7 ?=1 &=3 [=2
+`(|`! = 80 add 89 = 169 vs }}` 448 diff 279 add no; 08 add 98 = 106 vs rev `}} 844 diff 738 add no
+ rejected none ("<\" = 07 sub 57 rev 70 sub 75 = 5 rev 5 = final answer: \
+
+Trying `=5 (=8 !=0 }=4 \=1 '=6 "=7 ?=2 &=3 [=9
+`(|`! = 58 add 50 = 108 vs }}` 445 diff 337 add no; 85 add 05 = 90 vs rev `}} 544 diff 454 add no
+ rejected none ("<\" = 87 sub 17 rev 78 sub 71 = 7 rev 7 = final answer: "
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=2 (=0 !=9 }=4 \=5 '=6 "=7 ?=8 &=3 [=1
+`(|`! = 20 add 29 = 49 vs }}` 442 diff 393 add no; 02 add 92 = 94 vs rev `}} 244 diff 150 add no
+ rejected none ("<\" = 07 sub 57 rev 70 sub 75 = 5 rev 5 = final answer: \
+
+Trying `=8 (=5 !=0 }=4 \=1 '=6 "=7 ?=2 &=3 [=9
+`(|`! = 85 add 80 = 165 vs }}` 448 diff 283 add no; 58 add 08 = 66 vs rev `}} 844 diff 778 add no
+ rejected none ("<\" = 57 sub 17 rev 75 sub 71 = 4 rev 4 = final answer: }
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=5 (=0 !=9 }=4 \=1 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 50 add 59 = 109 vs }}` 445 diff 336 add no; 05 add 95 = 100 vs rev `}} 544 diff 444 add no
+ rejected none ("<\" = 07 sub 17 rev 70 sub 71 = 1 rev 1 = final answer: \
+
+Trying `=2 (=8 !=0 }=4 \=5 '=6 "=7 ?=1 &=3 [=9
+`(|`! = 28 add 20 = 48 vs }}` 442 diff 394 add no; 82 add 02 = 84 vs rev `}} 244 diff 160 add no
+ rejected none ("<\" = 87 sub 57 rev 78 sub 75 = 3 rev 3 = final answer: &
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=8 (=0 !=9 }=4 \=5 '=6 "=7 ?=2 &=3 [=1
+`(|`! = 80 add 89 = 169 vs }}` 448 diff 279 add no; 08 add 98 = 106 vs rev `}} 844 diff 738 add no
+ rejected none ("<\" = 07 sub 57 rev 70 sub 75 = 5 rev 5 = final answer: \
+
+Trying `=5 (=8 !=0 }=4 \=1 '=6 "=7 ?=2 &=3 [=9
+`(|`! = 58 add 50 = 108 vs }}` 445 diff 337 add no; 85 add 05 = 90 vs rev `}} 544 diff 454 add no
+ rejected none ("<\" = 87 sub 17 rev 78 sub 71 = 7 rev 7 = final answer: "
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=2 (=0 !=9 }=4 \=5 '=6 "=7 ?=8 &=3 [=1
+`(|`! = 20 add 29 = 49 vs }}` 442 diff 393 add no; 02 add 92 = 94 vs rev `}} 244 diff 150 add no
+ rejected none ("<\" = 07 sub 57 rev 70 sub 75 = 5 rev 5 = final answer: \
+
+Trying `=8 (=5 !=0 }=4 \=1 '=6 "=7 ?=2 &=3 [=9
+`(|`! = 85 add 80 = 165 vs }}` 448 diff 283 add no; 58 add 08 = 66 vs rev `}} 844 diff 778 add no
+ rejected none ("<\" = 57 sub 17 rev 75 sub 71 = 4 rev 4 = final answer: }
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=2 (=0 !=9 }=4 \=5 '=6 "=7 ?=8 &=3 [=1
+`(|`! = 20 add 29 = 49 vs }}` 442 diff 393 add no; 02 add 92 = 94 vs rev `}} 244 diff 150 add no
+ rejected none ("<\" = 07 sub 57 rev 70 sub 75 = 5 rev 5 = final answer: \
+
+Trying `=5 (=8 !=0 }=4 \=1 '=6 "=7 ?=2 &=3 [=9
+`(|`! = 58 add 50 = 108 vs }}` 445 diff 337 add no; 85 add 05 = 90 vs rev `}} 544 diff 454 add no
+ rejected none ("<\" = 87 sub 17 rev 78 sub 71 = 7 rev 7 = final answer: "
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=2 (=0 !=9 }=4 \=5 '=6 "=7 ?=8 &=3 [=1
+`(|`! = 20 add 29 = 49 vs }}` 442 diff 393 add no; 02 add 92 = 94 vs rev `}} 244 diff 150 add no
+ rejected none ("<\" = 07 sub 57 rev 70 sub 75 = 5 rev 5 = final answer: \
+
+Trying `=8 (=5 !=0 }=4 \=1 '=6 "=7 ?=2 &=3 [=9
+`(|`! = 85 add 80 = 165 vs }}` 448 diff 283 add no; 58 add 08 = 66 vs rev `}} 844 diff 778 add no
+ rejected none ("<\" = 57 sub 17 rev 75 sub 71 = 4 rev 4 = final answer: }
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=2 (=0 !=9 }=4 \=5 '=6 "=7 ?=8 &=3 [=1
+`(|`! = 20 add 29 = 49 vs }}` 442 diff 393 add no; 02 add 92 = 94 vs rev `}} 244 diff 150 add no
+ rejected none ("<\" = 07 sub 57 rev 70 sub 75 = 5 rev 5 = final answer: \
+
+Trying `=5 (=8 !=0 }=4 \=1 '=6 "=7 ?=2 &=3 [=9
+`(|`! = 58 add 50 = 108 vs }}` 445 diff 337 add no; 85 add 05 = 90 vs rev `}} 544 diff 454 add no
+ rejected none ("<\" = 87 sub 17 rev 78 sub 71 = 7 rev 7 = final answer: "
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `}} 144 diff 92 add no
+ rejected none ("<\" = 27 sub 57 rev 72 sub 75 = 3 rev 3 = final answer: !
+
+Trying `=9 (=1 !=2 }=4 \=5 '=6 "=7 ?=8 &=3 [=0
+`(|`! = 91 add 92 = 183 vs }}` 449 diff 266 add no; 19 add 29 = 48 vs rev `}} 944 diff 896 add no
+ rejected none ("<\" = 17 sub 57 rev 71 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=0 (=9 !=1 }=4 \=5 '=6 "=7 ?=8 &=3 [=2
+`(|`! = 09 add 01 = 10 vs }}` 440 diff 430 add no; 90 add 10 = 100 vs rev `}} 044 diff 56 add no
+ rejected none ("<\" = 97 sub 57 rev 79 sub 75 = 4 rev 4 = final answer: }
+
+Trying `=2 (=0 !=9 }=4 \=5 '=6 "=7 ?=8 &=3 [=1
+`(|`! = 20 add 29 = 49 vs }}` 442 diff 393 add no; 02 add 92 = 94 vs rev `}} 244 diff 150 add no
+ rejected none ("<\" = 07 sub 57 rev 70 sub 75 = 5 rev 5 = final answer: \
+
+Trying `=8 (=5 !=0 }=4 \=1 '=6 "=7 ?=2 &=3 [=9
+`(|`! = 85 add 80 = 165 vs }}` 448 diff 283 add no; 58 add 08 = 66 vs rev `}} 844 diff 778 add no
+ rejected none ("<\" = 57 sub 17 rev 75 sub 71 = 4 rev 4 = final answer: }
+
+Trying `=1 (=2 !=3 }=4 \=5 '=6 "=7 ?=8 &=9 [=0
+`(|`! = 12 add 13 = 25 vs }}` 441 diff 416 add no; 21 add 31 = 52 vs rev `

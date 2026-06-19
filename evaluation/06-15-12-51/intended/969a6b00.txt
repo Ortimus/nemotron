@@ -1,0 +1,66 @@
+/(':! = `/
+@|'`^ = '`|
+^^}>^ = (?
+@/"(: = @/?^
+The question is `^">?
+
+Operator symbols '}"
+Question operator symbol "
+Question operator in examples
+
+Digit symbols /(:!`@|^>?
+
+Checking concatenation
+left /( op ' right :! expected /(:! versus `/ mismatch
+left @| op ' right `^ expected @|`^ versus '`| mismatch
+left ^^ op } right >^ expected ^^>^ versus (? mismatch
+left @/ op " right (: expected @/(: versus @/?^ mismatch
+
+Question operator " is not concatenation
+
+Checking reverse concatenation
+left /( op ' right :! expected :!/( versus `/ mismatch
+left @| op ' right `^ expected `^@| versus '`| mismatch
+left ^^ op } right >^ expected >^^^ versus (? mismatch
+left @/ op " right (: expected (:@/ versus @/?^ mismatch
+
+Question operator " is not reverse concatenation
+
+Filtering out the concatenation operations
+/(':! = `/
+@|'`^ = '`|
+^^}>^ = (?
+@/"(: = @/?^
+
+Assigning mul
+ left /( op ' right :! = `/ length 2
+ left @| op ' right `^ = '`| length 3
+ left ^^ op } right >^ = (? length 2
+ left @/ op " right (: = @/?^ length 4 assume mul
+
+Assigning sub
+ left /( op ' right :! = `/ length 2
+ left @| op ' right `^ = '`| op in output assume sub
+ left ^^ op } right >^ = (? length 2
+ left @/ op " right (: = @/?^ assumed mul
+
+Assigning add
+ left /( op ' right :! = `/ assumed sub
+ left @| op ' right `^ = '`| assumed sub
+ left ^^ op } right >^ = (? length 2
+ left @/ op " right (: = @/?^ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left /( op ' right :! = `/ assumed sub
+ left @| op ' right `^ = '`| assumed sub
+ left ^^ op } right >^ = (? length 2 assume add
+ left @/ op " right (: = @/?^ assumed mul
+ left `^ op " right >? the question, assumed mul
+
+Trying /=5 (=7 :=9 !=1 `=6 @=0 |=2 ^=4 >=3 ?=8
+/(':! = 57 sub 91 = 34 vs `/ 65 diff 31 sub no; 75 sub 19 = 56 vs rev /` 56 diff 0 sub ok
+@|'`^ = 02 sub 64 = 62 vs '`| -62 diff 0 sub ok; 20 sub 46 = 26 vs rev '|` -26 diff 0 sub ok
+^^}>^ = 44 add 34 = 78 vs (? 78 diff 0 add ok; 44 add 43 = 87 vs rev ?( 87 diff 0 add ok
+@/"(: = 05 mul 79 = 395 vs @/?^ 0584 diff 189 mul no; 50 mul 97 = 4850 vs rev ^?/@ 4850 diff 0 mul ok
+ accepted rev `^">? = 64 mul 38 rev 46 mul 83 = 3818 rev 8183 = \boxed{?!?>}

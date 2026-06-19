@@ -1,0 +1,182 @@
+32*88 = 011
+71-22 = -5
+86+55 = 0473
+11+32 = 352
+
+The inputs are 32, 88, 71, 22, 86, 55, 11, 32
+
+The outputs are 011, -5, 0473, 352
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 011, -5, 0473, 352
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+32*88 -> *
+71-22 -> -
+86+55 -> +
+11+32 -> +
+
+The operators
+*
+-
++
+
+Looking at the question
+15*33 -> *
+The question operator is found in the examples.
+
+Looking at operator * [32*88 = 011]:
+
+Trying common operations
+ reversed operands [32->23 88->88] and reversed result [expected (23,88)->011]
+ addition
+ (23,88)->011: 23 + 88 = 111 rev-> 111 mismatch
+ multiplication
+ (23,88)->011: (20 + 3) * 88 = 20 * 88 + 3 * 88 = 1760 + 264 = 2024 rev-> 4202 mismatch
+ concatenation
+ (23,88)->011: 23 || 88 = 2388 rev-> 8832 mismatch
+ reverse concatenation
+ (23,88)->011: 88 || 23 = 8823 rev-> 3288 mismatch
+
+ identity [32 88] [expected (32,88)->011]
+ addition
+ (32,88)->011: 32 + 88 = 120 mismatch
+ multiplication
+ (32,88)->011: (30 + 2) * 88 = 30 * 88 + 2 * 88 = 2640 + 176 = 2816 mismatch
+ concatenation
+ (32,88)->011: 32 || 88 = 3288 mismatch
+ reverse concatenation
+ (32,88)->011: 88 || 32 = 8832 mismatch
+
+Trying difference operations
+ reversed operands [32->23 88->88] and reversed result [expected (23,88)->011]
+ subtraction (a-b)
+ (23,88)->011: 23 - 88 = -65 rev-> -56 mismatch
+ absolute difference
+ (23,88)->011: |23 - 88| = 65 rev-> 56 mismatch
+ max mod min
+ (23,88)->011: max(23,88) mod min(23,88) = 88 mod 23 = 19 rev-> 91 mismatch
+ negated absolute difference
+ (23,88)->011: -|23 - 88| = -65 rev-> -56 mismatch
+ reverse subtraction (b-a)
+ (23,88)->011: 88 - 23 = 65 rev-> 56 mismatch
+ modulo (a mod b)
+ (23,88)->011: 23 mod 88 = 23 rev-> 32 mismatch
+
+ identity [32 88] [expected (32,88)->011]
+ subtraction (a-b)
+ (32,88)->011: 32 - 88 = -56 mismatch
+ absolute difference
+ (32,88)->011: |32 - 88| = 56 mismatch
+ max mod min
+ (32,88)->011: max(32,88) mod min(32,88) = 88 mod 32 = 24 mismatch
+ negated absolute difference
+ (32,88)->011: -|32 - 88| = -56 mismatch
+ reverse subtraction (b-a)
+ (32,88)->011: 88 - 32 = 56 mismatch
+ modulo (a mod b)
+ (32,88)->011: 32 mod 88 = 32 mismatch
+
+Trying rare operations
+ reversed operands [32->23 88->88] and reversed result [expected (23,88)->011]
+ multiply+1
+ (23,88)->011: (20 + 3) * 88 + 1 = 20 * 88 + 3 * 88 + 1 = 1760 + 264 + 1 = 2024 + 1 = 2025 rev-> 5202 mismatch
+ multiply-1
+ (23,88)->011: (20 + 3) * 88 - 1 = 20 * 88 + 3 * 88 - 1 = 1760 + 264 - 1 = 2024 - 1 = 2023 rev-> 3202 mismatch
+ add+1
+ (23,88)->011: 23 + 88 + 1 = 112 rev-> 211 mismatch
+ add-1
+ (23,88)->011: 23 + 88 - 1 = 110 rev-> 011 match
+ correct, actions: reversed operands, reversed result, add-1
+ sub+1
+ (23,88)->011: 23 - 88 + 1 = -64 rev-> -46 mismatch
+ sub-1
+ (23,88)->011: 23 - 88 - 1 = -66 rev-> -66 mismatch
+ integer division (a/b)
+ (23,88)->011: 23 / 88 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (23,88)->011: 88 / 23 = 3 rev-> 3 mismatch
+ reverse modulo (b mod a)
+ (23,88)->011: 88 mod 23 = 19 rev-> 91 mismatch
+ digit absolute diff
+ (23,88)->011: |2-8| || |3-8| = 65 rev-> 56 mismatch
+ digit add mod10
+ (23,88)->011: (2+8)%10 || (3+8)%10 = 01 rev-> 10 mismatch
+ digit sub mod10
+ (23,88)->011: (2-8)%10 || (3-8)%10 = 45 rev-> 54 mismatch
+ cross multiply
+ (23,88)->011: 2*8 + 3*8 = 16 + 24 = 40 rev-> 04 mismatch
+ cross multiply rev
+ (23,88)->011: 2*8 + 3*8 = 16 + 24 = 40 rev-> 04 mismatch
+ digit multiply
+ (23,88)->011: 2*8 || 3*8 = 16 || 24 = 1624 rev-> 4261 mismatch
+ digit multiply rev
+ (23,88)->011: 2*8 || 3*8 = 16 || 24 = 1624 rev-> 4261 mismatch
+ digit sum diff
+ (23,88)->011: (2+3) - (8+8) = -11 rev-> -11 mismatch
+ digit sum sum
+ (23,88)->011: (2+3) + (8+8) = 21 rev-> 12 mismatch
+ digit product diff
+ (23,88)->011: 2*3 - 8*8 = 6 - 64 = -58 rev-> -85 mismatch
+ digit product sum
+ (23,88)->011: 2*3 + 8*8 = 6 + 64 = 70 rev-> 07 mismatch
+ determinant
+ (23,88)->011: 2*8 - 3*8 = 16 - 24 = -8 rev-> -8 mismatch
+ abs determinant
+ (23,88)->011: |2*8 - 3*8| = |16 - 24| = 8 rev-> 8 mismatch
+
+ identity [32 88] [expected (32,88)->011]
+ multiply+1
+ (32,88)->011: (30 + 2) * 88 + 1 = 30 * 88 + 2 * 88 + 1 = 2640 + 176 + 1 = 2816 + 1 = 2817 mismatch
+ multiply-1
+ (32,88)->011: (30 + 2) * 88 - 1 = 30 * 88 + 2 * 88 - 1 = 2640 + 176 - 1 = 2816 - 1 = 2815 mismatch
+ add+1
+ (32,88)->011: 32 + 88 + 1 = 121 mismatch
+ add-1
+ (32,88)->011: 32 + 88 - 1 = 119 mismatch
+ sub+1
+ (32,88)->011: 32 - 88 + 1 = -55 mismatch
+ sub-1
+ (32,88)->011: 32 - 88 - 1 = -57 mismatch
+ integer division (a/b)
+ (32,88)->011: 32 / 88 = 0 mismatch
+ reverse division (b/a)
+ (32,88)->011: 88 / 32 = 2 mismatch
+ reverse modulo (b mod a)
+ (32,88)->011: 88 mod 32 = 24 mismatch
+ digit absolute diff
+ (32,88)->011: |3-8| || |2-8| = 56 mismatch
+ digit add mod10
+ (32,88)->011: (3+8)%10 || (2+8)%10 = 10 mismatch
+ digit sub mod10
+ (32,88)->011: (3-8)%10 || (2-8)%10 = 54 mismatch
+ cross multiply
+ (32,88)->011: 3*8 + 2*8 = 24 + 16 = 40 mismatch
+ cross multiply rev
+ (32,88)->011: 3*8 + 2*8 = 24 + 16 = 40 mismatch
+ digit multiply
+ (32,88)->011: 3*8 || 2*8 = 24 || 16 = 2416 mismatch
+ digit multiply rev
+ (32,88)->011: 3*8 || 2*8 = 24 || 16 = 2416 mismatch
+ digit sum diff
+ (32,88)->011: (3+2) - (8+8) = -11 mismatch
+ digit sum sum
+ (32,88)->011: (3+2) + (8+8) = 21 mismatch
+ digit product diff
+ (32,88)->011: 3*2 - 8*8 = 6 - 64 = -58 mismatch
+ digit product sum
+ (32,88)->011: 3*2 + 8*8 = 6 + 64 = 70 mismatch
+ determinant
+ (32,88)->011: 3*8 - 2*8 = 24 - 16 = 8 mismatch
+ abs determinant
+ (32,88)->011: |3*8 - 2*8| = |24 - 16| = 8 mismatch
+
+correct, actions: reversed operands, reversed result, add-1
+
+Applying to 15*33:
+ We recall that the question operator is found in the examples.
+ reversed operands [15->51, 33->33] and reversed result
+ add-1
+ (51,33): 51 + 33 - 1 = 83 rev-> 38
+ Result is non-negative
+ \boxed{38}

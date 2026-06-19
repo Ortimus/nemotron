@@ -1,0 +1,66 @@
+@)-@\ = -)
+[$*$$ = [|{\
+$]+!\ = |$|
+$[*$& = &@![
+The question is ]$*$)
+
+Operator symbols -*+
+Question operator symbol *
+Question operator in examples
+
+Digit symbols @)\[$|{]!&
+
+Checking concatenation
+left @) op - right @\ expected @)@\ versus -) mismatch
+left [$ op * right $$ expected [$$$ versus [|{\ mismatch
+left $] op + right !\ expected $]!\ versus |$| mismatch
+left $[ op * right $& expected $[$& versus &@![ mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left @) op - right @\ expected @\@) versus -) mismatch
+left [$ op * right $$ expected $$[$ versus [|{\ mismatch
+left $] op + right !\ expected !\$] versus |$| mismatch
+left $[ op * right $& expected $&$[ versus &@![ mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+@)-@\ = -)
+[$*$$ = [|{\
+$]+!\ = |$|
+$[*$& = &@![
+
+Assigning mul
+ left @) op - right @\ = -) length 2
+ left [$ op * right $$ = [|{\ length 4 assume mul
+ left $] op + right !\ = |$| length 3
+ left $[ op * right $& = &@![ assumed mul
+
+Assigning sub
+ left @) op - right @\ = -) op in output assume sub
+ left [$ op * right $$ = [|{\ assumed mul
+ left $] op + right !\ = |$| length 3
+ left $[ op * right $& = &@![ assumed mul
+
+Assigning add
+ left @) op - right @\ = -) assumed sub
+ left [$ op * right $$ = [|{\ assumed mul
+ left $] op + right !\ = |$| length 3 assume add
+ left $[ op * right $& = &@![ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left @) op - right @\ = -) assumed sub
+ left [$ op * right $$ = [|{\ assumed mul
+ left $] op + right !\ = |$| assumed add
+ left $[ op * right $& = &@![ assumed mul
+ left ]$ op * right $) the question, assumed mul
+
+Trying @=3 )=2 \=4 [=5 $=8 |=1 {=0 ]=6 !=9 &=7
+@)-@\ = 32 sub 34 = 2 vs -) -2 diff 0 sub ok; 23 sub 43 = 20 vs rev -) -2 diff 18 sub no
+[$*$$ = 58 mul 88 = 5104 vs [|{\ 5104 diff 0 mul ok; 85 mul 88 = 7480 vs rev \{|[ 4015 diff 3465 mul no
+$]+!\ = 86 add 94 = 180 vs |$| 181 diff 1 add ok + 1; 68 add 49 = 117 vs rev |$| 181 diff 64 add no
+$[*$& = 85 mul 87 = 7395 vs &@![ 7395 diff 0 mul ok; 58 mul 78 = 4524 vs rev [!@& 5937 diff 1413 mul no
+ accepted forward ]$*$) = 68 mul 82 = 5576 = \boxed{[[&]}

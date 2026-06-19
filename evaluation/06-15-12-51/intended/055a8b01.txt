@@ -1,0 +1,75 @@
+<#*|< = <//'
+<|*$| = <<|/
+$#+/` = ??
+/{+?? = /(`
+'(*|# = {{?(
+The question is //-/$
+
+Operator symbols *+
+Question operator symbol -
+Question operator not in examples
+
+Digit symbols <#|/'$`?{(
+
+Checking concatenation
+left <# op * right |< expected <#|< versus <//' mismatch
+left <| op * right $| expected <|$| versus <<|/ mismatch
+left $# op + right /` expected $#/` versus ?? mismatch
+left /{ op + right ?? expected /{?? versus /(` mismatch
+left '( op * right |# expected '(|# versus {{?( mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left <# op * right |< expected |<<# versus <//' mismatch
+left <| op * right $| expected $|<| versus <<|/ mismatch
+left $# op + right /` expected /`$# versus ?? mismatch
+left /{ op + right ?? expected ??/{ versus /(` mismatch
+left '( op * right |# expected |#'( versus {{?( mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+<#*|< = <//'
+<|*$| = <<|/
+$#+/` = ??
+/{+?? = /(`
+'(*|# = {{?(
+
+Assigning mul
+ left <# op * right |< = <//' length 4 assume mul
+ left <| op * right $| = <<|/ assumed mul
+ left $# op + right /` = ?? length 2
+ left /{ op + right ?? = /(` length 3
+ left '( op * right |# = {{?( assumed mul
+
+Assigning sub
+ left <# op * right |< = <//' assumed mul
+ left <| op * right $| = <<|/ assumed mul
+ left $# op + right /` = ?? length 2
+ left /{ op + right ?? = /(` length 3
+ left '( op * right |# = {{?( assumed mul
+
+Assigning add
+ left <# op * right |< = <//' assumed mul
+ left <| op * right $| = <<|/ assumed mul
+ left $# op + right /` = ?? length 2
+ left /{ op + right ?? = /(` length 3 assume add
+ left '( op * right |# = {{?( assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left <# op * right |< = <//' assumed mul
+ left <| op * right $| = <<|/ assumed mul
+ left $# op + right /` = ?? assumed add
+ left /{ op + right ?? = /(` assumed add
+ left '( op * right |# = {{?( assumed mul
+ left // op - right /$ the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying <=2 #=3 |=9 /=1 '=6 $=7 `=4 ?=8 {=5 (=0
+<#*|< = 23 mul 92 = 2116 vs <//' 2116 diff 0 mul ok; 32 mul 29 = 928 vs rev '//< 6112 diff 5184 mul no
+<|*$| = 29 mul 79 = 2291 vs <<|/ 2291 diff 0 mul ok; 92 mul 97 = 8924 vs rev /|<< 1922 diff 7002 mul no
+$#+/` = 73 add 14 = 87 vs ?? 88 diff 1 add ok + 1; 37 add 41 = 78 vs rev ?? 88 diff 10 add no
+/{+?? = 15 add 88 = 103 vs /(` 104 diff 1 add ok + 1; 51 add 88 = 139 vs rev `(/ 401 diff 262 add no
+'(*|# = 60 mul 93 = 5580 vs {{?( 5580 diff 0 mul ok; 06 mul 39 = 234 vs rev (?{{ 0855 diff 621 mul no
+ accepted forward //-/$ = 11 sub 17 = 6 = \boxed{'}

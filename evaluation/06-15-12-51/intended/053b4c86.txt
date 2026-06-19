@@ -1,0 +1,75 @@
+%&*#$ = $?&&
+#$*#] = ?%]]
+]%-"] = &@
+$%+"\ = $]]
+\$-?" = -\]
+The question is (@*]&
+
+Operator symbols *-+
+Question operator symbol *
+Question operator in examples
+
+Digit symbols %&#$?]"@\(
+
+Checking concatenation
+left %& op * right #$ expected %&#$ versus $?&& mismatch
+left #$ op * right #] expected #$#] versus ?%]] mismatch
+left ]% op - right "] expected ]%"] versus &@ mismatch
+left $% op + right "\ expected $%"\ versus $]] mismatch
+left \$ op - right ?" expected \$?" versus -\] mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left %& op * right #$ expected #$%& versus $?&& mismatch
+left #$ op * right #] expected #]#$ versus ?%]] mismatch
+left ]% op - right "] expected "]]% versus &@ mismatch
+left $% op + right "\ expected "\$% versus $]] mismatch
+left \$ op - right ?" expected ?"\$ versus -\] mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+%&*#$ = $?&&
+#$*#] = ?%]]
+]%-"] = &@
+$%+"\ = $]]
+\$-?" = -\]
+
+Assigning mul
+ left %& op * right #$ = $?&& length 4 assume mul
+ left #$ op * right #] = ?%]] assumed mul
+ left ]% op - right "] = &@ length 2
+ left $% op + right "\ = $]] length 3
+ left \$ op - right ?" = -\] length 3
+
+Assigning sub
+ left %& op * right #$ = $?&& assumed mul
+ left #$ op * right #] = ?%]] assumed mul
+ left ]% op - right "] = &@ length 2
+ left $% op + right "\ = $]] length 3
+ left \$ op - right ?" = -\] op in output assume sub
+
+Assigning add
+ left %& op * right #$ = $?&& assumed mul
+ left #$ op * right #] = ?%]] assumed mul
+ left ]% op - right "] = &@ assumed sub
+ left $% op + right "\ = $]] length 3 assume add
+ left \$ op - right ?" = -\] assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left %& op * right #$ = $?&& assumed mul
+ left #$ op * right #] = ?%]] assumed mul
+ left ]% op - right "] = &@ assumed sub
+ left $% op + right "\ = $]] assumed add
+ left \$ op - right ?" = -\] assumed sub
+ left (@ op * right ]& the question, assumed mul
+
+Trying %=7 &=2 #=4 $=8 ?=6 ]=1 "=9 @=5 \=3 (=0
+%&*#$ = 72 mul 48 = 3456 vs $?&& 8622 diff 5166 mul no; 27 mul 84 = 2268 vs rev &&?$ 2268 diff 0 mul ok
+#$*#] = 48 mul 41 = 1968 vs ?%]] 6711 diff 4743 mul no; 84 mul 14 = 1176 vs rev ]]%? 1176 diff 0 mul ok
+]%-"] = 17 sub 91 = 74 vs &@ 25 diff 49 sub no; 71 sub 19 = 52 vs rev @& 52 diff 0 sub ok
+$%+"\ = 87 add 93 = 180 vs $]] 811 diff 631 add no; 78 add 39 = 117 vs rev ]]$ 118 diff 1 add ok + 1
+\$-?" = 38 sub 69 = 31 vs -\] -31 diff 0 sub ok; 83 sub 96 = 13 vs rev -]\ -13 diff 0 sub ok
+ accepted rev (@*]& = 05 mul 12 rev 50 mul 21 = 1050 rev 0501 = \boxed{(@(]}

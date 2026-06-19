@@ -1,0 +1,57 @@
+!>+^$ = :`
+\^*:: = ^!\!
+$^-!$ = -<
+The question is >\*:!
+
+Operator symbols +*-
+Question operator symbol *
+Question operator in examples
+
+Digit symbols !>^$:`\<
+
+Checking concatenation
+left !> op + right ^$ expected !>^$ versus :` mismatch
+left \^ op * right :: expected \^:: versus ^!\! mismatch
+left $^ op - right !$ expected $^!$ versus -< mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left !> op + right ^$ expected ^$!> versus :` mismatch
+left \^ op * right :: expected ::\^ versus ^!\! mismatch
+left $^ op - right !$ expected !$$^ versus -< mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+!>+^$ = :`
+\^*:: = ^!\!
+$^-!$ = -<
+
+Assigning mul
+ left !> op + right ^$ = :` length 2
+ left \^ op * right :: = ^!\! length 4 assume mul
+ left $^ op - right !$ = -< length 2
+
+Assigning sub
+ left !> op + right ^$ = :` length 2
+ left \^ op * right :: = ^!\! assumed mul
+ left $^ op - right !$ = -< op in output assume sub
+
+Assigning add
+ left !> op + right ^$ = :` length 2
+ left \^ op * right :: = ^!\! assumed mul
+ left $^ op - right !$ = -< assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left !> op + right ^$ = :` length 2 assume add
+ left \^ op * right :: = ^!\! assumed mul
+ left $^ op - right !$ = -< assumed sub
+ left >\ op * right :! the question, assumed mul
+
+Trying !=3 >=1 ^=4 $=5 :=7 `=6 \=2 <=8 A=0 B=9
+!>+^$ = 31 add 45 = 76 vs :` 76 diff 0 add ok; 13 add 54 = 67 vs rev `: 67 diff 0 add ok
+\^*:: = 24 mul 77 = 1848 vs ^!\! 4323 diff 2475 mul no; 42 mul 77 = 3234 vs rev !\!^ 3234 diff 0 mul ok
+$^-!$ = 54 sub 35 = 19 vs -< -8 diff 11 sub no; 45 sub 53 = 8 vs rev -< -8 diff 0 sub ok
+ accepted rev >\*:! = 12 mul 73 rev 21 mul 37 = 777 rev 777 = \boxed{:::}

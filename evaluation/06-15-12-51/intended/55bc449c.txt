@@ -1,0 +1,66 @@
+[<(}& = &{:
+[:(!! = &&[
+)}?)& = :&&}
+<)-!: = -&}
+The question is !`(&:
+
+Operator symbols (?-
+Question operator symbol (
+Question operator in examples
+
+Digit symbols [<}&{:!)`
+
+Checking concatenation
+left [< op ( right }& expected [<}& versus &{: mismatch
+left [: op ( right !! expected [:!! versus &&[ mismatch
+left )} op ? right )& expected )})& versus :&&} mismatch
+left <) op - right !: expected <)!: versus -&} mismatch
+
+Question operator ( is not concatenation
+
+Checking reverse concatenation
+left [< op ( right }& expected }&[< versus &{: mismatch
+left [: op ( right !! expected !![: versus &&[ mismatch
+left )} op ? right )& expected )&)} versus :&&} mismatch
+left <) op - right !: expected !:<) versus -&} mismatch
+
+Question operator ( is not reverse concatenation
+
+Filtering out the concatenation operations
+[<(}& = &{:
+[:(!! = &&[
+)}?)& = :&&}
+<)-!: = -&}
+
+Assigning mul
+ left [< op ( right }& = &{: length 3
+ left [: op ( right !! = &&[ length 3
+ left )} op ? right )& = :&&} length 4 assume mul
+ left <) op - right !: = -&} length 3
+
+Assigning sub
+ left [< op ( right }& = &{: length 3
+ left [: op ( right !! = &&[ length 3
+ left )} op ? right )& = :&&} assumed mul
+ left <) op - right !: = -&} op in output assume sub
+
+Assigning add
+ left [< op ( right }& = &{: length 3 assume add
+ left [: op ( right !! = &&[ assumed add
+ left )} op ? right )& = :&&} assumed mul
+ left <) op - right !: = -&} assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left [< op ( right }& = &{: assumed add
+ left [: op ( right !! = &&[ assumed add
+ left )} op ? right )& = :&&} assumed mul
+ left <) op - right !: = -&} assumed sub
+ left !` op ( right &: the question, assumed add
+
+Trying [=8 <=4 }=2 &=1 {=0 :=5 !=3 )=7 `=6 A=9
+[<(}& = 84 add 21 = 105 vs &{: 105 diff 0 add ok; 48 add 12 = 60 vs rev :{& 501 diff 441 add no
+[:(!! = 85 add 33 = 118 vs &&[ 118 diff 0 add ok; 58 add 33 = 91 vs rev [&& 811 diff 720 add no
+)}?)& = 72 mul 71 = 5112 vs :&&} 5112 diff 0 mul ok; 27 mul 17 = 459 vs rev }&&: 2115 diff 1656 mul no
+<)-!: = 47 sub 35 = 12 vs -&} -12 diff 0 sub ok; 74 sub 53 = 21 vs rev -}& -21 diff 0 sub ok
+ accepted forward !`(&: = 36 add 15 = 51 = \boxed{:&}

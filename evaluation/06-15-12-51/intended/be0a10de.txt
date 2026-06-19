@@ -1,0 +1,66 @@
+\\(\[ = (!
+]$?"} = )>$
+)"@"" = )[[$
+)$?!> = '[
+The question is $!?]!
+
+Operator symbols (?@
+Question operator symbol ?
+Question operator in examples
+
+Digit symbols \[!]$"})>'
+
+Checking concatenation
+left \\ op ( right \[ expected \\\[ versus (! mismatch
+left ]$ op ? right "} expected ]$"} versus )>$ mismatch
+left )" op @ right "" expected )""" versus )[[$ mismatch
+left )$ op ? right !> expected )$!> versus '[ mismatch
+
+Question operator ? is not concatenation
+
+Checking reverse concatenation
+left \\ op ( right \[ expected \[\\ versus (! mismatch
+left ]$ op ? right "} expected "}]$ versus )>$ mismatch
+left )" op @ right "" expected "")" versus )[[$ mismatch
+left )$ op ? right !> expected !>)$ versus '[ mismatch
+
+Question operator ? is not reverse concatenation
+
+Filtering out the concatenation operations
+\\(\[ = (!
+]$?"} = )>$
+)"@"" = )[[$
+)$?!> = '[
+
+Assigning mul
+ left \\ op ( right \[ = (! length 2
+ left ]$ op ? right "} = )>$ length 3
+ left )" op @ right "" = )[[$ length 4 assume mul
+ left )$ op ? right !> = '[ length 2
+
+Assigning sub
+ left \\ op ( right \[ = (! op in output assume sub
+ left ]$ op ? right "} = )>$ length 3
+ left )" op @ right "" = )[[$ assumed mul
+ left )$ op ? right !> = '[ length 2
+
+Assigning add
+ left \\ op ( right \[ = (! assumed sub
+ left ]$ op ? right "} = )>$ length 3 assume add
+ left )" op @ right "" = )[[$ assumed mul
+ left )$ op ? right !> = '[ assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left \\ op ( right \[ = (! assumed sub
+ left ]$ op ? right "} = )>$ assumed add
+ left )" op @ right "" = )[[$ assumed mul
+ left )$ op ? right !> = '[ assumed add
+ left $! op ? right ]! the question, assumed add
+
+Trying \=3 [=8 !=4 ]=7 $=2 "=9 }=0 )=1 >=6 '=5
+\\(\[ = 33 sub 38 = 5 vs (! -4 diff 1 sub ok - 1; 33 sub 83 = 50 vs rev (! -4 diff 46 sub no
+]$?"} = 72 add 90 = 162 vs )>$ 162 diff 0 add ok; 27 add 09 = 36 vs rev $>) 261 diff 225 add no
+)"@"" = 19 mul 99 = 1881 vs )[[$ 1882 diff 1 mul ok + 1; 91 mul 99 = 9009 vs rev $[[) 2881 diff 6128 mul no
+)$?!> = 12 add 46 = 58 vs '[ 58 diff 0 add ok; 21 add 64 = 85 vs rev [' 85 diff 0 add ok
+ accepted forward $!?]! = 24 add 74 = 98 = \boxed{"[}

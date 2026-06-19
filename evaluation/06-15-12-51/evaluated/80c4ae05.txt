@@ -1,0 +1,243 @@
+"'}%% = '@
+^^-%^ = ^<[
+["}') = }$%
+<^`@% = %$^
+@<}<$ = %$
+The question is ><}"{
+
+Operator symbols }-`
+Question operator symbol }
+Question operator in examples
+
+Digit symbols "'%@^<[)$>{
+
+Checking concatenation
+left "' op } right %% expected "'%% versus '@ mismatch
+left ^^ op - right %^ expected ^^%^ versus ^<[ mismatch
+left [" op } right ') expected ["') versus }$% mismatch
+left <^ op ` right @% expected <^@% versus %$^ mismatch
+left @< op } right <$ expected @<<$ versus %$ mismatch
+
+Question operator } is not concatenation
+
+Checking reverse concatenation
+left "' op } right %% expected %%"' versus '@ mismatch
+left ^^ op - right %^ expected %^^^ versus ^<[ mismatch
+left [" op } right ') expected ')[" versus }$% mismatch
+left <^ op ` right @% expected @%<^ versus %$^ mismatch
+left @< op } right <$ expected <$@< versus %$ mismatch
+
+Question operator } is not reverse concatenation
+
+Filtering out the concatenation operations
+"'}%% = '@
+^^-%^ = ^<[
+["}') = }$%
+<^`@% = %$^
+@<}<$ = %$
+
+Assigning mul
+ left "' op } right %% = '@ length 2
+ left ^^ op - right %^ = ^<[ length 3
+ left [" op } right ') = }$% length 3
+ left <^ op ` right @% = %$^ length 3
+ left @< op } right <$ = %$ length 2
+
+Assigning sub
+ left "' op } right %% = '@ length 2
+ left ^^ op - right %^ = ^<[ length 3
+ left [" op } right ') = }$% op in output assume sub
+ left <^ op ` right @% = %$^ length 3
+ left @< op } right <$ = %$ assumed sub
+
+Assigning add
+ left "' op } right %% = '@ assumed sub
+ left ^^ op - right %^ = ^<[ length 3 assume add
+ left [" op } right ') = }$% assumed sub
+ left <^ op ` right @% = %$^ length 3 assume add
+ left @< op } right <$ = %$ assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left "' op } right %% = '@ assumed sub
+ left ^^ op - right %^ = ^<[ assumed add
+ left [" op } right ') = }$% assumed sub
+ left <^ op ` right @% = %$^ assumed add
+ left @< op } right <$ = %$ assumed sub
+ left >< op } right "{ the question, assumed sub
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+^^-%^ = 55 add 35 = 90 vs ^<[ 567 diff 477 add no; 55 add 53 = 108 vs rev [<^ 765 diff 657 add no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% = 80 sub 99 = 19 vs '@ 01 diff 18 sub no; 08 sub 99 = 91 vs rev @' 10 diff 81 sub no
+ rejected none ><}"{ = 46 sub 8A rev 64 sub A8 = 56 rev 65 vs {> A4 diff 61 sub no
+
+Trying "=7 '=8 %=0 @=9 ^=5 <=6 [=1 )=2 $=3 >=4 {=A
+"'}%% = 78 sub 00 = 78 vs '@ 89 diff 11 sub no; 87 sub 00 = 87 vs rev @' 98 diff 11 sub no
+ rejected none ><}"{ = 46 sub 7A rev 64 sub A7 = 57 rev 75 vs {> A4 diff 71 sub no
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% = 80 sub 99 = 19 vs '@ 01 diff 18 sub no; 08 sub 99 = 91 vs rev @' 10 diff 81 sub no
+ rejected none ><}"{ = 46 sub 8A rev 64 sub A8 = 56 rev 65 vs {> A4 diff 61 sub no
+
+Trying "=7 '=8 %=0 @=9 ^=5 <=6 [=1 )=2 $=3 >=4 {=A
+"'}%% = 78 sub 00 = 78 vs '@ 89 diff 11 sub no; 87 sub 00 = 87 vs rev @' 98 diff 11 sub no
+ rejected none ><}"{ = 46 sub 7A rev 64 sub A7 = 57 rev 75 vs {> A4 diff 71 sub no
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% = 80 sub 99 = 19 vs '@ 01 diff 18 sub no; 08 sub 99 = 91 vs rev @' 10 diff 81 sub no
+ rejected none ><}"{ = 46 sub 8A rev 64 sub A8 = 56 rev 65 vs {> A4 diff 61 sub no
+
+Trying "=7 '=8 %=0 @=9 ^=5 <=6 [=1 )=2 $=3 >=4 {=A
+"'}%% = 78 sub 00 = 78 vs '@ 89 diff 11 sub no; 87 sub 00 = 87 vs rev @' 98 diff 11 sub no
+ rejected none ><}"{ = 46 sub 7A rev 64 sub A7 = 57 rev 75 vs {> A4 diff 71 sub no
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% = 80 sub 99 = 19 vs '@ 01 diff 18 sub no; 08 sub 99 = 91 vs rev @' 10 diff 81 sub no
+ rejected none ><}"{ = 46 sub 8A rev 64 sub A8 = 56 rev 65 vs {> A4 diff 61 sub no
+
+Trying "=7 '=8 %=0 @=9 ^=5 <=6 [=1 )=2 $=3 >=4 {=A
+"'}%% = 78 sub 00 = 78 vs '@ 89 diff 11 sub no; 87 sub 00 = 87 vs rev @' 98 diff 11 sub no
+ rejected none ><}"{ = 46 sub 7A rev 64 sub A7 = 57 rev 75 vs {> A4 diff 71 sub no
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% = 80 sub 99 = 19 vs '@ 01 diff 18 sub no; 08 sub 99 = 91 vs rev @' 10 diff 81 sub no
+ rejected none ><}"{ = 46 sub 8A rev 64 sub A8 = 56 rev 65 vs {> A4 diff 61 sub no
+
+Trying "=7 '=8 %=0 @=9 ^=5 <=6 [=1 )=2 $=3 >=4 {=A
+"'}%% = 78 sub 00 = 78 vs '@ 89 diff 11 sub no; 87 sub 00 = 87 vs rev @' 98 diff 11 sub no
+ rejected none ><}"{ = 46 sub 7A rev 64 sub A7 = 57 rev 75 vs {> A4 diff 71 sub no
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% = 80 sub 99 = 19 vs '@ 01 diff 18 sub no; 08 sub 99 = 91 vs rev @' 10 diff 81 sub no
+ rejected none ><}"{ = 46 sub 8A rev 64 sub A8 = 56 rev 65 vs {> A4 diff 61 sub no
+
+Trying "=7 '=8 %=0 @=9 ^=5 <=6 [=1 )=2 $=3 >=4 {=A
+"'}%% = 78 sub 00 = 78 vs '@ 89 diff 11 sub no; 87 sub 00 = 87 vs rev @' 98 diff 11 sub no
+ rejected none ><}"{ = 46 sub 7A rev 64 sub A7 = 57 rev 75 vs {> A4 diff 71 sub no
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% = 80 sub 99 = 19 vs '@ 01 diff 18 sub no; 08 sub 99 = 91 vs rev @' 10 diff 81 sub no
+ rejected none ><}"{ = 46 sub 8A rev 64 sub A8 = 56 rev 65 vs {> A4 diff 61 sub no
+
+Trying "=7 '=8 %=0 @=9 ^=5 <=6 [=1 )=2 $=3 >=4 {=A
+"'}%% = 78 sub 00 = 78 vs '@ 89 diff 11 sub no; 87 sub 00 = 87 vs rev @' 98 diff 11 sub no
+ rejected none ><}"{ = 46 sub 7A rev 64 sub A7 = 57 rev 75 vs {> A4 diff 71 sub no
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% = 80 sub 99 = 19 vs '@ 01 diff 18 sub no; 08 sub 99 = 91 vs rev @' 10 diff 81 sub no
+ rejected none ><}"{ = 46 sub 8A rev 64 sub A8 = 56 rev 65 vs {> A4 diff 61 sub no
+
+Trying "=7 '=8 %=0 @=9 ^=5 <=6 [=1 )=2 $=3 >=4 {=A
+"'}%% = 78 sub 00 = 78 vs '@ 89 diff 11 sub no; 87 sub 00 = 87 vs rev @' 98 diff 11 sub no
+ rejected none ><}"{ = 46 sub 7A rev 64 sub A7 = 57 rev 75 vs {> A4 diff 71 sub no
+
+Trying "=1 '=2 %=3 @=4 ^=5 <=6 [=7 )=8 $=9 >=0 {=A
+"'}%% = 12 sub 33 = 21 vs '@ 24 diff 3 sub no; 21 sub 33 = 12 vs rev @' 42 diff 30 sub no
+ rejected forward ><}"{ = 06 sub 1A = 9 vs {> A0 diff 9 sub no; 60 sub A1 = 59 vs rev >{ 0A diff 59 sub no
+
+Trying "=9 '=1 %=2 @=3 ^=5 <=6 [=7 )=8 $=4 >=0 {=A
+"'}%% = 91 sub 22 = 69 vs '@ 13 diff 56 sub no; 19 sub 22 = 3 vs rev @' 31 diff 28 sub no
+ rejected none ><}"{ = 06 sub 9A rev 60 sub A9 = 51 rev 15 vs {> A0 diff 15 sub no
+
+Trying "=0 '=9 %=1 @=2 ^=5 <=6 [=7 )=8 $=3 >=4 {=A
+"'}%% = 09 sub 11 = 2 vs '@ 92 diff 90 sub no; 90 sub 11 = 79 vs rev @' 29 diff 50 sub no
+ rejected none ><}"{ = 46 sub 0A rev 64 sub A0 = 64 rev 46 vs {> A4 diff 42 sub no
+
+Trying "=8 '=0 %=9 @=1 ^=5 <=6 [=7 )=2 $=3 >=4 {=A
+"'}%% =

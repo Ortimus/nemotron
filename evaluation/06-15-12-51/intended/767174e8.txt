@@ -1,0 +1,66 @@
+^<\`! = /!\
+!}{/} = `]}`
+#/{}^ = `!`/
+''\#} = !/
+The question is `<?</
+
+Operator symbols \{
+Question operator symbol ?
+Question operator not in examples
+
+Digit symbols ^<`!/}]#'
+
+Checking concatenation
+left ^< op \ right `! expected ^<`! versus /!\ mismatch
+left !} op { right /} expected !}/} versus `]}` mismatch
+left #/ op { right }^ expected #/}^ versus `!`/ mismatch
+left '' op \ right #} expected ''#} versus !/ mismatch
+
+Question operator ? is not concatenation
+
+Checking reverse concatenation
+left ^< op \ right `! expected `!^< versus /!\ mismatch
+left !} op { right /} expected /}!} versus `]}` mismatch
+left #/ op { right }^ expected }^#/ versus `!`/ mismatch
+left '' op \ right #} expected #}'' versus !/ mismatch
+
+Question operator ? is not reverse concatenation
+
+Filtering out the concatenation operations
+^<\`! = /!\
+!}{/} = `]}`
+#/{}^ = `!`/
+''\#} = !/
+
+Assigning mul
+ left ^< op \ right `! = /!\ length 3
+ left !} op { right /} = `]}` length 4 assume mul
+ left #/ op { right }^ = `!`/ assumed mul
+ left '' op \ right #} = !/ length 2
+
+Assigning sub
+ left ^< op \ right `! = /!\ op in output assume sub
+ left !} op { right /} = `]}` assumed mul
+ left #/ op { right }^ = `!`/ assumed mul
+ left '' op \ right #} = !/ assumed sub
+
+Assigning add
+ left ^< op \ right `! = /!\ assumed sub
+ left !} op { right /} = `]}` assumed mul
+ left #/ op { right }^ = `!`/ assumed mul
+ left '' op \ right #} = !/ assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ^< op \ right `! = /!\ assumed sub
+ left !} op { right /} = `]}` assumed mul
+ left #/ op { right }^ = `!`/ assumed mul
+ left '' op \ right #} = !/ assumed sub
+ left `< op ? right </ the question, operator not in the examples, the unused family is add, assume add
+
+Trying ^=9 <=4 `=6 !=2 /=3 }=8 ]=0 #=7 '=5 A=1
+^<\`! = 94 sub 62 = 32 vs /!\ -32 diff 0 sub ok; 49 sub 26 = 23 vs rev /!/ -23 diff 0 sub ok
+!}{/} = 28 mul 38 = 1064 vs `]}` 6086 diff 5022 mul no; 82 mul 83 = 6806 vs rev `}]` 6806 diff 0 mul ok
+#/{}^ = 73 mul 89 = 6497 vs `!`/ 6263 diff 234 mul no; 37 mul 98 = 3626 vs rev /`!` 3626 diff 0 mul ok
+''\#} = 55 sub 78 = 23 vs !/ 23 diff 0 sub ok; 55 sub 87 = 32 vs rev /! 32 diff 0 sub ok
+ accepted rev `<?</ = 64 add 43 rev 46 add 34 = 80 rev 08 = \boxed{]}}

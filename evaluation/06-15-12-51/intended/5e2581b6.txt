@@ -1,0 +1,66 @@
+[%->? = -(%
+['*>] = @#?\
+'[*\[ = \%%(
+%?+'' = ['
+The question is '\+\[
+
+Operator symbols -*+
+Question operator symbol +
+Question operator in examples
+
+Digit symbols [%>?(']@#\
+
+Checking concatenation
+left [% op - right >? expected [%>? versus -(% mismatch
+left [' op * right >] expected ['>] versus @#?\ mismatch
+left '[ op * right \[ expected '[\[ versus \%%( mismatch
+left %? op + right '' expected %?'' versus [' mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left [% op - right >? expected >?[% versus -(% mismatch
+left [' op * right >] expected >][' versus @#?\ mismatch
+left '[ op * right \[ expected \['[ versus \%%( mismatch
+left %? op + right '' expected ''%? versus [' mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+[%->? = -(%
+['*>] = @#?\
+'[*\[ = \%%(
+%?+'' = ['
+
+Assigning mul
+ left [% op - right >? = -(% length 3
+ left [' op * right >] = @#?\ length 4 assume mul
+ left '[ op * right \[ = \%%( assumed mul
+ left %? op + right '' = [' length 2
+
+Assigning sub
+ left [% op - right >? = -(% op in output assume sub
+ left [' op * right >] = @#?\ assumed mul
+ left '[ op * right \[ = \%%( assumed mul
+ left %? op + right '' = [' length 2
+
+Assigning add
+ left [% op - right >? = -(% assumed sub
+ left [' op * right >] = @#?\ assumed mul
+ left '[ op * right \[ = \%%( assumed mul
+ left %? op + right '' = [' length 2
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left [% op - right >? = -(% assumed sub
+ left [' op * right >] = @#?\ assumed mul
+ left '[ op * right \[ = \%%( assumed mul
+ left %? op + right '' = [' length 2 assume add
+ left '\ op + right \[ the question, assumed add
+
+Trying [=8 %=2 >=5 ?=0 (=3 '=6 ]=7 @=4 #=9 \=1
+[%->? = 82 sub 50 = 32 vs -(% -32 diff 0 sub ok; 28 sub 05 = 23 vs rev -%( -23 diff 0 sub ok
+['*>] = 86 mul 57 = 4902 vs @#?\ 4901 diff 1 mul ok - 1; 68 mul 75 = 5100 vs rev \?#@ 1094 diff 4006 mul no
+'[*\[ = 68 mul 18 = 1224 vs \%%( 1223 diff 1 mul ok - 1; 86 mul 81 = 6966 vs rev (%%\ 3221 diff 3745 mul no
+%?+'' = 20 add 66 = 86 vs [' 86 diff 0 add ok; 02 add 66 = 68 vs rev '[ 68 diff 0 add ok
+ accepted forward '\+\[ = 61 add 18 = 79 = \boxed{]#}

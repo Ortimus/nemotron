@@ -1,0 +1,181 @@
+88\87 = 7656
+30]47 = 3047
+52*15 = *37
+
+The inputs are 88, 87, 30, 47, 52, 15
+
+The outputs are 7656, 3047, *37
+Some example outputs have the operator symbol as prefix *.
+We now consider the outputs to be 7656, 3047, -37
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+88\87 -> \
+30]47 -> ]
+52*15 -> *
+
+The operators
+\
+]
+*
+
+Looking at the question
+97]83 -> ]
+The question operator is found in the examples.
+
+Looking at operator ] [30]47 = 3047]:
+
+Trying common operations
+ reversed operands [30->03 47->74] and reversed result [expected (03,74)->3047]
+ addition
+ (03,74)->3047: 03 + 74 = 77 rev-> 77 mismatch
+ multiplication
+ (03,74)->3047: (0 + 3) * 74 = 0 * 74 + 3 * 74 = 0 + 222 = 222 rev-> 222 mismatch
+ concatenation
+ (03,74)->3047: 03 || 74 = 0374 rev-> 4730 mismatch
+ reverse concatenation
+ (03,74)->3047: 74 || 03 = 7403 rev-> 3047 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+ identity [30 47] [expected (30,47)->3047]
+ addition
+ (30,47)->3047: 30 + 47 = 77 mismatch
+ multiplication
+ (30,47)->3047: (30 + 0) * 47 = 30 * 47 + 0 * 47 = 1410 + 0 = 1410 mismatch
+ concatenation
+ (30,47)->3047: 30 || 47 = 3047 match
+ correct, but skipping
+ reverse concatenation
+ (30,47)->3047: 47 || 30 = 4730 mismatch
+
+Trying difference operations
+ reversed operands [30->03 47->74] and reversed result [expected (03,74)->3047]
+ subtraction (a-b)
+ (03,74)->3047: 03 - 74 = -71 rev-> -17 mismatch
+ absolute difference
+ (03,74)->3047: |03 - 74| = 71 rev-> 17 mismatch
+ max mod min
+ (03,74)->3047: max(03,74) mod min(03,74) = 74 mod 03 = 2 rev-> 2 mismatch
+ negated absolute difference
+ (03,74)->3047: -|03 - 74| = -71 rev-> -17 mismatch
+ reverse subtraction (b-a)
+ (03,74)->3047: 74 - 03 = 71 rev-> 17 mismatch
+ modulo (a mod b)
+ (03,74)->3047: 03 mod 74 = 3 rev-> 3 mismatch
+
+ identity [30 47] [expected (30,47)->3047]
+ subtraction (a-b)
+ (30,47)->3047: 30 - 47 = -17 mismatch
+ absolute difference
+ (30,47)->3047: |30 - 47| = 17 mismatch
+ max mod min
+ (30,47)->3047: max(30,47) mod min(30,47) = 47 mod 30 = 17 mismatch
+ negated absolute difference
+ (30,47)->3047: -|30 - 47| = -17 mismatch
+ reverse subtraction (b-a)
+ (30,47)->3047: 47 - 30 = 17 mismatch
+ modulo (a mod b)
+ (30,47)->3047: 30 mod 47 = 30 mismatch
+
+Trying rare operations
+ reversed operands [30->03 47->74] and reversed result [expected (03,74)->3047]
+ multiply+1
+ (03,74)->3047: (0 + 3) * 74 + 1 = 0 * 74 + 3 * 74 + 1 = 0 + 222 + 1 = 222 + 1 = 223 rev-> 322 mismatch
+ multiply-1
+ (03,74)->3047: (0 + 3) * 74 - 1 = 0 * 74 + 3 * 74 - 1 = 0 + 222 - 1 = 222 - 1 = 221 rev-> 122 mismatch
+ add+1
+ (03,74)->3047: 03 + 74 + 1 = 78 rev-> 87 mismatch
+ add-1
+ (03,74)->3047: 03 + 74 - 1 = 76 rev-> 67 mismatch
+ sub+1
+ (03,74)->3047: 03 - 74 + 1 = -70 rev-> -07 mismatch
+ sub-1
+ (03,74)->3047: 03 - 74 - 1 = -72 rev-> -27 mismatch
+ integer division (a/b)
+ (03,74)->3047: 03 / 74 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (03,74)->3047: 74 / 03 = 24 rev-> 42 mismatch
+ reverse modulo (b mod a)
+ (03,74)->3047: 74 mod 03 = 2 rev-> 2 mismatch
+ digit absolute diff
+ (03,74)->3047: |0-7| || |3-4| = 71 rev-> 17 mismatch
+ digit add mod10
+ (03,74)->3047: (0+7)%10 || (3+4)%10 = 77 rev-> 77 mismatch
+ digit sub mod10
+ (03,74)->3047: (0-7)%10 || (3-4)%10 = 39 rev-> 93 mismatch
+ cross multiply
+ (03,74)->3047: 0*7 + 3*4 = 0 + 12 = 12 rev-> 21 mismatch
+ cross multiply rev
+ (03,74)->3047: 0*4 + 3*7 = 0 + 21 = 21 rev-> 12 mismatch
+ digit multiply
+ (03,74)->3047: 0*7 || 3*4 = 0 || 12 = 012 rev-> 210 mismatch
+ digit multiply rev
+ (03,74)->3047: 0*4 || 3*7 = 0 || 21 = 021 rev-> 120 mismatch
+ digit sum diff
+ (03,74)->3047: (0+3) - (7+4) = -8 rev-> -8 mismatch
+ digit sum sum
+ (03,74)->3047: (0+3) + (7+4) = 14 rev-> 41 mismatch
+ digit product diff
+ (03,74)->3047: 0*3 - 7*4 = 0 - 28 = -28 rev-> -82 mismatch
+ digit product sum
+ (03,74)->3047: 0*3 + 7*4 = 0 + 28 = 28 rev-> 82 mismatch
+ determinant
+ (03,74)->3047: 0*4 - 3*7 = 0 - 21 = -21 rev-> -12 mismatch
+ abs determinant
+ (03,74)->3047: |0*4 - 3*7| = |0 - 21| = 21 rev-> 12 mismatch
+
+ identity [30 47] [expected (30,47)->3047]
+ multiply+1
+ (30,47)->3047: (30 + 0) * 47 + 1 = 30 * 47 + 0 * 47 + 1 = 1410 + 0 + 1 = 1410 + 1 = 1411 mismatch
+ multiply-1
+ (30,47)->3047: (30 + 0) * 47 - 1 = 30 * 47 + 0 * 47 - 1 = 1410 + 0 - 1 = 1410 - 1 = 1409 mismatch
+ add+1
+ (30,47)->3047: 30 + 47 + 1 = 78 mismatch
+ add-1
+ (30,47)->3047: 30 + 47 - 1 = 76 mismatch
+ sub+1
+ (30,47)->3047: 30 - 47 + 1 = -16 mismatch
+ sub-1
+ (30,47)->3047: 30 - 47 - 1 = -18 mismatch
+ integer division (a/b)
+ (30,47)->3047: 30 / 47 = 0 mismatch
+ reverse division (b/a)
+ (30,47)->3047: 47 / 30 = 1 mismatch
+ reverse modulo (b mod a)
+ (30,47)->3047: 47 mod 30 = 17 mismatch
+ digit absolute diff
+ (30,47)->3047: |3-4| || |0-7| = 17 mismatch
+ digit add mod10
+ (30,47)->3047: (3+4)%10 || (0+7)%10 = 77 mismatch
+ digit sub mod10
+ (30,47)->3047: (3-4)%10 || (0-7)%10 = 93 mismatch
+ cross multiply
+ (30,47)->3047: 3*4 + 0*7 = 12 + 0 = 12 mismatch
+ cross multiply rev
+ (30,47)->3047: 3*7 + 0*4 = 21 + 0 = 21 mismatch
+ digit multiply
+ (30,47)->3047: 3*4 || 0*7 = 12 || 0 = 120 mismatch
+ digit multiply rev
+ (30,47)->3047: 3*7 || 0*4 = 21 || 0 = 210 mismatch
+ digit sum diff
+ (30,47)->3047: (3+0) - (4+7) = -8 mismatch
+ digit sum sum
+ (30,47)->3047: (3+0) + (4+7) = 14 mismatch
+ digit product diff
+ (30,47)->3047: 3*0 - 4*7 = 0 - 28 = -28 mismatch
+ digit product sum
+ (30,47)->3047: 3*0 + 4*7 = 0 + 28 = 28 mismatch
+ determinant
+ (30,47)->3047: 3*7 - 0*4 = 21 - 0 = 21 mismatch
+ abs determinant
+ (30,47)->3047: |3*7 - 0*4| = |21 - 0| = 21 mismatch
+
+correct, actions: reversed operands, reversed result, reverse concatenation
+
+Applying to 97]83:
+ We recall that the question operator is found in the examples.
+ reversed operands [97->79, 83->38] and reversed result
+ reverse concatenation
+ (79,38): 38 || 79 = 3879 rev-> 9783
+ Result is non-negative
+ \boxed{9783}

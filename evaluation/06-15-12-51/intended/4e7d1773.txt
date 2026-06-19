@@ -1,0 +1,75 @@
+^|+'" = \{:
+?:<^\ = $"
+\^%@: = %|@
+@^+{^ = ?:"$
+'?+@? = '|'?
+The question is ^\+$:
+
+Operator symbols +<%
+Question operator symbol +
+Question operator in examples
+
+Digit symbols ^|'"\{:?$@
+
+Checking concatenation
+left ^| op + right '" expected ^|'" versus \{: mismatch
+left ?: op < right ^\ expected ?:^\ versus $" mismatch
+left \^ op % right @: expected \^@: versus %|@ mismatch
+left @^ op + right {^ expected @^{^ versus ?:"$ mismatch
+left '? op + right @? expected '?@? versus '|'? mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left ^| op + right '" expected '"^| versus \{: mismatch
+left ?: op < right ^\ expected ^\?: versus $" mismatch
+left \^ op % right @: expected @:\^ versus %|@ mismatch
+left @^ op + right {^ expected {^@^ versus ?:"$ mismatch
+left '? op + right @? expected @?'? versus '|'? mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+^|+'" = \{:
+?:<^\ = $"
+\^%@: = %|@
+@^+{^ = ?:"$
+'?+@? = '|'?
+
+Assigning mul
+ left ^| op + right '" = \{: length 3
+ left ?: op < right ^\ = $" length 2
+ left \^ op % right @: = %|@ length 3
+ left @^ op + right {^ = ?:"$ length 4 assume mul
+ left '? op + right @? = '|'? assumed mul
+
+Assigning sub
+ left ^| op + right '" = \{: assumed mul
+ left ?: op < right ^\ = $" length 2
+ left \^ op % right @: = %|@ op in output assume sub
+ left @^ op + right {^ = ?:"$ assumed mul
+ left '? op + right @? = '|'? assumed mul
+
+Assigning add
+ left ^| op + right '" = \{: assumed mul
+ left ?: op < right ^\ = $" length 2
+ left \^ op % right @: = %|@ assumed sub
+ left @^ op + right {^ = ?:"$ assumed mul
+ left '? op + right @? = '|'? assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ^| op + right '" = \{: assumed mul
+ left ?: op < right ^\ = $" length 2 assume add
+ left \^ op % right @: = %|@ assumed sub
+ left @^ op + right {^ = ?:"$ assumed mul
+ left '? op + right @? = '|'? assumed mul
+ left ^\ op + right $: the question, assumed mul
+
+Trying ^=3 |=2 '=1 "=5 \=4 {=8 :=0 ?=6 $=9 @=7
+^|+'" = 32 mul 15 = 480 vs \{: 480 diff 0 mul ok; 23 mul 51 = 1173 vs rev :{\ 084 diff 1089 mul no
+?:<^\ = 60 add 34 = 94 vs $" 95 diff 1 add ok + 1; 06 add 43 = 49 vs rev "$ 59 diff 10 add no
+\^%@: = 43 sub 70 = 27 vs %|@ -27 diff 0 sub ok; 34 sub 07 = 27 vs rev %@| -72 diff 45 sub no
+@^+{^ = 73 mul 83 = 6059 vs ?:"$ 6059 diff 0 mul ok; 37 mul 38 = 1406 vs rev $":? 9506 diff 8100 mul no
+'?+@? = 16 mul 76 = 1216 vs '|'? 1216 diff 0 mul ok; 61 mul 67 = 4087 vs rev ?'|' 6121 diff 2034 mul no
+ accepted forward ^\+$: = 34 mul 90 = 3060 = \boxed{^:?:}

@@ -1,0 +1,568 @@
+[&-:# = -%>
+|:+/> = #"
+#>+</ = #[:
+%"+%& = #|:
+[&*>/ = ><&"
+The question is #%*</
+
+Operator symbols -+*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols [&:#%>|/"<
+
+Checking concatenation
+left [& op - right :# expected [&:# versus -%> mismatch
+left |: op + right /> expected |:/> versus #" mismatch
+left #> op + right </ expected #></ versus #[: mismatch
+left %" op + right %& expected %"%& versus #|: mismatch
+left [& op * right >/ expected [&>/ versus ><&" mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left [& op - right :# expected :#[& versus -%> mismatch
+left |: op + right /> expected />|: versus #" mismatch
+left #> op + right </ expected </#> versus #[: mismatch
+left %" op + right %& expected %&%" versus #|: mismatch
+left [& op * right >/ expected >/[& versus ><&" mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+[&-:# = -%>
+|:+/> = #"
+#>+</ = #[:
+%"+%& = #|:
+[&*>/ = ><&"
+
+Assigning mul
+ left [& op - right :# = -%> length 3
+ left |: op + right /> = #" length 2
+ left #> op + right </ = #[: length 3
+ left %" op + right %& = #|: length 3
+ left [& op * right >/ = ><&" length 4 assume mul
+
+Assigning sub
+ left [& op - right :# = -%> op in output assume sub
+ left |: op + right /> = #" length 2
+ left #> op + right </ = #[: length 3
+ left %" op + right %& = #|: length 3
+ left [& op * right >/ = ><&" assumed mul
+
+Assigning add
+ left [& op - right :# = -%> assumed sub
+ left |: op + right /> = #" length 2
+ left #> op + right </ = #[: length 3 assume add
+ left %" op + right %& = #|: assumed add
+ left [& op * right >/ = ><&" assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left [& op - right :# = -%> assumed sub
+ left |: op + right /> = #" assumed add
+ left #> op + right </ = #[: assumed add
+ left %" op + right %& = #|: assumed add
+ left [& op * right >/ = ><&" assumed mul
+ left #% op * right </ the question, assumed mul
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=2 &=9 :=8 #=5 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 29 sub 85 = 56 vs -%> -47 diff 9 sub no; 92 sub 58 = 34 vs rev ->% -74 diff 40 sub no
+ rejected none #%*</ = 54 mul 60 rev 45 mul 06 = 270 rev 072 = final answer: />[
+
+Trying [=7 &=1 :=9 #=4 %=2 >=5 |=8 /=0 "=3 <=6
+[&-:# = 71 sub 94 = 23 vs -%> -25 diff 2 sub no; 17 sub 49 = 32 vs rev ->% -52 diff 20 sub no
+ rejected none #%*</ = 42 mul 60 rev 24 mul 06 = 144 rev 441 = final answer: ##&
+
+Trying [=3 &=2 :=7 #=8 %=4 >=5 |=1 /=0 "=9 <=6
+[&-:# = 32 sub 78 = 46 vs -%> -45 diff 1 sub ok - 1; 23 sub 87 = 64 vs rev ->% -54 diff 10 sub no
+|:+/> = 17 add 05 = 22 vs #" 89 diff 67 add no; 71 add 50 = 121 vs rev "# 98 diff 23 add no
+ rejected forward #%*</ = 84 mul 60 = 5040 = final answer: >/%/
+
+Trying [=8 &=4 :=6 #=7 %=9 >=2 |=1 /=0 "=3 <=5
+[&-:# = 84 sub 67 = 17 vs -%> -92 diff 75 sub no; 48 sub 76 = 28 vs rev ->% -29 diff 1 sub ok + 1
+|:+/> = 16 add 02 = 18 vs #" 73 diff 55 add no; 61 add 20 = 81 vs rev "# 37 diff 44 add no
+ rejected rev #%*</ = 79 mul 50 rev 97 mul 05 = 485 rev 584 = final answer: <[&
+
+Trying [=5 &=7 :=1 #=0 %=4 >=8 |=9 /=2 "=3 <=6
+[&-:# = 57 sub 10 = 47 vs -%> -48 diff 1 sub ok + 1; 75 sub 01 = 74 vs rev ->% -84 diff 10 sub no
+|:+/> = 91 add 28 = 119 vs #" 03 diff 116 add no; 19 add 82 = 101 vs rev "# 30 diff 71 add no
+ rejected forward #%*</ = 04 mul 62 = 248 = final answer: /%>
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=6 &=9 :=3 #=1 %=4 >=7 |=2 /=0 "=5 <=8
+[&-:# = 69 sub 31 = 38 vs -%> -47 diff 9 sub no; 96 sub 13 = 83 vs rev ->% -74 diff 9 sub no
+ rejected none #%*</ = 14 mul 80 rev 41 mul 08 = 328 rev 823 = final answer: <|:
+
+Trying [=1 &=5 :=8 #=3 %=4 >=7 |=9 /=0 "=2 <=6
+[&-:# = 15 sub 83 = 68 vs -%> -47 diff 21 sub no; 51 sub 38 = 13 vs rev ->% -74 diff 61 sub no
+ rejected none #%*</ = 34 mul 60 rev 43 mul 06 = 258 rev 852 = final answer: :&"
+
+Trying [=0 &=1 :=4 #=8 %=5 >=7 |=2 /=9 "=3 <=6
+[&-:# = 01 sub 48 = 47 vs -%> -57 diff 10 sub no; 10 sub 84 = 74 vs rev ->% -75 diff 1 sub ok + 1
+|:+/> = 24 add 97 = 121 vs #" 83 diff 38 add no; 42 add 79 = 121 vs rev "# 38 diff 83 add no
+ rejected rev #%*</ = 85 mul 69 rev 58 mul 96 = 5568 rev 8655 = final answer: #<%%
+
+Trying [=7 &=3 :=2 #=9 %=4 >=5 |=1 /=0 "=8 <=6
+[&-:# = 73 sub 29 = 44 vs -%> -45 diff 1 sub ok + 1; 37 sub 92 = 55 vs rev ->% -54 diff 1 sub ok - 1
+|:+/> = 12 add 05 = 17 vs #" 98 diff 81 add no; 21 add 50 = 71 vs rev "# 89 diff 18 add no
+ rejected forward #%*</ = 94 mul 60 = 5640 = final answer: ><%/
+
+Trying [=5 &=6 :=9 #=7 %=4 >=2 |=1 /=0 "=3 <=8
+[&-:# = 56 sub 97 = 41 vs -%> -42 diff 1 sub ok + 1; 65 sub 79 = 14 vs rev ->% -24 diff 10 sub no
+|:+/> = 19 add 02 = 21 vs #" 73 diff 52 add no; 91 add 20 = 111 vs rev "# 37 diff 74 add no
+ rejected forward #%*</ = 74 mul 80 = 5920 = final answer: [:>/
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=8 &=9 :=6 #=4 %=2 >=7 |=1 /=0 "=3 <=5
+[&-:# = 89 sub 64 = 25 vs -%> -27 diff 2 sub no; 98 sub 46 = 52 vs rev ->% -72 diff 20 sub no
+ rejected none #%*</ = 42 mul 50 rev 24 mul 05 = 120 rev 021 = final answer: /%|
+
+Trying [=3 &=4 :=8 #=0 %=5 >=7 |=1 /=2 "=9 <=6
+[&-:# = 34 sub 80 = 46 vs -%> -57 diff 11 sub no; 43 sub 08 = 35 vs rev ->% -75 diff 40 sub no
+ rejected none #%*</ = 05 mul 62 rev 50 mul 26 = 1300 rev 0031 = final answer: ##[|
+
+Trying [=6 &=0 :=1 #=8 %=4 >=7 |=5 /=2 "=3 <=9
+[&-:# = 60 sub 18 = 42 vs -%> -47 diff 5 sub no; 06 sub 81 = 75 vs rev ->% -74 diff 1 sub ok - 1
+|:+/> = 51 add 27 = 78 vs #" 83 diff 5 add no; 15 add 72 = 87 vs rev "# 38 diff 49 add no
+ rejected rev #%*</ = 84 mul 92 rev 48 mul 29 = 1392 rev 2931 = final answer: /<":
+
+Trying [=7 &=3 :=4 #=5 %=2 >=9 |=1 /=0 "=8 <=6
+[&-:# = 73 sub 45 = 28 vs -%> -29 diff 1 sub ok + 1; 37 sub 54 = 17 vs rev ->% -92 diff 75 sub no
+|:+/> = 14 add 09 = 23 vs #" 58 diff 35 add no; 41 add 90 = 131 vs rev "# 85 diff 46 add no
+ rejected forward #%*</ = 52 mul 60 = 3120 = final answer: &|%/
+
+Trying [=4 &=2 :=3 #=7 %=9 >=8 |=1 /=0 "=5 <=6
+[&-:# = 42 sub 37 = 5 vs -%> -98 diff 93 sub no; 24 sub 73 = 49 vs rev ->% -89 diff 40 sub no
+ rejected none #%*</ = 79 mul 60 rev 97 mul 06 = 582 rev 285 = final answer: &>"
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=2 &=5 :=7 #=9 %=4 >=8 |=1 /=0 "=3 <=6
+[&-:# = 25 sub 79 = 54 vs -%> -48 diff 6 sub no; 52 sub 97 = 45 vs rev ->% -84 diff 39 sub no
+ rejected none #%*</ = 94 mul 60 rev 49 mul 06 = 294 rev 492 = final answer: %#[
+
+Trying [=3 &=6 :=0 #=4 %=2 >=7 |=1 /=5 "=9 <=8
+[&-:# = 36 sub 04 = 32 vs -%> -27 diff 5 sub no; 63 sub 40 = 23 vs rev ->% -72 diff 49 sub no
+ rejected none #%*</ = 42 mul 85 rev 24 mul 58 = 1392 rev 2931 = final answer: %"[|
+
+Trying [=5 &=0 :=9 #=6 %=4 >=7 |=1 /=8 "=3 <=2
+[&-:# = 50 sub 96 = 46 vs -%> -47 diff 1 sub ok + 1; 05 sub 69 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 19 add 87 = 106 vs #" 63 diff 43 add no; 91 add 78 = 169 vs rev "# 36 diff 133 add no
+ rejected forward #%*</ = 64 mul 28 = 1792 = final answer: |>:<
+
+Trying [=7 &=9 :=2 #=1 %=4 >=8 |=5 /=0 "=3 <=6
+[&-:# = 79 sub 21 = 58 vs -%> -48 diff 10 sub no; 97 sub 12 = 85 vs rev ->% -84 diff 1 sub ok - 1
+|:+/> = 52 add 08 = 60 vs #" 13 diff 47 add no; 25 add 80 = 105 vs rev "# 31 diff 74 add no
+ rejected rev #%*</ = 14 mul 60 rev 41 mul 06 = 246 rev 642 = final answer: <%:
+
+Trying [=0 &=1 :=4 #=8 %=5 >=7 |=2 /=9 "=3 <=6
+[&-:# = 01 sub 48 = 47 vs -%> -57 diff 10 sub no; 10 sub 84 = 74 vs rev ->% -75 diff 1 sub ok + 1
+|:+/> = 24 add 97 = 121 vs #" 83 diff 38 add no; 42 add 79 = 121 vs rev "# 38 diff 83 add no
+ rejected rev #%*</ = 85 mul 69 rev 58 mul 96 = 5568 rev 8655 = final answer: #<%%
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=2 &=3 :=6 #=9 %=4 >=7 |=1 /=0 "=8 <=5
+[&-:# = 23 sub 69 = 46 vs -%> -47 diff 1 sub ok + 1; 32 sub 96 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 16 add 07 = 23 vs #" 98 diff 75 add no; 61 add 70 = 131 vs rev "# 89 diff 42 add no
+ rejected forward #%*</ = 94 mul 50 = 4700 = final answer: %>//
+
+Trying [=1 &=6 :=8 #=4 %=2 >=7 |=9 /=0 "=3 <=5
+[&-:# = 16 sub 84 = 68 vs -%> -27 diff 41 sub no; 61 sub 48 = 13 vs rev ->% -72 diff 59 sub no
+ rejected none #%*</ = 42 mul 50 rev 24 mul 05 = 120 rev 021 = final answer: /%[
+
+Trying [=6 &=2 :=1 #=7 %=4 >=8 |=5 /=0 "=3 <=9
+[&-:# = 62 sub 17 = 45 vs -%> -48 diff 3 sub no; 26 sub 71 = 45 vs rev ->% -84 diff 39 sub no
+ rejected none #%*</ = 74 mul 90 rev 47 mul 09 = 423 rev 324 = final answer: "&%
+
+Trying [=5 &=0 :=9 #=6 %=4 >=7 |=1 /=8 "=3 <=2
+[&-:# = 50 sub 96 = 46 vs -%> -47 diff 1 sub ok + 1; 05 sub 69 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 19 add 87 = 106 vs #" 63 diff 43 add no; 91 add 78 = 169 vs rev "# 36 diff 133 add no
+ rejected forward #%*</ = 64 mul 28 = 1792 = final answer: |>:<
+
+Trying [=0 &=9 :=4 #=1 %=5 >=7 |=2 /=8 "=3 <=6
+[&-:# = 09 sub 41 = 32 vs -%> -57 diff 25 sub no; 90 sub 14 = 76 vs rev ->% -75 diff 1 sub ok - 1
+|:+/> = 24 add 87 = 111 vs #" 13 diff 98 add no; 42 add 78 = 120 vs rev "# 31 diff 89 add no
+ rejected rev #%*</ = 15 mul 68 rev 51 mul 86 = 4386 rev 6834 = final answer: </":
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=4 &=1 :=6 #=9 %=2 >=7 |=8 /=0 "=3 <=5
+[&-:# = 41 sub 69 = 28 vs -%> -27 diff 1 sub ok - 1; 14 sub 96 = 82 vs rev ->% -72 diff 10 sub no
+|:+/> = 86 add 07 = 93 vs #" 93 diff 0 add ok; 68 add 70 = 138 vs rev "# 39 diff 99 add no
+#>+</ = 97 add 50 = 147 vs #[: 946 diff 799 add no; 79 add 05 = 84 vs rev :[# 649 diff 565 add no
+ rejected forward #%*</ = 92 mul 50 = 4600 = final answer: [://
+
+Trying [=2 &=5 :=7 #=3 %=4 >=8 |=1 /=0 "=9 <=6
+[&-:# = 25 sub 73 = 48 vs -%> -48 diff 0 sub ok; 52 sub 37 = 15 vs rev ->% -84 diff 69 sub no
+|:+/> = 17 add 08 = 25 vs #" 39 diff 14 add no; 71 add 80 = 151 vs rev "# 93 diff 58 add no
+ rejected forward #%*</ = 34 mul 60 = 2040 = final answer: [/%/
+
+Trying [=1 &=4 :=0 #=7 %=8 >=2 |=9 /=5 "=3 <=6
+[&-:# = 14 sub 07 = 7 vs -%> -82 diff 75 sub no; 41 sub 70 = 29 vs rev ->% -28 diff 1 sub ok - 1
+|:+/> = 90 add 52 = 142 vs #" 73 diff 69 add no; 09 add 25 = 34 vs rev "# 37 diff 3 add no
+ rejected rev #%*</ = 78 mul 65 rev 87 mul 56 = 4872 rev 2784 = final answer: >#%&
+
+Trying [=5 &=7 :=9 #=8 %=4 >=2 |=1 /=0 "=3 <=6
+[&-:# = 57 sub 98 = 41 vs -%> -42 diff 1 sub ok + 1; 75 sub 89 = 14 vs rev ->% -24 diff 10 sub no
+|:+/> = 19 add 02 = 21 vs #" 83 diff 62 add no; 91 add 20 = 111 vs rev "# 38 diff 73 add no
+ rejected forward #%*</ = 84 mul 60 = 5040 = final answer: [/%/
+
+Trying [=3 &=9 :=8 #=6 %=4 >=7 |=1 /=0 "=5 <=2
+[&-:# = 39 sub 86 = 47 vs -%> -47 diff 0 sub ok; 93 sub 68 = 25 vs rev ->% -74 diff 49 sub no
+|:+/> = 18 add 07 = 25 vs #" 65 diff 40 add no; 81 add 70 = 151 vs rev "# 56 diff 95 add no
+ rejected forward #%*</ = 64 mul 20 = 1280 = final answer: |<:/
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=4 &=6 :=1 #=9 %=2 >=7 |=5 /=0 "=3 <=8
+[&-:# = 46 sub 19 = 27 vs -%> -27 diff 0 sub ok; 64 sub 91 = 27 vs rev ->% -72 diff 45 sub no
+|:+/> = 51 add 07 = 58 vs #" 93 diff 35 add no; 15 add 70 = 85 vs rev "# 39 diff 46 add no
+ rejected forward #%*</ = 92 mul 80 = 7360 = final answer: >"&/
+
+Trying [=7 &=3 :=2 #=4 %=5 >=9 |=1 /=0 "=8 <=6
+[&-:# = 73 sub 24 = 49 vs -%> -59 diff 10 sub no; 37 sub 42 = 5 vs rev ->% -95 diff 90 sub no
+ rejected none #%*</ = 45 mul 60 rev 54 mul 06 = 324 rev 423 = final answer: #:&
+
+Trying [=8 &=2 :=3 #=1 %=4 >=7 |=9 /=0 "=5 <=6
+[&-:# = 82 sub 31 = 51 vs -%> -47 diff 4 sub no; 28 sub 13 = 15 vs rev ->% -74 diff 59 sub no
+ rejected none #%*</ = 14 mul 60 rev 41 mul 06 = 246 rev 642 = final answer: <%&
+
+Trying [=5 &=0 :=9 #=8 %=4 >=7 |=1 /=2 "=3 <=6
+[&-:# = 50 sub 98 = 48 vs -%> -47 diff 1 sub ok - 1; 05 sub 89 = 84 vs rev ->% -74 diff 10 sub no
+|:+/> = 19 add 27 = 46 vs #" 83 diff 37 add no; 91 add 72 = 163 vs rev "# 38 diff 125 add no
+ rejected forward #%*</ = 84 mul 62 = 5208 = final answer: [/&#
+
+Trying [=1 &=9 :=7 #=3 %=4 >=5 |=8 /=0 "=2 <=6
+[&-:# = 19 sub 73 = 54 vs -%> -45 diff 9 sub no; 91 sub 37 = 54 vs rev ->% -54 diff 0 sub ok
+|:+/> = 87 add 05 = 92 vs #" 32 diff 60 add no; 78 add 50 = 128 vs rev "# 23 diff 105 add no
+ rejected rev #%*</ = 34 mul 60 rev 43 mul 06 = 258 rev 852 = final answer: |>"
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=4 &=7 :=1 #=9 %=2 >=8 |=5 /=0 "=3 <=6
+[&-:# = 47 sub 19 = 28 vs -%> -28 diff 0 sub ok; 74 sub 91 = 17 vs rev ->% -82 diff 65 sub no
+|:+/> = 51 add 08 = 59 vs #" 93 diff 34 add no; 15 add 80 = 95 vs rev "# 39 diff 56 add no
+ rejected forward #%*</ = 92 mul 60 = 5520 = final answer: ||%/
+
+Trying [=7 &=3 :=2 #=4 %=5 >=9 |=1 /=0 "=8 <=6
+[&-:# = 73 sub 24 = 49 vs -%> -59 diff 10 sub no; 37 sub 42 = 5 vs rev ->% -95 diff 90 sub no
+ rejected none #%*</ = 45 mul 60 rev 54 mul 06 = 324 rev 423 = final answer: #:&
+
+Trying [=3 &=5 :=8 #=1 %=4 >=7 |=2 /=0 "=9 <=6
+[&-:# = 35 sub 81 = 46 vs -%> -47 diff 1 sub ok + 1; 53 sub 18 = 35 vs rev ->% -74 diff 39 sub no
+|:+/> = 28 add 07 = 35 vs #" 19 diff 16 add no; 82 add 70 = 152 vs rev "# 91 diff 61 add no
+ rejected forward #%*</ = 14 mul 60 = 840 = final answer: :%/
+
+Trying [=5 &=2 :=9 #=8 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 52 sub 98 = 46 vs -%> -47 diff 1 sub ok + 1; 25 sub 89 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 19 add 07 = 26 vs #" 83 diff 57 add no; 91 add 70 = 161 vs rev "# 38 diff 123 add no
+ rejected forward #%*</ = 84 mul 60 = 5040 = final answer: [/%/
+
+Trying [=8 &=9 :=3 #=7 %=4 >=2 |=1 /=0 "=5 <=6
+[&-:# = 89 sub 37 = 52 vs -%> -42 diff 10 sub no; 98 sub 73 = 25 vs rev ->% -24 diff 1 sub ok - 1
+|:+/> = 13 add 02 = 15 vs #" 75 diff 60 add no; 31 add 20 = 51 vs rev "# 57 diff 6 add no
+ rejected rev #%*</ = 74 mul 60 rev 47 mul 06 = 282 rev 282 = final answer: >[>
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=6 &=1 :=0 #=3 %=4 >=7 |=8 /=5 "=2 <=9
+[&-:# = 61 sub 03 = 58 vs -%> -47 diff 11 sub no; 16 sub 30 = 14 vs rev ->% -74 diff 60 sub no
+ rejected none #%*</ = 34 mul 95 rev 43 mul 59 = 2537 rev 7352 = final answer: >#/"
+
+Trying [=7 &=3 :=2 #=5 %=4 >=9 |=1 /=0 "=8 <=6
+[&-:# = 73 sub 25 = 48 vs -%> -49 diff 1 sub ok + 1; 37 sub 52 = 15 vs rev ->% -94 diff 79 sub no
+|:+/> = 12 add 09 = 21 vs #" 58 diff 37 add no; 21 add 90 = 111 vs rev "# 85 diff 26 add no
+ rejected forward #%*</ = 54 mul 60 = 3240 = final answer: &:%/
+
+Trying [=3 &=5 :=6 #=4 %=2 >=7 |=1 /=0 "=9 <=8
+[&-:# = 35 sub 64 = 29 vs -%> -27 diff 2 sub no; 53 sub 46 = 7 vs rev ->% -72 diff 65 sub no
+ rejected none #%*</ = 42 mul 80 rev 24 mul 08 = 192 rev 291 = final answer: %"|
+
+Trying [=4 &=2 :=9 #=8 %=5 >=7 |=1 /=0 "=3 <=6
+[&-:# = 42 sub 98 = 56 vs -%> -57 diff 1 sub ok + 1; 24 sub 89 = 65 vs rev ->% -75 diff 10 sub no
+|:+/> = 19 add 07 = 26 vs #" 83 diff 57 add no; 91 add 70 = 161 vs rev "# 38 diff 123 add no
+ rejected forward #%*</ = 85 mul 60 = 5100 = final answer: %|//
+
+Trying [=5 &=6 :=1 #=0 %=4 >=7 |=9 /=2 "=3 <=8
+[&-:# = 56 sub 10 = 46 vs -%> -47 diff 1 sub ok + 1; 65 sub 01 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 91 add 27 = 118 vs #" 03 diff 115 add no; 19 add 72 = 91 vs rev "# 30 diff 61 add no
+ rejected forward #%*</ = 04 mul 82 = 328 = final answer: "/<
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=8 &=9 :=3 #=7 %=4 >=2 |=1 /=0 "=5 <=6
+[&-:# = 89 sub 37 = 52 vs -%> -42 diff 10 sub no; 98 sub 73 = 25 vs rev ->% -24 diff 1 sub ok - 1
+|:+/> = 13 add 02 = 15 vs #" 75 diff 60 add no; 31 add 20 = 51 vs rev "# 57 diff 6 add no
+ rejected rev #%*</ = 74 mul 60 rev 47 mul 06 = 282 rev 282 = final answer: >[>
+
+Trying [=2 &=7 :=8 #=1 %=4 >=5 |=9 /=0 "=3 <=6
+[&-:# = 27 sub 81 = 54 vs -%> -45 diff 9 sub no; 72 sub 18 = 54 vs rev ->% -54 diff 0 sub ok
+|:+/> = 98 add 05 = 103 vs #" 13 diff 90 add no; 89 add 50 = 139 vs rev "# 31 diff 108 add no
+ rejected rev #%*</ = 14 mul 60 rev 41 mul 06 = 246 rev 642 = final answer: <%[
+
+Trying [=7 &=3 :=2 #=5 %=4 >=9 |=1 /=0 "=8 <=6
+[&-:# = 73 sub 25 = 48 vs -%> -49 diff 1 sub ok + 1; 37 sub 52 = 15 vs rev ->% -94 diff 79 sub no
+|:+/> = 12 add 09 = 21 vs #" 58 diff 37 add no; 21 add 90 = 111 vs rev "# 85 diff 26 add no
+ rejected forward #%*</ = 54 mul 60 = 3240 = final answer: &:%/
+
+Trying [=4 &=0 :=9 #=6 %=5 >=7 |=1 /=8 "=3 <=2
+[&-:# = 40 sub 96 = 56 vs -%> -57 diff 1 sub ok + 1; 04 sub 69 = 65 vs rev ->% -75 diff 10 sub no
+|:+/> = 19 add 87 = 106 vs #" 63 diff 43 add no; 91 add 78 = 169 vs rev "# 36 diff 133 add no
+ rejected forward #%*</ = 65 mul 28 = 1820 = final answer: |/<&
+
+Trying [=0 &=1 :=4 #=8 %=5 >=7 |=2 /=9 "=3 <=6
+[&-:# = 01 sub 48 = 47 vs -%> -57 diff 10 sub no; 10 sub 84 = 74 vs rev ->% -75 diff 1 sub ok + 1
+|:+/> = 24 add 97 = 121 vs #" 83 diff 38 add no; 42 add 79 = 121 vs rev "# 38 diff 83 add no
+ rejected rev #%*</ = 85 mul 69 rev 58 mul 96 = 5568 rev 8655 = final answer: #<%%
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=1 &=9 :=7 #=3 %=4 >=5 |=8 /=0 "=2 <=6
+[&-:# = 19 sub 73 = 54 vs -%> -45 diff 9 sub no; 91 sub 37 = 54 vs rev ->% -54 diff 0 sub ok
+|:+/> = 87 add 05 = 92 vs #" 32 diff 60 add no; 78 add 50 = 128 vs rev "# 23 diff 105 add no
+ rejected rev #%*</ = 34 mul 60 rev 43 mul 06 = 258 rev 852 = final answer: |>"
+
+Trying [=3 &=4 :=0 #=7 %=8 >=2 |=1 /=5 "=9 <=6
+[&-:# = 34 sub 07 = 27 vs -%> -82 diff 55 sub no; 43 sub 70 = 27 vs rev ->% -28 diff 1 sub ok + 1
+|:+/> = 10 add 52 = 62 vs #" 79 diff 17 add no; 01 add 25 = 26 vs rev "# 97 diff 71 add no
+ rejected rev #%*</ = 78 mul 65 rev 87 mul 56 = 4872 rev 2784 = final answer: >#%&
+
+Trying [=7 &=6 :=3 #=1 %=4 >=9 |=2 /=0 "=5 <=8
+[&-:# = 76 sub 31 = 45 vs -%> -49 diff 4 sub no; 67 sub 13 = 54 vs rev ->% -94 diff 40 sub no
+ rejected none #%*</ = 14 mul 80 rev 41 mul 08 = 328 rev 823 = final answer: <|:
+
+Trying [=5 &=0 :=9 #=6 %=4 >=7 |=1 /=8 "=3 <=2
+[&-:# = 50 sub 96 = 46 vs -%> -47 diff 1 sub ok + 1; 05 sub 69 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 19 add 87 = 106 vs #" 63 diff 43 add no; 91 add 78 = 169 vs rev "# 36 diff 133 add no
+ rejected forward #%*</ = 64 mul 28 = 1792 = final answer: |>:<
+
+Trying [=2 &=5 :=8 #=0 %=4 >=7 |=1 /=9 "=3 <=6
+[&-:# = 25 sub 80 = 55 vs -%> -47 diff 8 sub no; 52 sub 08 = 44 vs rev ->% -74 diff 30 sub no
+ rejected none #%*</ = 04 mul 69 rev 40 mul 96 = 3840 rev 0483 = final answer: #%:"
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=1 &=7 :=6 #=5 %=4 >=8 |=9 /=0 "=3 <=2
+[&-:# = 17 sub 65 = 48 vs -%> -48 diff 0 sub ok; 71 sub 56 = 15 vs rev ->% -84 diff 69 sub no
+|:+/> = 96 add 08 = 104 vs #" 53 diff 51 add no; 69 add 80 = 149 vs rev "# 35 diff 114 add no
+ rejected forward #%*</ = 54 mul 20 = 1080 = final answer: [/>/
+
+Trying [=0 &=4 :=7 #=9 %=8 >=5 |=1 /=2 "=3 <=6
+[&-:# = 04 sub 79 = 75 vs -%> -85 diff 10 sub no; 40 sub 97 = 57 vs rev ->% -58 diff 1 sub ok + 1
+|:+/> = 17 add 25 = 42 vs #" 93 diff 51 add no; 71 add 52 = 123 vs rev "# 39 diff 84 add no
+ rejected rev #%*</ = 98 mul 62 rev 89 mul 26 = 2314 rev 4132 = final answer: &|"/
+
+Trying [=8 &=9 :=3 #=7 %=4 >=2 |=1 /=0 "=5 <=6
+[&-:# = 89 sub 37 = 52 vs -%> -42 diff 10 sub no; 98 sub 73 = 25 vs rev ->% -24 diff 1 sub ok - 1
+|:+/> = 13 add 02 = 15 vs #" 75 diff 60 add no; 31 add 20 = 51 vs rev "# 57 diff 6 add no
+ rejected rev #%*</ = 74 mul 60 rev 47 mul 06 = 282 rev 282 = final answer: >[>
+
+Trying [=5 &=2 :=9 #=8 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 52 sub 98 = 46 vs -%> -47 diff 1 sub ok + 1; 25 sub 89 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 19 add 07 = 26 vs #" 83 diff 57 add no; 91 add 70 = 161 vs rev "# 38 diff 123 add no
+ rejected forward #%*</ = 84 mul 60 = 5040 = final answer: [/%/
+
+Trying [=6 &=0 :=1 #=3 %=4 >=7 |=5 /=8 "=2 <=9
+[&-:# = 60 sub 13 = 47 vs -%> -47 diff 0 sub ok; 06 sub 31 = 25 vs rev ->% -74 diff 49 sub no
+|:+/> = 51 add 87 = 138 vs #" 32 diff 106 add no; 15 add 78 = 93 vs rev "# 23 diff 70 add no
+ rejected forward #%*</ = 34 mul 98 = 3332 = final answer: ###"
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=3 &=5 :=6 #=4 %=2 >=7 |=1 /=0 "=9 <=8
+[&-:# = 35 sub 64 = 29 vs -%> -27 diff 2 sub no; 53 sub 46 = 7 vs rev ->% -72 diff 65 sub no
+ rejected none #%*</ = 42 mul 80 rev 24 mul 08 = 192 rev 291 = final answer: %"|
+
+Trying [=7 &=1 :=0 #=6 %=4 >=9 |=8 /=5 "=3 <=2
+[&-:# = 71 sub 06 = 65 vs -%> -49 diff 16 sub no; 17 sub 60 = 43 vs rev ->% -94 diff 51 sub no
+ rejected none #%*</ = 64 mul 25 rev 46 mul 52 = 2392 rev 2932 = final answer: <>"<
+
+Trying [=8 &=9 :=3 #=7 %=4 >=2 |=1 /=0 "=5 <=6
+[&-:# = 89 sub 37 = 52 vs -%> -42 diff 10 sub no; 98 sub 73 = 25 vs rev ->% -24 diff 1 sub ok - 1
+|:+/> = 13 add 02 = 15 vs #" 75 diff 60 add no; 31 add 20 = 51 vs rev "# 57 diff 6 add no
+ rejected rev #%*</ = 74 mul 60 rev 47 mul 06 = 282 rev 282 = final answer: >[>
+
+Trying [=5 &=7 :=9 #=8 %=4 >=2 |=1 /=0 "=3 <=6
+[&-:# = 57 sub 98 = 41 vs -%> -42 diff 1 sub ok + 1; 75 sub 89 = 14 vs rev ->% -24 diff 10 sub no
+|:+/> = 19 add 02 = 21 vs #" 83 diff 62 add no; 91 add 20 = 111 vs rev "# 38 diff 73 add no
+ rejected forward #%*</ = 84 mul 60 = 5040 = final answer: [/%/
+
+Trying [=2 &=3 :=7 #=9 %=4 >=5 |=1 /=0 "=8 <=6
+[&-:# = 23 sub 79 = 56 vs -%> -45 diff 11 sub no; 32 sub 97 = 65 vs rev ->% -54 diff 11 sub no
+ rejected none #%*</ = 94 mul 60 rev 49 mul 06 = 294 rev 492 = final answer: %#[
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=3 &=5 :=8 #=1 %=4 >=7 |=2 /=0 "=9 <=6
+[&-:# = 35 sub 81 = 46 vs -%> -47 diff 1 sub ok + 1; 53 sub 18 = 35 vs rev ->% -74 diff 39 sub no
+|:+/> = 28 add 07 = 35 vs #" 19 diff 16 add no; 82 add 70 = 152 vs rev "# 91 diff 61 add no
+ rejected forward #%*</ = 14 mul 60 = 840 = final answer: :%/
+
+Trying [=0 &=2 :=4 #=6 %=5 >=7 |=1 /=9 "=3 <=8
+[&-:# = 02 sub 46 = 44 vs -%> -57 diff 13 sub no; 20 sub 64 = 44 vs rev ->% -75 diff 31 sub no
+ rejected none #%*</ = 65 mul 89 rev 56 mul 98 = 5488 rev 8845 = final answer: <<:%
+
+Trying [=8 &=4 :=0 #=3 %=9 >=7 |=1 /=5 "=2 <=6
+[&-:# = 84 sub 03 = 81 vs -%> -97 diff 16 sub no; 48 sub 30 = 18 vs rev ->% -79 diff 61 sub no
+ rejected none #%*</ = 39 mul 65 rev 93 mul 56 = 5208 rev 8025 = final answer: [:"/
+
+Trying [=6 &=0 :=1 #=8 %=4 >=7 |=5 /=2 "=3 <=9
+[&-:# = 60 sub 18 = 42 vs -%> -47 diff 5 sub no; 06 sub 81 = 75 vs rev ->% -74 diff 1 sub ok - 1
+|:+/> = 51 add 27 = 78 vs #" 83 diff 5 add no; 15 add 72 = 87 vs rev "# 38 diff 49 add no
+ rejected rev #%*</ = 84 mul 92 rev 48 mul 29 = 1392 rev 2931 = final answer: /<":
+
+Trying [=5 &=6 :=9 #=7 %=4 >=2 |=1 /=0 "=3 <=8
+[&-:# = 56 sub 97 = 41 vs -%> -42 diff 1 sub ok + 1; 65 sub 79 = 14 vs rev ->% -24 diff 10 sub no
+|:+/> = 19 add 02 = 21 vs #" 73 diff 52 add no; 91 add 20 = 111 vs rev "# 37 diff 74 add no
+ rejected forward #%*</ = 74 mul 80 = 5920 = final answer: [:>/
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=2 &=3 :=6 #=9 %=4 >=7 |=1 /=0 "=8 <=5
+[&-:# = 23 sub 69 = 46 vs -%> -47 diff 1 sub ok + 1; 32 sub 96 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 16 add 07 = 23 vs #" 98 diff 75 add no; 61 add 70 = 131 vs rev "# 89 diff 42 add no
+ rejected forward #%*</ = 94 mul 50 = 4700 = final answer: %>//
+
+Trying [=7 &=9 :=3 #=0 %=4 >=8 |=1 /=2 "=5 <=6
+[&-:# = 79 sub 30 = 49 vs -%> -48 diff 1 sub ok - 1; 97 sub 03 = 94 vs rev ->% -84 diff 10 sub no
+|:+/> = 13 add 28 = 41 vs #" 05 diff 36 add no; 31 add 82 = 113 vs rev "# 50 diff 63 add no
+ rejected forward #%*</ = 04 mul 62 = 248 = final answer: /%>
+
+Trying [=3 &=5 :=8 #=1 %=4 >=7 |=2 /=0 "=9 <=6
+[&-:# = 35 sub 81 = 46 vs -%> -47 diff 1 sub ok + 1; 53 sub 18 = 35 vs rev ->% -74 diff 39 sub no
+|:+/> = 28 add 07 = 35 vs #" 19 diff 16 add no; 82 add 70 = 152 vs rev "# 91 diff 61 add no
+ rejected forward #%*</ = 14 mul 60 = 840 = final answer: :%/
+
+Trying [=8 &=1 :=2 #=4 %=5 >=7 |=9 /=0 "=3 <=6
+[&-:# = 81 sub 24 = 57 vs -%> -57 diff 0 sub ok; 18 sub 42 = 24 vs rev ->% -75 diff 51 sub no
+|:+/> = 92 add 07 = 99 vs #" 43 diff 56 add no; 29 add 70 = 99 vs rev "# 34 diff 65 add no
+ rejected forward #%*</ = 45 mul 60 = 2700 = final answer: :>//
+
+Trying [=4 &=0 :=9 #=6 %=5 >=7 |=1 /=8 "=3 <=2
+[&-:# = 40 sub 96 = 56 vs -%> -57 diff 1 sub ok + 1; 04 sub 69 = 65 vs rev ->% -75 diff 10 sub no
+|:+/> = 19 add 87 = 106 vs #" 63 diff 43 add no; 91 add 78 = 169 vs rev "# 36 diff 133 add no
+ rejected forward #%*</ = 65 mul 28 = 1820 = final answer: |/<&
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=2 &=3 :=7 #=9 %=4 >=5 |=1 /=0 "=8 <=6
+[&-:# = 23 sub 79 = 56 vs -%> -45 diff 11 sub no; 32 sub 97 = 65 vs rev ->% -54 diff 11 sub no
+ rejected none #%*</ = 94 mul 60 rev 49 mul 06 = 294 rev 492 = final answer: %#[
+
+Trying [=1 &=7 :=6 #=8 %=4 >=2 |=9 /=0 "=3 <=5
+[&-:# = 17 sub 68 = 51 vs -%> -42 diff 9 sub no; 71 sub 86 = 15 vs rev ->% -24 diff 9 sub no
+ rejected none #%*</ = 84 mul 50 rev 48 mul 05 = 240 rev 042 = final answer: /%>
+
+Trying [=3 &=4 :=8 #=7 %=5 >=2 |=1 /=0 "=9 <=6
+[&-:# = 34 sub 87 = 53 vs -%> -52 diff 1 sub ok - 1; 43 sub 78 = 35 vs rev ->% -25 diff 10 sub no
+|:+/> = 18 add 02 = 20 vs #" 79 diff 59 add no; 81 add 20 = 101 vs rev "# 97 diff 4 add no
+ rejected forward #%*</ = 75 mul 60 = 4500 = final answer: &%//
+
+Trying [=6 &=9 :=2 #=1 %=4 >=7 |=5 /=0 "=3 <=8
+[&-:# = 69 sub 21 = 48 vs -%> -47 diff 1 sub ok - 1; 96 sub 12 = 84 vs rev ->% -74 diff 10 sub no
+|:+/> = 52 add 07 = 59 vs #" 13 diff 46 add no; 25 add 70 = 95 vs rev "# 31 diff 64 add no
+ rejected forward #%*</ = 14 mul 80 = 1120 = final answer: ##:/
+
+Trying [=5 &=0 :=9 #=6 %=4 >=7 |=1 /=8 "=3 <=2
+[&-:# = 50 sub 96 = 46 vs -%> -47 diff 1 sub ok + 1; 05 sub 69 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 19 add 87 = 106 vs #" 63 diff 43 add no; 91 add 78 = 169 vs rev "# 36 diff 133 add no
+ rejected forward #%*</ = 64 mul 28 = 1792 = final answer: |>:<
+
+Trying [=9 &=8 :=5 #=2 %=4 >=7 |=1 /=0 "=3 <=6
+[&-:# = 98 sub 52 = 46 vs -%> -47 diff 1 sub ok + 1; 89 sub 25 = 64 vs rev ->% -74 diff 10 sub no
+|:+/> = 15 add 07 = 22 vs #" 23 diff 1 add ok + 1; 51 add 70 = 121 vs rev "# 32 diff 89 add no
+#>+</ = 27 add 60 = 87 vs #[: 295 diff 208 add no; 72 add 06 = 78 vs rev :[# 592 diff 514 add no
+ rejected forward #%*</ = 24 mul 60 = 1440 = final answer: |%%/
+
+Trying [=7 &=6 :=0 #=9 %=4 >=2 |=1 /=5 "=3 <=8
+[&-:# = 76 sub 09 = 67 vs -%> -42 diff 25 sub no; 67 sub 90 = 23 vs rev ->% -24 diff 1 sub ok + 1
+|:+/> = 10 add 52 = 62 vs #" 93 diff 31 add no; 01 add 25 = 26 vs rev "# 39 diff 13 add no
+ rejected rev #%*</ = 94 mul 85 rev 49 mul 58 = 2842 rev 2482 = final answer: >%<>
+
+Trying [=0 &=1 :=3 #=8 %=4 >=7 |=2 /=9 "=5 <=6
+[&-:# = 01 sub 38 = 37 vs -%> -47 diff 10 sub no; 10 sub 83 = 73 vs rev ->% -74 diff 1 sub ok + 1
+|:+/> = 23 add 97 = 120 vs #" 85 diff 35 add no; 32 add 79 = 111 vs rev "# 58 diff 53 add no
+ rejected rev #%*</ = 84 mul 69 rev 48 mul 96 = 4608 rev 8064 = final answer: #[<%
+
+Trying [=3 &=4 :=6 #=0 %=8 >=7 |=1 /=2 "=9 <=5
+[&-:# = 34 sub 60 = 26 vs -%> -87 diff 61 sub no; 43 sub 06 = 37 vs rev ->% -78 diff 41 sub no
+ rejected none #%*</ = 08 mul 52 rev 80 mul 25 = 2000 rev 0002 = final answer: ###/
+
+Trying [=6 &=9 :=2 #=7 %=5 >=8 |=4 /=1 "=0 <=3
+[&-:# = 69 sub 27 = 42 vs -%> -58 diff 16 sub no; 96 sub 72 = 24 vs rev ->% -85 diff 61 sub no
+ rejected none #%*</ = 75 mul 31 rev 57 mul 13 = 741 rev 147 = final answer: /|#
+
+Trying [=2 &=0 :=9 #=3 %=7 >=4 |=8 /=5 "=6 <=1
+[&-:# = 20 sub 93 = 73 vs -%> -74 diff 1 sub ok + 1; 02 sub 39 = 37 vs rev ->% -47 diff 10 sub no
+|:+/> = 89 add 54 = 143 vs #" 36 diff 107 add no; 98 add 45 = 143 vs rev "# 63 diff 80 add no
+ rejected forward #%*</ = 37 mul 15 = 555 = final answer: ///

@@ -1,0 +1,66 @@
+/%{@] = ]%#%
+@"+]@ = |'
+#|\]' = |@
+^/\#^ = \^]
+The question is #@{]"
+
+Operator symbols {+\
+Question operator symbol {
+Question operator in examples
+
+Digit symbols /%@]#"|'^
+
+Checking concatenation
+left /% op { right @] expected /%@] versus ]%#% mismatch
+left @" op + right ]@ expected @"]@ versus |' mismatch
+left #| op \ right ]' expected #|]' versus |@ mismatch
+left ^/ op \ right #^ expected ^/#^ versus \^] mismatch
+
+Question operator { is not concatenation
+
+Checking reverse concatenation
+left /% op { right @] expected @]/% versus ]%#% mismatch
+left @" op + right ]@ expected ]@@" versus |' mismatch
+left #| op \ right ]' expected ]'#| versus |@ mismatch
+left ^/ op \ right #^ expected #^^/ versus \^] mismatch
+
+Question operator { is not reverse concatenation
+
+Filtering out the concatenation operations
+/%{@] = ]%#%
+@"+]@ = |'
+#|\]' = |@
+^/\#^ = \^]
+
+Assigning mul
+ left /% op { right @] = ]%#% length 4 assume mul
+ left @" op + right ]@ = |' length 2
+ left #| op \ right ]' = |@ length 2
+ left ^/ op \ right #^ = \^] length 3
+
+Assigning sub
+ left /% op { right @] = ]%#% assumed mul
+ left @" op + right ]@ = |' length 2
+ left #| op \ right ]' = |@ length 2
+ left ^/ op \ right #^ = \^] op in output assume sub
+
+Assigning add
+ left /% op { right @] = ]%#% assumed mul
+ left @" op + right ]@ = |' length 2
+ left #| op \ right ]' = |@ assumed sub
+ left ^/ op \ right #^ = \^] assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left /% op { right @] = ]%#% assumed mul
+ left @" op + right ]@ = |' length 2 assume add
+ left #| op \ right ]' = |@ assumed sub
+ left ^/ op \ right #^ = \^] assumed sub
+ left #@ op { right ]" the question, assumed mul
+
+Trying /=3 %=9 @=5 ]=1 #=8 "=6 |=7 '=2 ^=4 A=0
+/%{@] = 39 mul 51 = 1989 vs ]%#% 1989 diff 0 mul ok; 93 mul 15 = 1395 vs rev %#%] 9891 diff 8496 mul no
+@"+]@ = 56 add 15 = 71 vs |' 72 diff 1 add ok + 1; 65 add 51 = 116 vs rev '| 27 diff 89 add no
+#|\]' = 87 sub 12 = 75 vs |@ 75 diff 0 sub ok; 78 sub 21 = 57 vs rev @| 57 diff 0 sub ok
+^/\#^ = 43 sub 84 = 41 vs \^] -41 diff 0 sub ok; 34 sub 48 = 14 vs rev \]^ -14 diff 0 sub ok
+ accepted forward #@{]" = 85 mul 16 = 1360 = \boxed{]/"A}

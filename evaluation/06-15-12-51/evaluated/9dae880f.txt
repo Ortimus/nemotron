@@ -1,0 +1,258 @@
+:'"`# = <"
+[:>\[ = \)#
+`#"$| = [)
+:\}[# = <)[
+#:>#` = #)::
+The question is :<}`\
+
+Operator symbols ">}
+Question operator symbol }
+Question operator in examples
+
+Digit symbols :'`#<[\)$|
+
+Checking concatenation
+left :' op " right `# expected :'`# versus <" mismatch
+left [: op > right \[ expected [:\[ versus \)# mismatch
+left `# op " right $| expected `#$| versus [) mismatch
+left :\ op } right [# expected :\[# versus <)[ mismatch
+left #: op > right #` expected #:#` versus #):: mismatch
+
+Question operator } is not concatenation
+
+Checking reverse concatenation
+left :' op " right `# expected `#:' versus <" mismatch
+left [: op > right \[ expected \[[: versus \)# mismatch
+left `# op " right $| expected $|`# versus [) mismatch
+left :\ op } right [# expected [#:\ versus <)[ mismatch
+left #: op > right #` expected #`#: versus #):: mismatch
+
+Question operator } is not reverse concatenation
+
+Filtering out the concatenation operations
+:'"`# = <"
+[:>\[ = \)#
+`#"$| = [)
+:\}[# = <)[
+#:>#` = #)::
+
+Assigning mul
+ left :' op " right `# = <" length 2
+ left [: op > right \[ = \)# length 3
+ left `# op " right $| = [) length 2
+ left :\ op } right [# = <)[ length 3
+ left #: op > right #` = #):: length 4 assume mul
+
+Assigning sub
+ left :' op " right `# = <" length 2
+ left [: op > right \[ = \)# assumed mul
+ left `# op " right $| = [) length 2
+ left :\ op } right [# = <)[ length 3
+ left #: op > right #` = #):: assumed mul
+
+Assigning add
+ left :' op " right `# = <" length 2
+ left [: op > right \[ = \)# assumed mul
+ left `# op " right $| = [) length 2
+ left :\ op } right [# = <)[ length 3 assume add
+ left #: op > right #` = #):: assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left :' op " right `# = <" length 2 assume sub
+ left [: op > right \[ = \)# assumed mul
+ left `# op " right $| = [) assumed sub
+ left :\ op } right [# = <)[ assumed add
+ left #: op > right #` = #):: assumed mul
+ left :< op } right `\ the question, assumed add
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+[:>\[ = 61 mul 76 = 4636 vs \)# 790 diff 3846 mul no; 16 mul 67 = 1072 vs rev #)\ 097 diff 975 mul no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1 #=3 <=2 [=6 \=7 )=9 $=5 |=4
+:'"`# = 08 sub 13 = 5 vs <" 24 diff 19 sub no; 80 sub 31 = 49 vs rev "< 42 diff 7 sub no
+ rejected none :<}`\ = 02 add 17 rev 20 add 71 = 91 rev 19 = final answer: `)
+
+Trying :=5 '=0 `=8 #=1 <=2 [=6 \=7 )=9 $=3 |=4
+:'"`# = 50 sub 81 = 31 vs <" 20 diff 11 sub no; 05 sub 18 = 13 vs rev "< 02 diff 11 sub no
+ rejected none :<}`\ = 52 add 87 rev 25 add 78 = 103 rev 301 = final answer: $'#
+
+Trying :=2 '=5 `=0 #=8 <=1 [=6 \=7 )=9 $=3 |=4
+:'"`# = 25 sub 08 = 17 vs <" 15 diff 2 sub no; 52 sub 80 = 28 vs rev "< 51 diff 23 sub no
+ rejected none :<}`\ = 21 add 07 rev 12 add 70 = 82 rev 28 = final answer: :#
+
+Trying :=1 '=3 `=4 #=0 <=2 [=6 \=7 )=9 $=5 |=8
+:'"`# = 13 sub 40 = 27 vs <" 22 diff 5 sub no; 31 sub 04 = 27 vs rev "< 22 diff 5 sub no
+ rejected forward :<}`\ = 12 add 47 = 59 = final answer: $)
+
+Trying :=8 '=1 `=3 #=4 <=2 [=6 \=7 )=9 $=5 |=0
+:'"`# = 81 sub 34 = 47 vs <" 24 diff 23 sub no; 18 sub 43 = 25 vs rev "< 42 diff 17 sub no
+ rejected none :<}`\ = 82 add 37 rev 28 add 73 = 101 rev 101 = final answer: '|'
+
+Trying :=0 '=8 `=1

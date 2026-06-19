@@ -1,0 +1,75 @@
+((+$@ = ("#
+")+(: = {)#
+()-'? = ''
+#@*{: = ?$))
+#"-(# = {{
+The question is (:*?"
+
+Operator symbols +-*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols ($@"#):{'?
+
+Checking concatenation
+left (( op + right $@ expected (($@ versus ("# mismatch
+left ") op + right (: expected ")(: versus {)# mismatch
+left () op - right '? expected ()'? versus '' mismatch
+left #@ op * right {: expected #@{: versus ?$)) mismatch
+left #" op - right (# expected #"(# versus {{ mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left (( op + right $@ expected $@(( versus ("# mismatch
+left ") op + right (: expected (:") versus {)# mismatch
+left () op - right '? expected '?() versus '' mismatch
+left #@ op * right {: expected {:#@ versus ?$)) mismatch
+left #" op - right (# expected (##" versus {{ mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+((+$@ = ("#
+")+(: = {)#
+()-'? = ''
+#@*{: = ?$))
+#"-(# = {{
+
+Assigning mul
+ left (( op + right $@ = ("# length 3
+ left ") op + right (: = {)# length 3
+ left () op - right '? = '' length 2
+ left #@ op * right {: = ?$)) length 4 assume mul
+ left #" op - right (# = {{ length 2
+
+Assigning sub
+ left (( op + right $@ = ("# length 3
+ left ") op + right (: = {)# length 3
+ left () op - right '? = '' length 2
+ left #@ op * right {: = ?$)) assumed mul
+ left #" op - right (# = {{ length 2
+
+Assigning add
+ left (( op + right $@ = ("# length 3 assume add
+ left ") op + right (: = {)# assumed add
+ left () op - right '? = '' length 2
+ left #@ op * right {: = ?$)) assumed mul
+ left #" op - right (# = {{ length 2
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left (( op + right $@ = ("# assumed add
+ left ") op + right (: = {)# assumed add
+ left () op - right '? = '' length 2 assume sub
+ left #@ op * right {: = ?$)) assumed mul
+ left #" op - right (# = {{ assumed sub
+ left (: op * right ?" the question, assumed mul
+
+Trying (=8 $=0 @=7 "=5 #=1 )=6 :=9 {=3 '=4 ?=2
+((+$@ = 88 add 07 = 95 vs ("# 851 diff 756 add no; 88 add 70 = 158 vs rev #"( 158 diff 0 add ok
+")+(: = 56 add 89 = 145 vs {)# 361 diff 216 add no; 65 add 98 = 163 vs rev #){ 163 diff 0 add ok
+()-'? = 86 sub 42 = 44 vs '' 44 diff 0 sub ok; 68 sub 24 = 44 vs rev '' 44 diff 0 sub ok
+#@*{: = 17 mul 39 = 663 vs ?$)) 2066 diff 1403 mul no; 71 mul 93 = 6603 vs rev ))$? 6602 diff 1 mul ok - 1
+#"-(# = 15 sub 81 = 66 vs {{ 33 diff 33 sub no; 51 sub 18 = 33 vs rev {{ 33 diff 0 sub ok
+ accepted rev (:*?" = 89 mul-1 25 rev 98 mul-1 52 = 5096 - 1 = 5095 rev 5905 = \boxed{":$"}

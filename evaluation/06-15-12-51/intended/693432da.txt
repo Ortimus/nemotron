@@ -1,0 +1,66 @@
+^?*[? = \${|
+[(-[? = -|
+(>*[$ = \|$$
+{[+(\ = |^$
+The question is ?(+>^
+
+Operator symbols *-+
+Question operator symbol +
+Question operator in examples
+
+Digit symbols ^?[\${|(>
+
+Checking concatenation
+left ^? op * right [? expected ^?[? versus \${| mismatch
+left [( op - right [? expected [([? versus -| mismatch
+left (> op * right [$ expected (>[$ versus \|$$ mismatch
+left {[ op + right (\ expected {[(\ versus |^$ mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left ^? op * right [? expected [?^? versus \${| mismatch
+left [( op - right [? expected [?[( versus -| mismatch
+left (> op * right [$ expected [$(> versus \|$$ mismatch
+left {[ op + right (\ expected (\{[ versus |^$ mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+^?*[? = \${|
+[(-[? = -|
+(>*[$ = \|$$
+{[+(\ = |^$
+
+Assigning mul
+ left ^? op * right [? = \${| length 4 assume mul
+ left [( op - right [? = -| length 2
+ left (> op * right [$ = \|$$ assumed mul
+ left {[ op + right (\ = |^$ length 3
+
+Assigning sub
+ left ^? op * right [? = \${| assumed mul
+ left [( op - right [? = -| op in output assume sub
+ left (> op * right [$ = \|$$ assumed mul
+ left {[ op + right (\ = |^$ length 3
+
+Assigning add
+ left ^? op * right [? = \${| assumed mul
+ left [( op - right [? = -| assumed sub
+ left (> op * right [$ = \|$$ assumed mul
+ left {[ op + right (\ = |^$ length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ^? op * right [? = \${| assumed mul
+ left [( op - right [? = -| assumed sub
+ left (> op * right [$ = \|$$ assumed mul
+ left {[ op + right (\ = |^$ assumed add
+ left ?( op + right >^ the question, assumed add
+
+Trying ^=6 ?=9 [=5 \=4 $=0 {=7 |=1 (=8 >=2 A=3
+^?*[? = 69 mul 59 = 4071 vs \${| 4071 diff 0 mul ok; 96 mul 95 = 9120 vs rev |{$\ 1704 diff 7416 mul no
+[(-[? = 58 sub 59 = 1 vs -| -1 diff 0 sub ok; 85 sub 95 = 10 vs rev -| -1 diff 9 sub no
+(>*[$ = 82 mul 50 = 4100 vs \|$$ 4100 diff 0 mul ok; 28 mul 05 = 140 vs rev $$|\ 0014 diff 126 mul no
+{[+(\ = 75 add 84 = 159 vs |^$ 160 diff 1 add ok + 1; 57 add 48 = 105 vs rev $^| 061 diff 44 add no
+ accepted forward ?(+>^ = 98 add+1 26 = 124 + 1 = 125 = \boxed{|>[}

@@ -1,0 +1,66 @@
+[[-&` = -<>
+>#+`| = `$>
+|#*|` = |<&#
+<#+<' = `>>
+The question is `$*##
+
+Operator symbols -+*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols [&`<>#|$'
+
+Checking concatenation
+left [[ op - right &` expected [[&` versus -<> mismatch
+left ># op + right `| expected >#`| versus `$> mismatch
+left |# op * right |` expected |#|` versus |<&# mismatch
+left <# op + right <' expected <#<' versus `>> mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left [[ op - right &` expected &`[[ versus -<> mismatch
+left ># op + right `| expected `|># versus `$> mismatch
+left |# op * right |` expected |`|# versus |<&# mismatch
+left <# op + right <' expected <'<# versus `>> mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+[[-&` = -<>
+>#+`| = `$>
+|#*|` = |<&#
+<#+<' = `>>
+
+Assigning mul
+ left [[ op - right &` = -<> length 3
+ left ># op + right `| = `$> length 3
+ left |# op * right |` = |<&# length 4 assume mul
+ left <# op + right <' = `>> length 3
+
+Assigning sub
+ left [[ op - right &` = -<> op in output assume sub
+ left ># op + right `| = `$> length 3
+ left |# op * right |` = |<&# assumed mul
+ left <# op + right <' = `>> length 3
+
+Assigning add
+ left [[ op - right &` = -<> assumed sub
+ left ># op + right `| = `$> length 3 assume add
+ left |# op * right |` = |<&# assumed mul
+ left <# op + right <' = `>> assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left [[ op - right &` = -<> assumed sub
+ left ># op + right `| = `$> assumed add
+ left |# op * right |` = |<&# assumed mul
+ left <# op + right <' = `>> assumed add
+ left `$ op * right ## the question, assumed mul
+
+Trying [=7 &=2 `=9 <=5 >=1 #=8 |=6 $=4 '=3 A=0
+[[-&` = 77 sub 29 = 48 vs -<> -51 diff 3 sub no; 77 sub 92 = 15 vs rev ->< -15 diff 0 sub ok
+>#+`| = 18 add 96 = 114 vs `$> 941 diff 827 add no; 81 add 69 = 150 vs rev >$` 149 diff 1 add ok - 1
+|#*|` = 68 mul 69 = 4692 vs |<&# 6528 diff 1836 mul no; 86 mul 96 = 8256 vs rev #&<| 8256 diff 0 mul ok
+<#+<' = 58 add 53 = 111 vs `>> 911 diff 800 add no; 85 add 35 = 120 vs rev >>` 119 diff 1 add ok - 1
+ accepted rev `$*## = 94 mul 88 rev 49 mul 88 = 4312 rev 2134 = \boxed{&>'$}

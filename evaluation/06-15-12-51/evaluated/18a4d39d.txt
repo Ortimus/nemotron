@@ -1,0 +1,224 @@
+|/*{^ = #[^/
+""+#^ = ""#^
+|#+|> = |#|>
+"<+<[ = "<<[
+{$-"# = #{
+The question is ^"*<>
+
+Operator symbols *+-
+Question operator symbol *
+Question operator in examples
+
+Digit symbols |/{^#["><$
+
+Checking concatenation
+left |/ op * right {^ expected |/{^ versus #[^/ mismatch
+left "" op + right #^ expected ""#^ versus ""#^ match +
+left |# op + right |> expected |#|> versus |#|> match +
+left "< op + right <[ expected "<<[ versus "<<[ match +
+left {$ op - right "# expected {$"# versus #{ mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left |/ op * right {^ expected {^|/ versus #[^/ mismatch
+left "" op + right #^ expected #^"" versus ""#^ mismatch
+left |# op + right |> expected |>|# versus |#|> mismatch
+left "< op + right <[ expected <["< versus "<<[ mismatch
+left {$ op - right "# expected "#{$ versus #{ mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+|/*{^ = #[^/
+{$-"# = #{
+
+Assigning mul
+ left |/ op * right {^ = #[^/ length 4 assume mul
+ left {$ op - right "# = #{ length 2
+
+Assigning sub
+ left |/ op * right {^ = #[^/ assumed mul
+ left {$ op - right "# = #{ length 2
+
+Assigning add
+ left |/ op * right {^ = #[^/ assumed mul
+ left {$ op - right "# = #{ length 2
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left |/ op * right {^ = #[^/ assumed mul
+ left {$ op - right "# = #{ length 2 assume add
+ left ^" op * right <> the question, assumed mul
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul 89 = 6408 rev 8046 = final answer: >/#|
+
+Trying |=3 /=6 {=0 ^=1 #=4 [=5 "=7 >=8 <=9 $=2
+|/*{^ = 36 mul 01 = 36 vs #[^/ 4516 diff 4480 mul no; 63 mul 10 = 630 vs rev /^[# 6154 diff 5524 mul no
+ rejected none ^"*<> = 17 mul 98 rev 71 mul 89 = 6319 rev 9136 = final answer: <^|/
+
+Trying |=5 /=3 {=6 ^=0 #=4 [=2 "=7 >=8 <=9 $=1
+|/*{^ = 53 mul 60 = 3180 vs #[^/ 4203 diff 1023 mul no; 35 mul 06 = 210 vs rev /^[# 3024 diff 2814 mul no
+ rejected none ^"*<> = 07 mul 98 rev 70 mul 89 = 6230 rev 0326 = final answer: ^/[{
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul 89 = 6408 rev 8046 = final answer: >/#|
+
+Trying |=3 /=6 {=0 ^=1 #=4 [=5 "=7 >=8 <=9 $=2
+|/*{^ = 36 mul 01 = 36 vs #[^/ 4516 diff 4480 mul no; 63 mul 10 = 630 vs rev /^[# 6154 diff 5524 mul no
+ rejected none ^"*<> = 17 mul 98 rev 71 mul 89 = 6319 rev 9136 = final answer: <^|/
+
+Trying |=5 /=3 {=6 ^=0 #=4 [=2 "=7 >=8 <=9 $=1
+|/*{^ = 53 mul 60 = 3180 vs #[^/ 4203 diff 1023 mul no; 35 mul 06 = 210 vs rev /^[# 3024 diff 2814 mul no
+ rejected none ^"*<> = 07 mul 98 rev 70 mul 89 = 6230 rev 0326 = final answer: ^/[{
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul 89 = 6408 rev 8046 = final answer: >/#|
+
+Trying |=3 /=6 {=0 ^=1 #=4 [=5 "=7 >=8 <=9 $=2
+|/*{^ = 36 mul 01 = 36 vs #[^/ 4516 diff 4480 mul no; 63 mul 10 = 630 vs rev /^[# 6154 diff 5524 mul no
+ rejected none ^"*<> = 17 mul 98 rev 71 mul 89 = 6319 rev 9136 = final answer: <^|/
+
+Trying |=5 /=3 {=6 ^=0 #=4 [=2 "=7 >=8 <=9 $=1
+|/*{^ = 53 mul 60 = 3180 vs #[^/ 4203 diff 1023 mul no; 35 mul 06 = 210 vs rev /^[# 3024 diff 2814 mul no
+ rejected none ^"*<> = 07 mul 98 rev 70 mul 89 = 6230 rev 0326 = final answer: ^/[{
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul 89 = 6408 rev 8046 = final answer: >/#|
+
+Trying |=3 /=6 {=0 ^=1 #=4 [=5 "=7 >=8 <=9 $=2
+|/*{^ = 36 mul 01 = 36 vs #[^/ 4516 diff 4480 mul no; 63 mul 10 = 630 vs rev /^[# 6154 diff 5524 mul no
+ rejected none ^"*<> = 17 mul 98 rev 71 mul 89 = 6319 rev 9136 = final answer: <^|/
+
+Trying |=5 /=3 {=6 ^=0 #=4 [=2 "=7 >=8 <=9 $=1
+|/*{^ = 53 mul 60 = 3180 vs #[^/ 4203 diff 1023 mul no; 35 mul 06 = 210 vs rev /^[# 3024 diff 2814 mul no
+ rejected none ^"*<> = 07 mul 98 rev 70 mul 89 = 6230 rev 0326 = final answer: ^/[{
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul 89 = 6408 rev 8046 = final answer: >/#|
+
+Trying |=3 /=6 {=0 ^=1 #=4 [=5 "=7 >=8 <=9 $=2
+|/*{^ = 36 mul 01 = 36 vs #[^/ 4516 diff 4480 mul no; 63 mul 10 = 630 vs rev /^[# 6154 diff 5524 mul no
+ rejected none ^"*<> = 17 mul 98 rev 71 mul 89 = 6319 rev 9136 = final answer: <^|/
+
+Trying |=5 /=3 {=6 ^=0 #=4 [=2 "=7 >=8 <=9 $=1
+|/*{^ = 53 mul 60 = 3180 vs #[^/ 4203 diff 1023 mul no; 35 mul 06 = 210 vs rev /^[# 3024 diff 2814 mul no
+ rejected none ^"*<> = 07 mul 98 rev 70 mul 89 = 6230 rev 0326 = final answer: ^/[{
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul 89 = 6408 rev 8046 = final answer: >/#|
+
+Trying |=3 /=6 {=0 ^=1 #=4 [=5 "=7 >=8 <=9 $=2
+|/*{^ = 36 mul 01 = 36 vs #[^/ 4516 diff 4480 mul no; 63 mul 10 = 630 vs rev /^[# 6154 diff 5524 mul no
+ rejected none ^"*<> = 17 mul 98 rev 71 mul 89 = 6319 rev 9136 = final answer: <^|/
+
+Trying |=5 /=3 {=6 ^=0 #=4 [=2 "=7 >=8 <=9 $=1
+|/*{^ = 53 mul 60 = 3180 vs #[^/ 4203 diff 1023 mul no; 35 mul 06 = 210 vs rev /^[# 3024 diff 2814 mul no
+ rejected none ^"*<> = 07 mul 98 rev 70 mul 89 = 6230 rev 0326 = final answer: ^/[{
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul 89 = 6408 rev 8046 = final answer: >/#|
+
+Trying |=3 /=6 {=0 ^=1 #=4 [=5 "=7 >=8 <=9 $=2
+|/*{^ = 36 mul 01 = 36 vs #[^/ 4516 diff 4480 mul no; 63 mul 10 = 630 vs rev /^[# 6154 diff 5524 mul no
+ rejected none ^"*<> = 17 mul 98 rev 71 mul 89 = 6319 rev 9136 = final answer: <^|/
+
+Trying |=5 /=3 {=6 ^=0 #=4 [=2 "=7 >=8 <=9 $=1
+|/*{^ = 53 mul 60 = 3180 vs #[^/ 4203 diff 1023 mul no; 35 mul 06 = 210 vs rev /^[# 3024 diff 2814 mul no
+ rejected none ^"*<> = 07 mul 98 rev 70 mul 89 = 6230 rev 0326 = final answer: ^/[{
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul 89 = 6408 rev 8046 = final answer: >/#|
+
+Trying |=3 /=6 {=0 ^=1 #=4 [=5 "=7 >=8 <=9 $=2
+|/*{^ = 36 mul 01 = 36 vs #[^/ 4516 diff 4480 mul no; 63 mul 10 = 630 vs rev /^[# 6154 diff 5524 mul no
+ rejected none ^"*<> = 17 mul 98 rev 71 mul 89 = 6319 rev 9136 = final answer: <^|/
+
+Trying |=5 /=3 {=6 ^=0 #=4 [=2 "=7 >=8 <=9 $=1
+|/*{^ = 53 mul 60 = 3180 vs #[^/ 4203 diff 1023 mul no; 35 mul 06 = 210 vs rev /^[# 3024 diff 2814 mul no
+ rejected none ^"*<> = 07 mul 98 rev 70 mul 89 = 6230 rev 0326 = final answer: ^/[{
+
+Trying |=1 /=2 {=3 ^=4 #=5 [=6 "=7 >=8 <=9 $=0
+|/*{^ = 12 mul 34 = 408 vs #[^/ 5642 diff 5234 mul no; 21 mul 43 = 903 vs rev /^[# 2465 diff 1562 mul no
+ rejected none ^"*<> = 47 mul 98 rev 74 mul 89 = 6566 rev 6656 = final answer: [[#[
+
+Trying |=0 /=1 {=2 ^=3 #=4 [=5 "=7 >=8 <=9 $=6
+|/*{^ = 01 mul 23 = 23 vs #[^/ 4531 diff 4508 mul no; 10 mul 32 = 320 vs rev /^[# 1354 diff 1034 mul no
+ rejected none ^"*<> = 37 mul 98 rev 73 mul 89 = 6497 rev 7946 = final answer: "<#$
+
+Trying |=6 /=0 {=1 ^=2 #=4 [=5 "=7 >=8 <=9 $=3
+|/*{^ = 60 mul 12 = 720 vs #[^/ 4520 diff 3800 mul no; 06 mul 21 = 126 vs rev /^[# 0254 diff 128 mul no
+ rejected none ^"*<> = 27 mul 98 rev 72 mul

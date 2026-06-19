@@ -1,0 +1,540 @@
+>|:^< = })?
+^\!\< = >'
+)>/|' = )|?'
+<<!^\ = !'<
+}':}] = ]}
+The question is ^':'}
+
+Operator symbols :!/
+Question operator symbol :
+Question operator in examples
+
+Digit symbols >|^<})?\']
+
+Checking concatenation
+left >| op : right ^< expected >|^< versus })? mismatch
+left ^\ op ! right \< expected ^\\< versus >' mismatch
+left )> op / right |' expected )>|' versus )|?' mismatch
+left << op ! right ^\ expected <<^\ versus !'< mismatch
+left }' op : right }] expected }'}] versus ]} mismatch
+
+Question operator : is not concatenation
+
+Checking reverse concatenation
+left >| op : right ^< expected ^<>| versus })? mismatch
+left ^\ op ! right \< expected \<^\ versus >' mismatch
+left )> op / right |' expected |')> versus )|?' mismatch
+left << op ! right ^\ expected ^\<< versus !'< mismatch
+left }' op : right }] expected }]}' versus ]} mismatch
+
+Question operator : is not reverse concatenation
+
+Filtering out the concatenation operations
+>|:^< = })?
+^\!\< = >'
+)>/|' = )|?'
+<<!^\ = !'<
+}':}] = ]}
+
+Assigning mul
+ left >| op : right ^< = })? length 3
+ left ^\ op ! right \< = >' length 2
+ left )> op / right |' = )|?' length 4 assume mul
+ left << op ! right ^\ = !'< length 3
+ left }' op : right }] = ]} length 2
+
+Assigning sub
+ left >| op : right ^< = })? length 3
+ left ^\ op ! right \< = >' length 2
+ left )> op / right |' = )|?' assumed mul
+ left << op ! right ^\ = !'< op in output assume sub
+ left }' op : right }] = ]} length 2
+
+Assigning add
+ left >| op : right ^< = })? length 3 assume add
+ left ^\ op ! right \< = >' assumed sub
+ left )> op / right |' = )|?' assumed mul
+ left << op ! right ^\ = !'< assumed sub
+ left }' op : right }] = ]} assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left >| op : right ^< = })? assumed add
+ left ^\ op ! right \< = >' assumed sub
+ left )> op / right |' = )|?' assumed mul
+ left << op ! right ^\ = !'< assumed sub
+ left }' op : right }] = ]} assumed add
+ left ^' op : right '} the question, assumed add
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=7 |=3 ^=8 <=9 }=1 )=2 ?=0 \=6 '=5 ]=4
+>|:^< = 73 add 89 = 162 vs })? 120 diff 42 add no; 37 add 98 = 135 vs rev ?)} 021 diff 114 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: |>
+
+Trying >=9 |=7 ^=3 <=8 }=1 )=2 ?=0 \=6 '=5 ]=4
+>|:^< = 97 add 38 = 135 vs })? 120 diff 15 add no; 79 add 83 = 162 vs rev ?)} 021 diff 141 add no
+ rejected none ^':'} = 35 add 51 rev 53 add 15 = 68 rev 86 = final answer: <\
+
+Trying >=8 |=4 ^=5 <=3 }=1 )=2 ?=0 \=6 '=9 ]=7
+>|:^< = 84 add 53 = 137 vs })? 120 diff 17 add no; 48 add 35 = 83 vs rev ?)} 021 diff 62 add no
+ rejected none ^':'} = 59 add 91 rev 95 add 19 = 114 rev 411 = final answer: |}}
+
+Trying >=5 |=6 ^=7 <=4 }=1 )=2 ?=9 \=8 '=3 ]=0
+>|:^< = 56 add 74 = 130 vs })? 129 diff 1 add ok - 1; 65 add 47 = 112 vs rev ?)} 921 diff 809 add no
+^\!\< = 78 sub 84 = 6 vs >' 53 diff 47 sub no; 87 sub 48 = 39 vs rev '> 35 diff 4 sub no
+ rejected forward ^':'} = 73 add 31 = 104 = final answer: }]<
+
+Trying >=4 |=2 ^=6 <=5 }=1 )=8 ?=3 \=9 '=0 ]=7
+>|:^< = 42 add 65 = 107 vs })? 183 diff 76 add no; 24 add 56 = 80 vs rev ?)} 381 diff 301 add no
+ rejected none ^':'} = 60 add 01 rev 06 add 10 = 16 rev 61 = final answer: ^}
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=6 |=9 ^=8 <=7 }=1 )=2 ?=4 \=3 '=5 ]=0
+>|:^< = 69 add 87 = 156 vs })? 124 diff 32 add no; 96 add 78 = 174 vs rev ?)} 421 diff 247 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: \<
+
+Trying >=7 |=3 ^=4 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 73 add 48 = 121 vs })? 120 diff 1 add ok - 1; 37 add 84 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 46 sub 68 = 22 vs >' 75 diff 53 sub no; 64 sub 86 = 22 vs rev '> 57 diff 35 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ]\
+
+Trying >=2 |=4 ^=0 <=9 }=1 )=3 ?=8 \=6 '=5 ]=7
+>|:^< = 24 add 09 = 33 vs })? 138 diff 105 add no; 42 add 90 = 132 vs rev ?)} 831 diff 699 add no
+ rejected none ^':'} = 05 add 51 rev 50 add 15 = 65 rev 56 = final answer: '\
+
+Trying >=9 |=6 ^=3 <=4 }=1 )=2 ?=0 \=8 '=5 ]=7
+>|:^< = 96 add 34 = 130 vs })? 120 diff 10 add no; 69 add 43 = 112 vs rev ?)} 021 diff 91 add no
+ rejected none ^':'} = 35 add 51 rev 53 add 15 = 68 rev 86 = final answer: \|
+
+Trying >=4 |=5 ^=6 <=3 }=1 )=2 ?=0 \=9 '=8 ]=7
+>|:^< = 45 add 63 = 108 vs })? 120 diff 12 add no; 54 add 36 = 90 vs rev ?)} 021 diff 69 add no
+ rejected none ^':'} = 68 add 81 rev 86 add 18 = 104 rev 401 = final answer: >?}
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=5 |=7 ^=8 <=6 }=1 )=2 ?=9 \=0 '=3 ]=4
+>|:^< = 57 add 86 = 143 vs })? 129 diff 14 add no; 75 add 68 = 143 vs rev ?)} 921 diff 778 add no
+ rejected none ^':'} = 83 add 31 rev 38 add 13 = 51 rev 15 = final answer: }>
+
+Trying >=7 |=3 ^=4 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 73 add 48 = 121 vs })? 120 diff 1 add ok - 1; 37 add 84 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 46 sub 68 = 22 vs >' 75 diff 53 sub no; 64 sub 86 = 22 vs rev '> 57 diff 35 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ]\
+
+Trying >=2 |=4 ^=0 <=9 }=1 )=3 ?=8 \=6 '=5 ]=7
+>|:^< = 24 add 09 = 33 vs })? 138 diff 105 add no; 42 add 90 = 132 vs rev ?)} 831 diff 699 add no
+ rejected none ^':'} = 05 add 51 rev 50 add 15 = 65 rev 56 = final answer: '\
+
+Trying >=8 |=9 ^=3 <=7 }=1 )=2 ?=0 \=6 '=5 ]=4
+>|:^< = 89 add 37 = 126 vs })? 120 diff 6 add no; 98 add 73 = 171 vs rev ?)} 021 diff 150 add no
+ rejected none ^':'} = 35 add 51 rev 53 add 15 = 68 rev 86 = final answer: >\
+
+Trying >=4 |=6 ^=7 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 46 add 73 = 119 vs })? 120 diff 1 add ok + 1; 64 add 37 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 78 sub 83 = 5 vs >' 45 diff 40 sub no; 87 sub 38 = 49 vs rev '> 54 diff 5 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })|
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=6 |=5 ^=8 <=4 }=1 )=2 ?=0 \=3 '=9 ]=7
+>|:^< = 65 add 84 = 149 vs })? 120 diff 29 add no; 56 add 48 = 104 vs rev ?)} 021 diff 83 add no
+ rejected none ^':'} = 89 add 91 rev 98 add 19 = 117 rev 711 = final answer: ]}}
+
+Trying >=7 |=3 ^=4 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 73 add 48 = 121 vs })? 120 diff 1 add ok - 1; 37 add 84 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 46 sub 68 = 22 vs >' 75 diff 53 sub no; 64 sub 86 = 22 vs rev '> 57 diff 35 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ]\
+
+Trying >=2 |=4 ^=0 <=9 }=1 )=3 ?=8 \=6 '=5 ]=7
+>|:^< = 24 add 09 = 33 vs })? 138 diff 105 add no; 42 add 90 = 132 vs rev ?)} 831 diff 699 add no
+ rejected none ^':'} = 05 add 51 rev 50 add 15 = 65 rev 56 = final answer: '\
+
+Trying >=8 |=9 ^=3 <=6 }=1 )=2 ?=4 \=0 '=5 ]=7
+>|:^< = 89 add 36 = 125 vs })? 124 diff 1 add ok - 1; 98 add 63 = 161 vs rev ?)} 421 diff 260 add no
+^\!\< = 30 sub 06 = 24 vs >' 85 diff 61 sub no; 03 sub 60 = 57 vs rev '> 58 diff 1 sub ok + 1
+ rejected forward ^':'} = 35 add 51 = 86 = final answer: ><
+
+Trying >=5 |=7 ^=6 <=2 }=1 )=0 ?=8 \=9 '=3 ]=4
+>|:^< = 57 add 62 = 119 vs })? 108 diff 11 add no; 75 add 26 = 101 vs rev ?)} 801 diff 700 add no
+ rejected none ^':'} = 63 add 31 rev 36 add 13 = 49 rev 94 = final answer: \]
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=4 |=6 ^=7 <=5 }=1 )=2 ?=9 \=8 '=0 ]=3
+>|:^< = 46 add 75 = 121 vs })? 129 diff 8 add no; 64 add 57 = 121 vs rev ?)} 921 diff 800 add no
+ rejected none ^':'} = 70 add 01 rev 07 add 10 = 17 rev 71 = final answer: ^}
+
+Trying >=6 |=2 ^=4 <=8 }=1 )=0 ?=9 \=3 '=5 ]=7
+>|:^< = 62 add 48 = 110 vs })? 109 diff 1 add ok - 1; 26 add 84 = 110 vs rev ?)} 901 diff 791 add no
+^\!\< = 43 sub 38 = 5 vs >' 65 diff 60 sub no; 34 sub 83 = 49 vs rev '> 56 diff 7 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ?>
+
+Trying >=7 |=3 ^=8 <=9 }=1 )=2 ?=0 \=6 '=5 ]=4
+>|:^< = 73 add 89 = 162 vs })? 120 diff 42 add no; 37 add 98 = 135 vs rev ?)} 021 diff 114 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: |>
+
+Trying >=8 |=9 ^=3 <=7 }=1 )=2 ?=0 \=6 '=5 ]=4
+>|:^< = 89 add 37 = 126 vs })? 120 diff 6 add no; 98 add 73 = 171 vs rev ?)} 021 diff 150 add no
+ rejected none ^':'} = 35 add 51 rev 53 add 15 = 68 rev 86 = final answer: >\
+
+Trying >=5 |=7 ^=6 <=4 }=1 )=2 ?=8 \=9 '=3 ]=0
+>|:^< = 57 add 64 = 121 vs })? 128 diff 7 add no; 75 add 46 = 121 vs rev ?)} 821 diff 700 add no
+ rejected none ^':'} = 63 add 31 rev 36 add 13 = 49 rev 94 = final answer: \<
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=4 |=6 ^=7 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 46 add 73 = 119 vs })? 120 diff 1 add ok + 1; 64 add 37 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 78 sub 83 = 5 vs >' 45 diff 40 sub no; 87 sub 38 = 49 vs rev '> 54 diff 5 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })|
+
+Trying >=6 |=5 ^=4 <=2 }=1 )=0 ?=7 \=3 '=8 ]=9
+>|:^< = 65 add 42 = 107 vs })? 107 diff 0 add ok; 56 add 24 = 80 vs rev ?)} 701 diff 621 add no
+^\!\< = 43 sub 32 = 11 vs >' 68 diff 57 sub no; 34 sub 23 = 11 vs rev '> 86 diff 75 sub no
+ rejected forward ^':'} = 48 add 81 = 129 = final answer: }<]
+
+Trying >=7 |=3 ^=8 <=9 }=1 )=2 ?=0 \=6 '=5 ]=4
+>|:^< = 73 add 89 = 162 vs })? 120 diff 42 add no; 37 add 98 = 135 vs rev ?)} 021 diff 114 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: |>
+
+Trying >=8 |=9 ^=3 <=7 }=1 )=2 ?=0 \=6 '=5 ]=4
+>|:^< = 89 add 37 = 126 vs })? 120 diff 6 add no; 98 add 73 = 171 vs rev ?)} 021 diff 150 add no
+ rejected none ^':'} = 35 add 51 rev 53 add 15 = 68 rev 86 = final answer: >\
+
+Trying >=9 |=4 ^=2 <=8 }=1 )=3 ?=0 \=6 '=5 ]=7
+>|:^< = 94 add 28 = 122 vs })? 130 diff 8 add no; 49 add 82 = 131 vs rev ?)} 031 diff 100 add no
+ rejected none ^':'} = 25 add 51 rev 52 add 15 = 67 rev 76 = final answer: ]\
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=2 |=7 ^=0 <=6 }=1 )=3 ?=8 \=9 '=5 ]=4
+>|:^< = 27 add 06 = 33 vs })? 138 diff 105 add no; 72 add 60 = 132 vs rev ?)} 831 diff 699 add no
+ rejected none ^':'} = 05 add 51 rev 50 add 15 = 65 rev 56 = final answer: '<
+
+Trying >=4 |=6 ^=7 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 46 add 73 = 119 vs })? 120 diff 1 add ok + 1; 64 add 37 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 78 sub 83 = 5 vs >' 45 diff 40 sub no; 87 sub 38 = 49 vs rev '> 54 diff 5 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })|
+
+Trying >=7 |=3 ^=4 <=9 }=1 )=2 ?=0 \=6 '=5 ]=8
+>|:^< = 73 add 49 = 122 vs })? 120 diff 2 add no; 37 add 94 = 131 vs rev ?)} 021 diff 110 add no
+ rejected none ^':'} = 45 add 51 rev 54 add 15 = 69 rev 96 = final answer: <\
+
+Trying >=8 |=5 ^=1 <=7 }=9 )=2 ?=0 \=6 '=3 ]=4
+>|:^< = 85 add 17 = 102 vs })? 920 diff 818 add no; 58 add 71 = 129 vs rev ?)} 029 diff 100 add no
+ rejected none ^':'} = 13 add 39 rev 31 add 93 = 124 rev 421 = final answer: ])^
+
+Trying >=9 |=0 ^=3 <=8 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 90 add 38 = 128 vs })? 127 diff 1 add ok - 1; 09 add 83 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 36 sub 68 = 32 vs >' 95 diff 63 sub no; 63 sub 86 = 23 vs rev '> 59 diff 36 sub no
+ rejected forward ^':'} = 35 add 51 = 86 = final answer: <\
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=6 |=7 ^=8 <=4 }=1 )=2 ?=9 \=3 '=5 ]=0
+>|:^< = 67 add 84 = 151 vs })? 129 diff 22 add no; 76 add 48 = 124 vs rev ?)} 921 diff 797 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: \|
+
+Trying >=4 |=6 ^=7 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 46 add 73 = 119 vs })? 120 diff 1 add ok + 1; 64 add 37 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 78 sub 83 = 5 vs >' 45 diff 40 sub no; 87 sub 38 = 49 vs rev '> 54 diff 5 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })|
+
+Trying >=7 |=9 ^=4 <=6 }=1 )=2 ?=8 \=0 '=5 ]=3
+>|:^< = 79 add 46 = 125 vs })? 128 diff 3 add no; 97 add 64 = 161 vs rev ?)} 821 diff 660 add no
+ rejected none ^':'} = 45 add 51 rev 54 add 15 = 69 rev 96 = final answer: |<
+
+Trying >=5 |=3 ^=6 <=7 }=1 )=2 ?=0 \=9 '=8 ]=4
+>|:^< = 53 add 67 = 120 vs })? 120 diff 0 add ok; 35 add 76 = 111 vs rev ?)} 021 diff 90 add no
+^\!\< = 69 sub 97 = 28 vs >' 58 diff 30 sub no; 96 sub 79 = 17 vs rev '> 85 diff 68 sub no
+ rejected forward ^':'} = 68 add 81 = 149 = final answer: }]\
+
+Trying >=9 |=0 ^=3 <=8 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 90 add 38 = 128 vs })? 127 diff 1 add ok - 1; 09 add 83 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 36 sub 68 = 32 vs >' 95 diff 63 sub no; 63 sub 86 = 23 vs rev '> 59 diff 36 sub no
+ rejected forward ^':'} = 35 add 51 = 86 = final answer: <\
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=2 |=7 ^=8 <=9 }=1 )=3 ?=0 \=6 '=5 ]=4
+>|:^< = 27 add 89 = 116 vs })? 130 diff 14 add no; 72 add 98 = 170 vs rev ?)} 031 diff 139 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: )|
+
+Trying >=4 |=6 ^=7 <=3 }=1 )=2 ?=9 \=8 '=5 ]=0
+>|:^< = 46 add 73 = 119 vs })? 129 diff 10 add no; 64 add 37 = 101 vs rev ?)} 921 diff 820 add no
+ rejected none ^':'} = 75 add 51 rev 57 add 15 = 72 rev 27 = final answer: )^
+
+Trying >=7 |=9 ^=4 <=6 }=1 )=2 ?=8 \=0 '=5 ]=3
+>|:^< = 79 add 46 = 125 vs })? 128 diff 3 add no; 97 add 64 = 161 vs rev ?)} 821 diff 660 add no
+ rejected none ^':'} = 45 add 51 rev 54 add 15 = 69 rev 96 = final answer: |<
+
+Trying >=5 |=4 ^=6 <=7 }=1 )=2 ?=8 \=9 '=3 ]=0
+>|:^< = 54 add 67 = 121 vs })? 128 diff 7 add no; 45 add 76 = 121 vs rev ?)} 821 diff 700 add no
+ rejected none ^':'} = 63 add 31 rev 36 add 13 = 49 rev 94 = final answer: \|
+
+Trying >=9 |=0 ^=3 <=5 }=1 )=2 ?=7 \=6 '=8 ]=4
+>|:^< = 90 add 35 = 125 vs })? 127 diff 2 add no; 09 add 53 = 62 vs rev ?)} 721 diff 659 add no
+ rejected none ^':'} = 38 add 81 rev 83 add 18 = 101 rev 101 = final answer: }|}
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=2 |=7 ^=8 <=9 }=1 )=3 ?=0 \=6 '=5 ]=4
+>|:^< = 27 add 89 = 116 vs })? 130 diff 14 add no; 72 add 98 = 170 vs rev ?)} 031 diff 139 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: )|
+
+Trying >=4 |=3 ^=7 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 43 add 78 = 121 vs })? 120 diff 1 add ok - 1; 34 add 87 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 76 sub 68 = 8 vs >' 45 diff 37 sub no; 67 sub 86 = 19 vs rev '> 54 diff 35 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })\
+
+Trying >=7 |=6 ^=4 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 76 add 43 = 119 vs })? 120 diff 1 add ok + 1; 67 add 34 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 48 sub 83 = 35 vs >' 75 diff 40 sub no; 84 sub 38 = 46 vs rev '> 57 diff 11 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ]|
+
+Trying >=6 |=9 ^=5 <=7 }=1 )=2 ?=0 \=3 '=8 ]=4
+>|:^< = 69 add 57 = 126 vs })? 120 diff 6 add no; 96 add 75 = 171 vs rev ?)} 021 diff 150 add no
+ rejected none ^':'} = 58 add 81 rev 85 add 18 = 103 rev 301 = final answer: \?}
+
+Trying >=9 |=4 ^=3 <=6 }=1 )=2 ?=8 \=0 '=5 ]=7
+>|:^< = 94 add 36 = 130 vs })? 128 diff 2 add no; 49 add 63 = 112 vs rev ?)} 821 diff 709 add no
+ rejected none ^':'} = 35 add 51 rev 53 add 15 = 68 rev 86 = final answer: ?<
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=2 |=7 ^=8 <=9 }=1 )=3 ?=0 \=6 '=5 ]=4
+>|:^< = 27 add 89 = 116 vs })? 130 diff 14 add no; 72 add 98 = 170 vs rev ?)} 031 diff 139 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: )|
+
+Trying >=4 |=3 ^=7 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 43 add 78 = 121 vs })? 120 diff 1 add ok - 1; 34 add 87 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 76 sub 68 = 8 vs >' 45 diff 37 sub no; 67 sub 86 = 19 vs rev '> 54 diff 35 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })\
+
+Trying >=7 |=6 ^=4 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 76 add 43 = 119 vs })? 120 diff 1 add ok + 1; 67 add 34 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 48 sub 83 = 35 vs >' 75 diff 40 sub no; 84 sub 38 = 46 vs rev '> 57 diff 11 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ]|
+
+Trying >=8 |=5 ^=1 <=7 }=9 )=2 ?=0 \=6 '=3 ]=4
+>|:^< = 85 add 17 = 102 vs })? 920 diff 818 add no; 58 add 71 = 129 vs rev ?)} 029 diff 100 add no
+ rejected none ^':'} = 13 add 39 rev 31 add 93 = 124 rev 421 = final answer: ])^
+
+Trying >=9 |=4 ^=3 <=5 }=1 )=2 ?=8 \=6 '=0 ]=7
+>|:^< = 94 add 35 = 129 vs })? 128 diff 1 add ok - 1; 49 add 53 = 102 vs rev ?)} 821 diff 719 add no
+^\!\< = 36 sub 65 = 29 vs >' 90 diff 61 sub no; 63 sub 56 = 7 vs rev '> 09 diff 2 sub no
+ rejected forward ^':'} = 30 add 01 = 31 = final answer: ^}
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=2 |=7 ^=8 <=9 }=1 )=3 ?=0 \=6 '=5 ]=4
+>|:^< = 27 add 89 = 116 vs })? 130 diff 14 add no; 72 add 98 = 170 vs rev ?)} 031 diff 139 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: )|
+
+Trying >=4 |=3 ^=7 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 43 add 78 = 121 vs })? 120 diff 1 add ok - 1; 34 add 87 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 76 sub 68 = 8 vs >' 45 diff 37 sub no; 67 sub 86 = 19 vs rev '> 54 diff 35 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })\
+
+Trying >=7 |=6 ^=4 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 76 add 43 = 119 vs })? 120 diff 1 add ok + 1; 67 add 34 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 48 sub 83 = 35 vs >' 75 diff 40 sub no; 84 sub 38 = 46 vs rev '> 57 diff 11 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ]|
+
+Trying >=8 |=5 ^=1 <=7 }=9 )=2 ?=0 \=6 '=3 ]=4
+>|:^< = 85 add 17 = 102 vs })? 920 diff 818 add no; 58 add 71 = 129 vs rev ?)} 029 diff 100 add no
+ rejected none ^':'} = 13 add 39 rev 31 add 93 = 124 rev 421 = final answer: ])^
+
+Trying >=9 |=4 ^=3 <=5 }=1 )=2 ?=8 \=6 '=0 ]=7
+>|:^< = 94 add 35 = 129 vs })? 128 diff 1 add ok - 1; 49 add 53 = 102 vs rev ?)} 821 diff 719 add no
+^\!\< = 36 sub 65 = 29 vs >' 90 diff 61 sub no; 63 sub 56 = 7 vs rev '> 09 diff 2 sub no
+ rejected forward ^':'} = 30 add 01 = 31 = final answer: ^}
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=5 |=7 ^=8 <=9 }=1 )=2 ?=0 \=6 '=3 ]=4
+>|:^< = 57 add 89 = 146 vs })? 120 diff 26 add no; 75 add 98 = 173 vs rev ?)} 021 diff 152 add no
+ rejected none ^':'} = 83 add 31 rev 38 add 13 = 51 rev 15 = final answer: }>
+
+Trying >=4 |=3 ^=7 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 43 add 78 = 121 vs })? 120 diff 1 add ok - 1; 34 add 87 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 76 sub 68 = 8 vs >' 45 diff 37 sub no; 67 sub 86 = 19 vs rev '> 54 diff 35 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })\
+
+Trying >=7 |=6 ^=4 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 76 add 43 = 119 vs })? 120 diff 1 add ok + 1; 67 add 34 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 48 sub 83 = 35 vs >' 75 diff 40 sub no; 84 sub 38 = 46 vs rev '> 57 diff 11 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ]|
+
+Trying >=6 |=9 ^=5 <=4 }=1 )=2 ?=0 \=3 '=8 ]=7
+>|:^< = 69 add 54 = 123 vs })? 120 diff 3 add no; 96 add 45 = 141 vs rev ?)} 021 diff 120 add no
+ rejected none ^':'} = 58 add 81 rev 85 add 18 = 103 rev 301 = final answer: \?}
+
+Trying >=9 |=4 ^=3 <=5 }=1 )=2 ?=8 \=6 '=0 ]=7
+>|:^< = 94 add 35 = 129 vs })? 128 diff 1 add ok - 1; 49 add 53 = 102 vs rev ?)} 821 diff 719 add no
+^\!\< = 36 sub 65 = 29 vs >' 90 diff 61 sub no; 63 sub 56 = 7 vs rev '> 09 diff 2 sub no
+ rejected forward ^':'} = 30 add 01 = 31 = final answer: ^}
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=2 |=7 ^=8 <=9 }=1 )=3 ?=0 \=6 '=5 ]=4
+>|:^< = 27 add 89 = 116 vs })? 130 diff 14 add no; 72 add 98 = 170 vs rev ?)} 031 diff 139 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: )|
+
+Trying >=4 |=3 ^=7 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 43 add 78 = 121 vs })? 120 diff 1 add ok - 1; 34 add 87 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 76 sub 68 = 8 vs >' 45 diff 37 sub no; 67 sub 86 = 19 vs rev '> 54 diff 35 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })\
+
+Trying >=7 |=6 ^=4 <=3 }=1 )=2 ?=0 \=8 '=5 ]=9
+>|:^< = 76 add 43 = 119 vs })? 120 diff 1 add ok + 1; 67 add 34 = 101 vs rev ?)} 021 diff 80 add no
+^\!\< = 48 sub 83 = 35 vs >' 75 diff 40 sub no; 84 sub 38 = 46 vs rev '> 57 diff 11 sub no
+ rejected forward ^':'} = 45 add 51 = 96 = final answer: ]|
+
+Trying >=8 |=5 ^=1 <=7 }=9 )=2 ?=0 \=6 '=3 ]=4
+>|:^< = 85 add 17 = 102 vs })? 920 diff 818 add no; 58 add 71 = 129 vs rev ?)} 029 diff 100 add no
+ rejected none ^':'} = 13 add 39 rev 31 add 93 = 124 rev 421 = final answer: ])^
+
+Trying >=9 |=4 ^=3 <=6 }=1 )=2 ?=8 \=0 '=5 ]=7
+>|:^< = 94 add 36 = 130 vs })? 128 diff 2 add no; 49 add 63 = 112 vs rev ?)} 821 diff 709 add no
+ rejected none ^':'} = 35 add 51 rev 53 add 15 = 68 rev 86 = final answer: ?<
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=5 |=7 ^=8 <=9 }=1 )=2 ?=0 \=6 '=3 ]=4
+>|:^< = 57 add 89 = 146 vs })? 120 diff 26 add no; 75 add 98 = 173 vs rev ?)} 021 diff 152 add no
+ rejected none ^':'} = 83 add 31 rev 38 add 13 = 51 rev 15 = final answer: }>
+
+Trying >=4 |=3 ^=7 <=8 }=1 )=2 ?=0 \=6 '=5 ]=9
+>|:^< = 43 add 78 = 121 vs })? 120 diff 1 add ok - 1; 34 add 87 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 76 sub 68 = 8 vs >' 45 diff 37 sub no; 67 sub 86 = 19 vs rev '> 54 diff 35 sub no
+ rejected forward ^':'} = 75 add 51 = 126 = final answer: })\
+
+Trying >=7 |=2 ^=5 <=3 }=1 )=8 ?=0 \=6 '=9 ]=4
+>|:^< = 72 add 53 = 125 vs })? 180 diff 55 add no; 27 add 35 = 62 vs rev ?)} 081 diff 19 add no
+ rejected none ^':'} = 59 add 91 rev 95 add 19 = 114 rev 411 = final answer: ]}}
+
+Trying >=6 |=5 ^=4 <=7 }=1 )=2 ?=9 \=3 '=8 ]=0
+>|:^< = 65 add 47 = 112 vs })? 129 diff 17 add no; 56 add 74 = 130 vs rev ?)} 921 diff 791 add no
+ rejected none ^':'} = 48 add 81 rev 84 add 18 = 102 rev 201 = final answer: )]}
+
+Trying >=9 |=4 ^=3 <=5 }=1 )=2 ?=8 \=6 '=0 ]=7
+>|:^< = 94 add 35 = 129 vs })? 128 diff 1 add ok - 1; 49 add 53 = 102 vs rev ?)} 821 diff 719 add no
+^\!\< = 36 sub 65 = 29 vs >' 90 diff 61 sub no; 63 sub 56 = 7 vs rev '> 09 diff 2 sub no
+ rejected forward ^':'} = 30 add 01 = 31 = final answer: ^}
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=5 |=7 ^=6 <=4 }=1 )=2 ?=0 \=9 '=3 ]=8
+>|:^< = 57 add 64 = 121 vs })? 120 diff 1 add ok - 1; 75 add 46 = 121 vs rev ?)} 021 diff 100 add no
+^\!\< = 69 sub 94 = 25 vs >' 53 diff 28 sub no; 96 sub 49 = 47 vs rev '> 35 diff 12 sub no
+ rejected forward ^':'} = 63 add 31 = 94 = final answer: \<
+
+Trying >=4 |=3 ^=8 <=9 }=1 )=2 ?=0 \=6 '=5 ]=7
+>|:^< = 43 add 89 = 132 vs })? 120 diff 12 add no; 34 add 98 = 132 vs rev ?)} 021 diff 111 add no
+ rejected none ^':'} = 85 add 51 rev 58 add 15 = 73 rev 37 = final answer: |]
+
+Trying >=7 |=9 ^=1 <=3 }=8 )=2 ?=0 \=6 '=5 ]=4
+>|:^< = 79 add 13 = 92 vs })? 820 diff 728 add no; 97 add 31 = 128 vs rev ?)} 028 diff 100 add no
+ rejected none ^':'} = 15 add 58 rev 51 add 85 = 136 rev 631 = final answer: \<^
+
+Trying >=8 |=2 ^=4 <=7 }=1 )=3 ?=9 \=6 '=5 ]=0
+>|:^< = 82 add 47 = 129 vs })? 139 diff 10 add no; 28 add 74 = 102 vs rev ?)} 931 diff 829 add no
+ rejected none ^':'} = 45 add 51 rev 54 add 15 = 69 rev 96 = final answer: ?\
+
+Trying >=9 |=0 ^=3 <=8 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 90 add 38 = 128 vs })? 127 diff 1 add ok - 1; 09 add 83 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 36 sub 68 = 32 vs >' 95 diff 63 sub no; 63 sub 86 = 23 vs rev '> 59 diff 36 sub no
+ rejected forward ^':'} = 35 add 51 = 86 = final answer: <\
+
+Trying >=3 |=8 ^=9 <=0 }=1 )=2 ?=7 \=6 '=5 ]=4
+>|:^< = 38 add 90 = 128 vs })? 127 diff 1 add ok - 1; 83 add 09 = 92 vs rev ?)} 721 diff 629 add no
+^\!\< = 96 sub 60 = 36 vs >' 35 diff 1 sub ok - 1; 69 sub 06 = 63 vs rev '> 53 diff 10 sub no
+)>/|' = 23 mul 85 = 1955 vs )|?' 2875 diff 920 mul no; 32 mul 58 = 1856 vs rev '?|) 5782 diff 3926 mul no
+ rejected forward ^':'} = 95 add 51 = 146 = final answer: }]\
+
+Trying >=2 |=7 ^=0 <=6 }=1 )=3 ?=8 \=9 '=5 ]=4
+>|:^< = 27 add 06 = 33 vs })? 138 diff 105 add no; 72 add 60 = 132 vs rev ?)} 831 diff 699 add no
+ rejected none ^':'} = 05 add 51 rev 50 add 15 = 65 rev 56 = final answer: '<
+
+Trying >=4 |=3 ^=7 <=9 }=1 )=2 ?=0 \=6 '=5 ]=8
+>|:^< = 43 add 79 = 122 vs })? 120 diff 2 add no; 34 add 97 = 131 vs rev ?)} 021 diff 110 add no
+ rejected none ^':'} = 75 add 51 rev 57 add 15 = 72 rev 27 = final answer: )^
+
+Trying >=7 |=6 ^=5 <=3 }=1 )=2 ?=0 \=8 '=9 ]=4
+>|:^< = 76 add 53 = 129 vs })? 120 diff 9 add no; 67 add 35 = 102 vs rev ?)} 021 diff 81 add no
+ rejected none ^':'} = 59 add 91 rev 95 add 19 = 114 rev 411 = final answer: ]}}
+
+Trying >=6 |=2 ^=8 <=5 }=1 )=4 ?=0 \=7 '=3 ]=9
+>|:^< = 62 add 85 = 147 vs })? 140 diff 7 add no; 26 add 58 = 84 vs rev ?)} 041 diff 43 add no
+ rejected none ^':'} = 83 add 31 rev 38 add 13 = 51 rev 15 = final answer: }<
+
+Trying >=8 |=0 ^=6 <=7 }=1 )=4 ?=3 \=9 '=2 ]=5
+>|:^< = 80 add 67 = 147 vs })? 143 diff 4 add no; 08 add 76 = 84 vs rev ?)} 341 diff 257 add no
+ rejected none ^':'} = 62 add 21 rev 26 add 12 = 38 rev 83 = final answer: >?

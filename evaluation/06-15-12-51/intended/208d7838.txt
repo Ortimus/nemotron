@@ -1,0 +1,75 @@
+#}+{% = }$$
+%#*%[ = &:[[
+}%-&[ = [$
+<&+:$ = :#
+}%*&# = }[$%
+The question is [&-<>
+
+Operator symbols +*-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols #}{%$[&:<>
+
+Checking concatenation
+left #} op + right {% expected #}{% versus }$$ mismatch
+left %# op * right %[ expected %#%[ versus &:[[ mismatch
+left }% op - right &[ expected }%&[ versus [$ mismatch
+left <& op + right :$ expected <&:$ versus :# mismatch
+left }% op * right &# expected }%&# versus }[$% mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left #} op + right {% expected {%#} versus }$$ mismatch
+left %# op * right %[ expected %[%# versus &:[[ mismatch
+left }% op - right &[ expected &[}% versus [$ mismatch
+left <& op + right :$ expected :$<& versus :# mismatch
+left }% op * right &# expected &#}% versus }[$% mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+#}+{% = }$$
+%#*%[ = &:[[
+}%-&[ = [$
+<&+:$ = :#
+}%*&# = }[$%
+
+Assigning mul
+ left #} op + right {% = }$$ length 3
+ left %# op * right %[ = &:[[ length 4 assume mul
+ left }% op - right &[ = [$ length 2
+ left <& op + right :$ = :# length 2
+ left }% op * right &# = }[$% assumed mul
+
+Assigning sub
+ left #} op + right {% = }$$ length 3
+ left %# op * right %[ = &:[[ assumed mul
+ left }% op - right &[ = [$ length 2
+ left <& op + right :$ = :# length 2
+ left }% op * right &# = }[$% assumed mul
+
+Assigning add
+ left #} op + right {% = }$$ length 3 assume add
+ left %# op * right %[ = &:[[ assumed mul
+ left }% op - right &[ = [$ length 2
+ left <& op + right :$ = :# assumed add
+ left }% op * right &# = }[$% assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left #} op + right {% = }$$ assumed add
+ left %# op * right %[ = &:[[ assumed mul
+ left }% op - right &[ = [$ length 2 assume sub
+ left <& op + right :$ = :# assumed add
+ left }% op * right &# = }[$% assumed mul
+ left [& op - right <> the question, assumed sub
+
+Trying #=9 }=3 {=4 %=7 $=1 [=5 &=8 :=2 <=0 >=6
+#}+{% = 93 add 47 = 140 vs }$$ 311 diff 171 add no; 39 add 74 = 113 vs rev $$} 113 diff 0 add ok
+%#*%[ = 79 mul 75 = 5925 vs &:[[ 8255 diff 2330 mul no; 97 mul 57 = 5529 vs rev [[:& 5528 diff 1 mul ok - 1
+}%-&[ = 37 sub 85 = 48 vs [$ 51 diff 3 sub no; 73 sub 58 = 15 vs rev $[ 15 diff 0 sub ok
+<&+:$ = 08 add 21 = 29 vs :# 29 diff 0 add ok; 80 add 12 = 92 vs rev #: 92 diff 0 add ok
+}%*&# = 37 mul 89 = 3293 vs }[$% 3517 diff 224 mul no; 73 mul 98 = 7154 vs rev %$[} 7153 diff 1 mul ok - 1
+ accepted rev [&-<> = 58 sub 06 rev 85 sub 60 = 25 rev 52 = \boxed{[:}

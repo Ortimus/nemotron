@@ -1,0 +1,528 @@
+#}`)$ = }\
+$<(>/ = (^/
+!}&#< = $)^}
+>\`## = )$<
+The question is \$&\\
+
+Operator symbols `(&
+Question operator symbol &
+Question operator in examples
+
+Digit symbols #})$\<>/^!
+
+Checking concatenation
+left #} op ` right )$ expected #})$ versus }\ mismatch
+left $< op ( right >/ expected $<>/ versus (^/ mismatch
+left !} op & right #< expected !}#< versus $)^} mismatch
+left >\ op ` right ## expected >\## versus )$< mismatch
+
+Question operator & is not concatenation
+
+Checking reverse concatenation
+left #} op ` right )$ expected )$#} versus }\ mismatch
+left $< op ( right >/ expected >/$< versus (^/ mismatch
+left !} op & right #< expected #<!} versus $)^} mismatch
+left >\ op ` right ## expected ##>\ versus )$< mismatch
+
+Question operator & is not reverse concatenation
+
+Filtering out the concatenation operations
+#}`)$ = }\
+$<(>/ = (^/
+!}&#< = $)^}
+>\`## = )$<
+
+Assigning mul
+ left #} op ` right )$ = }\ length 2
+ left $< op ( right >/ = (^/ length 3
+ left !} op & right #< = $)^} length 4 assume mul
+ left >\ op ` right ## = )$< length 3
+
+Assigning sub
+ left #} op ` right )$ = }\ length 2
+ left $< op ( right >/ = (^/ op in output assume sub
+ left !} op & right #< = $)^} assumed mul
+ left >\ op ` right ## = )$< length 3
+
+Assigning add
+ left #} op ` right )$ = }\ length 2
+ left $< op ( right >/ = (^/ assumed sub
+ left !} op & right #< = $)^} assumed mul
+ left >\ op ` right ## = )$< length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left #} op ` right )$ = }\ assumed add
+ left $< op ( right >/ = (^/ assumed sub
+ left !} op & right #< = $)^} assumed mul
+ left >\ op ` right ## = )$< assumed add
+ left \$ op & right \\ the question, assumed mul
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -81 diff 19 sub no; 90 sub 17 = 73 vs rev (/^ -18 diff 55 sub no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />!$
+
+Trying #=8 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 82 add 53 = 135 vs }\ 24 diff 111 add no; 28 add 35 = 63 vs rev \} 42 diff 21 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: !<\/
+
+Trying #=6 }=8 )=1 $=5 \=4 <=9 >=7 /=3 ^=0 !=2
+#}`)$ = 68 add 15 = 83 vs }\ 84 diff 1 add ok + 1; 86 add 51 = 137 vs rev \} 48 diff 89 add no
+$<(>/ = 59 sub 73 = 14 vs (^/ -03 diff 11 sub no; 95 sub 37 = 58 vs rev (/^ -30 diff 28 sub no
+ rejected forward \$&\\ = 45 mul 44 = 1980 = final answer: )<}^
+
+Trying #=3 }=6 )=2 $=9 \=4 <=0 >=7 /=1 ^=5 !=8
+#}`)$ = 36 add 29 = 65 vs }\ 64 diff 1 add ok - 1; 63 add 92 = 155 vs rev \} 46 diff 109 add no
+$<(>/ = 90 sub 71 = 19 vs (^/ -51 diff 32 sub no; 09 sub 17 = 8 vs rev (/^ -15 diff 7 sub no
+ rejected forward \$&\\ = 49 mul 44 = 2156 = final answer: )/^}
+
+Trying #=0 }=9 )=8 $=4 \=2 <=5 >=7 /=1 ^=3 !=6
+#}`)$ = 09 add 84 = 93 vs }\ 92 diff 1 add ok - 1; 90 add 48 = 138 vs rev \} 29 diff 109 add no
+$<(>/ = 45 sub 71 = 26 vs (^/ -31 diff 5 sub no; 54 sub 17 = 37 vs rev (/^ -13 diff 24 sub no
+ rejected forward \$&\\ = 24 mul 22 = 528 = final answer: <\)
+
+Trying #=5 }=0 )=6 $=7 \=4 <=9 >=2 /=1 ^=3 !=8
+#}`)$ = 50 add 67 = 117 vs }\ 04 diff 113 add no; 05 add 76 = 81 vs rev \} 40 diff 41 add no
+ rejected none \$&\\ = 47 mul 44 rev 74 mul 44 = 3256 rev 6523 = final answer: )#>^
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=8 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 82 add 53 = 135 vs }\ 24 diff 111 add no; 28 add 35 = 63 vs rev \} 42 diff 21 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: !<\/
+
+Trying #=6 }=8 )=1 $=5 \=4 <=9 >=7 /=3 ^=0 !=2
+#}`)$ = 68 add 15 = 83 vs }\ 84 diff 1 add ok + 1; 86 add 51 = 137 vs rev \} 48 diff 89 add no
+$<(>/ = 59 sub 73 = 14 vs (^/ -03 diff 11 sub no; 95 sub 37 = 58 vs rev (/^ -30 diff 28 sub no
+ rejected forward \$&\\ = 45 mul 44 = 1980 = final answer: )<}^
+
+Trying #=3 }=6 )=2 $=8 \=4 <=9 >=7 /=1 ^=5 !=0
+#}`)$ = 36 add 28 = 64 vs }\ 64 diff 0 add ok; 63 add 82 = 145 vs rev \} 46 diff 99 add no
+$<(>/ = 89 sub 71 = 18 vs (^/ -51 diff 33 sub no; 98 sub 17 = 81 vs rev (/^ -15 diff 66 sub no
+ rejected forward \$&\\ = 48 mul 44 = 2112 = final answer: )//)
+
+Trying #=0 }=3 )=4 $=2 \=5 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 03 add 42 = 45 vs }\ 35 diff 10 add no; 30 add 24 = 54 vs rev \} 53 diff 1 add ok - 1
+$<(>/ = 29 sub 71 = 42 vs (^/ -61 diff 19 sub no; 92 sub 17 = 75 vs rev (/^ -16 diff 59 sub no
+ rejected rev \$&\\ = 52 mul 55 rev 25 mul 55 = 1375 rev 5731 = final answer: \>}/
+
+Trying #=4 }=0 )=6 $=7 \=2 <=9 >=5 /=1 ^=3 !=8
+#}`)$ = 40 add 67 = 107 vs }\ 02 diff 105 add no; 04 add 76 = 80 vs rev \} 20 diff 60 add no
+ rejected none \$&\\ = 27 mul 22 rev 72 mul 22 = 1584 rev 4851 = final answer: #!>/
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=8 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 82 add 53 = 135 vs }\ 24 diff 111 add no; 28 add 35 = 63 vs rev \} 42 diff 21 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: !<\/
+
+Trying #=6 }=8 )=1 $=5 \=4 <=9 >=7 /=3 ^=0 !=2
+#}`)$ = 68 add 15 = 83 vs }\ 84 diff 1 add ok + 1; 86 add 51 = 137 vs rev \} 48 diff 89 add no
+$<(>/ = 59 sub 73 = 14 vs (^/ -03 diff 11 sub no; 95 sub 37 = 58 vs rev (/^ -30 diff 28 sub no
+ rejected forward \$&\\ = 45 mul 44 = 1980 = final answer: )<}^
+
+Trying #=3 }=6 )=2 $=8 \=4 <=9 >=7 /=1 ^=0 !=5
+#}`)$ = 36 add 28 = 64 vs }\ 64 diff 0 add ok; 63 add 82 = 145 vs rev \} 46 diff 99 add no
+$<(>/ = 89 sub 71 = 18 vs (^/ -01 diff 17 sub no; 98 sub 17 = 81 vs rev (/^ -10 diff 71 sub no
+ rejected forward \$&\\ = 48 mul 44 = 2112 = final answer: )//)
+
+Trying #=1 }=9 )=7 $=6 \=4 <=5 >=3 /=2 ^=0 !=8
+#}`)$ = 19 add 76 = 95 vs }\ 94 diff 1 add ok - 1; 91 add 67 = 158 vs rev \} 49 diff 109 add no
+$<(>/ = 65 sub 32 = 33 vs (^/ -02 diff 31 sub no; 56 sub 23 = 33 vs rev (/^ -20 diff 13 sub no
+ rejected forward \$&\\ = 46 mul 44 = 2024 = final answer: /^/\
+
+Trying #=5 }=0 )=6 $=7 \=4 <=9 >=2 /=1 ^=3 !=8
+#}`)$ = 50 add 67 = 117 vs }\ 04 diff 113 add no; 05 add 76 = 81 vs rev \} 40 diff 41 add no
+ rejected none \$&\\ = 47 mul 44 rev 74 mul 44 = 3256 rev 6523 = final answer: )#>^
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -81 diff 19 sub no; 90 sub 17 = 73 vs rev (/^ -18 diff 55 sub no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />!$
+
+Trying #=8 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 82 add 53 = 135 vs }\ 24 diff 111 add no; 28 add 35 = 63 vs rev \} 42 diff 21 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: !<\/
+
+Trying #=6 }=7 )=1 $=2 \=4 <=9 >=5 /=3 ^=0 !=8
+#}`)$ = 67 add 12 = 79 vs }\ 74 diff 5 add no; 76 add 21 = 97 vs rev \} 47 diff 50 add no
+ rejected none \$&\\ = 42 mul 44 rev 24 mul 44 = 1056 rev 6501 = final answer: #>^)
+
+Trying #=3 }=8 )=4 $=5 \=2 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 38 add 45 = 83 vs }\ 82 diff 1 add ok - 1; 83 add 54 = 137 vs rev \} 28 diff 109 add no
+$<(>/ = 59 sub 71 = 12 vs (^/ -01 diff 11 sub no; 95 sub 17 = 78 vs rev (/^ -10 diff 68 sub no
+ rejected forward \$&\\ = 25 mul 22 = 550 = final answer: $$^
+
+Trying #=0 }=9 )=8 $=4 \=2 <=5 >=7 /=1 ^=3 !=6
+#}`)$ = 09 add 84 = 93 vs }\ 92 diff 1 add ok - 1; 90 add 48 = 138 vs rev \} 29 diff 109 add no
+$<(>/ = 45 sub 71 = 26 vs (^/ -31 diff 5 sub no; 54 sub 17 = 37 vs rev (/^ -13 diff 24 sub no
+ rejected forward \$&\\ = 24 mul 22 = 528 = final answer: <\)
+
+Trying #=9 }=6 )=7 $=1 \=4 <=2 >=3 /=0 ^=5 !=8
+#}`)$ = 96 add 71 = 167 vs }\ 64 diff 103 add no; 69 add 17 = 86 vs rev \} 46 diff 40 add no
+ rejected none \$&\\ = 41 mul 44 rev 14 mul 44 = 616 rev 616 = final answer: }$}
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=8 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 82 add 53 = 135 vs }\ 24 diff 111 add no; 28 add 35 = 63 vs rev \} 42 diff 21 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: !<\/
+
+Trying #=4 }=7 )=2 $=8 \=3 <=9 >=5 /=1 ^=0 !=6
+#}`)$ = 47 add 28 = 75 vs }\ 73 diff 2 add no; 74 add 82 = 156 vs rev \} 37 diff 119 add no
+ rejected none \$&\\ = 38 mul 33 rev 83 mul 33 = 2739 rev 9372 = final answer: <\})
+
+Trying #=1 }=8 )=6 $=5 \=4 <=9 >=7 /=2 ^=0 !=3
+#}`)$ = 18 add 65 = 83 vs }\ 84 diff 1 add ok + 1; 81 add 56 = 137 vs rev \} 48 diff 89 add no
+$<(>/ = 59 sub 72 = 13 vs (^/ -02 diff 11 sub no; 95 sub 27 = 68 vs rev (/^ -20 diff 48 sub no
+ rejected forward \$&\\ = 45 mul 44 = 1980 = final answer: #<}^
+
+Trying #=0 }=9 )=8 $=6 \=4 <=5 >=7 /=1 ^=3 !=2
+#}`)$ = 09 add 86 = 95 vs }\ 94 diff 1 add ok - 1; 90 add 68 = 158 vs rev \} 49 diff 109 add no
+$<(>/ = 65 sub 71 = 6 vs (^/ -31 diff 25 sub no; 56 sub 17 = 39 vs rev (/^ -13 diff 26 sub no
+ rejected forward \$&\\ = 46 mul 44 = 2024 = final answer: !#!\
+
+Trying #=5 }=6 )=1 $=4 \=0 <=9 >=7 /=3 ^=8 !=2
+#}`)$ = 56 add 14 = 70 vs }\ 60 diff 10 add no; 65 add 41 = 106 vs rev \} 06 diff 100 add no
+ rejected none \$&\\ = 04 mul 00 rev 40 mul 00 = 0 rev 0 = final answer: \
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=8 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 82 add 53 = 135 vs }\ 24 diff 111 add no; 28 add 35 = 63 vs rev \} 42 diff 21 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: !<\/
+
+Trying #=6 }=7 )=2 $=1 \=4 <=9 >=5 /=0 ^=3 !=8
+#}`)$ = 67 add 21 = 88 vs }\ 74 diff 14 add no; 76 add 12 = 88 vs rev \} 47 diff 41 add no
+ rejected none \$&\\ = 41 mul 44 rev 14 mul 44 = 616 rev 616 = final answer: #$#
+
+Trying #=1 }=8 )=6 $=5 \=4 <=9 >=7 /=2 ^=0 !=3
+#}`)$ = 18 add 65 = 83 vs }\ 84 diff 1 add ok + 1; 81 add 56 = 137 vs rev \} 48 diff 89 add no
+$<(>/ = 59 sub 72 = 13 vs (^/ -02 diff 11 sub no; 95 sub 27 = 68 vs rev (/^ -20 diff 48 sub no
+ rejected forward \$&\\ = 45 mul 44 = 1980 = final answer: #<}^
+
+Trying #=4 }=1 )=8 $=6 \=2 <=9 >=7 /=5 ^=0 !=3
+#}`)$ = 41 add 86 = 127 vs }\ 12 diff 115 add no; 14 add 68 = 82 vs rev \} 21 diff 61 add no
+ rejected none \$&\\ = 26 mul 22 rev 62 mul 22 = 1364 rev 4631 = final answer: #$!}
+
+Trying #=5 }=0 )=4 $=2 \=3 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 50 add 42 = 92 vs }\ 03 diff 89 add no; 05 add 24 = 29 vs rev \} 30 diff 1 add ok + 1
+$<(>/ = 29 sub 71 = 42 vs (^/ -81 diff 39 sub no; 92 sub 17 = 75 vs rev (/^ -18 diff 57 sub no
+ rejected rev \$&\\ = 32 mul 33 rev 23 mul 33 = 759 rev 957 = final answer: <#>
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=8 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 82 add 53 = 135 vs }\ 24 diff 111 add no; 28 add 35 = 63 vs rev \} 42 diff 21 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: !<\/
+
+Trying #=3 }=6 )=2 $=8 \=4 <=9 >=7 /=1 ^=0 !=5
+#}`)$ = 36 add 28 = 64 vs }\ 64 diff 0 add ok; 63 add 82 = 145 vs rev \} 46 diff 99 add no
+$<(>/ = 89 sub 71 = 18 vs (^/ -01 diff 17 sub no; 98 sub 17 = 81 vs rev (/^ -10 diff 71 sub no
+ rejected forward \$&\\ = 48 mul 44 = 2112 = final answer: )//)
+
+Trying #=6 }=8 )=1 $=5 \=4 <=9 >=7 /=3 ^=2 !=0
+#}`)$ = 68 add 15 = 83 vs }\ 84 diff 1 add ok + 1; 86 add 51 = 137 vs rev \} 48 diff 89 add no
+$<(>/ = 59 sub 73 = 14 vs (^/ -23 diff 9 sub no; 95 sub 37 = 58 vs rev (/^ -32 diff 26 sub no
+ rejected forward \$&\\ = 45 mul 44 = 1980 = final answer: )<}!
+
+Trying #=0 }=7 )=6 $=4 \=2 <=9 >=5 /=1 ^=3 !=8
+#}`)$ = 07 add 64 = 71 vs }\ 72 diff 1 add ok + 1; 70 add 46 = 116 vs rev \} 27 diff 89 add no
+$<(>/ = 49 sub 51 = 2 vs (^/ -31 diff 29 sub no; 94 sub 15 = 79 vs rev (/^ -13 diff 66 sub no
+ rejected forward \$&\\ = 24 mul 22 = 528 = final answer: >\!
+
+Trying #=1 }=9 )=7 $=6 \=4 <=5 >=3 /=2 ^=0 !=8
+#}`)$ = 19 add 76 = 95 vs }\ 94 diff 1 add ok - 1; 91 add 67 = 158 vs rev \} 49 diff 109 add no
+$<(>/ = 65 sub 32 = 33 vs (^/ -02 diff 31 sub no; 56 sub 23 = 33 vs rev (/^ -20 diff 13 sub no
+ rejected forward \$&\\ = 46 mul 44 = 2024 = final answer: /^/\
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -81 diff 19 sub no; 90 sub 17 = 73 vs rev (/^ -18 diff 55 sub no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />!$
+
+Trying #=4 }=0 )=5 $=1 \=2 <=9 >=7 /=3 ^=6 !=8
+#}`)$ = 40 add 51 = 91 vs }\ 02 diff 89 add no; 04 add 15 = 19 vs rev \} 20 diff 1 add ok + 1
+$<(>/ = 19 sub 73 = 54 vs (^/ -63 diff 9 sub no; 91 sub 37 = 54 vs rev (/^ -36 diff 18 sub no
+ rejected rev \$&\\ = 21 mul 22 rev 12 mul 22 = 264 rev 462 = final answer: #^\
+
+Trying #=7 }=6 )=0 $=3 \=4 <=9 >=2 /=1 ^=5 !=8
+#}`)$ = 76 add 03 = 79 vs }\ 64 diff 15 add no; 67 add 30 = 97 vs rev \} 46 diff 51 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: }<\/
+
+Trying #=3 }=2 )=8 $=5 \=4 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 32 add 85 = 117 vs }\ 24 diff 93 add no; 23 add 58 = 81 vs rev \} 42 diff 39 add no
+ rejected none \$&\\ = 45 mul 44 rev 54 mul 44 = 2376 rev 6732 = final answer: !>#}
+
+Trying #=8 }=1 )=2 $=7 \=4 <=9 >=0 /=5 ^=3 !=6
+#}`)$ = 81 add 27 = 108 vs }\ 14 diff 94 add no; 18 add 72 = 90 vs rev \} 41 diff 49 add no
+ rejected none \$&\\ = 47 mul 44 rev 74 mul 44 = 3256 rev 6523 = final answer: !/)^
+
+Trying #=6 }=3 )=7 $=2 \=4 <=9 >=5 /=1 ^=0 !=8
+#}`)$ = 63 add 72 = 135 vs }\ 34 diff 101 add no; 36 add 27 = 63 vs rev \} 43 diff 20 add no
+ rejected none \$&\\ = 42 mul 44 rev 24 mul 44 = 1056 rev 6501 = final answer: #>^/
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=4 }=0 )=6 $=8 \=2 <=9 >=7 /=1 ^=3 !=5
+#}`)$ = 40 add 68 = 108 vs }\ 02 diff 106 add no; 04 add 86 = 90 vs rev \} 20 diff 70 add no
+ rejected none \$&\\ = 28 mul 22 rev 82 mul 22 = 1804 rev 4081 = final answer: #}$/
+
+Trying #=1 }=6 )=5 $=3 \=4 <=9 >=7 /=2 ^=0 !=8
+#}`)$ = 16 add 53 = 69 vs }\ 64 diff 5 add no; 61 add 35 = 96 vs rev \} 46 diff 50 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: }<\#
+
+Trying #=5 }=2 )=8 $=6 \=4 <=9 >=7 /=1 ^=3 !=0
+#}`)$ = 52 add 86 = 138 vs }\ 24 diff 114 add no; 25 add 68 = 93 vs rev \} 42 diff 51 add no
+ rejected none \$&\\ = 46 mul 44 rev 64 mul 44 = 2816 rev 6182 = final answer: $/)}
+
+Trying #=8 }=1 )=2 $=5 \=4 <=9 >=7 /=0 ^=3 !=6
+#}`)$ = 81 add 25 = 106 vs }\ 14 diff 92 add no; 18 add 52 = 70 vs rev \} 41 diff 29 add no
+ rejected none \$&\\ = 45 mul 44 rev 54 mul 44 = 2376 rev 6732 = final answer: !>^)
+
+Trying #=7 }=8 )=0 $=4 \=3 <=9 >=2 /=1 ^=5 !=6
+#}`)$ = 78 add 04 = 82 vs }\ 83 diff 1 add ok + 1; 87 add 40 = 127 vs rev \} 38 diff 89 add no
+$<(>/ = 49 sub 21 = 28 vs (^/ -51 diff 23 sub no; 94 sub 12 = 82 vs rev (/^ -15 diff 67 sub no
+ rejected forward \$&\\ = 34 mul 33 = 1122 = final answer: //>>
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -81 diff 19 sub no; 90 sub 17 = 73 vs rev (/^ -18 diff 55 sub no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />!$
+
+Trying #=0 }=3 )=4 $=2 \=5 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 03 add 42 = 45 vs }\ 35 diff 10 add no; 30 add 24 = 54 vs rev \} 53 diff 1 add ok - 1
+$<(>/ = 29 sub 71 = 42 vs (^/ -81 diff 39 sub no; 92 sub 17 = 75 vs rev (/^ -18 diff 57 sub no
+ rejected rev \$&\\ = 52 mul 55 rev 25 mul 55 = 1375 rev 5731 = final answer: \>}/
+
+Trying #=3 }=9 )=6 $=1 \=4 <=5 >=7 /=0 ^=2 !=8
+#}`)$ = 39 add 61 = 100 vs }\ 94 diff 6 add no; 93 add 16 = 109 vs rev \} 49 diff 60 add no
+ rejected none \$&\\ = 41 mul 44 rev 14 mul 44 = 616 rev 616 = final answer: )$)
+
+Trying #=6 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=8
+#}`)$ = 62 add 53 = 115 vs }\ 24 diff 91 add no; 26 add 35 = 61 vs rev \} 42 diff 19 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: #<\/
+
+Trying #=8 }=0 )=2 $=5 \=4 <=9 >=7 /=1 ^=3 !=6
+#}`)$ = 80 add 25 = 105 vs }\ 04 diff 101 add no; 08 add 52 = 60 vs rev \} 40 diff 20 add no
+ rejected none \$&\\ = 45 mul 44 rev 54 mul 44 = 2376 rev 6732 = final answer: !>^)
+
+Trying #=7 }=8 )=0 $=9 \=4 <=3 >=2 /=1 ^=5 !=6
+#}`)$ = 78 add 09 = 87 vs }\ 84 diff 3 add no; 87 add 90 = 177 vs rev \} 48 diff 129 add no
+ rejected none \$&\\ = 49 mul 44 rev 94 mul 44 = 4136 rev 6314 = final answer: !</\
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -81 diff 19 sub no; 90 sub 17 = 73 vs rev (/^ -18 diff 55 sub no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />!$
+
+Trying #=1 }=6 )=4 $=8 \=3 <=9 >=7 /=2 ^=5 !=0
+#}`)$ = 16 add 48 = 64 vs }\ 63 diff 1 add ok - 1; 61 add 84 = 145 vs rev \} 36 diff 109 add no
+$<(>/ = 89 sub 72 = 17 vs (^/ -52 diff 35 sub no; 98 sub 27 = 71 vs rev (/^ -25 diff 46 sub no
+ rejected forward \$&\\ = 38 mul 33 = 1254 = final answer: #/^)
+
+Trying #=9 }=7 )=8 $=1 \=4 <=2 >=5 /=0 ^=3 !=6
+#}`)$ = 97 add 81 = 178 vs }\ 74 diff 104 add no; 79 add 18 = 97 vs rev \} 47 diff 50 add no
+ rejected none \$&\\ = 41 mul 44 rev 14 mul 44 = 616 rev 616 = final answer: !$!
+
+Trying #=6 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=8
+#}`)$ = 62 add 53 = 115 vs }\ 24 diff 91 add no; 26 add 35 = 61 vs rev \} 42 diff 19 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: #<\/
+
+Trying #=8 }=0 )=2 $=5 \=4 <=9 >=7 /=1 ^=3 !=6
+#}`)$ = 80 add 25 = 105 vs }\ 04 diff 101 add no; 08 add 52 = 60 vs rev \} 40 diff 20 add no
+ rejected none \$&\\ = 45 mul 44 rev 54 mul 44 = 2376 rev 6732 = final answer: !>^)
+
+Trying #=7 }=8 )=0 $=9 \=4 <=3 >=2 /=1 ^=5 !=6
+#}`)$ = 78 add 09 = 87 vs }\ 84 diff 3 add no; 87 add 90 = 177 vs rev \} 48 diff 129 add no
+ rejected none \$&\\ = 49 mul 44 rev 94 mul 44 = 4136 rev 6314 = final answer: !</\
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -81 diff 19 sub no; 90 sub 17 = 73 vs rev (/^ -18 diff 55 sub no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />!$
+
+Trying #=0 }=6 )=7 $=2 \=4 <=9 >=3 /=1 ^=8 !=5
+#}`)$ = 06 add 72 = 78 vs }\ 64 diff 14 add no; 60 add 27 = 87 vs rev \} 46 diff 41 add no
+ rejected none \$&\\ = 42 mul 44 rev 24 mul 44 = 1056 rev 6501 = final answer: }!#/
+
+Trying #=5 }=1 )=6 $=7 \=4 <=9 >=0 /=2 ^=3 !=8
+#}`)$ = 51 add 67 = 118 vs }\ 14 diff 104 add no; 15 add 76 = 91 vs rev \} 41 diff 50 add no
+ rejected none \$&\\ = 47 mul 44 rev 74 mul 44 = 3256 rev 6523 = final answer: )#/^
+
+Trying #=6 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=8
+#}`)$ = 62 add 53 = 115 vs }\ 24 diff 91 add no; 26 add 35 = 61 vs rev \} 42 diff 19 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: #<\/
+
+Trying #=8 }=0 )=2 $=5 \=4 <=9 >=7 /=1 ^=3 !=6
+#}`)$ = 80 add 25 = 105 vs }\ 04 diff 101 add no; 08 add 52 = 60 vs rev \} 40 diff 20 add no
+ rejected none \$&\\ = 45 mul 44 rev 54 mul 44 = 2376 rev 6732 = final answer: !>^)
+
+Trying #=3 }=8 )=4 $=1 \=2 <=9 >=7 /=0 ^=5 !=6
+#}`)$ = 38 add 41 = 79 vs }\ 82 diff 3 add no; 83 add 14 = 97 vs rev \} 28 diff 69 add no
+ rejected none \$&\\ = 21 mul 22 rev 12 mul 22 = 264 rev 462 = final answer: )!\
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=0 }=9 )=8 $=2 \=4 <=5 >=7 /=1 ^=3 !=6
+#}`)$ = 09 add 82 = 91 vs }\ 94 diff 3 add no; 90 add 28 = 118 vs rev \} 49 diff 69 add no
+ rejected none \$&\\ = 42 mul 44 rev 24 mul 44 = 1056 rev 6501 = final answer: !<#/
+
+Trying #=4 }=6 )=1 $=7 \=2 <=9 >=0 /=3 ^=5 !=8
+#}`)$ = 46 add 17 = 63 vs }\ 62 diff 1 add ok - 1; 64 add 71 = 135 vs rev \} 26 diff 109 add no
+$<(>/ = 79 sub 03 = 76 vs (^/ -53 diff 23 sub no; 97 sub 30 = 67 vs rev (/^ -35 diff 32 sub no
+ rejected forward \$&\\ = 27 mul 22 = 594 = final answer: ^<#
+
+Trying #=6 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=8
+#}`)$ = 62 add 53 = 115 vs }\ 24 diff 91 add no; 26 add 35 = 61 vs rev \} 42 diff 19 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: #<\/
+
+Trying #=8 }=0 )=2 $=4 \=5 <=9 >=7 /=1 ^=3 !=6
+#}`)$ = 80 add 24 = 104 vs }\ 05 diff 99 add no; 08 add 42 = 50 vs rev \} 50 diff 0 add ok
+$<(>/ = 49 sub 71 = 22 vs (^/ -31 diff 9 sub no; 94 sub 17 = 77 vs rev (/^ -13 diff 64 sub no
+ rejected rev \$&\\ = 54 mul 55 rev 45 mul 55 = 2475 rev 5742 = final answer: \>$)
+
+Trying #=9 }=4 )=6 $=1 \=5 <=2 >=7 /=0 ^=3 !=8
+#}`)$ = 94 add 61 = 155 vs }\ 45 diff 110 add no; 49 add 16 = 65 vs rev \} 54 diff 11 add no
+ rejected none \$&\\ = 51 mul 55 rev 15 mul 55 = 825 rev 528 = final answer: \<!
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=7 }=1 )=4 $=6 \=3 <=9 >=2 /=5 ^=0 !=8
+#}`)$ = 71 add 46 = 117 vs }\ 13 diff 104 add no; 17 add 64 = 81 vs rev \} 31 diff 50 add no
+ rejected none \$&\\ = 36 mul 33 rev 63 mul 33 = 2079 rev 9702 = final answer: <#^>
+
+Trying #=4 }=6 )=1 $=5 \=2 <=9 >=7 /=3 ^=0 !=8
+#}`)$ = 46 add 15 = 61 vs }\ 62 diff 1 add ok + 1; 64 add 51 = 115 vs rev \} 26 diff 89 add no
+$<(>/ = 59 sub 73 = 14 vs (^/ -03 diff 11 sub no; 95 sub 37 = 58 vs rev (/^ -30 diff 28 sub no
+ rejected forward \$&\\ = 25 mul 22 = 550 = final answer: $$^
+
+Trying #=6 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=8
+#}`)$ = 62 add 53 = 115 vs }\ 24 diff 91 add no; 26 add 35 = 61 vs rev \} 42 diff 19 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: #<\/
+
+Trying #=5 }=8 )=2 $=7 \=4 <=9 >=0 /=1 ^=3 !=6
+#}`)$ = 58 add 27 = 85 vs }\ 84 diff 1 add ok - 1; 85 add 72 = 157 vs rev \} 48 diff 109 add no
+$<(>/ = 79 sub 01 = 78 vs (^/ -31 diff 47 sub no; 97 sub 10 = 87 vs rev (/^ -13 diff 74 sub no
+ rejected forward \$&\\ = 47 mul 44 = 2068 = final answer: )>!}
+
+Trying #=8 }=4 )=6 $=2 \=5 <=9 >=7 /=1 ^=0 !=3
+#}`)$ = 84 add 62 = 146 vs }\ 45 diff 101 add no; 48 add 26 = 74 vs rev \} 54 diff 20 add no
+ rejected none \$&\\ = 52 mul 55 rev 25 mul 55 = 1375 rev 5731 = final answer: \>!/
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=1 }=9 )=7 $=6 \=4 <=5 >=3 /=2 ^=0 !=8
+#}`)$ = 19 add 76 = 95 vs }\ 94 diff 1 add ok - 1; 91 add 67 = 158 vs rev \} 49 diff 109 add no
+$<(>/ = 65 sub 32 = 33 vs (^/ -02 diff 31 sub no; 56 sub 23 = 33 vs rev (/^ -20 diff 13 sub no
+ rejected forward \$&\\ = 46 mul 44 = 2024 = final answer: /^/\
+
+Trying #=4 }=6 )=1 $=5 \=2 <=9 >=7 /=3 ^=0 !=8
+#}`)$ = 46 add 15 = 61 vs }\ 62 diff 1 add ok + 1; 64 add 51 = 115 vs rev \} 26 diff 89 add no
+$<(>/ = 59 sub 73 = 14 vs (^/ -03 diff 11 sub no; 95 sub 37 = 58 vs rev (/^ -30 diff 28 sub no
+ rejected forward \$&\\ = 25 mul 22 = 550 = final answer: $$^
+
+Trying #=6 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=8
+#}`)$ = 62 add 53 = 115 vs }\ 24 diff 91 add no; 26 add 35 = 61 vs rev \} 42 diff 19 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: #<\/
+
+Trying #=7 }=8 )=0 $=4 \=3 <=9 >=2 /=1 ^=6 !=5
+#}`)$ = 78 add 04 = 82 vs }\ 83 diff 1 add ok + 1; 87 add 40 = 127 vs rev \} 38 diff 89 add no
+$<(>/ = 49 sub 21 = 28 vs (^/ -61 diff 33 sub no; 94 sub 12 = 82 vs rev (/^ -16 diff 66 sub no
+ rejected forward \$&\\ = 34 mul 33 = 1122 = final answer: //>>
+
+Trying #=0 }=1 )=2 $=8 \=4 <=9 >=7 /=5 ^=3 !=6
+#}`)$ = 01 add 28 = 29 vs }\ 14 diff 15 add no; 10 add 82 = 92 vs rev \} 41 diff 51 add no
+ rejected none \$&\\ = 48 mul 44 rev 84 mul 44 = 3696 rev 6963 = final answer: !<!^
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=6 !=8
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -61 diff 1 sub ok - 1; 90 sub 17 = 73 vs rev (/^ -16 diff 57 sub no
+!}&#< = 85 mul 29 = 2465 vs $)^} 0365 diff 2100 mul no; 58 mul 92 = 5336 vs rev }^)$ 5630 diff 294 mul no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />^$
+
+Trying #=8 }=3 )=4 $=2 \=5 <=9 >=7 /=1 ^=0 !=6
+#}`)$ = 83 add 42 = 125 vs }\ 35 diff 90 add no; 38 add 24 = 62 vs rev \} 53 diff 9 add no
+ rejected none \$&\\ = 52 mul 55 rev 25 mul 55 = 1375 rev 5731 = final answer: \>}/
+
+Trying #=1 }=0 )=8 $=7 \=4 <=9 >=5 /=2 ^=3 !=6
+#}`)$ = 10 add 87 = 97 vs }\ 04 diff 93 add no; 01 add 78 = 79 vs rev \} 40 diff 39 add no
+ rejected none \$&\\ = 47 mul 44 rev 74 mul 44 = 3256 rev 6523 = final answer: !>/^
+
+Trying #=6 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=8
+#}`)$ = 62 add 53 = 115 vs }\ 24 diff 91 add no; 26 add 35 = 61 vs rev \} 42 diff 19 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: #<\/
+
+Trying #=4 }=6 )=1 $=5 \=2 <=9 >=7 /=3 ^=0 !=8
+#}`)$ = 46 add 15 = 61 vs }\ 62 diff 1 add ok + 1; 64 add 51 = 115 vs rev \} 26 diff 89 add no
+$<(>/ = 59 sub 73 = 14 vs (^/ -03 diff 11 sub no; 95 sub 37 = 58 vs rev (/^ -30 diff 28 sub no
+ rejected forward \$&\\ = 25 mul 22 = 550 = final answer: $$^
+
+Trying #=0 }=7 )=6 $=9 \=4 <=2 >=5 /=1 ^=3 !=8
+#}`)$ = 07 add 69 = 76 vs }\ 74 diff 2 add no; 70 add 96 = 166 vs rev \} 47 diff 119 add no
+ rejected none \$&\\ = 49 mul 44 rev 94 mul 44 = 4136 rev 6314 = final answer: )^/\
+
+Trying #=2 }=5 )=3 $=0 \=4 <=9 >=7 /=1 ^=8 !=6
+#}`)$ = 25 add 30 = 55 vs }\ 54 diff 1 add ok - 1; 52 add 03 = 55 vs rev \} 45 diff 10 add no
+$<(>/ = 09 sub 71 = 62 vs (^/ -81 diff 19 sub no; 90 sub 17 = 73 vs rev (/^ -18 diff 55 sub no
+ rejected forward \$&\\ = 40 mul 44 = 1760 = final answer: />!$
+
+Trying #=5 }=8 )=2 $=6 \=4 <=9 >=7 /=1 ^=3 !=0
+#}`)$ = 58 add 26 = 84 vs }\ 84 diff 0 add ok; 85 add 62 = 147 vs rev \} 48 diff 99 add no
+$<(>/ = 69 sub 71 = 2 vs (^/ -31 diff 29 sub no; 96 sub 17 = 79 vs rev (/^ -13 diff 66 sub no
+ rejected forward \$&\\ = 46 mul 44 = 2024 = final answer: )!)\
+
+Trying #=3 }=1 )=8 $=2 \=4 <=9 >=7 /=5 ^=0 !=6
+#}`)$ = 31 add 82 = 113 vs }\ 14 diff 99 add no; 13 add 28 = 41 vs rev \} 41 diff 0 add ok
+$<(>/ = 29 sub 75 = 46 vs (^/ -05 diff 41 sub no; 92 sub 57 = 35 vs rev (/^ -50 diff 15 sub no
+ rejected rev \$&\\ = 42 mul 44 rev 24 mul 44 = 1056 rev 6501 = final answer: !/^}
+
+Trying #=6 }=2 )=5 $=3 \=4 <=9 >=7 /=1 ^=0 !=8
+#}`)$ = 62 add 53 = 115 vs }\ 24 diff 91 add no; 26 add 35 = 61 vs rev \} 42 diff 19 add no
+ rejected none \$&\\ = 43 mul 44 rev 34 mul 44 = 1496 rev 6941 = final answer: #<\/
+
+Trying #=4 }=6 )=1 $=8 \=3 <=0 >=5 /=9 ^=2 !=7
+#}`)$ = 46 add 18 = 64 vs }\ 63 diff 1 add ok - 1; 64 add 81 = 145 vs rev \} 36 diff 109 add no
+$<(>/ = 80 sub 59 = 21 vs (^/ -29 diff 8 sub no; 08 sub 95 = 87 vs rev (/^ -92 diff 5 sub no
+ rejected forward \$&\\ = 38 mul 33 = 1254 = final answer: )^>#
+
+Trying #=0 }=3 )=4 $=5 \=9 <=8 >=7 /=1 ^=2 !=6
+#}`)$ = 03 add 45 = 48 vs }\ 39 diff 9 add no; 30 add 54 = 84 vs rev \} 93 diff 9 add no
+ rejected none \$&\\ = 95 mul 99 rev 59 mul 99 = 5841 rev 1485 = final answer: /)<$

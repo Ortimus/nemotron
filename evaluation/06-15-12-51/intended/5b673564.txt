@@ -1,0 +1,509 @@
+$?'?[ = \[?
+]}':" = \"]
+\%/]] = \:
+$}`\$ = "\$
+}%`$\ = \:[%
+The question is ?)/%}
+
+Operator symbols '/`
+Question operator symbol /
+Question operator in examples
+
+Digit symbols $?[\]}:"%)
+
+Checking concatenation
+left $? op ' right ?[ expected $??[ versus \[? mismatch
+left ]} op ' right :" expected ]}:" versus \"] mismatch
+left \% op / right ]] expected \%]] versus \: mismatch
+left $} op ` right \$ expected $}\$ versus "\$ mismatch
+left }% op ` right $\ expected }%$\ versus \:[% mismatch
+
+Question operator / is not concatenation
+
+Checking reverse concatenation
+left $? op ' right ?[ expected ?[$? versus \[? mismatch
+left ]} op ' right :" expected :"]} versus \"] mismatch
+left \% op / right ]] expected ]]\% versus \: mismatch
+left $} op ` right \$ expected \$$} versus "\$ mismatch
+left }% op ` right $\ expected $\}% versus \:[% mismatch
+
+Question operator / is not reverse concatenation
+
+Filtering out the concatenation operations
+$?'?[ = \[?
+]}':" = \"]
+\%/]] = \:
+$}`\$ = "\$
+}%`$\ = \:[%
+
+Assigning mul
+ left $? op ' right ?[ = \[? length 3
+ left ]} op ' right :" = \"] length 3
+ left \% op / right ]] = \: length 2
+ left $} op ` right \$ = "\$ length 3
+ left }% op ` right $\ = \:[% length 4 assume mul
+
+Assigning sub
+ left $? op ' right ?[ = \[? length 3
+ left ]} op ' right :" = \"] length 3
+ left \% op / right ]] = \: length 2
+ left $} op ` right \$ = "\$ assumed mul
+ left }% op ` right $\ = \:[% assumed mul
+
+Assigning add
+ left $? op ' right ?[ = \[? length 3 assume add
+ left ]} op ' right :" = \"] assumed add
+ left \% op / right ]] = \: length 2
+ left $} op ` right \$ = "\$ assumed mul
+ left }% op ` right $\ = \:[% assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left $? op ' right ?[ = \[? assumed add
+ left ]} op ' right :" = \"] assumed add
+ left \% op / right ]] = \: length 2 assume sub
+ left $} op ` right \$ = "\$ assumed mul
+ left }% op ` right $\ = \:[% assumed mul
+ left ?) op / right %} the question, assumed sub
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=9 ?=8 [=2 \=1 ]=7 }=4 :=6 "=3 %=5 )=0
+$?'?[ = 98 add 82 = 180 vs \[? 128 diff 52 add no; 89 add 28 = 117 vs rev ?[\ 821 diff 704 add no
+ rejected none ?)/%} = 80 sub 54 rev 08 sub 45 = 37 rev 73 = final answer: ]"
+
+Trying $=3 ?=9 [=4 \=1 ]=7 }=0 :=6 "=8 %=5 )=2
+$?'?[ = 39 add 94 = 133 vs \[? 149 diff 16 add no; 93 add 49 = 142 vs rev ?[\ 941 diff 799 add no
+ rejected none ?)/%} = 92 sub 50 rev 29 sub 05 = 24 rev 42 = final answer: [)
+
+Trying $=5 ?=7 [=8 \=1 ]=2 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 57 add 78 = 135 vs \[? 187 diff 52 add no; 75 add 87 = 162 vs rev ?[\ 781 diff 619 add no
+ rejected none ?)/%} = 70 sub 94 rev 07 sub 49 = 42 rev 24 = final answer: ]}
+
+Trying $=4 ?=6 [=9 \=1 ]=7 }=8 :=2 "=3 %=5 )=0
+$?'?[ = 46 add 69 = 115 vs \[? 196 diff 81 add no; 64 add 96 = 160 vs rev ?[\ 691 diff 531 add no
+ rejected none ?)/%} = 60 sub 58 rev 06 sub 85 = 79 rev 97 = final answer: []
+
+Trying $=7 ?=3 [=5 \=1 ]=8 }=4 :=6 "=2 %=0 )=9
+$?'?[ = 73 add 35 = 108 vs \[? 153 diff 45 add no; 37 add 53 = 90 vs rev ?[\ 351 diff 261 add no
+ rejected none ?)/%} = 39 sub 04 rev 93 sub 40 = 53 rev 35 = final answer: ?[
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=2 ?=8 [=6 \=1 ]=7 }=4 :=0 "=3 %=9 )=5
+$?'?[ = 28 add 86 = 114 vs \[? 168 diff 54 add no; 82 add 68 = 150 vs rev ?[\ 861 diff 711 add no
+ rejected none ?)/%} = 85 sub 94 rev 58 sub 49 = 9 rev 9 = final answer: %
+
+Trying $=9 ?=5 [=4 \=1 ]=7 }=0 :=6 "=3 %=2 )=8
+$?'?[ = 95 add 54 = 149 vs \[? 145 diff 4 add no; 59 add 45 = 104 vs rev ?[\ 541 diff 437 add no
+ rejected none ?)/%} = 58 sub 20 rev 85 sub 02 = 83 rev 38 = final answer: ")
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=5 ?=7 [=8 \=1 ]=2 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 57 add 78 = 135 vs \[? 187 diff 52 add no; 75 add 87 = 162 vs rev ?[\ 781 diff 619 add no
+ rejected none ?)/%} = 70 sub 94 rev 07 sub 49 = 42 rev 24 = final answer: ]}
+
+Trying $=6 ?=4 [=5 \=1 ]=7 }=2 :=8 "=3 %=9 )=0
+$?'?[ = 64 add 45 = 109 vs \[? 154 diff 45 add no; 46 add 54 = 100 vs rev ?[\ 451 diff 351 add no
+ rejected none ?)/%} = 40 sub 92 rev 04 sub 29 = 25 rev 52 = final answer: [}
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=5 )=9
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 15 sub 77 = 62 vs \: 16 diff 46 sub no; 51 sub 77 = 26 vs rev :\ 61 diff 35 sub no
+ rejected forward ?)/%} = 29 sub 54 = 25 = final answer: ?%
+
+Trying $=2 ?=8 [=9 \=1 ]=7 }=4 :=6 "=3 %=5 )=0
+$?'?[ = 28 add 89 = 117 vs \[? 198 diff 81 add no; 82 add 98 = 180 vs rev ?[\ 891 diff 711 add no
+ rejected none ?)/%} = 80 sub 54 rev 08 sub 45 = 37 rev 73 = final answer: ]"
+
+Trying $=9 ?=5 [=4 \=1 ]=7 }=0 :=6 "=3 %=8 )=2
+$?'?[ = 95 add 54 = 149 vs \[? 145 diff 4 add no; 59 add 45 = 104 vs rev ?[\ 541 diff 437 add no
+ rejected none ?)/%} = 52 sub 80 rev 25 sub 08 = 17 rev 71 = final answer: ]\
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=5 ?=6 [=8 \=1 ]=7 }=4 :=2 "=3 %=9 )=0
+$?'?[ = 56 add 68 = 124 vs \[? 186 diff 62 add no; 65 add 86 = 151 vs rev ?[\ 681 diff 530 add no
+ rejected none ?)/%} = 60 sub 94 rev 06 sub 49 = 43 rev 34 = final answer: "}
+
+Trying $=6 ?=4 [=5 \=1 ]=7 }=2 :=8 "=3 %=0 )=9
+$?'?[ = 64 add 45 = 109 vs \[? 154 diff 45 add no; 46 add 54 = 100 vs rev ?[\ 451 diff 351 add no
+ rejected none ?)/%} = 49 sub 02 rev 94 sub 20 = 74 rev 47 = final answer: ?]
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=5 )=9
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 15 sub 77 = 62 vs \: 16 diff 46 sub no; 51 sub 77 = 26 vs rev :\ 61 diff 35 sub no
+ rejected forward ?)/%} = 29 sub 54 = 25 = final answer: ?%
+
+Trying $=2 ?=8 [=9 \=1 ]=7 }=4 :=6 "=3 %=5 )=0
+$?'?[ = 28 add 89 = 117 vs \[? 198 diff 81 add no; 82 add 98 = 180 vs rev ?[\ 891 diff 711 add no
+ rejected none ?)/%} = 80 sub 54 rev 08 sub 45 = 37 rev 73 = final answer: ]"
+
+Trying $=9 ?=5 [=6 \=1 ]=7 }=4 :=0 "=3 %=2 )=8
+$?'?[ = 95 add 56 = 151 vs \[? 165 diff 14 add no; 59 add 65 = 124 vs rev ?[\ 561 diff 437 add no
+ rejected none ?)/%} = 58 sub 24 rev 85 sub 42 = 43 rev 34 = final answer: "}
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=7 ?=6 [=8 \=1 ]=0 }=4 :=2 "=3 %=5 )=9
+$?'?[ = 76 add 68 = 144 vs \[? 186 diff 42 add no; 67 add 86 = 153 vs rev ?[\ 681 diff 528 add no
+ rejected none ?)/%} = 69 sub 54 rev 96 sub 45 = 51 rev 15 = final answer: \%
+
+Trying $=5 ?=7 [=3 \=1 ]=2 }=4 :=6 "=0 %=9 )=8
+$?'?[ = 57 add 73 = 130 vs \[? 137 diff 7 add no; 75 add 37 = 112 vs rev ?[\ 731 diff 619 add no
+ rejected none ?)/%} = 78 sub 94 rev 87 sub 49 = 38 rev 83 = final answer: )[
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=2 ?=8 [=9 \=1 ]=7 }=4 :=6 "=3 %=5 )=0
+$?'?[ = 28 add 89 = 117 vs \[? 198 diff 81 add no; 82 add 98 = 180 vs rev ?[\ 891 diff 711 add no
+ rejected none ?)/%} = 80 sub 54 rev 08 sub 45 = 37 rev 73 = final answer: ]"
+
+Trying $=9 ?=4 [=6 \=1 ]=7 }=2 :=0 "=3 %=5 )=8
+$?'?[ = 94 add 46 = 140 vs \[? 164 diff 24 add no; 49 add 64 = 113 vs rev ?[\ 461 diff 348 add no
+ rejected none ?)/%} = 48 sub 52 rev 84 sub 25 = 59 rev 95 = final answer: $%
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=4 ?=6 [=5 \=1 ]=7 }=8 :=2 "=3 %=0 )=9
+$?'?[ = 46 add 65 = 111 vs \[? 156 diff 45 add no; 64 add 56 = 120 vs rev ?[\ 651 diff 531 add no
+ rejected none ?)/%} = 69 sub 08 rev 96 sub 80 = 16 rev 61 = final answer: ?\
+
+Trying $=5 ?=7 [=8 \=1 ]=2 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 57 add 78 = 135 vs \[? 187 diff 52 add no; 75 add 87 = 162 vs rev ?[\ 781 diff 619 add no
+ rejected none ?)/%} = 70 sub 94 rev 07 sub 49 = 42 rev 24 = final answer: ]}
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=5 )=9
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 15 sub 77 = 62 vs \: 16 diff 46 sub no; 51 sub 77 = 26 vs rev :\ 61 diff 35 sub no
+ rejected forward ?)/%} = 29 sub 54 = 25 = final answer: ?%
+
+Trying $=6 ?=5 [=9 \=1 ]=7 }=4 :=8 "=3 %=0 )=2
+$?'?[ = 65 add 59 = 124 vs \[? 195 diff 71 add no; 56 add 95 = 151 vs rev ?[\ 591 diff 440 add no
+ rejected none ?)/%} = 52 sub 04 rev 25 sub 40 = 15 rev 51 = final answer: ?\
+
+Trying $=9 ?=8 [=7 \=1 ]=0 }=4 :=6 "=3 %=5 )=2
+$?'?[ = 98 add 87 = 185 vs \[? 178 diff 7 add no; 89 add 78 = 167 vs rev ?[\ 871 diff 704 add no
+ rejected none ?)/%} = 82 sub 54 rev 28 sub 45 = 17 rev 71 = final answer: [\
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=7 ?=6 [=4 \=1 ]=8 }=0 :=2 "=3 %=5 )=9
+$?'?[ = 76 add 64 = 140 vs \[? 146 diff 6 add no; 67 add 46 = 113 vs rev ?[\ 641 diff 528 add no
+ rejected none ?)/%} = 69 sub 50 rev 96 sub 05 = 91 rev 19 = final answer: \)
+
+Trying $=5 ?=7 [=8 \=1 ]=2 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 57 add 78 = 135 vs \[? 187 diff 52 add no; 75 add 87 = 162 vs rev ?[\ 781 diff 619 add no
+ rejected none ?)/%} = 70 sub 94 rev 07 sub 49 = 42 rev 24 = final answer: ]}
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=6 ?=5 [=3 \=1 ]=7 }=4 :=8 "=0 %=9 )=2
+$?'?[ = 65 add 53 = 118 vs \[? 135 diff 17 add no; 56 add 35 = 91 vs rev ?[\ 531 diff 440 add no
+ rejected none ?)/%} = 52 sub 94 rev 25 sub 49 = 24 rev 42 = final answer: })
+
+Trying $=9 ?=8 [=7 \=1 ]=0 }=4 :=6 "=3 %=5 )=2
+$?'?[ = 98 add 87 = 185 vs \[? 178 diff 7 add no; 89 add 78 = 167 vs rev ?[\ 871 diff 704 add no
+ rejected none ?)/%} = 82 sub 54 rev 28 sub 45 = 17 rev 71 = final answer: [\
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=7 ?=4 [=5 \=1 ]=8 }=2 :=6 "=3 %=9 )=0
+$?'?[ = 74 add 45 = 119 vs \[? 154 diff 35 add no; 47 add 54 = 101 vs rev ?[\ 451 diff 350 add no
+ rejected none ?)/%} = 40 sub 92 rev 04 sub 29 = 25 rev 52 = final answer: [}
+
+Trying $=5 ?=6 [=8 \=1 ]=7 }=4 :=2 "=3 %=9 )=0
+$?'?[ = 56 add 68 = 124 vs \[? 186 diff 62 add no; 65 add 86 = 151 vs rev ?[\ 681 diff 530 add no
+ rejected none ?)/%} = 60 sub 94 rev 06 sub 49 = 43 rev 34 = final answer: "}
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=6 ?=5 [=4 \=1 ]=7 }=0 :=8 "=3 %=9 )=2
+$?'?[ = 65 add 54 = 119 vs \[? 145 diff 26 add no; 56 add 45 = 101 vs rev ?[\ 541 diff 440 add no
+ rejected none ?)/%} = 52 sub 90 rev 25 sub 09 = 16 rev 61 = final answer: $\
+
+Trying $=9 ?=8 [=3 \=1 ]=7 }=4 :=6 "=0 %=5 )=2
+$?'?[ = 98 add 83 = 181 vs \[? 138 diff 43 add no; 89 add 38 = 127 vs rev ?[\ 831 diff 704 add no
+ rejected none ?)/%} = 82 sub 54 rev 28 sub 45 = 17 rev 71 = final answer: ]\
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=1 ?=7 [=5 \=8 ]=2 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 17 add 75 = 92 vs \[? 857 diff 765 add no; 71 add 57 = 128 vs rev ?[\ 758 diff 630 add no
+ rejected none ?)/%} = 70 sub 94 rev 07 sub 49 = 42 rev 24 = final answer: ]}
+
+Trying $=5 ?=4 [=8 \=1 ]=7 }=2 :=6 "=3 %=9 )=0
+$?'?[ = 54 add 48 = 102 vs \[? 184 diff 82 add no; 45 add 84 = 129 vs rev ?[\ 481 diff 352 add no
+ rejected none ?)/%} = 40 sub 92 rev 04 sub 29 = 25 rev 52 = final answer: $}
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=7 ?=5 [=9 \=1 ]=8 }=4 :=6 "=3 %=2 )=0
+$?'?[ = 75 add 59 = 134 vs \[? 195 diff 61 add no; 57 add 95 = 152 vs rev ?[\ 591 diff 439 add no
+ rejected none ?)/%} = 50 sub 24 rev 05 sub 42 = 37 rev 73 = final answer: $"
+
+Trying $=9 ?=3 [=6 \=1 ]=7 }=4 :=0 "=2 %=8 )=5
+$?'?[ = 93 add 36 = 129 vs \[? 163 diff 34 add no; 39 add 63 = 102 vs rev ?[\ 361 diff 259 add no
+ rejected none ?)/%} = 35 sub 84 rev 53 sub 48 = 5 rev 5 = final answer: )
+
+Trying $=4 ?=8 [=3 \=1 ]=7 }=2 :=6 "=0 %=9 )=5
+$?'?[ = 48 add 83 = 131 vs \[? 138 diff 7 add no; 84 add 38 = 122 vs rev ?[\ 831 diff 709 add no
+ rejected none ?)/%} = 85 sub 92 rev 58 sub 29 = 29 rev 92 = final answer: %}
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=5 ?=7 [=8 \=1 ]=2 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 57 add 78 = 135 vs \[? 187 diff 52 add no; 75 add 87 = 162 vs rev ?[\ 781 diff 619 add no
+ rejected none ?)/%} = 70 sub 94 rev 07 sub 49 = 42 rev 24 = final answer: ]}
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=5 )=9
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 15 sub 77 = 62 vs \: 16 diff 46 sub no; 51 sub 77 = 26 vs rev :\ 61 diff 35 sub no
+ rejected forward ?)/%} = 29 sub 54 = 25 = final answer: ?%
+
+Trying $=7 ?=4 [=9 \=1 ]=8 }=2 :=6 "=3 %=5 )=0
+$?'?[ = 74 add 49 = 123 vs \[? 194 diff 71 add no; 47 add 94 = 141 vs rev ?[\ 491 diff 350 add no
+ rejected none ?)/%} = 40 sub 52 rev 04 sub 25 = 21 rev 12 = final answer: \}
+
+Trying $=9 ?=5 [=4 \=1 ]=7 }=0 :=6 "=3 %=8 )=2
+$?'?[ = 95 add 54 = 149 vs \[? 145 diff 4 add no; 59 add 45 = 104 vs rev ?[\ 541 diff 437 add no
+ rejected none ?)/%} = 52 sub 80 rev 25 sub 08 = 17 rev 71 = final answer: ]\
+
+Trying $=2 ?=8 [=5 \=1 ]=7 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 28 add 85 = 113 vs \[? 158 diff 45 add no; 82 add 58 = 140 vs rev ?[\ 851 diff 711 add no
+ rejected none ?)/%} = 80 sub 94 rev 08 sub 49 = 41 rev 14 = final answer: \}
+
+Trying $=3 ?=9 [=7 \=1 ]=0 }=4 :=6 "=8 %=2 )=5
+$?'?[ = 39 add 97 = 136 vs \[? 179 diff 43 add no; 93 add 79 = 172 vs rev ?[\ 971 diff 799 add no
+ rejected none ?)/%} = 95 sub 24 rev 59 sub 42 = 17 rev 71 = final answer: [\
+
+Trying $=4 ?=7 [=2 \=1 ]=0 }=8 :=6 "=3 %=5 )=9
+$?'?[ = 47 add 72 = 119 vs \[? 127 diff 8 add no; 74 add 27 = 101 vs rev ?[\ 721 diff 620 add no
+ rejected none ?)/%} = 79 sub 58 rev 97 sub 85 = 12 rev 21 = final answer: [\
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=5 )=9
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 15 sub 77 = 62 vs \: 16 diff 46 sub no; 51 sub 77 = 26 vs rev :\ 61 diff 35 sub no
+ rejected forward ?)/%} = 29 sub 54 = 25 = final answer: ?%
+
+Trying $=5 ?=4 [=8 \=1 ]=7 }=2 :=6 "=3 %=9 )=0
+$?'?[ = 54 add 48 = 102 vs \[? 184 diff 82 add no; 45 add 84 = 129 vs rev ?[\ 481 diff 352 add no
+ rejected none ?)/%} = 40 sub 92 rev 04 sub 29 = 25 rev 52 = final answer: $}
+
+Trying $=9 ?=5 [=4 \=1 ]=7 }=0 :=6 "=3 %=2 )=8
+$?'?[ = 95 add 54 = 149 vs \[? 145 diff 4 add no; 59 add 45 = 104 vs rev ?[\ 541 diff 437 add no
+ rejected none ?)/%} = 58 sub 20 rev 85 sub 02 = 83 rev 38 = final answer: ")
+
+Trying $=6 ?=8 [=5 \=1 ]=7 }=4 :=2 "=3 %=9 )=0
+$?'?[ = 68 add 85 = 153 vs \[? 158 diff 5 add no; 86 add 58 = 144 vs rev ?[\ 851 diff 707 add no
+ rejected none ?)/%} = 80 sub 94 rev 08 sub 49 = 41 rev 14 = final answer: \}
+
+Trying $=3 ?=9 [=6 \=1 ]=7 }=4 :=0 "=8 %=5 )=2
+$?'?[ = 39 add 96 = 135 vs \[? 169 diff 34 add no; 93 add 69 = 162 vs rev ?[\ 961 diff 799 add no
+ rejected none ?)/%} = 92 sub 54 rev 29 sub 45 = 16 rev 61 = final answer: [\
+
+Trying $=4 ?=7 [=2 \=1 ]=0 }=8 :=6 "=3 %=9 )=5
+$?'?[ = 47 add 72 = 119 vs \[? 127 diff 8 add no; 74 add 27 = 101 vs rev ?[\ 721 diff 620 add no
+ rejected none ?)/%} = 75 sub 98 rev 57 sub 89 = 32 rev 23 = final answer: ["
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=5 )=9
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 15 sub 77 = 62 vs \: 16 diff 46 sub no; 51 sub 77 = 26 vs rev :\ 61 diff 35 sub no
+ rejected forward ?)/%} = 29 sub 54 = 25 = final answer: ?%
+
+Trying $=5 ?=4 [=8 \=1 ]=7 }=2 :=6 "=3 %=9 )=0
+$?'?[ = 54 add 48 = 102 vs \[? 184 diff 82 add no; 45 add 84 = 129 vs rev ?[\ 481 diff 352 add no
+ rejected none ?)/%} = 40 sub 92 rev 04 sub 29 = 25 rev 52 = final answer: $}
+
+Trying $=9 ?=5 [=4 \=1 ]=7 }=0 :=6 "=3 %=2 )=8
+$?'?[ = 95 add 54 = 149 vs \[? 145 diff 4 add no; 59 add 45 = 104 vs rev ?[\ 541 diff 437 add no
+ rejected none ?)/%} = 58 sub 20 rev 85 sub 02 = 83 rev 38 = final answer: ")
+
+Trying $=7 ?=8 [=9 \=1 ]=2 }=4 :=6 "=3 %=5 )=0
+$?'?[ = 78 add 89 = 167 vs \[? 198 diff 31 add no; 87 add 98 = 185 vs rev ?[\ 891 diff 706 add no
+ rejected none ?)/%} = 80 sub 54 rev 08 sub 45 = 37 rev 73 = final answer: $"
+
+Trying $=3 ?=9 [=6 \=1 ]=7 }=4 :=0 "=8 %=5 )=2
+$?'?[ = 39 add 96 = 135 vs \[? 169 diff 34 add no; 93 add 69 = 162 vs rev ?[\ 961 diff 799 add no
+ rejected none ?)/%} = 92 sub 54 rev 29 sub 45 = 16 rev 61 = final answer: [\
+
+Trying $=1 ?=6 [=7 \=8 ]=0 }=4 :=2 "=3 %=5 )=9
+$?'?[ = 16 add 67 = 83 vs \[? 876 diff 793 add no; 61 add 76 = 137 vs rev ?[\ 678 diff 541 add no
+ rejected none ?)/%} = 69 sub 54 rev 96 sub 45 = 51 rev 15 = final answer: $%
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=5 ?=7 [=8 \=1 ]=2 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 57 add 78 = 135 vs \[? 187 diff 52 add no; 75 add 87 = 162 vs rev ?[\ 781 diff 619 add no
+ rejected none ?)/%} = 70 sub 94 rev 07 sub 49 = 42 rev 24 = final answer: ]}
+
+Trying $=9 ?=4 [=3 \=1 ]=7 }=2 :=6 "=0 %=5 )=8
+$?'?[ = 94 add 43 = 137 vs \[? 134 diff 3 add no; 49 add 34 = 83 vs rev ?[\ 431 diff 348 add no
+ rejected none ?)/%} = 48 sub 52 rev 84 sub 25 = 59 rev 95 = final answer: $%
+
+Trying $=7 ?=5 [=2 \=1 ]=8 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 75 add 52 = 127 vs \[? 125 diff 2 add no; 57 add 25 = 82 vs rev ?[\ 521 diff 439 add no
+ rejected none ?)/%} = 50 sub 94 rev 05 sub 49 = 44 rev 44 = final answer: }}
+
+Trying $=3 ?=9 [=5 \=1 ]=7 }=4 :=6 "=8 %=2 )=0
+$?'?[ = 39 add 95 = 134 vs \[? 159 diff 25 add no; 93 add 59 = 152 vs rev ?[\ 951 diff 799 add no
+ rejected none ?)/%} = 90 sub 24 rev 09 sub 42 = 33 rev 33 = final answer: $$
+
+Trying $=2 ?=8 [=4 \=1 ]=7 }=0 :=6 "=3 %=9 )=5
+$?'?[ = 28 add 84 = 112 vs \[? 148 diff 36 add no; 82 add 48 = 130 vs rev ?[\ 841 diff 711 add no
+ rejected none ?)/%} = 85 sub 90 rev 58 sub 09 = 49 rev 94 = final answer: %[
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=5 )=9
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 15 sub 77 = 62 vs \: 16 diff 46 sub no; 51 sub 77 = 26 vs rev :\ 61 diff 35 sub no
+ rejected forward ?)/%} = 29 sub 54 = 25 = final answer: ?%
+
+Trying $=5 ?=6 [=8 \=1 ]=7 }=4 :=2 "=3 %=9 )=0
+$?'?[ = 56 add 68 = 124 vs \[? 186 diff 62 add no; 65 add 86 = 151 vs rev ?[\ 681 diff 530 add no
+ rejected none ?)/%} = 60 sub 94 rev 06 sub 49 = 43 rev 34 = final answer: "}
+
+Trying $=9 ?=4 [=6 \=1 ]=7 }=2 :=0 "=3 %=5 )=8
+$?'?[ = 94 add 46 = 140 vs \[? 164 diff 24 add no; 49 add 64 = 113 vs rev ?[\ 461 diff 348 add no
+ rejected none ?)/%} = 48 sub 52 rev 84 sub 25 = 59 rev 95 = final answer: $%
+
+Trying $=7 ?=5 [=2 \=1 ]=8 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 75 add 52 = 127 vs \[? 125 diff 2 add no; 57 add 25 = 82 vs rev ?[\ 521 diff 439 add no
+ rejected none ?)/%} = 50 sub 94 rev 05 sub 49 = 44 rev 44 = final answer: }}
+
+Trying $=3 ?=9 [=5 \=1 ]=7 }=4 :=6 "=8 %=0 )=2
+$?'?[ = 39 add 95 = 134 vs \[? 159 diff 25 add no; 93 add 59 = 152 vs rev ?[\ 951 diff 799 add no
+ rejected none ?)/%} = 92 sub 04 rev 29 sub 40 = 11 rev 11 = final answer: \\
+
+Trying $=2 ?=8 [=9 \=1 ]=7 }=4 :=6 "=3 %=5 )=0
+$?'?[ = 28 add 89 = 117 vs \[? 198 diff 81 add no; 82 add 98 = 180 vs rev ?[\ 891 diff 711 add no
+ rejected none ?)/%} = 80 sub 54 rev 08 sub 45 = 37 rev 73 = final answer: ]"
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=5 ?=7 [=8 \=1 ]=2 }=4 :=6 "=3 %=0 )=9
+$?'?[ = 57 add 78 = 135 vs \[? 187 diff 52 add no; 75 add 87 = 162 vs rev ?[\ 781 diff 619 add no
+ rejected none ?)/%} = 79 sub 04 rev 97 sub 40 = 57 rev 75 = final answer: ?$
+
+Trying $=9 ?=6 [=7 \=1 ]=0 }=4 :=2 "=3 %=5 )=8
+$?'?[ = 96 add 67 = 163 vs \[? 176 diff 13 add no; 69 add 76 = 145 vs rev ?[\ 671 diff 526 add no
+ rejected none ?)/%} = 68 sub 54 rev 86 sub 45 = 41 rev 14 = final answer: \}
+
+Trying $=6 ?=4 [=3 \=1 ]=7 }=2 :=8 "=0 %=5 )=9
+$?'?[ = 64 add 43 = 107 vs \[? 134 diff 27 add no; 46 add 34 = 80 vs rev ?[\ 431 diff 351 add no
+ rejected none ?)/%} = 49 sub 52 rev 94 sub 25 = 69 rev 96 = final answer: )$
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=7 ?=5 [=9 \=1 ]=8 }=4 :=6 "=3 %=0 )=2
+$?'?[ = 75 add 59 = 134 vs \[? 195 diff 61 add no; 57 add 95 = 152 vs rev ?[\ 591 diff 439 add no
+ rejected none ?)/%} = 52 sub 04 rev 25 sub 40 = 15 rev 51 = final answer: ?\
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=5 )=9
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 15 sub 77 = 62 vs \: 16 diff 46 sub no; 51 sub 77 = 26 vs rev :\ 61 diff 35 sub no
+ rejected forward ?)/%} = 29 sub 54 = 25 = final answer: ?%
+
+Trying $=5 ?=8 [=4 \=1 ]=7 }=0 :=6 "=3 %=9 )=2
+$?'?[ = 58 add 84 = 142 vs \[? 148 diff 6 add no; 85 add 48 = 133 vs rev ?[\ 841 diff 708 add no
+ rejected none ?)/%} = 82 sub 90 rev 28 sub 09 = 19 rev 91 = final answer: %\
+
+Trying $=9 ?=7 [=8 \=1 ]=2 }=4 :=6 "=3 %=5 )=0
+$?'?[ = 97 add 78 = 175 vs \[? 187 diff 12 add no; 79 add 87 = 166 vs rev ?[\ 781 diff 615 add no
+ rejected none ?)/%} = 70 sub 54 rev 07 sub 45 = 38 rev 83 = final answer: ["
+
+Trying $=1 ?=6 [=5 \=8 ]=7 }=4 :=2 "=3 %=0 )=9
+$?'?[ = 16 add 65 = 81 vs \[? 856 diff 775 add no; 61 add 56 = 117 vs rev ?[\ 658 diff 541 add no
+ rejected none ?)/%} = 69 sub 04 rev 96 sub 40 = 56 rev 65 = final answer: ?[
+
+Trying $=3 ?=9 [=2 \=1 ]=7 }=4 :=6 "=8 %=5 )=0
+$?'?[ = 39 add 92 = 131 vs \[? 129 diff 2 add no; 93 add 29 = 122 vs rev ?[\ 921 diff 799 add no
+ rejected none ?)/%} = 90 sub 54 rev 09 sub 45 = 36 rev 63 = final answer: :$
+
+Trying $=6 ?=3 [=9 \=1 ]=7 }=4 :=8 "=2 %=5 )=0
+$?'?[ = 63 add 39 = 102 vs \[? 193 diff 91 add no; 36 add 93 = 129 vs rev ?[\ 391 diff 262 add no
+ rejected none ?)/%} = 30 sub 54 rev 03 sub 45 = 42 rev 24 = final answer: "}
+
+Trying $=8 ?=2 [=0 \=1 ]=7 }=4 :=6 "=3 %=9 )=5
+$?'?[ = 82 add 20 = 102 vs \[? 102 diff 0 add ok; 28 add 02 = 30 vs rev ?[\ 201 diff 171 add no
+]}':" = 74 add 63 = 137 vs \"] 137 diff 0 add ok; 47 add 36 = 83 vs rev ]"\ 731 diff 648 add no
+\%/]] = 19 sub 77 = 58 vs \: 16 diff 42 sub no; 91 sub 77 = 14 vs rev :\ 61 diff 47 sub no
+ rejected forward ?)/%} = 25 sub 94 = 69 = final answer: :%
+
+Trying $=5 ?=8 [=4 \=1 ]=7 }=0 :=6 "=3 %=9 )=2
+$?'?[ = 58 add 84 = 142 vs \[? 148 diff 6 add no; 85 add 48 = 133 vs rev ?[\ 841 diff 708 add no
+ rejected none ?)/%} = 82 sub 90 rev 28 sub 09 = 19 rev 91 = final answer: %\
+
+Trying $=4 ?=5 [=6 \=1 ]=7 }=8 :=0 "=3 %=9 )=2
+$?'?[ = 45 add 56 = 101 vs \[? 165 diff 64 add no; 54 add 65 = 119 vs rev ?[\ 561 diff 442 add no
+ rejected none ?)/%} = 52 sub 98 rev 25 sub 89 = 64 rev 46 = final answer: $[
+
+Trying $=1 ?=7 [=5 \=8 ]=2 }=4 :=6 "=3 %=9 )=0
+$?'?[ = 17 add 75 = 92 vs \[? 857 diff 765 add no; 71 add 57 = 128 vs rev ?[\ 758 diff 630 add no
+ rejected none ?)/%} = 70 sub 94 rev 07 sub 49 = 42 rev 24 = final answer: ]}
+
+Trying $=7 ?=9 [=2 \=6 ]=1 }=8 :=4 "=0 %=3 )=5
+$?'?[ = 79 add 92 = 171 vs \[? 629 diff 458 add no; 97 add 29 = 126 vs rev ?[\ 926 diff 800 add no
+ rejected none ?)/%} = 95 sub 38 rev 59 sub 83 = 24 rev 42 = final answer: :[
+
+Trying $=0 ?=3 [=7 \=2 ]=9 }=1 :=8 "=6 %=4 )=5
+$?'?[ = 03 add 37 = 40 vs \[? 273 diff 233 add no; 30 add 73 = 103 vs rev ?[\ 372 diff 269 add no
+ rejected none ?)/%} = 35 sub 41 rev 53 sub 14 = 39 rev 93 = final answer: ]?

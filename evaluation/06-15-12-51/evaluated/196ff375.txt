@@ -1,0 +1,251 @@
+[@)$: = )@<
+@#\@$ = $^
+$<)<[ = )@#
+#^\$% = @^%
+The question is %^\#@
+
+Operator symbols )\
+Question operator symbol \
+Question operator in examples
+
+Digit symbols [@$:<#^%
+
+Checking concatenation
+left [@ op ) right $: expected [@$: versus )@< mismatch
+left @# op \ right @$ expected @#@$ versus $^ mismatch
+left $< op ) right <[ expected $<<[ versus )@# mismatch
+left #^ op \ right $% expected #^$% versus @^% mismatch
+
+Question operator \ is not concatenation
+
+Checking reverse concatenation
+left [@ op ) right $: expected $:[@ versus )@< mismatch
+left @# op \ right @$ expected @$@# versus $^ mismatch
+left $< op ) right <[ expected <[$< versus )@# mismatch
+left #^ op \ right $% expected $%#^ versus @^% mismatch
+
+Question operator \ is not reverse concatenation
+
+Filtering out the concatenation operations
+[@)$: = )@<
+@#\@$ = $^
+$<)<[ = )@#
+#^\$% = @^%
+
+Assigning mul
+ left [@ op ) right $: = )@< length 3
+ left @# op \ right @$ = $^ length 2
+ left $< op ) right <[ = )@# length 3
+ left #^ op \ right $% = @^% length 3
+
+Assigning sub
+ left [@ op ) right $: = )@< op in output assume sub
+ left @# op \ right @$ = $^ length 2
+ left $< op ) right <[ = )@# assumed sub
+ left #^ op \ right $% = @^% length 3
+
+Assigning add
+ left [@ op ) right $: = )@< assumed sub
+ left @# op \ right @$ = $^ length 2
+ left $< op ) right <[ = )@# assumed sub
+ left #^ op \ right $% = @^% length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left [@ op ) right $: = )@< assumed sub
+ left @# op \ right @$ = $^ assumed add
+ left $< op ) right <[ = )@# assumed sub
+ left #^ op \ right $% = @^% assumed add
+ left %^ op \ right #@ the question, assumed add
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+@#\@$ = 26 add 23 = 49 vs $^ 37 diff 12 add no; 62 add 32 = 94 vs rev ^$ 73 diff 21 add no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 12 = 3 vs )@< -94 diff 91 sub no; 90 sub 21 = 69 vs rev )<@ -49 diff 20 sub no
+ rejected none %^\#@ = 87 add 69 rev 78 add 96 = 174 rev 471 = final answer: <^$
+
+Trying [=5 @=0 $=9 :=1 <=4 #=6 ^=7 %=8 A=3 B=2
+[@)$: = 50 sub 91 = 41 vs )@< -04 diff 37 sub no; 05 sub 19 = 14 vs rev )<@ -40 diff 26 sub no
+ rejected none %^\#@ = 87 add 60 rev 78 add 06 = 84 rev 48 = final answer: <%
+
+Trying [=3 @=5 $=0 :=9 <=4 #=6 ^=7 %=8 A=1 B=2
+[@)$: = 35 sub 09 = 26 vs )@< -54 diff 28 sub no; 53 sub 90 = 37 vs rev )<@ -45 diff 8 sub no
+ rejected none %^\#@ = 87 add 65 rev 78 add 56 = 134 rev 431 = final answer: <[A
+
+Trying [=1 @=2 $=3 :=4 <=5 #=6 ^=7 %=8 A=9 B=0
+[@)$: = 12 sub 34 = 22 vs )@< -25 diff 3 sub no; 21 sub 43 = 22 vs rev )<@ -52 diff 30 sub no
+ rejected forward %^\#@ = 87 add 62 = 149 = final answer: [:A
+
+Trying [=9 @=1 $=2 :=3 <=4 #=6 ^=7 %=8 A=5 B=0
+[@)$: = 91 sub 23 = 68 vs )@< -14 diff 54 sub no; 19 sub 32 = 13 vs rev )<@ -41 diff 28 sub no
+ rejected none %^\#@ = 87 add 61 rev 78 add 16 = 94 rev 49 = final answer: <[
+
+Trying [=0 @=9 $=1 :=2 <=4 #=6 ^=7 %=8 A=5 B=3
+[@)$: = 09 sub 1

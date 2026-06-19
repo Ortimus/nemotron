@@ -1,0 +1,69 @@
+[#*[: = */
+[%"^\ = [%^\
+[\+#& = %^^&
+:)+}^ = ^^:\
+/&+:/ = :/&
+The question is %/+^#
+
+Operator symbols *"+
+Question operator symbol +
+Question operator in examples
+
+Digit symbols [#:/%^\&)}
+
+Checking concatenation
+left [# op * right [: expected [#[: versus */ mismatch
+left [% op " right ^\ expected [%^\ versus [%^\ match "
+left [\ op + right #& expected [\#& versus %^^& mismatch
+left :) op + right }^ expected :)}^ versus ^^:\ mismatch
+left /& op + right :/ expected /&:/ versus :/& mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left [# op * right [: expected [:[# versus */ mismatch
+left [% op " right ^\ expected ^\[% versus [%^\ mismatch
+left [\ op + right #& expected #&[\ versus %^^& mismatch
+left :) op + right }^ expected }^:) versus ^^:\ mismatch
+left /& op + right :/ expected ://& versus :/& mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+[#*[: = */
+[\+#& = %^^&
+:)+}^ = ^^:\
+/&+:/ = :/&
+
+Assigning mul
+ left [# op * right [: = */ length 2
+ left [\ op + right #& = %^^& length 4 assume mul
+ left :) op + right }^ = ^^:\ assumed mul
+ left /& op + right :/ = :/& assumed mul
+
+Assigning sub
+ left [# op * right [: = */ op in output assume sub
+ left [\ op + right #& = %^^& assumed mul
+ left :) op + right }^ = ^^:\ assumed mul
+ left /& op + right :/ = :/& assumed mul
+
+Assigning add
+ left [# op * right [: = */ assumed sub
+ left [\ op + right #& = %^^& assumed mul
+ left :) op + right }^ = ^^:\ assumed mul
+ left /& op + right :/ = :/& assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left [# op * right [: = */ assumed sub
+ left [\ op + right #& = %^^& assumed mul
+ left :) op + right }^ = ^^:\ assumed mul
+ left /& op + right :/ = :/& assumed mul
+ left %/ op + right ^# the question, assumed mul
+
+Trying [=9 #=7 :=5 /=1 %=6 ^=4 \=2 &=0 )=3 }=8
+[#*[: = 97 sub 95 = 2 vs */ -1 diff 1 sub ok - 1; 79 sub 59 = 20 vs rev */ -1 diff 19 sub no
+[\+#& = 92 mul 70 = 6440 vs %^^& 6440 diff 0 mul ok; 29 mul 07 = 203 vs rev &^^% 0446 diff 243 mul no
+:)+}^ = 53 mul 84 = 4452 vs ^^:\ 4452 diff 0 mul ok; 35 mul 48 = 1680 vs rev \:^^ 2544 diff 864 mul no
+/&+:/ = 10 mul 51 = 510 vs :/& 510 diff 0 mul ok; 01 mul 15 = 15 vs rev &/: 015 diff 0 mul ok
+ accepted forward %/+^# = 61 mul 47 = 2867 = \boxed{\}%#}

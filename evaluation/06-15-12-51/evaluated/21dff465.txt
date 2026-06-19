@@ -1,0 +1,179 @@
+30?45 = 75
+57?67 = 124
+40?37 = 77
+
+The inputs are 30, 45, 57, 67, 40, 37
+
+The outputs are 75, 124, 77
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+30?45 -> ?
+57?67 -> ?
+40?37 -> ?
+
+The operators
+?
+
+Looking at the question
+73@82 -> @
+The question operator is not found in the examples. Investigating the most common example operator ? instead. We will use addition for the question operator.
+
+Looking at operator ? [30?45 = 75, 57?67 = 124, 40?37 = 77]:
+
+Trying common operations
+ reversed operands [30->03 45->54, 57->75 67->76, 40->04 37->73] and reversed result [expected (03,54)->75, (75,76)->124, (04,73)->77]
+ addition
+ (03,54)->75: 03 + 54 = 57 rev-> 75 match
+ (75,76)->124: 75 + 76 = 151 rev-> 151 mismatch
+ multiplication
+ (75,76)->124: (70 + 5) * 76 = 70 * 76 + 5 * 76 = 5320 + 380 = 5700 rev-> 0075 mismatch
+ concatenation
+ (04,73)->77: 04 || 73 = 0473 rev-> 3740 mismatch
+ reverse concatenation
+ (03,54)->75: 54 || 03 = 5403 rev-> 3045 mismatch
+
+ identity [30 45, 57 67, 40 37] [expected (30,45)->75, (57,67)->124, (40,37)->77]
+ addition
+ (30,45)->75: 30 + 45 = 75 match
+ (57,67)->124: 57 + 67 = 124 match
+ (40,37)->77: 40 + 37 = 77 match
+ correct, actions: addition
+ multiplication
+ (57,67)->124: (50 + 7) * 67 = 50 * 67 + 7 * 67 = 3350 + 469 = 3819 mismatch
+ concatenation
+ (40,37)->77: 40 || 37 = 4037 mismatch
+ reverse concatenation
+ (30,45)->75: 45 || 30 = 4530 mismatch
+
+Trying difference operations
+ reversed operands [30->03 45->54, 57->75 67->76, 40->04 37->73] and reversed result [expected (03,54)->75, (75,76)->124, (04,73)->77]
+ subtraction (a-b)
+ (03,54)->75: 03 - 54 = -51 rev-> -15 mismatch
+ absolute difference
+ (75,76)->124: |75 - 76| = 1 rev-> 1 mismatch
+ max mod min
+ (04,73)->77: max(04,73) mod min(04,73) = 73 mod 04 = 1 rev-> 1 mismatch
+ negated absolute difference
+ (03,54)->75: -|03 - 54| = -51 rev-> -15 mismatch
+ reverse subtraction (b-a)
+ (75,76)->124: 76 - 75 = 1 rev-> 1 mismatch
+ modulo (a mod b)
+ (04,73)->77: 04 mod 73 = 4 rev-> 4 mismatch
+
+ identity [30 45, 57 67, 40 37] [expected (30,45)->75, (57,67)->124, (40,37)->77]
+ subtraction (a-b)
+ (30,45)->75: 30 - 45 = -15 mismatch
+ absolute difference
+ (57,67)->124: |57 - 67| = 10 mismatch
+ max mod min
+ (40,37)->77: max(40,37) mod min(40,37) = 40 mod 37 = 3 mismatch
+ negated absolute difference
+ (30,45)->75: -|30 - 45| = -15 mismatch
+ reverse subtraction (b-a)
+ (57,67)->124: 67 - 57 = 10 mismatch
+ modulo (a mod b)
+ (40,37)->77: 40 mod 37 = 3 mismatch
+
+Trying rare operations
+ reversed operands [30->03 45->54, 57->75 67->76, 40->04 37->73] and reversed result [expected (03,54)->75, (75,76)->124, (04,73)->77]
+ multiply+1
+ (03,54)->75: (0 + 3) * 54 + 1 = 0 * 54 + 3 * 54 + 1 = 0 + 162 + 1 = 162 + 1 = 163 rev-> 361 mismatch
+ multiply-1
+ (75,76)->124: (70 + 5) * 76 - 1 = 70 * 76 + 5 * 76 - 1 = 5320 + 380 - 1 = 5700 - 1 = 5699 rev-> 9965 mismatch
+ add+1
+ (04,73)->77: 04 + 73 + 1 = 78 rev-> 87 mismatch
+ add-1
+ (03,54)->75: 03 + 54 - 1 = 56 rev-> 65 mismatch
+ sub+1
+ (75,76)->124: 75 - 76 + 1 = 0 rev-> 0 mismatch
+ sub-1
+ (04,73)->77: 04 - 73 - 1 = -70 rev-> -07 mismatch
+ integer division (a/b)
+ (03,54)->75: 03 / 54 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (75,76)->124: 76 / 75 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (04,73)->77: 73 mod 04 = 1 rev-> 1 mismatch
+ digit absolute diff
+ (03,54)->75: |0-5| || |3-4| = 51 rev-> 15 mismatch
+ digit add mod10
+ (75,76)->124: (7+7)%10 || (5+6)%10 = 41 rev-> 14 mismatch
+ digit sub mod10
+ (04,73)->77: (0-7)%10 || (4-3)%10 = 31 rev-> 13 mismatch
+ cross multiply
+ (03,54)->75: 0*5 + 3*4 = 0 + 12 = 12 rev-> 21 mismatch
+ cross multiply rev
+ (75,76)->124: 7*6 + 5*7 = 42 + 35 = 77 rev-> 77 mismatch
+ digit multiply
+ (04,73)->77: 0*7 || 4*3 = 0 || 12 = 012 rev-> 210 mismatch
+ digit multiply rev
+ (03,54)->75: 0*4 || 3*5 = 0 || 15 = 015 rev-> 510 mismatch
+ digit sum diff
+ (75,76)->124: (7+5) - (7+6) = -1 rev-> -1 mismatch
+ digit sum sum
+ (04,73)->77: (0+4) + (7+3) = 14 rev-> 41 mismatch
+ digit product diff
+ (03,54)->75: 0*3 - 5*4 = 0 - 20 = -20 rev-> -02 mismatch
+ digit product sum
+ (75,76)->124: 7*5 + 7*6 = 35 + 42 = 77 rev-> 77 mismatch
+ determinant
+ (04,73)->77: 0*3 - 4*7 = 0 - 28 = -28 rev-> -82 mismatch
+ abs determinant
+ (03,54)->75: |0*4 - 3*5| = |0 - 15| = 15 rev-> 51 mismatch
+
+ identity [30 45, 57 67, 40 37] [expected (30,45)->75, (57,67)->124, (40,37)->77]
+ multiply+1
+ (30,45)->75: (30 + 0) * 45 + 1 = 30 * 45 + 0 * 45 + 1 = 1350 + 0 + 1 = 1350 + 1 = 1351 mismatch
+ multiply-1
+ (57,67)->124: (50 + 7) * 67 - 1 = 50 * 67 + 7 * 67 - 1 = 3350 + 469 - 1 = 3819 - 1 = 3818 mismatch
+ add+1
+ (40,37)->77: 40 + 37 + 1 = 78 mismatch
+ add-1
+ (30,45)->75: 30 + 45 - 1 = 74 mismatch
+ sub+1
+ (57,67)->124: 57 - 67 + 1 = -9 mismatch
+ sub-1
+ (40,37)->77: 40 - 37 - 1 = 2 mismatch
+ integer division (a/b)
+ (30,45)->75: 30 / 45 = 0 mismatch
+ reverse division (b/a)
+ (57,67)->124: 67 / 57 = 1 mismatch
+ reverse modulo (b mod a)
+ (40,37)->77: 37 mod 40 = 37 mismatch
+ digit absolute diff
+ (30,45)->75: |3-4| || |0-5| = 15 mismatch
+ digit add mod10
+ (57,67)->124: (5+6)%10 || (7+7)%10 = 14 mismatch
+ digit sub mod10
+ (40,37)->77: (4-3)%10 || (0-7)%10 = 13 mismatch
+ cross multiply
+ (30,45)->75: 3*4 + 0*5 = 12 + 0 = 12 mismatch
+ cross multiply rev
+ (57,67)->124: 5*7 + 7*6 = 35 + 42 = 77 mismatch
+ digit multiply
+ (40,37)->77: 4*3 || 0*7 = 12 || 0 = 120 mismatch
+ digit multiply rev
+ (30,45)->75: 3*5 || 0*4 = 15 || 0 = 150 mismatch
+ digit sum diff
+ (57,67)->124: (5+7) - (6+7) = -1 mismatch
+ digit sum sum
+ (40,37)->77: (4+0) + (3+7) = 14 mismatch
+ digit product diff
+ (30,45)->75: 3*0 - 4*5 = 0 - 20 = -20 mismatch
+ digit product sum
+ (57,67)->124: 5*7 + 6*7 = 35 + 42 = 77 mismatch
+ determinant
+ (40,37)->77: 4*7 - 0*3 = 28 - 0 = 28 mismatch
+ abs determinant
+ (30,45)->75: |3*5 - 0*4| = |15 - 0| = 15 mismatch
+
+correct, actions: addition
+
+Applying to 73@82:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ identity [73 82]
+ addition
+ (73,82): 73 + 82 = 155
+ Result is non-negative
+ \boxed{155}

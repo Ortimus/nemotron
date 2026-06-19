@@ -1,0 +1,75 @@
+"|:[? = :"(
+{<:?% = :|>
+[`)[` = |(|
+><)[" = |%"
+"{)%[ = ?"
+The question is {|:%?
+
+Operator symbols :)
+Question operator symbol :
+Question operator in examples
+
+Digit symbols "|[?({<%>`
+
+Checking concatenation
+left "| op : right [? expected "|[? versus :"( mismatch
+left {< op : right ?% expected {<?% versus :|> mismatch
+left [` op ) right [` expected [`[` versus |(| mismatch
+left >< op ) right [" expected ><[" versus |%" mismatch
+left "{ op ) right %[ expected "{%[ versus ?" mismatch
+
+Question operator : is not concatenation
+
+Checking reverse concatenation
+left "| op : right [? expected [?"| versus :"( mismatch
+left {< op : right ?% expected ?%{< versus :|> mismatch
+left [` op ) right [` expected [`[` versus |(| mismatch
+left >< op ) right [" expected [">< versus |%" mismatch
+left "{ op ) right %[ expected %["{ versus ?" mismatch
+
+Question operator : is not reverse concatenation
+
+Filtering out the concatenation operations
+"|:[? = :"(
+{<:?% = :|>
+[`)[` = |(|
+><)[" = |%"
+"{)%[ = ?"
+
+Assigning mul
+ left "| op : right [? = :"( length 3
+ left {< op : right ?% = :|> length 3
+ left [` op ) right [` = |(| length 3
+ left >< op ) right [" = |%" length 3
+ left "{ op ) right %[ = ?" length 2
+
+Assigning sub
+ left "| op : right [? = :"( op in output assume sub
+ left {< op : right ?% = :|> assumed sub
+ left [` op ) right [` = |(| length 3
+ left >< op ) right [" = |%" length 3
+ left "{ op ) right %[ = ?" length 2
+
+Assigning add
+ left "| op : right [? = :"( assumed sub
+ left {< op : right ?% = :|> assumed sub
+ left [` op ) right [` = |(| length 3 assume add
+ left >< op ) right [" = |%" assumed add
+ left "{ op ) right %[ = ?" assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left "| op : right [? = :"( assumed sub
+ left {< op : right ?% = :|> assumed sub
+ left [` op ) right [` = |(| assumed add
+ left >< op ) right [" = |%" assumed add
+ left "{ op ) right %[ = ?" assumed add
+ left {| op : right %? the question, assumed sub
+
+Trying "=4 |=1 [=8 ?=7 (=6 {=5 <=9 %=2 >=3 `=0
+"|:[? = 41 sub 87 = 46 vs :"( -46 diff 0 sub ok; 14 sub 78 = 64 vs rev :(" -64 diff 0 sub ok
+{<:?% = 59 sub 72 = 13 vs :|> -13 diff 0 sub ok; 95 sub 27 = 68 vs rev :>| -31 diff 37 sub no
+[`)[` = 80 add 80 = 160 vs |(| 161 diff 1 add ok + 1; 08 add 08 = 16 vs rev |(| 161 diff 145 add no
+><)[" = 39 add 84 = 123 vs |%" 124 diff 1 add ok + 1; 93 add 48 = 141 vs rev "%| 421 diff 280 add no
+"{)%[ = 45 add 28 = 73 vs ?" 74 diff 1 add ok + 1; 54 add 82 = 136 vs rev "? 47 diff 89 add no
+ accepted forward {|:%? = 51 sub 27 = 24 = \boxed{%"}

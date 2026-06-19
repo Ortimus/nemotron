@@ -1,0 +1,178 @@
+47+15 = 421
+55+09 = 441
+71*66 = 3211
+
+The inputs are 47, 15, 55, 09, 71, 66
+
+The outputs are 421, 441, 3211
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+47+15 -> +
+55+09 -> +
+71*66 -> *
+
+The operators
++
+*
+
+Looking at the question
+01-91 -> -
+The question operator is not found in the examples. Investigating the most common example operator + instead. We will use addition for the question operator.
+
+Looking at operator + [47+15 = 421, 55+09 = 441]:
+
+Trying common operations
+ reversed operands [47->74 15->51, 55->55 09->90] and reversed result [expected (74,51)->421, (55,90)->441]
+ addition
+ (74,51)->421: 74 + 51 = 125 rev-> 521 mismatch
+ multiplication
+ (55,90)->441: (50 + 5) * 90 = 50 * 90 + 5 * 90 = 4500 + 450 = 4950 rev-> 0594 mismatch
+ concatenation
+ (74,51)->421: 74 || 51 = 7451 rev-> 1547 mismatch
+ reverse concatenation
+ (55,90)->441: 90 || 55 = 9055 rev-> 5509 mismatch
+
+ identity [47 15, 55 09] [expected (47,15)->421, (55,09)->441]
+ addition
+ (47,15)->421: 47 + 15 = 62 mismatch
+ multiplication
+ (55,09)->441: (50 + 5) * 09 = 50 * 09 + 5 * 09 = 450 + 45 = 495 mismatch
+ concatenation
+ (47,15)->421: 47 || 15 = 4715 mismatch
+ reverse concatenation
+ (55,09)->441: 09 || 55 = 0955 mismatch
+
+Trying difference operations
+ reversed operands [47->74 15->51, 55->55 09->90] and reversed result [expected (74,51)->421, (55,90)->441]
+ subtraction (a-b)
+ (74,51)->421: 74 - 51 = 23 rev-> 32 mismatch
+ absolute difference
+ (55,90)->441: |55 - 90| = 35 rev-> 53 mismatch
+ max mod min
+ (74,51)->421: max(74,51) mod min(74,51) = 74 mod 51 = 23 rev-> 32 mismatch
+ negated absolute difference
+ (55,90)->441: -|55 - 90| = -35 rev-> -53 mismatch
+ reverse subtraction (b-a)
+ (74,51)->421: 51 - 74 = -23 rev-> -32 mismatch
+ modulo (a mod b)
+ (55,90)->441: 55 mod 90 = 55 rev-> 55 mismatch
+
+ identity [47 15, 55 09] [expected (47,15)->421, (55,09)->441]
+ subtraction (a-b)
+ (47,15)->421: 47 - 15 = 32 mismatch
+ absolute difference
+ (55,09)->441: |55 - 09| = 46 mismatch
+ max mod min
+ (47,15)->421: max(47,15) mod min(47,15) = 47 mod 15 = 2 mismatch
+ negated absolute difference
+ (55,09)->441: -|55 - 09| = -46 mismatch
+ reverse subtraction (b-a)
+ (47,15)->421: 15 - 47 = -32 mismatch
+ modulo (a mod b)
+ (55,09)->441: 55 mod 09 = 1 mismatch
+
+Trying rare operations
+ reversed operands [47->74 15->51, 55->55 09->90] and reversed result [expected (74,51)->421, (55,90)->441]
+ multiply+1
+ (74,51)->421: (70 + 4) * 51 + 1 = 70 * 51 + 4 * 51 + 1 = 3570 + 204 + 1 = 3774 + 1 = 3775 rev-> 5773 mismatch
+ multiply-1
+ (55,90)->441: (50 + 5) * 90 - 1 = 50 * 90 + 5 * 90 - 1 = 4500 + 450 - 1 = 4950 - 1 = 4949 rev-> 9494 mismatch
+ add+1
+ (74,51)->421: 74 + 51 + 1 = 126 rev-> 621 mismatch
+ add-1
+ (55,90)->441: 55 + 90 - 1 = 144 rev-> 441 match
+ (74,51)->421: 74 + 51 - 1 = 124 rev-> 421 match
+ correct, actions: reversed operands, reversed result, add-1
+ sub+1
+ (74,51)->421: 74 - 51 + 1 = 24 rev-> 42 mismatch
+ sub-1
+ (55,90)->441: 55 - 90 - 1 = -36 rev-> -63 mismatch
+ integer division (a/b)
+ (74,51)->421: 74 / 51 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (55,90)->441: 90 / 55 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (74,51)->421: 51 mod 74 = 51 rev-> 15 mismatch
+ digit absolute diff
+ (55,90)->441: |5-9| || |5-0| = 45 rev-> 54 mismatch
+ digit add mod10
+ (74,51)->421: (7+5)%10 || (4+1)%10 = 25 rev-> 52 mismatch
+ digit sub mod10
+ (55,90)->441: (5-9)%10 || (5-0)%10 = 65 rev-> 56 mismatch
+ cross multiply
+ (74,51)->421: 7*5 + 4*1 = 35 + 4 = 39 rev-> 93 mismatch
+ cross multiply rev
+ (55,90)->441: 5*0 + 5*9 = 0 + 45 = 45 rev-> 54 mismatch
+ digit multiply
+ (74,51)->421: 7*5 || 4*1 = 35 || 4 = 354 rev-> 453 mismatch
+ digit multiply rev
+ (55,90)->441: 5*0 || 5*9 = 0 || 45 = 045 rev-> 540 mismatch
+ digit sum diff
+ (74,51)->421: (7+4) - (5+1) = 5 rev-> 5 mismatch
+ digit sum sum
+ (55,90)->441: (5+5) + (9+0) = 19 rev-> 91 mismatch
+ digit product diff
+ (74,51)->421: 7*4 - 5*1 = 28 - 5 = 23 rev-> 32 mismatch
+ digit product sum
+ (55,90)->441: 5*5 + 9*0 = 25 + 0 = 25 rev-> 52 mismatch
+ determinant
+ (74,51)->421: 7*1 - 4*5 = 7 - 20 = -13 rev-> -31 mismatch
+ abs determinant
+ (55,90)->441: |5*0 - 5*9| = |0 - 45| = 45 rev-> 54 mismatch
+
+ identity [47 15, 55 09] [expected (47,15)->421, (55,09)->441]
+ multiply+1
+ (47,15)->421: (40 + 7) * 15 + 1 = 40 * 15 + 7 * 15 + 1 = 600 + 105 + 1 = 705 + 1 = 706 mismatch
+ multiply-1
+ (55,09)->441: (50 + 5) * 09 - 1 = 50 * 09 + 5 * 09 - 1 = 450 + 45 - 1 = 495 - 1 = 494 mismatch
+ add+1
+ (47,15)->421: 47 + 15 + 1 = 63 mismatch
+ add-1
+ (55,09)->441: 55 + 09 - 1 = 63 mismatch
+ sub+1
+ (47,15)->421: 47 - 15 + 1 = 33 mismatch
+ sub-1
+ (55,09)->441: 55 - 09 - 1 = 45 mismatch
+ integer division (a/b)
+ (47,15)->421: 47 / 15 = 3 mismatch
+ reverse division (b/a)
+ (55,09)->441: 09 / 55 = 0 mismatch
+ reverse modulo (b mod a)
+ (47,15)->421: 15 mod 47 = 15 mismatch
+ digit absolute diff
+ (55,09)->441: |5-0| || |5-9| = 54 mismatch
+ digit add mod10
+ (47,15)->421: (4+1)%10 || (7+5)%10 = 52 mismatch
+ digit sub mod10
+ (55,09)->441: (5-0)%10 || (5-9)%10 = 56 mismatch
+ cross multiply
+ (47,15)->421: 4*1 + 7*5 = 4 + 35 = 39 mismatch
+ cross multiply rev
+ (55,09)->441: 5*9 + 5*0 = 45 + 0 = 45 mismatch
+ digit multiply
+ (47,15)->421: 4*1 || 7*5 = 4 || 35 = 435 mismatch
+ digit multiply rev
+ (55,09)->441: 5*9 || 5*0 = 45 || 0 = 450 mismatch
+ digit sum diff
+ (47,15)->421: (4+7) - (1+5) = 5 mismatch
+ digit sum sum
+ (55,09)->441: (5+5) + (0+9) = 19 mismatch
+ digit product diff
+ (47,15)->421: 4*7 - 1*5 = 28 - 5 = 23 mismatch
+ digit product sum
+ (55,09)->441: 5*5 + 0*9 = 25 + 0 = 25 mismatch
+ determinant
+ (47,15)->421: 4*5 - 7*1 = 20 - 7 = 13 mismatch
+ abs determinant
+ (55,09)->441: |5*9 - 5*0| = |45 - 0| = 45 mismatch
+
+correct, actions: reversed operands, reversed result, add-1
+
+Applying to 01-91:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [01->10, 91->19] and reversed result
+ addition
+ (10,19): 10 + 19 = 29 rev-> 92
+ Result is non-negative
+ \boxed{92}

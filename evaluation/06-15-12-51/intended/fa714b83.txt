@@ -1,0 +1,75 @@
+<^@%{ = $'
+${@^{ = <<
+>#)/# = >'/<
+%'?($ = ^
+#/?<< = '>
+The question is ^{?#{
+
+Operator symbols @)?
+Question operator symbol ?
+Question operator in examples
+
+Digit symbols <^%{$'>#/(
+
+Checking concatenation
+left <^ op @ right %{ expected <^%{ versus $' mismatch
+left ${ op @ right ^{ expected ${^{ versus << mismatch
+left ># op ) right /# expected >#/# versus >'/< mismatch
+left %' op ? right ($ expected %'($ versus ^ mismatch
+left #/ op ? right << expected #/<< versus '> mismatch
+
+Question operator ? is not concatenation
+
+Checking reverse concatenation
+left <^ op @ right %{ expected %{<^ versus $' mismatch
+left ${ op @ right ^{ expected ^{${ versus << mismatch
+left ># op ) right /# expected /#># versus >'/< mismatch
+left %' op ? right ($ expected ($%' versus ^ mismatch
+left #/ op ? right << expected <<#/ versus '> mismatch
+
+Question operator ? is not reverse concatenation
+
+Filtering out the concatenation operations
+<^@%{ = $'
+${@^{ = <<
+>#)/# = >'/<
+%'?($ = ^
+#/?<< = '>
+
+Assigning mul
+ left <^ op @ right %{ = $' length 2
+ left ${ op @ right ^{ = << length 2
+ left ># op ) right /# = >'/< length 4 assume mul
+ left %' op ? right ($ = ^ length 1
+ left #/ op ? right << = '> length 2
+
+Assigning sub
+ left <^ op @ right %{ = $' length 2
+ left ${ op @ right ^{ = << length 2
+ left ># op ) right /# = >'/< assumed mul
+ left %' op ? right ($ = ^ length 1 assume sub
+ left #/ op ? right << = '> assumed sub
+
+Assigning add
+ left <^ op @ right %{ = $' length 2
+ left ${ op @ right ^{ = << length 2
+ left ># op ) right /# = >'/< assumed mul
+ left %' op ? right ($ = ^ assumed sub
+ left #/ op ? right << = '> assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left <^ op @ right %{ = $' length 2 assume add
+ left ${ op @ right ^{ = << assumed add
+ left ># op ) right /# = >'/< assumed mul
+ left %' op ? right ($ = ^ assumed sub
+ left #/ op ? right << = '> assumed sub
+ left ^{ op ? right #{ the question, assumed sub
+
+Trying <=5 ^=6 %=4 {=2 $=9 '=8 >=3 #=7 /=1 (=0
+<^@%{ = 56 add 42 = 98 vs $' 98 diff 0 add ok; 65 add 24 = 89 vs rev '$ 89 diff 0 add ok
+${@^{ = 92 add 62 = 154 vs << 55 diff 99 add no; 29 add 26 = 55 vs rev << 55 diff 0 add ok
+>#)/# = 37 mul 17 = 629 vs >'/< 3815 diff 3186 mul no; 73 mul 71 = 5183 vs rev </'> 5183 diff 0 mul ok
+%'?($ = 48 sub 09 = 39 vs ^ 6 diff 33 sub no; 84 sub 90 = 6 vs rev ^ 6 diff 0 sub ok
+#/?<< = 71 sub 55 = 16 vs '> 83 diff 67 sub no; 17 sub 55 = 38 vs rev >' 38 diff 0 sub ok
+ accepted rev ^{?#{ = 62 sub 72 rev 26 sub 27 = 1 rev 1 = \boxed{/}

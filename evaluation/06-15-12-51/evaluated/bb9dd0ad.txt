@@ -1,0 +1,254 @@
+%?*%/ = *>
+>%*`] = *`%
+\?#"} = "]\`
+\%$?] = `>%
+//*"} = *?>
+The question is "}#^/
+
+Operator symbols *#$
+Question operator symbol #
+Question operator in examples
+
+Digit symbols %?/>`]\"}^
+
+Checking concatenation
+left %? op * right %/ expected %?%/ versus *> mismatch
+left >% op * right `] expected >%`] versus *`% mismatch
+left \? op # right "} expected \?"} versus "]\` mismatch
+left \% op $ right ?] expected \%?] versus `>% mismatch
+left // op * right "} expected //"} versus *?> mismatch
+
+Question operator # is not concatenation
+
+Checking reverse concatenation
+left %? op * right %/ expected %/%? versus *> mismatch
+left >% op * right `] expected `]>% versus *`% mismatch
+left \? op # right "} expected "}\? versus "]\` mismatch
+left \% op $ right ?] expected ?]\% versus `>% mismatch
+left // op * right "} expected "}// versus *?> mismatch
+
+Question operator # is not reverse concatenation
+
+Filtering out the concatenation operations
+%?*%/ = *>
+>%*`] = *`%
+\?#"} = "]\`
+\%$?] = `>%
+//*"} = *?>
+
+Assigning mul
+ left %? op * right %/ = *> length 2
+ left >% op * right `] = *`% length 3
+ left \? op # right "} = "]\` length 4 assume mul
+ left \% op $ right ?] = `>% length 3
+ left // op * right "} = *?> length 3
+
+Assigning sub
+ left %? op * right %/ = *> op in output assume sub
+ left >% op * right `] = *`% assumed sub
+ left \? op # right "} = "]\` assumed mul
+ left \% op $ right ?] = `>% length 3
+ left // op * right "} = *?> assumed sub
+
+Assigning add
+ left %? op * right %/ = *> assumed sub
+ left >% op * right `] = *`% assumed sub
+ left \? op # right "} = "]\` assumed mul
+ left \% op $ right ?] = `>% length 3 assume add
+ left // op * right "} = *?> assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left %? op * right %/ = *> assumed sub
+ left >% op * right `] = *`% assumed sub
+ left \? op # right "} = "]\` assumed mul
+ left \% op $ right ?] = `>% assumed add
+ left // op * right "} = *?> assumed sub
+ left "} op # right ^/ the question, assumed mul
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+>%*`] = 41 sub 56 = 15 vs *`% 45 diff 30 sub no; 14 sub 65 = 51 vs rev *`* 454 diff 403 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=8 ?=9 /=0 >=4 `=5 ]=6 \=7 "=1 }=2 ^=3
+%?*%/ = 89 sub 80 = 9 vs *> 4 diff 5 sub no; 98 sub 08 = 90 vs rev >* 48 diff 42 sub no
+ rejected none "}#^/ = 12 mul 30 rev 21 mul 03 = 63 rev 36 = final answer: ^]
+
+Trying %=3 ?=8 /=9 >=4 `=5 ]=6 \=7 "=1 }=2 ^=0
+%?*%/ = 38 sub 39 = 1 vs *> 4 diff 3 sub no; 83 sub 93 = 10 vs rev >* 43 diff 33 sub no
+ rejected none "}#^/ = 12 mul 09 rev 21 mul 90 = 1890 rev 0981 = final answer: ^/?"
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=2 ?=9 /=8 >=4 `=5 ]=6 \=7 "=1 }=3 ^=0
+%?*%/ = 29 sub 28 = 1 vs *> 4 diff 3 sub no; 92 sub 82 = 10 vs rev >* 42 diff 32 sub no
+ rejected none "}#^/ = 13 mul 08 rev 31 mul 80 = 2480 rev 0842 = final answer: ^/>%
+
+Trying %=8 ?=3 /=0 >=4 `=5 ]=6 \=7 "=1 }=2 ^=9
+%?*%/ = 83 sub 80 = 3 vs *> 4 diff 1 sub ok + 1; 38 sub 08 = 30 vs rev >* 48 diff 18 sub no
+>%*`] = 48 sub 56 = 8 vs *`% 458 diff 450 sub no; 84 sub 65 = 19 vs rev *`* 854 diff 835 sub no
+ rejected forward "}#^/ = 12 mul 90 = 1080 = final answer: "/%/
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=3 ?=8 /=9 >=4 `=5 ]=6 \=7 "=1 }=2 ^=0
+%?*%/ = 38 sub 39 = 1 vs *> 4 diff 3 sub no; 83 sub 93 = 10 vs rev >* 43 diff 33 sub no
+ rejected none "}#^/ = 12 mul 09 rev 21 mul 90 = 1890 rev 0981 = final answer: ^/?"
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=2 ?=9 /=8 >=4 `=5 ]=6 \=7 "=1 }=3 ^=0
+%?*%/ = 29 sub 28 = 1 vs *> 4 diff 3 sub no; 92 sub 82 = 10 vs rev >* 42 diff 32 sub no
+ rejected none "}#^/ = 13 mul 08 rev 31 mul 80 = 2480 rev 0842 = final answer: ^/>%
+
+Trying %=8 ?=3 /=0 >=4 `=5 ]=6 \=7 "=1 }=2 ^=9
+%?*%/ = 83 sub 80 = 3 vs *> 4 diff 1 sub ok + 1; 38 sub 08 = 30 vs rev >* 48 diff 18 sub no
+>%*`] = 48 sub 56 = 8 vs *`% 458 diff 450 sub no; 84 sub 65 = 19 vs rev *`* 854 diff 835 sub no
+ rejected forward "}#^/ = 12 mul 90 = 1080 = final answer: "/%/
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=3 ?=8 /=9 >=4 `=5 ]=6 \=7 "=1 }=2 ^=0
+%?*%/ = 38 sub 39 = 1 vs *> 4 diff 3 sub no; 83 sub 93 = 10 vs rev >* 43 diff 33 sub no
+ rejected none "}#^/ = 12 mul 09 rev 21 mul 90 = 1890 rev 0981 = final answer: ^/?"
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=2 ?=9 /=8 >=4 `=5 ]=6 \=7 "=1 }=3 ^=0
+%?*%/ = 29 sub 28 = 1 vs *> 4 diff 3 sub no; 92 sub 82 = 10 vs rev >* 42 diff 32 sub no
+ rejected none "}#^/ = 13 mul 08 rev 31 mul 80 = 2480 rev 0842 = final answer: ^/>%
+
+Trying %=8 ?=3 /=0 >=4 `=5 ]=6 \=7 "=1 }=2 ^=9
+%?*%/ = 83 sub 80 = 3 vs *> 4 diff 1 sub ok + 1; 38 sub 08 = 30 vs rev >* 48 diff 18 sub no
+>%*`] = 48 sub 56 = 8 vs *`% 458 diff 450 sub no; 84 sub 65 = 19 vs rev *`* 854 diff 835 sub no
+ rejected forward "}#^/ = 12 mul 90 = 1080 = final answer: "/%/
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=3 ?=8 /=9 >=4 `=5 ]=6 \=7 "=1 }=2 ^=0
+%?*%/ = 38 sub 39 = 1 vs *> 4 diff 3 sub no; 83 sub 93 = 10 vs rev >* 43 diff 33 sub no
+ rejected none "}#^/ = 12 mul 09 rev 21 mul 90 = 1890 rev 0981 = final answer: ^/?"
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=2 ?=9 /=8 >=4 `=5 ]=6 \=7 "=1 }=3 ^=0
+%?*%/ = 29 sub 28 = 1 vs *> 4 diff 3 sub no; 92 sub 82 = 10 vs rev >* 42 diff 32 sub no
+ rejected none "}#^/ = 13 mul 08 rev 31 mul 80 = 2480 rev 0842 = final answer: ^/>%
+
+Trying %=8 ?=3 /=0 >=4 `=5 ]=6 \=7 "=1 }=2 ^=9
+%?*%/ = 83 sub 80 = 3 vs *> 4 diff 1 sub ok + 1; 38 sub 08 = 30 vs rev >* 48 diff 18 sub no
+>%*`] = 48 sub 56 = 8 vs *`% 458 diff 450 sub no; 84 sub 65 = 19 vs rev *`* 854 diff 835 sub no
+ rejected forward "}#^/ = 12 mul 90 = 1080 = final answer: "/%/
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=3 ?=8 /=9 >=4 `=5 ]=6 \=7 "=1 }=2 ^=0
+%?*%/ = 38 sub 39 = 1 vs *> 4 diff 3 sub no; 83 sub 93 = 10 vs rev >* 43 diff 33 sub no
+ rejected none "}#^/ = 12 mul 09 rev 21 mul 90 = 1890 rev 0981 = final answer: ^/?"
+
+Trying %=1 ?=2 /=3 >=4 `=5 ]=6 \=7 "=8 }=9 ^=0
+%?*%/ = 12 sub 13 = 1 vs *> 4 diff 3 sub no; 21 sub 31 = 10 vs rev >* 41 diff 31 sub no
+ rejected forward "}#^/ = 89 mul 03 = 267 = final answer: ?]\
+
+Trying %=0 ?=1 /=2 >=4 `=5 ]=6 \=7 "=8 }=9 ^=3
+%?*%/ = 01 sub 02 = 1 vs *> 4 diff 3 sub no; 10 sub 20 = 10 vs rev >* 40 diff 30 sub no
+ rejected none "}#^/ = 89 mul 32 rev 98 mul 23 = 2254 rev 4522 = final answer: >`//
+
+Trying %=9 ?=0 /=1 >=4 `=5 ]=6 \=7 "=8 }=2 ^=3
+%?*%/ = 90 sub 91 = 1 vs *> 4 diff 3 sub no; 09 sub 19 = 10 vs rev >* 49 diff 39 sub no
+ rejected none "}#^/ = 82 mul 31 rev 28 mul 13 = 364 rev 463 = final answer: >]^
+
+Trying %=2 ?=9 /=8 >=4 `=5 ]=6 \=7 "=1 }=3 ^=0
+%?*%/ = 29 sub 28 = 1 vs *> 4 diff 3 sub no; 92 sub 82 = 10 vs rev >* 42 diff 32 sub no
+ rejected none "}#^/ = 13 mul 08 rev 31 mul 80 = 2480 rev 0842 = final answer: ^/>%
+
+Trying %=8 ?=3 /=0 >=4 `=5 ]=6 \=7 "=1 }=2 ^=9

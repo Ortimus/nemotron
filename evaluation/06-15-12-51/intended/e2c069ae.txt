@@ -1,0 +1,75 @@
+@^)<! = /::@
+:{}@^ = %@
+^%}/@ = @{}
+?%)@{ = ??!
+?%\{% = {?{
+The question is :!}{:
+
+Operator symbols )}\
+Question operator symbol }
+Question operator in examples
+
+Digit symbols @^<!/:{%?
+
+Checking concatenation
+left @^ op ) right <! expected @^<! versus /::@ mismatch
+left :{ op } right @^ expected :{@^ versus %@ mismatch
+left ^% op } right /@ expected ^%/@ versus @{} mismatch
+left ?% op ) right @{ expected ?%@{ versus ??! mismatch
+left ?% op \ right {% expected ?%{% versus {?{ mismatch
+
+Question operator } is not concatenation
+
+Checking reverse concatenation
+left @^ op ) right <! expected <!@^ versus /::@ mismatch
+left :{ op } right @^ expected @^:{ versus %@ mismatch
+left ^% op } right /@ expected /@^% versus @{} mismatch
+left ?% op ) right @{ expected @{?% versus ??! mismatch
+left ?% op \ right {% expected {%?% versus {?{ mismatch
+
+Question operator } is not reverse concatenation
+
+Filtering out the concatenation operations
+@^)<! = /::@
+:{}@^ = %@
+^%}/@ = @{}
+?%)@{ = ??!
+?%\{% = {?{
+
+Assigning mul
+ left @^ op ) right <! = /::@ length 4 assume mul
+ left :{ op } right @^ = %@ length 2
+ left ^% op } right /@ = @{} length 3
+ left ?% op ) right @{ = ??! assumed mul
+ left ?% op \ right {% = {?{ length 3
+
+Assigning sub
+ left @^ op ) right <! = /::@ assumed mul
+ left :{ op } right @^ = %@ length 2
+ left ^% op } right /@ = @{} op in output assume sub
+ left ?% op ) right @{ = ??! assumed mul
+ left ?% op \ right {% = {?{ length 3
+
+Assigning add
+ left @^ op ) right <! = /::@ assumed mul
+ left :{ op } right @^ = %@ assumed sub
+ left ^% op } right /@ = @{} assumed sub
+ left ?% op ) right @{ = ??! assumed mul
+ left ?% op \ right {% = {?{ length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left @^ op ) right <! = /::@ assumed mul
+ left :{ op } right @^ = %@ assumed sub
+ left ^% op } right /@ = @{} assumed sub
+ left ?% op ) right @{ = ??! assumed mul
+ left ?% op \ right {% = {?{ assumed add
+ left :! op } right {: the question, assumed sub
+
+Trying @=4 ^=6 <=8 !=7 /=2 :=9 {=1 %=5 ?=0 A=3
+@^)<! = 46 mul 87 = 4002 vs /::@ 2994 diff 1008 mul no; 64 mul 78 = 4992 vs rev @::/ 4992 diff 0 mul ok
+:{}@^ = 91 sub 46 = 45 vs %@ 54 diff 9 sub no; 19 sub 64 = 45 vs rev @% 45 diff 0 sub ok
+^%}/@ = 65 sub 24 = 41 vs @{} -41 diff 0 sub ok; 56 sub 42 = 14 vs rev @{@ -14 diff 0 sub ok
+?%)@{ = 05 mul 41 = 205 vs ??! 007 diff 198 mul no; 50 mul 14 = 700 vs rev !?? 700 diff 0 mul ok
+?%\{% = 05 add 15 = 20 vs {?{ 101 diff 81 add no; 50 add 51 = 101 vs rev {?{ 101 diff 0 add ok
+ accepted rev :!}{: = 97 sub 19 rev 79 sub 91 = 12 rev 21 = \boxed{/{}

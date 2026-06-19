@@ -1,0 +1,75 @@
+|>+<< = <^[
+|<*^^ = |>>
+[`+%[ = >%
+<@+<: = >^[
+`%*<` = <`><
+The question is `<+^@
+
+Operator symbols +*
+Question operator symbol +
+Question operator in examples
+
+Digit symbols |><^[`%@:
+
+Checking concatenation
+left |> op + right << expected |><< versus <^[ mismatch
+left |< op * right ^^ expected |<^^ versus |>> mismatch
+left [` op + right %[ expected [`%[ versus >% mismatch
+left <@ op + right <: expected <@<: versus >^[ mismatch
+left `% op * right <` expected `%<` versus <`>< mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left |> op + right << expected <<|> versus <^[ mismatch
+left |< op * right ^^ expected ^^|< versus |>> mismatch
+left [` op + right %[ expected %[[` versus >% mismatch
+left <@ op + right <: expected <:<@ versus >^[ mismatch
+left `% op * right <` expected <``% versus <`>< mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+|>+<< = <^[
+|<*^^ = |>>
+[`+%[ = >%
+<@+<: = >^[
+`%*<` = <`><
+
+Assigning mul
+ left |> op + right << = <^[ length 3
+ left |< op * right ^^ = |>> length 3
+ left [` op + right %[ = >% length 2
+ left <@ op + right <: = >^[ length 3
+ left `% op * right <` = <`>< length 4 assume mul
+
+Assigning sub
+ left |> op + right << = <^[ length 3
+ left |< op * right ^^ = |>> assumed mul
+ left [` op + right %[ = >% length 2
+ left <@ op + right <: = >^[ length 3
+ left `% op * right <` = <`>< assumed mul
+
+Assigning add
+ left |> op + right << = <^[ length 3 assume add
+ left |< op * right ^^ = |>> assumed mul
+ left [` op + right %[ = >% assumed add
+ left <@ op + right <: = >^[ assumed add
+ left `% op * right <` = <`>< assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left |> op + right << = <^[ assumed add
+ left |< op * right ^^ = |>> assumed mul
+ left [` op + right %[ = >% assumed add
+ left <@ op + right <: = >^[ assumed add
+ left `% op * right <` = <`>< assumed mul
+ left `< op + right ^@ the question, assumed add
+
+Trying |=0 >=8 <=4 ^=2 [=1 `=6 %=7 @=9 :=3 A=5
+|>+<< = 08 add 44 = 52 vs <^[ 421 diff 369 add no; 80 add 44 = 124 vs rev [^< 124 diff 0 add ok
+|<*^^ = 04 mul 22 = 88 vs |>> 088 diff 0 mul ok; 40 mul 22 = 880 vs rev >>| 880 diff 0 mul ok
+[`+%[ = 16 add 71 = 87 vs >% 87 diff 0 add ok; 61 add 17 = 78 vs rev %> 78 diff 0 add ok
+<@+<: = 49 add 43 = 92 vs >^[ 821 diff 729 add no; 94 add 34 = 128 vs rev [^> 128 diff 0 add ok
+`%*<` = 67 mul 46 = 3082 vs <`>< 4684 diff 1602 mul no; 76 mul 64 = 4864 vs rev <>`< 4864 diff 0 mul ok
+ accepted rev `<+^@ = 64 add 29 rev 46 add 92 = 138 rev 831 = \boxed{>:[}

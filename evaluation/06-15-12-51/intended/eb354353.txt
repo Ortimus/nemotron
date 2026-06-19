@@ -1,0 +1,66 @@
+//}|< = @|/<
+[@!"/ = \%
+"&!\/ = !@"
+%/}@@ = &%/%
+The question is %%}||
+
+Operator symbols }!
+Question operator symbol }
+Question operator in examples
+
+Digit symbols /|<@["\%&
+
+Checking concatenation
+left // op } right |< expected //|< versus @|/< mismatch
+left [@ op ! right "/ expected [@"/ versus \% mismatch
+left "& op ! right \/ expected "&\/ versus !@" mismatch
+left %/ op } right @@ expected %/@@ versus &%/% mismatch
+
+Question operator } is not concatenation
+
+Checking reverse concatenation
+left // op } right |< expected |<// versus @|/< mismatch
+left [@ op ! right "/ expected "/[@ versus \% mismatch
+left "& op ! right \/ expected \/"& versus !@" mismatch
+left %/ op } right @@ expected @@%/ versus &%/% mismatch
+
+Question operator } is not reverse concatenation
+
+Filtering out the concatenation operations
+//}|< = @|/<
+[@!"/ = \%
+"&!\/ = !@"
+%/}@@ = &%/%
+
+Assigning mul
+ left // op } right |< = @|/< length 4 assume mul
+ left [@ op ! right "/ = \% length 2
+ left "& op ! right \/ = !@" length 3
+ left %/ op } right @@ = &%/% assumed mul
+
+Assigning sub
+ left // op } right |< = @|/< assumed mul
+ left [@ op ! right "/ = \% length 2
+ left "& op ! right \/ = !@" op in output assume sub
+ left %/ op } right @@ = &%/% assumed mul
+
+Assigning add
+ left // op } right |< = @|/< assumed mul
+ left [@ op ! right "/ = \% assumed sub
+ left "& op ! right \/ = !@" assumed sub
+ left %/ op } right @@ = &%/% assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left // op } right |< = @|/< assumed mul
+ left [@ op ! right "/ = \% assumed sub
+ left "& op ! right \/ = !@" assumed sub
+ left %/ op } right @@ = &%/% assumed mul
+ left %% op } right || the question, assumed mul
+
+Trying /=4 |=6 <=0 @=2 [=9 "=3 \=5 %=8 &=1 A=7
+//}|< = 44 mul 60 = 2640 vs @|/< 2640 diff 0 mul ok; 44 mul 06 = 264 vs rev </|@ 0462 diff 198 mul no
+[@!"/ = 92 sub 34 = 58 vs \% 58 diff 0 sub ok; 29 sub 43 = 14 vs rev %\ 85 diff 71 sub no
+"&!\/ = 31 sub 54 = 23 vs !@" -23 diff 0 sub ok; 13 sub 45 = 32 vs rev !"@ -32 diff 0 sub ok
+%/}@@ = 84 mul 22 = 1848 vs &%/% 1848 diff 0 mul ok; 48 mul 22 = 1056 vs rev %/%& 8481 diff 7425 mul no
+ accepted forward %%}|| = 88 mul 66 = 5808 = \boxed{\%<%}

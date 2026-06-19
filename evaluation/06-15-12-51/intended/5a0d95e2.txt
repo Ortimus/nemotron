@@ -1,0 +1,63 @@
+{{-(( = &&
+((-## = -{{
+[@+|& = [@|&
+|)*[{ = /&"[
+[#+#" = [##"
+The question is {@*|{
+
+Operator symbols -+*
+Question operator symbol *
+Question operator in examples
+
+Digit symbols {(&#[@|)/"
+
+Checking concatenation
+left {{ op - right (( expected {{(( versus && mismatch
+left (( op - right ## expected ((## versus -{{ mismatch
+left [@ op + right |& expected [@|& versus [@|& match +
+left |) op * right [{ expected |)[{ versus /&"[ mismatch
+left [# op + right #" expected [##" versus [##" match +
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left {{ op - right (( expected (({{ versus && mismatch
+left (( op - right ## expected ##(( versus -{{ mismatch
+left [@ op + right |& expected |&[@ versus [@|& mismatch
+left |) op * right [{ expected [{|) versus /&"[ mismatch
+left [# op + right #" expected #"[# versus [##" mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+{{-(( = &&
+((-## = -{{
+|)*[{ = /&"[
+
+Assigning mul
+ left {{ op - right (( = && length 2
+ left (( op - right ## = -{{ length 3
+ left |) op * right [{ = /&"[ length 4 assume mul
+
+Assigning sub
+ left {{ op - right (( = && length 2
+ left (( op - right ## = -{{ op in output assume sub
+ left |) op * right [{ = /&"[ assumed mul
+
+Assigning add
+ left {{ op - right (( = && assumed sub
+ left (( op - right ## = -{{ assumed sub
+ left |) op * right [{ = /&"[ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left {{ op - right (( = && assumed sub
+ left (( op - right ## = -{{ assumed sub
+ left |) op * right [{ = /&"[ assumed mul
+ left {@ op * right |{ the question, assumed mul
+
+Trying {=7 (=2 &=5 #=9 [=8 @=0 |=4 )=1 /=3 "=6
+{{-(( = 77 sub 22 = 55 vs && 55 diff 0 sub ok; 77 sub 22 = 55 vs rev && 55 diff 0 sub ok
+((-## = 22 sub 99 = 77 vs -{{ -77 diff 0 sub ok; 22 sub 99 = 77 vs rev -{{ -77 diff 0 sub ok
+|)*[{ = 41 mul 87 = 3567 vs /&"[ 3568 diff 1 mul ok + 1; 14 mul 78 = 1092 vs rev ["&/ 8653 diff 7561 mul no
+ accepted forward {@*|{ = 70 mul+1 47 = 3290 + 1 = 3291 = \boxed{/(#)}

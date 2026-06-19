@@ -1,0 +1,184 @@
+37@72 = 64
+58!05 = 0524
+71!56 = 5011
+65?73 = 49
+82!61 = 844
+
+The inputs are 37, 72, 58, 05, 71, 56, 65, 73, 82, 61
+
+The outputs are 64, 0524, 5011, 49, 844
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+37@72 -> @
+58!05 -> !
+71!56 -> !
+65?73 -> ?
+82!61 -> !
+
+The operators
+@
+!
+?
+
+Looking at the question
+74!88 -> !
+The question operator is found in the examples.
+
+Looking at operator ! [58!05 = 0524, 71!56 = 5011, 82!61 = 844]:
+
+Trying common operations
+ reversed operands [58->85 05->50, 71->17 56->65, 82->28 61->16] and reversed result [expected (85,50)->0524, (17,65)->5011, (28,16)->844]
+ addition
+ (85,50)->0524: 85 + 50 = 135 rev-> 531 mismatch
+ multiplication
+ (17,65)->5011: (10 + 7) * 65 = 10 * 65 + 7 * 65 = 650 + 455 = 1105 rev-> 5011 match
+ (28,16)->844: (20 + 8) * 16 = 20 * 16 + 8 * 16 = 320 + 128 = 448 rev-> 844 match
+ (85,50)->0524: (80 + 5) * 50 = 80 * 50 + 5 * 50 = 4000 + 250 = 4250 rev-> 0524 match
+ correct, actions: reversed operands, reversed result, multiplication
+ concatenation
+ (28,16)->844: 28 || 16 = 2816 rev-> 6182 mismatch
+ reverse concatenation
+ (85,50)->0524: 50 || 85 = 5085 rev-> 5805 mismatch
+
+ identity [58 05, 71 56, 82 61] [expected (58,05)->0524, (71,56)->5011, (82,61)->844]
+ addition
+ (58,05)->0524: 58 + 05 = 63 mismatch
+ multiplication
+ (71,56)->5011: (70 + 1) * 56 = 70 * 56 + 1 * 56 = 3920 + 56 = 3976 mismatch
+ concatenation
+ (82,61)->844: 82 || 61 = 8261 mismatch
+ reverse concatenation
+ (58,05)->0524: 05 || 58 = 0558 mismatch
+
+Trying difference operations
+ reversed operands [58->85 05->50, 71->17 56->65, 82->28 61->16] and reversed result [expected (85,50)->0524, (17,65)->5011, (28,16)->844]
+ subtraction (a-b)
+ (85,50)->0524: 85 - 50 = 35 rev-> 53 mismatch
+ absolute difference
+ (17,65)->5011: |17 - 65| = 48 rev-> 84 mismatch
+ max mod min
+ (28,16)->844: max(28,16) mod min(28,16) = 28 mod 16 = 12 rev-> 21 mismatch
+ negated absolute difference
+ (85,50)->0524: -|85 - 50| = -35 rev-> -53 mismatch
+ reverse subtraction (b-a)
+ (17,65)->5011: 65 - 17 = 48 rev-> 84 mismatch
+ modulo (a mod b)
+ (28,16)->844: 28 mod 16 = 12 rev-> 21 mismatch
+
+ identity [58 05, 71 56, 82 61] [expected (58,05)->0524, (71,56)->5011, (82,61)->844]
+ subtraction (a-b)
+ (58,05)->0524: 58 - 05 = 53 mismatch
+ absolute difference
+ (71,56)->5011: |71 - 56| = 15 mismatch
+ max mod min
+ (82,61)->844: max(82,61) mod min(82,61) = 82 mod 61 = 21 mismatch
+ negated absolute difference
+ (58,05)->0524: -|58 - 05| = -53 mismatch
+ reverse subtraction (b-a)
+ (71,56)->5011: 56 - 71 = -15 mismatch
+ modulo (a mod b)
+ (82,61)->844: 82 mod 61 = 21 mismatch
+
+Trying rare operations
+ reversed operands [58->85 05->50, 71->17 56->65, 82->28 61->16] and reversed result [expected (85,50)->0524, (17,65)->5011, (28,16)->844]
+ multiply+1
+ (85,50)->0524: (80 + 5) * 50 + 1 = 80 * 50 + 5 * 50 + 1 = 4000 + 250 + 1 = 4250 + 1 = 4251 rev-> 1524 mismatch
+ multiply-1
+ (17,65)->5011: (10 + 7) * 65 - 1 = 10 * 65 + 7 * 65 - 1 = 650 + 455 - 1 = 1105 - 1 = 1104 rev-> 4011 mismatch
+ add+1
+ (28,16)->844: 28 + 16 + 1 = 45 rev-> 54 mismatch
+ add-1
+ (85,50)->0524: 85 + 50 - 1 = 134 rev-> 431 mismatch
+ sub+1
+ (17,65)->5011: 17 - 65 + 1 = -47 rev-> -74 mismatch
+ sub-1
+ (28,16)->844: 28 - 16 - 1 = 11 rev-> 11 mismatch
+ integer division (a/b)
+ (85,50)->0524: 85 / 50 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (17,65)->5011: 65 / 17 = 3 rev-> 3 mismatch
+ reverse modulo (b mod a)
+ (28,16)->844: 16 mod 28 = 16 rev-> 61 mismatch
+ digit absolute diff
+ (85,50)->0524: |8-5| || |5-0| = 35 rev-> 53 mismatch
+ digit add mod10
+ (17,65)->5011: (1+6)%10 || (7+5)%10 = 72 rev-> 27 mismatch
+ digit sub mod10
+ (28,16)->844: (2-1)%10 || (8-6)%10 = 12 rev-> 21 mismatch
+ cross multiply
+ (85,50)->0524: 8*5 + 5*0 = 40 + 0 = 40 rev-> 04 mismatch
+ cross multiply rev
+ (17,65)->5011: 1*5 + 7*6 = 5 + 42 = 47 rev-> 74 mismatch
+ digit multiply
+ (28,16)->844: 2*1 || 8*6 = 2 || 48 = 248 rev-> 842 mismatch
+ digit multiply rev
+ (85,50)->0524: 8*0 || 5*5 = 0 || 25 = 025 rev-> 520 mismatch
+ digit sum diff
+ (17,65)->5011: (1+7) - (6+5) = -3 rev-> -3 mismatch
+ digit sum sum
+ (28,16)->844: (2+8) + (1+6) = 17 rev-> 71 mismatch
+ digit product diff
+ (85,50)->0524: 8*5 - 5*0 = 40 - 0 = 40 rev-> 04 mismatch
+ digit product sum
+ (17,65)->5011: 1*7 + 6*5 = 7 + 30 = 37 rev-> 73 mismatch
+ determinant
+ (28,16)->844: 2*6 - 8*1 = 12 - 8 = 4 rev-> 4 mismatch
+ abs determinant
+ (85,50)->0524: |8*0 - 5*5| = |0 - 25| = 25 rev-> 52 mismatch
+
+ identity [58 05, 71 56, 82 61] [expected (58,05)->0524, (71,56)->5011, (82,61)->844]
+ multiply+1
+ (58,05)->0524: (50 + 8) * 05 + 1 = 50 * 05 + 8 * 05 + 1 = 250 + 40 + 1 = 290 + 1 = 291 mismatch
+ multiply-1
+ (71,56)->5011: (70 + 1) * 56 - 1 = 70 * 56 + 1 * 56 - 1 = 3920 + 56 - 1 = 3976 - 1 = 3975 mismatch
+ add+1
+ (82,61)->844: 82 + 61 + 1 = 144 mismatch
+ add-1
+ (58,05)->0524: 58 + 05 - 1 = 62 mismatch
+ sub+1
+ (71,56)->5011: 71 - 56 + 1 = 16 mismatch
+ sub-1
+ (82,61)->844: 82 - 61 - 1 = 20 mismatch
+ integer division (a/b)
+ (58,05)->0524: 58 / 05 = 11 mismatch
+ reverse division (b/a)
+ (71,56)->5011: 56 / 71 = 0 mismatch
+ reverse modulo (b mod a)
+ (82,61)->844: 61 mod 82 = 61 mismatch
+ digit absolute diff
+ (58,05)->0524: |5-0| || |8-5| = 53 mismatch
+ digit add mod10
+ (71,56)->5011: (7+5)%10 || (1+6)%10 = 27 mismatch
+ digit sub mod10
+ (82,61)->844: (8-6)%10 || (2-1)%10 = 21 mismatch
+ cross multiply
+ (58,05)->0524: 5*0 + 8*5 = 0 + 40 = 40 mismatch
+ cross multiply rev
+ (71,56)->5011: 7*6 + 1*5 = 42 + 5 = 47 mismatch
+ digit multiply
+ (82,61)->844: 8*6 || 2*1 = 48 || 2 = 482 mismatch
+ digit multiply rev
+ (58,05)->0524: 5*5 || 8*0 = 25 || 0 = 250 mismatch
+ digit sum diff
+ (71,56)->5011: (7+1) - (5+6) = -3 mismatch
+ digit sum sum
+ (82,61)->844: (8+2) + (6+1) = 17 mismatch
+ digit product diff
+ (58,05)->0524: 5*8 - 0*5 = 40 - 0 = 40 mismatch
+ digit product sum
+ (71,56)->5011: 7*1 + 5*6 = 7 + 30 = 37 mismatch
+ determinant
+ (82,61)->844: 8*1 - 2*6 = 8 - 12 = -4 mismatch
+ abs determinant
+ (58,05)->0524: |5*5 - 8*0| = |25 - 0| = 25 mismatch
+
+correct, actions: reversed operands, reversed result, multiplication
+
+Applying to 74!88:
+ We recall that the question operator is found in the examples.
+ reversed operands [74->47, 88->88] and reversed result
+ multiplication
+ (47,88): (40 + 7) * 88 = 40 * 88 + 7 * 88 = 3520 + 616 = 4136 rev-> 6314
+ Result is non-negative
+ \boxed{6314}

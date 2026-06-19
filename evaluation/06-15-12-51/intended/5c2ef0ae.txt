@@ -1,0 +1,66 @@
+]#*`( = *?(
+(&<]@ = ']
+`(^@` = `#/\
+/@^`( = '&@`
+The question is /&*\?
+
+Operator symbols *<^
+Question operator symbol *
+Question operator in examples
+
+Digit symbols ]#`(?&@'/\
+
+Checking concatenation
+left ]# op * right `( expected ]#`( versus *?( mismatch
+left (& op < right ]@ expected (&]@ versus '] mismatch
+left `( op ^ right @` expected `(@` versus `#/\ mismatch
+left /@ op ^ right `( expected /@`( versus '&@` mismatch
+
+Question operator * is not concatenation
+
+Checking reverse concatenation
+left ]# op * right `( expected `(]# versus *?( mismatch
+left (& op < right ]@ expected ]@(& versus '] mismatch
+left `( op ^ right @` expected @``( versus `#/\ mismatch
+left /@ op ^ right `( expected `(/@ versus '&@` mismatch
+
+Question operator * is not reverse concatenation
+
+Filtering out the concatenation operations
+]#*`( = *?(
+(&<]@ = ']
+`(^@` = `#/\
+/@^`( = '&@`
+
+Assigning mul
+ left ]# op * right `( = *?( length 3
+ left (& op < right ]@ = '] length 2
+ left `( op ^ right @` = `#/\ length 4 assume mul
+ left /@ op ^ right `( = '&@` assumed mul
+
+Assigning sub
+ left ]# op * right `( = *?( op in output assume sub
+ left (& op < right ]@ = '] length 2
+ left `( op ^ right @` = `#/\ assumed mul
+ left /@ op ^ right `( = '&@` assumed mul
+
+Assigning add
+ left ]# op * right `( = *?( assumed sub
+ left (& op < right ]@ = '] length 2
+ left `( op ^ right @` = `#/\ assumed mul
+ left /@ op ^ right `( = '&@` assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left ]# op * right `( = *?( assumed sub
+ left (& op < right ]@ = '] length 2 assume add
+ left `( op ^ right @` = `#/\ assumed mul
+ left /@ op ^ right `( = '&@` assumed mul
+ left /& op * right \? the question, assumed sub
+
+Trying ]=2 #=0 `=7 (=3 ?=5 &=4 @=9 '=6 /=8 \=1
+]#*`( = 20 sub 73 = 53 vs *?( -53 diff 0 sub ok; 02 sub 37 = 35 vs rev *(? -35 diff 0 sub ok
+(&<]@ = 34 add 29 = 63 vs '] 62 diff 1 add ok - 1; 43 add 92 = 135 vs rev ]' 26 diff 109 add no
+`(^@` = 73 mul 97 = 7081 vs `#/\ 7081 diff 0 mul ok; 37 mul 79 = 2923 vs rev \/#` 1807 diff 1116 mul no
+/@^`( = 89 mul 73 = 6497 vs '&@` 6497 diff 0 mul ok; 98 mul 37 = 3626 vs rev `@&' 7946 diff 4320 mul no
+ accepted forward /&*\? = 84 sub 15 = 69 = \boxed{'@}

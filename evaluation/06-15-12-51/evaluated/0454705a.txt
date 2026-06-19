@@ -1,0 +1,216 @@
+|?'|< = }:%^
+|?+?@ = +}?
+%<+(} = +/(
+<|-<@ = }/|
+The question is (}'}|
+
+Operator symbols '+-
+Question operator symbol '
+Question operator in examples
+
+Digit symbols |?<}:%^@(/
+
+Checking concatenation
+left |? op ' right |< expected |?|< versus }:%^ mismatch
+left |? op + right ?@ expected |??@ versus +}? mismatch
+left %< op + right (} expected %<(} versus +/( mismatch
+left <| op - right <@ expected <|<@ versus }/| mismatch
+
+Question operator ' is not concatenation
+
+Checking reverse concatenation
+left |? op ' right |< expected |<|? versus }:%^ mismatch
+left |? op + right ?@ expected ?@|? versus +}? mismatch
+left %< op + right (} expected (}%< versus +/( mismatch
+left <| op - right <@ expected <@<| versus }/| mismatch
+
+Question operator ' is not reverse concatenation
+
+Filtering out the concatenation operations
+|?'|< = }:%^
+|?+?@ = +}?
+%<+(} = +/(
+<|-<@ = }/|
+
+Assigning mul
+ left |? op ' right |< = }:%^ length 4 assume mul
+ left |? op + right ?@ = +}? length 3
+ left %< op + right (} = +/( length 3
+ left <| op - right <@ = }/| length 3
+
+Assigning sub
+ left |? op ' right |< = }:%^ assumed mul
+ left |? op + right ?@ = +}? op in output assume sub
+ left %< op + right (} = +/( assumed sub
+ left <| op - right <@ = }/| length 3
+
+Assigning add
+ left |? op ' right |< = }:%^ assumed mul
+ left |? op + right ?@ = +}? assumed sub
+ left %< op + right (} = +/( assumed sub
+ left <| op - right <@ = }/| length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left |? op ' right |< = }:%^ assumed mul
+ left |? op + right ?@ = +}? assumed sub
+ left %< op + right (} = +/( assumed sub
+ left <| op - right <@ = }/| assumed add
+ left (} op ' right }| the question, assumed mul
+
+Trying |=1 ?=2 <=3 }=4 :=5 %=6 ^=7 @=8 (=9 /=0
+|?'|< = 12 mul 13 = 156 vs }:%^ 4567 diff 4411 mul no; 21 mul 31 = 651 vs rev ^%:} 7654 diff 7003 mul no
+ rejected none (}'}| = 94 mul 41 rev 49 mul 14 = 686 vs rev |}'4 144 rev 441 diff 297 mul no
+
+Trying |=0 ?=1 <=2 }=3 :=4 %=5 ^=6 @=7 (=9 /=8
+|?'|< = 01 mul 02 = 2 vs }:%^ 3456 diff 3454 mul no; 10 mul 20 = 200 vs rev ^%:} 6543 diff 6343 mul no
+ rejected none (}'}| = 93 mul 30 rev 39 mul 03 = 117 vs rev |}'3 033 rev 331 diff 214 mul no
+
+Trying |=8 ?=0 <=1 }=2 :=3 %=4 ^=5 @=7 (=9 /=6
+|?'|< = 80 mul 81 = 6480 vs }:%^ 2345 diff 4135 mul no; 08 mul 18 = 144 vs rev ^%:} 5432 diff 5288 mul no
+ rejected none (}'}| = 92 mul 28 rev 29 mul 82 = 2378 vs rev |}'2 822 rev 822 diff 1556 mul no
+
+Trying |=5 ?=8 <=0 }=1 :=2 %=3 ^=4 @=7 (=9 /=6
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected none (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 115 diff 814 mul no
+
+Trying |=6 ?=5 <=8 }=0 :=1 %=2 ^=3 @=7 (=9 /=4
+|?'|< = 65 mul 68 = 4420 vs }:%^ 0123 diff 4297 mul no; 56 mul 86 = 4816 vs rev ^%:} 3210 diff 1606 mul no
+ rejected none (}'}| = 90 mul 06 rev 09 mul 60 = 540 vs rev |}'0 600 rev 045 diff 15 mul no
+
+Trying |=9 ?=6 <=5 }=7 :=0 %=1 ^=2 @=8 (=3 /=4
+|?'|< = 96 mul 95 = 9120 vs }:%^ 7012 diff 2108 mul no; 69 mul 59 = 4071 vs rev ^%:} 2107 diff 1964 mul no
+ rejected none (}'}| = 37 mul 79 rev 73 mul 97 = 7081 vs rev |}'7 977 rev 7807 diff 726 mul no
+
+Trying |=1 ?=2 <=3 }=4 :=5 %=6 ^=7 @=8 (=9 /=0
+|?'|< = 12 mul 13 = 156 vs }:%^ 4567 diff 4411 mul no; 21 mul 31 = 651 vs rev ^%:} 7654 diff 7003 mul no
+ rejected none (}'}| = 94 mul 41 rev 49 mul 14 = 686 vs rev |}'4 144 rev 646 diff 42 mul no
+
+Trying |=0 ?=1 <=2 }=3 :=4 %=5 ^=6 @=7 (=9 /=8
+|?'|< = 01 mul 02 = 2 vs }:%^ 3456 diff 3454 mul no; 10 mul 20 = 200 vs rev ^%:} 6543 diff 6343 mul no
+ rejected none (}'}| = 93 mul 30 rev 39 mul 03 = 117 vs rev |}'3 033 rev 711 diff 594 mul no
+
+Trying |=8 ?=0 <=1 }=2 :=3 %=4 ^=5 @=7 (=9 /=6
+|?'|< = 80 mul 81 = 6480 vs }:%^ 2345 diff 4135 mul no; 08 mul 18 = 144 vs rev ^%:} 5432 diff 5288 mul no
+ rejected none (}'}| = 92 mul 28 rev 29 mul 82 = 2378 vs rev |}'2 822 rev 822 diff 1556 mul no
+
+Trying |=5 ?=8 <=0 }=1 :=2 %=3 ^=4 @=7 (=9 /=6
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected none (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected rev (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 115 diff 854 mul no
+
+Trying |=6 ?=5 <=8 }=0 :=1 %=2 ^=3 @=7 (=9 /=4
+|?'|< = 65 mul 68 = 4420 vs }:%^ 0123 diff 4297 mul no; 56 mul 86 = 4816 vs rev ^%:} 3210 diff 1606 mul no
+ rejected none (}'}| = 90 mul 06 rev 09 mul 60 = 540 vs rev |}'0 600 rev 045 diff 95 mul no
+
+Trying |=9 ?=6 <=5 }=7 :=0 %=1 ^=2 @=8 (=3 /=4
+|?'|< = 96 mul 95 = 9120 vs }:%^ 7012 diff 2108 mul no; 69 mul 59 = 4071 vs rev ^%:} 2107 diff 1964 mul no
+ rejected none (}'}| = 37 mul 79 rev 73 mul 97 = 7081 vs rev |}'7 977 rev 1807 diff 5274 mul no
+
+Trying |=1 ?=2 <=3 }=4 :=5 %=6 ^=7 @=8 (=9 /=0
+|?'|< = 12 mul 13 = 156 vs }:%^ 4567 diff 4411 mul no; 21 mul 31 = 651 vs rev ^%:} 7654 diff 7003 mul no
+ rejected none (}'}| = 94 mul 41 rev 49 mul 14 = 686 vs rev |}'4 144 rev 646 diff 42 mul no
+
+Trying |=0 ?=1 <=2 }=3 :=4 %=5 ^=6 @=7 (=9 /=8
+|?'|< = 01 mul 02 = 2 vs }:%^ 3456 diff 3454 mul no; 10 mul 20 = 200 vs rev ^%:} 6543 diff 6343 mul no
+ rejected none (}'}| = 93 mul 30 rev 39 mul 03 = 117 vs rev |}'3 033 rev 711 diff 594 mul no
+
+Trying |=8 ?=0 <=1 }=2 :=3 %=4 ^=5 @=7 (=9 /=6
+|?'|< = 80 mul 81 = 6480 vs }:%^ 2345 diff 4135 mul no; 08 mul 18 = 144 vs rev ^%:} 5432 diff 5288 mul no
+ rejected none (}'}| = 92 mul 28 rev 29 mul 82 = 2378 vs rev |}'2 822 rev 822 diff 1556 mul no
+
+Trying |=5 ?=8 <=0 }=1 :=2 %=3 ^=4 @=7 (=9 /=6
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected none (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected rev (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+
+Trying |=6 ?=5 <=8 }=0 :=1 %=2 ^=3 @=7 (=9 /=4
+|?'|< = 65 mul 68 = 4420 vs }:%^ 0123 diff 4297 mul no; 56 mul 86 = 4816 vs rev ^%:} 3210 diff 1606 mul no
+ rejected none (}'}| = 90 mul 06 rev 09 mul 60 = 540 vs rev |}'0 600 rev 045 diff 95 mul no
+
+Trying |=9 ?=6 <=5 }=7 :=0 %=1 ^=2 @=8 (=3 /=4
+|?'|< = 96 mul 95 = 9120 vs }:%^ 7012 diff 2108 mul no; 69 mul 59 = 4071 vs rev ^%:} 2107 diff 1964 mul no
+ rejected none (}'}| = 37 mul 79 rev 73 mul 97 = 7081 vs rev |}'7 977 rev 1807 diff 5274 mul no
+
+Trying |=1 ?=2 <=3 }=4 :=5 %=6 ^=7 @=8 (=9 /=0
+|?'|< = 12 mul 13 = 156 vs }:%^ 4567 diff 4411 mul no; 21 mul 31 = 651 vs rev ^%:} 7654 diff 7003 mul no
+ rejected none (}'}| = 94 mul 41 rev 49 mul 14 = 686 vs rev |}'4 144 rev 646 diff 42 mul no
+
+Trying |=0 ?=1 <=2 }=3 :=4 %=5 ^=6 @=7 (=9 /=8
+|?'|< = 01 mul 02 = 2 vs }:%^ 3456 diff 3454 mul no; 10 mul 20 = 200 vs rev ^%:} 6543 diff 6343 mul no
+ rejected none (}'}| = 93 mul 30 rev 39 mul 03 = 117 vs rev |}'3 033 rev 711 diff 594 mul no
+
+Trying |=8 ?=0 <=1 }=2 :=3 %=4 ^=5 @=7 (=9 /=6
+|?'|< = 80 mul 81 = 6480 vs }:%^ 2345 diff 4135 mul no; 08 mul 18 = 144 vs rev ^%:} 5432 diff 5288 mul no
+ rejected none (}'}| = 92 mul 28 rev 29 mul 82 = 2378 vs rev |}'2 822 rev 822 diff 1556 mul no
+
+Trying |=5 ?=8 <=0 }=1 :=2 %=3 ^=4 @=7 (=9 /=6
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected none (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected rev (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+
+Trying |=6 ?=5 <=8 }=0 :=1 %=2 ^=3 @=7 (=9 /=4
+|?'|< = 65 mul 68 = 4420 vs }:%^ 0123 diff 4297 mul no; 56 mul 86 = 4816 vs rev ^%:} 3210 diff 1606 mul no
+ rejected none (}'}| = 90 mul 06 rev 09 mul 60 = 540 vs rev |}'0 600 rev 045 diff 95 mul no
+
+Trying |=9 ?=6 <=5 }=7 :=0 %=1 ^=2 @=8 (=3 /=4
+|?'|< = 96 mul 95 = 9120 vs }:%^ 7012 diff 2108 mul no; 69 mul 59 = 4071 vs rev ^%:} 2107 diff 1964 mul no
+ rejected none (}'}| = 37 mul 79 rev 73 mul 97 = 7081 vs rev |}'7 977 rev 1807 diff 5274 mul no
+
+Trying |=1 ?=2 <=3 }=4 :=5 %=6 ^=7 @=8 (=9 /=0
+|?'|< = 12 mul 13 = 156 vs }:%^ 4567 diff 4411 mul no; 21 mul 31 = 651 vs rev ^%:} 7654 diff 7003 mul no
+ rejected none (}'}| = 94 mul 41 rev 49 mul 14 = 686 vs rev |}'4 144 rev 646 diff 42 mul no
+
+Trying |=0 ?=1 <=2 }=3 :=4 %=5 ^=6 @=7 (=9 /=8
+|?'|< = 01 mul 02 = 2 vs }:%^ 3456 diff 3454 mul no; 10 mul 20 = 200 vs rev ^%:} 6543 diff 6343 mul no
+ rejected none (}'}| = 93 mul 30 rev 39 mul 03 = 117 vs rev |}'3 033 rev 711 diff 594 mul no
+
+Trying |=8 ?=0 <=1 }=2 :=3 %=4 ^=5 @=7 (=9 /=6
+|?'|< = 80 mul 81 = 6480 vs }:%^ 2345 diff 4135 mul no; 08 mul 18 = 144 vs rev ^%:} 5432 diff 5288 mul no
+ rejected none (}'}| = 92 mul 28 rev 29 mul 82 = 2378 vs rev |}'2 822 rev 822 diff 1556 mul no
+
+Trying |=5 ?=8 <=0 }=1 :=2 %=3 ^=4 @=7 (=9 /=6
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected none (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected rev (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+
+Trying |=6 ?=5 <=8 }=0 :=1 %=2 ^=3 @=7 (=9 /=4
+|?'|< = 65 mul 68 = 4420 vs }:%^ 0123 diff 4297 mul no; 56 mul 86 = 4816 vs rev ^%:} 3210 diff 1606 mul no
+ rejected none (}'}| = 90 mul 06 rev 09 mul 60 = 540 vs rev |}'0 600 rev 045 diff 95 mul no
+
+Trying |=9 ?=6 <=5 }=7 :=0 %=1 ^=2 @=8 (=3 /=4
+|?'|< = 96 mul 95 = 9120 vs }:%^ 7012 diff 2108 mul no; 69 mul 59 = 4071 vs rev ^%:} 2107 diff 1964 mul no
+ rejected none (}'}| = 37 mul 79 rev 73 mul 97 = 7081 vs rev |}'7 977 rev 1807 diff 5274 mul no
+
+Trying |=1 ?=2 <=3 }=4 :=5 %=6 ^=7 @=8 (=9 /=0
+|?'|< = 12 mul 13 = 156 vs }:%^ 4567 diff 4411 mul no; 21 mul 31 = 651 vs rev ^%:} 7654 diff 7003 mul no
+ rejected none (}'}| = 94 mul 41 rev 49 mul 14 = 686 vs rev |}'4 144 rev 646 diff 42 mul no
+
+Trying |=0 ?=1 <=2 }=3 :=4 %=5 ^=6 @=7 (=9 /=8
+|?'|< = 01 mul 02 = 2 vs }:%^ 3456 diff 3454 mul no; 10 mul 20 = 200 vs rev ^%:} 6543 diff 6343 mul no
+ rejected none (}'}| = 93 mul 30 rev 39 mul 03 = 117 vs rev |}'3 033 rev 711 diff 594 mul no
+
+Trying |=8 ?=0 <=1 }=2 :=3 %=4 ^=5 @=7 (=9 /=6
+|?'|< = 80 mul 81 = 6480 vs }:%^ 2345 diff 4135 mul no; 08 mul 18 = 144 vs rev ^%:} 5432 diff 5288 mul no
+ rejected none (}'}| = 92 mul 28 rev 29 mul 82 = 2378 vs rev |}'2 822 rev 822 diff 1556 mul no
+
+Trying |=5 ?=8 <=0 }=1 :=2 %=3 ^=4 @=7 (=9 /=6
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected none (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+|?'|< = 58 mul 50 = 2900 vs }:%^ 1234 diff 1666 mul no; 85 mul 05 = 425 vs rev ^%:} 4321 diff 3896 mul no
+ rejected rev (}'}| = 91 mul 15 rev 19 mul 51 = 969 vs rev |}'1 511 rev 969 diff 0 mul ok
+
+Trying |=6 ?=5 <=8 }=0 :=1 %=2 ^=3 @=7 (=9 /=4
+|?'|< = 65 mul 68 = 4420 vs }:%^ 0123 diff 4297 mul no; 56 mul 86 = 4816 vs rev ^%:} 3210 diff 1606 mul no
+ rejected none (}'}| = 90 mul 06 rev 09 mul 60 = 540 vs rev |}'0 600 rev 045 diff 95 mul no
+
+Trying |=9 ?=6 <=5 }=7 :=0 %=1 ^=2 @=8 (=3 /=4
+|?'|< = 96 mul 95 = 9120 vs }:%^ 7012 diff 2108 mul no; 69 mul 59 = 4071 vs rev ^%:} 2107 diff 1964 mul no
+ rejected none (}'}| = 37 mul 79 rev 73 mul 97 = 7081 vs rev |}'7 977 rev 1807 diff 5274 mul no
+
+Trying |=1 ?=2 <=3 }=4 :=5 %=6 ^=7 @=8 (=9 /=0
+|?'|< = 12 mul 13 = 156 vs }:%^ 4567 diff 4411 mul no; 21 mul 31 = 651 vs rev ^%:

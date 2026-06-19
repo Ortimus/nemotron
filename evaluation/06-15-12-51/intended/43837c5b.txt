@@ -1,0 +1,181 @@
+90^36 = 18
+19*32 = 1932
+15<45 = 675
+54^25 = 4
+
+The inputs are 90, 36, 19, 32, 15, 45, 54, 25
+
+The outputs are 18, 1932, 675, 4
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+90^36 -> ^
+19*32 -> *
+15<45 -> <
+54^25 -> ^
+
+The operators
+^
+*
+<
+
+Looking at the question
+45*72 -> *
+The question operator is found in the examples.
+
+Looking at operator * [19*32 = 1932]:
+
+Trying common operations
+ reversed operands [19->91 32->23] and reversed result [expected (91,23)->1932]
+ addition
+ (91,23)->1932: 91 + 23 = 114 rev-> 411 mismatch
+ multiplication
+ (91,23)->1932: (90 + 1) * 23 = 90 * 23 + 1 * 23 = 2070 + 23 = 2093 rev-> 3902 mismatch
+ concatenation
+ (91,23)->1932: 91 || 23 = 9123 rev-> 3219 mismatch
+ reverse concatenation
+ (91,23)->1932: 23 || 91 = 2391 rev-> 1932 match
+ correct, actions: reversed operands, reversed result, reverse concatenation
+
+ identity [19 32] [expected (19,32)->1932]
+ addition
+ (19,32)->1932: 19 + 32 = 51 mismatch
+ multiplication
+ (19,32)->1932: (10 + 9) * 32 = 10 * 32 + 9 * 32 = 320 + 288 = 608 mismatch
+ concatenation
+ (19,32)->1932: 19 || 32 = 1932 match
+ correct, but skipping
+ reverse concatenation
+ (19,32)->1932: 32 || 19 = 3219 mismatch
+
+Trying difference operations
+ reversed operands [19->91 32->23] and reversed result [expected (91,23)->1932]
+ subtraction (a-b)
+ (91,23)->1932: 91 - 23 = 68 rev-> 86 mismatch
+ absolute difference
+ (91,23)->1932: |91 - 23| = 68 rev-> 86 mismatch
+ max mod min
+ (91,23)->1932: max(91,23) mod min(91,23) = 91 mod 23 = 22 rev-> 22 mismatch
+ negated absolute difference
+ (91,23)->1932: -|91 - 23| = -68 rev-> -86 mismatch
+ reverse subtraction (b-a)
+ (91,23)->1932: 23 - 91 = -68 rev-> -86 mismatch
+ modulo (a mod b)
+ (91,23)->1932: 91 mod 23 = 22 rev-> 22 mismatch
+
+ identity [19 32] [expected (19,32)->1932]
+ subtraction (a-b)
+ (19,32)->1932: 19 - 32 = -13 mismatch
+ absolute difference
+ (19,32)->1932: |19 - 32| = 13 mismatch
+ max mod min
+ (19,32)->1932: max(19,32) mod min(19,32) = 32 mod 19 = 13 mismatch
+ negated absolute difference
+ (19,32)->1932: -|19 - 32| = -13 mismatch
+ reverse subtraction (b-a)
+ (19,32)->1932: 32 - 19 = 13 mismatch
+ modulo (a mod b)
+ (19,32)->1932: 19 mod 32 = 19 mismatch
+
+Trying rare operations
+ reversed operands [19->91 32->23] and reversed result [expected (91,23)->1932]
+ multiply+1
+ (91,23)->1932: (90 + 1) * 23 + 1 = 90 * 23 + 1 * 23 + 1 = 2070 + 23 + 1 = 2093 + 1 = 2094 rev-> 4902 mismatch
+ multiply-1
+ (91,23)->1932: (90 + 1) * 23 - 1 = 90 * 23 + 1 * 23 - 1 = 2070 + 23 - 1 = 2093 - 1 = 2092 rev-> 2902 mismatch
+ add+1
+ (91,23)->1932: 91 + 23 + 1 = 115 rev-> 511 mismatch
+ add-1
+ (91,23)->1932: 91 + 23 - 1 = 113 rev-> 311 mismatch
+ sub+1
+ (91,23)->1932: 91 - 23 + 1 = 69 rev-> 96 mismatch
+ sub-1
+ (91,23)->1932: 91 - 23 - 1 = 67 rev-> 76 mismatch
+ integer division (a/b)
+ (91,23)->1932: 91 / 23 = 3 rev-> 3 mismatch
+ reverse division (b/a)
+ (91,23)->1932: 23 / 91 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (91,23)->1932: 23 mod 91 = 23 rev-> 32 mismatch
+ digit absolute diff
+ (91,23)->1932: |9-2| || |1-3| = 72 rev-> 27 mismatch
+ digit add mod10
+ (91,23)->1932: (9+2)%10 || (1+3)%10 = 14 rev-> 41 mismatch
+ digit sub mod10
+ (91,23)->1932: (9-2)%10 || (1-3)%10 = 78 rev-> 87 mismatch
+ cross multiply
+ (91,23)->1932: 9*2 + 1*3 = 18 + 3 = 21 rev-> 12 mismatch
+ cross multiply rev
+ (91,23)->1932: 9*3 + 1*2 = 27 + 2 = 29 rev-> 92 mismatch
+ digit multiply
+ (91,23)->1932: 9*2 || 1*3 = 18 || 3 = 183 rev-> 381 mismatch
+ digit multiply rev
+ (91,23)->1932: 9*3 || 1*2 = 27 || 2 = 272 rev-> 272 mismatch
+ digit sum diff
+ (91,23)->1932: (9+1) - (2+3) = 5 rev-> 5 mismatch
+ digit sum sum
+ (91,23)->1932: (9+1) + (2+3) = 15 rev-> 51 mismatch
+ digit product diff
+ (91,23)->1932: 9*1 - 2*3 = 9 - 6 = 3 rev-> 3 mismatch
+ digit product sum
+ (91,23)->1932: 9*1 + 2*3 = 9 + 6 = 15 rev-> 51 mismatch
+ determinant
+ (91,23)->1932: 9*3 - 1*2 = 27 - 2 = 25 rev-> 52 mismatch
+ abs determinant
+ (91,23)->1932: |9*3 - 1*2| = |27 - 2| = 25 rev-> 52 mismatch
+
+ identity [19 32] [expected (19,32)->1932]
+ multiply+1
+ (19,32)->1932: (10 + 9) * 32 + 1 = 10 * 32 + 9 * 32 + 1 = 320 + 288 + 1 = 608 + 1 = 609 mismatch
+ multiply-1
+ (19,32)->1932: (10 + 9) * 32 - 1 = 10 * 32 + 9 * 32 - 1 = 320 + 288 - 1 = 608 - 1 = 607 mismatch
+ add+1
+ (19,32)->1932: 19 + 32 + 1 = 52 mismatch
+ add-1
+ (19,32)->1932: 19 + 32 - 1 = 50 mismatch
+ sub+1
+ (19,32)->1932: 19 - 32 + 1 = -12 mismatch
+ sub-1
+ (19,32)->1932: 19 - 32 - 1 = -14 mismatch
+ integer division (a/b)
+ (19,32)->1932: 19 / 32 = 0 mismatch
+ reverse division (b/a)
+ (19,32)->1932: 32 / 19 = 1 mismatch
+ reverse modulo (b mod a)
+ (19,32)->1932: 32 mod 19 = 13 mismatch
+ digit absolute diff
+ (19,32)->1932: |1-3| || |9-2| = 27 mismatch
+ digit add mod10
+ (19,32)->1932: (1+3)%10 || (9+2)%10 = 41 mismatch
+ digit sub mod10
+ (19,32)->1932: (1-3)%10 || (9-2)%10 = 87 mismatch
+ cross multiply
+ (19,32)->1932: 1*3 + 9*2 = 3 + 18 = 21 mismatch
+ cross multiply rev
+ (19,32)->1932: 1*2 + 9*3 = 2 + 27 = 29 mismatch
+ digit multiply
+ (19,32)->1932: 1*3 || 9*2 = 3 || 18 = 318 mismatch
+ digit multiply rev
+ (19,32)->1932: 1*2 || 9*3 = 2 || 27 = 227 mismatch
+ digit sum diff
+ (19,32)->1932: (1+9) - (3+2) = 5 mismatch
+ digit sum sum
+ (19,32)->1932: (1+9) + (3+2) = 15 mismatch
+ digit product diff
+ (19,32)->1932: 1*9 - 3*2 = 9 - 6 = 3 mismatch
+ digit product sum
+ (19,32)->1932: 1*9 + 3*2 = 9 + 6 = 15 mismatch
+ determinant
+ (19,32)->1932: 1*2 - 9*3 = 2 - 27 = -25 mismatch
+ abs determinant
+ (19,32)->1932: |1*2 - 9*3| = |2 - 27| = 25 mismatch
+
+correct, actions: reversed operands, reversed result, reverse concatenation
+
+Applying to 45*72:
+ We recall that the question operator is found in the examples.
+ reversed operands [45->54, 72->27] and reversed result
+ reverse concatenation
+ (54,27): 27 || 54 = 2754 rev-> 4572
+ Result is non-negative
+ \boxed{4572}

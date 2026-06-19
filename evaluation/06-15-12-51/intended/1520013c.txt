@@ -1,0 +1,75 @@
+\\/{: = \"%[
+[:>\[ = >`{
+{[/][ = ]]`[
+[%>\" = >??
+"%/"[ = ?{[\
+The question is {?>?[
+
+Operator symbols />
+Question operator symbol >
+Question operator in examples
+
+Digit symbols \{:"%[`]?
+
+Checking concatenation
+left \\ op / right {: expected \\{: versus \"%[ mismatch
+left [: op > right \[ expected [:\[ versus >`{ mismatch
+left {[ op / right ][ expected {[][ versus ]]`[ mismatch
+left [% op > right \" expected [%\" versus >?? mismatch
+left "% op / right "[ expected "%"[ versus ?{[\ mismatch
+
+Question operator > is not concatenation
+
+Checking reverse concatenation
+left \\ op / right {: expected {:\\ versus \"%[ mismatch
+left [: op > right \[ expected \[[: versus >`{ mismatch
+left {[ op / right ][ expected ][{[ versus ]]`[ mismatch
+left [% op > right \" expected \"[% versus >?? mismatch
+left "% op / right "[ expected "["% versus ?{[\ mismatch
+
+Question operator > is not reverse concatenation
+
+Filtering out the concatenation operations
+\\/{: = \"%[
+[:>\[ = >`{
+{[/][ = ]]`[
+[%>\" = >??
+"%/"[ = ?{[\
+
+Assigning mul
+ left \\ op / right {: = \"%[ length 4 assume mul
+ left [: op > right \[ = >`{ length 3
+ left {[ op / right ][ = ]]`[ assumed mul
+ left [% op > right \" = >?? length 3
+ left "% op / right "[ = ?{[\ assumed mul
+
+Assigning sub
+ left \\ op / right {: = \"%[ assumed mul
+ left [: op > right \[ = >`{ op in output assume sub
+ left {[ op / right ][ = ]]`[ assumed mul
+ left [% op > right \" = >?? assumed sub
+ left "% op / right "[ = ?{[\ assumed mul
+
+Assigning add
+ left \\ op / right {: = \"%[ assumed mul
+ left [: op > right \[ = >`{ assumed sub
+ left {[ op / right ][ = ]]`[ assumed mul
+ left [% op > right \" = >?? assumed sub
+ left "% op / right "[ = ?{[\ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left \\ op / right {: = \"%[ assumed mul
+ left [: op > right \[ = >`{ assumed sub
+ left {[ op / right ][ = ]]`[ assumed mul
+ left [% op > right \" = >?? assumed sub
+ left "% op / right "[ = ?{[\ assumed mul
+ left {? op > right ?[ the question, assumed sub
+
+Trying \=8 {=9 :=7 "=5 %=3 [=6 `=1 ]=4 ?=2 A=0
+\\/{: = 88 mul 97 = 8536 vs \"%[ 8536 diff 0 mul ok; 88 mul 79 = 6952 vs rev [%"\ 6358 diff 594 mul no
+[:>\[ = 67 sub 86 = 19 vs >`{ -19 diff 0 sub ok; 76 sub 68 = 8 vs rev >{` -91 diff 83 sub no
+{[/][ = 96 mul 46 = 4416 vs ]]`[ 4416 diff 0 mul ok; 69 mul 64 = 4416 vs rev [`]] 6144 diff 1728 mul no
+[%>\" = 63 sub 85 = 22 vs >?? -22 diff 0 sub ok; 36 sub 58 = 22 vs rev >?? -22 diff 0 sub ok
+"%/"[ = 53 mul 56 = 2968 vs ?{[\ 2968 diff 0 mul ok; 35 mul 65 = 2275 vs rev \[{? 8692 diff 6417 mul no
+ accepted forward {?>?[ = 92 sub 26 = 66 = \boxed{[[}

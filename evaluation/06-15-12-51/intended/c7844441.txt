@@ -1,0 +1,75 @@
+^%|:> = |%<
+<:|/: = |&`
+/&|<: = @$
+&>}%% = $@
+:`}>$ = %<$
+The question is :/[$^
+
+Operator symbols |}
+Question operator symbol [
+Question operator not in examples
+
+Digit symbols ^%:></&`@$
+
+Checking concatenation
+left ^% op | right :> expected ^%:> versus |%< mismatch
+left <: op | right /: expected <:/: versus |&` mismatch
+left /& op | right <: expected /&<: versus @$ mismatch
+left &> op } right %% expected &>%% versus $@ mismatch
+left :` op } right >$ expected :`>$ versus %<$ mismatch
+
+Question operator [ is not concatenation
+
+Checking reverse concatenation
+left ^% op | right :> expected :>^% versus |%< mismatch
+left <: op | right /: expected /:<: versus |&` mismatch
+left /& op | right <: expected <:/& versus @$ mismatch
+left &> op } right %% expected %%&> versus $@ mismatch
+left :` op } right >$ expected >$:` versus %<$ mismatch
+
+Question operator [ is not reverse concatenation
+
+Filtering out the concatenation operations
+^%|:> = |%<
+<:|/: = |&`
+/&|<: = @$
+&>}%% = $@
+:`}>$ = %<$
+
+Assigning mul
+ left ^% op | right :> = |%< length 3
+ left <: op | right /: = |&` length 3
+ left /& op | right <: = @$ length 2
+ left &> op } right %% = $@ length 2
+ left :` op } right >$ = %<$ length 3
+
+Assigning sub
+ left ^% op | right :> = |%< op in output assume sub
+ left <: op | right /: = |&` assumed sub
+ left /& op | right <: = @$ assumed sub
+ left &> op } right %% = $@ length 2
+ left :` op } right >$ = %<$ length 3
+
+Assigning add
+ left ^% op | right :> = |%< assumed sub
+ left <: op | right /: = |&` assumed sub
+ left /& op | right <: = @$ assumed sub
+ left &> op } right %% = $@ length 2
+ left :` op } right >$ = %<$ length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ^% op | right :> = |%< assumed sub
+ left <: op | right /: = |&` assumed sub
+ left /& op | right <: = @$ assumed sub
+ left &> op } right %% = $@ assumed add
+ left :` op } right >$ = %<$ assumed add
+ left :/ op [ right $^ the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying ^=8 %=1 :=9 >=3 <=2 /=7 &=5 `=0 @=4 $=6
+^%|:> = 81 sub 93 = 12 vs |%< -12 diff 0 sub ok; 18 sub 39 = 21 vs rev |<% -21 diff 0 sub ok
+<:|/: = 29 sub 79 = 50 vs |&` -50 diff 0 sub ok; 92 sub 97 = 5 vs rev |`& -05 diff 0 sub ok
+/&|<: = 75 sub 29 = 46 vs @$ 46 diff 0 sub ok; 57 sub 92 = 35 vs rev $@ 64 diff 29 sub no
+&>}%% = 53 add 11 = 64 vs $@ 64 diff 0 add ok; 35 add 11 = 46 vs rev @$ 46 diff 0 add ok
+:`}>$ = 90 add 36 = 126 vs %<$ 126 diff 0 add ok; 09 add 63 = 72 vs rev $<% 621 diff 549 add no
+ accepted forward :/[$^ = 97 mul 68 = 6596 = \boxed{$&:$}

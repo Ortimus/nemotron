@@ -1,0 +1,75 @@
+%?*%/ = *>
+>%*`] = *`%
+\?#"} = "]\`
+\%$?] = `>%
+//*"} = *?>
+The question is "}#^/
+
+Operator symbols *#$
+Question operator symbol #
+Question operator in examples
+
+Digit symbols %?/>`]\"}^
+
+Checking concatenation
+left %? op * right %/ expected %?%/ versus *> mismatch
+left >% op * right `] expected >%`] versus *`% mismatch
+left \? op # right "} expected \?"} versus "]\` mismatch
+left \% op $ right ?] expected \%?] versus `>% mismatch
+left // op * right "} expected //"} versus *?> mismatch
+
+Question operator # is not concatenation
+
+Checking reverse concatenation
+left %? op * right %/ expected %/%? versus *> mismatch
+left >% op * right `] expected `]>% versus *`% mismatch
+left \? op # right "} expected "}\? versus "]\` mismatch
+left \% op $ right ?] expected ?]\% versus `>% mismatch
+left // op * right "} expected "}// versus *?> mismatch
+
+Question operator # is not reverse concatenation
+
+Filtering out the concatenation operations
+%?*%/ = *>
+>%*`] = *`%
+\?#"} = "]\`
+\%$?] = `>%
+//*"} = *?>
+
+Assigning mul
+ left %? op * right %/ = *> length 2
+ left >% op * right `] = *`% length 3
+ left \? op # right "} = "]\` length 4 assume mul
+ left \% op $ right ?] = `>% length 3
+ left // op * right "} = *?> length 3
+
+Assigning sub
+ left %? op * right %/ = *> op in output assume sub
+ left >% op * right `] = *`% assumed sub
+ left \? op # right "} = "]\` assumed mul
+ left \% op $ right ?] = `>% length 3
+ left // op * right "} = *?> assumed sub
+
+Assigning add
+ left %? op * right %/ = *> assumed sub
+ left >% op * right `] = *`% assumed sub
+ left \? op # right "} = "]\` assumed mul
+ left \% op $ right ?] = `>% length 3 assume add
+ left // op * right "} = *?> assumed sub
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left %? op * right %/ = *> assumed sub
+ left >% op * right `] = *`% assumed sub
+ left \? op # right "} = "]\` assumed mul
+ left \% op $ right ?] = `>% assumed add
+ left // op * right "} = *?> assumed sub
+ left "} op # right ^/ the question, assumed mul
+
+Trying %=4 ?=3 /=5 >=2 `=1 ]=0 \=9 "=8 }=7 ^=6
+%?*%/ = 43 sub 45 = 2 vs *> -2 diff 0 sub ok; 34 sub 54 = 20 vs rev *> -2 diff 18 sub no
+>%*`] = 24 sub 10 = 14 vs *`% -14 diff 0 sub ok; 42 sub 01 = 41 vs rev *%` -41 diff 0 sub ok
+\?#"} = 93 mul 87 = 8091 vs "]\` 8091 diff 0 mul ok; 39 mul 78 = 3042 vs rev `\]" 1908 diff 1134 mul no
+\%$?] = 94 add 30 = 124 vs `>% 124 diff 0 add ok; 49 add 03 = 52 vs rev %>` 421 diff 369 add no
+//*"} = 55 sub 87 = 32 vs *?> -32 diff 0 sub ok; 55 sub 78 = 23 vs rev *>? -23 diff 0 sub ok
+ accepted forward "}#^/ = 87 mul 65 = 5655 = \boxed{/^//}

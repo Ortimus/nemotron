@@ -1,0 +1,75 @@
+"}]}% = `^
+<|]^< = }::
+&&-&% = -}
+%%?"} = &&%%
+&`]}^ = ^%
+The question is ^&]%@
+
+Operator symbols ]-?
+Question operator symbol ]
+Question operator in examples
+
+Digit symbols "}%`^<|:&@
+
+Checking concatenation
+left "} op ] right }% expected "}}% versus `^ mismatch
+left <| op ] right ^< expected <|^< versus }:: mismatch
+left && op - right &% expected &&&% versus -} mismatch
+left %% op ? right "} expected %%"} versus &&%% mismatch
+left &` op ] right }^ expected &`}^ versus ^% mismatch
+
+Question operator ] is not concatenation
+
+Checking reverse concatenation
+left "} op ] right }% expected }%"} versus `^ mismatch
+left <| op ] right ^< expected ^<<| versus }:: mismatch
+left && op - right &% expected &%&& versus -} mismatch
+left %% op ? right "} expected "}%% versus &&%% mismatch
+left &` op ] right }^ expected }^&` versus ^% mismatch
+
+Question operator ] is not reverse concatenation
+
+Filtering out the concatenation operations
+"}]}% = `^
+<|]^< = }::
+&&-&% = -}
+%%?"} = &&%%
+&`]}^ = ^%
+
+Assigning mul
+ left "} op ] right }% = `^ length 2
+ left <| op ] right ^< = }:: length 3
+ left && op - right &% = -} length 2
+ left %% op ? right "} = &&%% length 4 assume mul
+ left &` op ] right }^ = ^% length 2
+
+Assigning sub
+ left "} op ] right }% = `^ length 2
+ left <| op ] right ^< = }:: length 3
+ left && op - right &% = -} op in output assume sub
+ left %% op ? right "} = &&%% assumed mul
+ left &` op ] right }^ = ^% length 2
+
+Assigning add
+ left "} op ] right }% = `^ length 2
+ left <| op ] right ^< = }:: length 3 assume add
+ left && op - right &% = -} assumed sub
+ left %% op ? right "} = &&%% assumed mul
+ left &` op ] right }^ = ^% assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left "} op ] right }% = `^ assumed add
+ left <| op ] right ^< = }:: assumed add
+ left && op - right &% = -} assumed sub
+ left %% op ? right "} = &&%% assumed mul
+ left &` op ] right }^ = ^% assumed add
+ left ^& op ] right %@ the question, assumed add
+
+Trying "=8 }=1 %=5 `=9 ^=6 <=3 |=7 :=0 &=4 @=2
+"}]}% = 81 add 15 = 96 vs `^ 96 diff 0 add ok; 18 add 51 = 69 vs rev ^` 69 diff 0 add ok
+<|]^< = 37 add 63 = 100 vs }:: 100 diff 0 add ok; 73 add 36 = 109 vs rev ::} 001 diff 108 add no
+&&-&% = 44 sub 45 = 1 vs -} -1 diff 0 sub ok; 44 sub 54 = 10 vs rev -} -1 diff 9 sub no
+%%?"} = 55 mul 81 = 4455 vs &&%% 4455 diff 0 mul ok; 55 mul 18 = 990 vs rev %%&& 5544 diff 4554 mul no
+&`]}^ = 49 add 16 = 65 vs ^% 65 diff 0 add ok; 94 add 61 = 155 vs rev %^ 56 diff 99 add no
+ accepted forward ^&]%@ = 64 add 52 = 116 = \boxed{}}^}

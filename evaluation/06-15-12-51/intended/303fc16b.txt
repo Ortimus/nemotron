@@ -1,0 +1,75 @@
+`(|`! = }}`
+}\{`} = '}"
+"?{}" = "&}
+`(|`\ = }}?
+!"{[! = "["\
+The question is ("<\"
+
+Operator symbols |{
+Question operator symbol <
+Question operator not in examples
+
+Digit symbols `(!}\'"?&[
+
+Checking concatenation
+left `( op | right `! expected `(`! versus }}` mismatch
+left }\ op { right `} expected }\`} versus '}" mismatch
+left "? op { right }" expected "?}" versus "&} mismatch
+left `( op | right `\ expected `(`\ versus }}? mismatch
+left !" op { right [! expected !"[! versus "["\ mismatch
+
+Question operator < is not concatenation
+
+Checking reverse concatenation
+left `( op | right `! expected `!`( versus }}` mismatch
+left }\ op { right `} expected `}}\ versus '}" mismatch
+left "? op { right }" expected }""? versus "&} mismatch
+left `( op | right `\ expected `\`( versus }}? mismatch
+left !" op { right [! expected [!!" versus "["\ mismatch
+
+Question operator < is not reverse concatenation
+
+Filtering out the concatenation operations
+`(|`! = }}`
+}\{`} = '}"
+"?{}" = "&}
+`(|`\ = }}?
+!"{[! = "["\
+
+Assigning mul
+ left `( op | right `! = }}` length 3
+ left }\ op { right `} = '}" length 3
+ left "? op { right }" = "&} length 3
+ left `( op | right `\ = }}? length 3
+ left !" op { right [! = "["\ length 4 assume mul
+
+Assigning sub
+ left `( op | right `! = }}` length 3
+ left }\ op { right `} = '}" assumed mul
+ left "? op { right }" = "&} assumed mul
+ left `( op | right `\ = }}? length 3
+ left !" op { right [! = "["\ assumed mul
+
+Assigning add
+ left `( op | right `! = }}` length 3 assume add
+ left }\ op { right `} = '}" assumed mul
+ left "? op { right }" = "&} assumed mul
+ left `( op | right `\ = }}? assumed add
+ left !" op { right [! = "["\ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left `( op | right `! = }}` assumed add
+ left }\ op { right `} = '}" assumed mul
+ left "? op { right }" = "&} assumed mul
+ left `( op | right `\ = }}? assumed add
+ left !" op { right [! = "["\ assumed mul
+ left (" op < right \" the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying `=5 (=8 !=7 }=1 \=2 '=6 "=3 ?=0 &=9 [=4
+`(|`! = 58 add 57 = 115 vs }}` 115 diff 0 add ok; 85 add 75 = 160 vs rev `}} 511 diff 351 add no
+}\{`} = 12 mul 51 = 612 vs '}" 613 diff 1 mul ok + 1; 21 mul 15 = 315 vs rev "}' 316 diff 1 mul ok + 1
+"?{}" = 30 mul 13 = 390 vs "&} 391 diff 1 mul ok + 1; 03 mul 31 = 93 vs rev }&" 193 diff 100 mul no
+`(|`\ = 58 add 52 = 110 vs }}? 110 diff 0 add ok; 85 add 25 = 110 vs rev ?}} 011 diff 99 add no
+!"{[! = 73 mul 47 = 3431 vs "["\ 3432 diff 1 mul ok + 1; 37 mul 74 = 2738 vs rev \"[" 2343 diff 395 mul no
+ accepted forward ("<\" = 83 sub 23 = 60 = \boxed{'?}

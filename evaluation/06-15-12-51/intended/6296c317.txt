@@ -1,0 +1,75 @@
+@>:@@ = :<
+[>:[\ = #
+]":"" = :#{
+\>}>" = #{[
+@[}|< = #">
+The question is ##:[\
+
+Operator symbols :}
+Question operator symbol :
+Question operator in examples
+
+Digit symbols @><[\#]"{|
+
+Checking concatenation
+left @> op : right @@ expected @>@@ versus :< mismatch
+left [> op : right [\ expected [>[\ versus # mismatch
+left ]" op : right "" expected ]""" versus :#{ mismatch
+left \> op } right >" expected \>>" versus #{[ mismatch
+left @[ op } right |< expected @[|< versus #"> mismatch
+
+Question operator : is not concatenation
+
+Checking reverse concatenation
+left @> op : right @@ expected @@@> versus :< mismatch
+left [> op : right [\ expected [\[> versus # mismatch
+left ]" op : right "" expected ""]" versus :#{ mismatch
+left \> op } right >" expected >"\> versus #{[ mismatch
+left @[ op } right |< expected |<@[ versus #"> mismatch
+
+Question operator : is not reverse concatenation
+
+Filtering out the concatenation operations
+@>:@@ = :<
+[>:[\ = #
+]":"" = :#{
+\>}>" = #{[
+@[}|< = #">
+
+Assigning mul
+ left @> op : right @@ = :< length 2
+ left [> op : right [\ = # length 1
+ left ]" op : right "" = :#{ length 3
+ left \> op } right >" = #{[ length 3
+ left @[ op } right |< = #"> length 3
+
+Assigning sub
+ left @> op : right @@ = :< op in output assume sub
+ left [> op : right [\ = # assumed sub
+ left ]" op : right "" = :#{ assumed sub
+ left \> op } right >" = #{[ length 3
+ left @[ op } right |< = #"> length 3
+
+Assigning add
+ left @> op : right @@ = :< assumed sub
+ left [> op : right [\ = # assumed sub
+ left ]" op : right "" = :#{ assumed sub
+ left \> op } right >" = #{[ length 3 assume add
+ left @[ op } right |< = #"> assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left @> op : right @@ = :< assumed sub
+ left [> op : right [\ = # assumed sub
+ left ]" op : right "" = :#{ assumed sub
+ left \> op } right >" = #{[ assumed add
+ left @[ op } right |< = #"> assumed add
+ left ## op : right [\ the question, assumed sub
+
+Trying @=8 >=5 <=3 [=2 \=4 #=1 ]=6 "=7 {=0 |=9
+@>:@@ = 85 sub 88 = 3 vs :< -3 diff 0 sub ok; 58 sub 88 = 30 vs rev :< -3 diff 27 sub no
+[>:[\ = 25 sub 24 = 1 vs # 1 diff 0 sub ok; 52 sub 42 = 10 vs rev # 1 diff 9 sub no
+]":"" = 67 sub 77 = 10 vs :#{ -10 diff 0 sub ok; 76 sub 77 = 1 vs rev :{# -01 diff 0 sub ok
+\>}>" = 45 add 57 = 102 vs #{[ 102 diff 0 add ok; 54 add 75 = 129 vs rev [{# 201 diff 72 add no
+@[}|< = 82 add 93 = 175 vs #"> 175 diff 0 add ok; 28 add 39 = 67 vs rev >"# 571 diff 504 add no
+ accepted forward ##:[\ = 11 sub 24 = 13 = \boxed{#<}

@@ -1,0 +1,218 @@
+^%|:> = |%<
+<:|/: = |&`
+/&|<: = @$
+&>}%% = $@
+:`}>$ = %<$
+The question is :/[$^
+
+Operator symbols |}
+Question operator symbol [
+Question operator not in examples
+
+Digit symbols ^%:></&`@$
+
+Checking concatenation
+left ^% op | right :> expected ^%:> versus |%< mismatch
+left <: op | right /: expected <:/: versus |&` mismatch
+left /& op | right <: expected /&<: versus @$ mismatch
+left &> op } right %% expected &>%% versus $@ mismatch
+left :` op } right >$ expected :`>$ versus %<$ mismatch
+
+Question operator [ is not concatenation
+
+Checking reverse concatenation
+left ^% op | right :> expected :>^% versus |%< mismatch
+left <: op | right /: expected /:<: versus |&` mismatch
+left /& op | right <: expected <:/& versus @$ mismatch
+left &> op } right %% expected %%&> versus $@ mismatch
+left :` op } right >$ expected >$:` versus %<$ mismatch
+
+Question operator [ is not reverse concatenation
+
+Filtering out the concatenation operations
+^%|:> = |%<
+<:|/: = |&`
+/&|<: = @$
+&>}%% = $@
+:`}>$ = %<$
+
+Assigning mul
+ left ^% op | right :> = |%< length 3
+ left <: op | right /: = |&` length 3
+ left /& op | right <: = @$ length 2
+ left &> op } right %% = $@ length 2
+ left :` op } right >$ = %<$ length 3
+
+Assigning sub
+ left ^% op | right :> = |%< op in output assume sub
+ left <: op | right /: = |&` assumed sub
+ left /& op | right <: = @$ assumed sub
+ left &> op } right %% = $@ length 2
+ left :` op } right >$ = %<$ length 3
+
+Assigning add
+ left ^% op | right :> = |%< assumed sub
+ left <: op | right /: = |&` assumed sub
+ left /& op | right <: = @$ assumed sub
+ left &> op } right %% = $@ length 2
+ left :` op } right >$ = %<$ length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ^% op | right :> = |%< assumed sub
+ left <: op | right /: = |&` assumed sub
+ left /& op | right <: = @$ assumed sub
+ left &> op } right %% = $@ assumed add
+ left :` op } right >$ = %<$ assumed add
+ left :/ op [ right $^ the question, operator not in the examples, the unused family is mul, assume mul
+
+Trying ^=8 %=1 :=3 >=4 <=9 /=6 &=2 `=5 @=0 $=7
+^%|:> = 81 sub 34 = 47 vs |%< -19 diff 28 sub no; 18 sub 43 = 25 vs rev |<% -91 diff 66 sub no
+<:|/: = 93 sub 63 = 30 vs |&` -25 diff 5 sub no; 39 sub 36 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 93 = 31 vs @$ -07 diff 24 sub no; 26 sub 39 = 13 vs rev @$ -70 diff 57 sub no
+&>}%% = 24 add 11 = 35 vs $@ 70 diff 35 add no; 42 add 11 = 53 vs rev @$ 07 diff 46 add no
+:`}>$ = 35 add 47 = 82 vs %<$ 197 diff 115 add no; 53 add 74 = 127 vs rev $<% 791 diff 664 add no
+ rejected forward :/[$^ = 36 mul 78 = 2808 = final answer: &^@^
+
+Trying ^=7 %=8 :=1 >=3 <=9 /=6 &=2 `=5 @=0 $=4
+^%|:> = 78 sub 13 = 65 vs |%< -89 diff 24 sub no; 87 sub 31 = 56 vs rev |<% -98 diff 42 sub no
+<:|/: = 91 sub 61 = 30 vs |&` -25 diff 5 sub no; 19 sub 16 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 91 = 29 vs @$ -04 diff 25 sub no; 26 sub 19 = 7 vs rev @$ -40 diff 33 sub no
+ rejected none :/[$^ = 16 mul 47 rev 61 mul 74 = 4514 rev 4154 = final answer: $:`$
+
+Trying ^=6 %=7 :=8 >=1 <=9 /=3 &=2 `=5 @=0 $=4
+^%|:> = 67 sub 81 = 14 vs |%< -79 diff 65 sub no; 76 sub 18 = 58 vs rev |<% -97 diff 39 sub no
+<:|/: = 98 sub 38 = 60 vs |&` -25 diff 35 sub no; 89 sub 83 = 6 vs rev |`& -52 diff 46 sub no
+/&|<: = 32 sub 98 = 66 vs @$ -04 diff 62 sub no; 23 sub 89 = 66 vs rev @$ -40 diff 26 sub no
+ rejected none :/[$^ = 83 mul 46 rev 38 mul 64 = 2432 rev 2342 = final answer: &/$&
+
+Trying ^=5 %=6 :=7 >=8 <=9 /=3 &=2 `=1 @=0 $=4
+^%|:> = 56 sub 78 = 22 vs |%< -69 diff 47 sub no; 65 sub 87 = 22 vs rev |<% -96 diff 74 sub no
+<:|/: = 97 sub 37 = 60 vs |&` -21 diff 39 sub no; 79 sub 73 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 97 = 65 vs @$ -04 diff 61 sub no; 23 sub 79 = 56 vs rev @$ -40 diff 16 sub no
+ rejected none :/[$^ = 73 mul 45 rev 37 mul 54 = 1998 rev 8991 = final answer: ><<`
+
+Trying ^=4 %=5 :=6 >=7 <=9 /=3 &=2 `=1 @=0 $=8
+^%|:> = 45 sub 67 = 22 vs |%< -59 diff 37 sub no; 54 sub 76 = 22 vs rev |<% -95 diff 73 sub no
+<:|/: = 96 sub 36 = 60 vs |&` -21 diff 39 sub no; 69 sub 63 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 96 = 64 vs @$ -08 diff 56 sub no; 23 sub 69 = 46 vs rev @$ -80 diff 34 sub no
+ rejected none :/[$^ = 63 mul 84 rev 36 mul 48 = 1728 rev 8271 = final answer: $&>`
+
+Trying ^=8 %=1 :=3 >=4 <=9 /=6 &=2 `=5 @=0 $=7
+^%|:> = 81 sub 34 = 47 vs |%< -19 diff 28 sub no; 18 sub 43 = 25 vs rev |<% -91 diff 66 sub no
+<:|/: = 93 sub 63 = 30 vs |&` -25 diff 5 sub no; 39 sub 36 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 93 = 31 vs @$ -07 diff 24 sub no; 26 sub 39 = 13 vs rev @$ -70 diff 57 sub no
+ rejected forward :/[$^ = 36 mul 78 = 2808 = final answer: &^@^
+
+Trying ^=7 %=8 :=1 >=3 <=9 /=6 &=2 `=5 @=0 $=4
+^%|:> = 78 sub 13 = 65 vs |%< -89 diff 24 sub no; 87 sub 31 = 56 vs rev |<% -98 diff 42 sub no
+<:|/: = 91 sub 61 = 30 vs |&` -25 diff 5 sub no; 19 sub 16 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 91 = 29 vs @$ -04 diff 25 sub no; 26 sub 19 = 7 vs rev @$ -40 diff 33 sub no
+ rejected none :/[$^ = 16 mul 47 rev 61 mul 74 = 4514 rev 4154 = final answer: $:`$
+
+Trying ^=6 %=7 :=8 >=1 <=9 /=3 &=2 `=5 @=0 $=4
+^%|:> = 67 sub 81 = 14 vs |%< -79 diff 65 sub no; 76 sub 18 = 58 vs rev |<% -97 diff 39 sub no
+<:|/: = 98 sub 38 = 60 vs |&` -25 diff 35 sub no; 89 sub 83 = 6 vs rev |`& -52 diff 46 sub no
+/&|<: = 32 sub 98 = 66 vs @$ -04 diff 62 sub no; 23 sub 89 = 66 vs rev @$ -40 diff 26 sub no
+ rejected none :/[$^ = 83 mul 46 rev 38 mul 64 = 2432 rev 2342 = final answer: &/$&
+
+Trying ^=5 %=6 :=7 >=8 <=9 /=3 &=2 `=1 @=0 $=4
+^%|:> = 56 sub 78 = 22 vs |%< -69 diff 47 sub no; 65 sub 87 = 22 vs rev |<% -96 diff 74 sub no
+<:|/: = 97 sub 37 = 60 vs |&` -21 diff 39 sub no; 79 sub 73 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 97 = 65 vs @$ -04 diff 61 sub no; 23 sub 79 = 56 vs rev @$ -40 diff 16 sub no
+ rejected none :/[$^ = 73 mul 45 rev 37 mul 54 = 1998 rev 8991 = final answer: ><<`
+
+Trying ^=4 %=5 :=6 >=7 <=9 /=3 &=2 `=1 @=0 $=8
+^%|:> = 45 sub 67 = 22 vs |%< -59 diff 37 sub no; 54 sub 76 = 22 vs rev |<% -95 diff 73 sub no
+<:|/: = 96 sub 36 = 60 vs |&` -21 diff 39 sub no; 69 sub 63 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 96 = 64 vs @$ -08 diff 56 sub no; 23 sub 69 = 46 vs rev @$ -80 diff 34 sub no
+ rejected none :/[$^ = 63 mul 84 rev 36 mul 48 = 1728 rev 8271 = final answer: $&>`
+
+Trying ^=8 %=1 :=3 >=4 <=9 /=6 &=2 `=5 @=0 $=7
+^%|:> = 81 sub 34 = 47 vs |%< -19 diff 28 sub no; 18 sub 43 = 25 vs rev |<% -91 diff 66 sub no
+<:|/: = 93 sub 63 = 30 vs |&` -25 diff 5 sub no; 39 sub 36 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 93 = 31 vs @$ -07 diff 24 sub no; 26 sub 39 = 13 vs rev @$ -70 diff 57 sub no
+ rejected forward :/[$^ = 36 mul 78 = 2808 = final answer: &^@^
+
+Trying ^=7 %=8 :=1 >=3 <=9 /=6 &=2 `=5 @=0 $=4
+^%|:> = 78 sub 13 = 65 vs |%< -89 diff 24 sub no; 87 sub 31 = 56 vs rev |<% -98 diff 42 sub no
+<:|/: = 91 sub 61 = 30 vs |&` -25 diff 5 sub no; 19 sub 16 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 91 = 29 vs @$ -04 diff 25 sub no; 26 sub 19 = 7 vs rev @$ -40 diff 33 sub no
+ rejected none :/[$^ = 16 mul 47 rev 61 mul 74 = 4514 rev 4154 = final answer: $:`$
+
+Trying ^=6 %=7 :=8 >=1 <=9 /=3 &=2 `=5 @=0 $=4
+^%|:> = 67 sub 81 = 14 vs |%< -79 diff 65 sub no; 76 sub 18 = 58 vs rev |<% -97 diff 39 sub no
+<:|/: = 98 sub 38 = 60 vs |&` -25 diff 35 sub no; 89 sub 83 = 6 vs rev |`& -52 diff 46 sub no
+/&|<: = 32 sub 98 = 66 vs @$ -04 diff 62 sub no; 23 sub 89 = 66 vs rev @$ -40 diff 26 sub no
+ rejected none :/[$^ = 83 mul 46 rev 38 mul 64 = 2432 rev 2342 = final answer: &/$&
+
+Trying ^=5 %=6 :=7 >=8 <=9 /=3 &=2 `=1 @=0 $=4
+^%|:> = 56 sub 78 = 22 vs |%< -69 diff 47 sub no; 65 sub 87 = 22 vs rev |<% -96 diff 74 sub no
+<:|/: = 97 sub 37 = 60 vs |&` -21 diff 39 sub no; 79 sub 73 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 97 = 65 vs @$ -04 diff 61 sub no; 23 sub 79 = 56 vs rev @$ -40 diff 16 sub no
+ rejected none :/[$^ = 73 mul 45 rev 37 mul 54 = 1998 rev 8991 = final answer: ><<`
+
+Trying ^=4 %=5 :=6 >=7 <=9 /=3 &=2 `=1 @=0 $=8
+^%|:> = 45 sub 67 = 22 vs |%< -59 diff 37 sub no; 54 sub 76 = 22 vs rev |<% -95 diff 73 sub no
+<:|/: = 96 sub 36 = 60 vs |&` -21 diff 39 sub no; 69 sub 63 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 96 = 64 vs @$ -08 diff 56 sub no; 23 sub 69 = 46 vs rev @$ -80 diff 34 sub no
+ rejected none :/[$^ = 63 mul 84 rev 36 mul 48 = 1728 rev 8271 = final answer: $&>`
+
+Trying ^=8 %=1 :=3 >=4 <=9 /=6 &=2 `=5 @=0 $=7
+^%|:> = 81 sub 34 = 47 vs |%< -19 diff 28 sub no; 18 sub 43 = 25 vs rev |<% -91 diff 66 sub no
+<:|/: = 93 sub 63 = 30 vs |&` -25 diff 5 sub no; 39 sub 36 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 93 = 31 vs @$ -07 diff 24 sub no; 26 sub 39 = 13 vs rev @$ -70 diff 57 sub no
+ rejected forward :/[$^ = 36 mul 78 = 2808 = final answer: &^@^
+
+Trying ^=7 %=8 :=1 >=3 <=9 /=6 &=2 `=5 @=0 $=4
+^%|:> = 78 sub 13 = 65 vs |%< -89 diff 24 sub no; 87 sub 31 = 56 vs rev |<% -98 diff 42 sub no
+<:|/: = 91 sub 61 = 30 vs |&` -25 diff 5 sub no; 19 sub 16 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 91 = 29 vs @$ -04 diff 25 sub no; 26 sub 19 = 7 vs rev @$ -40 diff 33 sub no
+ rejected none :/[$^ = 16 mul 47 rev 61 mul 74 = 4514 rev 4154 = final answer: $:`$
+
+Trying ^=6 %=7 :=8 >=1 <=9 /=3 &=2 `=5 @=0 $=4
+^%|:> = 67 sub 81 = 14 vs |%< -79 diff 65 sub no; 76 sub 18 = 58 vs rev |<% -97 diff 39 sub no
+<:|/: = 98 sub 38 = 60 vs |&` -25 diff 35 sub no; 89 sub 83 = 6 vs rev |`& -52 diff 46 sub no
+/&|<: = 32 sub 98 = 66 vs @$ -04 diff 62 sub no; 23 sub 89 = 66 vs rev @$ -40 diff 26 sub no
+ rejected none :/[$^ = 83 mul 46 rev 38 mul 64 = 2432 rev 2342 = final answer: &/$&
+
+Trying ^=5 %=6 :=7 >=8 <=9 /=3 &=2 `=1 @=0 $=4
+^%|:> = 56 sub 78 = 22 vs |%< -69 diff 47 sub no; 65 sub 87 = 22 vs rev |<% -96 diff 74 sub no
+<:|/: = 97 sub 37 = 60 vs |&` -21 diff 39 sub no; 79 sub 73 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 97 = 65 vs @$ -04 diff 61 sub no; 23 sub 79 = 56 vs rev @$ -40 diff 16 sub no
+ rejected none :/[$^ = 73 mul 45 rev 37 mul 54 = 1998 rev 8991 = final answer: ><<`
+
+Trying ^=4 %=5 :=6 >=7 <=9 /=3 &=2 `=1 @=0 $=8
+^%|:> = 45 sub 67 = 22 vs |%< -59 diff 37 sub no; 54 sub 76 = 22 vs rev |<% -95 diff 73 sub no
+<:|/: = 96 sub 36 = 60 vs |&` -21 diff 39 sub no; 69 sub 63 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 96 = 64 vs @$ -08 diff 56 sub no; 23 sub 69 = 46 vs rev @$ -80 diff 34 sub no
+ rejected none :/[$^ = 63 mul 84 rev 36 mul 48 = 1728 rev 8271 = final answer: $&>`
+
+Trying ^=8 %=1 :=3 >=4 <=9 /=6 &=2 `=5 @=0 $=7
+^%|:> = 81 sub 34 = 47 vs |%< -19 diff 28 sub no; 18 sub 43 = 25 vs rev |<% -91 diff 66 sub no
+<:|/: = 93 sub 63 = 30 vs |&` -25 diff 5 sub no; 39 sub 36 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 93 = 31 vs @$ -07 diff 24 sub no; 26 sub 39 = 13 vs rev @$ -70 diff 57 sub no
+ rejected forward :/[$^ = 36 mul 78 = 2808 = final answer: &^@^
+
+Trying ^=7 %=8 :=1 >=3 <=9 /=6 &=2 `=5 @=0 $=4
+^%|:> = 78 sub 13 = 65 vs |%< -89 diff 24 sub no; 87 sub 31 = 56 vs rev |<% -98 diff 42 sub no
+<:|/: = 91 sub 61 = 30 vs |&` -25 diff 5 sub no; 19 sub 16 = 3 vs rev |`& -52 diff 49 sub no
+/&|<: = 62 sub 91 = 29 vs @$ -04 diff 25 sub no; 26 sub 19 = 7 vs rev @$ -40 diff 33 sub no
+ rejected none :/[$^ = 16 mul 47 rev 61 mul 74 = 4514 rev 4154 = final answer: $:`$
+
+Trying ^=6 %=7 :=8 >=1 <=9 /=3 &=2 `=5 @=0 $=4
+^%|:> = 67 sub 81 = 14 vs |%< -79 diff 65 sub no; 76 sub 18 = 58 vs rev |<% -97 diff 39 sub no
+<:|/: = 98 sub 38 = 60 vs |&` -25 diff 35 sub no; 89 sub 83 = 6 vs rev |`& -52 diff 46 sub no
+/&|<: = 32 sub 98 = 66 vs @$ -04 diff 62 sub no; 23 sub 89 = 66 vs rev @$ -40 diff 26 sub no
+ rejected none :/[$^ = 83 mul 46 rev 38 mul 64 = 2432 rev 2342 = final answer: &/$&
+
+Trying ^=5 %=6 :=7 >=8 <=9 /=3 &=2 `=1 @=0 $=4
+^%|:> = 56 sub 78 = 22 vs |%< -69 diff 47 sub no; 65 sub 87 = 22 vs rev |<% -96 diff 74 sub no
+<:|/: = 97 sub 37 = 60 vs |&` -21 diff 39 sub no; 79 sub 73 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: = 32 sub 97 = 65 vs @$ -04 diff 61 sub no; 23 sub 79 = 56 vs rev @$ -40 diff 16 sub no
+ rejected none :/[$^ = 73 mul 45 rev 37 mul 54 = 1998 rev 8991 = final answer: ><<`
+
+Trying ^=4 %=5 :=6 >=7 <=9 /=3 &=2 `=1 @=0 $=8
+^%|:> = 45 sub 67 = 22 vs |%< -59 diff 37 sub no; 54 sub 76 = 22 vs rev |<% -95 diff 73 sub no
+<:|/: = 96 sub 36 = 60 vs |&` -21 diff 39 sub no; 69 sub 63 = 6 vs rev |`& -12 diff 54 sub no
+/&|<: =

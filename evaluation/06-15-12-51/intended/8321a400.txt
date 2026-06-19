@@ -1,0 +1,187 @@
+98*36 = 3698
+04*82 = 8204
+26-11 = 15
+64*02 = 0264
+25+94 = 9425
+
+The inputs are 98, 36, 04, 82, 26, 11, 64, 02, 25, 94
+
+The outputs are 3698, 8204, 15, 0264, 9425
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+98*36 -> *
+04*82 -> *
+26-11 -> -
+64*02 -> *
+25+94 -> +
+
+The operators
+*
+-
++
+
+Looking at the question
+15*69 -> *
+The question operator is found in the examples.
+
+Looking at operator * [98*36 = 3698, 04*82 = 8204, 64*02 = 0264]:
+
+Trying common operations
+ reversed operands [98->89 36->63, 04->40 82->28, 64->46 02->20] and reversed result [expected (89,63)->3698, (40,28)->8204, (46,20)->0264]
+ addition
+ (89,63)->3698: 89 + 63 = 152 rev-> 251 mismatch
+ multiplication
+ (40,28)->8204: (40 + 0) * 28 = 40 * 28 + 0 * 28 = 1120 + 0 = 1120 rev-> 0211 mismatch
+ concatenation
+ (46,20)->0264: 46 || 20 = 4620 rev-> 0264 match
+ (89,63)->3698: 89 || 63 = 8963 rev-> 3698 match
+ (40,28)->8204: 40 || 28 = 4028 rev-> 8204 match
+ correct, actions: reversed operands, reversed result, concatenation
+ reverse concatenation
+ (89,63)->3698: 63 || 89 = 6389 rev-> 9836 mismatch
+
+ identity [98 36, 04 82, 64 02] [expected (98,36)->3698, (04,82)->8204, (64,02)->0264]
+ addition
+ (98,36)->3698: 98 + 36 = 134 mismatch
+ multiplication
+ (04,82)->8204: (0 + 4) * 82 = 0 * 82 + 4 * 82 = 0 + 328 = 328 mismatch
+ concatenation
+ (64,02)->0264: 64 || 02 = 6402 mismatch
+ reverse concatenation
+ (98,36)->3698: 36 || 98 = 3698 match
+ (04,82)->8204: 82 || 04 = 8204 match
+ (64,02)->0264: 02 || 64 = 0264 match
+ correct, but skipping
+
+Trying difference operations
+ reversed operands [98->89 36->63, 04->40 82->28, 64->46 02->20] and reversed result [expected (89,63)->3698, (40,28)->8204, (46,20)->0264]
+ subtraction (a-b)
+ (89,63)->3698: 89 - 63 = 26 rev-> 62 mismatch
+ absolute difference
+ (40,28)->8204: |40 - 28| = 12 rev-> 21 mismatch
+ max mod min
+ (46,20)->0264: max(46,20) mod min(46,20) = 46 mod 20 = 6 rev-> 6 mismatch
+ negated absolute difference
+ (89,63)->3698: -|89 - 63| = -26 rev-> -62 mismatch
+ reverse subtraction (b-a)
+ (40,28)->8204: 28 - 40 = -12 rev-> -21 mismatch
+ modulo (a mod b)
+ (46,20)->0264: 46 mod 20 = 6 rev-> 6 mismatch
+
+ identity [98 36, 04 82, 64 02] [expected (98,36)->3698, (04,82)->8204, (64,02)->0264]
+ subtraction (a-b)
+ (98,36)->3698: 98 - 36 = 62 mismatch
+ absolute difference
+ (04,82)->8204: |04 - 82| = 78 mismatch
+ max mod min
+ (64,02)->0264: max(64,02) mod min(64,02) = 64 mod 02 = 0 mismatch
+ negated absolute difference
+ (98,36)->3698: -|98 - 36| = -62 mismatch
+ reverse subtraction (b-a)
+ (04,82)->8204: 82 - 04 = 78 mismatch
+ modulo (a mod b)
+ (64,02)->0264: 64 mod 02 = 0 mismatch
+
+Trying rare operations
+ reversed operands [98->89 36->63, 04->40 82->28, 64->46 02->20] and reversed result [expected (89,63)->3698, (40,28)->8204, (46,20)->0264]
+ multiply+1
+ (89,63)->3698: (80 + 9) * 63 + 1 = 80 * 63 + 9 * 63 + 1 = 5040 + 567 + 1 = 5607 + 1 = 5608 rev-> 8065 mismatch
+ multiply-1
+ (40,28)->8204: (40 + 0) * 28 - 1 = 40 * 28 + 0 * 28 - 1 = 1120 + 0 - 1 = 1120 - 1 = 1119 rev-> 9111 mismatch
+ add+1
+ (46,20)->0264: 46 + 20 + 1 = 67 rev-> 76 mismatch
+ add-1
+ (89,63)->3698: 89 + 63 - 1 = 151 rev-> 151 mismatch
+ sub+1
+ (40,28)->8204: 40 - 28 + 1 = 13 rev-> 31 mismatch
+ sub-1
+ (46,20)->0264: 46 - 20 - 1 = 25 rev-> 52 mismatch
+ integer division (a/b)
+ (89,63)->3698: 89 / 63 = 1 rev-> 1 mismatch
+ reverse division (b/a)
+ (40,28)->8204: 28 / 40 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (46,20)->0264: 20 mod 46 = 20 rev-> 02 mismatch
+ digit absolute diff
+ (89,63)->3698: |8-6| || |9-3| = 26 rev-> 62 mismatch
+ digit add mod10
+ (40,28)->8204: (4+2)%10 || (0+8)%10 = 68 rev-> 86 mismatch
+ digit sub mod10
+ (46,20)->0264: (4-2)%10 || (6-0)%10 = 26 rev-> 62 mismatch
+ cross multiply
+ (89,63)->3698: 8*6 + 9*3 = 48 + 27 = 75 rev-> 57 mismatch
+ cross multiply rev
+ (40,28)->8204: 4*8 + 0*2 = 32 + 0 = 32 rev-> 23 mismatch
+ digit multiply
+ (46,20)->0264: 4*2 || 6*0 = 8 || 0 = 80 rev-> 08 mismatch
+ digit multiply rev
+ (89,63)->3698: 8*3 || 9*6 = 24 || 54 = 2454 rev-> 4542 mismatch
+ digit sum diff
+ (40,28)->8204: (4+0) - (2+8) = -6 rev-> -6 mismatch
+ digit sum sum
+ (46,20)->0264: (4+6) + (2+0) = 12 rev-> 21 mismatch
+ digit product diff
+ (89,63)->3698: 8*9 - 6*3 = 72 - 18 = 54 rev-> 45 mismatch
+ digit product sum
+ (40,28)->8204: 4*0 + 2*8 = 0 + 16 = 16 rev-> 61 mismatch
+ determinant
+ (46,20)->0264: 4*0 - 6*2 = 0 - 12 = -12 rev-> -21 mismatch
+ abs determinant
+ (89,63)->3698: |8*3 - 9*6| = |24 - 54| = 30 rev-> 03 mismatch
+
+ identity [98 36, 04 82, 64 02] [expected (98,36)->3698, (04,82)->8204, (64,02)->0264]
+ multiply+1
+ (98,36)->3698: (90 + 8) * 36 + 1 = 90 * 36 + 8 * 36 + 1 = 3240 + 288 + 1 = 3528 + 1 = 3529 mismatch
+ multiply-1
+ (04,82)->8204: (0 + 4) * 82 - 1 = 0 * 82 + 4 * 82 - 1 = 0 + 328 - 1 = 328 - 1 = 327 mismatch
+ add+1
+ (64,02)->0264: 64 + 02 + 1 = 67 mismatch
+ add-1
+ (98,36)->3698: 98 + 36 - 1 = 133 mismatch
+ sub+1
+ (04,82)->8204: 04 - 82 + 1 = -77 mismatch
+ sub-1
+ (64,02)->0264: 64 - 02 - 1 = 61 mismatch
+ integer division (a/b)
+ (98,36)->3698: 98 / 36 = 2 mismatch
+ reverse division (b/a)
+ (04,82)->8204: 82 / 04 = 20 mismatch
+ reverse modulo (b mod a)
+ (64,02)->0264: 02 mod 64 = 2 mismatch
+ digit absolute diff
+ (98,36)->3698: |9-3| || |8-6| = 62 mismatch
+ digit add mod10
+ (04,82)->8204: (0+8)%10 || (4+2)%10 = 86 mismatch
+ digit sub mod10
+ (64,02)->0264: (6-0)%10 || (4-2)%10 = 62 mismatch
+ cross multiply
+ (98,36)->3698: 9*3 + 8*6 = 27 + 48 = 75 mismatch
+ cross multiply rev
+ (04,82)->8204: 0*2 + 4*8 = 0 + 32 = 32 mismatch
+ digit multiply
+ (64,02)->0264: 6*0 || 4*2 = 0 || 8 = 08 mismatch
+ digit multiply rev
+ (98,36)->3698: 9*6 || 8*3 = 54 || 24 = 5424 mismatch
+ digit sum diff
+ (04,82)->8204: (0+4) - (8+2) = -6 mismatch
+ digit sum sum
+ (64,02)->0264: (6+4) + (0+2) = 12 mismatch
+ digit product diff
+ (98,36)->3698: 9*8 - 3*6 = 72 - 18 = 54 mismatch
+ digit product sum
+ (04,82)->8204: 0*4 + 8*2 = 0 + 16 = 16 mismatch
+ determinant
+ (64,02)->0264: 6*2 - 4*0 = 12 - 0 = 12 mismatch
+ abs determinant
+ (98,36)->3698: |9*6 - 8*3| = |54 - 24| = 30 mismatch
+
+correct, actions: reversed operands, reversed result, concatenation
+
+Applying to 15*69:
+ We recall that the question operator is found in the examples.
+ reversed operands [15->51, 69->96] and reversed result
+ concatenation
+ (51,96): 51 || 96 = 5196 rev-> 6915
+ Result is non-negative
+ \boxed{6915}

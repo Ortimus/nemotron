@@ -1,0 +1,568 @@
+//+]] = @@
+$]+@% = :^
+^:+^} = %}:
+%]+"/ = >@
+%^*/] = $^:
+The question is @^-@:
+
+Operator symbols +*
+Question operator symbol -
+Question operator not in examples
+
+Digit symbols /]@$%:^}">
+
+Checking concatenation
+left // op + right ]] expected //]] versus @@ mismatch
+left $] op + right @% expected $]@% versus :^ mismatch
+left ^: op + right ^} expected ^:^} versus %}: mismatch
+left %] op + right "/ expected %]"/ versus >@ mismatch
+left %^ op * right /] expected %^/] versus $^: mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left // op + right ]] expected ]]// versus @@ mismatch
+left $] op + right @% expected @%$] versus :^ mismatch
+left ^: op + right ^} expected ^}^: versus %}: mismatch
+left %] op + right "/ expected "/%] versus >@ mismatch
+left %^ op * right /] expected /]%^ versus $^: mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+//+]] = @@
+$]+@% = :^
+^:+^} = %}:
+%]+"/ = >@
+%^*/] = $^:
+
+Assigning mul
+ left // op + right ]] = @@ length 2
+ left $] op + right @% = :^ length 2
+ left ^: op + right ^} = %}: length 3
+ left %] op + right "/ = >@ length 2
+ left %^ op * right /] = $^: length 3
+
+Assigning sub
+ left // op + right ]] = @@ length 2
+ left $] op + right @% = :^ length 2
+ left ^: op + right ^} = %}: length 3
+ left %] op + right "/ = >@ length 2
+ left %^ op * right /] = $^: length 3
+
+Assigning add
+ left // op + right ]] = @@ length 2
+ left $] op + right @% = :^ length 2
+ left ^: op + right ^} = %}: length 3 assume add
+ left %] op + right "/ = >@ assumed add
+ left %^ op * right /] = $^: length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left // op + right ]] = @@ assumed add
+ left $] op + right @% = :^ assumed add
+ left ^: op + right ^} = %}: assumed add
+ left %] op + right "/ = >@ assumed add
+ left %^ op * right /] = $^: assumed add
+ left @^ op - right @: the question, operator not in the examples
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=1 ]=8 @=6 $=3 %=2 :=9 ^=5 }=0 "=7 >=4
+//+]] = 11 add 88 = 99 vs @@ 66 diff 33 add no; 11 add 88 = 99 vs rev @@ 66 diff 33 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: %^/
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=0 ]=7 @=6 $=3 %=1 :=9 ^=5 }=2 "=4 >=8
+//+]] = 00 add 77 = 77 vs @@ 66 diff 11 add no; 00 add 77 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: }^%
+
+Trying /=7 ]=0 @=6 $=3 %=1 :=9 ^=5 }=4 "=2 >=8
+//+]] = 77 add 00 = 77 vs @@ 66 diff 11 add no; 77 add 00 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=1 ]=8 @=6 $=3 %=2 :=9 ^=5 }=0 "=7 >=4
+//+]] = 11 add 88 = 99 vs @@ 66 diff 33 add no; 11 add 88 = 99 vs rev @@ 66 diff 33 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: %^/
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=0 ]=5 @=6 $=3 %=1 :=9 ^=4 }=2 "=7 >=8
+//+]] = 00 add 55 = 55 vs @@ 66 diff 11 add no; 00 add 55 = 55 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 64 add 69 rev 46 add 96 = 142 rev 241 = final answer: }^%
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=7 ]=8 @=6 $=3 %=1 :=9 ^=5 }=0 "=2 >=4
+//+]] = 77 add 88 = 165 vs @@ 66 diff 99 add no; 77 add 88 = 165 vs rev @@ 66 diff 99 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=0 ]=8 @=6 $=3 %=1 :=9 ^=5 }=2 "=7 >=4
+//+]] = 00 add 88 = 88 vs @@ 66 diff 22 add no; 00 add 88 = 88 vs rev @@ 66 diff 22 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: }^%
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=9 ]=8 @=6 $=3 %=1 :=2 ^=5 }=0 "=7 >=4
+//+]] = 99 add 88 = 187 vs @@ 66 diff 121 add no; 99 add 88 = 187 vs rev @@ 66 diff 121 add no
+ rejected none @^-@: = 65 add 62 rev 56 add 26 = 82 rev 28 = final answer: :]
+
+Trying /=7 ]=0 @=6 $=3 %=1 :=9 ^=5 }=4 "=2 >=8
+//+]] = 77 add 00 = 77 vs @@ 66 diff 11 add no; 77 add 00 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=0 ]=5 @=6 $=3 %=1 :=9 ^=4 }=2 "=7 >=8
+//+]] = 00 add 55 = 55 vs @@ 66 diff 11 add no; 00 add 55 = 55 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 64 add 69 rev 46 add 96 = 142 rev 241 = final answer: }^%
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=3 ]=8 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 33 add 88 = 121 vs @@ 66 diff 55 add no; 33 add 88 = 121 vs rev @@ 66 diff 55 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=6 ]=7 @=2 $=3 %=1 :=9 ^=5 }=0 "=4 >=8
+//+]] = 66 add 77 = 143 vs @@ 22 diff 121 add no; 66 add 77 = 143 vs rev @@ 22 diff 121 add no
+ rejected none @^-@: = 25 add 29 rev 52 add 92 = 144 rev 441 = final answer: ""%
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=0 ]=8 @=6 $=3 %=1 :=9 ^=5 }=2 "=7 >=4
+//+]] = 00 add 88 = 88 vs @@ 66 diff 22 add no; 00 add 88 = 88 vs rev @@ 66 diff 22 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: }^%
+
+Trying /=7 ]=0 @=6 $=3 %=1 :=9 ^=5 }=4 "=2 >=8
+//+]] = 77 add 00 = 77 vs @@ 66 diff 11 add no; 77 add 00 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=0 ]=8 @=6 $=3 %=1 :=9 ^=5 }=2 "=7 >=4
+//+]] = 00 add 88 = 88 vs @@ 66 diff 22 add no; 00 add 88 = 88 vs rev @@ 66 diff 22 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: }^%
+
+Trying /=9 ]=0 @=6 $=3 %=1 :=2 ^=5 }=4 "=7 >=8
+//+]] = 99 add 00 = 99 vs @@ 66 diff 33 add no; 99 add 00 = 99 vs rev @@ 66 diff 33 add no
+ rejected none @^-@: = 65 add 62 rev 56 add 26 = 82 rev 28 = final answer: :>
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=7 ]=8 @=6 $=3 %=1 :=9 ^=5 }=0 "=2 >=4
+//+]] = 77 add 88 = 165 vs @@ 66 diff 99 add no; 77 add 88 = 165 vs rev @@ 66 diff 99 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=0 ]=7 @=6 $=3 %=1 :=9 ^=5 }=2 "=4 >=8
+//+]] = 00 add 77 = 77 vs @@ 66 diff 11 add no; 00 add 77 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: }^%
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=9 ]=8 @=6 $=3 %=1 :=2 ^=5 }=0 "=7 >=4
+//+]] = 99 add 88 = 187 vs @@ 66 diff 121 add no; 99 add 88 = 187 vs rev @@ 66 diff 121 add no
+ rejected none @^-@: = 65 add 62 rev 56 add 26 = 82 rev 28 = final answer: :]
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=7 ]=0 @=6 $=3 %=1 :=9 ^=5 }=4 "=2 >=8
+//+]] = 77 add 00 = 77 vs @@ 66 diff 11 add no; 77 add 00 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=3 ]=8 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 33 add 88 = 121 vs @@ 66 diff 55 add no; 33 add 88 = 121 vs rev @@ 66 diff 55 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=7 ]=0 @=6 $=3 %=1 :=9 ^=5 }=4 "=2 >=8
+//+]] = 77 add 00 = 77 vs @@ 66 diff 11 add no; 77 add 00 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=6 ]=8 @=2 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 66 add 88 = 154 vs @@ 22 diff 132 add no; 66 add 88 = 154 vs rev @@ 22 diff 132 add no
+ rejected none @^-@: = 25 add 29 rev 52 add 92 = 144 rev 441 = final answer: >>%
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=3 ]=8 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 33 add 88 = 121 vs @@ 66 diff 55 add no; 33 add 88 = 121 vs rev @@ 66 diff 55 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=7 ]=0 @=6 $=3 %=1 :=9 ^=5 }=4 "=2 >=8
+//+]] = 77 add 00 = 77 vs @@ 66 diff 11 add no; 77 add 00 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=0 ]=7 @=6 $=3 %=1 :=9 ^=5 }=2 "=4 >=8
+//+]] = 00 add 77 = 77 vs @@ 66 diff 11 add no; 00 add 77 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: }^%
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=6 ]=8 @=2 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 66 add 88 = 154 vs @@ 22 diff 132 add no; 66 add 88 = 154 vs rev @@ 22 diff 132 add no
+ rejected none @^-@: = 25 add 29 rev 52 add 92 = 144 rev 441 = final answer: >>%
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=0 ]=8 @=6 $=3 %=1 :=9 ^=5 }=2 "=7 >=4
+//+]] = 00 add 88 = 88 vs @@ 66 diff 22 add no; 00 add 88 = 88 vs rev @@ 66 diff 22 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: }^%
+
+Trying /=5 ]=0 @=6 $=3 %=1 :=9 ^=2 }=4 "=7 >=8
+//+]] = 55 add 00 = 55 vs @@ 66 diff 11 add no; 55 add 00 = 55 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 62 add 69 rev 26 add 96 = 122 rev 221 = final answer: ^^%
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=9 ]=7 @=6 $=3 %=1 :=2 ^=5 }=0 "=4 >=8
+//+]] = 99 add 77 = 176 vs @@ 66 diff 110 add no; 99 add 77 = 176 vs rev @@ 66 diff 110 add no
+ rejected none @^-@: = 65 add 62 rev 56 add 26 = 82 rev 28 = final answer: :>
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=6 ]=8 @=2 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 66 add 88 = 154 vs @@ 22 diff 132 add no; 66 add 88 = 154 vs rev @@ 22 diff 132 add no
+ rejected none @^-@: = 25 add 29 rev 52 add 92 = 144 rev 441 = final answer: >>%
+
+Trying /=7 ]=0 @=6 $=3 %=1 :=9 ^=5 }=4 "=2 >=8
+//+]] = 77 add 00 = 77 vs @@ 66 diff 11 add no; 77 add 00 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: "^%
+
+Trying /=1 ]=5 @=6 $=3 %=2 :=9 ^=4 }=0 "=7 >=8
+//+]] = 11 add 55 = 66 vs @@ 66 diff 0 add ok; 11 add 55 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 35 add 62 = 97 vs :^ 94 diff 3 add no; 53 add 26 = 79 vs rev ^: 49 diff 30 add no
+ rejected forward @^-@: = 64 add 69 = 133 = final answer: /$$
+
+Trying /=5 ]=1 @=6 $=3 %=4 :=9 ^=2 }=0 "=7 >=8
+//+]] = 55 add 11 = 66 vs @@ 66 diff 0 add ok; 55 add 11 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 31 add 64 = 95 vs :^ 92 diff 3 add no; 13 add 46 = 59 vs rev ^: 29 diff 30 add no
+ rejected forward @^-@: = 62 add 69 = 131 = final answer: ]$]
+
+Trying /=2 ]=4 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 22 add 44 = 66 vs @@ 66 diff 0 add ok; 22 add 44 = 66 vs rev @@ 66 diff 0 add ok
+$]+@% = 34 add 61 = 95 vs :^ 95 diff 0 add ok; 43 add 16 = 59 vs rev ^: 59 diff 0 add ok
+^:+^} = 59 add 50 = 109 vs %}: 109 diff 0 add ok; 95 add 05 = 100 vs rev :}% 901 diff 801 add no
+%]+"/ = 14 add 72 = 86 vs >@ 86 diff 0 add ok; 41 add 27 = 68 vs rev @> 68 diff 0 add ok
+%^*/] = 15 add 24 = 39 vs $^: 359 diff 320 add no; 51 add 42 = 93 vs rev :^$ 953 diff 860 add no
+ rejected forward @^-@: = 65 add 69 = 134 = final answer: %$]
+
+Trying /=8 ]=2 @=6 $=3 %=1 :=9 ^=5 }=0 "=7 >=4
+//+]] = 88 add 22 = 110 vs @@ 66 diff 44 add no; 88 add 22 = 110 vs rev @@ 66 diff 44 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: ]^%
+
+Trying /=9 ]=8 @=6 $=3 %=1 :=2 ^=5 }=0 "=7 >=4
+//+]] = 99 add 88 = 187 vs @@ 66 diff 121 add no; 99 add 88 = 187 vs rev @@ 66 diff 121 add no
+ rejected none @^-@: = 65 add 62 rev 56 add 26 = 82 rev 28 = final answer: :]
+
+Trying /=4 ]=3 @=6 $=2 %=1 :=9 ^=5 }=0 "=7 >=8
+//+]] = 44 add 33 = 77 vs @@ 66 diff 11 add no; 44 add 33 = 77 vs rev @@ 66 diff 11 add no
+ rejected none @^-@: = 65 add 69 rev 56 add 96 = 152 rev 251 = final answer: $^%
+
+Trying /=1 ]=6 @=7 $=4 %=8 :=2 ^=9 }=3 "=0 >=5
+//+]] = 11 add 66 = 77 vs @@ 77 diff 0 add ok; 11 add 66 = 77 vs rev @@ 77 diff 0 add ok
+$]+@% = 46 add 78 = 124 vs :^ 29 diff 95 add no; 64 add 87 = 151 vs rev ^: 92 diff 59 add no
+ rejected forward @^-@: = 79 add 72 = 151 = final answer: />/
+
+Trying /=7 ]=1 @=9 $=4 %=0 :=5 ^=2 }=6 "=3 >=8
+//+]] = 77 add 11 = 88 vs @@ 99 diff 11 add no; 77 add 11 = 88 vs rev @@ 99 diff 11 add no
+ rejected none @^-@: = 92 add 95 rev 29 add 59 = 88 rev 88 = final answer: >>

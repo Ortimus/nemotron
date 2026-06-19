@@ -1,0 +1,75 @@
+>>}($ = ^^
+`/}>[ = "!
+><:^[ = :$"
+"[+(/ = $(`[
+`[:/! = /(
+The question is $$}<$
+
+Operator symbols }:+
+Question operator symbol }
+Question operator in examples
+
+Digit symbols >($^`/["!<
+
+Checking concatenation
+left >> op } right ($ expected >>($ versus ^^ mismatch
+left `/ op } right >[ expected `/>[ versus "! mismatch
+left >< op : right ^[ expected ><^[ versus :$" mismatch
+left "[ op + right (/ expected "[(/ versus $(`[ mismatch
+left `[ op : right /! expected `[/! versus /( mismatch
+
+Question operator } is not concatenation
+
+Checking reverse concatenation
+left >> op } right ($ expected ($>> versus ^^ mismatch
+left `/ op } right >[ expected >[`/ versus "! mismatch
+left >< op : right ^[ expected ^[>< versus :$" mismatch
+left "[ op + right (/ expected (/"[ versus $(`[ mismatch
+left `[ op : right /! expected /!`[ versus /( mismatch
+
+Question operator } is not reverse concatenation
+
+Filtering out the concatenation operations
+>>}($ = ^^
+`/}>[ = "!
+><:^[ = :$"
+"[+(/ = $(`[
+`[:/! = /(
+
+Assigning mul
+ left >> op } right ($ = ^^ length 2
+ left `/ op } right >[ = "! length 2
+ left >< op : right ^[ = :$" length 3
+ left "[ op + right (/ = $(`[ length 4 assume mul
+ left `[ op : right /! = /( length 2
+
+Assigning sub
+ left >> op } right ($ = ^^ length 2
+ left `/ op } right >[ = "! length 2
+ left >< op : right ^[ = :$" op in output assume sub
+ left "[ op + right (/ = $(`[ assumed mul
+ left `[ op : right /! = /( assumed sub
+
+Assigning add
+ left >> op } right ($ = ^^ length 2
+ left `/ op } right >[ = "! length 2
+ left >< op : right ^[ = :$" assumed sub
+ left "[ op + right (/ = $(`[ assumed mul
+ left `[ op : right /! = /( assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left >> op } right ($ = ^^ length 2 assume add
+ left `/ op } right >[ = "! assumed add
+ left >< op : right ^[ = :$" assumed sub
+ left "[ op + right (/ = $(`[ assumed mul
+ left `[ op : right /! = /( assumed sub
+ left $$ op } right <$ the question, assumed add
+
+Trying >=2 (=6 $=5 ^=8 `=7 /=3 [=0 "=9 !=4 <=1
+>>}($ = 22 add 65 = 87 vs ^^ 88 diff 1 add ok + 1; 22 add 56 = 78 vs rev ^^ 88 diff 10 add no
+`/}>[ = 73 add 20 = 93 vs "! 94 diff 1 add ok + 1; 37 add 02 = 39 vs rev !" 49 diff 10 add no
+><:^[ = 21 sub 80 = 59 vs :$" -59 diff 0 sub ok; 12 sub 08 = 4 vs rev :"$ -95 diff 91 sub no
+"[+(/ = 90 mul 63 = 5670 vs $(`[ 5670 diff 0 mul ok; 09 mul 36 = 324 vs rev [`($ 0765 diff 441 mul no
+`[:/! = 70 sub 34 = 36 vs /( 36 diff 0 sub ok; 07 sub 43 = 36 vs rev (/ 63 diff 27 sub no
+ accepted forward $$}<$ = 55 add+1 15 = 70 + 1 = 71 = \boxed{`<}

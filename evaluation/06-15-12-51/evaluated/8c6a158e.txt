@@ -1,0 +1,180 @@
+65}27 = }38
+11}59 = }48
+46}23 = }23
+
+The inputs are 65, 27, 11, 59, 46, 23
+
+The outputs are }38, }48, }23
+Some example outputs have the operator symbol as prefix }.
+We now consider the outputs to be -38, -48, -23
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+65}27 -> }
+11}59 -> }
+46}23 -> }
+
+The operators
+}
+
+Looking at the question
+28}58 -> }
+The question operator is found in the examples.
+
+Looking at operator } [65}27 = -38, 11}59 = -48, 46}23 = -23]:
+
+Trying common operations
+ reversed operands [65->56 27->72, 11->11 59->95, 46->64 23->32] and reversed result [expected (56,72)->-38, (11,95)->-48, (64,32)->-23]
+ addition
+ (56,72)->-38: 56 + 72 = 128 rev-> 821 mismatch
+ multiplication
+ (11,95)->-48: (10 + 1) * 95 = 10 * 95 + 1 * 95 = 950 + 95 = 1045 rev-> 5401 mismatch
+ concatenation
+ (64,32)->-23: 64 || 32 = 6432 rev-> 2346 mismatch
+ reverse concatenation
+ (56,72)->-38: 72 || 56 = 7256 rev-> 6527 mismatch
+
+ identity [65 27, 11 59, 46 23] [expected (65,27)->-38, (11,59)->-48, (46,23)->-23]
+ addition
+ (65,27)->-38: 65 + 27 = 92 mismatch
+ multiplication
+ (11,59)->-48: (10 + 1) * 59 = 10 * 59 + 1 * 59 = 590 + 59 = 649 mismatch
+ concatenation
+ (46,23)->-23: 46 || 23 = 4623 mismatch
+ reverse concatenation
+ (65,27)->-38: 27 || 65 = 2765 mismatch
+
+Trying difference operations
+ reversed operands [65->56 27->72, 11->11 59->95, 46->64 23->32] and reversed result [expected (56,72)->-38, (11,95)->-48, (64,32)->-23]
+ subtraction (a-b)
+ (56,72)->-38: 56 - 72 = -16 rev-> -61 mismatch
+ absolute difference
+ (11,95)->-48: |11 - 95| = 84 rev-> 48 mismatch
+ max mod min
+ (64,32)->-23: max(64,32) mod min(64,32) = 64 mod 32 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (56,72)->-38: -|56 - 72| = -16 rev-> -61 mismatch
+ reverse subtraction (b-a)
+ (11,95)->-48: 95 - 11 = 84 rev-> 48 mismatch
+ modulo (a mod b)
+ (64,32)->-23: 64 mod 32 = 0 rev-> 0 mismatch
+
+ identity [65 27, 11 59, 46 23] [expected (65,27)->-38, (11,59)->-48, (46,23)->-23]
+ subtraction (a-b)
+ (65,27)->-38: 65 - 27 = 38 mismatch
+ absolute difference
+ (11,59)->-48: |11 - 59| = 48 mismatch
+ max mod min
+ (46,23)->-23: max(46,23) mod min(46,23) = 46 mod 23 = 0 mismatch
+ negated absolute difference
+ (65,27)->-38: -|65 - 27| = -38 match
+ (11,59)->-48: -|11 - 59| = -48 match
+ (46,23)->-23: -|46 - 23| = -23 match
+ correct, actions: negated absolute difference
+ reverse subtraction (b-a)
+ (11,59)->-48: 59 - 11 = 48 mismatch
+ modulo (a mod b)
+ (46,23)->-23: 46 mod 23 = 0 mismatch
+
+Trying rare operations
+ reversed operands [65->56 27->72, 11->11 59->95, 46->64 23->32] and reversed result [expected (56,72)->-38, (11,95)->-48, (64,32)->-23]
+ multiply+1
+ (56,72)->-38: (50 + 6) * 72 + 1 = 50 * 72 + 6 * 72 + 1 = 3600 + 432 + 1 = 4032 + 1 = 4033 rev-> 3304 mismatch
+ multiply-1
+ (11,95)->-48: (10 + 1) * 95 - 1 = 10 * 95 + 1 * 95 - 1 = 950 + 95 - 1 = 1045 - 1 = 1044 rev-> 4401 mismatch
+ add+1
+ (64,32)->-23: 64 + 32 + 1 = 97 rev-> 79 mismatch
+ add-1
+ (56,72)->-38: 56 + 72 - 1 = 127 rev-> 721 mismatch
+ sub+1
+ (11,95)->-48: 11 - 95 + 1 = -83 rev-> -38 mismatch
+ sub-1
+ (64,32)->-23: 64 - 32 - 1 = 31 rev-> 13 mismatch
+ integer division (a/b)
+ (56,72)->-38: 56 / 72 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (11,95)->-48: 95 / 11 = 8 rev-> 8 mismatch
+ reverse modulo (b mod a)
+ (64,32)->-23: 32 mod 64 = 32 rev-> 23 mismatch
+ digit absolute diff
+ (56,72)->-38: |5-7| || |6-2| = 24 rev-> 42 mismatch
+ digit add mod10
+ (11,95)->-48: (1+9)%10 || (1+5)%10 = 06 rev-> 60 mismatch
+ digit sub mod10
+ (64,32)->-23: (6-3)%10 || (4-2)%10 = 32 rev-> 23 mismatch
+ cross multiply
+ (56,72)->-38: 5*7 + 6*2 = 35 + 12 = 47 rev-> 74 mismatch
+ cross multiply rev
+ (11,95)->-48: 1*5 + 1*9 = 5 + 9 = 14 rev-> 41 mismatch
+ digit multiply
+ (64,32)->-23: 6*3 || 4*2 = 18 || 8 = 188 rev-> 881 mismatch
+ digit multiply rev
+ (56,72)->-38: 5*2 || 6*7 = 10 || 42 = 1042 rev-> 2401 mismatch
+ digit sum diff
+ (11,95)->-48: (1+1) - (9+5) = -12 rev-> -21 mismatch
+ digit sum sum
+ (64,32)->-23: (6+4) + (3+2) = 15 rev-> 51 mismatch
+ digit product diff
+ (56,72)->-38: 5*6 - 7*2 = 30 - 14 = 16 rev-> 61 mismatch
+ digit product sum
+ (11,95)->-48: 1*1 + 9*5 = 1 + 45 = 46 rev-> 64 mismatch
+ determinant
+ (64,32)->-23: 6*2 - 4*3 = 12 - 12 = 0 rev-> 0 mismatch
+ abs determinant
+ (56,72)->-38: |5*2 - 6*7| = |10 - 42| = 32 rev-> 23 mismatch
+
+ identity [65 27, 11 59, 46 23] [expected (65,27)->-38, (11,59)->-48, (46,23)->-23]
+ multiply+1
+ (65,27)->-38: (60 + 5) * 27 + 1 = 60 * 27 + 5 * 27 + 1 = 1620 + 135 + 1 = 1755 + 1 = 1756 mismatch
+ multiply-1
+ (11,59)->-48: (10 + 1) * 59 - 1 = 10 * 59 + 1 * 59 - 1 = 590 + 59 - 1 = 649 - 1 = 648 mismatch
+ add+1
+ (46,23)->-23: 46 + 23 + 1 = 70 mismatch
+ add-1
+ (65,27)->-38: 65 + 27 - 1 = 91 mismatch
+ sub+1
+ (11,59)->-48: 11 - 59 + 1 = -47 mismatch
+ sub-1
+ (46,23)->-23: 46 - 23 - 1 = 22 mismatch
+ integer division (a/b)
+ (65,27)->-38: 65 / 27 = 2 mismatch
+ reverse division (b/a)
+ (11,59)->-48: 59 / 11 = 5 mismatch
+ reverse modulo (b mod a)
+ (46,23)->-23: 23 mod 46 = 23 mismatch
+ digit absolute diff
+ (65,27)->-38: |6-2| || |5-7| = 42 mismatch
+ digit add mod10
+ (11,59)->-48: (1+5)%10 || (1+9)%10 = 60 mismatch
+ digit sub mod10
+ (46,23)->-23: (4-2)%10 || (6-3)%10 = 23 mismatch
+ cross multiply
+ (65,27)->-38: 6*2 + 5*7 = 12 + 35 = 47 mismatch
+ cross multiply rev
+ (11,59)->-48: 1*9 + 1*5 = 9 + 5 = 14 mismatch
+ digit multiply
+ (46,23)->-23: 4*2 || 6*3 = 8 || 18 = 818 mismatch
+ digit multiply rev
+ (65,27)->-38: 6*7 || 5*2 = 42 || 10 = 4210 mismatch
+ digit sum diff
+ (11,59)->-48: (1+1) - (5+9) = -12 mismatch
+ digit sum sum
+ (46,23)->-23: (4+6) + (2+3) = 15 mismatch
+ digit product diff
+ (65,27)->-38: 6*5 - 2*7 = 30 - 14 = 16 mismatch
+ digit product sum
+ (11,59)->-48: 1*1 + 5*9 = 1 + 45 = 46 mismatch
+ determinant
+ (46,23)->-23: 4*3 - 6*2 = 12 - 12 = 0 mismatch
+ abs determinant
+ (65,27)->-38: |6*7 - 5*2| = |42 - 10| = 32 mismatch
+
+correct, actions: negated absolute difference
+
+Applying to 28}58:
+ We recall that the question operator is found in the examples.
+ identity [28 58]
+ negated absolute difference
+ (28,58): -|28 - 58| = -30
+ Result is negative - we add back the operator prefix }
+ -30 -> \boxed{}30}

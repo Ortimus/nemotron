@@ -1,0 +1,520 @@
+(#-`> = ''
+|'-'# = ||
+@&+'> = '&&&
+The question is (@+@?
+
+Operator symbols -+
+Question operator symbol +
+Question operator in examples
+
+Digit symbols (#`>'|@&?
+
+Checking concatenation
+left (# op - right `> expected (#`> versus '' mismatch
+left |' op - right '# expected |''# versus || mismatch
+left @& op + right '> expected @&'> versus '&&& mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left (# op - right `> expected `>(# versus '' mismatch
+left |' op - right '# expected '#|' versus || mismatch
+left @& op + right '> expected '>@& versus '&&& mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+(#-`> = ''
+|'-'# = ||
+@&+'> = '&&&
+
+Assigning mul
+ left (# op - right `> = '' length 2
+ left |' op - right '# = || length 2
+ left @& op + right '> = '&&& length 4 assume mul
+
+Assigning sub
+ left (# op - right `> = '' length 2
+ left |' op - right '# = || length 2
+ left @& op + right '> = '&&& assumed mul
+
+Assigning add
+ left (# op - right `> = '' length 2
+ left |' op - right '# = || length 2
+ left @& op + right '> = '&&& assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left (# op - right `> = '' length 2 assume add
+ left |' op - right '# = || assumed add
+ left @& op + right '> = '&&& assumed mul
+ left (@ op + right @? the question, assumed mul
+
+Trying (=0 #=3 `=1 >=8 '=2 |=5 @=4 &=6 ?=9 A=7
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 52 add 23 = 75 vs || 55 diff 20 add no; 25 add 32 = 57 vs rev || 55 diff 2 add no
+ rejected forward (@+@? = 04 mul 49 = 196 = final answer: `?&
+
+Trying (=9 #=0 `=3 >=1 '=2 |=6 @=7 &=5 ?=8 A=4
+(#-`> = 90 add 31 = 121 vs '' 22 diff 99 add no; 09 add 13 = 22 vs rev '' 22 diff 0 add ok
+|'-'# = 62 add 20 = 82 vs || 66 diff 16 add no; 26 add 02 = 28 vs rev || 66 diff 38 add no
+ rejected rev (@+@? = 97 mul 78 rev 79 mul 87 = 6873 rev 3786 = final answer: `@?|
+
+Trying (=6 #=9 `=0 >=3 '=2 |=5 @=7 &=4 ?=1 A=8
+(#-`> = 69 add 03 = 72 vs '' 22 diff 50 add no; 96 add 30 = 126 vs rev '' 22 diff 104 add no
+ rejected none (@+@? = 67 mul 71 rev 76 mul 17 = 1292 rev 2921 = final answer: '#'?
+
+Trying (=4 #=2 `=9 >=0 '=3 |=5 @=6 &=7 ?=8 A=1
+(#-`> = 42 add 90 = 132 vs '' 33 diff 99 add no; 24 add 09 = 33 vs rev '' 33 diff 0 add ok
+|'-'# = 53 add 32 = 85 vs || 55 diff 30 add no; 35 add 23 = 58 vs rev || 55 diff 3 add no
+ rejected rev (@+@? = 46 mul 68 rev 64 mul 86 = 5504 rev 4055 = final answer: (>||
+
+Trying (=5 #=7 `=4 >=9 '=2 |=1 @=6 &=8 ?=0 A=3
+(#-`> = 57 add 49 = 106 vs '' 22 diff 84 add no; 75 add 94 = 169 vs rev '' 22 diff 147 add no
+ rejected none (@+@? = 56 mul 60 rev 65 mul 06 = 390 rev 093 = final answer: ?>A
+
+Trying (=7 #=1 `=5 >=4 '=2 |=6 @=9 &=0 ?=3 A=8
+(#-`> = 71 add 54 = 125 vs '' 22 diff 103 add no; 17 add 45 = 62 vs rev '' 22 diff 40 add no
+ rejected none (@+@? = 79 mul 93 rev 97 mul 39 = 3783 rev 3873 = final answer: ?A(?
+
+Trying (=0 #=3 `=1 >=8 '=2 |=6 @=7 &=4 ?=9 A=5
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 62 add 23 = 85 vs || 66 diff 19 add no; 26 add 32 = 58 vs rev || 66 diff 8 add no
+ rejected forward (@+@? = 07 mul 79 = 553 = final answer: AA#
+
+Trying (=9 #=0 `=3 >=1 '=2 |=4 @=7 &=6 ?=5 A=8
+(#-`> = 90 add 31 = 121 vs '' 22 diff 99 add no; 09 add 13 = 22 vs rev '' 22 diff 0 add ok
+|'-'# = 42 add 20 = 62 vs || 44 diff 18 add no; 24 add 02 = 26 vs rev || 44 diff 18 add no
+ rejected rev (@+@? = 97 mul 75 rev 79 mul 57 = 4503 rev 3054 = final answer: `#?|
+
+Trying (=1 #=5 `=0 >=7 '=2 |=9 @=4 &=6 ?=3 A=8
+(#-`> = 15 add 07 = 22 vs '' 22 diff 0 add ok; 51 add 70 = 121 vs rev '' 22 diff 99 add no
+|'-'# = 92 add 25 = 117 vs || 99 diff 18 add no; 29 add 52 = 81 vs rev || 99 diff 18 add no
+ rejected forward (@+@? = 14 mul 43 = 602 = final answer: &`'
+
+Trying (=6 #=4 `=7 >=0 '=2 |=9 @=3 &=5 ?=8 A=1
+(#-`> = 64 add 70 = 134 vs '' 22 diff 112 add no; 46 add 07 = 53 vs rev '' 22 diff 31 add no
+ rejected none (@+@? = 63 mul 38 rev 36 mul 83 = 2988 rev 8892 = final answer: ??|'
+
+Trying (=4 #=7 `=9 >=3 '=2 |=5 @=1 &=6 ?=8 A=0
+(#-`> = 47 add 93 = 140 vs '' 22 diff 118 add no; 74 add 39 = 113 vs rev '' 22 diff 91 add no
+ rejected none (@+@? = 41 mul 18 rev 14 mul 81 = 1134 rev 4311 = final answer: (>@@
+
+Trying (=5 #=6 `=4 >=2 '=8 |=9 @=1 &=7 ?=0 A=3
+(#-`> = 56 add 42 = 98 vs '' 88 diff 10 add no; 65 add 24 = 89 vs rev '' 88 diff 1 add ok - 1
+|'-'# = 98 add 86 = 184 vs || 99 diff 85 add no; 89 add 68 = 157 vs rev || 99 diff 58 add no
+ rejected rev (@+@? = 51 mul 10 rev 15 mul 01 = 15 rev 51 = final answer: (@
+
+Trying (=0 #=3 `=1 >=8 '=2 |=4 @=6 &=9 ?=7 A=5
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 42 add 23 = 65 vs || 44 diff 21 add no; 24 add 32 = 56 vs rev || 44 diff 12 add no
+ rejected forward (@+@? = 06 mul 67 = 402 = final answer: |('
+
+Trying (=9 #=0 `=3 >=1 '=2 |=5 @=4 &=6 ?=8 A=7
+(#-`> = 90 add 31 = 121 vs '' 22 diff 99 add no; 09 add 13 = 22 vs rev '' 22 diff 0 add ok
+|'-'# = 52 add 20 = 72 vs || 55 diff 17 add no; 25 add 02 = 27 vs rev || 55 diff 28 add no
+ rejected rev (@+@? = 94 mul 48 rev 49 mul 84 = 4116 rev 6114 = final answer: &>>@
+
+Trying (=1 #=9 `=0 >=4 '=2 |=6 @=5 &=7 ?=3 A=8
+(#-`> = 19 add 04 = 23 vs '' 22 diff 1 add ok - 1; 91 add 40 = 131 vs rev '' 22 diff 109 add no
+|'-'# = 62 add 29 = 91 vs || 66 diff 25 add no; 26 add 92 = 118 vs rev || 66 diff 52 add no
+ rejected forward (@+@? = 15 mul 53 = 795 = final answer: &#@
+
+Trying (=6 #=1 `=5 >=0 '=2 |=9 @=4 &=7 ?=8 A=3
+(#-`> = 61 add 50 = 111 vs '' 22 diff 89 add no; 16 add 05 = 21 vs rev '' 22 diff 1 add ok + 1
+|'-'# = 92 add 21 = 113 vs || 99 diff 14 add no; 29 add 12 = 41 vs rev || 99 diff 58 add no
+ rejected rev (@+@? = 64 mul 48 rev 46 mul 84 = 3864 rev 4683 = final answer: @(?A
+
+Trying (=7 #=5 `=6 >=3 '=2 |=1 @=4 &=9 ?=8 A=0
+(#-`> = 75 add 63 = 138 vs '' 22 diff 116 add no; 57 add 36 = 93 vs rev '' 22 diff 71 add no
+ rejected none (@+@? = 74 mul 48 rev 47 mul 84 = 3948 rev 8493 = final answer: ?@&>
+
+Trying (=4 #=2 `=9 >=5 '=3 |=6 @=8 &=7 ?=1 A=0
+(#-`> = 42 add 95 = 137 vs '' 33 diff 104 add no; 24 add 59 = 83 vs rev '' 33 diff 50 add no
+ rejected none (@+@? = 48 mul 81 rev 84 mul 18 = 1512 rev 2151 = final answer: #?>?
+
+Trying (=0 #=3 `=1 >=8 '=2 |=4 @=7 &=9 ?=6 A=5
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 42 add 23 = 65 vs || 44 diff 21 add no; 24 add 32 = 56 vs rev || 44 diff 12 add no
+ rejected forward (@+@? = 07 mul 76 = 532 = final answer: A#'
+
+Trying (=9 #=0 `=3 >=1 '=2 |=4 @=6 &=7 ?=8 A=5
+(#-`> = 90 add 31 = 121 vs '' 22 diff 99 add no; 09 add 13 = 22 vs rev '' 22 diff 0 add ok
+|'-'# = 42 add 20 = 62 vs || 44 diff 18 add no; 24 add 02 = 26 vs rev || 44 diff 18 add no
+ rejected rev (@+@? = 96 mul 68 rev 69 mul 86 = 5934 rev 4395 = final answer: |`(A
+
+Trying (=1 #=4 `=0 >=9 '=2 |=6 @=5 &=7 ?=3 A=8
+(#-`> = 14 add 09 = 23 vs '' 22 diff 1 add ok - 1; 41 add 90 = 131 vs rev '' 22 diff 109 add no
+|'-'# = 62 add 24 = 86 vs || 66 diff 20 add no; 26 add 42 = 68 vs rev || 66 diff 2 add no
+ rejected forward (@+@? = 15 mul 53 = 795 = final answer: &>@
+
+Trying (=8 #=7 `=4 >=0 '=2 |=6 @=5 &=9 ?=1 A=3
+(#-`> = 87 add 40 = 127 vs '' 22 diff 105 add no; 78 add 04 = 82 vs rev '' 22 diff 60 add no
+ rejected none (@+@? = 85 mul 51 rev 58 mul 15 = 870 rev 078 = final answer: >#(
+
+Trying (=5 #=1 `=8 >=3 '=2 |=9 @=6 &=7 ?=4 A=0
+(#-`> = 51 add 83 = 134 vs '' 22 diff 112 add no; 15 add 38 = 53 vs rev '' 22 diff 31 add no
+ rejected none (@+@? = 56 mul 64 rev 65 mul 46 = 2990 rev 0992 = final answer: A||'
+
+Trying (=6 #=2 `=7 >=5 '=3 |=4 @=8 &=9 ?=1 A=0
+(#-`> = 62 add 75 = 137 vs '' 33 diff 104 add no; 26 add 57 = 83 vs rev '' 33 diff 50 add no
+ rejected none (@+@? = 68 mul 81 rev 86 mul 18 = 1548 rev 8451 = final answer: @|>?
+
+Trying (=0 #=3 `=1 >=8 '=2 |=4 @=9 &=6 ?=7 A=5
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 42 add 23 = 65 vs || 44 diff 21 add no; 24 add 32 = 56 vs rev || 44 diff 12 add no
+ rejected forward (@+@? = 09 mul 97 = 873 = final answer: >?#
+
+Trying (=9 #=0 `=3 >=1 '=2 |=4 @=6 &=7 ?=8 A=5
+(#-`> = 90 add 31 = 121 vs '' 22 diff 99 add no; 09 add 13 = 22 vs rev '' 22 diff 0 add ok
+|'-'# = 42 add 20 = 62 vs || 44 diff 18 add no; 24 add 02 = 26 vs rev || 44 diff 18 add no
+ rejected rev (@+@? = 96 mul 68 rev 69 mul 86 = 5934 rev 4395 = final answer: |`(A
+
+Trying (=1 #=6 `=0 >=9 '=2 |=4 @=5 &=7 ?=8 A=3
+(#-`> = 16 add 09 = 25 vs '' 22 diff 3 add no; 61 add 90 = 151 vs rev '' 22 diff 129 add no
+ rejected none (@+@? = 15 mul 58 rev 51 mul 85 = 4335 rev 5334 = final answer: @AA|
+
+Trying (=2 #=9 `=6 >=0 '=8 |=4 @=5 &=7 ?=1 A=3
+(#-`> = 29 add 60 = 89 vs '' 88 diff 1 add ok - 1; 92 add 06 = 98 vs rev '' 88 diff 10 add no
+|'-'# = 48 add 89 = 137 vs || 44 diff 93 add no; 84 add 98 = 182 vs rev || 44 diff 138 add no
+ rejected forward (@+@? = 25 mul 51 = 1275 = final answer: ?(&@
+
+Trying (=7 #=5 `=4 >=3 '=2 |=6 @=9 &=1 ?=0 A=8
+(#-`> = 75 add 43 = 118 vs '' 22 diff 96 add no; 57 add 34 = 91 vs rev '' 22 diff 69 add no
+ rejected none (@+@? = 79 mul 90 rev 97 mul 09 = 873 rev 378 = final answer: >(A
+
+Trying (=6 #=1 `=7 >=5 '=2 |=9 @=4 &=8 ?=0 A=3
+(#-`> = 61 add 75 = 136 vs '' 22 diff 114 add no; 16 add 57 = 73 vs rev '' 22 diff 51 add no
+ rejected none (@+@? = 64 mul 40 rev 46 mul 04 = 184 rev 481 = final answer: @&#
+
+Trying (=0 #=3 `=1 >=8 '=2 |=4 @=9 &=6 ?=7 A=5
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 42 add 23 = 65 vs || 44 diff 21 add no; 24 add 32 = 56 vs rev || 44 diff 12 add no
+ rejected forward (@+@? = 09 mul 97 = 873 = final answer: >?#
+
+Trying (=4 #=0 `=9 >=1 '=2 |=7 @=5 &=6 ?=3 A=8
+(#-`> = 40 add 91 = 131 vs '' 22 diff 109 add no; 04 add 19 = 23 vs rev '' 22 diff 1 add ok - 1
+|'-'# = 72 add 20 = 92 vs || 77 diff 15 add no; 27 add 02 = 29 vs rev || 77 diff 48 add no
+ rejected rev (@+@? = 45 mul 53 rev 54 mul 35 = 1890 rev 0981 = final answer: #`A>
+
+Trying (=5 #=6 `=3 >=2 '=8 |=4 @=9 &=7 ?=1 A=0
+(#-`> = 56 add 32 = 88 vs '' 88 diff 0 add ok; 65 add 23 = 88 vs rev '' 88 diff 0 add ok
+|'-'# = 48 add 86 = 134 vs || 44 diff 90 add no; 84 add 68 = 152 vs rev || 44 diff 108 add no
+ rejected forward (@+@? = 59 mul 91 = 5369 = final answer: (`#@
+
+Trying (=9 #=2 `=5 >=0 '=3 |=4 @=7 &=6 ?=8 A=1
+(#-`> = 92 add 50 = 142 vs '' 33 diff 109 add no; 29 add 05 = 34 vs rev '' 33 diff 1 add ok - 1
+|'-'# = 43 add 32 = 75 vs || 44 diff 31 add no; 34 add 23 = 57 vs rev || 44 diff 13 add no
+ rejected rev (@+@? = 97 mul 78 rev 79 mul 87 = 6873 rev 3786 = final answer: '@?&
+
+Trying (=1 #=9 `=0 >=3 '=2 |=4 @=7 &=5 ?=8 A=6
+(#-`> = 19 add 03 = 22 vs '' 22 diff 0 add ok; 91 add 30 = 121 vs rev '' 22 diff 99 add no
+|'-'# = 42 add 29 = 71 vs || 44 diff 27 add no; 24 add 92 = 116 vs rev || 44 diff 72 add no
+ rejected forward (@+@? = 17 mul 78 = 1326 = final answer: (>'A
+
+Trying (=7 #=1 `=4 >=5 '=2 |=9 @=6 &=0 ?=8 A=3
+(#-`> = 71 add 45 = 116 vs '' 22 diff 94 add no; 17 add 54 = 71 vs rev '' 22 diff 49 add no
+ rejected none (@+@? = 76 mul 68 rev 67 mul 86 = 5762 rev 2675 = final answer: '@(>
+
+Trying (=0 #=3 `=1 >=8 '=2 |=6 @=5 &=9 ?=7 A=4
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 62 add 23 = 85 vs || 66 diff 19 add no; 26 add 32 = 58 vs rev || 66 diff 8 add no
+ rejected forward (@+@? = 05 mul 57 = 285 = final answer: '>@
+
+Trying (=6 #=0 `=7 >=1 '=2 |=9 @=4 &=5 ?=8 A=3
+(#-`> = 60 add 71 = 131 vs '' 22 diff 109 add no; 06 add 17 = 23 vs rev '' 22 diff 1 add ok - 1
+|'-'# = 92 add 20 = 112 vs || 99 diff 13 add no; 29 add 02 = 31 vs rev || 99 diff 68 add no
+ rejected rev (@+@? = 64 mul 48 rev 46 mul 84 = 3864 rev 4683 = final answer: @(?A
+
+Trying (=4 #=6 `=3 >=2 '=8 |=9 @=5 &=7 ?=0 A=1
+(#-`> = 46 add 32 = 78 vs '' 88 diff 10 add no; 64 add 23 = 87 vs rev '' 88 diff 1 add ok + 1
+|'-'# = 98 add 86 = 184 vs || 99 diff 85 add no; 89 add 68 = 157 vs rev || 99 diff 58 add no
+ rejected rev (@+@? = 45 mul 50 rev 54 mul 05 = 270 rev 072 = final answer: ?&>
+
+Trying (=9 #=5 `=2 >=0 '=1 |=4 @=7 &=6 ?=8 A=3
+(#-`> = 95 add 20 = 115 vs '' 11 diff 104 add no; 59 add 02 = 61 vs rev '' 11 diff 50 add no
+ rejected none (@+@? = 97 mul 78 rev 79 mul 87 = 6873 rev 3786 = final answer: A@?&
+
+Trying (=5 #=4 `=6 >=3 '=2 |=0 @=9 &=7 ?=1 A=8
+(#-`> = 54 add 63 = 117 vs '' 22 diff 95 add no; 45 add 36 = 81 vs rev '' 22 diff 59 add no
+ rejected none (@+@? = 59 mul 91 rev 95 mul 19 = 1805 rev 5081 = final answer: (|A?
+
+Trying (=1 #=7 `=0 >=6 '=2 |=3 @=9 &=4 ?=5 A=8
+(#-`> = 17 add 06 = 23 vs '' 22 diff 1 add ok - 1; 71 add 60 = 131 vs rev '' 22 diff 109 add no
+|'-'# = 32 add 27 = 59 vs || 33 diff 26 add no; 23 add 72 = 95 vs rev || 33 diff 62 add no
+ rejected forward (@+@? = 19 mul 95 = 1805 = final answer: (A`?
+
+Trying (=0 #=3 `=1 >=8 '=2 |=5 @=6 &=4 ?=7 A=9
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 52 add 23 = 75 vs || 55 diff 20 add no; 25 add 32 = 57 vs rev || 55 diff 2 add no
+ rejected forward (@+@? = 06 mul 67 = 402 = final answer: &('
+
+Trying (=6 #=0 `=5 >=1 '=2 |=4 @=9 &=7 ?=3 A=8
+(#-`> = 60 add 51 = 111 vs '' 22 diff 89 add no; 06 add 15 = 21 vs rev '' 22 diff 1 add ok + 1
+|'-'# = 42 add 20 = 62 vs || 44 diff 18 add no; 24 add 02 = 26 vs rev || 44 diff 18 add no
+ rejected rev (@+@? = 69 mul 93 rev 96 mul 39 = 3744 rev 4473 = final answer: ||&?
+
+Trying (=4 #=6 `=3 >=2 '=8 |=9 @=7 &=5 ?=0 A=1
+(#-`> = 46 add 32 = 78 vs '' 88 diff 10 add no; 64 add 23 = 87 vs rev '' 88 diff 1 add ok + 1
+|'-'# = 98 add 86 = 184 vs || 99 diff 85 add no; 89 add 68 = 157 vs rev || 99 diff 58 add no
+ rejected rev (@+@? = 47 mul 70 rev 74 mul 07 = 518 rev 815 = final answer: 'A&
+
+Trying (=3 #=1 `=9 >=0 '=2 |=4 @=7 &=5 ?=6 A=8
+(#-`> = 31 add 90 = 121 vs '' 22 diff 99 add no; 13 add 09 = 22 vs rev '' 22 diff 0 add ok
+|'-'# = 42 add 21 = 63 vs || 44 diff 19 add no; 24 add 12 = 36 vs rev || 44 diff 8 add no
+ rejected rev (@+@? = 37 mul 76 rev 73 mul 67 = 4891 rev 1984 = final answer: #`A|
+
+Trying (=9 #=5 `=2 >=3 '=1 |=7 @=4 &=6 ?=8 A=0
+(#-`> = 95 add 23 = 118 vs '' 11 diff 107 add no; 59 add 32 = 91 vs rev '' 11 diff 80 add no
+ rejected none (@+@? = 94 mul 48 rev 49 mul 84 = 4116 rev 6114 = final answer: &''@
+
+Trying (=1 #=9 `=0 >=6 '=2 |=4 @=5 &=7 ?=3 A=8
+(#-`> = 19 add 06 = 25 vs '' 22 diff 3 add no; 91 add 60 = 151 vs rev '' 22 diff 129 add no
+ rejected none (@+@? = 15 mul 53 rev 51 mul 35 = 1785 rev 5871 = final answer: @A&(
+
+Trying (=0 #=3 `=1 >=8 '=2 |=9 @=7 &=6 ?=4 A=5
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 92 add 23 = 115 vs || 99 diff 16 add no; 29 add 32 = 61 vs rev || 99 diff 38 add no
+ rejected forward (@+@? = 07 mul 74 = 518 = final answer: A`>
+
+Trying (=6 #=0 `=5 >=1 '=2 |=9 @=4 &=7 ?=8 A=3
+(#-`> = 60 add 51 = 111 vs '' 22 diff 89 add no; 06 add 15 = 21 vs rev '' 22 diff 1 add ok + 1
+|'-'# = 92 add 20 = 112 vs || 99 diff 13 add no; 29 add 02 = 31 vs rev || 99 diff 68 add no
+ rejected rev (@+@? = 64 mul 48 rev 46 mul 84 = 3864 rev 4683 = final answer: @(?A
+
+Trying (=4 #=6 `=3 >=2 '=8 |=5 @=7 &=9 ?=1 A=0
+(#-`> = 46 add 32 = 78 vs '' 88 diff 10 add no; 64 add 23 = 87 vs rev '' 88 diff 1 add ok + 1
+|'-'# = 58 add 86 = 144 vs || 55 diff 89 add no; 85 add 68 = 153 vs rev || 55 diff 98 add no
+ rejected rev (@+@? = 47 mul 71 rev 74 mul 17 = 1258 rev 8521 = final answer: '|>?
+
+Trying (=5 #=2 `=9 >=0 '=3 |=7 @=8 &=4 ?=6 A=1
+(#-`> = 52 add 90 = 142 vs '' 33 diff 109 add no; 25 add 09 = 34 vs rev '' 33 diff 1 add ok - 1
+|'-'# = 73 add 32 = 105 vs || 77 diff 28 add no; 37 add 23 = 60 vs rev || 77 diff 17 add no
+ rejected rev (@+@? = 58 mul 86 rev 85 mul 68 = 5780 rev 0875 = final answer: >@|(
+
+Trying (=9 #=5 `=4 >=3 '=2 |=1 @=7 &=6 ?=8 A=0
+(#-`> = 95 add 43 = 138 vs '' 22 diff 116 add no; 59 add 34 = 93 vs rev '' 22 diff 71 add no
+ rejected none (@+@? = 97 mul 78 rev 79 mul 87 = 6873 rev 3786 = final answer: >@?&
+
+Trying (=1 #=9 `=0 >=5 '=2 |=7 @=4 &=6 ?=8 A=3
+(#-`> = 19 add 05 = 24 vs '' 22 diff 2 add no; 91 add 50 = 141 vs rev '' 22 diff 119 add no
+ rejected none (@+@? = 14 mul 48 rev 41 mul 84 = 3444 rev 4443 = final answer: @@@A
+
+Trying (=0 #=3 `=1 >=8 '=2 |=5 @=4 &=9 ?=7 A=6
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 52 add 23 = 75 vs || 55 diff 20 add no; 25 add 32 = 57 vs rev || 55 diff 2 add no
+ rejected forward (@+@? = 04 mul 47 = 188 = final answer: `>>
+
+Trying (=6 #=0 `=5 >=1 '=2 |=4 @=7 &=9 ?=3 A=8
+(#-`> = 60 add 51 = 111 vs '' 22 diff 89 add no; 06 add 15 = 21 vs rev '' 22 diff 1 add ok + 1
+|'-'# = 42 add 20 = 62 vs || 44 diff 18 add no; 24 add 02 = 26 vs rev || 44 diff 18 add no
+ rejected rev (@+@? = 67 mul 73 rev 76 mul 37 = 2812 rev 2182 = final answer: '>A'
+
+Trying (=4 #=7 `=3 >=2 '=8 |=5 @=6 &=9 ?=0 A=1
+(#-`> = 47 add 32 = 79 vs '' 88 diff 9 add no; 74 add 23 = 97 vs rev '' 88 diff 9 add no
+ rejected none (@+@? = 46 mul 60 rev 64 mul 06 = 384 rev 483 = final answer: ('`
+
+Trying (=7 #=1 `=6 >=0 '=2 |=4 @=9 &=5 ?=3 A=8
+(#-`> = 71 add 60 = 131 vs '' 22 diff 109 add no; 17 add 06 = 23 vs rev '' 22 diff 1 add ok - 1
+|'-'# = 42 add 21 = 63 vs || 44 diff 19 add no; 24 add 12 = 36 vs rev || 44 diff 8 add no
+ rejected rev (@+@? = 79 mul 93 rev 97 mul 39 = 3783 rev 3873 = final answer: ?A(?
+
+Trying (=5 #=4 `=7 >=3 '=2 |=9 @=6 &=1 ?=0 A=8
+(#-`> = 54 add 73 = 127 vs '' 22 diff 105 add no; 45 add 37 = 82 vs rev '' 22 diff 60 add no
+ rejected none (@+@? = 56 mul 60 rev 65 mul 06 = 390 rev 093 = final answer: ?|>
+
+Trying (=1 #=5 `=0 >=7 '=2 |=6 @=9 &=4 ?=3 A=8
+(#-`> = 15 add 07 = 22 vs '' 22 diff 0 add ok; 51 add 70 = 121 vs rev '' 22 diff 99 add no
+|'-'# = 62 add 25 = 87 vs || 66 diff 21 add no; 26 add 52 = 78 vs rev || 66 diff 12 add no
+ rejected forward (@+@? = 19 mul 93 = 1767 = final answer: (>|>
+
+Trying (=0 #=3 `=1 >=8 '=2 |=4 @=6 &=5 ?=7 A=9
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 42 add 23 = 65 vs || 44 diff 21 add no; 24 add 32 = 56 vs rev || 44 diff 12 add no
+ rejected forward (@+@? = 06 mul 67 = 402 = final answer: |('
+
+Trying (=9 #=0 `=4 >=1 '=2 |=5 @=6 &=7 ?=3 A=8
+(#-`> = 90 add 41 = 131 vs '' 22 diff 109 add no; 09 add 14 = 23 vs rev '' 22 diff 1 add ok - 1
+|'-'# = 52 add 20 = 72 vs || 55 diff 17 add no; 25 add 02 = 27 vs rev || 55 diff 28 add no
+ rejected rev (@+@? = 96 mul 63 rev 69 mul 36 = 2484 rev 4842 = final answer: `A`'
+
+Trying (=4 #=7 `=3 >=2 '=8 |=6 @=9 &=5 ?=0 A=1
+(#-`> = 47 add 32 = 79 vs '' 88 diff 9 add no; 74 add 23 = 97 vs rev '' 88 diff 9 add no
+ rejected none (@+@? = 49 mul 90 rev 94 mul 09 = 846 rev 648 = final answer: |('
+
+Trying (=8 #=2 `=5 >=0 '=3 |=9 @=6 &=7 ?=4 A=1
+(#-`> = 82 add 50 = 132 vs '' 33 diff 99 add no; 28 add 05 = 33 vs rev '' 33 diff 0 add ok
+|'-'# = 93 add 32 = 125 vs || 99 diff 26 add no; 39 add 23 = 62 vs rev || 99 diff 37 add no
+ rejected rev (@+@? = 86 mul 64 rev 68 mul 46 = 3128 rev 8213 = final answer: (#A'
+
+Trying (=5 #=1 `=6 >=3 '=2 |=7 @=9 &=4 ?=8 A=0
+(#-`> = 51 add 63 = 114 vs '' 22 diff 92 add no; 15 add 36 = 51 vs rev '' 22 diff 29 add no
+ rejected none (@+@? = 59 mul 98 rev 95 mul 89 = 8455 rev 5548 = final answer: ((&?
+
+Trying (=1 #=9 `=0 >=4 '=2 |=7 @=6 &=5 ?=8 A=3
+(#-`> = 19 add 04 = 23 vs '' 22 diff 1 add ok - 1; 91 add 40 = 131 vs rev '' 22 diff 109 add no
+|'-'# = 72 add 29 = 101 vs || 77 diff 24 add no; 27 add 92 = 119 vs rev || 77 diff 42 add no
+ rejected forward (@+@? = 16 mul 68 = 1088 = final answer: (`??
+
+Trying (=0 #=3 `=1 >=8 '=2 |=4 @=5 &=9 ?=6 A=7
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 42 add 23 = 65 vs || 44 diff 21 add no; 24 add 32 = 56 vs rev || 44 diff 12 add no
+ rejected forward (@+@? = 05 mul 56 = 280 = final answer: '>(
+
+Trying (=7 #=0 `=4 >=1 '=2 |=9 @=6 &=5 ?=8 A=3
+(#-`> = 70 add 41 = 111 vs '' 22 diff 89 add no; 07 add 14 = 21 vs rev '' 22 diff 1 add ok + 1
+|'-'# = 92 add 20 = 112 vs || 99 diff 13 add no; 29 add 02 = 31 vs rev || 99 diff 68 add no
+ rejected rev (@+@? = 76 mul 68 rev 67 mul 86 = 5762 rev 2675 = final answer: '@(&
+
+Trying (=6 #=7 `=3 >=2 '=8 |=4 @=9 &=5 ?=1 A=0
+(#-`> = 67 add 32 = 99 vs '' 88 diff 11 add no; 76 add 23 = 99 vs rev '' 88 diff 11 add no
+ rejected none (@+@? = 69 mul 91 rev 96 mul 19 = 1824 rev 4281 = final answer: |>'?
+
+Trying (=4 #=5 `=7 >=0 '=2 |=1 @=9 &=6 ?=3 A=8
+(#-`> = 45 add 70 = 115 vs '' 22 diff 93 add no; 54 add 07 = 61 vs rev '' 22 diff 39 add no
+ rejected none (@+@? = 49 mul 93 rev 94 mul 39 = 3666 rev 6663 = final answer: &&&?
+
+Trying (=5 #=1 `=6 >=7 '=2 |=4 @=3 &=9 ?=0 A=8
+(#-`> = 51 add 67 = 118 vs '' 22 diff 96 add no; 15 add 76 = 91 vs rev '' 22 diff 69 add no
+ rejected none (@+@? = 53 mul 30 rev 35 mul 03 = 105 rev 501 = final answer: (?#
+
+Trying (=1 #=8 `=0 >=3 '=2 |=4 @=6 &=9 ?=5 A=7
+(#-`> = 18 add 03 = 21 vs '' 22 diff 1 add ok + 1; 81 add 30 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 42 add 28 = 70 vs || 44 diff 26 add no; 24 add 82 = 106 vs rev || 44 diff 62 add no
+ rejected forward (@+@? = 16 mul 65 = 1040 = final answer: (`|`
+
+Trying (=0 #=3 `=1 >=8 '=2 |=9 @=6 &=5 ?=7 A=4
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 92 add 23 = 115 vs || 99 diff 16 add no; 29 add 32 = 61 vs rev || 99 diff 38 add no
+ rejected forward (@+@? = 06 mul 67 = 402 = final answer: A('
+
+Trying (=7 #=0 `=4 >=1 '=2 |=5 @=9 &=6 ?=8 A=3
+(#-`> = 70 add 41 = 111 vs '' 22 diff 89 add no; 07 add 14 = 21 vs rev '' 22 diff 1 add ok + 1
+|'-'# = 52 add 20 = 72 vs || 55 diff 17 add no; 25 add 02 = 27 vs rev || 55 diff 28 add no
+ rejected rev (@+@? = 79 mul 98 rev 97 mul 89 = 8633 rev 3368 = final answer: AA&?
+
+Trying (=8 #=4 `=3 >=2 '=0 |=5 @=9 &=6 ?=1 A=7
+(#-`> = 84 add 32 = 116 vs '' 00 diff 116 add no; 48 add 23 = 71 vs rev '' 00 diff 71 add no
+ rejected none (@+@? = 89 mul 91 rev 98 mul 19 = 1862 rev 2681 = final answer: >&(?
+
+Trying (=4 #=7 `=9 >=0 '=2 |=1 @=6 &=5 ?=8 A=3
+(#-`> = 47 add 90 = 137 vs '' 22 diff 115 add no; 74 add 09 = 83 vs rev '' 22 diff 61 add no
+ rejected none (@+@? = 46 mul 68 rev 64 mul 86 = 5504 rev 4055 = final answer: (>&&
+
+Trying (=6 #=2 `=7 >=4 '=3 |=0 @=5 &=9 ?=1 A=8
+(#-`> = 62 add 74 = 136 vs '' 33 diff 103 add no; 26 add 47 = 73 vs rev '' 33 diff 40 add no
+ rejected none (@+@? = 65 mul 51 rev 56 mul 15 = 840 rev 048 = final answer: |>A
+
+Trying (=1 #=6 `=0 >=7 '=2 |=5 @=4 &=9 ?=8 A=3
+(#-`> = 16 add 07 = 23 vs '' 22 diff 1 add ok - 1; 61 add 70 = 131 vs rev '' 22 diff 109 add no
+|'-'# = 52 add 26 = 78 vs || 55 diff 23 add no; 25 add 62 = 87 vs rev || 55 diff 32 add no
+ rejected forward (@+@? = 14 mul 48 = 672 = final answer: #>'
+
+Trying (=0 #=3 `=1 >=8 '=2 |=7 @=6 &=9 ?=5 A=4
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 72 add 23 = 95 vs || 77 diff 18 add no; 27 add 32 = 59 vs rev || 77 diff 18 add no
+ rejected forward (@+@? = 06 mul 65 = 390 = final answer: #&(
+
+Trying (=9 #=0 `=4 >=1 '=2 |=6 @=7 &=5 ?=3 A=8
+(#-`> = 90 add 41 = 131 vs '' 22 diff 109 add no; 09 add 14 = 23 vs rev '' 22 diff 1 add ok - 1
+|'-'# = 62 add 20 = 82 vs || 66 diff 16 add no; 26 add 02 = 28 vs rev || 66 diff 38 add no
+ rejected rev (@+@? = 97 mul 73 rev 79 mul 37 = 2923 rev 3292 = final answer: ?'('
+
+Trying (=7 #=4 `=6 >=3 '=2 |=9 @=0 &=5 ?=1 A=8
+(#-`> = 74 add 63 = 137 vs '' 22 diff 115 add no; 47 add 36 = 83 vs rev '' 22 diff 61 add no
+ rejected none (@+@? = 70 mul 01 rev 07 mul 10 = 70 rev 07 = final answer: @(
+
+Trying (=3 #=5 `=9 >=0 '=2 |=1 @=7 &=4 ?=8 A=6
+(#-`> = 35 add 90 = 125 vs '' 22 diff 103 add no; 53 add 09 = 62 vs rev '' 22 diff 40 add no
+ rejected none (@+@? = 37 mul 78 rev 73 mul 87 = 6351 rev 1536 = final answer: |#(A
+
+Trying (=6 #=7 `=3 >=2 '=8 |=4 @=9 &=5 ?=0 A=1
+(#-`> = 67 add 32 = 99 vs '' 88 diff 11 add no; 76 add 23 = 99 vs rev '' 88 diff 11 add no
+ rejected none (@+@? = 69 mul 90 rev 96 mul 09 = 864 rev 468 = final answer: |('
+
+Trying (=1 #=9 `=0 >=6 '=2 |=4 @=7 &=5 ?=3 A=8
+(#-`> = 19 add 06 = 25 vs '' 22 diff 3 add no; 91 add 60 = 151 vs rev '' 22 diff 129 add no
+ rejected none (@+@? = 17 mul 73 rev 71 mul 37 = 2627 rev 7262 = final answer: @'>'
+
+Trying (=0 #=3 `=1 >=8 '=2 |=6 @=5 &=4 ?=7 A=9
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 62 add 23 = 85 vs || 66 diff 19 add no; 26 add 32 = 58 vs rev || 66 diff 8 add no
+ rejected forward (@+@? = 05 mul 57 = 285 = final answer: '>@
+
+Trying (=5 #=0 `=8 >=1 '=2 |=4 @=9 &=7 ?=3 A=6
+(#-`> = 50 add 81 = 131 vs '' 22 diff 109 add no; 05 add 18 = 23 vs rev '' 22 diff 1 add ok - 1
+|'-'# = 42 add 20 = 62 vs || 44 diff 18 add no; 24 add 02 = 26 vs rev || 44 diff 18 add no
+ rejected rev (@+@? = 59 mul 93 rev 95 mul 39 = 3705 rev 5073 = final answer: (#&?
+
+Trying (=7 #=4 `=5 >=3 '=2 |=6 @=1 &=9 ?=8 A=0
+(#-`> = 74 add 53 = 127 vs '' 22 diff 105 add no; 47 add 35 = 82 vs rev '' 22 diff 60 add no
+ rejected none (@+@? = 71 mul 18 rev 17 mul 81 = 1377 rev 7731 = final answer: ((>@
+
+Trying (=9 #=2 `=4 >=0 '=3 |=5 @=6 &=7 ?=1 A=8
+(#-`> = 92 add 40 = 132 vs '' 33 diff 99 add no; 29 add 04 = 33 vs rev '' 33 diff 0 add ok
+|'-'# = 53 add 32 = 85 vs || 55 diff 30 add no; 35 add 23 = 58 vs rev || 55 diff 3 add no
+ rejected rev (@+@? = 96 mul 61 rev 69 mul 16 = 1104 rev 4011 = final answer: `>??
+
+Trying (=6 #=5 `=3 >=2 '=8 |=4 @=7 &=9 ?=0 A=1
+(#-`> = 65 add 32 = 97 vs '' 88 diff 9 add no; 56 add 23 = 79 vs rev '' 88 diff 9 add no
+ rejected none (@+@? = 67 mul 70 rev 76 mul 07 = 532 rev 235 = final answer: >`#
+
+Trying (=1 #=6 `=0 >=5 '=2 |=4 @=7 &=9 ?=8 A=3
+(#-`> = 16 add 05 = 21 vs '' 22 diff 1 add ok + 1; 61 add 50 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 42 add 26 = 68 vs || 44 diff 24 add no; 24 add 62 = 86 vs rev || 44 diff 42 add no
+ rejected forward (@+@? = 17 mul 78 = 1326 = final answer: (A'#
+
+Trying (=0 #=3 `=1 >=8 '=2 |=5 @=9 &=6 ?=7 A=4
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 52 add 23 = 75 vs || 55 diff 20 add no; 25 add 32 = 57 vs rev || 55 diff 2 add no
+ rejected forward (@+@? = 09 mul 97 = 873 = final answer: >?#
+
+Trying (=5 #=0 `=7 >=1 '=2 |=6 @=9 &=4 ?=3 A=8
+(#-`> = 50 add 71 = 121 vs '' 22 diff 99 add no; 05 add 17 = 22 vs rev '' 22 diff 0 add ok
+|'-'# = 62 add 20 = 82 vs || 66 diff 16 add no; 26 add 02 = 28 vs rev || 66 diff 38 add no
+ rejected rev (@+@? = 59 mul 93 rev 95 mul 39 = 3705 rev 5073 = final answer: (#`?
+
+Trying (=7 #=4 `=5 >=3 '=2 |=8 @=6 &=9 ?=1 A=0
+(#-`> = 74 add 53 = 127 vs '' 22 diff 105 add no; 47 add 35 = 82 vs rev '' 22 diff 60 add no
+ rejected none (@+@? = 76 mul 61 rev 67 mul 16 = 1072 rev 2701 = final answer: '(A?
+
+Trying (=4 #=1 `=9 >=0 '=2 |=7 @=6 &=5 ?=3 A=8
+(#-`> = 41 add 90 = 131 vs '' 22 diff 109 add no; 14 add 09 = 23 vs rev '' 22 diff 1 add ok - 1
+|'-'# = 72 add 21 = 93 vs || 77 diff 16 add no; 27 add 12 = 39 vs rev || 77 diff 38 add no
+ rejected rev (@+@? = 46 mul 63 rev 64 mul 36 = 2304 rev 4032 = final answer: (>?'
+
+Trying (=9 #=2 `=4 >=6 '=3 |=7 @=8 &=5 ?=0 A=1
+(#-`> = 92 add 46 = 138 vs '' 33 diff 105 add no; 29 add 64 = 93 vs rev '' 33 diff 60 add no
+ rejected none (@+@? = 98 mul 80 rev 89 mul 08 = 712 rev 217 = final answer: #A|
+
+Trying (=1 #=9 `=0 >=4 '=2 |=6 @=5 &=7 ?=3 A=8
+(#-`> = 19 add 04 = 23 vs '' 22 diff 1 add ok - 1; 91 add 40 = 131 vs rev '' 22 diff 109 add no
+|'-'# = 62 add 29 = 91 vs || 66 diff 25 add no; 26 add 92 = 118 vs rev || 66 diff 52 add no
+ rejected forward (@+@? = 15 mul 53 = 795 = final answer: &#@
+
+Trying (=0 #=3 `=1 >=8 '=2 |=7 @=4 &=6 ?=5 A=9
+(#-`> = 03 add 18 = 21 vs '' 22 diff 1 add ok + 1; 30 add 81 = 111 vs rev '' 22 diff 89 add no
+|'-'# = 72 add 23 = 95 vs || 77 diff 18 add no; 27 add 32 = 59 vs rev || 77 diff 18 add no
+ rejected forward (@+@? = 04 mul 45 = 180 = final answer: `>(
+
+Trying (=5 #=0 `=7 >=1 '=2 |=4 @=9 &=6 ?=3 A=8
+(#-`> = 50 add 71 = 121 vs '' 22 diff 99 add no; 05 add 17 = 22 vs rev '' 22 diff 0 add ok
+|'-'# = 42 add 20 = 62 vs || 44 diff 18 add no; 24 add 02 = 26 vs rev || 44 diff 18 add no
+ rejected rev (@+@? = 59 mul 93 rev 95 mul 39 = 3705 rev 5073 = final answer: (#`?
+
+Trying (=6 #=7 `=3 >=2 '=8 |=4 @=5 &=9 ?=1 A=0
+(#-`> = 67 add 32 = 99 vs '' 88 diff 11 add no; 76 add 23 = 99 vs rev '' 88 diff 11 add no
+ rejected none (@+@? = 65 mul 51 rev 56 mul 15 = 840 rev 048 = final answer: A|'
+
+Trying (=7 #=1 `=6 >=0 '=2 |=4 @=9 &=5 ?=8 A=3
+(#-`> = 71 add 60 = 131 vs '' 22 diff 109 add no; 17 add 06 = 23 vs rev '' 22 diff 1 add ok - 1
+|'-'# = 42 add 21 = 63 vs || 44 diff 19 add no; 24 add 12 = 36 vs rev || 44 diff 8 add no
+ rejected rev (@+@? = 79 mul 98 rev 97 mul 89 = 8633 rev 3368 = final answer: AA`?
+
+Trying (=2 #=5 `=8 >=3 '=1 |=7 @=9 &=0 ?=6 A=4
+(#-`> = 25 add 83 = 108 vs '' 11 diff 97 add no; 52 add 38 = 90 vs rev '' 11 diff 79 add no
+ rejected none (@+@? = 29 mul 96 rev 92 mul 69 = 6348 rev 8436 = final answer: `A>?
+
+Trying (=4 #=6 `=0 >=7 '=5 |=8 @=1 &=9 ?=2 A=3
+(#-`> = 46 add 07 = 53 vs '' 55 diff 2 add no; 64 add 70 = 134 vs rev '' 55 diff 79 add no
+ rejected none (@+@? = 41 mul 12 rev 14 mul 21 = 294 rev 492 = final answer: (&?

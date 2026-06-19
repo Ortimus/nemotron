@@ -1,0 +1,63 @@
+//-:( = -\
+':-'% = -'|
+||*|/ = |/||
+(/-'| = (%
+({*'# = '#({
+The question is (|-\|
+
+Operator symbols -*
+Question operator symbol -
+Question operator in examples
+
+Digit symbols /:(\'%|{#
+
+Checking concatenation
+left // op - right :( expected //:( versus -\ mismatch
+left ': op - right '% expected ':'% versus -'| mismatch
+left || op * right |/ expected |||/ versus |/|| mismatch
+left (/ op - right '| expected (/'| versus (% mismatch
+left ({ op * right '# expected ({'# versus '#({ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left // op - right :( expected :(// versus -\ mismatch
+left ': op - right '% expected '%': versus -'| mismatch
+left || op * right |/ expected |/|| versus |/|| match *
+left (/ op - right '| expected '|(/ versus (% mismatch
+left ({ op * right '# expected '#({ versus '#({ match *
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+//-:( = -\
+':-'% = -'|
+(/-'| = (%
+
+Assigning mul
+ left // op - right :( = -\ length 2
+ left ': op - right '% = -'| length 3
+ left (/ op - right '| = (% length 2
+
+Assigning sub
+ left // op - right :( = -\ op in output assume sub
+ left ': op - right '% = -'| assumed sub
+ left (/ op - right '| = (% assumed sub
+
+Assigning add
+ left // op - right :( = -\ assumed sub
+ left ': op - right '% = -'| assumed sub
+ left (/ op - right '| = (% assumed sub
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left // op - right :( = -\ assumed sub
+ left ': op - right '% = -'| assumed sub
+ left (/ op - right '| = (% assumed sub
+ left (| op - right \| the question, assumed sub
+
+Trying /=4 :=2 (=5 \=8 '=0 %=3 |=1 {=6 #=7 A=9
+//-:( = 44 sub 25 = 19 vs -\ -8 diff 11 sub no; 44 sub 52 = 8 vs rev -\ -8 diff 0 sub ok
+':-'% = 02 sub 03 = 1 vs -'| -01 diff 0 sub ok; 20 sub 30 = 10 vs rev -|' -10 diff 0 sub ok
+(/-'| = 54 sub 01 = 53 vs (% 53 diff 0 sub ok; 45 sub 10 = 35 vs rev %( 35 diff 0 sub ok
+ accepted rev (|-\| = 51 sub 81 rev 15 sub 18 = 3 rev 3 = \boxed{%}

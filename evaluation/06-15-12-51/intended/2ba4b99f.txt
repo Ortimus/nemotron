@@ -1,0 +1,66 @@
+>\+>[ = +/%
+:%?[{ = \/\
+{[+:: = |!
+{@(%: = >{:!
+The question is @|(\|
+
+Operator symbols +?(
+Question operator symbol (
+Question operator in examples
+
+Digit symbols >\[/%:{|!@
+
+Checking concatenation
+left >\ op + right >[ expected >\>[ versus +/% mismatch
+left :% op ? right [{ expected :%[{ versus \/\ mismatch
+left {[ op + right :: expected {[:: versus |! mismatch
+left {@ op ( right %: expected {@%: versus >{:! mismatch
+
+Question operator ( is not concatenation
+
+Checking reverse concatenation
+left >\ op + right >[ expected >[>\ versus +/% mismatch
+left :% op ? right [{ expected [{:% versus \/\ mismatch
+left {[ op + right :: expected ::{[ versus |! mismatch
+left {@ op ( right %: expected %:{@ versus >{:! mismatch
+
+Question operator ( is not reverse concatenation
+
+Filtering out the concatenation operations
+>\+>[ = +/%
+:%?[{ = \/\
+{[+:: = |!
+{@(%: = >{:!
+
+Assigning mul
+ left >\ op + right >[ = +/% length 3
+ left :% op ? right [{ = \/\ length 3
+ left {[ op + right :: = |! length 2
+ left {@ op ( right %: = >{:! length 4 assume mul
+
+Assigning sub
+ left >\ op + right >[ = +/% op in output assume sub
+ left :% op ? right [{ = \/\ length 3
+ left {[ op + right :: = |! assumed sub
+ left {@ op ( right %: = >{:! assumed mul
+
+Assigning add
+ left >\ op + right >[ = +/% assumed sub
+ left :% op ? right [{ = \/\ length 3 assume add
+ left {[ op + right :: = |! assumed sub
+ left {@ op ( right %: = >{:! assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left >\ op + right >[ = +/% assumed sub
+ left :% op ? right [{ = \/\ assumed add
+ left {[ op + right :: = |! assumed sub
+ left {@ op ( right %: = >{:! assumed mul
+ left @| op ( right \| the question, assumed mul
+
+Trying >=8 \=1 [=7 /=0 %=6 :=4 {=3 |=9 !=2 @=5
+>\+>[ = 81 sub 87 = 6 vs +/% -06 diff 0 sub ok; 18 sub 78 = 60 vs rev +%/ -60 diff 0 sub ok
+:%?[{ = 46 add 73 = 119 vs \/\ 101 diff 18 add no; 64 add 37 = 101 vs rev \/\ 101 diff 0 add ok
+{[+:: = 37 sub 44 = 7 vs |! 92 diff 85 sub no; 73 sub 44 = 29 vs rev !| 29 diff 0 sub ok
+{@(%: = 35 mul 64 = 2240 vs >{:! 8342 diff 6102 mul no; 53 mul 46 = 2438 vs rev !:{> 2438 diff 0 mul ok
+ accepted rev @|(\| = 59 mul 19 rev 95 mul 91 = 8645 rev 5468 = \boxed{@:%>}

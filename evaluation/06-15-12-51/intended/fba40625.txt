@@ -1,0 +1,60 @@
+?>/)] = ?>)]
+#?'{% = {?
+>{'#^ = '&&
+>>`#] = {#?>
+The question is {>'?#
+
+Operator symbols /'`
+Question operator symbol '
+Question operator in examples
+
+Digit symbols ?>)]#{%^&
+
+Checking concatenation
+left ?> op / right )] expected ?>)] versus ?>)] match /
+left #? op ' right {% expected #?{% versus {? mismatch
+left >{ op ' right #^ expected >{#^ versus '&& mismatch
+left >> op ` right #] expected >>#] versus {#?> mismatch
+
+Question operator ' is not concatenation
+
+Checking reverse concatenation
+left ?> op / right )] expected )]?> versus ?>)] mismatch
+left #? op ' right {% expected {%#? versus {? mismatch
+left >{ op ' right #^ expected #^>{ versus '&& mismatch
+left >> op ` right #] expected #]>> versus {#?> mismatch
+
+Question operator ' is not reverse concatenation
+
+Filtering out the concatenation operations
+#?'{% = {?
+>{'#^ = '&&
+>>`#] = {#?>
+
+Assigning mul
+ left #? op ' right {% = {? length 2
+ left >{ op ' right #^ = '&& length 3
+ left >> op ` right #] = {#?> length 4 assume mul
+
+Assigning sub
+ left #? op ' right {% = {? length 2
+ left >{ op ' right #^ = '&& op in output assume sub
+ left >> op ` right #] = {#?> assumed mul
+
+Assigning add
+ left #? op ' right {% = {? assumed sub
+ left >{ op ' right #^ = '&& assumed sub
+ left >> op ` right #] = {#?> assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left #? op ' right {% = {? assumed sub
+ left >{ op ' right #^ = '&& assumed sub
+ left >> op ` right #] = {#?> assumed mul
+ left {> op ' right ?# the question, assumed sub
+
+Trying ?=8 >=5 )=2 ]=7 #=6 {=3 %=0 ^=4 &=1 A=9
+#?'{% = 68 sub 30 = 38 vs {? 38 diff 0 sub ok; 86 sub 03 = 83 vs rev ?{ 83 diff 0 sub ok
+>{'#^ = 53 sub 64 = 11 vs '&& -11 diff 0 sub ok; 35 sub 46 = 11 vs rev '&& -11 diff 0 sub ok
+>>`#] = 55 mul 67 = 3685 vs {#?> 3685 diff 0 mul ok; 55 mul 76 = 4180 vs rev >?#{ 5863 diff 1683 mul no
+ accepted forward {>'?# = 35 sub 86 = 51 = \boxed{>&}

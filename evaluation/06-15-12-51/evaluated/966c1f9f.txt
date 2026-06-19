@@ -1,0 +1,182 @@
+43*19 = 4903
+53-24 = -7
+51-49 = -97
+
+The inputs are 43, 19, 53, 24, 51, 49
+
+The outputs are 4903, -7, -97
+Some example outputs have the operator symbol as prefix -.
+We now consider the outputs to be 4903, -7, -97
+We will add back the operator prefix if our answer is negative.
+
+Looking at the input of the examples
+43*19 -> *
+53-24 -> -
+51-49 -> -
+
+The operators
+*
+-
+
+Looking at the question
+31+45 -> +
+The question operator is not found in the examples. Investigating the most common example operator - instead. We will use addition for the question operator.
+
+Looking at operator - [53-24 = -7, 51-49 = -97]:
+
+Trying common operations
+ reversed operands [53->35 24->42, 51->15 49->94] and reversed result [expected (35,42)->-7, (15,94)->-97]
+ addition
+ (35,42)->-7: 35 + 42 = 77 rev-> 77 mismatch
+ multiplication
+ (15,94)->-97: (10 + 5) * 94 = 10 * 94 + 5 * 94 = 940 + 470 = 1410 rev-> 0141 mismatch
+ concatenation
+ (35,42)->-7: 35 || 42 = 3542 rev-> 2453 mismatch
+ reverse concatenation
+ (15,94)->-97: 94 || 15 = 9415 rev-> 5149 mismatch
+
+ identity [53 24, 51 49] [expected (53,24)->-7, (51,49)->-97]
+ addition
+ (53,24)->-7: 53 + 24 = 77 mismatch
+ multiplication
+ (51,49)->-97: (50 + 1) * 49 = 50 * 49 + 1 * 49 = 2450 + 49 = 2499 mismatch
+ concatenation
+ (53,24)->-7: 53 || 24 = 5324 mismatch
+ reverse concatenation
+ (51,49)->-97: 49 || 51 = 4951 mismatch
+
+Trying difference operations
+ reversed operands [53->35 24->42, 51->15 49->94] and reversed result [expected (35,42)->-7, (15,94)->-97]
+ subtraction (a-b)
+ (35,42)->-7: 35 - 42 = -7 rev-> -7 match
+ (15,94)->-97: 15 - 94 = -79 rev-> -97 match
+ correct, actions: reversed operands, reversed result, subtraction (a-b)
+ absolute difference
+ (15,94)->-97: |15 - 94| = 79 rev-> 97 mismatch
+ max mod min
+ (35,42)->-7: max(35,42) mod min(35,42) = 42 mod 35 = 7 rev-> 7 mismatch
+ negated absolute difference
+ (15,94)->-97: -|15 - 94| = -79 rev-> -97 match
+ (35,42)->-7: -|35 - 42| = -7 rev-> -7 match
+ correct, but skipping
+ reverse subtraction (b-a)
+ (35,42)->-7: 42 - 35 = 7 rev-> 7 mismatch
+ modulo (a mod b)
+ (15,94)->-97: 15 mod 94 = 15 rev-> 51 mismatch
+
+ identity [53 24, 51 49] [expected (53,24)->-7, (51,49)->-97]
+ subtraction (a-b)
+ (53,24)->-7: 53 - 24 = 29 mismatch
+ absolute difference
+ (51,49)->-97: |51 - 49| = 2 mismatch
+ max mod min
+ (53,24)->-7: max(53,24) mod min(53,24) = 53 mod 24 = 5 mismatch
+ negated absolute difference
+ (51,49)->-97: -|51 - 49| = -2 mismatch
+ reverse subtraction (b-a)
+ (53,24)->-7: 24 - 53 = -29 mismatch
+ modulo (a mod b)
+ (51,49)->-97: 51 mod 49 = 2 mismatch
+
+Trying rare operations
+ reversed operands [53->35 24->42, 51->15 49->94] and reversed result [expected (35,42)->-7, (15,94)->-97]
+ multiply+1
+ (35,42)->-7: (30 + 5) * 42 + 1 = 30 * 42 + 5 * 42 + 1 = 1260 + 210 + 1 = 1470 + 1 = 1471 rev-> 1741 mismatch
+ multiply-1
+ (15,94)->-97: (10 + 5) * 94 - 1 = 10 * 94 + 5 * 94 - 1 = 940 + 470 - 1 = 1410 - 1 = 1409 rev-> 9041 mismatch
+ add+1
+ (35,42)->-7: 35 + 42 + 1 = 78 rev-> 87 mismatch
+ add-1
+ (15,94)->-97: 15 + 94 - 1 = 108 rev-> 801 mismatch
+ sub+1
+ (35,42)->-7: 35 - 42 + 1 = -6 rev-> -6 mismatch
+ sub-1
+ (15,94)->-97: 15 - 94 - 1 = -80 rev-> -08 mismatch
+ integer division (a/b)
+ (35,42)->-7: 35 / 42 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (15,94)->-97: 94 / 15 = 6 rev-> 6 mismatch
+ reverse modulo (b mod a)
+ (35,42)->-7: 42 mod 35 = 7 rev-> 7 mismatch
+ digit absolute diff
+ (15,94)->-97: |1-9| || |5-4| = 81 rev-> 18 mismatch
+ digit add mod10
+ (35,42)->-7: (3+4)%10 || (5+2)%10 = 77 rev-> 77 mismatch
+ digit sub mod10
+ (15,94)->-97: (1-9)%10 || (5-4)%10 = 21 rev-> 12 mismatch
+ cross multiply
+ (35,42)->-7: 3*4 + 5*2 = 12 + 10 = 22 rev-> 22 mismatch
+ cross multiply rev
+ (15,94)->-97: 1*4 + 5*9 = 4 + 45 = 49 rev-> 94 mismatch
+ digit multiply
+ (35,42)->-7: 3*4 || 5*2 = 12 || 10 = 1210 rev-> 0121 mismatch
+ digit multiply rev
+ (15,94)->-97: 1*4 || 5*9 = 4 || 45 = 445 rev-> 544 mismatch
+ digit sum diff
+ (35,42)->-7: (3+5) - (4+2) = 2 rev-> 2 mismatch
+ digit sum sum
+ (15,94)->-97: (1+5) + (9+4) = 19 rev-> 91 mismatch
+ digit product diff
+ (35,42)->-7: 3*5 - 4*2 = 15 - 8 = 7 rev-> 7 mismatch
+ digit product sum
+ (15,94)->-97: 1*5 + 9*4 = 5 + 36 = 41 rev-> 14 mismatch
+ determinant
+ (35,42)->-7: 3*2 - 5*4 = 6 - 20 = -14 rev-> -41 mismatch
+ abs determinant
+ (15,94)->-97: |1*4 - 5*9| = |4 - 45| = 41 rev-> 14 mismatch
+
+ identity [53 24, 51 49] [expected (53,24)->-7, (51,49)->-97]
+ multiply+1
+ (53,24)->-7: (50 + 3) * 24 + 1 = 50 * 24 + 3 * 24 + 1 = 1200 + 72 + 1 = 1272 + 1 = 1273 mismatch
+ multiply-1
+ (51,49)->-97: (50 + 1) * 49 - 1 = 50 * 49 + 1 * 49 - 1 = 2450 + 49 - 1 = 2499 - 1 = 2498 mismatch
+ add+1
+ (53,24)->-7: 53 + 24 + 1 = 78 mismatch
+ add-1
+ (51,49)->-97: 51 + 49 - 1 = 99 mismatch
+ sub+1
+ (53,24)->-7: 53 - 24 + 1 = 30 mismatch
+ sub-1
+ (51,49)->-97: 51 - 49 - 1 = 1 mismatch
+ integer division (a/b)
+ (53,24)->-7: 53 / 24 = 2 mismatch
+ reverse division (b/a)
+ (51,49)->-97: 49 / 51 = 0 mismatch
+ reverse modulo (b mod a)
+ (53,24)->-7: 24 mod 53 = 24 mismatch
+ digit absolute diff
+ (51,49)->-97: |5-4| || |1-9| = 15 mismatch
+ digit add mod10
+ (53,24)->-7: (5+2)%10 || (3+4)%10 = 77 mismatch
+ digit sub mod10
+ (51,49)->-97: (5-4)%10 || (1-9)%10 = 12 mismatch
+ cross multiply
+ (53,24)->-7: 5*2 + 3*4 = 10 + 12 = 22 mismatch
+ cross multiply rev
+ (51,49)->-97: 5*9 + 1*4 = 45 + 4 = 49 mismatch
+ digit multiply
+ (53,24)->-7: 5*2 || 3*4 = 10 || 12 = 1012 mismatch
+ digit multiply rev
+ (51,49)->-97: 5*9 || 1*4 = 45 || 4 = 454 mismatch
+ digit sum diff
+ (53,24)->-7: (5+3) - (2+4) = 2 mismatch
+ digit sum sum
+ (51,49)->-97: (5+1) + (4+9) = 19 mismatch
+ digit product diff
+ (53,24)->-7: 5*3 - 2*4 = 15 - 8 = 7 mismatch
+ digit product sum
+ (51,49)->-97: 5*1 + 4*9 = 5 + 36 = 41 mismatch
+ determinant
+ (53,24)->-7: 5*4 - 3*2 = 20 - 6 = 14 mismatch
+ abs determinant
+ (51,49)->-97: |5*9 - 1*4| = |45 - 4| = 41 mismatch
+
+correct, actions: reversed operands, reversed result, subtraction (a-b)
+
+Applying to 31+45:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ reversed operands [31->13, 45->54] and reversed result
+ addition
+ (13,54): 13 + 54 = 67 rev-> 76
+ Result is non-negative
+ \boxed{76}

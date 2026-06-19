@@ -1,0 +1,66 @@
+:"-/% = -%%
+{{-/{ = -|"
+%(*'( = :|{
+((*'( = |"|{
+The question is (>+'"
+
+Operator symbols -*
+Question operator symbol +
+Question operator not in examples
+
+Digit symbols :"/%{|('>
+
+Checking concatenation
+left :" op - right /% expected :"/% versus -%% mismatch
+left {{ op - right /{ expected {{/{ versus -|" mismatch
+left %( op * right '( expected %('( versus :|{ mismatch
+left (( op * right '( expected (('( versus |"|{ mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left :" op - right /% expected /%:" versus -%% mismatch
+left {{ op - right /{ expected /{{{ versus -|" mismatch
+left %( op * right '( expected '(%( versus :|{ mismatch
+left (( op * right '( expected '((( versus |"|{ mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+:"-/% = -%%
+{{-/{ = -|"
+%(*'( = :|{
+((*'( = |"|{
+
+Assigning mul
+ left :" op - right /% = -%% length 3
+ left {{ op - right /{ = -|" length 3
+ left %( op * right '( = :|{ length 3
+ left (( op * right '( = |"|{ length 4 assume mul
+
+Assigning sub
+ left :" op - right /% = -%% op in output assume sub
+ left {{ op - right /{ = -|" assumed sub
+ left %( op * right '( = :|{ assumed mul
+ left (( op * right '( = |"|{ assumed mul
+
+Assigning add
+ left :" op - right /% = -%% assumed sub
+ left {{ op - right /{ = -|" assumed sub
+ left %( op * right '( = :|{ assumed mul
+ left (( op * right '( = |"|{ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left :" op - right /% = -%% assumed sub
+ left {{ op - right /{ = -|" assumed sub
+ left %( op * right '( = :|{ assumed mul
+ left (( op * right '( = |"|{ assumed mul
+ left (> op + right '" the question, operator not in the examples, the unused family is add, assume add
+
+Trying :=7 "=0 /=8 %=1 {=5 |=3 (=6 '=4 >=9 A=2
+:"-/% = 70 sub 81 = 11 vs -%% -11 diff 0 sub ok; 07 sub 18 = 11 vs rev -%% -11 diff 0 sub ok
+{{-/{ = 55 sub 85 = 30 vs -|" -30 diff 0 sub ok; 55 sub 58 = 3 vs rev -"| -03 diff 0 sub ok
+%(*'( = 16 mul 46 = 736 vs :|{ 735 diff 1 mul ok - 1; 61 mul 64 = 3904 vs rev {|: 537 diff 3367 mul no
+((*'( = 66 mul 46 = 3036 vs |"|{ 3035 diff 1 mul ok - 1; 66 mul 64 = 4224 vs rev {|"| 5303 diff 1079 mul no
+ accepted forward (>+'" = 69 add 40 = 109 = \boxed{%">}

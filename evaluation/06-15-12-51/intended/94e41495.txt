@@ -1,0 +1,75 @@
+$<+@< = "}
+$`+>^ = ^)
+)>*$> = >$^@
+}`-@< = ->^
+`<+$} = @@
+The question is |)->@
+
+Operator symbols +*-
+Question operator symbol -
+Question operator in examples
+
+Digit symbols $<@"}`>^)|
+
+Checking concatenation
+left $< op + right @< expected $<@< versus "} mismatch
+left $` op + right >^ expected $`>^ versus ^) mismatch
+left )> op * right $> expected )>$> versus >$^@ mismatch
+left }` op - right @< expected }`@< versus ->^ mismatch
+left `< op + right $} expected `<$} versus @@ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left $< op + right @< expected @<$< versus "} mismatch
+left $` op + right >^ expected >^$` versus ^) mismatch
+left )> op * right $> expected $>)> versus >$^@ mismatch
+left }` op - right @< expected @<}` versus ->^ mismatch
+left `< op + right $} expected $}`< versus @@ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+$<+@< = "}
+$`+>^ = ^)
+)>*$> = >$^@
+}`-@< = ->^
+`<+$} = @@
+
+Assigning mul
+ left $< op + right @< = "} length 2
+ left $` op + right >^ = ^) length 2
+ left )> op * right $> = >$^@ length 4 assume mul
+ left }` op - right @< = ->^ length 3
+ left `< op + right $} = @@ length 2
+
+Assigning sub
+ left $< op + right @< = "} length 2
+ left $` op + right >^ = ^) length 2
+ left )> op * right $> = >$^@ assumed mul
+ left }` op - right @< = ->^ op in output assume sub
+ left `< op + right $} = @@ length 2
+
+Assigning add
+ left $< op + right @< = "} length 2
+ left $` op + right >^ = ^) length 2
+ left )> op * right $> = >$^@ assumed mul
+ left }` op - right @< = ->^ assumed sub
+ left `< op + right $} = @@ length 2
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left $< op + right @< = "} length 2 assume add
+ left $` op + right >^ = ^) assumed add
+ left )> op * right $> = >$^@ assumed mul
+ left }` op - right @< = ->^ assumed sub
+ left `< op + right $} = @@ assumed add
+ left |) op - right >@ the question, assumed sub
+
+Trying $=3 <=2 @=7 "=0 }=5 `=4 >=8 ^=1 )=6 |=9
+$<+@< = 32 add 72 = 104 vs "} 05 diff 99 add no; 23 add 27 = 50 vs rev }" 50 diff 0 add ok
+$`+>^ = 34 add 81 = 115 vs ^) 16 diff 99 add no; 43 add 18 = 61 vs rev )^ 61 diff 0 add ok
+)>*$> = 68 mul 38 = 2584 vs >$^@ 8317 diff 5733 mul no; 86 mul 83 = 7138 vs rev @^$> 7138 diff 0 mul ok
+}`-@< = 54 sub 72 = 18 vs ->^ -81 diff 63 sub no; 45 sub 27 = 18 vs rev -^> -18 diff 0 sub ok
+`<+$} = 42 add 35 = 77 vs @@ 77 diff 0 add ok; 24 add 53 = 77 vs rev @@ 77 diff 0 add ok
+ accepted rev |)->@ = 96 sub 87 rev 69 sub 78 = 9 rev 9 = \boxed{|}

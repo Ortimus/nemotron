@@ -1,0 +1,66 @@
+^([?' = }:}
+/?['^ = }@}
+/?{?/ = <@!:
+:![^@ = /!
+The question is }:#}(
+
+Operator symbols [{
+Question operator symbol #
+Question operator not in examples
+
+Digit symbols ^(?'}:/@<!
+
+Checking concatenation
+left ^( op [ right ?' expected ^(?' versus }:} mismatch
+left /? op [ right '^ expected /?'^ versus }@} mismatch
+left /? op { right ?/ expected /??/ versus <@!: mismatch
+left :! op [ right ^@ expected :!^@ versus /! mismatch
+
+Question operator # is not concatenation
+
+Checking reverse concatenation
+left ^( op [ right ?' expected ?'^( versus }:} mismatch
+left /? op [ right '^ expected '^/? versus }@} mismatch
+left /? op { right ?/ expected ?//? versus <@!: mismatch
+left :! op [ right ^@ expected ^@:! versus /! mismatch
+
+Question operator # is not reverse concatenation
+
+Filtering out the concatenation operations
+^([?' = }:}
+/?['^ = }@}
+/?{?/ = <@!:
+:![^@ = /!
+
+Assigning mul
+ left ^( op [ right ?' = }:} length 3
+ left /? op [ right '^ = }@} length 3
+ left /? op { right ?/ = <@!: length 4 assume mul
+ left :! op [ right ^@ = /! length 2
+
+Assigning sub
+ left ^( op [ right ?' = }:} length 3
+ left /? op [ right '^ = }@} length 3
+ left /? op { right ?/ = <@!: assumed mul
+ left :! op [ right ^@ = /! length 2
+
+Assigning add
+ left ^( op [ right ?' = }:} length 3 assume add
+ left /? op [ right '^ = }@} assumed add
+ left /? op { right ?/ = <@!: assumed mul
+ left :! op [ right ^@ = /! assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ^( op [ right ?' = }:} assumed add
+ left /? op [ right '^ = }@} assumed add
+ left /? op { right ?/ = <@!: assumed mul
+ left :! op [ right ^@ = /! assumed add
+ left }: op # right }( the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying ^=4 (=8 ?=7 '=3 }=1 :=2 /=6 @=0 <=5 !=9
+^([?' = 48 add 73 = 121 vs }:} 121 diff 0 add ok; 84 add 37 = 121 vs rev }:} 121 diff 0 add ok
+/?['^ = 67 add 34 = 101 vs }@} 101 diff 0 add ok; 76 add 43 = 119 vs rev }@} 101 diff 18 add no
+/?{?/ = 67 mul 76 = 5092 vs <@!: 5092 diff 0 mul ok; 76 mul 67 = 5092 vs rev :!@< 2905 diff 2187 mul no
+:![^@ = 29 add 40 = 69 vs /! 69 diff 0 add ok; 92 add 04 = 96 vs rev !/ 96 diff 0 add ok
+ accepted forward }:#}( = 12 sub 18 = 6 = \boxed{/}

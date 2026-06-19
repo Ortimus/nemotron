@@ -1,0 +1,66 @@
+}^?[< = #
+></<< = $[|}
+^#?<| = |}
+#!&|> = <<|
+The question is $>/|[
+
+Operator symbols ?/&
+Question operator symbol /
+Question operator in examples
+
+Digit symbols }^[<#>$|!
+
+Checking concatenation
+left }^ op ? right [< expected }^[< versus # mismatch
+left >< op / right << expected ><<< versus $[|} mismatch
+left ^# op ? right <| expected ^#<| versus |} mismatch
+left #! op & right |> expected #!|> versus <<| mismatch
+
+Question operator / is not concatenation
+
+Checking reverse concatenation
+left }^ op ? right [< expected [<}^ versus # mismatch
+left >< op / right << expected <<>< versus $[|} mismatch
+left ^# op ? right <| expected <|^# versus |} mismatch
+left #! op & right |> expected |>#! versus <<| mismatch
+
+Question operator / is not reverse concatenation
+
+Filtering out the concatenation operations
+}^?[< = #
+></<< = $[|}
+^#?<| = |}
+#!&|> = <<|
+
+Assigning mul
+ left }^ op ? right [< = # length 1
+ left >< op / right << = $[|} length 4 assume mul
+ left ^# op ? right <| = |} length 2
+ left #! op & right |> = <<| length 3
+
+Assigning sub
+ left }^ op ? right [< = # length 1 assume sub
+ left >< op / right << = $[|} assumed mul
+ left ^# op ? right <| = |} assumed sub
+ left #! op & right |> = <<| length 3
+
+Assigning add
+ left }^ op ? right [< = # assumed sub
+ left >< op / right << = $[|} assumed mul
+ left ^# op ? right <| = |} assumed sub
+ left #! op & right |> = <<| length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left }^ op ? right [< = # assumed sub
+ left >< op / right << = $[|} assumed mul
+ left ^# op ? right <| = |} assumed sub
+ left #! op & right |> = <<| assumed add
+ left $> op / right |[ the question, assumed mul
+
+Trying }=3 ^=6 [=9 <=5 #=4 >=8 $=0 |=1 !=7 A=2
+}^?[< = 36 sub 95 = 59 vs # 4 diff 55 sub no; 63 sub 59 = 4 vs rev # 4 diff 0 sub ok
+></<< = 85 mul 55 = 4675 vs $[|} 0913 diff 3762 mul no; 58 mul 55 = 3190 vs rev }|[$ 3190 diff 0 mul ok
+^#?<| = 64 sub 51 = 13 vs |} 13 diff 0 sub ok; 46 sub 15 = 31 vs rev }| 31 diff 0 sub ok
+#!&|> = 47 add 18 = 65 vs <<| 551 diff 486 add no; 74 add 81 = 155 vs rev |<< 155 diff 0 add ok
+ accepted rev $>/|[ = 08 mul 19 rev 80 mul 91 = 7280 rev 0827 = \boxed{$>A!}

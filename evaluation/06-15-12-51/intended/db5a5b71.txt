@@ -1,0 +1,180 @@
+21*31 = 651
+54"25 = 7
+74*52 = 5711
+
+The inputs are 21, 31, 54, 25, 74, 52
+
+The outputs are 651, 7, 5711
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+21*31 -> *
+54"25 -> "
+74*52 -> *
+
+The operators
+*
+"
+
+Looking at the question
+58"42 -> "
+The question operator is found in the examples.
+
+Looking at operator " [54"25 = 7]:
+
+Trying common operations
+ reversed operands [54->45 25->52] and reversed result [expected (45,52)->7]
+ addition
+ (45,52)->7: 45 + 52 = 97 rev-> 79 mismatch
+ multiplication
+ (45,52)->7: (40 + 5) * 52 = 40 * 52 + 5 * 52 = 2080 + 260 = 2340 rev-> 0432 mismatch
+ concatenation
+ (45,52)->7: 45 || 52 = 4552 rev-> 2554 mismatch
+ reverse concatenation
+ (45,52)->7: 52 || 45 = 5245 rev-> 5425 mismatch
+
+ identity [54 25] [expected (54,25)->7]
+ addition
+ (54,25)->7: 54 + 25 = 79 mismatch
+ multiplication
+ (54,25)->7: (50 + 4) * 25 = 50 * 25 + 4 * 25 = 1250 + 100 = 1350 mismatch
+ concatenation
+ (54,25)->7: 54 || 25 = 5425 mismatch
+ reverse concatenation
+ (54,25)->7: 25 || 54 = 2554 mismatch
+
+Trying difference operations
+ reversed operands [54->45 25->52] and reversed result [expected (45,52)->7]
+ subtraction (a-b)
+ (45,52)->7: 45 - 52 = -7 rev-> -7 mismatch
+ absolute difference
+ (45,52)->7: |45 - 52| = 7 rev-> 7 match
+ correct, actions: reversed operands, reversed result, absolute difference
+ max mod min
+ (45,52)->7: max(45,52) mod min(45,52) = 52 mod 45 = 7 rev-> 7 match
+ correct, but skipping
+ negated absolute difference
+ (45,52)->7: -|45 - 52| = -7 rev-> -7 mismatch
+ reverse subtraction (b-a)
+ (45,52)->7: 52 - 45 = 7 rev-> 7 match
+ correct, but skipping
+ modulo (a mod b)
+ (45,52)->7: 45 mod 52 = 45 rev-> 54 mismatch
+
+ identity [54 25] [expected (54,25)->7]
+ subtraction (a-b)
+ (54,25)->7: 54 - 25 = 29 mismatch
+ absolute difference
+ (54,25)->7: |54 - 25| = 29 mismatch
+ max mod min
+ (54,25)->7: max(54,25) mod min(54,25) = 54 mod 25 = 4 mismatch
+ negated absolute difference
+ (54,25)->7: -|54 - 25| = -29 mismatch
+ reverse subtraction (b-a)
+ (54,25)->7: 25 - 54 = -29 mismatch
+ modulo (a mod b)
+ (54,25)->7: 54 mod 25 = 4 mismatch
+
+Trying rare operations
+ reversed operands [54->45 25->52] and reversed result [expected (45,52)->7]
+ multiply+1
+ (45,52)->7: (40 + 5) * 52 + 1 = 40 * 52 + 5 * 52 + 1 = 2080 + 260 + 1 = 2340 + 1 = 2341 rev-> 1432 mismatch
+ multiply-1
+ (45,52)->7: (40 + 5) * 52 - 1 = 40 * 52 + 5 * 52 - 1 = 2080 + 260 - 1 = 2340 - 1 = 2339 rev-> 9332 mismatch
+ add+1
+ (45,52)->7: 45 + 52 + 1 = 98 rev-> 89 mismatch
+ add-1
+ (45,52)->7: 45 + 52 - 1 = 96 rev-> 69 mismatch
+ sub+1
+ (45,52)->7: 45 - 52 + 1 = -6 rev-> -6 mismatch
+ sub-1
+ (45,52)->7: 45 - 52 - 1 = -8 rev-> -8 mismatch
+ integer division (a/b)
+ (45,52)->7: 45 / 52 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (45,52)->7: 52 / 45 = 1 rev-> 1 mismatch
+ reverse modulo (b mod a)
+ (45,52)->7: 52 mod 45 = 7 rev-> 7 match
+ correct, but skipping
+ digit absolute diff
+ (45,52)->7: |4-5| || |5-2| = 13 rev-> 31 mismatch
+ digit add mod10
+ (45,52)->7: (4+5)%10 || (5+2)%10 = 97 rev-> 79 mismatch
+ digit sub mod10
+ (45,52)->7: (4-5)%10 || (5-2)%10 = 93 rev-> 39 mismatch
+ cross multiply
+ (45,52)->7: 4*5 + 5*2 = 20 + 10 = 30 rev-> 03 mismatch
+ cross multiply rev
+ (45,52)->7: 4*2 + 5*5 = 8 + 25 = 33 rev-> 33 mismatch
+ digit multiply
+ (45,52)->7: 4*5 || 5*2 = 20 || 10 = 2010 rev-> 0102 mismatch
+ digit multiply rev
+ (45,52)->7: 4*2 || 5*5 = 8 || 25 = 825 rev-> 528 mismatch
+ digit sum diff
+ (45,52)->7: (4+5) - (5+2) = 2 rev-> 2 mismatch
+ digit sum sum
+ (45,52)->7: (4+5) + (5+2) = 16 rev-> 61 mismatch
+ digit product diff
+ (45,52)->7: 4*5 - 5*2 = 20 - 10 = 10 rev-> 01 mismatch
+ digit product sum
+ (45,52)->7: 4*5 + 5*2 = 20 + 10 = 30 rev-> 03 mismatch
+ determinant
+ (45,52)->7: 4*2 - 5*5 = 8 - 25 = -17 rev-> -71 mismatch
+ abs determinant
+ (45,52)->7: |4*2 - 5*5| = |8 - 25| = 17 rev-> 71 mismatch
+
+ identity [54 25] [expected (54,25)->7]
+ multiply+1
+ (54,25)->7: (50 + 4) * 25 + 1 = 50 * 25 + 4 * 25 + 1 = 1250 + 100 + 1 = 1350 + 1 = 1351 mismatch
+ multiply-1
+ (54,25)->7: (50 + 4) * 25 - 1 = 50 * 25 + 4 * 25 - 1 = 1250 + 100 - 1 = 1350 - 1 = 1349 mismatch
+ add+1
+ (54,25)->7: 54 + 25 + 1 = 80 mismatch
+ add-1
+ (54,25)->7: 54 + 25 - 1 = 78 mismatch
+ sub+1
+ (54,25)->7: 54 - 25 + 1 = 30 mismatch
+ sub-1
+ (54,25)->7: 54 - 25 - 1 = 28 mismatch
+ integer division (a/b)
+ (54,25)->7: 54 / 25 = 2 mismatch
+ reverse division (b/a)
+ (54,25)->7: 25 / 54 = 0 mismatch
+ reverse modulo (b mod a)
+ (54,25)->7: 25 mod 54 = 25 mismatch
+ digit absolute diff
+ (54,25)->7: |5-2| || |4-5| = 31 mismatch
+ digit add mod10
+ (54,25)->7: (5+2)%10 || (4+5)%10 = 79 mismatch
+ digit sub mod10
+ (54,25)->7: (5-2)%10 || (4-5)%10 = 39 mismatch
+ cross multiply
+ (54,25)->7: 5*2 + 4*5 = 10 + 20 = 30 mismatch
+ cross multiply rev
+ (54,25)->7: 5*5 + 4*2 = 25 + 8 = 33 mismatch
+ digit multiply
+ (54,25)->7: 5*2 || 4*5 = 10 || 20 = 1020 mismatch
+ digit multiply rev
+ (54,25)->7: 5*5 || 4*2 = 25 || 8 = 258 mismatch
+ digit sum diff
+ (54,25)->7: (5+4) - (2+5) = 2 mismatch
+ digit sum sum
+ (54,25)->7: (5+4) + (2+5) = 16 mismatch
+ digit product diff
+ (54,25)->7: 5*4 - 2*5 = 20 - 10 = 10 mismatch
+ digit product sum
+ (54,25)->7: 5*4 + 2*5 = 20 + 10 = 30 mismatch
+ determinant
+ (54,25)->7: 5*5 - 4*2 = 25 - 8 = 17 mismatch
+ abs determinant
+ (54,25)->7: |5*5 - 4*2| = |25 - 8| = 17 mismatch
+
+correct, actions: reversed operands, reversed result, absolute difference
+
+Applying to 58"42:
+ We recall that the question operator is found in the examples.
+ reversed operands [58->85, 42->24] and reversed result
+ absolute difference
+ (85,24): |85 - 24| = 61 rev-> 16
+ Result is non-negative
+ \boxed{16}

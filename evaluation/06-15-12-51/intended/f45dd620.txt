@@ -1,0 +1,75 @@
+"{+:$ = $$\
+!^+{: = \?\
+"$+^{ = \$\
+$$+'\ = \"
+"$*\" = "^|^
+The question is !'-${
+
+Operator symbols +*
+Question operator symbol -
+Question operator not in examples
+
+Digit symbols "{:$\!^?'|
+
+Checking concatenation
+left "{ op + right :$ expected "{:$ versus $$\ mismatch
+left !^ op + right {: expected !^{: versus \?\ mismatch
+left "$ op + right ^{ expected "$^{ versus \$\ mismatch
+left $$ op + right '\ expected $$'\ versus \" mismatch
+left "$ op * right \" expected "$\" versus "^|^ mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left "{ op + right :$ expected :$"{ versus $$\ mismatch
+left !^ op + right {: expected {:!^ versus \?\ mismatch
+left "$ op + right ^{ expected ^{"$ versus \$\ mismatch
+left $$ op + right '\ expected '\$$ versus \" mismatch
+left "$ op * right \" expected \""$ versus "^|^ mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+"{+:$ = $$\
+!^+{: = \?\
+"$+^{ = \$\
+$$+'\ = \"
+"$*\" = "^|^
+
+Assigning mul
+ left "{ op + right :$ = $$\ length 3
+ left !^ op + right {: = \?\ length 3
+ left "$ op + right ^{ = \$\ length 3
+ left $$ op + right '\ = \" length 2
+ left "$ op * right \" = "^|^ length 4 assume mul
+
+Assigning sub
+ left "{ op + right :$ = $$\ length 3
+ left !^ op + right {: = \?\ length 3
+ left "$ op + right ^{ = \$\ length 3
+ left $$ op + right '\ = \" length 2
+ left "$ op * right \" = "^|^ assumed mul
+
+Assigning add
+ left "{ op + right :$ = $$\ length 3 assume add
+ left !^ op + right {: = \?\ assumed add
+ left "$ op + right ^{ = \$\ assumed add
+ left $$ op + right '\ = \" assumed add
+ left "$ op * right \" = "^|^ assumed mul
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left "{ op + right :$ = $$\ assumed add
+ left !^ op + right {: = \?\ assumed add
+ left "$ op + right ^{ = \$\ assumed add
+ left $$ op + right '\ = \" assumed add
+ left "$ op * right \" = "^|^ assumed mul
+ left !' op - right ${ the question, operator not in the examples, the unused family is sub, assume sub
+
+Trying "=7 {=9 :=8 $=5 \=1 !=2 ^=4 ?=3 '=6 |=0
+"{+:$ = 79 add 85 = 164 vs $$\ 551 diff 387 add no; 97 add 58 = 155 vs rev \$$ 155 diff 0 add ok
+!^+{: = 24 add 98 = 122 vs \?\ 131 diff 9 add no; 42 add 89 = 131 vs rev \?\ 131 diff 0 add ok
+"$+^{ = 75 add 49 = 124 vs \$\ 151 diff 27 add no; 57 add 94 = 151 vs rev \$\ 151 diff 0 add ok
+$$+'\ = 55 add 61 = 116 vs \" 17 diff 99 add no; 55 add 16 = 71 vs rev "\ 71 diff 0 add ok
+"$*\" = 75 mul 17 = 1275 vs "^|^ 7404 diff 6129 mul no; 57 mul 71 = 4047 vs rev ^|^" 4047 diff 0 mul ok
+ accepted rev !'-${ = 26 sub 59 rev 62 sub 95 = 33 rev 33 = \boxed{??}

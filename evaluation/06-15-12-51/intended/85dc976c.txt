@@ -1,0 +1,75 @@
+|{*'^ = }%%^
+$\-^' = >%
+$:+>% = >{
+}^+\{ = |\%
+>%+^\ = $|
+The question is |\+\}
+
+Operator symbols *-+
+Question operator symbol +
+Question operator in examples
+
+Digit symbols |{'^}%$\>:
+
+Checking concatenation
+left |{ op * right '^ expected |{'^ versus }%%^ mismatch
+left $\ op - right ^' expected $\^' versus >% mismatch
+left $: op + right >% expected $:>% versus >{ mismatch
+left }^ op + right \{ expected }^\{ versus |\% mismatch
+left >% op + right ^\ expected >%^\ versus $| mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left |{ op * right '^ expected '^|{ versus }%%^ mismatch
+left $\ op - right ^' expected ^'$\ versus >% mismatch
+left $: op + right >% expected >%$: versus >{ mismatch
+left }^ op + right \{ expected \{}^ versus |\% mismatch
+left >% op + right ^\ expected ^\>% versus $| mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+|{*'^ = }%%^
+$\-^' = >%
+$:+>% = >{
+}^+\{ = |\%
+>%+^\ = $|
+
+Assigning mul
+ left |{ op * right '^ = }%%^ length 4 assume mul
+ left $\ op - right ^' = >% length 2
+ left $: op + right >% = >{ length 2
+ left }^ op + right \{ = |\% length 3
+ left >% op + right ^\ = $| length 2
+
+Assigning sub
+ left |{ op * right '^ = }%%^ assumed mul
+ left $\ op - right ^' = >% length 2
+ left $: op + right >% = >{ length 2
+ left }^ op + right \{ = |\% length 3
+ left >% op + right ^\ = $| length 2
+
+Assigning add
+ left |{ op * right '^ = }%%^ assumed mul
+ left $\ op - right ^' = >% length 2
+ left $: op + right >% = >{ length 2
+ left }^ op + right \{ = |\% length 3 assume add
+ left >% op + right ^\ = $| assumed add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left |{ op * right '^ = }%%^ assumed mul
+ left $\ op - right ^' = >% length 2 assume sub
+ left $: op + right >% = >{ assumed add
+ left }^ op + right \{ = |\% assumed add
+ left >% op + right ^\ = $| assumed add
+ left |\ op + right \} the question, assumed add
+
+Trying |=7 {=9 '=3 ^=6 }=2 %=1 $=0 \=5 >=4 :=8
+|{*'^ = 79 mul 36 = 2844 vs }%%^ 2116 diff 728 mul no; 97 mul 63 = 6111 vs rev ^%%} 6112 diff 1 mul ok + 1
+$\-^' = 05 sub 63 = 58 vs >% 41 diff 17 sub no; 50 sub 36 = 14 vs rev %> 14 diff 0 sub ok
+$:+>% = 08 add 41 = 49 vs >{ 49 diff 0 add ok; 80 add 14 = 94 vs rev {> 94 diff 0 add ok
+}^+\{ = 26 add 59 = 85 vs |\% 751 diff 666 add no; 62 add 95 = 157 vs rev %\| 157 diff 0 add ok
+>%+^\ = 41 add 65 = 106 vs $| 07 diff 99 add no; 14 add 56 = 70 vs rev |$ 70 diff 0 add ok
+ accepted rev |\+\} = 75 add 52 rev 57 add 25 = 82 rev 28 = \boxed{}:}

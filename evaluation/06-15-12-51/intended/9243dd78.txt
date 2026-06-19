@@ -1,0 +1,197 @@
+|\-?@ = -@\
+"@*?^ = @}/"
+@#*^} = \##/
+The question is }}+@?
+
+Operator symbols -*
+Question operator symbol +
+Question operator not in examples
+
+Digit symbols |\?@"^}/#
+
+Checking concatenation
+left |\ op - right ?@ expected |\?@ versus -@\ mismatch
+left "@ op * right ?^ expected "@?^ versus @}/" mismatch
+left @# op * right ^} expected @#^} versus \##/ mismatch
+
+Question operator + is not concatenation
+
+Checking reverse concatenation
+left |\ op - right ?@ expected ?@|\ versus -@\ mismatch
+left "@ op * right ?^ expected ?^"@ versus @}/" mismatch
+left @# op * right ^} expected ^}@# versus \##/ mismatch
+
+Question operator + is not reverse concatenation
+
+Filtering out the concatenation operations
+|\-?@ = -@\
+"@*?^ = @}/"
+@#*^} = \##/
+
+Assigning mul
+ left |\ op - right ?@ = -@\ length 3
+ left "@ op * right ?^ = @}/" length 4 assume mul
+ left @# op * right ^} = \##/ assumed mul
+
+Assigning sub
+ left |\ op - right ?@ = -@\ op in output assume sub
+ left "@ op * right ?^ = @}/" assumed mul
+ left @# op * right ^} = \##/ assumed mul
+
+Assigning add
+ left |\ op - right ?@ = -@\ assumed sub
+ left "@ op * right ?^ = @}/" assumed mul
+ left @# op * right ^} = \##/ assumed mul
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left |\ op - right ?@ = -@\ assumed sub
+ left "@ op * right ?^ = @}/" assumed mul
+ left @# op * right ^} = \##/ assumed mul
+ left }} op + right @? the question, operator not in the examples, the unused family is add, assume add
+
+Trying |=9 \=0 ?=8 @=1 "=2 ^=3 }=7 /=4 #=6 A=5
+|\-?@ = 90 sub 81 = 9 vs -@\ -10 diff 1 sub ok + 1; 09 sub 18 = 9 vs rev -\@ -01 diff 8 sub no
+"@*?^ = 21 mul 83 = 1743 vs @}/" 1742 diff 1 mul ok - 1; 12 mul 38 = 456 vs rev "/}@ 2471 diff 2015 mul no
+@#*^} = 16 mul 37 = 592 vs \##/ 0664 diff 72 mul no; 61 mul 73 = 4453 vs rev /##\ 4660 diff 207 mul no
+ rejected forward }}+@? = 77 add 18 = 95 = final answer: |A
+
+Trying |=5 \=9 ?=6 @=0 "=2 ^=3 }=7 /=8 #=4 A=1
+|\-?@ = 59 sub 60 = 1 vs -@\ -09 diff 8 sub no; 95 sub 06 = 89 vs rev -\@ -90 diff 1 sub ok + 1
+"@*?^ = 20 mul 63 = 1260 vs @}/" 0782 diff 478 mul no; 02 mul 36 = 72 vs rev "/}@ 2870 diff 2798 mul no
+ rejected rev }}+@? = 77 add 06 rev 77 add 60 = 137 rev 731 = final answer: }^A
+
+Trying |=4 \=6 ?=9 @=8 "=2 ^=3 }=7 /=1 #=5 A=0
+|\-?@ = 46 sub 98 = 52 vs -@\ -86 diff 34 sub no; 64 sub 89 = 25 vs rev -\@ -68 diff 43 sub no
+ rejected none }}+@? = 77 add 89 rev 77 add 98 = 175 rev 571 = final answer: #}/
+
+Trying |=3 \=5 ?=0 @=4 "=2 ^=9 }=7 /=1 #=6 A=8
+|\-?@ = 35 sub 04 = 31 vs -@\ -45 diff 14 sub no; 53 sub 40 = 13 vs rev -\@ -54 diff 41 sub no
+ rejected none }}+@? = 77 add 40 rev 77 add 04 = 81 rev 18 = final answer: /A
+
+Trying |=6 \=4 ?=5 @=9 "=2 ^=3 }=7 /=1 #=8 A=0
+|\-?@ = 64 sub 59 = 5 vs -@\ -94 diff 89 sub no; 46 sub 95 = 49 vs rev -\@ -49 diff 0 sub ok
+"@*?^ = 29 mul 53 = 1537 vs @}/" 9712 diff 8175 mul no; 92 mul 35 = 3220 vs rev "/}@ 2179 diff 1041 mul no
+ rejected rev }}+@? = 77 add 95 rev 77 add 59 = 136 rev 631 = final answer: |^/
+
+Trying |=0 \=8 ?=7 @=6 "=2 ^=3 }=9 /=1 #=4 A=5
+|\-?@ = 08 sub 76 = 68 vs -@\ -68 diff 0 sub ok; 80 sub 67 = 13 vs rev -\@ -86 diff 73 sub no
+"@*?^ = 26 mul 73 = 1898 vs @}/" 6912 diff 5014 mul no; 62 mul 37 = 2294 vs rev "/}@ 2196 diff 98 mul no
+ rejected forward }}+@? = 99 add 67 = 166 = final answer: /@@
+
+Trying |=9 \=0 ?=8 @=1 "=2 ^=3 }=7 /=5 #=4 A=6
+|\-?@ = 90 sub 81 = 9 vs -@\ -10 diff 1 sub ok + 1; 09 sub 18 = 9 vs rev -\@ -01 diff 8 sub no
+"@*?^ = 21 mul 83 = 1743 vs @}/" 1752 diff 9 mul no; 12 mul 38 = 456 vs rev "/}@ 2571 diff 2115 mul no
+ rejected forward }}+@? = 77 add 18 = 95 = final answer: |/
+
+Trying |=5 \=9 ?=4 @=0 "=2 ^=3 }=7 /=8 #=6 A=1
+|\-?@ = 59 sub 40 = 19 vs -@\ -09 diff 10 sub no; 95 sub 04 = 91 vs rev -\@ -90 diff 1 sub ok - 1
+"@*?^ = 20 mul 43 = 860 vs @}/" 0782 diff 78 mul no; 02 mul 34 = 68 vs rev "/}@ 2870 diff 2802 mul no
+ rejected rev }}+@? = 77 add 04 rev 77 add 40 = 117 rev 711 = final answer: }AA
+
+Trying |=4 \=3 ?=9 @=5 "=2 ^=0 }=7 /=8 #=6 A=1
+|\-?@ = 43 sub 95 = 52 vs -@\ -53 diff 1 sub ok + 1; 34 sub 59 = 25 vs rev -\@ -35 diff 10 sub no
+"@*?^ = 25 mul 90 = 2250 vs @}/" 5782 diff 3532 mul no; 52 mul 09 = 468 vs rev "/}@ 2875 diff 2407 mul no
+ rejected forward }}+@? = 77 add 59 = 136 = final answer: A\#
+
+Trying |=3 \=5 ?=0 @=4 "=2 ^=9 }=7 /=8 #=6 A=1
+|\-?@ = 35 sub 04 = 31 vs -@\ -45 diff 14 sub no; 53 sub 40 = 13 vs rev -\@ -54 diff 41 sub no
+ rejected none }}+@? = 77 add 40 rev 77 add 04 = 81 rev 18 = final answer: A/
+
+Trying |=6 \=4 ?=5 @=9 "=2 ^=3 }=7 /=8 #=0 A=1
+|\-?@ = 64 sub 59 = 5 vs -@\ -94 diff 89 sub no; 46 sub 95 = 49 vs rev -\@ -49 diff 0 sub ok
+"@*?^ = 29 mul 53 = 1537 vs @}/" 9782 diff 8245 mul no; 92 mul 35 = 3220 vs rev "/}@ 2879 diff 341 mul no
+ rejected rev }}+@? = 77 add 95 rev 77 add 59 = 136 rev 631 = final answer: |^A
+
+Trying |=2 \=1 ?=7 @=6 "=9 ^=3 }=8 /=0 #=5 A=4
+|\-?@ = 21 sub 76 = 55 vs -@\ -61 diff 6 sub no; 12 sub 67 = 55 vs rev -\@ -16 diff 39 sub no
+ rejected none }}+@? = 88 add 67 rev 88 add 76 = 164 rev 461 = final answer: A@\
+
+Trying |=9 \=0 ?=8 @=1 "=2 ^=3 }=7 /=5 #=4 A=6
+|\-?@ = 90 sub 81 = 9 vs -@\ -10 diff 1 sub ok + 1; 09 sub 18 = 9 vs rev -\@ -01 diff 8 sub no
+"@*?^ = 21 mul 83 = 1743 vs @}/" 1752 diff 9 mul no; 12 mul 38 = 456 vs rev "/}@ 2571 diff 2115 mul no
+ rejected forward }}+@? = 77 add 18 = 95 = final answer: |/
+
+Trying |=5 \=9 ?=4 @=0 "=2 ^=3 }=7 /=1 #=6 A=8
+|\-?@ = 59 sub 40 = 19 vs -@\ -09 diff 10 sub no; 95 sub 04 = 91 vs rev -\@ -90 diff 1 sub ok - 1
+"@*?^ = 20 mul 43 = 860 vs @}/" 0712 diff 148 mul no; 02 mul 34 = 68 vs rev "/}@ 2170 diff 2102 mul no
+ rejected rev }}+@? = 77 add 04 rev 77 add 40 = 117 rev 711 = final answer: }//
+
+Trying |=4 \=2 ?=9 @=5 "=0 ^=3 }=7 /=8 #=6 A=1
+|\-?@ = 42 sub 95 = 53 vs -@\ -52 diff 1 sub ok - 1; 24 sub 59 = 35 vs rev -\@ -25 diff 10 sub no
+"@*?^ = 05 mul 93 = 465 vs @}/" 5780 diff 5315 mul no; 50 mul 39 = 1950 vs rev "/}@ 0875 diff 1075 mul no
+ rejected forward }}+@? = 77 add 59 = 136 = final answer: A^#
+
+Trying |=3 \=5 ?=0 @=8 "=2 ^=9 }=7 /=6 #=4 A=1
+|\-?@ = 35 sub 08 = 27 vs -@\ -85 diff 58 sub no; 53 sub 80 = 27 vs rev -\@ -58 diff 31 sub no
+ rejected none }}+@? = 77 add 80 rev 77 add 08 = 85 rev 58 = final answer: \@
+
+Trying |=7 \=4 ?=5 @=9 "=2 ^=3 }=1 /=0 #=6 A=8
+|\-?@ = 74 sub 59 = 15 vs -@\ -94 diff 79 sub no; 47 sub 95 = 48 vs rev -\@ -49 diff 1 sub ok + 1
+"@*?^ = 29 mul 53 = 1537 vs @}/" 9102 diff 7565 mul no; 92 mul 35 = 3220 vs rev "/}@ 2019 diff 1201 mul no
+ rejected rev }}+@? = 11 add 95 rev 11 add 59 = 70 rev 07 = final answer: /|
+
+Trying |=1 \=3 ?=7 @=6 "=2 ^=0 }=8 /=9 #=4 A=5
+|\-?@ = 13 sub 76 = 63 vs -@\ -63 diff 0 sub ok; 31 sub 67 = 36 vs rev -\@ -36 diff 0 sub ok
+"@*?^ = 26 mul 70 = 1820 vs @}/" 6892 diff 5072 mul no; 62 mul 07 = 434 vs rev "/}@ 2986 diff 2552 mul no
+ rejected forward }}+@? = 88 add 67 = 155 = final answer: |AA
+
+Trying |=9 \=0 ?=8 @=1 "=2 ^=3 }=7 /=5 #=4 A=6
+|\-?@ = 90 sub 81 = 9 vs -@\ -10 diff 1 sub ok + 1; 09 sub 18 = 9 vs rev -\@ -01 diff 8 sub no
+"@*?^ = 21 mul 83 = 1743 vs @}/" 1752 diff 9 mul no; 12 mul 38 = 456 vs rev "/}@ 2571 diff 2115 mul no
+ rejected forward }}+@? = 77 add 18 = 95 = final answer: |/
+
+Trying |=5 \=9 ?=4 @=0 "=2 ^=3 }=7 /=1 #=6 A=8
+|\-?@ = 59 sub 40 = 19 vs -@\ -09 diff 10 sub no; 95 sub 04 = 91 vs rev -\@ -90 diff 1 sub ok - 1
+"@*?^ = 20 mul 43 = 860 vs @}/" 0712 diff 148 mul no; 02 mul 34 = 68 vs rev "/}@ 2170 diff 2102 mul no
+ rejected rev }}+@? = 77 add 04 rev 77 add 40 = 117 rev 711 = final answer: }//
+
+Trying |=6 \=2 ?=9 @=4 "=0 ^=3 }=7 /=8 #=5 A=1
+|\-?@ = 62 sub 94 = 32 vs -@\ -42 diff 10 sub no; 26 sub 49 = 23 vs rev -\@ -24 diff 1 sub ok + 1
+"@*?^ = 04 mul 93 = 372 vs @}/" 4780 diff 4408 mul no; 40 mul 39 = 1560 vs rev "/}@ 0874 diff 686 mul no
+ rejected rev }}+@? = 77 add 49 rev 77 add 94 = 171 rev 171 = final answer: A}A
+
+Trying |=3 \=6 ?=0 @=8 "=2 ^=9 }=7 /=1 #=4 A=5
+|\-?@ = 36 sub 08 = 28 vs -@\ -86 diff 58 sub no; 63 sub 80 = 17 vs rev -\@ -68 diff 51 sub no
+ rejected none }}+@? = 77 add 80 rev 77 add 08 = 85 rev 58 = final answer: A@
+
+Trying |=4 \=5 ?=3 @=9 "=2 ^=8 }=7 /=0 #=6 A=1
+|\-?@ = 45 sub 39 = 6 vs -@\ -95 diff 89 sub no; 54 sub 93 = 39 vs rev -\@ -59 diff 20 sub no
+ rejected none }}+@? = 77 add 93 rev 77 add 39 = 116 rev 611 = final answer: #AA
+
+Trying |=7 \=4 ?=5 @=2 "=1 ^=3 }=9 /=0 #=6 A=8
+|\-?@ = 74 sub 52 = 22 vs -@\ -24 diff 2 sub no; 47 sub 25 = 22 vs rev -\@ -42 diff 20 sub no
+ rejected none }}+@? = 99 add 25 rev 99 add 52 = 151 rev 151 = final answer: "?"
+
+Trying |=9 \=0 ?=8 @=1 "=2 ^=3 }=7 /=5 #=4 A=6
+|\-?@ = 90 sub 81 = 9 vs -@\ -10 diff 1 sub ok + 1; 09 sub 18 = 9 vs rev -\@ -01 diff 8 sub no
+"@*?^ = 21 mul 83 = 1743 vs @}/" 1752 diff 9 mul no; 12 mul 38 = 456 vs rev "/}@ 2571 diff 2115 mul no
+ rejected forward }}+@? = 77 add 18 = 95 = final answer: |/
+
+Trying |=5 \=9 ?=6 @=0 "=2 ^=3 }=7 /=1 #=4 A=8
+|\-?@ = 59 sub 60 = 1 vs -@\ -09 diff 8 sub no; 95 sub 06 = 89 vs rev -\@ -90 diff 1 sub ok + 1
+"@*?^ = 20 mul 63 = 1260 vs @}/" 0712 diff 548 mul no; 02 mul 36 = 72 vs rev "/}@ 2170 diff 2098 mul no
+ rejected rev }}+@? = 77 add 06 rev 77 add 60 = 137 rev 731 = final answer: }^/
+
+Trying |=6 \=2 ?=9 @=4 "=0 ^=3 }=7 /=1 #=5 A=8
+|\-?@ = 62 sub 94 = 32 vs -@\ -42 diff 10 sub no; 26 sub 49 = 23 vs rev -\@ -24 diff 1 sub ok + 1
+"@*?^ = 04 mul 93 = 372 vs @}/" 4710 diff 4338 mul no; 40 mul 39 = 1560 vs rev "/}@ 0174 diff 1386 mul no
+ rejected rev }}+@? = 77 add 49 rev 77 add 94 = 171 rev 171 = final answer: /}/
+
+Trying |=3 \=6 ?=0 @=8 "=2 ^=9 }=7 /=4 #=5 A=1
+|\-?@ = 36 sub 08 = 28 vs -@\ -86 diff 58 sub no; 63 sub 80 = 17 vs rev -\@ -68 diff 51 sub no
+ rejected none }}+@? = 77 add 80 rev 77 add 08 = 85 rev 58 = final answer: #@
+
+Trying |=4 \=5 ?=2 @=9 "=8 ^=3 }=7 /=0 #=6 A=1
+|\-?@ = 45 sub 29 = 16 vs -@\ -95 diff 79 sub no; 54 sub 92 = 38 vs rev -\@ -59 diff 21 sub no
+ rejected none }}+@? = 77 add 92 rev 77 add 29 = 106 rev 601 = final answer: #/A
+
+Trying |=7 \=4 ?=5 @=2 "=1 ^=3 }=9 /=8 #=6 A=0
+|\-?@ = 74 sub 52 = 22 vs -@\ -24 diff 2 sub no; 47 sub 25 = 22 vs rev -\@ -42 diff 20 sub no
+ rejected none }}+@? = 99 add 25 rev 99 add 52 = 151 rev 151 = final answer: "?"
+
+Trying |=9 \=0 ?=8 @=1 "=2 ^=3 }=7 /=4 #=5 A=6
+|\-?@ = 90 sub 81 = 9 vs -@\ -10 diff 1 sub ok + 1; 09 sub 18 = 9 vs rev -\@ -01 diff 8 sub no
+"@*?^ = 21 mul 83 = 1743 vs @}/" 1742 diff 1 mul ok - 1; 12 mul 38 = 456 vs rev "/}@ 2471 diff 2015 mul no
+@#*^} = 15 mul 37 = 555 vs \##/ 0554 diff 1 mul ok - 1; 51 mul 73 = 3723 vs rev /##\ 4550 diff 827 mul no
+ accepted forward }}+@? = 77 add 18 = 95 = \boxed{|#}

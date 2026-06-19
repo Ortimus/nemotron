@@ -1,0 +1,178 @@
+70<36 = 2520
+21+95 = 2195
+69<15 = 1035
+
+The inputs are 70, 36, 21, 95, 69, 15
+
+The outputs are 2520, 2195, 1035
+No example outputs have a symbol prefix or suffix.
+
+Looking at the input of the examples
+70<36 -> <
+21+95 -> +
+69<15 -> <
+
+The operators
+<
++
+
+Looking at the question
+75/62 -> /
+The question operator is not found in the examples. Investigating the most common example operator < instead. We will use addition for the question operator.
+
+Looking at operator < [70<36 = 2520, 69<15 = 1035]:
+
+Trying common operations
+ reversed operands [70->07 36->63, 69->96 15->51] and reversed result [expected (07,63)->2520, (96,51)->1035]
+ addition
+ (07,63)->2520: 07 + 63 = 70 rev-> 07 mismatch
+ multiplication
+ (96,51)->1035: (90 + 6) * 51 = 90 * 51 + 6 * 51 = 4590 + 306 = 4896 rev-> 6984 mismatch
+ concatenation
+ (07,63)->2520: 07 || 63 = 0763 rev-> 3670 mismatch
+ reverse concatenation
+ (96,51)->1035: 51 || 96 = 5196 rev-> 6915 mismatch
+
+ identity [70 36, 69 15] [expected (70,36)->2520, (69,15)->1035]
+ addition
+ (70,36)->2520: 70 + 36 = 106 mismatch
+ multiplication
+ (69,15)->1035: (60 + 9) * 15 = 60 * 15 + 9 * 15 = 900 + 135 = 1035 match
+ (70,36)->2520: (70 + 0) * 36 = 70 * 36 + 0 * 36 = 2520 + 0 = 2520 match
+ correct, actions: multiplication
+ concatenation
+ (70,36)->2520: 70 || 36 = 7036 mismatch
+ reverse concatenation
+ (69,15)->1035: 15 || 69 = 1569 mismatch
+
+Trying difference operations
+ reversed operands [70->07 36->63, 69->96 15->51] and reversed result [expected (07,63)->2520, (96,51)->1035]
+ subtraction (a-b)
+ (07,63)->2520: 07 - 63 = -56 rev-> -65 mismatch
+ absolute difference
+ (96,51)->1035: |96 - 51| = 45 rev-> 54 mismatch
+ max mod min
+ (07,63)->2520: max(07,63) mod min(07,63) = 63 mod 07 = 0 rev-> 0 mismatch
+ negated absolute difference
+ (96,51)->1035: -|96 - 51| = -45 rev-> -54 mismatch
+ reverse subtraction (b-a)
+ (07,63)->2520: 63 - 07 = 56 rev-> 65 mismatch
+ modulo (a mod b)
+ (96,51)->1035: 96 mod 51 = 45 rev-> 54 mismatch
+
+ identity [70 36, 69 15] [expected (70,36)->2520, (69,15)->1035]
+ subtraction (a-b)
+ (70,36)->2520: 70 - 36 = 34 mismatch
+ absolute difference
+ (69,15)->1035: |69 - 15| = 54 mismatch
+ max mod min
+ (70,36)->2520: max(70,36) mod min(70,36) = 70 mod 36 = 34 mismatch
+ negated absolute difference
+ (69,15)->1035: -|69 - 15| = -54 mismatch
+ reverse subtraction (b-a)
+ (70,36)->2520: 36 - 70 = -34 mismatch
+ modulo (a mod b)
+ (69,15)->1035: 69 mod 15 = 9 mismatch
+
+Trying rare operations
+ reversed operands [70->07 36->63, 69->96 15->51] and reversed result [expected (07,63)->2520, (96,51)->1035]
+ multiply+1
+ (07,63)->2520: (0 + 7) * 63 + 1 = 0 * 63 + 7 * 63 + 1 = 0 + 441 + 1 = 441 + 1 = 442 rev-> 244 mismatch
+ multiply-1
+ (96,51)->1035: (90 + 6) * 51 - 1 = 90 * 51 + 6 * 51 - 1 = 4590 + 306 - 1 = 4896 - 1 = 4895 rev-> 5984 mismatch
+ add+1
+ (07,63)->2520: 07 + 63 + 1 = 71 rev-> 17 mismatch
+ add-1
+ (96,51)->1035: 96 + 51 - 1 = 146 rev-> 641 mismatch
+ sub+1
+ (07,63)->2520: 07 - 63 + 1 = -55 rev-> -55 mismatch
+ sub-1
+ (96,51)->1035: 96 - 51 - 1 = 44 rev-> 44 mismatch
+ integer division (a/b)
+ (07,63)->2520: 07 / 63 = 0 rev-> 0 mismatch
+ reverse division (b/a)
+ (96,51)->1035: 51 / 96 = 0 rev-> 0 mismatch
+ reverse modulo (b mod a)
+ (07,63)->2520: 63 mod 07 = 0 rev-> 0 mismatch
+ digit absolute diff
+ (96,51)->1035: |9-5| || |6-1| = 45 rev-> 54 mismatch
+ digit add mod10
+ (07,63)->2520: (0+6)%10 || (7+3)%10 = 60 rev-> 06 mismatch
+ digit sub mod10
+ (96,51)->1035: (9-5)%10 || (6-1)%10 = 45 rev-> 54 mismatch
+ cross multiply
+ (07,63)->2520: 0*6 + 7*3 = 0 + 21 = 21 rev-> 12 mismatch
+ cross multiply rev
+ (96,51)->1035: 9*1 + 6*5 = 9 + 30 = 39 rev-> 93 mismatch
+ digit multiply
+ (07,63)->2520: 0*6 || 7*3 = 0 || 21 = 021 rev-> 120 mismatch
+ digit multiply rev
+ (96,51)->1035: 9*1 || 6*5 = 9 || 30 = 930 rev-> 039 mismatch
+ digit sum diff
+ (07,63)->2520: (0+7) - (6+3) = -2 rev-> -2 mismatch
+ digit sum sum
+ (96,51)->1035: (9+6) + (5+1) = 21 rev-> 12 mismatch
+ digit product diff
+ (07,63)->2520: 0*7 - 6*3 = 0 - 18 = -18 rev-> -81 mismatch
+ digit product sum
+ (96,51)->1035: 9*6 + 5*1 = 54 + 5 = 59 rev-> 95 mismatch
+ determinant
+ (07,63)->2520: 0*3 - 7*6 = 0 - 42 = -42 rev-> -24 mismatch
+ abs determinant
+ (96,51)->1035: |9*1 - 6*5| = |9 - 30| = 21 rev-> 12 mismatch
+
+ identity [70 36, 69 15] [expected (70,36)->2520, (69,15)->1035]
+ multiply+1
+ (70,36)->2520: (70 + 0) * 36 + 1 = 70 * 36 + 0 * 36 + 1 = 2520 + 0 + 1 = 2520 + 1 = 2521 mismatch
+ multiply-1
+ (69,15)->1035: (60 + 9) * 15 - 1 = 60 * 15 + 9 * 15 - 1 = 900 + 135 - 1 = 1035 - 1 = 1034 mismatch
+ add+1
+ (70,36)->2520: 70 + 36 + 1 = 107 mismatch
+ add-1
+ (69,15)->1035: 69 + 15 - 1 = 83 mismatch
+ sub+1
+ (70,36)->2520: 70 - 36 + 1 = 35 mismatch
+ sub-1
+ (69,15)->1035: 69 - 15 - 1 = 53 mismatch
+ integer division (a/b)
+ (70,36)->2520: 70 / 36 = 1 mismatch
+ reverse division (b/a)
+ (69,15)->1035: 15 / 69 = 0 mismatch
+ reverse modulo (b mod a)
+ (70,36)->2520: 36 mod 70 = 36 mismatch
+ digit absolute diff
+ (69,15)->1035: |6-1| || |9-5| = 54 mismatch
+ digit add mod10
+ (70,36)->2520: (7+3)%10 || (0+6)%10 = 06 mismatch
+ digit sub mod10
+ (69,15)->1035: (6-1)%10 || (9-5)%10 = 54 mismatch
+ cross multiply
+ (70,36)->2520: 7*3 + 0*6 = 21 + 0 = 21 mismatch
+ cross multiply rev
+ (69,15)->1035: 6*5 + 9*1 = 30 + 9 = 39 mismatch
+ digit multiply
+ (70,36)->2520: 7*3 || 0*6 = 21 || 0 = 210 mismatch
+ digit multiply rev
+ (69,15)->1035: 6*5 || 9*1 = 30 || 9 = 309 mismatch
+ digit sum diff
+ (70,36)->2520: (7+0) - (3+6) = -2 mismatch
+ digit sum sum
+ (69,15)->1035: (6+9) + (1+5) = 21 mismatch
+ digit product diff
+ (70,36)->2520: 7*0 - 3*6 = 0 - 18 = -18 mismatch
+ digit product sum
+ (69,15)->1035: 6*9 + 1*5 = 54 + 5 = 59 mismatch
+ determinant
+ (70,36)->2520: 7*6 - 0*3 = 42 - 0 = 42 mismatch
+ abs determinant
+ (69,15)->1035: |6*5 - 9*1| = |30 - 9| = 21 mismatch
+
+correct, actions: multiplication
+
+Applying to 75/62:
+ We recall that the question operator is not found in the examples. We will use addition as the operator.
+ identity [75 62]
+ addition
+ (75,62): 75 + 62 = 137
+ Result is non-negative
+ \boxed{137}

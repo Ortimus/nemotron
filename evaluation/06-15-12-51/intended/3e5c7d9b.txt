@@ -1,0 +1,75 @@
+?<*]( = ("("
+]"-?| = -^"
+$<-/< = <
+]$-|] = |"
+[$+$$ = //"
+The question is (<-[]
+
+Operator symbols *-+
+Question operator symbol -
+Question operator in examples
+
+Digit symbols ?<]("|^$/[
+
+Checking concatenation
+left ?< op * right ]( expected ?<]( versus ("(" mismatch
+left ]" op - right ?| expected ]"?| versus -^" mismatch
+left $< op - right /< expected $</< versus < mismatch
+left ]$ op - right |] expected ]$|] versus |" mismatch
+left [$ op + right $$ expected [$$$ versus //" mismatch
+
+Question operator - is not concatenation
+
+Checking reverse concatenation
+left ?< op * right ]( expected ](?< versus ("(" mismatch
+left ]" op - right ?| expected ?|]" versus -^" mismatch
+left $< op - right /< expected /<$< versus < mismatch
+left ]$ op - right |] expected |]]$ versus |" mismatch
+left [$ op + right $$ expected $$[$ versus //" mismatch
+
+Question operator - is not reverse concatenation
+
+Filtering out the concatenation operations
+?<*]( = ("("
+]"-?| = -^"
+$<-/< = <
+]$-|] = |"
+[$+$$ = //"
+
+Assigning mul
+ left ?< op * right ]( = ("(" length 4 assume mul
+ left ]" op - right ?| = -^" length 3
+ left $< op - right /< = < length 1
+ left ]$ op - right |] = |" length 2
+ left [$ op + right $$ = //" length 3
+
+Assigning sub
+ left ?< op * right ]( = ("(" assumed mul
+ left ]" op - right ?| = -^" op in output assume sub
+ left $< op - right /< = < assumed sub
+ left ]$ op - right |] = |" assumed sub
+ left [$ op + right $$ = //" length 3
+
+Assigning add
+ left ?< op * right ]( = ("(" assumed mul
+ left ]" op - right ?| = -^" assumed sub
+ left $< op - right /< = < assumed sub
+ left ]$ op - right |] = |" assumed sub
+ left [$ op + right $$ = //" length 3 assume add
+
+Assigning remainder
+ add is assigned, assigning remainder as sub
+ left ?< op * right ]( = ("(" assumed mul
+ left ]" op - right ?| = -^" assumed sub
+ left $< op - right /< = < assumed sub
+ left ]$ op - right |] = |" assumed sub
+ left [$ op + right $$ = //" assumed add
+ left (< op - right [] the question, assumed sub
+
+Trying ?=0 <=2 ]=6 (=9 "=1 |=3 ^=4 $=7 /=5 [=8
+?<*]( = 02 mul 69 = 138 vs ("(" 9191 diff 9053 mul no; 20 mul 96 = 1920 vs rev "("( 1919 diff 1 mul ok - 1
+]"-?| = 61 sub 03 = 58 vs -^" -41 diff 17 sub no; 16 sub 30 = 14 vs rev -"^ -14 diff 0 sub ok
+$<-/< = 72 sub 52 = 20 vs < 2 diff 18 sub no; 27 sub 25 = 2 vs rev < 2 diff 0 sub ok
+]$-|] = 67 sub 36 = 31 vs |" 31 diff 0 sub ok; 76 sub 63 = 13 vs rev "| 13 diff 0 sub ok
+[$+$$ = 87 add 77 = 164 vs //" 551 diff 387 add no; 78 add 77 = 155 vs rev "// 155 diff 0 add ok
+ accepted rev (<-[] = 92 sub 86 rev 29 sub 68 = 39 rev 93 = \boxed{(|}

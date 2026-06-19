@@ -1,0 +1,75 @@
+""&:[ = #]#<
+::`:{ = `'<
+@<&'" = ':"
+:@-[< = <]
+"@-@{ = [}
+The question is ]{`'#
+
+Operator symbols &`-
+Question operator symbol `
+Question operator in examples
+
+Digit symbols ":[#]<{'@}
+
+Checking concatenation
+left "" op & right :[ expected "":[ versus #]#< mismatch
+left :: op ` right :{ expected :::{ versus `'< mismatch
+left @< op & right '" expected @<'" versus ':" mismatch
+left :@ op - right [< expected :@[< versus <] mismatch
+left "@ op - right @{ expected "@@{ versus [} mismatch
+
+Question operator ` is not concatenation
+
+Checking reverse concatenation
+left "" op & right :[ expected :["" versus #]#< mismatch
+left :: op ` right :{ expected :{:: versus `'< mismatch
+left @< op & right '" expected '"@< versus ':" mismatch
+left :@ op - right [< expected [<:@ versus <] mismatch
+left "@ op - right @{ expected @{"@ versus [} mismatch
+
+Question operator ` is not reverse concatenation
+
+Filtering out the concatenation operations
+""&:[ = #]#<
+::`:{ = `'<
+@<&'" = ':"
+:@-[< = <]
+"@-@{ = [}
+
+Assigning mul
+ left "" op & right :[ = #]#< length 4 assume mul
+ left :: op ` right :{ = `'< length 3
+ left @< op & right '" = ':" assumed mul
+ left :@ op - right [< = <] length 2
+ left "@ op - right @{ = [} length 2
+
+Assigning sub
+ left "" op & right :[ = #]#< assumed mul
+ left :: op ` right :{ = `'< op in output assume sub
+ left @< op & right '" = ':" assumed mul
+ left :@ op - right [< = <] length 2
+ left "@ op - right @{ = [} length 2
+
+Assigning add
+ left "" op & right :[ = #]#< assumed mul
+ left :: op ` right :{ = `'< assumed sub
+ left @< op & right '" = ':" assumed mul
+ left :@ op - right [< = <] length 2
+ left "@ op - right @{ = [} length 2
+
+Assigning remainder
+ add is not assigned, assigning remainder as add
+ left "" op & right :[ = #]#< assumed mul
+ left :: op ` right :{ = `'< assumed sub
+ left @< op & right '" = ':" assumed mul
+ left :@ op - right [< = <] length 2 assume add
+ left "@ op - right @{ = [} assumed add
+ left ]{ op ` right '# the question, assumed sub
+
+Trying "=3 :=6 [=5 #=8 ]=4 <=1 {=7 '=0 @=2 }=9
+""&:[ = 33 mul 65 = 2145 vs #]#< 8481 diff 6336 mul no; 33 mul 56 = 1848 vs rev <#]# 1848 diff 0 mul ok
+::`:{ = 66 sub 67 = 1 vs `'< -01 diff 0 sub ok; 66 sub 76 = 10 vs rev `<' -10 diff 0 sub ok
+@<&'" = 21 mul 03 = 63 vs ':" 063 diff 0 mul ok; 12 mul 30 = 360 vs rev ":' 360 diff 0 mul ok
+:@-[< = 62 add 51 = 113 vs <] 14 diff 99 add no; 26 add 15 = 41 vs rev ]< 41 diff 0 add ok
+"@-@{ = 32 add 27 = 59 vs [} 59 diff 0 add ok; 23 add 72 = 95 vs rev }[ 95 diff 0 add ok
+ accepted rev ]{`'# = 47 sub 08 rev 74 sub 80 = 6 rev 6 = \boxed{:}
