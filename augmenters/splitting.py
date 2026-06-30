@@ -15,7 +15,7 @@ import random
 SYMBOLS = list('!"#$%&\'()*+-./:;<>?@[\\]^`{|}')
 
 LINES_PER_PROBLEM = 100
-N_PROBLEMS = 1500
+N_PROBLEMS = 1520 #  ~+1.3% from 1500
 DEMO_LINES = 3
 
 
@@ -40,7 +40,7 @@ def _pair(chars: list[str]) -> tuple[str, str]:
 
 def generate() -> list[dict[str, str]]:
     """Generate splitting problems. Returns list of dicts with id, prompt, answer, category."""
-    rng = random.Random(77)
+    rng = random.Random(99) #  using a different seed from 77 to perturb the generation a bit
     problems = []
 
     for i in range(N_PROBLEMS):

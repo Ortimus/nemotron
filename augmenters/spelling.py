@@ -52,7 +52,7 @@ def generate() -> list[dict[str, str]]:
     bare_tokens, spaced_tokens = load_tokens()
     print(f"[spelling] Loaded {len(bare_tokens)} bare tokens, {len(spaced_tokens)} spaced tokens")
 
-    rng = random.Random(42)
+    rng = random.Random(99) #  using a different seed from 99 to perturb the generation a bit
 
     bare_shuffled = bare_tokens[:]
     rng.shuffle(bare_shuffled)

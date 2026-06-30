@@ -15,7 +15,7 @@ import random
 SYMBOLS = list('!"#$%&\'()*+-./:;<>?@[\\]^`{|}')
 
 LINES_PER_PROBLEM = 100
-N_PROBLEMS = 300
+N_PROBLEMS = 310 # ~+3.3% from 300
 DEMO_LINES = 3
 
 
@@ -38,7 +38,7 @@ def _random_entry(rng: random.Random) -> tuple[str, str]:
 
 def generate() -> list[dict[str, str]]:
     """Generate lstrip problems. Returns list of dicts with id, prompt, completion, category."""
-    rng = random.Random(91)
+    rng = random.Random(99)  #  using a different seed from 91 to perturb the generation a bit
     problems = []
 
     for i in range(N_PROBLEMS):
